@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.GetComponent<Enemy>())
+        if (collision.GetComponent<Enemy>())
         {
+            Debug.Log("Trigger");
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             //&& transform.position.y -0.5 > enemy.transform.position.y +0.5
             if (enemy != null)
@@ -15,5 +16,5 @@ public class PlayerAttack : MonoBehaviour
                 enemy.KillEnemy();
             }
         }      
-    }
+    }     
 }
