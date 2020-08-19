@@ -29,6 +29,12 @@ public class Hero : MonoBehaviour
     [SerializeField]
     float jumpTime;
     float jumpTimeCounter;
+    [SerializeField]
+    LayerMask whatIsGround;
+
+    [SerializeField]
+    Transform arrowPosition;
+    public GameObject projectile;
 
     void Awake()
     {
@@ -46,10 +52,11 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius);
+        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
             isJumping = true;
+            isGrounded = false;
             jumpTimeCounter = jumpTime;
             rb.velocity = Vector2.up * mJumpForce;
         }
@@ -69,10 +76,22 @@ public class Hero : MonoBehaviour
         {
             isJumping = false;
         }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            rangeAttack();
+        }
     }
 
     void HeroDie()
     {
        Destroy(gameObject);
     }
+
+    void rangeAttack()
+    {
+        Instantiate(projectile, arrowPosition.position, arrowPosition.rotation);
+    }
+
+
 }
