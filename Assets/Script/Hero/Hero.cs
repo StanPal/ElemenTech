@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
+    public event System.Action onSkillPerformed;
+
     [SerializeField]
     string mName;
     [SerializeField]
@@ -31,6 +33,10 @@ public class Hero : MonoBehaviour
     float jumpTimeCounter;
     [SerializeField]
     LayerMask whatIsGround;
+
+    [SerializeField]
+    Elements.ElementalAttribute mElementalType = Elements.ElementalAttribute.Earth;
+    public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     [SerializeField]
     Transform arrowPosition;
@@ -80,6 +86,11 @@ public class Hero : MonoBehaviour
         if (Input.GetMouseButtonDown(0))
         {
             rangeAttack();
+        }
+
+        if(Input.GetKeyUp(KeyCode.E))
+        {
+            onSkillPerformed.Invoke();
         }
     }
 
