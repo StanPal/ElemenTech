@@ -5,6 +5,8 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
     [SerializeField]
+    float damage = 2;
+    [SerializeField]
     float projectileSpeed;
     private Rigidbody2D rigidbody;
 
@@ -22,7 +24,7 @@ public class Projectile : MonoBehaviour
             Enemy enemy = collision.gameObject.GetComponent<Enemy>();
             if (enemy != null)
             {
-                enemy.KillEnemy();
+                enemy.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }
