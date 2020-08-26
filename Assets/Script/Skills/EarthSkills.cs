@@ -16,6 +16,9 @@ public class EarthSkills : MonoBehaviour
     private float mSpikeHeight = 1.0f;
     [SerializeField]
     private float mDamage = 10.0f;
+
+    public float Damage { get { return mDamage; } }
+
     private bool mIsSpikeUp = true;
     [SerializeField]
     private List<GameObject> mEarthSpikeList = new List<GameObject>();
@@ -26,6 +29,16 @@ public class EarthSkills : MonoBehaviour
     {
         mHeroSkills = GetComponent<PlayerSkills>();
         mHeroSkills.onEarthSkillPerformed += EarthSlam;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.GetComponent<Golem>())
+        {
+            Debug.Log("Collided");
+            Golem mGolem = collision.GetComponent<Golem>();
+            mGolem.TakeDamage(mDamage);
+        }
     }
 
     // Update is called once per frame
@@ -76,7 +89,6 @@ public class EarthSkills : MonoBehaviour
             mEarthSpikeList[i].transform.Translate(new Vector3(0.0f, -mSpikeHeight) * Time.deltaTime);
         }
     }
-
 
     void ClearSpikes()
     {

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
     public event System.Action onSkillPerformed;
+    public event System.Action onPausePeformed;
+
 
     [SerializeField]
     string mName;
@@ -13,6 +15,11 @@ public class Hero : MonoBehaviour
     [SerializeField]
     float mMaxHealth;
     float mCurrentHealth;
+
+    public float CurrentHealth { get { return mCurrentHealth; } }
+    public float MaxHealth { get { return mMaxHealth; } }
+
+
 
     [SerializeField]
     float mSpeed;
@@ -91,6 +98,10 @@ public class Hero : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.E))
         {
             onSkillPerformed.Invoke();
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            onPausePeformed.Invoke();
         }
     }
 
