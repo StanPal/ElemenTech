@@ -19,20 +19,54 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     float attackRange;
 
+    [SerializeField]
+    GameObject target;
+    [SerializeField]
+    float rotaSpeed;
+    [SerializeField]
+    float rotaBackSpeed;
+
+    bool swingdown = false;
+    bool beginSwing = false;
+
     private void Update()
     {
-        if(timeBtwAttack <= 0 && Input.GetMouseButtonDown(0))
+        //if (transform.rotation.z.Equals(-20.0f))
+        //{
+        //    SwordSwing(rotaSpeed);
+        //}
+        //else if (transform.rotation.z.Equals(0.0f))
+        //{
+        //    SwordSwing(rotaBackSpeed);
+        //}
+
+        if (swingdown && beginSwing)
+        {
+            SwordSwing(-rotaBackSpeed);
+        }
+        else if (!swingdown && beginSwing)
+        {
+            SwordSwing(rotaSpeed);
+        }
+
+        if (transform.rotation.z >= 0.45f )
+        {
+            swingdown = true;
+        }
+        if (transform.rotation.z <= 0.0f)
+        {
+            beginSwing = false;
+            swingdown = false;
+        }
+
+        if (!beginSwing && Input.GetMouseButtonDown(0))
         {
             Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemy);
             for (int i = 0; i < enemiesToDamage.Length; ++i)
             {
                 enemiesToDamage[i].GetComponent<Enemy>().TakeDamage(damage);
             }
-            timeBtwAttack = startTimeBtAttack;
-        }
-        else
-        {
-            timeBtwAttack -= Time.deltaTime;
+            beginSwing = true;
         }
     }
 
@@ -40,6 +74,11 @@ public class PlayerAttack : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(attackPos.position, attackRange);
+    }
+
+    void SwordSwing(float Speed)
+    {
+        transform.RotateAround(target.transform.position, Vector3.forward, Speed * Time.deltaTime);
     }
 
     //private void OnTriggerEnter2D(Collider2D collision)

@@ -724,10 +724,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 185265465, guid: 78df297b0d35e7b42a7c2e6cf9cb3280, type: 3}
-      propertyPath: damage
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 7039369231012721105, guid: 78df297b0d35e7b42a7c2e6cf9cb3280,
         type: 3}
       propertyPath: m_Name
@@ -787,21 +783,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7039369231012721134, guid: 78df297b0d35e7b42a7c2e6cf9cb3280,
-        type: 3}
-      propertyPath: m_UsedByEffector
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7039369231012721135, guid: 78df297b0d35e7b42a7c2e6cf9cb3280,
-        type: 3}
-      propertyPath: m_GravityScale
-      value: 2.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 7039369231012721135, guid: 78df297b0d35e7b42a7c2e6cf9cb3280,
-        type: 3}
-      propertyPath: m_Constraints
-      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78df297b0d35e7b42a7c2e6cf9cb3280, type: 3}
