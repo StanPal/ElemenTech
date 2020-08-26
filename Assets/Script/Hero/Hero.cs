@@ -6,7 +6,7 @@ public class Hero : MonoBehaviour
 {
     public event System.Action onSkillPerformed;
     public event System.Action onPausePeformed;
-
+    public event System.Action onGuardPerformed;
 
     [SerializeField]
     string mName;
@@ -103,6 +103,9 @@ public class Hero : MonoBehaviour
         {
             onPausePeformed.Invoke();
         }
+        if (Input.GetKey(KeyCode.G))
+            onGuardPerformed.Invoke();
+
     }
 
     void HeroDie()
