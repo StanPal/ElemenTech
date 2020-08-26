@@ -77,7 +77,7 @@ public class Hero : MonoBehaviour
             isJumping = false;
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             rangeAttack();
         }
