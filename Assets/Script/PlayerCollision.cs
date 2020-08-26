@@ -20,7 +20,8 @@ public class PlayerCollision : MonoBehaviour
         Obstacle obstacle = collision.gameObject.GetComponent<Obstacle>();
         if (obstacle != null)
         {
-           GetComponent<PlayerHealth>().TakeDamage(obstacle.damage);
+            //GetComponent<PlayerHealth>().TakeDamage(obstacle.damage);
+            Debug.Log("get damaged");
         }
     }
 }

@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
 {
     public float maxHealth = 100.0f;
     float currentHealth;
-    public float guardDamage;
+    public float guardDamage = 5;
     public Slider slider;
     // Start is called before the first frame update
     void Start()
