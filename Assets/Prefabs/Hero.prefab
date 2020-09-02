@@ -548,8 +548,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mName: 
-  mAttack: 0
-  mMaxHealth: 0
+  mAttack: 2
+  mMaxHealth: 10
   mSpeed: 10
   mJumpForce: 5
   feetPos: {fileID: 1606244835}
@@ -558,6 +558,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  mElementalType: 1
   arrowPosition: {fileID: 1992477020}
   projectile: {fileID: 4214174864898391108, guid: d5555b111f1e6b041b43496502c643ea,
     type: 3}

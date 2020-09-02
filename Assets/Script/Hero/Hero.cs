@@ -58,6 +58,11 @@ public class Hero : MonoBehaviour
 
     void Update()
     {
+        if (mCurrentHealth <= 0)
+        {
+            HeroDie();
+        }
+
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
         {
@@ -92,11 +97,15 @@ public class Hero : MonoBehaviour
         {
             onSkillPerformed.Invoke();
         }
+
+        // Player health down
+        KillPlayerSelf();
     }
 
     void HeroDie()
     {
        Destroy(gameObject);
+       FindObjectOfType<GameManager>().EndGame();
     }
 
     void rangeAttack()
@@ -104,5 +113,11 @@ public class Hero : MonoBehaviour
         Instantiate(projectile, arrowPosition.position, arrowPosition.rotation);
     }
 
-
+    void KillPlayerSelf()
+    {
+        if (Input.GetKeyUp(KeyCode.P))
+        {
+            mCurrentHealth--;
+        }
+    }
 }
