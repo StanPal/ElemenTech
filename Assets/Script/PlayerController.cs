@@ -50,6 +50,7 @@ public class PlayerController : MonoBehaviour
             {
                 rb.AddForce(new Vector2(-speed, 0));
             }
+            lastClickTime = Time.time;
         }
 
         if (Input.GetKeyUp(KeyCode.RightArrow))
