@@ -77,7 +77,20 @@ public class PlayerController : MonoBehaviour
                     yield return null;
                 }
             }
-           
+
+            if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                DashCoolDown = Time.deltaTime;
+                while ((Time.deltaTime - DashCoolDown) <= DashDelay)
+                {
+                    if (Input.GetKeyDown(KeyCode.RightArrow))
+                    {
+                        rb.AddForce(new Vector2(DashSpeed, 0));
+                    }
+                    yield return null;
+                }
+            }
+
             yield return null;
         }
        
