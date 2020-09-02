@@ -490,7 +490,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &978945522 stripped
 MonoBehaviour:
@@ -729,6 +729,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 78df297b0d35e7b42a7c2e6cf9cb3280, type: 3}
+--- !u!1 &1113607200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7039369231012721105, guid: 78df297b0d35e7b42a7c2e6cf9cb3280,
+    type: 3}
+  m_PrefabInstance: {fileID: 1113607199}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1113607201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113607200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c304bbac9e161d47a82d46f613707a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10
+  JumpSpeed: 5
+  DashSpeed: 5000
+  DoubleClickedButtonTime: 0.2
 --- !u!1001 &1345592862
 PrefabInstance:
   m_ObjectHideFlags: 0

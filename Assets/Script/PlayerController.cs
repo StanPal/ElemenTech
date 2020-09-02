@@ -14,14 +14,13 @@ public class PlayerController : MonoBehaviour
     //private float DashTime;
     //public float startDashTime;
     //private int direction;
-    public float DashDelay = 0.5f;
-    private float DashCoolDown;
-
+    public float DoubleClickedButtonTime = 0.2f;
+    private float lastClickTime;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        StartCoroutine("CheckDash");
-        //DashTime = startDashTime;
+        //StartCoroutine("CheckDash");
 
     }
 
@@ -29,7 +28,7 @@ public class PlayerController : MonoBehaviour
     {
 
         float moveHorizontal = Input.GetAxis("Horizontal");
-        //float moveVertical = Input.GetAxis("Vertical");
+    
 
         Vector2 movement = new Vector2(moveHorizontal, 0.0f);
 
@@ -40,61 +39,71 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(new Vector2(0, JumpSpeed));
         }
 
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKeyUp(KeyCode.LeftArrow))
         {
-            rb.AddForce(new Vector2(-speed, 0));
+            float timeSinceLastClick = Time.time - lastClickTime;
+            if (timeSinceLastClick <= DoubleClickedButtonTime)
+            {
+                rb.AddForce(new Vector2(-DashSpeed, 0));
+            }
+            else
+            {
+                rb.AddForce(new Vector2(-speed, 0));
+            }
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyUp(KeyCode.RightArrow))
         {
-            rb.AddForce(new Vector2(speed, 0));
+            float timeSinceLastClick = Time.time - lastClickTime;
+            if(timeSinceLastClick <= DoubleClickedButtonTime)
+            {
+                rb.AddForce(new Vector2(DashSpeed, 0));
+            }
+            else
+            {
+                rb.AddForce(new Vector2(speed, 0));
+            }
+            lastClickTime = Time.time;
         }
 
-        //if (Input.GetKeyDown(KeyCode.C))
-        //{
-        //    rb.AddForce(new Vector2(DashSpeed, 0));
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Z))
-        //{
-        //    rb.AddForce(new Vector2(-DashSpeed, 0));
-        //}
+        
+    
     }
 
-    IEnumerator CheckDash()
-    {
-        while (true)
-        {
-            if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
-                DashCoolDown = Time.deltaTime;
-                while ((Time.deltaTime - DashCoolDown) <= DashDelay)
-                {
-                    if (Input.GetKeyDown(KeyCode.LeftArrow))
-                    {
-                        rb.AddForce(new Vector2(-DashSpeed, 0));
-                    }
-                    yield return null;
-                }
-            }
+    //IEnumerator CheckDash()
+    //{
+    //    while (true)
+    //    {
+    //        if (Input.GetKeyDown(KeyCode.LeftArrow))
+    //        {
+    //            DashCoolDown = Time.deltaTime;
+    //            while ((Time.deltaTime - DashCoolDown) <= DashDelay)
+    //            {
+    //                if (Input.GetKeyDown(KeyCode.LeftArrow))
+    //                {
+    //                    rb.AddForce(new Vector2(-DashSpeed, 0));
+    //                }
+    //                yield return null;
+    //            }
+    //        }
 
-            if (Input.GetKeyDown(KeyCode.RightArrow))
-            {
-                DashCoolDown = Time.deltaTime;
-                while ((Time.deltaTime - DashCoolDown) <= DashDelay)
-                {
-                    if (Input.GetKeyDown(KeyCode.RightArrow))
-                    {
-                        rb.AddForce(new Vector2(DashSpeed, 0));
-                    }
-                    yield return null;
-                }
-            }
+    //        if (Input.GetKeyDown(KeyCode.RightArrow))
+    //        {
+    //            DashCoolDown = Time.deltaTime;
+    //            while ((Time.deltaTime - DashCoolDown) <= DashDelay)
+    //            {
+    //                if (Input.GetKeyDown(KeyCode.RightArrow))
+    //                {
+    //                    rb.AddForce(new Vector2(DashSpeed, 0));
+    //                }
+    //                yield return null;
+    //            }
+    //        }
 
-            yield return null;
-        }
+    //        yield return null;
+    //    }
        
-    }
+    //}
         
 
 
