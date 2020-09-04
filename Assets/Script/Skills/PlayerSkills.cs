@@ -6,12 +6,15 @@ public class PlayerSkills : MonoBehaviour
 {
     public event System.Action onEarthSkillPerformed;
 
+    public event System.Action onWaterSkillPerformed;
+
     private Hero mHero;
     public Hero Hero { get { return mHero; } }
     private bool mIsSkillActivated = false;
     public bool SkillActive { get { return mIsSkillActivated; } set { mIsSkillActivated = value; } }
 
     private EarthSkills mEarthSkills;
+    private WaterSkills mWaterSkills;
 
     [SerializeField]
     private Elements.ElementalAttribute mElementType;
@@ -19,6 +22,7 @@ public class PlayerSkills : MonoBehaviour
     {
         mHero = FindObjectOfType<Hero>().GetComponent<Hero>();
         mEarthSkills = GetComponent<EarthSkills>();
+        mWaterSkills = GetComponent<WaterSkills>();
         mElementType = mHero.GetElement;
         mHero.onSkillPerformed += PerformSkill;
     }
