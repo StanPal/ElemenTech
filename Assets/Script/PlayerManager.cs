@@ -18,23 +18,23 @@ public class PlayerManager : MonoBehaviour
 
     // Static Lists for both Players and Golems, reason for static is
     // that this list should be the only copy so there is no need to instantiate it again
-    static public List<GameObject> mPlayersList;
-    static public List<GameObject> mGolemList;
 
-    private void Start()
-    {
-        mPlayersList = new List<GameObject>();
-        mGolemList = new List<GameObject>();
+    public List<Hero> mPlayersList = new List<Hero>();
+     public Dictionary<GameObject,Elements.ElementalAttribute> mGolemList;
 
-        mPlayersList.Add(FireHero);
-        mPlayersList.Add(WaterHero);
-        mPlayersList.Add(AirHero);
-        mPlayersList.Add(EarthHero);
+    private void Awake()
+    {                
+        mGolemList = new Dictionary<GameObject, Elements.ElementalAttribute>();
 
-        mGolemList.Add(FireGolem);
-        mGolemList.Add(WaterGolem);
-        mGolemList.Add(EarthGolem);
-        mGolemList.Add(AirGolem);
+        mPlayersList.Add(FireHero.GetComponent<Hero>());
+       // mPlayersList.Add(WaterHero);
+        //mPlayersList.Add(AirHero);
+        mPlayersList.Add(EarthHero.GetComponent<Hero>());
+
+        //mGolemList.Add(FireGolem);
+        //mGolemList.Add(WaterGolem);
+        //mGolemList.Add(EarthGolem);
+        //mGolemList.Add(AirGolem);
     }
 
     private void Update()

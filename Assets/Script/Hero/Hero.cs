@@ -5,6 +5,9 @@ using UnityEngine;
 public class Hero : MonoBehaviour
 {
     public event System.Action onSkillPerformed;
+    public event System.Action onPausePeformed;
+    public event System.Action onGuardPerformed;
+    public event System.Action onGuardExit;
 
     [SerializeField]
     string mName;
@@ -13,6 +16,11 @@ public class Hero : MonoBehaviour
     [SerializeField]
     float mMaxHealth;
     float mCurrentHealth;
+
+    public float CurrentHealth { get { return mCurrentHealth; } }
+    public float MaxHealth { get { return mMaxHealth; } }
+
+
 
     [SerializeField]
     float mSpeed;
@@ -35,7 +43,7 @@ public class Hero : MonoBehaviour
     LayerMask whatIsGround;
 
     [SerializeField]
-    Elements.ElementalAttribute mElementalType = Elements.ElementalAttribute.Earth;
+    Elements.ElementalAttribute mElementalType;
     public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     [SerializeField]
@@ -88,15 +96,24 @@ public class Hero : MonoBehaviour
             rangeAttack();
         }
 
-        if(Input.GetKeyUp(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             onSkillPerformed.Invoke();
         }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            onPausePeformed.Invoke();
+        }
+        if (Input.GetKey(KeyCode.G))
+            onGuardPerformed.Invoke();
+        //else
+        //    onGuardExit.Invoke();
+
     }
 
     void HeroDie()
     {
-       Destroy(gameObject);
+       //Destroy(gameObject);
     }
 
     void rangeAttack()
