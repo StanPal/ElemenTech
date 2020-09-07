@@ -37,6 +37,7 @@ public class PlayerSkills : MonoBehaviour
                 onEarthSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Water:
+                onWaterSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Air:
                 break;

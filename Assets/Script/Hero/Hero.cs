@@ -35,7 +35,8 @@ public class Hero : MonoBehaviour
     LayerMask whatIsGround;
 
     [SerializeField]
-    Elements.ElementalAttribute mElementalType = Elements.ElementalAttribute.Earth;
+    private Elements.ElementalAttribute mElementalType = Elements.ElementalAttribute.Earth;
+
     public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     [SerializeField]

@@ -33,7 +33,7 @@ public class WaterSkills : MonoBehaviour
             StartCoroutine("WaterSpikes");
     }
 
-    IEnumerator EarthSpikes()
+    IEnumerator WaterSpikes()
     {
         if (mIsSpikeUp)
             WaterSpikesUp();
