@@ -29,17 +29,7 @@ public class EarthSkills : MonoBehaviour
     {
         mHeroSkills = GetComponent<PlayerSkills>();
         mHeroSkills.onEarthSkillPerformed += EarthSlam;
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.GetComponent<Golem>())
-        {
-            Debug.Log("Collided");
-            Golem mGolem = collision.GetComponent<Golem>();
-            mGolem.TakeDamage(mDamage);
-        }
-    }
+    }  
 
     // Update is called once per frame
     void Update()

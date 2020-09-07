@@ -7,7 +7,7 @@ public class EarthSpike : MonoBehaviour
     EarthSkills EarthSkills;
     private void Awake()
     {
-        EarthSkills = FindObjectOfType<EarthSkills>().GetComponent<EarthSkills>();
+        EarthSkills = FindObjectOfType<EarthSkills>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

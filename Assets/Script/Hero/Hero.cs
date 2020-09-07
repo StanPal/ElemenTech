@@ -7,6 +7,7 @@ public class Hero : MonoBehaviour
     public event System.Action onSkillPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
+    public event System.Action onGuardExit;
 
     [SerializeField]
     string mName;
@@ -42,7 +43,7 @@ public class Hero : MonoBehaviour
     LayerMask whatIsGround;
 
     [SerializeField]
-    Elements.ElementalAttribute mElementalType = Elements.ElementalAttribute.Earth;
+    Elements.ElementalAttribute mElementalType;
     public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     [SerializeField]
@@ -95,7 +96,7 @@ public class Hero : MonoBehaviour
             rangeAttack();
         }
 
-        if(Input.GetKeyUp(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E))
         {
             onSkillPerformed.Invoke();
         }
@@ -105,12 +106,14 @@ public class Hero : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.G))
             onGuardPerformed.Invoke();
+        //else
+        //    onGuardExit.Invoke();
 
     }
 
     void HeroDie()
     {
-       Destroy(gameObject);
+       //Destroy(gameObject);
     }
 
     void rangeAttack()

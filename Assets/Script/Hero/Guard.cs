@@ -11,16 +11,20 @@ public class Guard : MonoBehaviour
     private bool isGuarding = false;
     [SerializeField]
     private float mGuardTime = 0.5f;
+    [SerializeField]
+    private float mShieldSize = 2.1f;
+    private bool mShiendCreated = false;
 
     private void Start()
     {
         mHero = GetComponentInParent<Hero>();
         mHero.onGuardPerformed += GuardMove;
+        mHero.onGuardExit += DestroyGuard;
     }
 
     private void GuardMove()
     {
-
+        isGuarding = true;
         switch (mHero.GetElement)
         {
             case Elements.ElementalAttribute.Fire:
@@ -39,22 +43,36 @@ public class Guard : MonoBehaviour
 
     private void Update()
     {
+        GuardMove();
         if (isGuarding)
-            StartCoroutine("GuardUp");
-
+        {
+            //Test to automatically have hero guarding
+            
+            if(mShield == null)
+            {
+               // Debug.Log("Cannot Create Shield, No Element Attached");
+            }
+            else
+            mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+        }
     }
 
-    IEnumerator GuardUp()
-    { 
-        yield return new WaitForSeconds(mGuardTime);
+ 
+    private void DestroyGuard()
+    {
         Destroy(mShield);
         isGuarding = false;
+        mShiendCreated = false;
     }
+
 
     private void SummonEarthGuard()
     {
-       mShield = Instantiate(mEarthShield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
-       mShield.transform.localScale *= 2.1f;
-        isGuarding = true;
+        if (!mShiendCreated)
+        {
+            mShield = Instantiate(mEarthShield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
+            mShield.transform.localScale = new Vector3(mShieldSize,mShieldSize,mShieldSize);
+            mShiendCreated = true;
+        }
     }
 }
