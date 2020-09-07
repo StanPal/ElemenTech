@@ -272,6 +272,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   attackRange: 0.5
+  target: {fileID: 5795234446586663973}
+  rotaSpeed: 80
+  rotaBackSpeed: 80
 --- !u!1 &5795234445817614424
 GameObject:
   m_ObjectHideFlags: 0
@@ -734,7 +737,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0.25, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0.75}
   m_SizeDelta: {x: 1024, y: 557}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &5795234446886171121
