@@ -2,17 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Golem : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField]
-    float maxHealth;
-    float health;
+    float mMaxHealth = 100.0f;
+    [SerializeField]
+    float mCurrentHealth;
+
+    public float MaxHealth { get { return mMaxHealth; } }
+    public float CurrentHealth { get { return mCurrentHealth; } }
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        health = maxHealth;
+        mCurrentHealth = mMaxHealth;
     }
 
     private void Update()
@@ -22,7 +27,7 @@ public class Enemy : MonoBehaviour
 
     private void KillEnemy()
     {
-        if (health <= 0)
+        if (mCurrentHealth <= 0)
         {
             Destroy(this.gameObject);
         }
@@ -30,7 +35,7 @@ public class Enemy : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        health -= damage;
+        mCurrentHealth -= damage;
         Debug.Log("damage TAKEN");
     }
 

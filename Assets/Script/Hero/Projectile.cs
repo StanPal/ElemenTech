@@ -31,13 +31,13 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Enemy>())
+        if (collision.GetComponent<Golem>())
         {
             Debug.Log("Trigger");
-            Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-            if (enemy != null)
+            Golem golem = collision.gameObject.GetComponent<Golem>();
+            if (golem != null)
             {
-                enemy.TakeDamage(damage);
+                golem.TakeDamage(damage);
                 Destroy(gameObject);
             }
         }

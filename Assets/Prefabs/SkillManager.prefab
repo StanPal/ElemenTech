@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1298977985946996485}
   - component: {fileID: 1298977985946996506}
   - component: {fileID: 1298977985946996507}
+  - component: {fileID: 1392078421}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -65,3 +66,19 @@ MonoBehaviour:
   mSpikeHeight: 1
   mDamage: 10
   mEarthSpikeList: []
+--- !u!114 &1392078421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298977985946996504}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df9ae2b8293fe9a46a7794daaf431660, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mFireBall: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
+    type: 3}
+  mSpeed: 10
+  mDamage: 10
