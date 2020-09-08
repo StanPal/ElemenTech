@@ -16,6 +16,8 @@ public class Hero : MonoBehaviour
     [SerializeField]
     float mMaxHealth;
     float mCurrentHealth;
+    bool isLeft = false;
+    public bool GetIsLeft { get { return isLeft; } }
 
     public float CurrentHealth { get { return mCurrentHealth; } }
     public float MaxHealth { get { return mMaxHealth; } }
@@ -57,12 +59,24 @@ public class Hero : MonoBehaviour
         mCurrentHealth = mMaxHealth;
     }
 
-
     void FixedUpdate()
     {
         //move
         mMoveInput = Input.GetAxis("Horizontal");
         rb.velocity = new Vector2(mMoveInput * mSpeed, rb.velocity.y);
+        //Flip the character
+        Vector3 characterScale = transform.localScale;
+        if (rb.velocity.x < 0)
+        {
+            characterScale.x = -1;
+            isLeft = true;
+        }
+        if (rb.velocity.x > 0)
+        {
+            characterScale.x = 1;
+            isLeft = false;
+        }
+        transform.localScale = characterScale;
     }
 
     void Update()
@@ -71,6 +85,7 @@ public class Hero : MonoBehaviour
         {
             HeroDie();
         }
+        
 
         isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
         if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))

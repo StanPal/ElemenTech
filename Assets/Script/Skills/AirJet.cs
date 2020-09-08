@@ -13,12 +13,17 @@ public class AirJet : MonoBehaviour
     [SerializeField]
     Vector3 ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private Rigidbody2D rigidbody;
+    private Hero hero;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
-        rigidbody.velocity = transform.right * projectileSpeed;
-        
+        hero = FindObjectOfType<Hero>();
+        if (hero.GetIsLeft)
+        {
+            projectileSpeed = - projectileSpeed;
+        }
+
     }
 
     private void Update()
@@ -28,6 +33,7 @@ public class AirJet : MonoBehaviour
             Destroy(gameObject);
         }
 
+        rigidbody.velocity = transform.right * projectileSpeed;
         gameObject.transform.localScale += ScaleSize;
         exitTime -= Time.deltaTime;
         

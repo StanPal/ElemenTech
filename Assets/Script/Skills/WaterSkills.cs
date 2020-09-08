@@ -12,7 +12,7 @@ public class WaterSkills : MonoBehaviour
     private void Start()
     {
         mHeroSkills = GetComponent<PlayerSkills>();
-        mHeroSkills.onAirSkillPerformed += WaterGun;
+        mHeroSkills.onWaterSkillPerformed += WaterGun;
     }
 
     void WaterGun()

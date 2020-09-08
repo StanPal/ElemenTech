@@ -25,9 +25,15 @@ public class PlayerAttack : MonoBehaviour
     float rotaSpeed;
     [SerializeField]
     float rotaBackSpeed;
-
+    Hero hero;
+    float swordAngle = 45.0f;
     bool swingdown = false;
     bool beginSwing = false;
+
+    private void Awake()
+    {
+        hero = FindObjectOfType<Hero>();
+    }
 
     private void Update()
     {
@@ -40,23 +46,50 @@ public class PlayerAttack : MonoBehaviour
         //    SwordSwing(rotaBackSpeed);
         //}
 
-        if (swingdown && beginSwing)
-        {
-            SwordSwing(-rotaBackSpeed);
-        }
-        else if (!swingdown && beginSwing)
-        {
-            SwordSwing(rotaSpeed);
-        }
 
-        if (transform.rotation.z >= 0.45f )
+
+
+
+        if (hero.GetIsLeft)
         {
-            swingdown = true;
+            if (swingdown && beginSwing)
+            {
+                SwordSwing(rotaBackSpeed);
+            }
+            else if (!swingdown && beginSwing)
+            {
+                SwordSwing(-rotaSpeed);
+            }
+            if (transform.rotation.z <= -0.45f)
+            {
+                swingdown = true;
+            }
+            if (transform.rotation.z >= 0.0f)
+            {
+                beginSwing = false;
+                swingdown = false;
+            }
         }
-        if (transform.rotation.z <= 0.0f)
+        else
         {
-            beginSwing = false;
-            swingdown = false;
+
+            if (swingdown && beginSwing)
+            {
+                SwordSwing(-rotaBackSpeed);
+            }
+            else if (!swingdown && beginSwing)
+            {
+                SwordSwing(rotaSpeed);
+            }
+            if (transform.rotation.z >= 0.45f )
+            {
+                swingdown = true;
+            }
+            if (transform.rotation.z <= 0.0f)
+            {
+                beginSwing = false;
+                swingdown = false;
+            }
         }
 
         if (!beginSwing && Input.GetMouseButtonDown(0))

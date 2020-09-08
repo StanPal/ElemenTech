@@ -5,32 +5,48 @@ using UnityEngine;
 public class WaterGun : MonoBehaviour
 {
     [SerializeField]
-    float defDistanceRany = 100;
-    public LineRenderer mLineRender;
-    Transform mTransform;
+    float damage = 2;
+    [SerializeField]
+    float projectileSpeed = 5;
+    private Rigidbody2D rigidbody;
+    [SerializeField]
+    float exitTime = 2.0f;
+    private Hero hero;
 
     private void Awake()
     {
-        mTransform = GetComponent<Transform>();
-    }
-
-    private void Update()
-    {
-        ShootLaser();
-    }
-
-    void ShootLaser()
-    {
-        if(Physics2D.Raycast(mTransform.position, transform.right))
+        rigidbody = GetComponent<Rigidbody2D>();
+        hero = FindObjectOfType<Hero>();
+        if (hero.GetIsLeft)
         {
-            RaycastHit2D _hit = Physics2D.Raycast(mTransform.position, transform.right);
-            Draw2DRay(gameObject.transform.position, gameObject.transform.right * defDistanceRany);
+            projectileSpeed = -projectileSpeed;
         }
+        
     }
 
-    void Draw2DRay(Vector2 starPos, Vector2 endPos)
+
+    private void FixedUpdate()
     {
-        mLineRender.SetPosition(0, starPos);
-        mLineRender.SetPosition(1, endPos);
+        if (exitTime <= 0.0f)
+        {
+            Destroy(gameObject);
+        }
+        exitTime -= Time.deltaTime;
+        rigidbody.velocity = transform.right * projectileSpeed;
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Golem>())
+        {
+            Debug.Log("Trigger");
+            Golem golem = collision.gameObject.GetComponent<Golem>();
+            if (golem != null)
+            {
+                golem.TakeDamage(damage);
+                Destroy(gameObject);
+            }
+        }
     }
 }
