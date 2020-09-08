@@ -12,6 +12,11 @@ public class PlayerSkills : MonoBehaviour
     private bool mIsSkillActivated = false;
     public bool SkillActive { get { return mIsSkillActivated; } set { mIsSkillActivated = value; } }
 
+    public GameObject FireHero;
+    public GameObject EarthHero;
+    public GameObject WaterHero;
+    public GameObject AirHero;
+
     private PlayerManager Player;
     private EarthSkills mEarthSkills;
     private FireSkills mFireSkills;
@@ -20,15 +25,21 @@ public class PlayerSkills : MonoBehaviour
 
     void Start()
     {
-        Player = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
-        //mHero = FindObjectOfType<Hero>().GetComponent<Hero>();
-        //mHero.onSkillPerformed += PerformSkill;
-        for (int i = 0; i < Player.mPlayersList.Count; i++)
-        {
-            Player.mPlayersList[i].onSkillPerformed += PerformSkill;
-            Debug.Log(Player.mPlayersList[i].GetElement);
-        }
+        //BRUTE FORCE CODE 
+        EarthHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
+        FireHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
+        //AirHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
+        //WaterHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
 
+        //mHero = FindObjectOfType<Hero>().GetComponent<Hero>();
+        /* Transition to this later on
+        //Player = FindObjectOfType<PlayerManager>().GetComponent<PlayerManager>();
+        //for (int i = 0; i < Player.mPlayersList.Count; i++)
+        //{
+        //    Player.mPlayersList[i].onSkillPerformed += PerformSkill;
+        //    Debug.Log(Player.mPlayersList[i].GetElement);
+        //}
+        */
         mEarthSkills = GetComponent<EarthSkills>();
         mFireSkills = GetComponent<FireSkills>();
     }
@@ -38,48 +49,50 @@ public class PlayerSkills : MonoBehaviour
        
     }
 
-    //void PerformSkill()
-    //{
-    //    switch (mHero.GetElement)
-    //    {
-    //        case Elements.ElementalAttribute.Fire:  
-    //            onFireSkillPerformed.Invoke();
-    //            break;
-    //        case Elements.ElementalAttribute.Earth:
-    //            onEarthSkillPerformed.Invoke();
-    //            break;
-    //        case Elements.ElementalAttribute.Water:
-    //            break;
-    //        case Elements.ElementalAttribute.Air:
-    //            break;
-    //        default:
-    //            break;
-    //    }
-    //}
-
-    void PerformSkill()
+    void PerformSkill(Elements.ElementalAttribute elementType)
     {
-        for (int i = 0; i < Player.mPlayersList.Count; i++)
+        switch (elementType)
         {
-            switch (Player.mPlayersList[i].GetElement)
-            {
-                case Elements.ElementalAttribute.Fire:
-                    mHero = Player.mPlayersList[i];
-                    onFireSkillPerformed.Invoke();
-                    break;
-                case Elements.ElementalAttribute.Earth:
-                    mHero = Player.mPlayersList[i];
-                    onEarthSkillPerformed.Invoke();
-                    break;
-                case Elements.ElementalAttribute.Water:
-                    break;
-                case Elements.ElementalAttribute.Air:
-                    break;
-                default:
-                    break;
-            }
+            case Elements.ElementalAttribute.Fire:
+                mHero = FireHero.GetComponent<Hero>();
+                onFireSkillPerformed.Invoke();
+                break;
+            case Elements.ElementalAttribute.Earth:
+                mHero = EarthHero.GetComponent<Hero>();
+                onEarthSkillPerformed.Invoke();
+                break;
+            case Elements.ElementalAttribute.Water:
+                break;
+            case Elements.ElementalAttribute.Air:
+                break;
+            default:
+                break;
         }
     }
+
+    //void PerformSkill()
+    //{
+    //    for (int i = 0; i < Player.mPlayersList.Count; i++)
+    //    {
+    //        switch (Player.mPlayersList[i].GetElement)
+    //        {
+    //            case Elements.ElementalAttribute.Fire:
+    //                mHero = Player.mPlayersList[i];
+    //                onFireSkillPerformed.Invoke();
+    //                break;
+    //            case Elements.ElementalAttribute.Earth:
+    //                mHero = Player.mPlayersList[i];
+    //                onEarthSkillPerformed.Invoke();
+    //                break;
+    //            case Elements.ElementalAttribute.Water:
+    //                break;
+    //            case Elements.ElementalAttribute.Air:
+    //                break;
+    //            default:
+    //                break;
+    //        }
+    //    }
+    //}
 
 
 }

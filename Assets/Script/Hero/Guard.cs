@@ -14,6 +14,10 @@ public class Guard : MonoBehaviour
     [SerializeField]
     private float mShieldSize = 2.1f;
     private bool mShiendCreated = false;
+    public GameObject CanonBall;
+
+    bool mSkillCombine = false;
+    public bool ComboSkillOn { get { return mSkillCombine; } set { mSkillCombine = value; } }
 
     private void Start()
     {
@@ -47,13 +51,21 @@ public class Guard : MonoBehaviour
         if (isGuarding)
         {
             //Test to automatically have hero guarding
-            
-            if(mShield == null)
+
+            if (mShield == null)
             {
-               // Debug.Log("Cannot Create Shield, No Element Attached");
+                // Debug.Log("Cannot Create Shield, No Element Attached");
             }
             else
-            mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+            {
+                mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+            }
+            if(ComboSkillOn)
+            {
+                Instantiate(CanonBall, transform);
+                Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
+                ComboSkillOn = false;
+            }
         }
     }
 
