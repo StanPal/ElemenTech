@@ -370,10 +370,15 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Hero
       objectReference: {fileID: 0}
+    - target: {fileID: 5795234445427293574, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5795234445427293626, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.07
+      value: 9.59
       objectReference: {fileID: 0}
     - target: {fileID: 5795234445427293626, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
@@ -428,12 +433,12 @@ PrefabInstance:
     - target: {fileID: 5795234446608479490, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5795234446608479490, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
@@ -559,6 +564,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 437e72302a3b7424ea4ade1172920898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &981458869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7942682652433179032, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1705758797}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1023555080
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -762,11 +773,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
-      propertyPath: AirHero
-      value: 
-      objectReference: {fileID: 444876993}
-    - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
-        type: 3}
       propertyPath: FireHero
       value: 
       objectReference: {fileID: 1463264770}
@@ -774,7 +780,12 @@ PrefabInstance:
         type: 3}
       propertyPath: EarthHero
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 981458869}
+    - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
+        type: 3}
+      propertyPath: WaterHero
+      value: 
+      objectReference: {fileID: 444876993}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
 --- !u!1 &1463264770 stripped
@@ -872,6 +883,85 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd837835497646c45aa7e1ec2d3a8a86, type: 3}
+--- !u!1001 &1705758797
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2666399957648209026, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2666399957648209026, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179032, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_Name
+      value: 'Earth Hero '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -4.74
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 30cd59cb61a1a1140b7909695e9e97e6, type: 3}
 --- !u!223 &1781726512 stripped
 Canvas:
   m_CorrespondingSourceObject: {fileID: 3045387163534386478, guid: 67111b046739c6b4f8a0c83c8a4a6747,
@@ -897,6 +987,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
+--- !u!114 &1922073248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922073242}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e7539fc20dbe07449103b21bb014d7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
+    type: 3}
 --- !u!1001 &7269365260085914856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1267,6 +1371,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: WaterHero
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
+        type: 3}
+      propertyPath: mElementalType
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7476759683541955516, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}
