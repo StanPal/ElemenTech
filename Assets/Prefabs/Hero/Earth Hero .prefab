@@ -322,7 +322,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mName: 
-  mAttack: 0
+  mAttack: 10
   mMaxHealth: 100
   mSpeed: 10
   mJumpForce: 5
@@ -454,7 +454,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: ee2f9fe6910c229448f6ba87e8e28e0d, type: 3}
-  m_Color: {r: 0.735849, g: 0.05206478, b: 0.05206478, a: 1}
+  m_Color: {r: 0.5283019, g: 0.20821701, b: 0.102171585, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

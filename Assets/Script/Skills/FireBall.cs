@@ -12,7 +12,6 @@ public class FireBall : MonoBehaviour
     private void Awake()
     {
         fireSkills = FindObjectOfType<FireSkills>();
-
     }
     // Start is called before the first frame update
     void Start()
@@ -38,9 +37,9 @@ public class FireBall : MonoBehaviour
 
             Destroy(gameObject);
         }
-        else if (collision.GetComponentInChildren<Wall>())
-        {
-            Destroy(gameObject);
-        }
+        //else if (collision.GetComponentInChildren<Wall>())
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

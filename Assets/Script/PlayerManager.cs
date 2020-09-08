@@ -28,7 +28,7 @@ public class PlayerManager : MonoBehaviour
 
         mPlayersList.Add(FireHero.GetComponent<Hero>());
        // mPlayersList.Add(WaterHero);
-        //mPlayersList.Add(AirHero);
+        mPlayersList.Add(AirHero.GetComponent<Hero>());
         mPlayersList.Add(EarthHero.GetComponent<Hero>());
 
         //mGolemList.Add(FireGolem);
