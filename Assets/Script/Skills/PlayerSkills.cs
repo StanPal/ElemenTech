@@ -7,6 +7,7 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onEarthSkillPerformed;
     public event System.Action onFireSkillPerformed;
     public event System.Action onAirSkillPerformed;
+    public event System.Action onWaterSkillPerformed;
 
     private Hero mHero;
     public Hero Hero { get { return mHero; } }
@@ -17,6 +18,8 @@ public class PlayerSkills : MonoBehaviour
     private EarthSkills mEarthSkills;
     private FireSkills mFireSkills;
     private AirSkills mAirSkills;
+    private WaterSkills mWaterSkills;
+
     [SerializeField]
     private Elements.ElementalAttribute mElementType;
 
@@ -34,6 +37,7 @@ public class PlayerSkills : MonoBehaviour
         mEarthSkills = GetComponent<EarthSkills>();
         mFireSkills = GetComponent<FireSkills>();
         mAirSkills = GetComponent<AirSkills>();
+        mWaterSkills = GetComponent<WaterSkills>();
     }
 
     private void Update()
@@ -75,6 +79,8 @@ public class PlayerSkills : MonoBehaviour
                     onEarthSkillPerformed.Invoke();
                     break;
                 case Elements.ElementalAttribute.Water:
+                    mHero = Player.mPlayersList[i];
+                    onWaterSkillPerformed.Invoke();
                     break;
                 case Elements.ElementalAttribute.Air:
                     mHero = Player.mPlayersList[i];

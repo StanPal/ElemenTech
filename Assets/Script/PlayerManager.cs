@@ -27,7 +27,7 @@ public class PlayerManager : MonoBehaviour
         mGolemList = new Dictionary<GameObject, Elements.ElementalAttribute>();
 
         mPlayersList.Add(FireHero.GetComponent<Hero>());
-       // mPlayersList.Add(WaterHero);
+        mPlayersList.Add(WaterHero.GetComponent<Hero>());
         mPlayersList.Add(AirHero.GetComponent<Hero>());
         mPlayersList.Add(EarthHero.GetComponent<Hero>());
 

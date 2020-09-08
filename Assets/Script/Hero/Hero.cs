@@ -27,6 +27,7 @@ public class Hero : MonoBehaviour
     private float mMoveInput;
     private Rigidbody2D rb;
     Vector2 mPosition = Vector2.zero;
+    private bool IsPressDown = false;
     
     [SerializeField]
     float mJumpForce;
@@ -101,10 +102,18 @@ public class Hero : MonoBehaviour
             rangeAttack();
         }
 
-        if(Input.GetKeyDown(KeyCode.E))
+
+        if (Input.GetKeyDown(KeyCode.E))
         {
+            IsPressDown = true;
             onSkillPerformed.Invoke();
         }
+        else
+        {
+            IsPressDown = false;
+        }
+
+
 //<<<<<<< HEAD
 
         // Player health down
