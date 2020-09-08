@@ -36,6 +36,8 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            // get the reources name ""
+            SoundManager.PlaySound("jump");
             rb.AddForce(new Vector2(0, JumpSpeed));
         }
 

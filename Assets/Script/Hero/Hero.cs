@@ -86,11 +86,15 @@ public class Hero : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1))
         {
+            //Attack sound
+            SoundManager.PlaySound("attack");
             rangeAttack();
         }
 
         if(Input.GetKeyUp(KeyCode.E))
         {
+            //"element skill " "elment sound name "
+            SoundManager.PlaySound("element");
             onSkillPerformed.Invoke();
         }
     }
