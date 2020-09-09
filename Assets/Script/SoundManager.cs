@@ -10,9 +10,9 @@ public class SoundManager : MonoBehaviour
     void Start()
     {
         GameLoopSound = Resources.Load<AudioClip>("Cronos");
-        ElementSound = Resources.Load<AudioClip>("");
-        JumpSound = Resources.Load<AudioClip>("");
-        AtttackSound = Resources.Load<AudioClip>("");
+        ElementSound = Resources.Load<AudioClip>("element");
+        //JumpSound = Resources.Load<AudioClip>("");
+        AtttackSound = Resources.Load<AudioClip>("attack");
         audioSrc = GetComponent<AudioSource>();
 
     }
@@ -31,15 +31,15 @@ public class SoundManager : MonoBehaviour
             case "Cronos":
                 audioSrc.PlayOneShot(GameLoopSound);
                 break;
-            case "a":
+            case "element":
                 audioSrc.PlayOneShot(ElementSound);
                 break;
-            case "b":
+            case "attack":
                 audioSrc.PlayOneShot(AtttackSound);
                 break;
-            case "e":
-                audioSrc.PlayOneShot(JumpSound);
-                break;
+            //case "e":
+            //    audioSrc.PlayOneShot(JumpSound);
+            //    break;
 
         }
     }
