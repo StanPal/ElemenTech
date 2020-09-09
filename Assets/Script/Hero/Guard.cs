@@ -15,7 +15,7 @@ public class Guard : MonoBehaviour
     [SerializeField]
     private float mShieldSize = 2.1f;
     private bool mShiendCreated = false;
-    public GameObject CanonBall;
+    public GameObject comboSkill;
 
     bool mSkillCombine = false;
     public bool ComboSkillOn { get { return mSkillCombine; } set { mSkillCombine = value; } }
@@ -30,21 +30,7 @@ public class Guard : MonoBehaviour
     private void GuardMove()
     {
         isGuarding = true;
-        switch (mHero.GetElement)
-        {
-            case Elements.ElementalAttribute.Fire:
-                SummonFireGuard();
-                break;
-            case Elements.ElementalAttribute.Earth:
-                SummonEarthGuard();
-                break;
-            case Elements.ElementalAttribute.Water:
-                break;
-            case Elements.ElementalAttribute.Air:
-                break;
-            default:
-                break;
-        }
+        SummonEarthGuard();
     }
 
     private void Update()
@@ -56,18 +42,17 @@ public class Guard : MonoBehaviour
 
             if (mShield == null)
             {
-                // Debug.Log("Cannot Create Shield, No Element Attached");
+                Debug.Log("Cannot Create Shield, No Element Attached");
             }
             else
             {
                 switch (mHero.GetElement)
                 {
                     case Elements.ElementalAttribute.Fire:
-                mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
-
+                mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, gameObject.transform.position, 1.0f);
                         break;
                     case Elements.ElementalAttribute.Earth:
-                mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+                mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y), 1.0f);
                         break;
                     case Elements.ElementalAttribute.Water:
                         break;
@@ -81,7 +66,7 @@ public class Guard : MonoBehaviour
         }
         if(isGuarding && ComboSkillOn)
         {
-            Instantiate(CanonBall, transform);
+            Instantiate(comboSkill, transform);
             Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
         }
@@ -100,7 +85,22 @@ public class Guard : MonoBehaviour
     {
         if (!mShiendCreated)
         {
-            mShield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
+            switch (mHero.GetElement)
+            {
+                case Elements.ElementalAttribute.Fire:
+                    mShield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y), Quaternion.identity);
+                    break;
+                case Elements.ElementalAttribute.Earth:
+                    mShield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
+                    break;
+                case Elements.ElementalAttribute.Water:
+                    break;
+                case Elements.ElementalAttribute.Air:
+                    break;
+                default:
+                    break;
+            }
+            
             mShield.transform.localScale = new Vector3(mShieldSize,mShieldSize,mShieldSize);
             mShiendCreated = true;
         }
@@ -110,7 +110,7 @@ public class Guard : MonoBehaviour
     {
         if(!mShiendCreated)
         {
-            mShield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y), Quaternion.identity);
+            
             mShield.transform.localScale = new Vector3(mShieldSize, mShieldSize, mShieldSize);
 
             mShiendCreated = true;

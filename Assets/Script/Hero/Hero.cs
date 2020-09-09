@@ -14,11 +14,13 @@ public class Hero : MonoBehaviour
     {
         PS4,
         KeyBoard,
-        Xbox
+        Xbox,
+        None
     };
-
-    [SerializeField]
-    Controller controllerType;
+    bool isLeft = false;
+    public bool GetIsLeft { get { return isLeft; } }
+    
+    public Controller controllerType;
     [SerializeField]
     string mName;
     [SerializeField]
@@ -80,7 +82,18 @@ public class Hero : MonoBehaviour
             mMoveInput = Input.GetAxis("PS4Horizontal");
             rb.velocity = new Vector2(mMoveInput * mSpeed, rb.velocity.y);
         }
-
+        Vector3 characterScale = transform.localScale;
+        if (rb.velocity.x < 0)
+        {
+            characterScale.x = -1;
+            isLeft = true;
+        }
+        if (rb.velocity.x > 0)
+        {
+            characterScale.x = 1;
+            isLeft = false;
+        }
+        transform.localScale = characterScale;
     }
 
     void Update()
@@ -125,7 +138,7 @@ public class Hero : MonoBehaviour
             else
                 onGuardExit.Invoke();
         }
-        else if(controllerType == Controller.PS4)
+         if(controllerType == Controller.PS4)
         {
             if (isGrounded == true && Input.GetButtonDown("PS4Jump"))
             {
@@ -151,7 +164,7 @@ public class Hero : MonoBehaviour
                 isJumping = false;
             }
 
-            if (Input.GetButtonDown("PS4Skill"))
+            if (Input.GetButtonUp("PS4Skill"))
             {
                 onSkillPerformed.Invoke(GetElement);
             }

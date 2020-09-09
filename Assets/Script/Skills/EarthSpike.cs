@@ -17,5 +17,9 @@ public class EarthSpike : MonoBehaviour
             Golem golem = collision.GetComponent<Golem>();
             golem.TakeDamage(EarthSkills.Damage);
         }
+        if (collision.tag.Equals("Team2"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(EarthSkills.Damage);
+        }
     }
 }

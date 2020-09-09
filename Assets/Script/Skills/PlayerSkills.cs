@@ -6,6 +6,8 @@ public class PlayerSkills : MonoBehaviour
 {
     public event System.Action onEarthSkillPerformed;
     public event System.Action onFireSkillPerformed;
+    public event System.Action onAirSkillPerformed;
+    public event System.Action onWaterSkillPerformed;
 
     private Hero mHero;
     public Hero Hero { get { return mHero; } }
@@ -28,8 +30,8 @@ public class PlayerSkills : MonoBehaviour
         //BRUTE FORCE CODE 
         EarthHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
         FireHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
-        //AirHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
-        //WaterHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
+        AirHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
+        WaterHero.GetComponent<Hero>().onSkillPerformed += PerformSkill;
 
         //mHero = FindObjectOfType<Hero>().GetComponent<Hero>();
         /* Transition to this later on
@@ -62,8 +64,12 @@ public class PlayerSkills : MonoBehaviour
                 onEarthSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Water:
+                mHero = WaterHero.GetComponent<Hero>();
+                onWaterSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Air:
+                mHero = AirHero.GetComponent<Hero>();
+                onAirSkillPerformed.Invoke();
                 break;
             default:
                 break;

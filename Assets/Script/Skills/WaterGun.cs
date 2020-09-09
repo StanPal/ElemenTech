@@ -21,7 +21,7 @@ public class WaterGun : MonoBehaviour
         {
             projectileSpeed = -projectileSpeed;
         }
-        
+
     }
 
 
@@ -47,6 +47,17 @@ public class WaterGun : MonoBehaviour
                 golem.TakeDamage(damage);
                 Destroy(gameObject);
             }
+        }
+
+        if (collision.tag.Equals("Team1"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(10);
+            Destroy(gameObject);
+        }
+
+        if (collision.GetComponent<Walls>())
+        {
+            Destroy(gameObject);
         }
     }
 }

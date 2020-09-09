@@ -37,7 +37,7 @@ public class FireBall : MonoBehaviour
             golem.TakeDamage(fireSkills.Damage);
             Destroy(gameObject);
         }
-        else if(collision.GetComponent<Guard>())
+         if(collision.GetComponent<Guard>())
         {      
             Guard guard = collision.GetComponent<Guard>();
             if (guard.Guarding)
@@ -47,13 +47,14 @@ public class FireBall : MonoBehaviour
             }
             Destroy(gameObject);
         }
-        else if (collision.GetComponentInChildren<Wall>())
+         if (collision.GetComponentInChildren<Walls>())
         {
             Destroy(gameObject);
         }
-        else if (collision.tag.Equals("Player"))
+         if (collision.tag.Equals("Team2"))
         {
             collision.GetComponent<Hero>().TakeDamage(mDamage);
+            Destroy(gameObject);
         }
     }
 }

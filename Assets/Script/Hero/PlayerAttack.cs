@@ -46,10 +46,6 @@ public class PlayerAttack : MonoBehaviour
         //    SwordSwing(rotaBackSpeed);
         //}
 
-
-
-
-
         if (hero.GetIsLeft)
         {
             if (swingdown && beginSwing)
@@ -92,14 +88,22 @@ public class PlayerAttack : MonoBehaviour
             }
         }
 
-        if (!beginSwing && Input.GetMouseButtonDown(0))
+        if (GetComponentInParent<Hero>().controllerType == Hero.Controller.PS4)
         {
-            Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemy);
-            for (int i = 0; i < enemiesToDamage.Length; ++i)
+            if (!beginSwing && Input.GetButtonDown("PS4Attack"))
+                beginSwing = true;
+        }
+        else if (GetComponentInParent<Hero>().controllerType == Hero.Controller.KeyBoard)
+        {
+            if (!beginSwing && Input.GetMouseButtonDown(0))
             {
-                enemiesToDamage[i].GetComponent<Golem>().TakeDamage(damage);
+                //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemy);
+                //for (int i = 0; i < enemiesToDamage.Length; ++i)
+                //{
+                //    enemiesToDamage[i].GetComponent<Golem>().TakeDamage(damage);
+                //}
+                beginSwing = true;
             }
-            beginSwing = true;
         }
     }
 
@@ -114,17 +118,11 @@ public class PlayerAttack : MonoBehaviour
         transform.RotateAround(target.transform.position, Vector3.forward, Speed * Time.deltaTime);
     }
 
-    //private void OnTriggerEnter2D(Collider2D collision)
-    //{
-    //    if (collision.GetComponent<Enemy>())
-    //    {
-    //        Debug.Log("Trigger");
-    //        Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    //        //&& transform.position.y -0.5 > enemy.transform.position.y +0.5
-    //        if (enemy != null)
-    //        {
-    //            enemy.TakeDamage(damage);
-    //        }
-    //    }      
-    //}     
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag.Equals("Team2"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(10f);
+        }
+    }
 }
