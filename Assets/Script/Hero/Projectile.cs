@@ -9,11 +9,24 @@ public class Projectile : MonoBehaviour
     [SerializeField]
     float projectileSpeed;
     private Rigidbody2D rigidbody;
+    [SerializeField]
+    float exitTime= 2.0f;
 
     void Start()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.velocity = transform.right * projectileSpeed;
+    }
+
+    private void Update()
+    {
+        if (exitTime <= 0.0f)
+        {
+            Destroy(gameObject);
+        }
+
+        exitTime -= Time.deltaTime;
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
