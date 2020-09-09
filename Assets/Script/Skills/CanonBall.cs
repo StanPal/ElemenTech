@@ -55,11 +55,15 @@ public class CanonBall : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<Wall>())
+        if (collision.GetComponent<Walls>())
             Destroy(gameObject);
-        else if(collision.GetComponent<Golem>())
+        if(collision.GetComponent<Golem>())
         {
             collision.GetComponent<Golem>().TakeDamage(mDamage);
+        }
+        if (collision.tag.Equals("Team2"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(mDamage);
         }
     }
 

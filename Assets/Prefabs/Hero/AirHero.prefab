@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 4463274815846023200}
   - component: {fileID: 4463274815846023207}
   - component: {fileID: 4463274815846023206}
+  - component: {fileID: 72972476683817209}
   m_Layer: 0
   m_Name: AirHero
   m_TagString: Untagged
@@ -460,10 +461,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e56881ff55d52449347a9951c92476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerType: 0
   mName: 
   mAttack: 10
   mMaxHealth: 100
-  mSpeed: 10
+  mCurrentHealth: 0
+  mElementalType: 0
   mJumpForce: 5
   feetPos: {fileID: 4463274816966319567}
   checkRadius: 0.5
@@ -471,10 +474,27 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  mElementalType: 0
+  mSpeed: 10
   arrowPosition: {fileID: 4463274815894263888}
   projectile: {fileID: 4214174864898391108, guid: d5555b111f1e6b041b43496502c643ea,
     type: 3}
+--- !u!114 &72972476683817209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4463274815846023205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shield: {fileID: 0}
+  isGuarding: 0
+  mGuardTime: 0.5
+  mShieldSize: 2.1
+  comboSkill: {fileID: 0}
 --- !u!1 &4463274815894263895
 GameObject:
   m_ObjectHideFlags: 0
