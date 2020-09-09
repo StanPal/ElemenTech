@@ -6,6 +6,8 @@ public class FireBall : MonoBehaviour
 {
     [SerializeField]
     private float speed = 10.0f;
+    [SerializeField]
+    private float mDamage = 10.0f;
     private CanonBall canonball;
     private FireSkills fireSkills;
 
@@ -37,14 +39,21 @@ public class FireBall : MonoBehaviour
         }
         else if(collision.GetComponent<Guard>())
         {      
-            Debug.Log("Shield Hit");
-            collision.GetComponent<Guard>().ComboSkillOn = true;
-
+            Guard guard = collision.GetComponent<Guard>();
+            if (guard.Guarding)
+            {
+                Debug.Log("Shield Hit");
+                collision.GetComponent<Guard>().ComboSkillOn = true;
+            }
             Destroy(gameObject);
         }
         else if (collision.GetComponentInChildren<Wall>())
         {
             Destroy(gameObject);
+        }
+        else if (collision.tag.Equals("Player"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(mDamage);
         }
     }
 }

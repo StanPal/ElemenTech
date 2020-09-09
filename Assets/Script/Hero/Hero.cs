@@ -13,7 +13,8 @@ public class Hero : MonoBehaviour
     public enum Controller
     {
         PS4,
-        KeyBoard
+        KeyBoard,
+        Xbox
     };
 
     [SerializeField]
@@ -24,6 +25,7 @@ public class Hero : MonoBehaviour
     float mAttack;
     [SerializeField]
     float mMaxHealth;
+    [SerializeField]
     float mCurrentHealth;
 
     public float CurrentHealth { get { return mCurrentHealth; } }
@@ -110,11 +112,6 @@ public class Hero : MonoBehaviour
                 isJumping = false;
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                rangeAttack();
-            }
-
             if (Input.GetKeyDown(KeyCode.E))
             {
                 onSkillPerformed.Invoke(GetElement);
@@ -125,8 +122,8 @@ public class Hero : MonoBehaviour
             }
             if (Input.GetKey(KeyCode.G))
                 onGuardPerformed.Invoke();
-            //else
-            //    onGuardExit.Invoke();
+            else
+                onGuardExit.Invoke();
         }
         else if(controllerType == Controller.PS4)
         {
@@ -154,23 +151,18 @@ public class Hero : MonoBehaviour
                 isJumping = false;
             }
 
-            if (Input.GetMouseButtonDown(1))
-            {
-                rangeAttack();
-            }
-
             if (Input.GetButtonDown("PS4Skill"))
             {
                 onSkillPerformed.Invoke(GetElement);
             }
-            if (Input.GetKeyDown(KeyCode.P))
+            if (Input.GetButtonDown("PS4Pause"))
             {
                 onPausePeformed.Invoke();
             }
-            if (Input.GetKey(KeyCode.G))
+            if (Input.GetButton("PS4Guard"))
                 onGuardPerformed.Invoke();
-            //else
-            //    onGuardExit.Invoke();
+            else
+                onGuardExit.Invoke();
         }
     }
 
@@ -179,9 +171,17 @@ public class Hero : MonoBehaviour
         Instantiate(projectile, arrowPosition.position, arrowPosition.rotation);
     }
 
+    public void TakeDamage(float damage)
+    {
+        mCurrentHealth -= damage;
+        if (mCurrentHealth <= 0)
+            HeroDie();
+    }
+
     void HeroDie()
     {
-       //Destroy(gameObject);
+  
+       Destroy(gameObject);
     }
 
 }

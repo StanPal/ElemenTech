@@ -11,6 +11,6 @@ public class ConnectedControllers : MonoBehaviour
     void Update()
     {
         controllers = Input.GetJoystickNames();
-        Debug.Log(controllers.ToString());
+
     }
 }
