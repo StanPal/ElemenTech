@@ -325,7 +325,7 @@ MonoBehaviour:
   mName: 
   mAttack: 10
   mMaxHealth: 100
-  mCurrentHealth: 0
+  mCoolDown: 5
   mElementalType: 1
   mJumpForce: 5
   feetPos: {fileID: 1119934845456304554}

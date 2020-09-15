@@ -27,9 +27,14 @@ public class Hero : MonoBehaviour
     float mAttack;
     [SerializeField]
     float mMaxHealth;
-    [SerializeField]
     float mCurrentHealth;
+    [SerializeField]
+    float mCoolDown;
+    float mTempCDTime;
+    bool isCDFinished;
 
+    public bool IsCDFinished { get { return isCDFinished; } }
+    public float CoolDown { get { return mCoolDown; } }
     public float CurrentHealth { get { return mCurrentHealth; } }
     public float MaxHealth { get { return mMaxHealth; } }
 
@@ -61,11 +66,13 @@ public class Hero : MonoBehaviour
     Transform arrowPosition;
     public GameObject projectile;
 
+    
+
     void Awake()
     {
         mCurrentHealth = mMaxHealth;
         rb = GetComponent<Rigidbody2D>();
-
+        mTempCDTime = 0;
     }
 
 
@@ -99,6 +106,19 @@ public class Hero : MonoBehaviour
     void Update()
     {
          isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+
+        if(mTempCDTime <= 0.0f)
+        {
+            mTempCDTime = 0.0f;
+            isCDFinished = true;
+        }
+
+        if(mTempCDTime > 0.0f)
+        {
+            mTempCDTime -= Time.deltaTime;
+        }
+
+        // Imput for keyboard
         if (controllerType == Controller.KeyBoard)
         {
             if (isGrounded == true && Input.GetKeyDown(KeyCode.Space))
@@ -127,7 +147,7 @@ public class Hero : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                onSkillPerformed.Invoke(GetElement);
+                MagicSkill();
             }
             if (Input.GetKeyDown(KeyCode.P))
             {
@@ -138,7 +158,9 @@ public class Hero : MonoBehaviour
             else
                 onGuardExit.Invoke();
         }
-         if(controllerType == Controller.PS4)
+
+        // // Imput for ps4
+        if (controllerType == Controller.PS4)
         {
             if (isGrounded == true && Input.GetButtonDown("PS4Jump"))
             {
@@ -166,7 +188,7 @@ public class Hero : MonoBehaviour
 
             if (Input.GetButtonUp("PS4Skill"))
             {
-                onSkillPerformed.Invoke(GetElement);
+                MagicSkill();
             }
             if (Input.GetButtonDown("PS4Pause"))
             {
@@ -176,6 +198,16 @@ public class Hero : MonoBehaviour
                 onGuardPerformed.Invoke();
             else
                 onGuardExit.Invoke();
+        }
+    }
+
+    void MagicSkill()
+    {
+        if (isCDFinished)
+        {
+            onSkillPerformed.Invoke(GetElement);
+            mTempCDTime = mCoolDown;
+            isCDFinished = false;
         }
     }
 
