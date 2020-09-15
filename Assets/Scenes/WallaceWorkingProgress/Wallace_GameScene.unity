@@ -188,6 +188,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkillManager
       objectReference: {fileID: 0}
+    - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
+        type: 3}
+      propertyPath: FireHero
+      value: 
+      objectReference: {fileID: 1463264770}
+    - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
+        type: 3}
+      propertyPath: EarthHero
+      value: 
+      objectReference: {fileID: 981458869}
+    - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
+        type: 3}
+      propertyPath: WaterHero
+      value: 
+      objectReference: {fileID: 444876993}
+    - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
+        type: 3}
+      propertyPath: AirHero
+      value: 
+      objectReference: {fileID: 4463274815846023205, guid: a8d6d26674b5cf740919459c540a8cb3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98, type: 3}
 --- !u!1001 &306839413
@@ -275,6 +296,24 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 7476759683449928569}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &444876998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 444876993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Shield: {fileID: 1854956812321698989, guid: 0456ef1bc5054e94793176be4e055cbe, type: 3}
+  isGuarding: 0
+  mGuardTime: 0.5
+  mShieldSize: 2.1
+  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
+    type: 3}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -786,6 +825,12 @@ PrefabInstance:
       propertyPath: WaterHero
       value: 
       objectReference: {fileID: 444876993}
+    - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
+        type: 3}
+      propertyPath: AirHero
+      value: 
+      objectReference: {fileID: 4463274815846023205, guid: a8d6d26674b5cf740919459c540a8cb3,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
 --- !u!1 &1463264770 stripped

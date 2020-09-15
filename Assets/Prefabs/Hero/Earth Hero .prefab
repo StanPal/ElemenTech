@@ -321,10 +321,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e56881ff55d52449347a9951c92476, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  controllerType: 0
   mName: 
   mAttack: 10
   mMaxHealth: 100
-  mSpeed: 10
+  mCurrentHealth: 0
+  mElementalType: 1
   mJumpForce: 5
   feetPos: {fileID: 1119934845456304554}
   checkRadius: 0.5
@@ -332,7 +334,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  mElementalType: 1
+  mSpeed: 10
   arrowPosition: {fileID: 1119934844776667413}
   projectile: {fileID: 4214174864898391108, guid: d5555b111f1e6b041b43496502c643ea,
     type: 3}
@@ -348,11 +350,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mEarthShield: {fileID: 1854956812321698989, guid: 0456ef1bc5054e94793176be4e055cbe,
-    type: 3}
+  Shield: {fileID: 1854956812321698989, guid: 0456ef1bc5054e94793176be4e055cbe, type: 3}
   isGuarding: 1
   mGuardTime: 0.5
   mShieldSize: 2.1
+  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
+    type: 3}
 --- !u!1 &7942682652529831052
 GameObject:
   m_ObjectHideFlags: 0
