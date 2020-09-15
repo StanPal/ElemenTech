@@ -24,7 +24,7 @@ public class EarthSkills : MonoBehaviour
     private List<GameObject> mEarthSpikeList = new List<GameObject>();
 
     PlayerSkills mHeroSkills;
-
+    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
     private void Start()
     {
         mHeroSkills = GetComponent<PlayerSkills>();
@@ -52,7 +52,15 @@ public class EarthSkills : MonoBehaviour
     {
         for (int i = 0; i < mNumSpikes; ++i)
         {
-            GameObject mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.Hero.transform.position.x + (mSpikeHorizontalOffset + i), -1.0f, 0.0f), Quaternion.identity);
+            GameObject mSpike;
+            if (mHeroSkills.Hero.GetIsLeft)
+            {
+                mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.Hero.transform.position.x - (mSpikeHorizontalOffset + i), -1.0f, 0.0f), Quaternion.identity);
+            }
+            else
+            {
+                 mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.Hero.transform.position.x + (mSpikeHorizontalOffset + i), -1.0f, 0.0f), Quaternion.identity);
+            }
             mEarthSpikeList.Add(mSpike);
         }
         mHeroSkills.SkillActive = true;

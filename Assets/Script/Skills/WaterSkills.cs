@@ -17,7 +17,7 @@ public class WaterSkills : MonoBehaviour
 
     void WaterGun()
     {
-        Instantiate(mWaterGun, mHeroSkills.Hero.transform);
+        Instantiate(mWaterGun, mHeroSkills.Hero.transform.position, Quaternion.identity);
     }
 
 }

@@ -17,6 +17,6 @@ public class AirSkills : MonoBehaviour
 
     void AirJet()
     {
-        Instantiate(mAirJet, mHeroSkills.Hero.transform);
+        Instantiate(mAirJet, mHeroSkills.Hero.transform.position, Quaternion.identity);
     }
 }

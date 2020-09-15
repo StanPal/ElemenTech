@@ -12,10 +12,11 @@ public class WaterGun : MonoBehaviour
     [SerializeField]
     float exitTime = 2.0f;
     private Hero hero;
-
+    WaterSkills waterSkills;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
+        waterSkills = FindObjectOfType<WaterSkills>();
         hero = FindObjectOfType<Hero>();
         if (hero.GetIsLeft)
         {
@@ -49,10 +50,19 @@ public class WaterGun : MonoBehaviour
             }
         }
 
-        if (collision.tag.Equals("Team1"))
+        if (waterSkills.PlayerSkills.Hero.tag.Equals("Team1"))
         {
-            collision.GetComponent<Hero>().TakeDamage(10);
-            Destroy(gameObject);
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(damage);
+            }
+        }
+        if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(damage);
+            }
         }
 
         if (collision.GetComponent<Walls>())

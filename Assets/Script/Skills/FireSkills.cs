@@ -24,8 +24,8 @@ public class FireSkills : MonoBehaviour
     }
 
     void FireBall()
-    {
-        Instantiate(mFireBall, mHeroSkills.Hero.transform);
+    {    
+        Instantiate(mFireBall, mHeroSkills.Hero.transform.position, Quaternion.identity);
     }
 
 }

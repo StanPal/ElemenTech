@@ -94,6 +94,7 @@ public class Hero : MonoBehaviour
             isLeft = false;
         }
         transform.localScale = characterScale;
+
     }
 
     void Update()

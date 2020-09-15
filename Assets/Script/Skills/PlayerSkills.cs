@@ -48,7 +48,7 @@ public class PlayerSkills : MonoBehaviour
 
     private void Update()
     {
-       
+
     }
 
     void PerformSkill(Elements.ElementalAttribute elementType)

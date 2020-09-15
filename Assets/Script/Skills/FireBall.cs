@@ -10,23 +10,28 @@ public class FireBall : MonoBehaviour
     private float mDamage = 10.0f;
     private CanonBall canonball;
     private FireSkills fireSkills;
-
+    [SerializeField]
+    Vector2 displacement;
+    [SerializeField]
+    float distance = 10;
     private void Awake()
     {
         fireSkills = FindObjectOfType<FireSkills>();
+        displacement.Set(this.transform.position.x + distance, this.transform.position.y);
+        if (fireSkills.PlayerSkills.Hero.GetIsLeft)
+        {   
+            displacement.x *= -1;
+        }
 
     }
-    // Start is called before the first frame update
-    void Start()
-    {     
-        canonball = FindObjectOfType<CanonBall>();
-     
-    }
+
 
     private void Update()
     {
         float step = speed * Time.deltaTime;
-        transform.position = Vector2.MoveTowards(transform.position, new Vector2(this.transform.position.x + 10, this.transform.position.y), step);
+        transform.position = Vector2.MoveTowards(transform.position, displacement, step);
+        if (transform.position.Equals(displacement))
+            Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -44,17 +49,28 @@ public class FireBall : MonoBehaviour
             {
                 Debug.Log("Shield Hit");
                 collision.GetComponent<Guard>().ComboSkillOn = true;
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
          if (collision.GetComponentInChildren<Walls>())
         {
             Destroy(gameObject);
         }
-         if (collision.tag.Equals("Team2"))
+        if (fireSkills.PlayerSkills.Hero.tag.Equals("Team1"))
         {
-            collision.GetComponent<Hero>().TakeDamage(mDamage);
-            Destroy(gameObject);
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(mDamage);
+                Destroy(gameObject);
+            }
+        }
+        if (fireSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(mDamage);
+                Destroy(gameObject);
+            }
         }
     }
 }
