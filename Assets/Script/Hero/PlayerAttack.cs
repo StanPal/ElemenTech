@@ -32,7 +32,7 @@ public class PlayerAttack : MonoBehaviour
 
     private void Awake()
     {
-        hero = FindObjectOfType<Hero>();
+        hero = GetComponentInParent<Hero>();
     }
 
     private void Update()
@@ -93,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
             if (!beginSwing && Input.GetButtonDown("PS4Attack"))
                 beginSwing = true;
         }
-        else if (GetComponentInParent<Hero>().controllerType == Hero.Controller.KeyBoard)
+        if (GetComponentInParent<Hero>().controllerType == Hero.Controller.KeyBoard)
         {
             if (!beginSwing && Input.GetMouseButtonDown(0))
             {
@@ -120,9 +120,19 @@ public class PlayerAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag.Equals("Team2"))
+        if (GetComponentInParent<Hero>().gameObject.tag.Equals("Team1"))
         {
-            collision.GetComponent<Hero>().TakeDamage(10f);
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(10f);
+            }
+        }
+        if (GetComponentInParent<Hero>().gameObject.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(10f);
+            }
         }
     }
 }

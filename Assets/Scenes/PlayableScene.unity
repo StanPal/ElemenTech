@@ -128,6 +128,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1392078421, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98, type: 3}
+      propertyPath: mDamage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1298977985946996485, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -427,10 +431,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Hero
       objectReference: {fileID: 0}
-    - target: {fileID: 5795234445427293574, guid: 2e10122b180751a40b4999ab9c6f6eac,
+    - target: {fileID: 5795234445427293575, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
+      propertyPath: mJumpForce
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5795234445427293626, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
@@ -490,12 +494,12 @@ PrefabInstance:
     - target: {fileID: 5795234446608479490, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5795234446608479490, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
@@ -872,17 +876,22 @@ PrefabInstance:
     - target: {fileID: 2666399957648209026, guid: 30cd59cb61a1a1140b7909695e9e97e6,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2666399957648209026, guid: 30cd59cb61a1a1140b7909695e9e97e6,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7942682652433179032, guid: 30cd59cb61a1a1140b7909695e9e97e6,
         type: 3}
       propertyPath: m_Name
       value: 'Earth Hero '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7942682652433179032, guid: 30cd59cb61a1a1140b7909695e9e97e6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7942682652433179045, guid: 30cd59cb61a1a1140b7909695e9e97e6,
         type: 3}
@@ -1161,6 +1170,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterHero
       objectReference: {fileID: 0}
+    - target: {fileID: 7476759683541955512, guid: 58c5ab03208ccc049b38cca1f19fa759,
+        type: 3}
+      propertyPath: m_TagString
+      value: Team2
+      objectReference: {fileID: 0}
     - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}
       propertyPath: mElementalType
@@ -1169,12 +1183,17 @@ PrefabInstance:
     - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}
       propertyPath: mCoolDown
-      value: 5
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}
       propertyPath: controllerType
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
+        type: 3}
+      propertyPath: mJumpForce
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7476759683541955516, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}

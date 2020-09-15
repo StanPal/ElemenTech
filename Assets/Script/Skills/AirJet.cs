@@ -50,7 +50,7 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(mDamage);
             }
         }
-        if (collision.GetComponentInChildren<Walls>())
+        if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }

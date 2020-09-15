@@ -52,7 +52,7 @@ public class FireBall : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-         if (collision.GetComponentInChildren<Walls>())
+         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }
@@ -60,7 +60,7 @@ public class FireBall : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<Hero>().TakeDamage(mDamage);
+                collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
                 Destroy(gameObject);
             }
         }
@@ -68,7 +68,7 @@ public class FireBall : MonoBehaviour
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<Hero>().TakeDamage(mDamage);
+                collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
                 Destroy(gameObject);
             }
         }

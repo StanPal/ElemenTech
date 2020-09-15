@@ -155,9 +155,15 @@ public class Hero : MonoBehaviour
                 onPausePeformed.Invoke();
             }
             if (Input.GetKey(KeyCode.G))
+            {
+                mSpeed = 5;
                 onGuardPerformed.Invoke();
+            }
             else
+            {
                 onGuardExit.Invoke();
+                mSpeed = 10;
+            }
         }
 
         // // Imput for ps4
@@ -196,9 +202,16 @@ public class Hero : MonoBehaviour
                 onPausePeformed.Invoke();
             }
             if (Input.GetButton("PS4Guard"))
+            {
                 onGuardPerformed.Invoke();
+                mSpeed = 5;
+
+            }
             else
+            {
                 onGuardExit.Invoke();
+                mSpeed = 10;
+            }
         }
     }
 
@@ -226,8 +239,8 @@ public class Hero : MonoBehaviour
 
     void HeroDie()
     {
-  
-       Destroy(gameObject);
+        this.gameObject.SetActive(false);
+       //Destroy(gameObject);
     }
 
 }

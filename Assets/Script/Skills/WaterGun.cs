@@ -65,7 +65,7 @@ public class WaterGun : MonoBehaviour
             }
         }
 
-        if (collision.GetComponent<Walls>())
+        if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }
