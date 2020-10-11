@@ -18,6 +18,7 @@ public class Shield : MonoBehaviour
             Instantiate(CanonBall,FindObjectOfType<Guard>().gameObject.transform);
             Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
+
         }
     }
 }

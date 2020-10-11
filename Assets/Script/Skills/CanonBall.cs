@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class CanonBall : MonoBehaviour
 {
-
+    [SerializeField]
+    float mDamage = 50;
     private Vector3 targetPos;
     [SerializeField]
-    private float targetXpos = 5f;
-    private float targetYpos = 5f;
+    private float targetXpos = 20f;
+    private float targetYpos = 10f;
 
     [SerializeField]
     private float speed = 10;
@@ -16,15 +17,16 @@ public class CanonBall : MonoBehaviour
     [SerializeField]
     private float mArcHeight = 1;
 
+    private Vector3 nextPos;
+    private Vector3 startPos;
 
-    Vector3 startPos;
 
     void Start()
     {
         // Cache our start position, which is really the only thing we need
         // (in addition to our current position, and the target).
-        startPos =  this.transform.position;
-        targetPos = new Vector3(startPos.x + targetXpos, startPos.y + targetYpos);
+        startPos = transform.position;
+        targetPos = new Vector3(transform.position.x + targetXpos, transform.position.y + targetYpos);
     }
 
     void Update()
@@ -36,7 +38,7 @@ public class CanonBall : MonoBehaviour
         float nextX = Mathf.MoveTowards(transform.position.x, x1, speed * Time.deltaTime);
         float baseY = Mathf.Lerp(startPos.y, targetPos.y, (nextX - x0) / dist);
         float arc = mArcHeight * (nextX - x0) * (nextX - x1) / (-0.25f * dist * dist);
-        Vector3 nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
+        nextPos = new Vector3(nextX, baseY + arc, transform.position.z);
 
         // Rotate to face the next position, and then move there
         transform.rotation = LookAt2D(nextPos - transform.position);
@@ -49,6 +51,20 @@ public class CanonBall : MonoBehaviour
     void Arrived()
     {
         Destroy(gameObject);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.GetComponent<Walls>())
+            Destroy(gameObject);
+        if(collision.GetComponent<Golem>())
+        {
+            collision.GetComponent<Golem>().TakeDamage(mDamage);
+        }
+        if (collision.tag.Equals("Team2"))
+        {
+            collision.GetComponent<Hero>().TakeDamage(mDamage);
+        }
     }
 
     static Quaternion LookAt2D(Vector2 forward)

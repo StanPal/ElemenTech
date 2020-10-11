@@ -4,23 +4,34 @@ using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
-
+    [SerializeField]
+    private float speed = 10.0f;
+    [SerializeField]
+    private float mDamage = 10.0f;
     private CanonBall canonball;
-    private Rigidbody2D rb;
     private FireSkills fireSkills;
-
+    [SerializeField]
+    Vector2 displacement;
+    [SerializeField]
+    float distance = 10;
     private void Awake()
     {
         fireSkills = FindObjectOfType<FireSkills>();
+        displacement.Set(this.transform.position.x + distance, this.transform.position.y);
+        if (fireSkills.PlayerSkills.Hero.GetIsLeft)
+        {   
+            displacement.x *= -1;
+        }
 
     }
-    // Start is called before the first frame update
-    void Start()
+
+
+    private void Update()
     {
-     
-        canonball = FindObjectOfType<CanonBall>();
-        rb = GetComponent<Rigidbody2D>();
-        rb.velocity = transform.right * 20;
+        float step = speed * Time.deltaTime;
+        transform.position = Vector2.MoveTowards(transform.position, displacement, step);
+        if (transform.position.Equals(displacement))
+            Destroy(this.gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -31,16 +42,35 @@ public class FireBall : MonoBehaviour
             golem.TakeDamage(fireSkills.Damage);
             Destroy(gameObject);
         }
-        else if(collision.GetComponent<Shield>())
+         if(collision.GetComponent<Guard>())
         {      
-            Debug.Log("Shield Hit");
-            collision.GetComponent<Shield>().ComboSkillOn = true;
-
-            Destroy(gameObject);
+            Guard guard = collision.GetComponent<Guard>();
+            if (guard.Guarding)
+            {
+                Debug.Log("Shield Hit");
+                collision.GetComponent<Guard>().ComboSkillOn = true;
+                Destroy(gameObject);
+            }
         }
-        else if (collision.GetComponentInChildren<Wall>())
+         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
+        }
+        if (fireSkills.PlayerSkills.Hero.tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
+                Destroy(gameObject);
+            }
+        }
+        if (fireSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
+                Destroy(gameObject);
+            }
         }
     }
 }

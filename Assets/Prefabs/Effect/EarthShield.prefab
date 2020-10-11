@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 1854956812321698994}
   - component: {fileID: 4465170668750065623}
   - component: {fileID: 34767663955727313}
-  - component: {fileID: 4102483246709424058}
   m_Layer: 0
   m_Name: EarthShield
   m_TagString: Untagged
@@ -103,17 +102,3 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4102483246709424058
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1854956812321698989}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 899ad55d437a6cc4b85f9d48a87e51d9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CanonBall: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
-    type: 3}
