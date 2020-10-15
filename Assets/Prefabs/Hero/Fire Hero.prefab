@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5795234445427293626}
   - component: {fileID: 5795234445427293573}
   - component: {fileID: 5795234445427293572}
-  - component: {fileID: 5795234445427293575}
   - component: {fileID: 178996512226551123}
   m_Layer: 0
   m_Name: Fire Hero
@@ -88,35 +87,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &5795234445427293575
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5795234445427293574}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 84e56881ff55d52449347a9951c92476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  controllerType: 0
-  mName: 
-  mAttack: 10
-  mMaxHealth: 100
-  mCoolDown: 3
-  mElementalType: 0
-  mJumpForce: 10
-  feetPos: {fileID: 5795234445715687053}
-  checkRadius: 0.5
-  jumpTime: 0.5
-  whatIsGround:
-    serializedVersion: 2
-    m_Bits: 256
-  mSpeed: 10
-  arrowPosition: {fileID: 5795234446586664154}
-  projectile: {fileID: 4214174864898391108, guid: d5555b111f1e6b041b43496502c643ea,
-    type: 3}
 --- !u!114 &178996512226551123
 MonoBehaviour:
   m_ObjectHideFlags: 0

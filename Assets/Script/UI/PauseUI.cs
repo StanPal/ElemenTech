@@ -5,12 +5,12 @@ using UnityEngine.UI;
 
 public class PauseUI : MonoBehaviour
 {
-    private Hero mHero;
+    private HeroActions mHero;
     public Canvas mCanvas;
 
     private void Start()
     {
-        mHero = FindObjectOfType<Hero>().GetComponent<Hero>();
+        mHero = FindObjectOfType<HeroActions>().GetComponent<HeroActions>();
         mHero.onPausePeformed += PauseGame;
     }
 

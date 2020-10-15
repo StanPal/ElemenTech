@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-    private Hero mHero;
+    private HeroActions mHero;
     public GameObject Shield;
     private GameObject mShield;
     [SerializeField]
@@ -22,7 +22,7 @@ public class Guard : MonoBehaviour
 
     private void Start()
     {
-        mHero = GetComponentInParent<Hero>();
+        mHero = GetComponentInParent<HeroActions>();
         mHero.onGuardPerformed += GuardMove;
         mHero.onGuardExit += DestroyGuard;
     }
