@@ -574,6 +574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerInput: 1
+  isLeft: 0
   mJumpForce: 10
   feetPos: {fileID: 174587261}
   checkRadius: 5
@@ -1573,6 +1574,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerInput: 0
+  isLeft: 0
   mJumpForce: 10
   feetPos: {fileID: 5893079455680566705}
   checkRadius: 5
@@ -1849,13 +1851,36 @@ GameObject:
   - component: {fileID: 5893079456587376410}
   - component: {fileID: 5893079456587376409}
   - component: {fileID: 5893079456587376408}
+  - component: {fileID: 5893079456587376414}
   m_Layer: 0
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
+--- !u!114 &5893079456587376414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893079456587376413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 2
+  startTimeBtAttack: 1
+  attackPos: {fileID: 5893079455124917682}
+  whatIsEnemy:
+    serializedVersion: 2
+    m_Bits: 512
+  attackRange: 5
+  target: {fileID: 5893079454672226073}
+  rotaSpeed: 100
+  rotaBackSpeed: 100
 --- !u!212 &5893079456655000418
 SpriteRenderer:
   m_ObjectHideFlags: 0

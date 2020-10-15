@@ -5,19 +5,36 @@ using UnityEngine;
 public class HeroActions : MonoBehaviour
 {
     public event System.Action<Elements.ElementalAttribute> onSkillPerformed;
+    public event System.Action onAttackPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
-    // Start is called before the first frame update
-    void Start()
+
+    HeroMovement mHeroMovement;
+    private PlayerInput mPlayerInput;
+
+    private void Awake()
     {
-        
+        mHeroMovement = GetComponent<HeroMovement>();
+        mPlayerInput = new PlayerInput();
+        if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
+        {
+            mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnEnable()
     {
-        
+        mPlayerInput.Enable();
+    }
+    private void OnDisable()
+    {
+        mPlayerInput.Disable();
     }
 
+    private void SwordSwing()
+    {
+        onAttackPerformed.Invoke();
+    }
+ 
 }

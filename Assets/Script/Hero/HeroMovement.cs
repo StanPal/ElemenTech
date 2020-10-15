@@ -4,7 +4,9 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class HeroMovement : MonoBehaviour
 {
+  
     private PlayerInput mPlayerInput;
+    public PlayerInput PlayerInput { get { return mPlayerInput; } }
     public enum Controller
     {
         Keyboard,
@@ -14,6 +16,7 @@ public class HeroMovement : MonoBehaviour
     }
 
     public Controller controllerInput;
+    [SerializeField]
     bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
 
@@ -58,10 +61,6 @@ public class HeroMovement : MonoBehaviour
         mPlayerInput.Disable();
     }
 
-    private void Start()
-    {
-      
-    }
 
     private void Jump()
     {        
@@ -96,17 +95,19 @@ public class HeroMovement : MonoBehaviour
         else
             Debug.Log("Keybindings not set");
 
+        Debug.Log(mMoveInput);
+
         Vector3 currentPosition = transform.position;
         currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
         transform.position = currentPosition;
-        
+
         Vector3 characterScale = transform.localScale;
-        if (rb.velocity.x < 0)
+        if (mMoveInput < 0)
         {
             characterScale.x = -1;
             isLeft = true;
         }
-        if (rb.velocity.x > 0)
+        if (mMoveInput > 0)
         {
             characterScale.x = 1;
             isLeft = false;
