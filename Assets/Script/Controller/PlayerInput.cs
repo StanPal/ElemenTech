@@ -41,6 +41,38 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""Element Special 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""ca9c08ef-2248-4f5f-9c5d-1348b304c40a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""a453bfd2-487c-47b7-b09c-86a94543fe7c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""Guard Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""e38d4642-0ae6-4cf3-bb9d-3d59f45152f8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""9520fbd5-f796-4757-8642-98b3a507f0cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -98,6 +130,50 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""SwordSwing"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e3fdd414-0724-42a9-a6c3-324ada27c141"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Element Special 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c7e4c52-c213-4339-9e47-b4c0203a631e"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a1dc6e02-8059-4a3f-9881-aed797533fd5"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40bc7c63-2552-4792-83a0-3216fe03c238"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -117,6 +193,38 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Jump"",
                     ""type"": ""Button"",
                     ""id"": ""7b40b742-70ea-4356-8198-2b8884428694"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwordSwing"",
+                    ""type"": ""Button"",
+                    ""id"": ""4f3b4f0b-0438-4ece-bfdf-f8f756f5ac21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Element Special 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""0c03d2b8-c007-40dd-a3e5-9db4e7e033b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""214a03ef-9ca3-4469-8068-a1ef415012a8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Guard Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""a41f893c-2021-4d06-a3a8-cd6a4c2a1f77"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -166,6 +274,50 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""effed0dc-d7f5-4250-8a87-9cc688489c37"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwordSwing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e343ef40-0f67-48ed-9c64-f0aa3e5be582"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Element Special 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""93d57159-b81e-450d-a038-aca2d9516f85"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8e9df7e9-7e31-44e1-9c32-a15ae16a0e88"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -245,10 +397,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Move = m_KeyboardMouse.FindAction("Move", throwIfNotFound: true);
         m_KeyboardMouse_Jump = m_KeyboardMouse.FindAction("Jump", throwIfNotFound: true);
         m_KeyboardMouse_SwordSwing = m_KeyboardMouse.FindAction("SwordSwing", throwIfNotFound: true);
+        m_KeyboardMouse_ElementSpecial1 = m_KeyboardMouse.FindAction("Element Special 1", throwIfNotFound: true);
+        m_KeyboardMouse_Guard = m_KeyboardMouse.FindAction("Guard", throwIfNotFound: true);
+        m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
+        m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
         // PS4
         m_PS4 = asset.FindActionMap("PS4", throwIfNotFound: true);
         m_PS4_Move = m_PS4.FindAction("Move", throwIfNotFound: true);
         m_PS4_Jump = m_PS4.FindAction("Jump", throwIfNotFound: true);
+        m_PS4_SwordSwing = m_PS4.FindAction("SwordSwing", throwIfNotFound: true);
+        m_PS4_ElementSpecial1 = m_PS4.FindAction("Element Special 1", throwIfNotFound: true);
+        m_PS4_Guard = m_PS4.FindAction("Guard", throwIfNotFound: true);
+        m_PS4_GuardRelease = m_PS4.FindAction("Guard Release", throwIfNotFound: true);
         // XBOX
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
@@ -305,6 +465,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Move;
     private readonly InputAction m_KeyboardMouse_Jump;
     private readonly InputAction m_KeyboardMouse_SwordSwing;
+    private readonly InputAction m_KeyboardMouse_ElementSpecial1;
+    private readonly InputAction m_KeyboardMouse_Guard;
+    private readonly InputAction m_KeyboardMouse_GuardRelease;
+    private readonly InputAction m_KeyboardMouse_Pause;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -312,6 +476,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_KeyboardMouse_Move;
         public InputAction @Jump => m_Wrapper.m_KeyboardMouse_Jump;
         public InputAction @SwordSwing => m_Wrapper.m_KeyboardMouse_SwordSwing;
+        public InputAction @ElementSpecial1 => m_Wrapper.m_KeyboardMouse_ElementSpecial1;
+        public InputAction @Guard => m_Wrapper.m_KeyboardMouse_Guard;
+        public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
+        public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -330,6 +498,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @SwordSwing.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnSwordSwing;
                 @SwordSwing.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnSwordSwing;
                 @SwordSwing.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnSwordSwing;
+                @ElementSpecial1.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
+                @Guard.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
+                @Guard.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
+                @Guard.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
+                @GuardRelease.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuardRelease;
+                @Pause.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -343,6 +523,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @SwordSwing.started += instance.OnSwordSwing;
                 @SwordSwing.performed += instance.OnSwordSwing;
                 @SwordSwing.canceled += instance.OnSwordSwing;
+                @ElementSpecial1.started += instance.OnElementSpecial1;
+                @ElementSpecial1.performed += instance.OnElementSpecial1;
+                @ElementSpecial1.canceled += instance.OnElementSpecial1;
+                @Guard.started += instance.OnGuard;
+                @Guard.performed += instance.OnGuard;
+                @Guard.canceled += instance.OnGuard;
+                @GuardRelease.started += instance.OnGuardRelease;
+                @GuardRelease.performed += instance.OnGuardRelease;
+                @GuardRelease.canceled += instance.OnGuardRelease;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -353,12 +545,20 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IPS4Actions m_PS4ActionsCallbackInterface;
     private readonly InputAction m_PS4_Move;
     private readonly InputAction m_PS4_Jump;
+    private readonly InputAction m_PS4_SwordSwing;
+    private readonly InputAction m_PS4_ElementSpecial1;
+    private readonly InputAction m_PS4_Guard;
+    private readonly InputAction m_PS4_GuardRelease;
     public struct PS4Actions
     {
         private @PlayerInput m_Wrapper;
         public PS4Actions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_PS4_Move;
         public InputAction @Jump => m_Wrapper.m_PS4_Jump;
+        public InputAction @SwordSwing => m_Wrapper.m_PS4_SwordSwing;
+        public InputAction @ElementSpecial1 => m_Wrapper.m_PS4_ElementSpecial1;
+        public InputAction @Guard => m_Wrapper.m_PS4_Guard;
+        public InputAction @GuardRelease => m_Wrapper.m_PS4_GuardRelease;
         public InputActionMap Get() { return m_Wrapper.m_PS4; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -374,6 +574,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnJump;
+                @SwordSwing.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnSwordSwing;
+                @SwordSwing.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnSwordSwing;
+                @SwordSwing.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnSwordSwing;
+                @ElementSpecial1.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnElementSpecial1;
+                @Guard.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuard;
+                @Guard.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuard;
+                @Guard.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuard;
+                @GuardRelease.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
             }
             m_Wrapper.m_PS4ActionsCallbackInterface = instance;
             if (instance != null)
@@ -384,6 +596,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @SwordSwing.started += instance.OnSwordSwing;
+                @SwordSwing.performed += instance.OnSwordSwing;
+                @SwordSwing.canceled += instance.OnSwordSwing;
+                @ElementSpecial1.started += instance.OnElementSpecial1;
+                @ElementSpecial1.performed += instance.OnElementSpecial1;
+                @ElementSpecial1.canceled += instance.OnElementSpecial1;
+                @Guard.started += instance.OnGuard;
+                @Guard.performed += instance.OnGuard;
+                @Guard.canceled += instance.OnGuard;
+                @GuardRelease.started += instance.OnGuardRelease;
+                @GuardRelease.performed += instance.OnGuardRelease;
+                @GuardRelease.canceled += instance.OnGuardRelease;
             }
         }
     }
@@ -434,11 +658,19 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnSwordSwing(InputAction.CallbackContext context);
+        void OnElementSpecial1(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
+        void OnGuardRelease(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IPS4Actions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnSwordSwing(InputAction.CallbackContext context);
+        void OnElementSpecial1(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
+        void OnGuardRelease(InputAction.CallbackContext context);
     }
     public interface IXBOXActions
     {

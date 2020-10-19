@@ -4,22 +4,38 @@ using UnityEngine;
 
 public class HeroActions : MonoBehaviour
 {
-    public event System.Action<Elements.ElementalAttribute> onSkillPerformed;
+    public event System.Action onSkillPerformed;
     public event System.Action onAttackPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
     HeroMovement mHeroMovement;
+    public HeroMovement HeroMovement { get { return mHeroMovement; } }
+    HeroStats mHeroStats;
+    public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
 
     private void Awake()
     {
         mHeroMovement = GetComponent<HeroMovement>();
+        mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
         if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
         {
             mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
+            mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+            mPlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
+            mPlayerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
+            mPlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
+        }
+
+        if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
+        {
+            mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
+            mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
+            mPlayerInput.PS4.Guard.performed += _ => Guard();
+            mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
         }
     }
 
@@ -32,9 +48,35 @@ public class HeroActions : MonoBehaviour
         mPlayerInput.Disable();
     }
 
+    private void Guard()
+    {
+        onGuardPerformed.Invoke();
+    }
+
+    private void GuardRelease()
+    {
+        onGuardExit.Invoke();
+    }
+    
+    private void ElementSpecial1()
+    {
+        //if (HeroStats.CDFinished)
+        //{
+            onSkillPerformed.Invoke();
+        //    HeroStats.CDTime = HeroStats.CoolDown;
+        //    HeroStats.CDFinished = false;
+        //}
+    }
+
     private void SwordSwing()
     {
         onAttackPerformed.Invoke();
+    }
+
+    private void Pause()
+    {
+        Debug.Log("Called");
+        onPausePeformed.Invoke();
     }
  
 }

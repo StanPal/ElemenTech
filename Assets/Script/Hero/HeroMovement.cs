@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 public class HeroMovement : MonoBehaviour
 {
-  
     private PlayerInput mPlayerInput;
     public PlayerInput PlayerInput { get { return mPlayerInput; } }
     public enum Controller
@@ -20,19 +19,16 @@ public class HeroMovement : MonoBehaviour
     bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
 
+
     [SerializeField]
-    float mJumpForce;
+    float mJumpSpeed = 5f;
     [SerializeField]
-    Transform feetPos;
+    int mNumOfJumps = 0;
     [SerializeField]
-    float checkRadius;
-    bool isGrounded;
-    bool isJumping;
+    int mMaxJumps = 2;
     [SerializeField]
-    float jumpTime;
-    float jumpTimeCounter;
-    [SerializeField]
-    LayerMask whatIsGround;
+    private LayerMask mGround;
+    private Collider2D col;
 
     [SerializeField]
     float mSpeed;
@@ -43,6 +39,7 @@ public class HeroMovement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         mPlayerInput = new PlayerInput();
+        col = GetComponent<Collider2D>();
 
         if (controllerInput == Controller.Keyboard)
             mPlayerInput.KeyboardMouse.Jump.performed += _ => Jump();
@@ -61,27 +58,48 @@ public class HeroMovement : MonoBehaviour
         mPlayerInput.Disable();
     }
 
-
     private void Jump()
-    {        
-        isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-        if (isGrounded == true)
+    {  
+        if(IsGrounded())
         {
-            isJumping = true;
-            isGrounded = false;
-            jumpTimeCounter = jumpTime;
-            rb.velocity = Vector2.up * mJumpForce;
+            mNumOfJumps = 0;
         }
-        if (isJumping == true)
+        if (IsGrounded() || mNumOfJumps < mMaxJumps)
         {
-            if (jumpTimeCounter > 0)
-            {
-                rb.velocity = Vector2.up * mJumpForce;
-                jumpTimeCounter -= Time.deltaTime;
-            }
-            else
-                isJumping = false;
+            rb.AddForce(new Vector2(0, mJumpSpeed), ForceMode2D.Impulse);
+            mNumOfJumps += 1;
         }
+        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
+        //if (isGrounded == true)
+        //{
+        //    isJumping = true;
+        //    isGrounded = false;
+        //    jumpTimeCounter = jumpTime;
+        //    rb.velocity = Vector2.up * mJumpForce;
+        //}
+        //if (isJumping == true)
+        //{
+        //    if (jumpTimeCounter > 0)
+        //    {
+        //        rb.velocity = Vector2.up * mJumpForce;
+        //        jumpTimeCounter -= Time.deltaTime;
+        //    }
+        //    else
+        //        isJumping = false;
+        //}
+    }
+
+    private bool IsGrounded()
+    {
+        Vector2 topLeftPoint = transform.position;
+        topLeftPoint.x -= col.bounds.extents.x;
+        topLeftPoint.y += col.bounds.extents.y;
+
+        Vector2 bottomRight = transform.position;
+        bottomRight.x += col.bounds.extents.x;
+        bottomRight.y -= col.bounds.extents.y;
+
+        return Physics2D.OverlapArea(topLeftPoint, bottomRight, mGround);
     }
 
     void FixedUpdate()
@@ -94,8 +112,6 @@ public class HeroMovement : MonoBehaviour
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
         else
             Debug.Log("Keybindings not set");
-
-        Debug.Log(mMoveInput);
 
         Vector3 currentPosition = transform.position;
         currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;

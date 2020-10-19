@@ -15,8 +15,6 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField]
     Transform attackPos;
     [SerializeField]
-    LayerMask whatIsEnemy;
-    [SerializeField]
     float attackRange;
 
     [SerializeField]
@@ -93,25 +91,6 @@ public class PlayerAttack : MonoBehaviour
                 }
             }
         }
-
-        //    if (GetComponentInParent<HeroMovement>().controllerInput == HeroMovement.Controller.PS4)
-        //    {
-        //        if (!beginSwing && Input.GetButtonDown("PS4Attack"))
-        //            beginSwing = true;
-        //    }
-        //    if (GetComponentInParent<HeroMovement>().controllerInput == HeroMovement.Controller.Keyboard)
-        //    {
-        //        if (!beginSwing && Input.GetMouseButtonDown(0))
-        //        {
-        //            //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemy);
-        //            //for (int i = 0; i < enemiesToDamage.Length; ++i)
-        //            //{
-        //            //    enemiesToDamage[i].GetComponent<Golem>().TakeDamage(damage);
-        //            //}
-        //            beginSwing = true;
-        //        }
-        //    }
-        //}
     }
     private void OnDrawGizmosSelected()
     {

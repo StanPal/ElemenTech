@@ -15,9 +15,11 @@ public class HeroStats : MonoBehaviour
     [SerializeField]
     float mCoolDown;
     float mTempCDTime;
+    [SerializeField]
     bool isCDFinished;
 
-    public bool IsCDFinished { get { return isCDFinished; } }
+    public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
+    public float CDTime { get { return mTempCDTime; } set { mTempCDTime = value; } }
     public float CoolDown { get { return mCoolDown; } }
     public float CurrentHealth { get { return mCurrentHealth; } }
     public float MaxHealth { get { return mMaxHealth; } }
@@ -39,22 +41,8 @@ public class HeroStats : MonoBehaviour
             mTempCDTime = 0.0f;
             isCDFinished = true;
         }
-
         if (mTempCDTime > 0.0f)
-        {
             mTempCDTime -= Time.deltaTime;
-        }
-
-    }
-
-    void MagicSkill()
-    {
-        if (isCDFinished)
-        {
-            //onSkillPerformed.Invoke(GetElement);
-            mTempCDTime = mCoolDown;
-            isCDFinished = false;
-        }
     }
 
     public void TakeDamage(float damage)
@@ -66,8 +54,7 @@ public class HeroStats : MonoBehaviour
 
     void HeroDie()
     {
-        this.gameObject.SetActive(false);
-       //Destroy(gameObject);
+        this.gameObject.SetActive(false);       
     }
 
 }
