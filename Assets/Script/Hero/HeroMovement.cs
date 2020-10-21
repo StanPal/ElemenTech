@@ -69,24 +69,6 @@ public class HeroMovement : MonoBehaviour
             rb.AddForce(new Vector2(0, mJumpSpeed), ForceMode2D.Impulse);
             mNumOfJumps += 1;
         }
-        //isGrounded = Physics2D.OverlapCircle(feetPos.position, checkRadius, whatIsGround);
-        //if (isGrounded == true)
-        //{
-        //    isJumping = true;
-        //    isGrounded = false;
-        //    jumpTimeCounter = jumpTime;
-        //    rb.velocity = Vector2.up * mJumpForce;
-        //}
-        //if (isJumping == true)
-        //{
-        //    if (jumpTimeCounter > 0)
-        //    {
-        //        rb.velocity = Vector2.up * mJumpForce;
-        //        jumpTimeCounter -= Time.deltaTime;
-        //    }
-        //    else
-        //        isJumping = false;
-        //}
     }
 
     private bool IsGrounded()
@@ -130,27 +112,4 @@ public class HeroMovement : MonoBehaviour
         }
         transform.localScale = characterScale;
     }
-
-    void Update()
-    {
-
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    MagicSkill();
-        //}
-        //if (Input.GetKeyDown(KeyCode.P))
-        //{
-        //    onPausePeformed.Invoke();
-        //}
-        //if (Input.GetKey(KeyCode.G))
-        //{
-        //    mSpeed = 5;
-        //    onGuardPerformed.Invoke();
-        //}
-        //else
-        //{
-        //    onGuardExit.Invoke();
-        //    mSpeed = 10;
-        //}
-    }     
-    }
+}

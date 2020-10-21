@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HeroActions : MonoBehaviour
 {
-    public event System.Action onSkillPerformed;
+    public event System.Action<Elements.ElementalAttribute> onSkillPerformed;
     public event System.Action onAttackPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
@@ -37,6 +37,14 @@ public class HeroActions : MonoBehaviour
             mPlayerInput.PS4.Guard.performed += _ => Guard();
             mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
         }
+
+        if(HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
+        {
+            mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
+            mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
+            mPlayerInput.PS4.Guard.performed += _ => Guard();
+            mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
+        }
     }
 
     private void OnEnable()
@@ -62,7 +70,7 @@ public class HeroActions : MonoBehaviour
     {
         //if (HeroStats.CDFinished)
         //{
-            onSkillPerformed.Invoke();
+            onSkillPerformed.Invoke(HeroStats.GetElement);
         //    HeroStats.CDTime = HeroStats.CoolDown;
         //    HeroStats.CDFinished = false;
         //}

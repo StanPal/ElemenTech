@@ -35,7 +35,7 @@
                     "id": "ca9c08ef-2248-4f5f-9c5d-1348b304c40a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "Hold"
                 },
                 {
                     "name": "Guard",
@@ -327,6 +327,38 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Sword Swing",
+                    "type": "Button",
+                    "id": "7bd3abc5-2220-4f78-9aea-76c640ad1220",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Element Special 1",
+                    "type": "Button",
+                    "id": "3b1818a7-b225-413f-acbf-1daf77a96f3c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Guard",
+                    "type": "Button",
+                    "id": "bbff89fb-c808-4860-9465-d54d775b18a3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "Guard Release",
+                    "type": "Button",
+                    "id": "ab93e9c2-82fb-494e-abbb-41023a5716ce",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -371,6 +403,50 @@
                     "processors": "",
                     "groups": "",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f3bf3690-f900-4d2d-b24d-7a70fb14fb3e",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Element Special 1",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3ed531df-46e8-45b4-abd7-17ce6f4581f5",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sword Swing",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4253cc08-9c9c-4131-989d-ded338a0cc8a",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "bbcc10a8-c475-4fd7-a2e8-5c09a991b141",
+                    "path": "<XInputController>/buttonNorth",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Guard Release",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

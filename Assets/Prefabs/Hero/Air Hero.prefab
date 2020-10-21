@@ -443,6 +443,7 @@ MonoBehaviour:
   mAttack: 20
   mMaxHealth: 100
   mCoolDown: 0
+  isCDFinished: 0
   mElementalType: 3
 --- !u!114 &1791110765294023673
 MonoBehaviour:
@@ -463,12 +464,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765294023672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 2
   isLeft: 0
   mJumpSpeed: 5
   mNumOfJumps: 0
@@ -484,7 +485,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765294023672}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
   m_Name: 
@@ -786,7 +787,7 @@ MonoBehaviour:
   damage: 2
   startTimeBtAttack: 1
   attackPos: {fileID: 1791110764420600048}
-  attackRange: 5
+  attackRange: 0.57
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100

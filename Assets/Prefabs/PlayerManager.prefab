@@ -44,10 +44,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireHero: {fileID: 0}
-  WaterHero: {fileID: 0}
+  WaterHero: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
+    type: 3}
   AirHero: {fileID: 0}
-  EarthHero: {fileID: 0}
-  FireGolem: {fileID: 0}
-  WaterGolem: {fileID: 0}
-  EarthGolem: {fileID: 0}
-  AirGolem: {fileID: 0}
+  EarthHero: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
+    type: 3}
+  mPlayersList: []
