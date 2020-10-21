@@ -46,21 +46,23 @@ public class FireBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //if (fireSkills.PlayerSkills.Hero.tag.Equals("Team1"))
-        //{
-        //    if (collision.tag.Equals("Team2"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
-        //        Destroy(gameObject);
-        //    }
-        //}
-        //if (fireSkills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-        //    if (collision.tag.Equals("Team1"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(fireSkills.Damage);
-        //        Destroy(gameObject);
-        //    }
-        //}
+        if (fireSkills.PlayerSkills.HeroAction.tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
+                collision.GetComponent<HeroStats>().TakeDamage(fireSkills.Damage);
+                Destroy(gameObject);
+            }
+        }
+        if (fireSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
+                collision.GetComponent<HeroStats>().TakeDamage(fireSkills.Damage);
+                Destroy(gameObject);
+            }
+        }
     }
 }
