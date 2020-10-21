@@ -97,7 +97,6 @@ public class CanonBall : MonoBehaviour
             }
             Destroy(gameObject);
         }
-
     }
 
     private void OnDrawGizmosSelected()

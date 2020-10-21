@@ -42,8 +42,8 @@ public class HeroActions : MonoBehaviour
         {
             mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
             mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
-            mPlayerInput.PS4.Guard.performed += _ => Guard();
-            mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
+            mPlayerInput.XBOX.Guard.performed += _ => Guard();
+            mPlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
         }
     }
 

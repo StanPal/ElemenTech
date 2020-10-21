@@ -73,6 +73,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": ""Hold""
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe94e74e-2574-4df0-89c4-0305ea0478d7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -172,6 +180,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a9ed5be7-296f-46a9-b9da-8788cadb6975"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": ""Press(behavior=2)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -477,6 +496,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Guard = m_KeyboardMouse.FindAction("Guard", throwIfNotFound: true);
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
+        m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
         // PS4
         m_PS4 = asset.FindActionMap("PS4", throwIfNotFound: true);
         m_PS4_Move = m_PS4.FindAction("Move", throwIfNotFound: true);
@@ -549,6 +569,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Guard;
     private readonly InputAction m_KeyboardMouse_GuardRelease;
     private readonly InputAction m_KeyboardMouse_Pause;
+    private readonly InputAction m_KeyboardMouse_Dash;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -560,6 +581,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Guard => m_Wrapper.m_KeyboardMouse_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
+        public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -590,6 +612,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
+                @Dash.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -615,6 +640,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -774,6 +802,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IPS4Actions
     {

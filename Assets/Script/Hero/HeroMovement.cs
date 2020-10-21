@@ -16,24 +16,42 @@ public class HeroMovement : MonoBehaviour
 
     public Controller controllerInput;
     [SerializeField]
-    bool isLeft = false;
+    private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
 
 
     [SerializeField]
     float mJumpSpeed = 5f;
     [SerializeField]
-    int mNumOfJumps = 0;
+    private int mNumOfJumps = 0;
     [SerializeField]
-    int mMaxJumps = 2;
+    private int mMaxJumps = 2;
     [SerializeField]
     private LayerMask mGround;
     private Collider2D col;
 
     [SerializeField]
-    float mSpeed;
+    private bool isDashing;
+    [SerializeField]
+    private float dashSpeed = 5f;
+    //[SerializeField]
+    //private float dashTime;
+    //private float distanceBetweenImages;
+    //private float dashCoolDown;
+    //private float dashTimeLeft;
+    //private float lastImageXpos;
+    //private float lastDash = -100f;
+
+    [SerializeField]
+    private float mSpeed;
     private float mMoveInput;
     private Rigidbody2D rb;
+
+    //Movement Buffs/Debuffs
+    [SerializeField]
+    private float mSlowAmount = 3f;
+    [SerializeField]
+    private float mSlowDuration = 10f;
 
     private void Awake()
     {
@@ -42,7 +60,10 @@ public class HeroMovement : MonoBehaviour
         col = GetComponent<Collider2D>();
 
         if (controllerInput == Controller.Keyboard)
+        {
             mPlayerInput.KeyboardMouse.Jump.performed += _ => Jump();
+            mPlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+        }
         if (controllerInput == Controller.PS4)
             mPlayerInput.PS4.Jump.performed += _ => Jump();
         if (controllerInput == Controller.XBOX)
@@ -59,8 +80,8 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void Jump()
-    {  
-        if(IsGrounded())
+    {
+        if (IsGrounded())
         {
             mNumOfJumps = 0;
         }
@@ -84,8 +105,37 @@ public class HeroMovement : MonoBehaviour
         return Physics2D.OverlapArea(topLeftPoint, bottomRight, mGround);
     }
 
+    private void OnDash()
+    {
+        isDashing = true;
+    }
+
+    private void Update()
+    {
+      if(isDashing)
+        {
+            if (isLeft)
+                StartCoroutine(Dash(-1f));
+            else
+                StartCoroutine(Dash(1f));
+
+        }
+    }
+
+    IEnumerator Dash(float direction)
+    {
+        Vector3 currentPosition = transform.position;
+        currentPosition.x += dashSpeed;
+        transform.position = currentPosition;
+        float gravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        yield return new WaitForSeconds(0.4f);
+        isDashing = false;
+        rb.gravityScale = 1f;
+    }
     void FixedUpdate()
     {
+
         if (controllerInput == Controller.Keyboard)
             mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
         else if (controllerInput == Controller.PS4)
@@ -94,10 +144,12 @@ public class HeroMovement : MonoBehaviour
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
         else
             Debug.Log("Keybindings not set");
-
-        Vector3 currentPosition = transform.position;
-        currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
-        transform.position = currentPosition;
+        if (!isDashing)
+        {
+            Vector3 currentPosition = transform.position;
+            currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
+            transform.position = currentPosition;
+        }
 
         Vector3 characterScale = transform.localScale;
         if (mMoveInput < 0)
@@ -111,5 +163,24 @@ public class HeroMovement : MonoBehaviour
             isLeft = false;
         }
         transform.localScale = characterScale;
+    }
+
+    void SlowMovement()
+    {
+        HeroStats herostats = GetComponent<HeroStats>();
+
+        if(herostats.DeBuff == StatusEffects.NegativeEffects.Slowed)
+        {
+            StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
+        }
+    }
+
+    IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
+    {
+        float currentSpeed = mSpeed;
+        mSpeed = Mathf.Lerp(currentSpeed, slowAmount, duration);
+        Debug.Log(mSpeed);
+        yield return new WaitForSeconds(1f);
+
     }
 }

@@ -200,6 +200,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
+--- !u!1 &761080261
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 761080262}
+  - component: {fileID: 761080263}
+  m_Layer: 0
+  m_Name: ParticleSystemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &761080262
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761080261}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.2839503, y: -1.6302, z: 84.28083}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &761080263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 761080261}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daeb57efe7dc67b4ebe63ea3d6801ab7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DebuffEffects:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &783586868 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342,
@@ -218,15 +267,20 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterHero (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
       propertyPath: controllerInput
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544473, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
@@ -682,12 +736,12 @@ PrefabInstance:
     - target: {fileID: 1791110764095077244, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110764095077244, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
@@ -749,6 +803,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Earth Hero (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023676, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: comboSkill
@@ -783,12 +842,12 @@ PrefabInstance:
     - target: {fileID: 1791110764095077244, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110764095077244, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
@@ -853,22 +912,27 @@ PrefabInstance:
     - target: {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023673, guid: d52c96831d5ac144cb35361e788f4342,
+        type: 3}
+      propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023676, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: controllerInput
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765894072924, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
