@@ -69,8 +69,11 @@ public class HeroStats : MonoBehaviour
                 DamageOverTime(damage, mDOTDuration);
                 break;
             case StatusEffects.NegativeEffects.Slowed:
+                mCurrentHealth -= damage;
+                HeroMovement heroMovement = GetComponent<HeroMovement>();
                 break;
             case StatusEffects.NegativeEffects.Stunned:
+                mCurrentHealth -= damage;
                 break;
             case StatusEffects.NegativeEffects.None:
                 mCurrentHealth -= damage;
@@ -78,7 +81,7 @@ public class HeroStats : MonoBehaviour
             default:
                 break;
         }
-        mNegativeEffect = StatusEffects.NegativeEffects.None;
+        
         if (mCurrentHealth <= 0)
             HeroDie();
     }
@@ -99,6 +102,7 @@ public class HeroStats : MonoBehaviour
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
         }
+        mNegativeEffect = StatusEffects.NegativeEffects.None;
     }
 
     void HeroDie()

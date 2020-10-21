@@ -19,6 +19,14 @@ public class WaterSkills : MonoBehaviour
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
 
+    [SerializeField]
+    private float mSlowAmount = 1f;
+    public float SlowAmount { get { return mSlowAmount; } }
+    [SerializeField]
+    private float mSlowDuration = 1f;
+    public float SlowDuration { get { return mSlowAmount; } }
+
+
     private void Start()
     {
         mHeroSkills = GetComponent<PlayerSkills>();

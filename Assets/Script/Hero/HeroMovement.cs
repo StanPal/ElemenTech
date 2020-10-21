@@ -45,13 +45,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private float mSpeed;
     private float mMoveInput;
-    private Rigidbody2D rb;
-
-    //Movement Buffs/Debuffs
-    [SerializeField]
-    private float mSlowAmount = 3f;
-    [SerializeField]
-    private float mSlowDuration = 10f;
+    private Rigidbody2D rb; 
 
     private void Awake()
     {
@@ -165,22 +159,24 @@ public class HeroMovement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    void SlowMovement()
+    public void SlowMovement(float mSlowAmount, float mSlowDuration)
     {
-        HeroStats herostats = GetComponent<HeroStats>();
-
-        if(herostats.DeBuff == StatusEffects.NegativeEffects.Slowed)
-        {
-            StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
-        }
+      StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
     }
 
     IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
     {
-        float currentSpeed = mSpeed;
-        mSpeed = Mathf.Lerp(currentSpeed, slowAmount, duration);
-        Debug.Log(mSpeed);
-        yield return new WaitForSeconds(1f);
+        float maxSpeed = mSpeed;
+        mSpeed = slowAmount;
+        float slowPerLoop = slowAmount / duration;
+        while(mSpeed < maxSpeed)
+        {
+            mSpeed += slowPerLoop;
+            Debug.Log(mSpeed);
+            yield return new WaitForSeconds(1f);
+        }
+        HeroStats herostats = GetComponent<HeroStats>();
+        herostats.DeBuff = StatusEffects.NegativeEffects.None;
 
     }
 }

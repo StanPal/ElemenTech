@@ -42,20 +42,24 @@ public class WaterGun : MonoBehaviour
             }
         }
 
-        //if (waterSkills.PlayerSkills.Hero.tag.Equals("Team1"))
-        //{
-        //    if (collision.tag.Equals("Team2"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(damage);
-        //    }
-        //}
-        //if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-        //    if (collision.tag.Equals("Team1"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(damage);
-        //    }
-        //}
+        if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
+                collision.GetComponent<HeroMovement>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+            }
+        }
+        if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
+                collision.GetComponent<HeroMovement>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+            }
+        }
 
         if (collision.GetComponentInParent<Walls>())
         {

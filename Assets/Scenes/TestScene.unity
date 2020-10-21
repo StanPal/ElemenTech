@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &64800854 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1767738437}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &100516182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -200,6 +206,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
+--- !u!1 &366968872 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
+    type: 3}
+  m_PrefabInstance: {fileID: 917517055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &761080261
 GameObject:
   m_ObjectHideFlags: 0
@@ -426,6 +438,11 @@ PrefabInstance:
       propertyPath: AirHero
       value: 
       objectReference: {fileID: 783586868}
+    - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
+        type: 3}
+      propertyPath: EarthHero
+      value: 
+      objectReference: {fileID: 64800854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
 --- !u!1001 &1077584874
@@ -1022,14 +1039,12 @@ PrefabInstance:
         type: 3}
       propertyPath: WaterHero
       value: 
-      objectReference: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
-        type: 3}
+      objectReference: {fileID: 366968872}
     - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
         type: 3}
       propertyPath: EarthHero
       value: 
-      objectReference: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
-        type: 3}
+      objectReference: {fileID: 64800854}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98, type: 3}
 --- !u!1001 &2134401907
