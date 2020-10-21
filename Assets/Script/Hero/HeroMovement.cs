@@ -44,6 +44,7 @@ public class HeroMovement : MonoBehaviour
 
     [SerializeField]
     private float mSpeed;
+    public float Speed { get { return mSpeed; } set { mSpeed = value; } }
     private float mMoveInput;
     private Rigidbody2D rb; 
 
@@ -159,24 +160,5 @@ public class HeroMovement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    public void SlowMovement(float mSlowAmount, float mSlowDuration)
-    {
-      StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
-    }
-
-    IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
-    {
-        float maxSpeed = mSpeed;
-        mSpeed = slowAmount;
-        float slowPerLoop = slowAmount / duration;
-        while(mSpeed < maxSpeed)
-        {
-            mSpeed += slowPerLoop;
-            Debug.Log(mSpeed);
-            yield return new WaitForSeconds(1f);
-        }
-        HeroStats herostats = GetComponent<HeroStats>();
-        herostats.DeBuff = StatusEffects.NegativeEffects.None;
-
-    }
+   
 }

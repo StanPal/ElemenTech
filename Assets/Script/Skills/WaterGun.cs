@@ -48,7 +48,7 @@ public class WaterGun : MonoBehaviour
             {
                 collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                 collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
-                collision.GetComponent<HeroMovement>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
             }
         }
         if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
@@ -57,7 +57,7 @@ public class WaterGun : MonoBehaviour
             {
                 collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                 collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
-                collision.GetComponent<HeroMovement>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
             }
         }
 

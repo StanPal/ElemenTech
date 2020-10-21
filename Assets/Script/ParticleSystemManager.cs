@@ -6,30 +6,66 @@ public class ParticleSystemManager : MonoBehaviour
 {
     public List<GameObject> DebuffEffects;
     public GameObject playerManager;
-    private GameObject statusEffect;
+    private Stack<GameObject> statusEffect = new Stack<GameObject>();
     private void Awake()
     {
-        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffActivated += Burning;
-        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffDeActivated += BurningOff;
+        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
+        playerManager.GetComponent<PlayerManager>().WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.GetComponent<PlayerManager>().WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
+        playerManager.GetComponent<PlayerManager>().EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.GetComponent<PlayerManager>().EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+
+        playerManager.GetComponent<PlayerManager>().FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.GetComponent<PlayerManager>().FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+    }
+
+    private void DebuffEffectOn(GameObject hero)
+    {
+        switch (hero.GetComponent<HeroStats>().DeBuff)
+        {
+            case StatusEffects.NegativeEffects.OnFire:
+                Burning(hero);
+                break;
+            case StatusEffects.NegativeEffects.Slowed:
+                Slowed(hero);
+                break;
+            case StatusEffects.NegativeEffects.Stunned:
+                break;            
+            default:
+                break;
+        }
     }
 
     private void Burning(GameObject hero)
     {
         ParticleSystem ps = DebuffEffects[0].GetComponent<ParticleSystem>();
-        statusEffect = Instantiate(DebuffEffects[0], hero.transform.position, Quaternion.identity);
-        if (hero.GetComponent<HeroStats>().DeBuff == StatusEffects.NegativeEffects.OnFire)
-        {
-            statusEffect.transform.parent = hero.transform;
-            statusEffect.GetComponent<ParticleSystem>().Play();
-        }
+        
+        GameObject BurningEffect = Instantiate(ps.gameObject, hero.transform.position, Quaternion.identity);
+        BurningEffect.transform.parent = hero.transform;
+        BurningEffect.transform.localScale = new Vector3(1f, 1f, 1f);
+        BurningEffect.GetComponent<ParticleSystem>().Play();
 
-    }    
+        statusEffect.Push(BurningEffect);
+    }
 
-    private void BurningOff(GameObject hero)
+    private void Slowed(GameObject hero)
     {
-        Destroy(statusEffect);        
+        ParticleSystem ps = DebuffEffects[1].GetComponent<ParticleSystem>();
+
+        GameObject SlowEffect = Instantiate(ps.gameObject, hero.transform.position, Quaternion.identity);
+        SlowEffect.transform.parent = hero.transform;
+        SlowEffect.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
+        SlowEffect.GetComponent<ParticleSystem>().Play();
+
+        statusEffect.Push(SlowEffect);
+    }
+
+    private void DebuffEffectOff()
+    {
+        Destroy(statusEffect.Pop());
     }
 
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class HeroStats : MonoBehaviour
 {
     public event System.Action<GameObject> onDebuffActivated;
-    public event System.Action<GameObject> onDebuffDeActivated;
+    public event System.Action onDebuffDeActivated;
 
     // Basic Stats
     [SerializeField]
@@ -43,8 +43,6 @@ public class HeroStats : MonoBehaviour
     [SerializeField]
     private float mDOTDuration = 5f;
 
-
-
     void Awake()
     {
         mCurrentHealth = mMaxHealth;
@@ -69,11 +67,11 @@ public class HeroStats : MonoBehaviour
             case StatusEffects.NegativeEffects.OnFire:
                 onDebuffActivated?.Invoke(gameObject);
                 mCurrentHealth -= damage;
-                DamageOverTime(damage, mDOTDuration);                
+                DamageOverTime(damage, mDOTDuration);
                 break;
             case StatusEffects.NegativeEffects.Slowed:
+                onDebuffActivated?.Invoke(gameObject);
                 mCurrentHealth -= damage;
-                HeroMovement heroMovement = GetComponent<HeroMovement>();
                 break;
             case StatusEffects.NegativeEffects.Stunned:
                 mCurrentHealth -= damage;
@@ -101,12 +99,33 @@ public class HeroStats : MonoBehaviour
         while(amountDamaged < damageAmount)
         {
             mCurrentHealth -= damagePerloop;
-            Debug.Log(mCurrentHealth.ToString());
+            Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth.ToString());
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
         }
         mNegativeEffect = StatusEffects.NegativeEffects.None;
-        onDebuffDeActivated?.Invoke(gameObject);
+        onDebuffDeActivated?.Invoke();
+    }
+
+    public void SlowMovement(float mSlowAmount, float mSlowDuration)
+    {
+        StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
+    }
+
+    IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
+    {
+        HeroMovement heromovement = GetComponent<HeroMovement>();
+        float maxSpeed = heromovement.Speed;
+        heromovement.Speed = slowAmount;
+        float slowPerLoop = slowAmount / duration;
+        while (heromovement.Speed < maxSpeed)
+        {
+            heromovement.Speed += slowPerLoop;
+            Debug.Log(mElementalType.ToString() + " Hero Current Speed " + heromovement.Speed);
+            yield return new WaitForSeconds(1f);
+        }        
+        mNegativeEffect = StatusEffects.NegativeEffects.None;
+        onDebuffDeActivated?.Invoke();
     }
 
     void HeroDie()
