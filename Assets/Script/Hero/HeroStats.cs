@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
-    
+    public event System.Action<GameObject> onDebuffActivated;
+    public event System.Action<GameObject> onDebuffDeActivated;
+
     // Basic Stats
     [SerializeField]
     private string mName;
@@ -65,8 +67,9 @@ public class HeroStats : MonoBehaviour
         switch (mNegativeEffect)
         {
             case StatusEffects.NegativeEffects.OnFire:
+                onDebuffActivated?.Invoke(gameObject);
                 mCurrentHealth -= damage;
-                DamageOverTime(damage, mDOTDuration);
+                DamageOverTime(damage, mDOTDuration);                
                 break;
             case StatusEffects.NegativeEffects.Slowed:
                 mCurrentHealth -= damage;
@@ -103,6 +106,7 @@ public class HeroStats : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         mNegativeEffect = StatusEffects.NegativeEffects.None;
+        onDebuffDeActivated?.Invoke(gameObject);
     }
 
     void HeroDie()
