@@ -241,6 +241,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1371002032310544466, guid: d95bedd6962ac8a468e26b2b40ea888a,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
       propertyPath: controllerInput
@@ -1037,17 +1042,17 @@ PrefabInstance:
     - target: {fileID: 4259322979056663117, guid: ba768d0656ad1844984af499c5e6a261,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -11.386137
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4259322979056663117, guid: ba768d0656ad1844984af499c5e6a261,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 193.69528
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4259322979056663117, guid: ba768d0656ad1844984af499c5e6a261,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 44640.953
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4259322979056663117, guid: ba768d0656ad1844984af499c5e6a261,
         type: 3}
@@ -1167,6 +1172,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Fire Hero
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mSpeed
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765894072924, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}

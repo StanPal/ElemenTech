@@ -13,6 +13,9 @@ public class FireSkills : MonoBehaviour
     [SerializeField]
     private float mDamage = 10.0f;
     public float Damage { get { return mDamage; } }
+    [SerializeField]
+    private float mDotDuration = 5.0f;
+    public float DotDuration { get { return mDotDuration; } }
 
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }

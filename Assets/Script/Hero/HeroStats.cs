@@ -40,9 +40,7 @@ public class HeroStats : MonoBehaviour
     StatusEffects.NegativeEffects mNegativeEffect = StatusEffects.NegativeEffects.None;
     public StatusEffects.PositiveEffects Buff { get { return mPositiveEffect; } set { mPositiveEffect = value; } }
     public StatusEffects.NegativeEffects DeBuff { get { return mNegativeEffect; } set { mNegativeEffect = value; } }
-    [SerializeField]
-    private float mDOTDuration = 5f;
-
+ 
     void Awake()
     {
         mCurrentHealth = mMaxHealth;
@@ -62,29 +60,27 @@ public class HeroStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        if (mCurrentHealth <= 0)
+            HeroDie();
+
+        mCurrentHealth -= damage;
         switch (mNegativeEffect)
         {
             case StatusEffects.NegativeEffects.OnFire:
-                onDebuffActivated?.Invoke(gameObject);
-                mCurrentHealth -= damage;
-                DamageOverTime(damage, mDOTDuration);
+                onDebuffActivated?.Invoke(gameObject); 
                 break;
             case StatusEffects.NegativeEffects.Slowed:
-                onDebuffActivated?.Invoke(gameObject);
-                mCurrentHealth -= damage;
+                onDebuffActivated?.Invoke(gameObject); 
                 break;
             case StatusEffects.NegativeEffects.Stunned:
-                mCurrentHealth -= damage;
                 break;
             case StatusEffects.NegativeEffects.None:
-                mCurrentHealth -= damage;
                 break;
             default:
                 break;
         }
-        
-        if (mCurrentHealth <= 0)
-            HeroDie();
+    
+
     }
 
     public void DamageOverTime(float damageAmount, float damageDuration)
@@ -99,7 +95,7 @@ public class HeroStats : MonoBehaviour
         while(amountDamaged < damageAmount)
         {
             mCurrentHealth -= damagePerloop;
-            Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth.ToString());
+            Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth);
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
         }
@@ -123,14 +119,13 @@ public class HeroStats : MonoBehaviour
             heromovement.Speed += slowPerLoop;
             Debug.Log(mElementalType.ToString() + " Hero Current Speed " + heromovement.Speed);
             yield return new WaitForSeconds(1f);
-        }        
+        }
         mNegativeEffect = StatusEffects.NegativeEffects.None;
         onDebuffDeActivated?.Invoke();
     }
 
     void HeroDie()
     {
-        this.gameObject.SetActive(false);
         Destroy(gameObject);
     }
 

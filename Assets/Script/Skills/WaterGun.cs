@@ -31,6 +31,7 @@ public class WaterGun : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.GetComponent<Golem>())
         {
             Debug.Log("Trigger");
@@ -49,6 +50,7 @@ public class WaterGun : MonoBehaviour
                 collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                 collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
                 collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                Destroy(gameObject);
             }
         }
         if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
@@ -58,6 +60,9 @@ public class WaterGun : MonoBehaviour
                 collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                 collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
                 collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
+                Destroy(gameObject);
+
             }
         }
 
@@ -65,5 +70,7 @@ public class WaterGun : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    
     }
 }
