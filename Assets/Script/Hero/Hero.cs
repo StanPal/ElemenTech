@@ -57,6 +57,7 @@ public class Hero : MonoBehaviour
     LayerMask whatIsGround;
 
     [SerializeField]
+    
     float mSpeed;
     private float mMoveInput;
     private Rigidbody2D rb;
@@ -81,6 +82,7 @@ public class Hero : MonoBehaviour
         if (controllerType == Controller.KeyBoard)
         {
             //move
+            
             mMoveInput = Input.GetAxis("Horizontal");
             rb.velocity = new Vector2(mMoveInput * mSpeed, rb.velocity.y);
         }
@@ -225,6 +227,17 @@ public class Hero : MonoBehaviour
         }
     }
 
+    public void SlideSpeed(float SliSpeed)
+    {
+        mSpeed -= SliSpeed;
+    }
+    public void DecreaceSpeed(float DecSpeed)
+    {
+        mSpeed -= DecSpeed;
+    }
+
+
+    
     void rangeAttack()
     {
         Instantiate(projectile, arrowPosition.position, arrowPosition.rotation);

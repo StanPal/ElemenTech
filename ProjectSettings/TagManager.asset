@@ -8,6 +8,7 @@ TagManager:
   - Wall
   - Team2
   - Team1
+  - IcyPlatform
   layers:
   - Default
   - TransparentFX
