@@ -87,7 +87,7 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    private bool IsGrounded()
+    public bool IsGrounded()
     {
         Vector2 topLeftPoint = transform.position;
         topLeftPoint.x -= col.bounds.extents.x;

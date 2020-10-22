@@ -62,6 +62,12 @@ public class Guard : MonoBehaviour
         mShiendCreated = false;
     }
 
+    private void OnDestroy()
+    {
+        mHeroAction.onGuardPerformed -= GuardMove;
+        mHeroAction.onGuardExit -= DestroyGuard;
+    }
+
     private void SummonGuard()
     {
         if (!mShiendCreated)

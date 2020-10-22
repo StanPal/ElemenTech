@@ -47,7 +47,9 @@ public class EarthSkills : MonoBehaviour
     }
 
     void EarthSlam()
-    {        
+    {
+        if (PlayerSkills.HeroMovement.IsGrounded())
+        {
             for (int i = 0; i < mNumSpikes; ++i)
             {
                 GameObject mSpike;
@@ -65,6 +67,7 @@ public class EarthSkills : MonoBehaviour
             }
             mHeroSkills.SkillActive = true;
             mIsSpikeUp = true;
+        }
     }
 
     void EarthSpikesUp()

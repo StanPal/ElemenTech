@@ -9,11 +9,6 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onAirSkillPerformed;
     public event System.Action onWaterSkillPerformed;
 
-    public GameObject FireHero;
-    public GameObject WaterHero;
-    public GameObject AirHero;
-    public GameObject EarthHero;
-
     private HeroActions mHeroAction;
     public HeroActions HeroAction { get { return mHeroAction; } }
     private HeroMovement mHeroMovement;
@@ -23,14 +18,15 @@ public class PlayerSkills : MonoBehaviour
 
   
 
-    PlayerManager PlayerManager;
+    PlayerManager playerManager;
 
     private void Awake()
     {
-        AirHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
-        FireHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
-        EarthHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
-        WaterHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+        playerManager = FindObjectOfType<PlayerManager>();
+        playerManager.AirHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+        playerManager.FireHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+        playerManager.EarthHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+        playerManager.WaterHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
     }
 
     void Start()
@@ -47,23 +43,23 @@ public class PlayerSkills : MonoBehaviour
         switch (elementalAttribute)
         {
             case Elements.ElementalAttribute.Fire:
-                mHeroAction = FireHero.GetComponent<HeroActions>();
-                mHeroMovement = FireHero.GetComponent<HeroMovement>();
+                mHeroAction = playerManager.FireHero.GetComponent<HeroActions>();
+                mHeroMovement = playerManager.FireHero.GetComponent<HeroMovement>();
                 onFireSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Earth:
-                mHeroAction = EarthHero.GetComponent<HeroActions>();
-                mHeroMovement = EarthHero.GetComponent<HeroMovement>();
+                mHeroAction = playerManager.EarthHero.GetComponent<HeroActions>();
+                mHeroMovement = playerManager.EarthHero.GetComponent<HeroMovement>();
                 onEarthSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Water:
-                mHeroAction = WaterHero.GetComponent<HeroActions>();
-                mHeroMovement = WaterHero.GetComponent<HeroMovement>();
+                mHeroAction = playerManager.WaterHero.GetComponent<HeroActions>();
+                mHeroMovement = playerManager.WaterHero.GetComponent<HeroMovement>();
                 onWaterSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Air:
-                mHeroAction = AirHero.GetComponent<HeroActions>();
-                mHeroMovement = AirHero.GetComponent<HeroMovement>();
+                mHeroAction = playerManager.AirHero.GetComponent<HeroActions>();
+                mHeroMovement = playerManager.AirHero.GetComponent<HeroMovement>();
                 onAirSkillPerformed.Invoke();
                 break;
             default:
