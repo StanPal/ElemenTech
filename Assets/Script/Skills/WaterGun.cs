@@ -57,12 +57,13 @@ public class WaterGun : MonoBehaviour
                 collision.GetComponent<Hero>().TakeDamage(damage);
             }
         }
-        if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        //if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        //{
+             //64 - 67
+        //}
+        if (collision.tag.Equals("Team1"))
         {
-            if (collision.tag.Equals("Team1"))
-            {
-                collision.GetComponent<Hero>().TakeDamage(damage);
-            }
+            collision.GetComponent<Hero>().TakeDamage(damage);
         }
 
         if (collision.GetComponentInParent<Walls>())
