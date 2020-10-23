@@ -5,19 +5,17 @@ using UnityEngine.UI;
 
 public class HeroHealthBar : MonoBehaviour
 {
-    private Hero mHero;
+    private HeroStats mHero;
     private Slider slider;
 
     void Awake()
     {
-        mHero = GetComponentInParent<Hero>();
+        mHero = GetComponentInParent<HeroStats>();
         slider = GetComponent<Slider>();
         slider.transform.position = 
-            new Vector3(this.GetComponentInParent<Hero>().gameObject.transform.position.x,
-                        this.GetComponentInParent<Hero>().gameObject.transform.position.y + 1.0f);
+            new Vector3(this.GetComponentInParent<HeroStats>().gameObject.transform.position.x,
+                        this.GetComponentInParent<HeroStats>().gameObject.transform.position.y + 1.0f);
     }
-
-
 
     void Update()
     {

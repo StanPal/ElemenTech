@@ -1,0 +1,132 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class HeroStats : MonoBehaviour
+{
+    public event System.Action<GameObject> onDebuffActivated;
+    public event System.Action onDebuffDeActivated;
+
+    // Basic Stats
+    [SerializeField]
+    private string mName;
+    [SerializeField]
+    private float mAttack = 10f;
+    [SerializeField]
+    private float mMaxHealth = 100f;
+    [SerializeField]
+    private float mCurrentHealth = 100f;
+    [SerializeField]
+    private float mCoolDown;
+    private float mTempCDTime;
+    [SerializeField]
+
+    private bool isCDFinished;    
+    public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
+    public float CDTime { get { return mTempCDTime; } set { mTempCDTime = value; } }
+    public float CoolDown { get { return mCoolDown; } }
+    public float CurrentHealth { get { return mCurrentHealth; } }
+    public float MaxHealth { get { return mMaxHealth; } }
+
+    //Elementa Type
+    [SerializeField]
+    private Elements.ElementalAttribute mElementalType;
+    public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
+
+    //Buff & Debuff Effects
+    [SerializeField]
+    StatusEffects.PositiveEffects mPositiveEffect = StatusEffects.PositiveEffects.None;
+    [SerializeField]
+    StatusEffects.NegativeEffects mNegativeEffect = StatusEffects.NegativeEffects.None;
+    public StatusEffects.PositiveEffects Buff { get { return mPositiveEffect; } set { mPositiveEffect = value; } }
+    public StatusEffects.NegativeEffects DeBuff { get { return mNegativeEffect; } set { mNegativeEffect = value; } }
+ 
+    void Awake()
+    {
+        mCurrentHealth = mMaxHealth;
+        mTempCDTime = 0;
+    }
+
+    private void Update()
+    {
+        if (mTempCDTime <= 0.0f)
+        {
+            mTempCDTime = 0.0f;
+            isCDFinished = true;
+        }
+        if (mTempCDTime > 0.0f)
+            mTempCDTime -= Time.deltaTime;
+    }
+
+    public void TakeDamage(float damage)
+    {
+        if (mCurrentHealth <= 0)
+            HeroDie();
+
+        mCurrentHealth -= damage;
+        switch (mNegativeEffect)
+        {
+            case StatusEffects.NegativeEffects.OnFire:
+                onDebuffActivated?.Invoke(gameObject); 
+                break;
+            case StatusEffects.NegativeEffects.Slowed:
+                onDebuffActivated?.Invoke(gameObject); 
+                break;
+            case StatusEffects.NegativeEffects.Stunned:
+                break;
+            case StatusEffects.NegativeEffects.None:
+                break;
+            default:
+                break;
+        }
+    
+
+    }
+
+    public void DamageOverTime(float damageAmount, float damageDuration)
+    {
+        StartCoroutine(DamageOverTimeCoroutine(damageAmount, damageDuration));
+    }
+
+    IEnumerator DamageOverTimeCoroutine(float damageAmount, float duration)
+    {
+        float amountDamaged = 0;
+        float damagePerloop = damageAmount / duration;
+        while(amountDamaged < damageAmount)
+        {
+            mCurrentHealth -= damagePerloop;
+            Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth);
+            amountDamaged += damagePerloop;
+            yield return new WaitForSeconds(1f);
+        }
+        mNegativeEffect = StatusEffects.NegativeEffects.None;
+        onDebuffDeActivated?.Invoke();
+    }
+
+    public void SlowMovement(float mSlowAmount, float mSlowDuration)
+    {
+        StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
+    }
+
+    IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
+    {
+        HeroMovement heromovement = GetComponent<HeroMovement>();
+        float maxSpeed = heromovement.Speed;
+        heromovement.Speed = slowAmount;
+        float slowPerLoop = slowAmount / duration;
+        while (heromovement.Speed < maxSpeed)
+        {
+            heromovement.Speed += slowPerLoop;
+            Debug.Log(mElementalType.ToString() + " Hero Current Speed " + heromovement.Speed);
+            yield return new WaitForSeconds(1f);
+        }
+        mNegativeEffect = StatusEffects.NegativeEffects.None;
+        onDebuffDeActivated?.Invoke();
+    }
+
+    void HeroDie()
+    {
+        Destroy(gameObject);
+    }
+
+}

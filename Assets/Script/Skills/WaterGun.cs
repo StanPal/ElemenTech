@@ -3,65 +3,66 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class WaterGun : MonoBehaviour
-{
+{        
+    private float mProjectileSpeed;
+    private Rigidbody2D mRigidbody;
     [SerializeField]
-    float damage = 2;
-    [SerializeField]
-    float projectileSpeed = 5;
-    private Rigidbody2D rigidbody;
-    [SerializeField]
-    float exitTime = 2.0f;
-    private Hero hero;
+    float exitTime;
     WaterSkills waterSkills;
+
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
         waterSkills = FindObjectOfType<WaterSkills>();
-        hero = FindObjectOfType<Hero>();
-        if (hero.GetIsLeft)
-        {
-            projectileSpeed = -projectileSpeed;
-        }
-
+        mRigidbody = GetComponent<Rigidbody2D>();
+        mProjectileSpeed = waterSkills.Speed;
+        exitTime = waterSkills.ExitTime;
+        if (waterSkills.PlayerSkills.HeroMovement.GetIsLeft)
+            mProjectileSpeed *= -1;
     }
-
 
     private void FixedUpdate()
     {
         if (exitTime <= 0.0f)
-        {
             Destroy(gameObject);
-        }
-        exitTime -= Time.deltaTime;
-        rigidbody.velocity = transform.right * projectileSpeed;
-    }
 
+        exitTime -= Time.deltaTime;
+        mRigidbody.velocity = transform.right * mProjectileSpeed;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        
         if (collision.GetComponent<Golem>())
         {
             Debug.Log("Trigger");
             Golem golem = collision.gameObject.GetComponent<Golem>();
             if (golem != null)
             {
-                golem.TakeDamage(damage);
+                golem.TakeDamage(waterSkills.Damage);
                 Destroy(gameObject);
             }
         }
 
-        if (waterSkills.PlayerSkills.Hero.tag.Equals("Team1"))
+        if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<Hero>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                Destroy(gameObject);
             }
         }
-        if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+        if (waterSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<Hero>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().TakeDamage(waterSkills.Damage);
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                Physics2D.IgnoreCollision(collision, GetComponent<Collider2D>());
+                Destroy(gameObject);
+
             }
         }
 
@@ -69,5 +70,7 @@ public class WaterGun : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+    
     }
 }

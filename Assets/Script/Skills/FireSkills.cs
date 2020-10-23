@@ -9,10 +9,13 @@ public class FireSkills : MonoBehaviour
 
     [SerializeField]
     private float mSpeed = 10.0f;
-    public float Speed { get { return mSpeed; } }
+    public float Speed { get { return mSpeed; } set { mSpeed = value; } }
     [SerializeField]
     private float mDamage = 10.0f;
     public float Damage { get { return mDamage; } }
+    [SerializeField]
+    private float mDotDuration = 5.0f;
+    public float DotDuration { get { return mDotDuration; } }
 
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
@@ -24,8 +27,8 @@ public class FireSkills : MonoBehaviour
     }
 
     void FireBall()
-    {    
-        Instantiate(mFireBall, mHeroSkills.Hero.transform.position, Quaternion.identity);
+    {
+        Instantiate(mFireBall, mHeroSkills.HeroAction.transform.position, Quaternion.identity);
     }
 
 }

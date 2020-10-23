@@ -16,9 +16,7 @@ public class EarthSkills : MonoBehaviour
     private float mSpikeHeight = 1.0f;
     [SerializeField]
     private float mDamage = 10.0f;
-
     public float Damage { get { return mDamage; } }
-
     private bool mIsSpikeUp = true;
     [SerializeField]
     private List<GameObject> mEarthSpikeList = new List<GameObject>();
@@ -29,7 +27,7 @@ public class EarthSkills : MonoBehaviour
     {
         mHeroSkills = GetComponent<PlayerSkills>();
         mHeroSkills.onEarthSkillPerformed += EarthSlam;
-    }  
+    }
 
     // Update is called once per frame
     void Update()
@@ -50,35 +48,36 @@ public class EarthSkills : MonoBehaviour
 
     void EarthSlam()
     {
-        for (int i = 0; i < mNumSpikes; ++i)
+        if (PlayerSkills.HeroMovement.IsGrounded())
         {
-            GameObject mSpike;
-            if (mHeroSkills.Hero.GetIsLeft)
+            for (int i = 0; i < mNumSpikes; ++i)
             {
-                mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.Hero.transform.position.x - (mSpikeHorizontalOffset + i), -1.0f, 0.0f), Quaternion.identity);
+                GameObject mSpike;
+                if (mHeroSkills.HeroAction.HeroMovement.GetIsLeft)
+                {
+                    mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.HeroMovement.transform.position.x - (mSpikeHorizontalOffset + i),
+                                        mHeroSkills.HeroMovement.transform.position.y - 0.5f, 0.0f), Quaternion.identity);
+                }
+                else
+                {
+                    mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.HeroMovement.transform.position.x + (mSpikeHorizontalOffset + i),
+                                        mHeroSkills.HeroMovement.transform.position.y - 0.5f, 0.0f), Quaternion.identity);
+                }
+                mEarthSpikeList.Add(mSpike);
             }
-            else
-            {
-                 mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.Hero.transform.position.x + (mSpikeHorizontalOffset + i), -1.0f, 0.0f), Quaternion.identity);
-            }
-            mEarthSpikeList.Add(mSpike);
+            mHeroSkills.SkillActive = true;
+            mIsSpikeUp = true;
         }
-        mHeroSkills.SkillActive = true;
-        mIsSpikeUp = true;
     }
 
     void EarthSpikesUp()
     {
         for (int i = 0; i < mEarthSpikeList.Count; ++i)
-        {            
-            mEarthSpikeList[i].transform.Translate(new Vector3(0.0f, mSpikeHeight) * Time.deltaTime );
-
-            //Towards Enemy using Lerp
-            //mEarthSpikeList[i].transform.position = Vector3.Lerp(mEarthSpikeList[i].transform.position, new Vector3(0.0f, mSpikeHeight), Time.deltaTime);
-
+        {
+            mEarthSpikeList[i].transform.Translate(new Vector3(0.0f, mSpikeHeight) * Time.deltaTime);
         }
-    }
 
+    }
     void EarthSpikesDown()
     {
         mIsSpikeUp = false;

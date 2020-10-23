@@ -20,13 +20,23 @@ public class CanonBall : MonoBehaviour
     private Vector3 nextPos;
     private Vector3 startPos;
 
+    [SerializeField]
+    private float SplashRange = 1;
 
+    public GameObject explosionEffect;
     void Start()
     {
         // Cache our start position, which is really the only thing we need
         // (in addition to our current position, and the target).
         startPos = transform.position;
-        targetPos = new Vector3(transform.position.x + targetXpos, transform.position.y + targetYpos);
+        if (GetComponentInParent<HeroMovement>().GetIsLeft)
+        {
+            targetPos = new Vector3(transform.position.x - targetXpos, transform.position.y + targetYpos);
+        }
+        else
+        {
+            targetPos = new Vector3(transform.position.x + targetXpos, transform.position.y + targetYpos);
+        }
     }
 
     void Update()
@@ -53,21 +63,60 @@ public class CanonBall : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collision.GetComponent<Walls>())
+        if (collider.GetComponentInParent<Walls>())
+        {
+            Debug.Log("wall hit");
+            Explode();
+           // OnDrawGizmosSelected();
             Destroy(gameObject);
-        if(collision.GetComponent<Golem>())
-        {
-            collision.GetComponent<Golem>().TakeDamage(mDamage);
         }
-        if (collision.tag.Equals("Team2"))
+        if (SplashRange > 0)
         {
-            collision.GetComponent<Hero>().TakeDamage(mDamage);
+            var hitColliders = Physics2D.OverlapCircleAll(transform.position, SplashRange);
+            foreach (var hitCollider in hitColliders)
+            {
+                var enemy = hitCollider.GetComponent<HeroStats>();
+                if (enemy && enemy.tag.Equals("Team2"))
+                {
+                    var closestPont = hitCollider.ClosestPoint(transform.position);
+                    var distance = Vector3.Distance(closestPont, transform.position);
+
+                    var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
+                    enemy.TakeDamage(damagePercent * mDamage);
+                }
+            }
+        }
+        else
+        {
+            var enemy = collider.GetComponent<HeroStats>();
+            if (enemy.tag.Equals("Team2"))
+            {
+                enemy.TakeDamage(mDamage);
+            }
+            Destroy(gameObject);
         }
     }
 
-    static Quaternion LookAt2D(Vector2 forward)
+    private void OnDrawGizmosSelected()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, SplashRange);
+    }
+
+    void Explode()
+    {
+        ParticleSystem ps = explosionEffect.GetComponent<ParticleSystem>();
+        var sh = ps.shape;
+        sh.radius = SplashRange;
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);        
+        explosionEffect.GetComponent<ParticleSystem>().Play();
+    }
+
+
+static Quaternion LookAt2D(Vector2 forward)
     {
         return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
     }

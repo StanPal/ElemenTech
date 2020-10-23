@@ -111,7 +111,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0069edccfceef4d49a88327be991ebbe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDamage: 50
+  mDamage: 25
   targetXpos: 5
   speed: 10
   mArcHeight: 1
+  SplashRange: 1.5
+  explosionEffect: {fileID: 6690933303270406711, guid: 989e63ed0df65b6498444700de10dbb8,
+    type: 3}

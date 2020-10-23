@@ -6,6 +6,22 @@ public class AirSkills : MonoBehaviour
 {
     public GameObject mAirJet;
 
+    [SerializeField]
+    float mDamage = 2.0f;
+    public float Damage { get { return mDamage; } }
+    [SerializeField]
+    float mSpeed = 10.0f;
+    public float Speed { get { return mSpeed; } }
+    [SerializeField]
+    float mExitTime = 10.0f;
+    public float ExitTime { get { return mExitTime; } }
+    [SerializeField]
+    Vector3 mScale;
+    public Vector3 Scale { get { return mScale; } }
+    [SerializeField]
+    float mScaleSpeed; 
+    public float ScaleSpeed { get { return mScaleSpeed; } }
+
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
 
@@ -17,6 +33,6 @@ public class AirSkills : MonoBehaviour
 
     void AirJet()
     {
-        Instantiate(mAirJet, mHeroSkills.Hero.transform.position, Quaternion.identity);
+        Instantiate(mAirJet, mHeroSkills.HeroMovement.transform.position, Quaternion.identity);
     }
 }
