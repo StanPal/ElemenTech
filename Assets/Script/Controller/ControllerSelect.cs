@@ -6,43 +6,55 @@ using UnityEngine.SceneManagement;
 
 public class ControllerSelect : MonoBehaviour
 {
-    public Canvas mCanvas;
-    public Button mCharacterSelect;
+    public List<Button> butonList = new List<Button>();
+    private PlayerManager playerManager; 
     int select = 0;
-    // Start is called before the first frame update
-    void Start()
+
+    private void Awake()
     {
-        
+        playerManager = FindObjectOfType<PlayerManager>();
     }
 
-    // Update is called once per frame
-    void Update()
+    void Start()
+    {
+        butonList[0].GetComponentInChildren<Text>().text =
+       select.ToString();
+    }
+
+    private void Update()
     {
         switch (select)
         {
             case 0:
-                mCharacterSelect.GetComponentInChildren<Text>().text = "None";
+                butonList[0].GetComponentInChildren<Text>().text = "None";
                 break;
             case 1:
-                mCharacterSelect.GetComponentInChildren<Text>().text = "KeyBoard";
+                butonList[0].GetComponentInChildren<Text>().text = "Keyboard";
+                playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
+  (HeroMovement.Controller)select;
                 break;
             case 2:
-                mCharacterSelect.GetComponentInChildren<Text>().text = "PS4";
-                break;                
+                butonList[0].GetComponentInChildren<Text>().text = "PS4";
+                playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
+  (HeroMovement.Controller)select;
+                break;
+            case 3:
+                butonList[0].GetComponentInChildren<Text>().text = "XBOX";
+                playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
+(HeroMovement.Controller)select;
+                break;
             default:
                 break;
         }
     }
 
+
     public void SelectController()
     {
         select++;
-        if (select > 2)
-            select = 0;
+        if (select > 3)
+            select = 0; 
+     
     }
 
-    public void PlayGame()
-    {
-        SceneManager.LoadScene("GameScene");
-    }
 }

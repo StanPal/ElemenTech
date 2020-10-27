@@ -5,10 +5,11 @@ using UnityEngine;
 public class ParticleSystemManager : MonoBehaviour
 {
     public List<GameObject> DebuffEffects;
-    public GameObject playerManager;
+    private PlayerManager playerManager;
     private Stack<GameObject> statusEffect = new Stack<GameObject>();
     private void Awake()
     {
+        playerManager = FindObjectOfType<PlayerManager>();
         playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
         playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 

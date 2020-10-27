@@ -9,33 +9,24 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onAirSkillPerformed;
     public event System.Action onWaterSkillPerformed;
 
+    
     private HeroActions mHeroAction;
     public HeroActions HeroAction { get { return mHeroAction; } }
     private HeroMovement mHeroMovement;
     public HeroMovement HeroMovement { get { return mHeroMovement; } }
     private bool mIsSkillActivated = false;
     public bool SkillActive { get { return mIsSkillActivated; } set { mIsSkillActivated = value; } }
-
-  
-
-    PlayerManager playerManager;
+ 
+    private PlayerManager playerManager;
 
     private void Awake()
     {
+
         playerManager = FindObjectOfType<PlayerManager>();
         playerManager.AirHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         playerManager.FireHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         playerManager.EarthHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         playerManager.WaterHero.GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
-    }
-
-    void Start()
-    {
-   
-        //PlayerManager = FindObjectOfType<PlayerManager>();
-        //mHeroMovement = FindObjectOfType<HeroMovement>();
-        //mHeroAction = FindObjectOfType<HeroActions>();
-        //mHeroAction.onSkillPerformed += PerformSkill;        
     }
 
     void PerformSkill(Elements.ElementalAttribute elementalAttribute)

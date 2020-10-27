@@ -84,7 +84,7 @@ public class HeroActions : MonoBehaviour
     private void Pause()
     {
         Debug.Log("Called");
-        onPausePeformed.Invoke();
+        onPausePeformed.Invoke();        
     }
  
 }

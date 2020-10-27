@@ -8,10 +8,10 @@ public class HeroMovement : MonoBehaviour
     public PlayerInput PlayerInput { get { return mPlayerInput; } }
     public enum Controller
     {
+        None,
         Keyboard,
         PS4,
-        XBOX,
-        Other
+        XBOX
     }
 
     public Controller controllerInput;
@@ -107,14 +107,7 @@ public class HeroMovement : MonoBehaviour
 
     private void Update()
     {
-      if(isDashing)
-        {
-            if (isLeft)
-                StartCoroutine(Dash(-1f));
-            else
-                StartCoroutine(Dash(1f));
 
-        }
     }
 
     IEnumerator Dash(float direction)
@@ -139,12 +132,10 @@ public class HeroMovement : MonoBehaviour
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
         else
             Debug.Log("Keybindings not set");
-        if (!isDashing)
-        {
+
             Vector3 currentPosition = transform.position;
             currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
             transform.position = currentPosition;
-        }
 
         Vector3 characterScale = transform.localScale;
         if (mMoveInput < 0)

@@ -93,8 +93,10 @@ public class HeroStats : MonoBehaviour
         float amountDamaged = 0;
         float damagePerloop = damageAmount / duration;
         while(amountDamaged < damageAmount)
-        {
+        {        
             mCurrentHealth -= damagePerloop;
+            if (mCurrentHealth <= 0)
+                HeroDie();
             Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth);
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
