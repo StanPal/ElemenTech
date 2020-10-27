@@ -59,6 +59,10 @@ public class Golem : MonoBehaviour
     [SerializeField]
     float mJumpForce;
 
+    private Transform deadPosition;
+
+    public GameObject Drop;
+
     private void Awake()
     {
         jumpTimeCounter = jumpTime;
@@ -67,11 +71,10 @@ public class Golem : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mCurrentHealth = mMaxHealth;
         initGolemFeature();
-
-
         tagObject = GameObject.FindWithTag("Team2");
         targetPosition = tagObject.transform;
-        
+        ////
+       
     }
 
     private void Update()
@@ -210,7 +213,9 @@ public class Golem : MonoBehaviour
     {
         if (mCurrentHealth <= 0)
         {
+            deadPosition = this.gameObject.transform;
             Destroy(this.gameObject);
+            Instantiate(Drop, deadPosition.position, deadPosition.rotation);
         }
     }
 

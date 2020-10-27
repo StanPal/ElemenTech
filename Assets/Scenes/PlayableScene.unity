@@ -466,6 +466,11 @@ PrefabInstance:
       propertyPath: jumpingInterval
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1165230724, guid: c762589e65c02a84d9f3e704eb80e25b, type: 3}
+      propertyPath: Drop
+      value: 
+      objectReference: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941,
+        type: 3}
     - target: {fileID: 5768544537369164436, guid: c762589e65c02a84d9f3e704eb80e25b,
         type: 3}
       propertyPath: m_Name

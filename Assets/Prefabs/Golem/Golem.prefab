@@ -568,6 +568,7 @@ MonoBehaviour:
   mMaxHealth: 100
   mCurrentHealth: 0
   shootingInterval: 1
+  jumpTime: 0
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}
   gun: {fileID: 4544347526746678256}
@@ -582,6 +583,8 @@ MonoBehaviour:
   mGolemType: 0
   reverse: 0
   selfGeren: 0
+  mJumpForce: 0
+  Drop: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941, type: 3}
 --- !u!1 &5786073200164854496
 GameObject:
   m_ObjectHideFlags: 0
