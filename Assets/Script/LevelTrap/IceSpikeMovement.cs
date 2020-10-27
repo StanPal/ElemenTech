@@ -5,11 +5,12 @@ using UnityEngine;
 public class IceSpikeMovement : MonoBehaviour
 {
     Rigidbody2D rb;
-
+    
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -18,7 +19,7 @@ public class IceSpikeMovement : MonoBehaviour
         {
             rb.isKinematic = false;
             Debug.Log("hit");
-            Destroy(gameObject, 5.0f);
+            //Destroy(gameObject);
         }
     }
 }
