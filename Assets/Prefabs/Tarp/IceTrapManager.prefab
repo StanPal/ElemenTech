@@ -43,6 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9455f992bc7dc5f4ab84b5528573856e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  iceSpikesLocation: []
+  iceSpikesLocation:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   iceSpike: {fileID: 6293246880690288096, guid: 28b46daba1dde534b93d11b01fae1bf4,
     type: 3}
+  delayTime: 5
+  maxSpawnlocation: 3
+  damage: 50
