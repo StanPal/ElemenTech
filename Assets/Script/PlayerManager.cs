@@ -10,14 +10,14 @@ public class PlayerManager : MonoBehaviour
     public GameObject AirHero;
     public GameObject EarthHero;    
 
-    public List<HeroActions> mPlayersList = new List<HeroActions>();
+    public List<GameObject> mPlayersList = new List<GameObject>();
 
     private void Awake()
     {
-        mPlayersList.Add(FireHero.GetComponent<HeroActions>());
-        mPlayersList.Add(WaterHero.GetComponent<HeroActions>());
-        mPlayersList.Add(AirHero.GetComponent<HeroActions>());
-        mPlayersList.Add(EarthHero.GetComponent<HeroActions>());
+        mPlayersList.Add(FireHero);
+        mPlayersList.Add(WaterHero);
+        mPlayersList.Add(AirHero);
+        mPlayersList.Add(EarthHero);
 
     }
 }

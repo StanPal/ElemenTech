@@ -121,30 +121,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &144756189 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5795234445427293574, guid: 2e10122b180751a40b4999ab9c6f6eac,
-    type: 3}
-  m_PrefabInstance: {fileID: 1536134797}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &144756194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 144756189}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
-    type: 3}
 --- !u!1001 &306839413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -245,6 +221,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
     type: 3}
+  mSpeed: 10
+  mDamage: 5
+  mExitTime: 0
+  mSlowAmount: 1
+  mSlowDuration: 1
 --- !u!114 &506182999
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,6 +239,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
+  mDamage: 2
+  mSpeed: 10
+  mExitTime: 10
+  mScale: {x: 0, y: 0, z: 0}
+  mScaleSpeed: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -339,7 +325,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &759488012
 GameObject:
@@ -405,7 +391,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &816065401
 PrefabInstance:
@@ -521,30 +507,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
---- !u!1 &816065402 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5795234445427293574, guid: 2e10122b180751a40b4999ab9c6f6eac,
-    type: 3}
-  m_PrefabInstance: {fileID: 816065401}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &816065407
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 816065402}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc93667e0725bba428538e1452bbdcc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Shield: {fileID: 1854956812321698989, guid: 0456ef1bc5054e94793176be4e055cbe, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
-    type: 3}
 --- !u!1 &958082122
 GameObject:
   m_ObjectHideFlags: 0
@@ -588,7 +550,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &978945522 stripped
 MonoBehaviour:
@@ -753,6 +715,7 @@ MonoBehaviour:
   isGuarding: 0
   mGuardTime: 0.5
   mShieldSize: 2.1
+  mSpeedDecrease: 1
   comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
     type: 3}
 --- !u!1001 &1536134797
@@ -1186,12 +1149,12 @@ PrefabInstance:
         type: 3}
       propertyPath: FireHero
       value: 
-      objectReference: {fileID: 144756189}
+      objectReference: {fileID: 0}
     - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
         type: 3}
       propertyPath: AirHero
       value: 
-      objectReference: {fileID: 816065402}
+      objectReference: {fileID: 0}
     - target: {fileID: 1298977985946996506, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
         type: 3}
       propertyPath: WaterHero
@@ -1276,7 +1239,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FireHero
       value: 
-      objectReference: {fileID: 144756189}
+      objectReference: {fileID: 0}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: EarthHero
@@ -1286,7 +1249,7 @@ PrefabInstance:
         type: 3}
       propertyPath: AirHero
       value: 
-      objectReference: {fileID: 816065402}
+      objectReference: {fileID: 0}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: WaterHero

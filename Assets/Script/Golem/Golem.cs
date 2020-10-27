@@ -92,7 +92,7 @@ public class Golem : MonoBehaviour
         //     }
         // }
 
-        KillEnemy();
+        //KillEnemy();
         Move();
         Shoot();
         SelfRegen();
@@ -175,7 +175,7 @@ public class Golem : MonoBehaviour
         }
         else
         {
-            Debug.Log("Jump");
+            //Debug.Log("Jump");
             if (targetPosition.position.y - 1.0f > this.transform.position.y)
             {
                 rb.velocity = Vector2.up * mJumpForce;
