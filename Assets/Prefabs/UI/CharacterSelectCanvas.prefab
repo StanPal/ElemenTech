@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 4851043854602749272}
   - component: {fileID: 4851043854602749273}
   - component: {fileID: 4851043854602749278}
-  - component: {fileID: 4851043854602749279}
   m_Layer: 5
   m_Name: ControllerBtn (3)
   m_TagString: Untagged
@@ -193,32 +192,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4851043854602749273}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4851043854602749279}
-        m_MethodName: SelectController
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4851043854602749279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851043854602749277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd2839b4e2050242aab9a7773ade014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mCanvas: {fileID: 0}
-  mCharacterSelect: {fileID: 4851043854602749278}
+      m_Calls: []
 --- !u!1 &4851043854620884879
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +599,6 @@ GameObject:
   - component: {fileID: 4851043855201218512}
   - component: {fileID: 4851043855201218513}
   - component: {fileID: 4851043855201218518}
-  - component: {fileID: 4851043855201218519}
   m_Layer: 5
   m_Name: ControllerBtn (2)
   m_TagString: Untagged
@@ -732,32 +705,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4851043855201218513}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4851043855201218519}
-        m_MethodName: SelectController
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4851043855201218519
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851043855201218517}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd2839b4e2050242aab9a7773ade014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mCanvas: {fileID: 0}
-  mCharacterSelect: {fileID: 4851043855201218518}
+      m_Calls: []
 --- !u!1 &4851043855395225811
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +718,6 @@ GameObject:
   - component: {fileID: 4851043855395225822}
   - component: {fileID: 4851043855395225823}
   - component: {fileID: 4851043855395225820}
-  - component: {fileID: 4851043855395225821}
   m_Layer: 5
   m_Name: ControllerBtn (1)
   m_TagString: Untagged
@@ -877,32 +824,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4851043855395225823}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 4851043855395225821}
-        m_MethodName: SelectController
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
---- !u!114 &4851043855395225821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851043855395225811}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd2839b4e2050242aab9a7773ade014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mCanvas: {fileID: 0}
-  mCharacterSelect: {fileID: 4851043855395225820}
+      m_Calls: []
 --- !u!1 &4851043855634697231
 GameObject:
   m_ObjectHideFlags: 0
@@ -1150,7 +1072,6 @@ GameObject:
   - component: {fileID: 4851043855699292364}
   - component: {fileID: 4851043855699292365}
   - component: {fileID: 4851043855699292354}
-  - component: {fileID: 4851043855699292367}
   m_Layer: 5
   m_Name: ControllerBtn
   m_TagString: Untagged
@@ -1258,7 +1179,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 4851043855699292367}
+      - m_Target: {fileID: 0}
         m_MethodName: SelectController
         m_Mode: 1
         m_Arguments:
@@ -1269,20 +1190,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &4851043855699292367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4851043855699292352}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfd2839b4e2050242aab9a7773ade014, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mCanvas: {fileID: 0}
-  mCharacterSelect: {fileID: 4851043855699292354}
 --- !u!1 &4851043855818925539
 GameObject:
   m_ObjectHideFlags: 0
@@ -1640,11 +1547,11 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_MethodName: 
+        m_MethodName: PlayerGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
