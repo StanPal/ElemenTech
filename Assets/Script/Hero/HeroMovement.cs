@@ -87,6 +87,18 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    public void IcySlidding(float SliddingSpeed)
+    {
+        mSpeed += SliddingSpeed;
+    }
+
+
+    public void SandDecrease(float SandDecreaseSpeed)
+    {
+        mSpeed -= SandDecreaseSpeed;
+    }
+
+
     public bool IsGrounded()
     {
         Vector2 topLeftPoint = transform.position;
