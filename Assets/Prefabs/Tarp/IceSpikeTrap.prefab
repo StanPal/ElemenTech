@@ -115,7 +115,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc8c58576096b284fb34023db8ba5e70, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
 --- !u!1 &6293246880690288096
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,7 +126,7 @@ GameObject:
   - component: {fileID: 6293246880690288097}
   - component: {fileID: 6293246880690288103}
   - component: {fileID: 6293246880690288102}
-  - component: {fileID: 6293246880690288100}
+  - component: {fileID: 6467660832463615801}
   m_Layer: 0
   m_Name: IceSpikeTrap
   m_TagString: Untagged
@@ -188,7 +187,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.0862651, y: 12.95541}
   m_EdgeRadius: 0
---- !u!50 &6293246880690288100
+--- !u!50 &6467660832463615801
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 0

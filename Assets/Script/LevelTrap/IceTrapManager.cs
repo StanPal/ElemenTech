@@ -1,19 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random; 
 
 public class IceTrapManager : MonoBehaviour
 {
     public List<Transform> iceSpikesLocation = new List<Transform>();
-    List<Transform> randomNum = new List<Transform>();
-    public List<Transform> RandomNum { get { return randomNum; } }
+    List<Transform> spawnLocation = new List<Transform>();
+    public List<Transform> SpawnLocation { get { return spawnLocation; } }
 
     public GameObject iceSpike;
 
     [SerializeField]
     float delayTime = 5.0f;
     float currentDelayTime = 0.0f;
-    System.Random random = new System.Random();
     [SerializeField]
     int maxSpawnlocation = 3;
     [SerializeField]
@@ -24,11 +24,11 @@ public class IceTrapManager : MonoBehaviour
     public int IceSpikeCounter { set { iceSpikeCounter = value; } get { return iceSpikeCounter; } }
     private void Awake()
     {
-        randomNum = iceSpikesLocation;
+        spawnLocation = iceSpikesLocation;
         
         for (int i = 0; i < maxSpawnlocation; ++i)
         {
-            spawnSpike();
+            SpawnSpike();
         }
     }
 
@@ -37,15 +37,15 @@ public class IceTrapManager : MonoBehaviour
         if (iceSpikeCounter < maxSpawnlocation && currentDelayTime < Time.time)
         {
             currentDelayTime = Time.time + delayTime;
-            spawnSpike();
+            SpawnSpike();
         }
     }
 
-    void spawnSpike()
+    public void SpawnSpike()
     {
-        Transform location = randomNum[random.Next(1, randomNum.Count)];
+        Transform location = spawnLocation[Random.Range(0, spawnLocation.Count)];
         Instantiate(iceSpike, location.position, Quaternion.identity);
-        randomNum.Remove(location);
+        spawnLocation.Remove(location);
         iceSpikeCounter++;
     }
 }

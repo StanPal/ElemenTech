@@ -15,17 +15,28 @@ public class IceSpikeTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<HeroStats>())
+        var heroStats = collision.GetComponent<HeroStats>();
+        if (heroStats != null)
         {
-            collision.GetComponent<HeroStats>().TakeDamage(iceTrapManager.Damage);
+            Debug.Log("hit player");
+            heroStats.TakeDamage(iceTrapManager.Damage);
+            DestroySpike();
         }
-        if ( collision.CompareTag("Wall") || collision.GetComponent<HeroStats>())
+        if (collision.gameObject.CompareTag("Wall"))
         {
-            iceTrapManager.IceSpikeCounter--;
-            transform.position = startTransform;
-            iceTrapManager.RandomNum.Add(transform);
-            Debug.Log("hit");
-            Destroy(gameObject.transform.parent);
+            Debug.Log("hit wall");
+            DestroySpike();
         }
+    }
+
+
+    private void DestroySpike()
+    {
+        iceTrapManager.IceSpikeCounter--;
+        //transform.position = startTransform;
+        //iceTrapManager.RandomNum.Add(transform);
+        // If it hits anything, destroy it.
+        iceTrapManager.SpawnSpike();
+        Destroy(transform.parent.gameObject);
     }
 }
