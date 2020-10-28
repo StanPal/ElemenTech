@@ -4,15 +4,10 @@ using UnityEngine;
 
 public class SandPlatform : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    float SandSpeed = 5f;
+    private void OnTriggerEnter(Collider other)
     {
-        
+        other.gameObject.GetComponent<HeroMovement>().SandDecrease(SandSpeed);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
