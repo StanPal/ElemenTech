@@ -128,7 +128,7 @@ public class HeroStats : MonoBehaviour
 
     void HeroDie()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
 }
