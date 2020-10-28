@@ -92,11 +92,13 @@ public class Golem : MonoBehaviour
         //     }
         // }
 
-        //KillEnemy();
+        //Debug.Log("Golem Health" + mCurrentHealth);
+        //mCurrentHealth--;
         Move();
         Shoot();
         SelfRegen();
         Jump();
+        KillEnemy();
     }
 
     private void OnCollisionEnter2D(Collision2D coll)

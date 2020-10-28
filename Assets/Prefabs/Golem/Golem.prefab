@@ -566,24 +566,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMaxHealth: 100
-  mCurrentHealth: 0
+  mCurrentHealth: 100
   shootingInterval: 1
-  jumpTime: 0
+  jumpTime: 1
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}
   gun: {fileID: 4544347526746678256}
   bullet: {fileID: -6625602420098716459, guid: 6737eb36e309cbf4ba388fb6e63c1b3e, type: 3}
   muzzle: {fileID: 1550714508109685991}
   bulletSpeed: 5
-  FasterMoveSpeed: 0
-  NormalMoveSpeed: 0
-  SlowerMoveSpeed: 0
-  mSpeed: 0
+  FasterMoveSpeed: 1
+  NormalMoveSpeed: 1
+  SlowerMoveSpeed: 1
+  mSpeed: 1
   mTime: 2
   mGolemType: 0
   reverse: 0
   selfGeren: 0
-  mJumpForce: 0
+  mJumpForce: 4
   Drop: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941, type: 3}
 --- !u!1 &5786073200164854496
 GameObject:

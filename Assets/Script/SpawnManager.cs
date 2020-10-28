@@ -13,6 +13,10 @@ public class SpawnManager : MonoBehaviour
         playerManager.FireHero = Instantiate(playerManager.FireHero);
         if (playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
           playerManager.WaterHero = Instantiate(playerManager.WaterHero);
+        if (playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+            playerManager.EarthHero = Instantiate(playerManager.EarthHero);
+        if (playerManager.AirHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+            playerManager.AirHero = Instantiate(playerManager.AirHero);
 
     }
 }
