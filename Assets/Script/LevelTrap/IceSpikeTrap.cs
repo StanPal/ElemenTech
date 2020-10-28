@@ -32,12 +32,11 @@ public class IceSpikeTrap : MonoBehaviour
 
     private void DestroySpike()
     {
-        iceTrapManager.IceSpikeCounter--;
         //transform.position = startTransform;
         //iceTrapManager.RandomNum.Add(transform);
         // If it hits anything, destroy it.
         iceTrapManager.SpawnSpike();
-        Destroy(transform.parent.gameObject);
-        
+        iceTrapManager.IceSpikeCounter--;
+        Destroy(gameObject);
     }
 }

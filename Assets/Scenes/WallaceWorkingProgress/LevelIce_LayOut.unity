@@ -121,6 +121,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &2229123 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
+    type: 3}
+  m_PrefabInstance: {fileID: 744554101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &46569231
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -658,16 +664,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 759488012}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Script: {fileID: 11500000, guid: 01614664b831546d2ae94a42149d80ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalAxis: Horizontal
-  m_VerticalAxis: Vertical
-  m_SubmitButton: Submit
-  m_CancelButton: Cancel
-  m_InputActionsPerSecond: 10
-  m_RepeatDelay: 0.5
-  m_ForceModuleActive: 0
+  m_MoveRepeatDelay: 0.5
+  m_MoveRepeatRate: 0.1
+  m_ActionsAsset: {fileID: -944628639613478452, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_PointAction: {fileID: 1054132383583890850, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MoveAction: {fileID: 3710738434707379630, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_SubmitAction: {fileID: 2064916234097673511, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_CancelAction: {fileID: -1967631576421560919, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_LeftClickAction: {fileID: 8056856818456041789, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_MiddleClickAction: {fileID: 3279352641294131588, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_RightClickAction: {fileID: 3837173908680883260, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_ScrollWheelAction: {fileID: 4502412055082496612, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDevicePositionAction: {fileID: 4754684134866288074, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_TrackedDeviceOrientationAction: {fileID: 1025543830046995696, guid: ca9f5fa95ffab41fb9a615ab714db018,
+    type: 3}
+  m_DeselectOnBackgroundClick: 1
+  m_PointerBehavior: 0
 --- !u!114 &759488014
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1048,22 +1073,23 @@ PrefabInstance:
         type: 3}
       propertyPath: FireHero
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1497430141}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: EarthHero
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
+        type: 3}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: WaterHero
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 2229123}
     - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: AirHero
       value: 
-      objectReference: {fileID: 4463274815846023205, guid: a8d6d26674b5cf740919459c540a8cb3,
+      objectReference: {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
@@ -1094,6 +1120,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!1 &1497430141 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791110765294023672, guid: 2e10122b180751a40b4999ab9c6f6eac,
+    type: 3}
+  m_PrefabInstance: {fileID: 712161390}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1655727316 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5979753016203844237, guid: 17860b7e78a364943ad98ff49e08f315,
@@ -1359,6 +1391,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IceTrapManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762166116706157134, guid: f79c097613fc9954392d6a851d047433,
+        type: 3}
+      propertyPath: spawnLocationNotUse.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8762166116706157134, guid: f79c097613fc9954392d6a851d047433,
         type: 3}

@@ -8,7 +8,6 @@ public class IceTrapManager : MonoBehaviour
     public List<Transform> iceSpikesLocation = new List<Transform>();
     public List<Transform> spawnLocation = new List<Transform>();
     public List<Transform> SpawnLocation { get { return spawnLocation; } }
-    public List<Transform> spawnLocationNotUse = new List<Transform>();
     public GameObject iceSpike;
 
     [SerializeField]
@@ -24,7 +23,9 @@ public class IceTrapManager : MonoBehaviour
     public int IceSpikeCounter { set { iceSpikeCounter = value; } get { return iceSpikeCounter; } }
     private void Awake()
     {
-        spawnLocationNotUse = iceSpikesLocation;
+
+        spawnLocation = iceSpikesLocation;
+
         for (int i = 0; i < maxSpawnlocation; ++i)
         {
             SpawnSpike();
@@ -33,6 +34,7 @@ public class IceTrapManager : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(spawnLocation.Count);
         if (iceSpikeCounter < maxSpawnlocation && currentDelayTime < Time.time)
         {
             currentDelayTime = Time.time + delayTime;
@@ -42,26 +44,16 @@ public class IceTrapManager : MonoBehaviour
 
     public void SpawnSpike()
     {
-        Transform location = spawnLocationNotUse[Random.Range(0, spawnLocationNotUse.Count)];
+        Transform location = spawnLocation[Random.Range(0, spawnLocation.Count)];
         Instantiate(iceSpike, location.position, Quaternion.identity);
-        spawnLocation.Add(location);
-        spawnLocationNotUse.Remove(location);
-        RecalculatePosition();
+        //for (int i = 0; i < spawnLocation.Count; ++i)
+        //{
+        //    if (spawnLocation[i].gameObject.transform.Equals(location))
+        //    {
+        //        spawnLocation[i].gameObject.SetActive(false);
+        //    }
+        //}
+        spawnLocation.Remove(location);
         iceSpikeCounter++;
-    }
-
-    public void RecalculatePosition()
-    {
-        spawnLocationNotUse = iceSpikesLocation;
-        for (int i = 0; i < spawnLocationNotUse.Count; i++)
-        {
-            for (int j = 0; j < spawnLocation.Count; j++)
-            {
-                if (spawnLocationNotUse[i].position == spawnLocation[j].position)
-                {
-                    spawnLocationNotUse.Remove(spawnLocationNotUse[i]);
-                }
-            }
-        }
     }
 }
