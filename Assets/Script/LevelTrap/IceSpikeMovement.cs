@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class IceSpikeMovement : MonoBehaviour
 {
-    Rigidbody2D rb;
+    Rigidbody2D rb;    
+
 
     private void Awake()
     {

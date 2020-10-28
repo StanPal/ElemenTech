@@ -38,5 +38,6 @@ public class IceSpikeTrap : MonoBehaviour
         // If it hits anything, destroy it.
         iceTrapManager.SpawnSpike();
         Destroy(transform.parent.gameObject);
+        
     }
 }
