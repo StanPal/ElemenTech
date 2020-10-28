@@ -119,5 +119,10 @@ public class PlayerAttack : MonoBehaviour
                 collision.GetComponent<HeroStats>().TakeDamage(10f);
             }
         }
+
+        if (collision.GetComponent<Golem>())
+        {
+            collision.GetComponent<Golem>().TakeDamage(50);
+        }
     }
 }
