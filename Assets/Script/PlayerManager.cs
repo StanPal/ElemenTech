@@ -18,6 +18,5 @@ public class PlayerManager : MonoBehaviour
         mPlayersList.Add(WaterHero);
         mPlayersList.Add(AirHero);
         mPlayersList.Add(EarthHero);
-
     }
 }
