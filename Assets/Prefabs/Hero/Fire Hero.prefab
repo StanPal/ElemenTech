@@ -526,7 +526,6 @@ MonoBehaviour:
   mMaxHealth: 100
   mCurrentHealth: 100
   mCoolDown: 3
-  isCDFinished: 0
   mElementalType: 0
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -566,6 +565,8 @@ MonoBehaviour:
   isDashing: 0
   dashSpeed: 5
   mSpeed: 5
+  mKnockbackRecieved: 0
+  mKnockbackCount: 0
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -770,7 +771,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765894072920
 Transform:
   m_ObjectHideFlags: 0
@@ -880,6 +881,7 @@ MonoBehaviour:
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100
+  mKnockBackAmount: 5
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0

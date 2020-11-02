@@ -46,7 +46,14 @@ public class HeroMovement : MonoBehaviour
     private float mSpeed;
     public float Speed { get { return mSpeed; } set { mSpeed = value; } }
     private float mMoveInput;
-    private Rigidbody2D rb; 
+    private Rigidbody2D rb;
+
+    [SerializeField]
+    private float mKnockbackRecieved;
+    [SerializeField]
+    private float mKnockbackCount;
+    private bool mOnHitLeft = false;
+
 
     private void Awake()
     {
@@ -117,11 +124,6 @@ public class HeroMovement : MonoBehaviour
         isDashing = true;
     }
 
-    private void Update()
-    {
-
-    }
-
     IEnumerator Dash(float direction)
     {
         Vector3 currentPosition = transform.position;
@@ -149,6 +151,20 @@ public class HeroMovement : MonoBehaviour
             currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
             transform.position = currentPosition;
 
+        if(mKnockbackCount > 0)
+        {
+            if (mOnHitLeft)
+            {
+                rb.velocity = new Vector2(-mKnockbackRecieved, mKnockbackRecieved);
+            }
+            else
+            {
+                rb.velocity = new Vector2(mKnockbackRecieved, mKnockbackRecieved);
+
+            }
+            mKnockbackCount--;
+        }
+   
         Vector3 characterScale = transform.localScale;
         if (mMoveInput < 0)
         {
@@ -163,5 +179,11 @@ public class HeroMovement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
+    public void OnKnockBackHit(float knockbackamount, bool direction)
+    {
+        mKnockbackCount++;
+        mKnockbackRecieved = knockbackamount;
+        mOnHitLeft = direction;
+    }
    
 }

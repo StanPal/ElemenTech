@@ -18,8 +18,7 @@ public class HeroStats : MonoBehaviour
     private float mCurrentHealth = 100f;
     [SerializeField]
     private float mCoolDown;
-    private float mTempCDTime;
-    [SerializeField]
+    private float mTempCDTime;   
 
     private bool isCDFinished;    
     public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
@@ -56,6 +55,7 @@ public class HeroStats : MonoBehaviour
         }
         if (mTempCDTime > 0.0f)
             mTempCDTime -= Time.deltaTime;
+
     }
 
     public void TakeDamage(float damage)

@@ -16,7 +16,7 @@ public class PlayerAttack : MonoBehaviour
     private Transform attackPos;
     [SerializeField]
     private float attackRange;
-
+    
     [SerializeField]
     GameObject target;
     [SerializeField]
@@ -30,7 +30,9 @@ public class PlayerAttack : MonoBehaviour
     private bool beginSwing = false;
     private bool swingActive = false;
 
-    private Transform originalRotation; 
+    private Transform originalRotation;
+    [SerializeField]
+    private float mKnockBackAmount = 5f;
 
     private void Awake()
     {
@@ -118,6 +120,7 @@ public class PlayerAttack : MonoBehaviour
             if (collision.tag.Equals("Team2"))
             {
                 collision.GetComponent<HeroStats>().TakeDamage(10f);
+                collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
             }
         }
         if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
@@ -125,6 +128,8 @@ public class PlayerAttack : MonoBehaviour
             if (collision.tag.Equals("Team1"))
             {
                 collision.GetComponent<HeroStats>().TakeDamage(10f);
+                collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+
             }
         }
 
