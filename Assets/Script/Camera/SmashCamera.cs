@@ -6,25 +6,25 @@ public class SmashCamera : MonoBehaviour
 {
     // Approximate time for the camera to refocus
     [SerializeField]
-    private float m_DampTime = 0.2f;
+    private float mDampTime = 0.2f;
     // Space between the top/bottom most target and the screen edge.
     [SerializeField]
-    private float m_ScreenEdgeBuffer = 4f;
+    private float mScreenEdgeBuffer = 4f;
     // The smallest orthographic size the camera can be.
     [SerializeField]
-    private float m_MinSize = 6.5f;
+    private float mMinSize = 6.5f;
     PlayerManager playerManager;
 
     private Camera mCamera;
     // Reference speed for the smooth damping of the orthographic size.
     [SerializeField]
-    private float m_ZoomSpeed;
+    private float mZoomSpeed;
     // Reference velocity for the smooth damping of the position.
     [SerializeField]
-    private Vector3 m_MoveVelocity;
+    private Vector3 mMoveVelocity;
     // The position the camera is moving towards.
     [SerializeField]
-    private Vector3 m_DesiredPosition;
+    private Vector3 mDesiredPosition;
 
 
     private void Awake()
@@ -47,7 +47,7 @@ public class SmashCamera : MonoBehaviour
         FindAveragePosition();
 
         // Smoothly transition to that position.
-        transform.position = Vector3.SmoothDamp(transform.position, m_DesiredPosition, ref m_MoveVelocity, m_DampTime);
+        transform.position = Vector3.SmoothDamp(transform.position, mDesiredPosition, ref mMoveVelocity, mDampTime);
     }
 
 
@@ -76,7 +76,7 @@ public class SmashCamera : MonoBehaviour
         averagePos.y = transform.position.y;
 
         // The desired position is the average position;
-        m_DesiredPosition = averagePos;
+        mDesiredPosition = averagePos;
     }
 
 
@@ -84,14 +84,14 @@ public class SmashCamera : MonoBehaviour
     {
         // Find the required size based on the desired position and smoothly transition to that size.
         float requiredSize = FindRequiredSize();
-        mCamera.orthographicSize = Mathf.SmoothDamp(mCamera.orthographicSize, requiredSize, ref m_ZoomSpeed, m_DampTime);
+        mCamera.orthographicSize = Mathf.SmoothDamp(mCamera.orthographicSize, requiredSize, ref mZoomSpeed, mDampTime);
     }
 
 
     private float FindRequiredSize()
     {
         // Find the position the camera rig is moving towards in its local space.
-        Vector3 desiredLocalPos = transform.InverseTransformPoint(m_DesiredPosition);
+        Vector3 desiredLocalPos = transform.InverseTransformPoint(mDesiredPosition);
 
         // Start the camera's size calculation at zero.
         float size = 0f;
@@ -116,10 +116,10 @@ public class SmashCamera : MonoBehaviour
         }
 
         // Add the edge buffer to the size.
-        size += m_ScreenEdgeBuffer;
+        size += mScreenEdgeBuffer;
 
         // Make sure the camera's size isn't below the minimum.
-        size = Mathf.Max(size, m_MinSize);
+        size = Mathf.Max(size, mMinSize);
 
         return size;
     }
@@ -131,7 +131,7 @@ public class SmashCamera : MonoBehaviour
         FindAveragePosition();
 
         // Set the camera's position to the desired position without damping.
-        transform.position = m_DesiredPosition;
+        transform.position = mDesiredPosition;
 
         // Find and set the required size of the camera.
         mCamera.orthographicSize = FindRequiredSize();
