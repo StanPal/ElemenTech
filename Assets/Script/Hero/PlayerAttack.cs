@@ -7,34 +7,37 @@ public class PlayerAttack : MonoBehaviour
 {
 
     [SerializeField]
-    float damage = 2;
+    private float damage = 2;
     [SerializeField]
-    float startTimeBtAttack;
-    float timeBtwAttack;
+    private float startTimeBtAttack;
+    private float timeBtwAttack;
 
     [SerializeField]
-    Transform attackPos;
+    private Transform attackPos;
     [SerializeField]
-    float attackRange;
+    private float attackRange;
 
     [SerializeField]
     GameObject target;
     [SerializeField]
-    float rotaSpeed;
+    private float rotaSpeed;
     [SerializeField]
-    float rotaBackSpeed;
+    private float rotaBackSpeed;
     HeroActions mHeroAction;
     HeroMovement mHeroMovement;
-    float swordAngle = 45.0f;
-    bool swingdown = false;
-    bool beginSwing = false;
-    bool swingActive = false;
+    private float swordAngle = 45.0f;
+    private bool swingdown = false;
+    private bool beginSwing = false;
+    private bool swingActive = false;
+
+    private Transform originalRotation; 
 
     private void Awake()
     {
         mHeroAction = GetComponentInParent<HeroActions>();
         mHeroMovement = GetComponentInParent<HeroMovement>();
         mHeroAction.onAttackPerformed += AttackPerformed;
+        originalRotation = transform;
     }
         
 
@@ -67,6 +70,9 @@ public class PlayerAttack : MonoBehaviour
                 {
                     beginSwing = false;
                     swingdown = false;
+                    this.gameObject.SetActive(false);
+                    transform.position = originalRotation.position;
+
                 }
             }
             else
@@ -88,6 +94,8 @@ public class PlayerAttack : MonoBehaviour
                 {
                     beginSwing = false;
                     swingdown = false;
+                    this.gameObject.SetActive(false);
+                    transform.position = originalRotation.position;
                 }
             }
         }

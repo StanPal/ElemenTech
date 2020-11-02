@@ -205,7 +205,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
---- !u!1001 &319288534
+--- !u!1001 &174078796
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -222,15 +222,25 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1791110764907904908, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110764907904908, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.6834502
+      value: 0.82878196
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.849121
+      value: 6.9243283
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
@@ -282,6 +292,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Fire Hero (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023673, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: sword
+      value: 
+      objectReference: {fileID: 1970810542}
     - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: controllerInput
@@ -289,12 +304,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
---- !u!1 &319288535 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1791110765294023672, guid: 2e10122b180751a40b4999ab9c6f6eac,
-    type: 3}
-  m_PrefabInstance: {fileID: 319288534}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &626590497
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -340,7 +349,7 @@ PrefabInstance:
     - target: {fileID: 1324117386745922356, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1324117386745922356, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
@@ -366,7 +375,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FireHero
       value: 
-      objectReference: {fileID: 319288535}
+      objectReference: {fileID: 1801224614}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
 --- !u!1 &1357305381
@@ -526,6 +535,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c762589e65c02a84d9f3e704eb80e25b, type: 3}
+--- !u!1 &1801224614 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791110765294023672, guid: 2e10122b180751a40b4999ab9c6f6eac,
+    type: 3}
+  m_PrefabInstance: {fileID: 174078796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1829880747
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,6 +610,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17860b7e78a364943ad98ff49e08f315, type: 3}
+--- !u!1 &1970810542 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1791110765894072927, guid: 2e10122b180751a40b4999ab9c6f6eac,
+    type: 3}
+  m_PrefabInstance: {fileID: 174078796}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2007698818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -856,6 +877,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927256456831370854, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7196761184023898869, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
