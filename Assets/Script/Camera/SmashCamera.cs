@@ -57,7 +57,7 @@ public class SmashCamera : MonoBehaviour
         int numTargets = 0;
 
         // Go through all the targets and add their positions together.
-        for (int i = 0; i < playerManager.mPlayersList.ToArray().Length; i++)
+        for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
             // If the target isn't active, go on to the next one.
             if (!playerManager.mPlayersList[i].gameObject.activeSelf)
@@ -96,7 +96,7 @@ public class SmashCamera : MonoBehaviour
         // Start the camera's size calculation at zero.
         float size = 0f;
 
-        for (int i = 0; i < playerManager.mPlayersList.ToArray().Length; i++)
+        for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
 
             if (!playerManager.mPlayersList[i].gameObject.activeSelf)
