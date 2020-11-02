@@ -550,6 +550,11 @@ PrefabInstance:
       propertyPath: mJumpForce
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5795234445427293575, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: controllerType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5795234445427293626, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1317,7 +1322,7 @@ PrefabInstance:
     - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}
       propertyPath: controllerType
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7476759683541955515, guid: 58c5ab03208ccc049b38cca1f19fa759,
         type: 3}

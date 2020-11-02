@@ -54,8 +54,11 @@ public class Golem : MonoBehaviour
     public float MaxHealth { get { return mMaxHealth; } }
     public float CurrentHealth { get { return mCurrentHealth; } }
     /////////////////////////////////////////////////
-    GameObject tagObject;
-    Transform targetPosition;
+    GameObject teamOneObj;
+    Transform teamOnePos;
+
+    GameObject teamTwoObj;
+    Transform teamTwoPos;
     [SerializeField]
     float mJumpForce;
 
@@ -71,10 +74,13 @@ public class Golem : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mCurrentHealth = mMaxHealth;
         initGolemFeature();
-        tagObject = GameObject.FindWithTag("Team2");
-        targetPosition = tagObject.transform;
-        ////
-       
+
+        teamOneObj = GameObject.FindWithTag("Team1");
+        teamOnePos = teamOneObj.transform;
+
+        teamTwoObj = GameObject.FindWithTag("Team2");
+        teamTwoPos = teamTwoObj.transform;
+        ////   
     }
 
     private void Update()
@@ -111,6 +117,18 @@ public class Golem : MonoBehaviour
         {
             reverse = !reverse;
             Debug.Log("hit the block");
+            transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
+        }
+        if (coll.gameObject.tag == "Team1")
+        {
+            reverse = !reverse;
+            Debug.Log("hit the Hero");
+            transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
+        }
+        if (coll.gameObject.tag == "Team2")
+        {
+            reverse = !reverse;
+            Debug.Log("hit the Hero");
             transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
         }
     }
@@ -176,7 +194,12 @@ public class Golem : MonoBehaviour
         else
         {
             Debug.Log("Jump");
-            if (targetPosition.position.y - 1.0f > this.transform.position.y)
+            if (teamTwoPos.position.y - 1.0f > this.transform.position.y)
+            {
+                rb.velocity = Vector2.up * mJumpForce;
+                jumpTimeCounter = jumpTime;
+            }
+            else if(teamOnePos.position.y - 1.0f > this.transform.position.y)
             {
                 rb.velocity = Vector2.up * mJumpForce;
                 jumpTimeCounter = jumpTime;

@@ -35,6 +35,11 @@ public class GolemBullet : MonoBehaviour
            other.GetComponent<Hero>().TakeDamage(damage);
         }
 
+        if (other.gameObject.tag == "Team1")
+        {
+            Destroy(gameObject);
+            other.GetComponent<Hero>().TakeDamage(damage);
+        }
     }
 
     void Update()
