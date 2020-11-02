@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelect.unity
     guid: c28738b1c6973f245b6cd6d90d71fb07
   - enabled: 1
-    path: Assets/Scenes/CameratTest.unity
+    path: Assets/Scenes/CameraTest.unity
     guid: 938eab5a3701d2448b36454a0f51d81c
   m_configObjects: {}

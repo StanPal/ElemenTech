@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     private PlayerManager playerManager;
-
+    public List<Transform> mSpawnPoints = new List<Transform>();
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
@@ -13,6 +13,7 @@ public class SpawnManager : MonoBehaviour
         {
             playerManager.FireHero.SetActive(true);
             playerManager.FireHero = Instantiate(playerManager.FireHero);
+            RandomizeSpawn(playerManager.FireHero); 
             playerManager.mPlayersList[0] = playerManager.FireHero;
             
         }
@@ -20,6 +21,7 @@ public class SpawnManager : MonoBehaviour
         {
             playerManager.WaterHero.SetActive(true);
             playerManager.WaterHero = Instantiate(playerManager.WaterHero);
+            RandomizeSpawn(playerManager.WaterHero);
             playerManager.mPlayersList[1] = playerManager.WaterHero;
 
         }
@@ -27,6 +29,7 @@ public class SpawnManager : MonoBehaviour
         {
             playerManager.EarthHero.SetActive(true);
             playerManager.EarthHero = Instantiate(playerManager.EarthHero);
+            RandomizeSpawn(playerManager.EarthHero);
             playerManager.mPlayersList[2] = playerManager.EarthHero;
 
         }
@@ -34,9 +37,16 @@ public class SpawnManager : MonoBehaviour
         {
             playerManager.AirHero.SetActive(true);
             playerManager.AirHero = Instantiate(playerManager.AirHero);
+            RandomizeSpawn(playerManager.AirHero);
             playerManager.mPlayersList[3] = playerManager.AirHero;
 
         }
+    }
 
+    void RandomizeSpawn(GameObject player)
+    {
+        int randIndex = Random.Range(0, mSpawnPoints.Count);
+        player.transform.position = mSpawnPoints[randIndex].position;
+        mSpawnPoints.RemoveAt(randIndex);
     }
 }
