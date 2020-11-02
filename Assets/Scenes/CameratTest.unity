@@ -223,12 +223,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9d69929276ea9478592ab6e3c4f19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_DampTime: 0.25
-  m_ScreenEdgeBuffer: 4
-  m_MinSize: 6.5
-  m_ZoomSpeed: 1
-  m_MoveVelocity: {x: 0, y: 0, z: 0}
-  m_DesiredPosition: {x: 0, y: 0, z: 0}
+  mDampTime: 0.2
+  mScreenEdgeBuffer: 4
+  mMinSize: 6.5
+  mZoomSpeed: 0
+  mMoveVelocity: {x: 0, y: 0, z: 0}
+  mDesiredPosition: {x: 0, y: 0, z: 0}
 --- !u!1001 &1779379889
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -372,18 +372,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17860b7e78a364943ad98ff49e08f315, type: 3}
---- !u!114 &1959308053 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 626247835298582183, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-    type: 3}
-  m_PrefabInstance: {fileID: 626247836578407858}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ba970a9e73587d4ab11f53a7d4f6d4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2007698818
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -555,75 +543,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ba768d0656ad1844984af499c5e6a261, type: 3}
---- !u!1001 &626247836578407858
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 626247835298582182, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
-        type: 3}
-      propertyPath: m_Name
-      value: LevelFocus
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5df3d1f3ae8f8e54b8db64950990e6c4, type: 3}
 --- !u!1001 &5774566764861250962
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -709,7 +628,7 @@ PrefabInstance:
         type: 3}
       propertyPath: FocusLevel
       value: 
-      objectReference: {fileID: 1959308053}
+      objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: m_LocalPosition.x
