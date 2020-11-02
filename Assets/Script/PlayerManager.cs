@@ -14,6 +14,10 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
+        FireHero.SetActive(false);
+        WaterHero.SetActive(false);
+        AirHero.SetActive(false);
+        EarthHero.SetActive(false);
         mPlayersList.Add(FireHero);
         mPlayersList.Add(WaterHero);
         mPlayersList.Add(AirHero);
