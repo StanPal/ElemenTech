@@ -10,6 +10,8 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    public GameObject sword;
+
     HeroMovement mHeroMovement;
     public HeroMovement HeroMovement { get { return mHeroMovement; } }
     HeroStats mHeroStats;
@@ -18,6 +20,7 @@ public class HeroActions : MonoBehaviour
 
     private void Awake()
     {
+        
         mHeroMovement = GetComponent<HeroMovement>();
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
@@ -78,6 +81,7 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
+        sword.gameObject.SetActive(true);
         onAttackPerformed.Invoke();
     }
 

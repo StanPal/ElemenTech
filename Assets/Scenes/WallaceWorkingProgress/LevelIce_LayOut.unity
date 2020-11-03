@@ -1422,6 +1422,11 @@ PrefabInstance:
       propertyPath: iceSpikesLocation.Array.data[4]
       value: 
       objectReference: {fileID: 1032986759}
+    - target: {fileID: 8762166116706157134, guid: f79c097613fc9954392d6a851d047433,
+        type: 3}
+      propertyPath: maxSpawnlocation
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 8762166116706157135, guid: f79c097613fc9954392d6a851d047433,
         type: 3}
       propertyPath: m_LocalPosition.x
