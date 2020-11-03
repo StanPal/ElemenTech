@@ -6,9 +6,9 @@ public class Golem : MonoBehaviour
 {
     private Rigidbody2D rb;
     [SerializeField]
-    float mMaxHealth = 100.0f;
+    private float mMaxHealth = 100.0f;
     [SerializeField]
-    float mCurrentHealth;
+    private float mCurrentHealth;
 
     /// <summary>
     /// ///////////////////////////////////////////
@@ -54,10 +54,10 @@ public class Golem : MonoBehaviour
     public float MaxHealth { get { return mMaxHealth; } }
     public float CurrentHealth { get { return mCurrentHealth; } }
     /////////////////////////////////////////////////
-    GameObject tagObject;
-    Transform targetPosition;
+    public GameObject tagObject;
+    private Transform targetPosition;
     [SerializeField]
-    float mJumpForce;
+    private float mJumpForce;
 
     private Transform deadPosition;
 

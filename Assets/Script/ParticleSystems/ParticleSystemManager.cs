@@ -66,7 +66,10 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void DebuffEffectOff()
     {
-        Destroy(statusEffect.Pop());
+        if (statusEffect.Count > 0)
+        {
+            Destroy(statusEffect.Pop());
+        }
     }
 
 }

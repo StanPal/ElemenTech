@@ -12,9 +12,9 @@ public class HeroActions : MonoBehaviour
 
     public GameObject sword;
 
-    HeroMovement mHeroMovement;
+    private HeroMovement mHeroMovement;
     public HeroMovement HeroMovement { get { return mHeroMovement; } }
-    HeroStats mHeroStats;
+    private HeroStats mHeroStats;
     public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
 
@@ -88,7 +88,7 @@ public class HeroActions : MonoBehaviour
     private void Pause()
     {
         Debug.Log("Called");
-        onPausePeformed.Invoke();        
+        onPausePeformed.Invoke();
     }
  
 }

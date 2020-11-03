@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EarthSpike : MonoBehaviour
 {
-    EarthSkills EarthSkills;
+    private EarthSkills EarthSkills;
     private void Awake()
     {
         EarthSkills = FindObjectOfType<EarthSkills>();

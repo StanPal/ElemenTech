@@ -18,7 +18,7 @@ public class PlayerAttack : MonoBehaviour
     private float attackRange;
     
     [SerializeField]
-    GameObject target;
+    public GameObject target;
     [SerializeField]
     private float rotaSpeed;
     [SerializeField]

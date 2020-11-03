@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AirJet : MonoBehaviour
 {       
-    float mProjectileSpeed = 1f;
-    float mExitTime = 1f; 
+    private float mProjectileSpeed = 1f;
+    private float mExitTime = 1f; 
     private Rigidbody2D mRigidbody;
-    Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
+    private Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
 
-    AirSkills airskills;
+    private AirSkills airskills;
 
     void Start()
     {
