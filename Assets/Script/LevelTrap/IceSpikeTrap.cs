@@ -6,12 +6,16 @@ public class IceSpikeTrap : MonoBehaviour
 {
     private IceTrapManager iceTrapManager;
     Vector3 startTransform = new Vector3();
+    Rigidbody2D rb;
+    
 
     private void Awake()
     {
         iceTrapManager = FindObjectOfType<IceTrapManager>();
         startTransform = transform.position;
+        rb = GetComponent<Rigidbody2D>();
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -37,6 +41,12 @@ public class IceSpikeTrap : MonoBehaviour
         // If it hits anything, destroy it.
         iceTrapManager.SpawnSpike();
         iceTrapManager.IceSpikeCounter--;
+        iceTrapManager.spawnLocation.Add(GetComponentInParent<IceSpikeMovement>().transform);
         Destroy(gameObject);
+    }
+
+    public void activeSpike()
+    {
+        rb.isKinematic = false;
     }
 }

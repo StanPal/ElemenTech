@@ -23,9 +23,10 @@ public class IceTrapManager : MonoBehaviour
     public int IceSpikeCounter { set { iceSpikeCounter = value; } get { return iceSpikeCounter; } }
     private void Awake()
     {
-
-        spawnLocation = iceSpikesLocation;
-
+        for (int i = 0; i < iceSpikesLocation.Count; i++)
+        {
+            spawnLocation.Add(iceSpikesLocation[i]);
+        }
         for (int i = 0; i < maxSpawnlocation; ++i)
         {
             SpawnSpike();
