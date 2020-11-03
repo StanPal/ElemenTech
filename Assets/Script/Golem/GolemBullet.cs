@@ -23,7 +23,15 @@ public class GolemBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-       
+        // An example on how to use IDamageable interface.
+        // NOTE: Use this method in place of looking for specific HeroStats or other scripts to deal damage. 
+        // IMPORTANT: This method should replace the code below to do damage via the HeroStats TakeDamage call.
+        var damageable = other.GetComponent<IDamageable>();
+        if(damageable != null)
+        {
+            damageable.TakeDamage(damage);
+        }
+
         if (other.gameObject.tag == ("Wall"))
         {
             Destroy(gameObject);
@@ -34,7 +42,6 @@ public class GolemBullet : MonoBehaviour
             Destroy(gameObject);
            other.GetComponent<HeroStats>().TakeDamage(damage);
         }
-
     }
 
     void Update()

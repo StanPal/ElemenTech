@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroStats : MonoBehaviour
+public class HeroStats : MonoBehaviour, IDamageable
 {
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action onDebuffDeActivated;
@@ -79,8 +79,6 @@ public class HeroStats : MonoBehaviour
             default:
                 break;
         }
-    
-
     }
 
     public void DamageOverTime(float damageAmount, float damageDuration)
