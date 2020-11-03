@@ -51,21 +51,21 @@ public class AirJet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //if (airskills.PlayerSkills.Hero.tag.Equals("Team1"))
-        //{
-        //    if (collision.tag.Equals("Team2"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(mDamage);
-        //        Destroy(gameObject);
-        //    }
-        //}
-        //if (airskills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-        //    if (collision.tag.Equals("Team1"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(mDamage);
-        //        Destroy(gameObject);
-        //    }
-        //}
+        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
+                Destroy(gameObject);
+            }
+        }
+        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
+                Destroy(gameObject);
+            }
+        }
     }
 }

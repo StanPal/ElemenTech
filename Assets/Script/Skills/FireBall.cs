@@ -46,7 +46,7 @@ public class FireBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (fireSkills.PlayerSkills.HeroAction.tag.Equals("Team1"))
+        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
@@ -57,7 +57,7 @@ public class FireBall : MonoBehaviour
                 Destroy(gameObject);
             }
         }
-        if (fireSkills.PlayerSkills.HeroAction.tag.Equals("Team2"))
+        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {

@@ -25,7 +25,6 @@ public class WaterGun : MonoBehaviour
 
     }
 
-
     private void FixedUpdate()
     {
         if (exitTime <= 0.0f)
@@ -55,15 +54,20 @@ public class WaterGun : MonoBehaviour
             if (collision.tag.Equals("Team2"))
             {
                 collision.GetComponent<HeroStats>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+
             }
         }
-        //if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-             //64 - 67
-        //}
-        if (collision.tag.Equals("Team1"))
+        if (waterSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
-            collision.GetComponent<HeroStats>().TakeDamage(damage);
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroMovement>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+
+
+            }
         }
 
         if (collision.GetComponentInParent<Walls>())
