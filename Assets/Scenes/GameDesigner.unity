@@ -287,6 +287,21 @@ PrefabInstance:
       propertyPath: controllerInput
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mSpeed
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mJumpSpeed
+      value: 9.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mMaxJumps
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
 --- !u!1 &319288535 stripped
@@ -340,7 +355,7 @@ PrefabInstance:
     - target: {fileID: 1324117386745922356, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1324117386745922356, guid: 61182018a349fda4785e8b9ba83dbf96,
         type: 3}
@@ -856,6 +871,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: SpawnManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 5927256456831370854, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7196761184023898869, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
