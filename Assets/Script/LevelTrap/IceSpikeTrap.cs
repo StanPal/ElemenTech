@@ -41,8 +41,8 @@ public class IceSpikeTrap : MonoBehaviour
         // If it hits anything, destroy it.
         iceTrapManager.SpawnSpike();
         iceTrapManager.IceSpikeCounter--;
-        iceTrapManager.spawnLocation.Add(GetComponentInParent<IceSpikeMovement>().transform);
-        Destroy(gameObject);
+        iceTrapManager.addNewLocation(GetComponentInParent<IceSpikeMovement>().transform);
+        Destroy(GetComponentInParent<IceSpikeMovement>().gameObject); 
     }
 
     public void activeSpike()

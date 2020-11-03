@@ -57,4 +57,16 @@ public class IceTrapManager : MonoBehaviour
         spawnLocation.Remove(location);
         iceSpikeCounter++;
     }
+
+    public void addNewLocation(Transform newLocation)
+    {
+        for (int i = 0; i < iceSpikesLocation.Count; i++)
+        {
+            if (iceSpikesLocation[i].transform.position == newLocation.position)
+            {
+                spawnLocation.Add(iceSpikesLocation[i]);
+            }
+        }
+    }
+
 }
