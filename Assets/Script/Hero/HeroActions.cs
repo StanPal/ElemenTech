@@ -18,6 +18,17 @@ public class HeroActions : MonoBehaviour
     public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
 
+    private enum Controller
+    {
+        None,
+        Keyboard,
+        PS4,
+        XBOX
+    }
+
+    private Controller controllerInput;
+
+
     private void Awake()
     {
         
@@ -50,6 +61,7 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+
     private void OnEnable()
     {
         mPlayerInput.Enable();
@@ -57,6 +69,11 @@ public class HeroActions : MonoBehaviour
     private void OnDisable()
     {
         mPlayerInput.Disable();
+    }
+
+    private void Update()
+    {
+        controllerInput = (Controller)mHeroMovement.controllerInput;
     }
 
     private void Guard()

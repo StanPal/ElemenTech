@@ -15,6 +15,7 @@ public class HeroMovement : MonoBehaviour
     }
 
     public Controller controllerInput;
+    
     [SerializeField]
     private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
@@ -146,15 +147,15 @@ public class HeroMovement : MonoBehaviour
         {
             mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
         }
-        else if (controllerInput == Controller.PS4)
+        if (controllerInput == Controller.PS4)
         {
             mMoveInput = mPlayerInput.PS4.Move.ReadValue<float>();
         }
-        else if (controllerInput == Controller.XBOX)
+        if (controllerInput == Controller.XBOX)
         {
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
         }
-        else
+        if (controllerInput == Controller.None)
         {
             Debug.Log("Keybindings not set");
         }
