@@ -14,7 +14,7 @@ public class HeroMovement : MonoBehaviour
         XBOX
     }
 
-    public Controller controllerInput;
+    public Controller controllerInput = Controller.None;
     [SerializeField]
     private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
@@ -197,5 +197,5 @@ public class HeroMovement : MonoBehaviour
         mKnockbackRecieved = knockbackamount;
         mOnHitLeft = direction;
     }
-   
+
 }

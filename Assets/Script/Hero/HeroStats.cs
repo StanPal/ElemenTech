@@ -57,7 +57,11 @@ public class HeroStats : MonoBehaviour
         {
             mTempCDTime -= Time.deltaTime;
         }
-
+        
+        if(mCurrentHealth <= 0)
+        {
+            HeroDie();
+        }
     }
 
     public void TakeDamage(float damage)
