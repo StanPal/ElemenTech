@@ -7,7 +7,7 @@ public class SandPlatform : MonoBehaviour
     float SandSpeed = 5f;
     private void OnTriggerEnter(Collider other)
     {
-        other.gameObject.GetComponent<HeroMovement>().SandDecrease(SandSpeed);
+        other.gameObject.GetComponent<HeroMovement>().Speed -= SandSpeed;
     }
 
 }

@@ -87,10 +87,10 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    public void IcySlidding(float SliddingSpeed)
-    {
-        mSpeed += SliddingSpeed;
-    }
+    //public void IcySlidding(float SliddingSpeed)
+    //{
+    //    Speed += SliddingSpeed;
+    //}
 
 
     public void SandDecrease(float SandDecreaseSpeed)

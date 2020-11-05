@@ -1,57 +1,65 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO.IsolatedStorage;
 using UnityEngine;
 
 public class DIsappearPlatform : MonoBehaviour
 {
-    public GameObject Player;
-    public float timeToTogglePlatform = 2;
-    public float currentTime = 0;
+    public float disappearDelay = 2.0f;
+    public float reappearDelay = 4.0f;
     public bool enabled = true;
+
     void Start()
     {
         enabled = true;
     }
 
-
-    private void OnTriggerEnter(Collider other)
+    private void OncolliderEnter(Collider other)
     {
-
-        currentTime += Time.deltaTime;
-        if (currentTime >= timeToTogglePlatform)
+        if (other.gameObject.GetComponent<HeroStats>() != null)
         {
-            currentTime = 0;
-            TogglePlatform();
+            //gameObject.SetActive(enabled);
+            Invoke("Disappear", disappearDelay);
         }
-        enabled = !enabled;
+    }
+    //private void OnCollisionEnter(Collision other)
+    //{
+        
 
-        gameObject.SetActive(enabled);
+    //}
 
+    private void Disappear()
+    {
+        //Code to make the platform disappear...
         foreach (Transform main in gameObject.transform)
         {
             main.gameObject.SetActive(enabled);
-
         }
-
+        Invoke("Reappear", reappearDelay);
     }
 
-    private void OnTriggerExit(Collider other)
+    private void Reappear()
     {
-        enabled = true;
-    }
-    void TogglePlatform()
-    {
-        enabled = !enabled;
-
-        //gameObject.SetActive(enabled);
-
-        foreach (Transform child in gameObject.transform)
+        //Make te platform appear again.
+        foreach (Transform main in gameObject.transform)
         {
-            child.gameObject.SetActive(enabled);
-
+            main.gameObject.SetActive(!enabled);
         }
     }
 }
+    //void TogglePlatform()
+    //{
+    //    enabled = !enabled;
+
+    //    //gameObject.SetActive(enabled);
+
+    //    foreach (Transform child in gameObject.transform)
+    //    {
+    //        child.gameObject.SetActive(enabled);
+
+    //    }
+    //}
+
 
     //    void Update()
     //{
@@ -63,11 +71,23 @@ public class DIsappearPlatform : MonoBehaviour
     //    }
 
        
-            //foreach (Transform child in gameObject.transform)
+            //foreach (Transform main in gameObject.transform)
             //{
-            //    child.gameObject.SetActive(enabled);
+            //    main.gameObject.SetActive(enabled);
             //}
     //    }
     //}
+
+
+/*
+ Making a disapearing platform.
+
+1. When a collision happens, check if it is the player that is touching the platform.
+2. If it is the player, then start a timer for the delay to disappear.
+3. When the timer ends, then make the platform disappear.
+4. Set timer for the delay to reappear.
+5. When the timer ends, then make the platform reappear.
+
+ */
 
 
