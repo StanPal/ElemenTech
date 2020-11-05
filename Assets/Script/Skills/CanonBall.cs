@@ -5,7 +5,7 @@ using UnityEngine;
 public class CanonBall : MonoBehaviour
 {
     [SerializeField]
-    float mDamage = 50;
+    private float mDamage = 50;
     private Vector3 targetPos;
     [SerializeField]
     private float targetXpos = 20f;

@@ -14,14 +14,14 @@ public class HeroMovement : MonoBehaviour
         XBOX
     }
 
-    public Controller controllerInput;
+    public Controller controllerInput = Controller.None;
     [SerializeField]
     private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
 
 
     [SerializeField]
-    float mJumpSpeed = 5f;
+    private float mJumpSpeed = 5f;
     [SerializeField]
     private int mNumOfJumps = 0;
     [SerializeField]
@@ -67,9 +67,13 @@ public class HeroMovement : MonoBehaviour
             mPlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
         }
         if (controllerInput == Controller.PS4)
+        {
             mPlayerInput.PS4.Jump.performed += _ => Jump();
+        }
         if (controllerInput == Controller.XBOX)
+        {
             mPlayerInput.XBOX.Jump.performed += _ => Jump();
+        }
     }
 
     private void OnEnable()
@@ -139,13 +143,21 @@ public class HeroMovement : MonoBehaviour
     {
 
         if (controllerInput == Controller.Keyboard)
+        {
             mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
+        }
         else if (controllerInput == Controller.PS4)
+        {
             mMoveInput = mPlayerInput.PS4.Move.ReadValue<float>();
+        }
         else if (controllerInput == Controller.XBOX)
+        {
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
+        }
         else
+        {
             Debug.Log("Keybindings not set");
+        }
 
             Vector3 currentPosition = transform.position;
             currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
@@ -185,5 +197,5 @@ public class HeroMovement : MonoBehaviour
         mKnockbackRecieved = knockbackamount;
         mOnHitLeft = direction;
     }
-   
+
 }

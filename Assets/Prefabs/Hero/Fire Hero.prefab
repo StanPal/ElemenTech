@@ -435,7 +435,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Fire Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,15 +556,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerInput: 1
   isLeft: 0
-  mJumpSpeed: 5
+  mJumpSpeed: 9.9
   mNumOfJumps: 0
-  mMaxJumps: 3
+  mMaxJumps: 1
   mGround:
     serializedVersion: 2
     m_Bits: 256
   isDashing: 0
   dashSpeed: 5
-  mSpeed: 5
+  mSpeed: 6
   mKnockbackRecieved: 0
   mKnockbackCount: 0
 --- !u!114 &1791110765294023676

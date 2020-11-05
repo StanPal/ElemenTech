@@ -49,4 +49,5 @@ public class SpawnManager : MonoBehaviour
         player.transform.position = mSpawnPoints[randIndex].position;
         mSpawnPoints.RemoveAt(randIndex);
     }
+
 }

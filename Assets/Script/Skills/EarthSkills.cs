@@ -21,7 +21,7 @@ public class EarthSkills : MonoBehaviour
     [SerializeField]
     private List<GameObject> mEarthSpikeList = new List<GameObject>();
 
-    PlayerSkills mHeroSkills;
+    private PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
     private void Start()
     {

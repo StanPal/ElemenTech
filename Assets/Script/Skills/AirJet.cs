@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class AirJet : MonoBehaviour
 {       
-    float mProjectileSpeed = 1f;
-    float mExitTime = 1f; 
+    private float mProjectileSpeed = 1f;
+    private float mExitTime = 1f; 
     private Rigidbody2D mRigidbody;
-    Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
+    private Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
 
-    AirSkills airskills;
+    private AirSkills airskills;
 
     void Start()
     {
@@ -51,21 +51,21 @@ public class AirJet : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        //if (airskills.PlayerSkills.Hero.tag.Equals("Team1"))
-        //{
-        //    if (collision.tag.Equals("Team2"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(mDamage);
-        //        Destroy(gameObject);
-        //    }
-        //}
-        //if (airskills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-        //    if (collision.tag.Equals("Team1"))
-        //    {
-        //        collision.GetComponent<Hero>().TakeDamage(mDamage);
-        //        Destroy(gameObject);
-        //    }
-        //}
+        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
+                Destroy(gameObject);
+            }
+        }
+        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
+                Destroy(gameObject);
+            }
+        }
     }
 }

@@ -14,13 +14,20 @@ public class PlayerManager : MonoBehaviour
 
     private void Awake()
     {
-        //FireHero.SetActive(false);
-        //WaterHero.SetActive(false);
-        //AirHero.SetActive(false);
-        //EarthHero.SetActive(false);
+        FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+
+        FireHero.SetActive(false);
+        WaterHero.SetActive(false);
+        AirHero.SetActive(false);
+        EarthHero.SetActive(false);
+
         mPlayersList.Add(FireHero);
         mPlayersList.Add(WaterHero);
         mPlayersList.Add(AirHero);
         mPlayersList.Add(EarthHero);
     }
+
 }

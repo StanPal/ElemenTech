@@ -34,9 +34,9 @@ public class HeroStats : MonoBehaviour
 
     //Buff & Debuff Effects
     [SerializeField]
-    StatusEffects.PositiveEffects mPositiveEffect = StatusEffects.PositiveEffects.None;
+    private StatusEffects.PositiveEffects mPositiveEffect = StatusEffects.PositiveEffects.None;
     [SerializeField]
-    StatusEffects.NegativeEffects mNegativeEffect = StatusEffects.NegativeEffects.None;
+    private StatusEffects.NegativeEffects mNegativeEffect = StatusEffects.NegativeEffects.None;
     public StatusEffects.PositiveEffects Buff { get { return mPositiveEffect; } set { mPositiveEffect = value; } }
     public StatusEffects.NegativeEffects DeBuff { get { return mNegativeEffect; } set { mNegativeEffect = value; } }
  
@@ -54,14 +54,22 @@ public class HeroStats : MonoBehaviour
             isCDFinished = true;
         }
         if (mTempCDTime > 0.0f)
+        {
             mTempCDTime -= Time.deltaTime;
-
+        }
+        
+        if(mCurrentHealth <= 0)
+        {
+            HeroDie();
+        }
     }
 
     public void TakeDamage(float damage)
     {
         if (mCurrentHealth <= 0)
+        {
             HeroDie();
+        }
 
         mCurrentHealth -= damage;
         switch (mNegativeEffect)
@@ -96,8 +104,10 @@ public class HeroStats : MonoBehaviour
         {        
             mCurrentHealth -= damagePerloop;
             if (mCurrentHealth <= 0)
+            {
                 HeroDie();
-            Debug.Log(mElementalType.ToString() + " Hero Current Health: " + mCurrentHealth);
+            }
+            Debug.Log(mElementalType.ToString() + "Hero Current Health" + mCurrentHealth);
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
         }
@@ -119,7 +129,7 @@ public class HeroStats : MonoBehaviour
         while (heromovement.Speed < maxSpeed)
         {
             heromovement.Speed += slowPerLoop;
-            Debug.Log(mElementalType.ToString() + " Hero Current Speed " + heromovement.Speed);
+            Debug.Log(mElementalType.ToString() + "Hero Current Speed" + heromovement.Speed);
             yield return new WaitForSeconds(1f);
         }
         mNegativeEffect = StatusEffects.NegativeEffects.None;

@@ -5,14 +5,14 @@ using UnityEngine;
 public class WaterGun : MonoBehaviour
 {
     [SerializeField]
-    float damage = 2;
+    private float damage = 2;
     [SerializeField]
-    float projectileSpeed = 5;
+    private float projectileSpeed = 5;
     private Rigidbody2D rigidbody;
     [SerializeField]
-    float exitTime = 2.0f;
+    private float exitTime = 2.0f;
     private HeroMovement hero;
-    WaterSkills waterSkills;
+    private WaterSkills waterSkills;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
@@ -24,7 +24,6 @@ public class WaterGun : MonoBehaviour
         }
 
     }
-
 
     private void FixedUpdate()
     {
@@ -55,15 +54,18 @@ public class WaterGun : MonoBehaviour
             if (collision.tag.Equals("Team2"))
             {
                 collision.GetComponent<HeroStats>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
             }
         }
-        //if (waterSkills.PlayerSkills.Hero.tag.Equals("Team2"))
-        //{
-             //64 - 67
-        //}
-        if (collision.tag.Equals("Team1"))
+        if (waterSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
-            collision.GetComponent<HeroStats>().TakeDamage(damage);
+            if (collision.tag.Equals("Team1"))
+            {
+                collision.GetComponent<HeroStats>().TakeDamage(damage);
+                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+            }
         }
 
         if (collision.GetComponentInParent<Walls>())

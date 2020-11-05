@@ -10,17 +10,17 @@ public class ParticleSystemManager : MonoBehaviour
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
-        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.GetComponent<PlayerManager>().AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        playerManager.AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.GetComponent<PlayerManager>().WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.GetComponent<PlayerManager>().WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        playerManager.WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.GetComponent<PlayerManager>().EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.GetComponent<PlayerManager>().EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        playerManager.EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.GetComponent<PlayerManager>().FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.GetComponent<PlayerManager>().FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        playerManager.FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        playerManager.FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
     }
 
     private void DebuffEffectOn(GameObject hero)
@@ -66,7 +66,10 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void DebuffEffectOff()
     {
-        Destroy(statusEffect.Pop());
+        if (statusEffect.Count > 0)
+        {
+            Destroy(statusEffect.Pop());
+        }
     }
 
 }
