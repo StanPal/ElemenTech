@@ -214,7 +214,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 160711058}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3164744553564996224}
+        m_MethodName: SelectController3
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &160711058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,7 +344,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 260516883}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3164744553564996224}
+        m_MethodName: SelectController4
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &260516883
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -452,7 +474,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 361666222}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3164744553564996224}
+        m_MethodName: SelectController1
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &361666222
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -945,7 +978,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1848780721}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 3164744553564996224}
+        m_MethodName: SelectController2
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1848780721
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1228,26 +1272,6 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
-      propertyPath: buttonList.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
-      propertyPath: butonList.Array.data[0]
-      value: 
-      objectReference: {fileID: 706527467}
-    - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
-      propertyPath: butonList.Array.data[1]
-      value: 
-      objectReference: {fileID: 85673279}
-    - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
-      propertyPath: butonList.Array.data[2]
-      value: 
-      objectReference: {fileID: 645949677}
-    - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
-      propertyPath: butonList.Array.data[3]
-      value: 
-      objectReference: {fileID: 1780404589}
-    - target: {fileID: 1686054796, guid: 6b9f23522deb6af439a0e03d2dcc34ec, type: 3}
       propertyPath: buttonList.Array.data[0]
       value: 
       objectReference: {fileID: 706527467}
@@ -1318,6 +1342,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3164744553564996224, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
+        type: 3}
+      propertyPath: teamButtonList.Array.data[0]
+      value: 
+      objectReference: {fileID: 361666221}
+    - target: {fileID: 3164744553564996224, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
+        type: 3}
+      propertyPath: teamButtonList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1848780720}
+    - target: {fileID: 3164744553564996224, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
+        type: 3}
+      propertyPath: teamButtonList.Array.data[2]
+      value: 
+      objectReference: {fileID: 160711057}
+    - target: {fileID: 3164744553564996224, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
+        type: 3}
+      propertyPath: teamButtonList.Array.data[3]
+      value: 
+      objectReference: {fileID: 260516882}
     - target: {fileID: 8655133727829777325, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
         type: 3}
       propertyPath: m_Name
@@ -1335,6 +1379,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: df63764216ab1d247803cd04dbdc374e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3164744553564996224 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3164744553564996224, guid: 6b9f23522deb6af439a0e03d2dcc34ec,
+    type: 3}
+  m_PrefabInstance: {fileID: 3164744553564996221}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76114c246aa03b041b20783bd7522538, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4851043855035354773
