@@ -36,6 +36,7 @@ public class SmashCamera : MonoBehaviour
 
     private void FixedUpdate()
     {
+
         Move();
         Zoom();
     }
@@ -75,6 +76,7 @@ public class SmashCamera : MonoBehaviour
         // Keep the same y value.
         averagePos.y = transform.position.y;
 
+        averagePos.z = -10;
         // The desired position is the average position;
         mDesiredPosition = averagePos;
     }
