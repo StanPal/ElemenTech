@@ -39,6 +39,7 @@ public class HeroActions : MonoBehaviour
             mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
             mPlayerInput.PS4.Guard.performed += _ => Guard();
             mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
+            mPlayerInput.PS4.Pause.performed += _ => Pause();
         }
 
         if(HeroMovement.controllerInput == HeroMovement.Controller.XBOX)

@@ -247,6 +247,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""c27c59cc-2151-48d9-9ab1-2fa121d9499d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -335,6 +343,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c729b9a6-a44c-4173-bdac-5028c08d0afa"",
+                    ""path"": ""<Gamepad>/start"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -505,6 +524,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PS4_ElementSpecial1 = m_PS4.FindAction("Element Special 1", throwIfNotFound: true);
         m_PS4_Guard = m_PS4.FindAction("Guard", throwIfNotFound: true);
         m_PS4_GuardRelease = m_PS4.FindAction("Guard Release", throwIfNotFound: true);
+        m_PS4_Pause = m_PS4.FindAction("Pause", throwIfNotFound: true);
         // XBOX
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
@@ -657,6 +677,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_PS4_ElementSpecial1;
     private readonly InputAction m_PS4_Guard;
     private readonly InputAction m_PS4_GuardRelease;
+    private readonly InputAction m_PS4_Pause;
     public struct PS4Actions
     {
         private @PlayerInput m_Wrapper;
@@ -667,6 +688,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @ElementSpecial1 => m_Wrapper.m_PS4_ElementSpecial1;
         public InputAction @Guard => m_Wrapper.m_PS4_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_PS4_GuardRelease;
+        public InputAction @Pause => m_Wrapper.m_PS4_Pause;
         public InputActionMap Get() { return m_Wrapper.m_PS4; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -694,6 +716,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GuardRelease.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
                 @GuardRelease.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
                 @GuardRelease.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnGuardRelease;
+                @Pause.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
             }
             m_Wrapper.m_PS4ActionsCallbackInterface = instance;
             if (instance != null)
@@ -716,6 +741,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GuardRelease.started += instance.OnGuardRelease;
                 @GuardRelease.performed += instance.OnGuardRelease;
                 @GuardRelease.canceled += instance.OnGuardRelease;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
             }
         }
     }
@@ -812,6 +840,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnElementSpecial1(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
     public interface IXBOXActions
     {
