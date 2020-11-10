@@ -11,6 +11,9 @@ public class LavaTrap: MonoBehaviour
     float currentDamageTime;
     bool onLava = false;
 
+    float delayTime = 1.0f;
+    float currentDelayTime = 0.0f;
+
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.GetComponent<HeroStats>())
@@ -19,7 +22,11 @@ public class LavaTrap: MonoBehaviour
         }
         if (onLava)
         {
-            collision.GetComponent<HeroStats>().TakeDamage(damage);
+            if (currentDelayTime < Time.time)
+            {
+                currentDelayTime = Time.time + delayTime;
+                collision.GetComponent<HeroStats>().TakeDamage(damage);
+            }
         }
     }
 
