@@ -1,32 +1,51 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaTrap: MonoBehaviour
+public class LavaTrap : MonoBehaviour
 {
-    [SerializeField]
-    float damageTime = 1.0f;
-    [SerializeField]
-    float damage = 5.0f;
-    float currentDamageTime;
-    bool onLava = false;
+    [SerializeField] private float damageTime = 1.0f;
+    [SerializeField] private float damage = 5.0f;
+    private const float delayTime = 1.0f;
+    
+    public struct TrappedHeroData
+    {
+        public HeroStats HeroStats;
+        public DateTime EnterTime;
+    }
+    private List<TrappedHeroData> _trappedHeros = new List<TrappedHeroData>();
 
-    float delayTime = 1.0f;
-    float currentDelayTime = 0.0f;
+    private void Awake()
+    {
+        StartCoroutine(LavaDamageRoutine());
+    }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    private IEnumerator LavaDamageRoutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delayTime);
+            if(_trappedHeros.Count > 0)
+            {
+                foreach(var trappedHero in _trappedHeros)
+                {
+                    trappedHero.HeroStats.TakeDamage(damage);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<HeroStats>())
         {
-            onLava = true;
-        }
-        if (onLava)
-        {
-            if (currentDelayTime < Time.time)
+            TrappedHeroData data = new TrappedHeroData()
             {
-                currentDelayTime = Time.time + delayTime;
-                collision.GetComponent<HeroStats>().TakeDamage(damage);
-            }
+                HeroStats = collision.GetComponent<HeroStats>(),
+                EnterTime = DateTime.Now
+            };
+            _trappedHeros.Add(data);
         }
     }
 
@@ -34,10 +53,7 @@ public class LavaTrap: MonoBehaviour
     {
         if (collision.GetComponent<HeroStats>())
         {
-            onLava = false;
+            //TODO - remove hero from _trappedHeros list.
         }
     }
-
-
-
 }
