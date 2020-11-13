@@ -58,9 +58,11 @@ public class HeroMovement : MonoBehaviour
 
     [SerializeField]
     private float mRecoveryTime = 1f;
+    public float RecoveryTime { get { return mRecoveryTime; } set { mRecoveryTime = value; } }
     [SerializeField]
     private bool isRecovering = false;
     public bool Recovering { get { return isRecovering; } set { isRecovering = value; } }
+    private float mOriginalRecoveryTime;
 
     private void Awake()
     {
@@ -68,6 +70,7 @@ public class HeroMovement : MonoBehaviour
         mPlayerInput = new PlayerInput();
         col = GetComponent<Collider2D>();
         mHeroActions = GetComponent<HeroActions>();
+        mOriginalRecoveryTime = mRecoveryTime;
 
         canDash = true;
         if (controllerInput == Controller.Keyboard)
@@ -234,7 +237,9 @@ public class HeroMovement : MonoBehaviour
     IEnumerator Recover()
     {
         mHeroActions.enabled = false;
+        isRecovering = true;
         yield return new WaitForSeconds(mRecoveryTime);
+        mRecoveryTime = mOriginalRecoveryTime;
         mHeroActions.enabled = true;
         isRecovering = false;
     }
