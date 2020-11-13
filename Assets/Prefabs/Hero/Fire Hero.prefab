@@ -556,6 +556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerInput: 1
   isLeft: 0
+  isJumping: 0
   mJumpSpeed: 9.9
   mNumOfJumps: 0
   mMaxJumps: 1
@@ -563,6 +564,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   isDashing: 0
+  canDash: 0
   dashSpeed: 5
   mSpeed: 6
   mKnockbackRecieved: 0

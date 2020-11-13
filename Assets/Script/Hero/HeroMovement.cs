@@ -19,7 +19,8 @@ public class HeroMovement : MonoBehaviour
     private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
 
-
+    [SerializeField]
+    private bool isJumping = false;
     [SerializeField]
     private float mJumpSpeed = 5f;
     [SerializeField]
@@ -31,16 +32,14 @@ public class HeroMovement : MonoBehaviour
     private Collider2D col;
 
     [SerializeField]
+    private bool canDash = true;
+    [SerializeField]
     private bool isDashing;
     [SerializeField]
     private float dashSpeed = 5f;
-    //[SerializeField]
-    //private float dashTime;
-    //private float distanceBetweenImages;
-    //private float dashCoolDown;
-    //private float dashTimeLeft;
-    //private float lastImageXpos;
-    //private float lastDash = -100f;
+    [SerializeField]
+    private float dashCoolDown = 1f;
+
 
     [SerializeField]
     private float mSpeed;
@@ -60,7 +59,7 @@ public class HeroMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mPlayerInput = new PlayerInput();
         col = GetComponent<Collider2D>();
-
+        canDash = true;
         if (controllerInput == Controller.Keyboard)
         {
             mPlayerInput.KeyboardMouse.Jump.performed += _ => Jump();
@@ -86,15 +85,16 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void Jump()
-    {
+    {      
         if (IsGrounded())
         {
             mNumOfJumps = 0;
         }
-        if (IsGrounded() || mNumOfJumps < mMaxJumps)
+        if (IsGrounded() || mNumOfJumps <= mMaxJumps)
         {
-            rb.AddForce(new Vector2(0, mJumpSpeed), ForceMode2D.Impulse);
-            mNumOfJumps += 1;
+            isJumping = true;
+            rb.AddForce(new Vector2(0, mJumpSpeed), ForceMode2D.Impulse);            
+            mNumOfJumps++;
         }
     }
 
@@ -125,32 +125,25 @@ public class HeroMovement : MonoBehaviour
 
     private void OnDash()
     {
-        isDashing = true;
+        if (canDash)
+        {
+            isDashing = true;
+        }
     }
 
-    IEnumerator Dash(float direction)
-    {
-        Vector3 currentPosition = transform.position;
-        currentPosition.x += dashSpeed;
-        transform.position = currentPosition;
-        float gravity = rb.gravityScale;
-        rb.gravityScale = 0f;
-        yield return new WaitForSeconds(0.4f);
-        isDashing = false;
-        rb.gravityScale = 1f;
-    }
+
     void FixedUpdate()
     {
 
-        if (controllerInput == Controller.Keyboard)
+        if (controllerInput == Controller.Keyboard && !isDashing)
         {
             mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
         }
-        else if (controllerInput == Controller.PS4)
+        else if (controllerInput == Controller.PS4 && !isDashing)
         {
             mMoveInput = mPlayerInput.PS4.Move.ReadValue<float>();
         }
-        else if (controllerInput == Controller.XBOX)
+        else if (controllerInput == Controller.XBOX && !isDashing)
         {
             mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
         }
@@ -159,11 +152,11 @@ public class HeroMovement : MonoBehaviour
             Debug.Log("Keybindings not set");
         }
 
-            Vector3 currentPosition = transform.position;
-            currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
-            transform.position = currentPosition;
+        Vector3 currentPosition = transform.position;
+        currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
+        transform.position = currentPosition;
 
-        if(mKnockbackCount > 0)
+        if (mKnockbackCount > 0)
         {
             if (mOnHitLeft)
             {
@@ -176,7 +169,11 @@ public class HeroMovement : MonoBehaviour
             }
             mKnockbackCount--;
         }
-   
+
+        if(isDashing)
+        {
+            StartCoroutine(Dash(isLeft));
+        }
         Vector3 characterScale = transform.localScale;
         if (mMoveInput < 0)
         {
@@ -189,6 +186,29 @@ public class HeroMovement : MonoBehaviour
             isLeft = false;
         }
         transform.localScale = characterScale;
+    }
+
+    IEnumerator Dash(bool isLeft)
+    {
+
+        Vector3 currentPosition = transform.position;
+        if (isLeft)
+        {
+            currentPosition.x -= (dashSpeed * 0.1f);
+        }
+        else
+        {
+            currentPosition.x += (dashSpeed * 0.1f);
+        }
+        transform.position = currentPosition;
+        float gravity = rb.gravityScale;
+        rb.gravityScale = 0f;
+        yield return new WaitForSeconds(0.4f);
+        rb.gravityScale = 1f;
+        isDashing = false;
+        canDash = false;
+        yield return new WaitForSeconds(dashCoolDown);
+        canDash = true;
     }
 
     public void OnKnockBackHit(float knockbackamount, bool direction)

@@ -187,7 +187,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a9ed5be7-296f-46a9-b9da-8788cadb6975"",
                     ""path"": ""<Keyboard>/shift"",
-                    ""interactions"": ""Press(behavior=2)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
