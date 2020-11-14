@@ -8,21 +8,25 @@ public class PlayerManager : MonoBehaviour
     public GameObject FireHero;
     public GameObject WaterHero;
     public GameObject AirHero;
-    public GameObject EarthHero;    
+    public GameObject EarthHero;
 
     public List<GameObject> mPlayersList = new List<GameObject>();
-
+    [SerializeField]
+    private bool playTestMode = false;
     private void Awake()
     {
-        FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        if (!playTestMode)
+        {
+            FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
 
-        FireHero.SetActive(false);
-        WaterHero.SetActive(false);
-        AirHero.SetActive(false);
-        EarthHero.SetActive(false);
+            FireHero.SetActive(false);
+            WaterHero.SetActive(false);
+            AirHero.SetActive(false);
+            EarthHero.SetActive(false);
+        }
 
         mPlayersList.Add(FireHero);
         mPlayersList.Add(WaterHero);
