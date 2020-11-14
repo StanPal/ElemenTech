@@ -28,10 +28,11 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private int mNumOfJumps = 0;
     [SerializeField]
-    private int mMaxJumps = 2;
+    private int mMaxJumps = 1;
     [SerializeField]
     private LayerMask mGround;
     private Collider2D col;
+
 
     [SerializeField]
     private bool canDash = true;
@@ -75,16 +76,15 @@ public class HeroMovement : MonoBehaviour
         canDash = true;
         if (controllerInput == Controller.Keyboard)
         {
-            mPlayerInput.KeyboardMouse.Jump.performed += _ => Jump();
             mPlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
         }
         if (controllerInput == Controller.PS4)
         {
-            mPlayerInput.PS4.Jump.performed += _ => Jump();
+        
         }
         if (controllerInput == Controller.XBOX)
         {
-            mPlayerInput.XBOX.Jump.performed += _ => Jump();
+
         }
     }
 
@@ -95,20 +95,6 @@ public class HeroMovement : MonoBehaviour
     private void OnDisable()
     {
         mPlayerInput.Disable();
-    }
-
-    private void Jump()
-    {      
-        if (IsGrounded())
-        {
-            mNumOfJumps = 0;
-        }
-        if (IsGrounded() || mNumOfJumps <= mMaxJumps)
-        {
-            isJumping = true;
-            rb.AddForce(new Vector2(0, mJumpSpeed), ForceMode2D.Impulse);
-            mNumOfJumps++;
-        }
     }
 
     public void IcySlidding(float SliddingSpeed)
@@ -148,7 +134,26 @@ public class HeroMovement : MonoBehaviour
         isDashing = true;
     }
 
-    void FixedUpdate()
+    private void Update()
+    {
+        if (IsGrounded())
+        {
+            mNumOfJumps = mMaxJumps;
+        }
+        if ((mPlayerInput.KeyboardMouse.Jump.triggered || mPlayerInput.PS4.Jump.triggered || mPlayerInput.XBOX.Jump.triggered)
+            && mNumOfJumps > 0)
+        {
+           rb.velocity = Vector2.up * mJumpSpeed;
+            mNumOfJumps--;
+        }
+        else if ((mPlayerInput.KeyboardMouse.Jump.triggered || mPlayerInput.PS4.Jump.triggered || mPlayerInput.XBOX.Jump.triggered)
+            && mNumOfJumps == 0 && IsGrounded())
+        {
+            rb.velocity = Vector2.up * mJumpSpeed;
+        }
+    }
+
+    private void FixedUpdate()
     {
         if (!isRecovering)
         {

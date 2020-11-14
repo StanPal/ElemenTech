@@ -11,15 +11,23 @@
                     "id": "02683b98-c112-480f-8549-a8fc03aaf85d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": ""
                 },
                 {
                     "name": "Jump",
-                    "type": "PassThrough",
-                    "id": "14af9891-6418-4298-ba20-ab63c669ba15",
+                    "type": "Button",
+                    "id": "cf598ddf-7fa9-4fe6-88ad-5b09ee5d5114",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": ""
+                },
+                {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "b21cc446-5f88-4503-9b23-21c070e8190f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 },
                 {
                     "name": "SwordSwing",
@@ -106,17 +114,6 @@
                 },
                 {
                     "name": "",
-                    "id": "532f78f6-5674-4ef9-9ebc-059ba078157e",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "431820a0-37c8-4b77-9080-c565a080538d",
                     "path": "<Mouse>/leftButton",
                     "interactions": "Press",
@@ -178,6 +175,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2f2f4320-dbff-40a6-82aa-ea89a3460b98",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "654a7d94-5b12-4aa7-8cbc-667f5dcfe622",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
