@@ -54,6 +54,19 @@ public class LavaTrap : MonoBehaviour
         if (collision.GetComponent<HeroStats>())
         {
             //TODO - remove hero from _trappedHeros list.
+            TrappedHeroData data = new TrappedHeroData()
+            {
+                HeroStats = collision.GetComponent<HeroStats>(),
+                EnterTime = DateTime.Now
+            };
+
+            for (int i = 0; i < _trappedHeros.Count; ++i)
+            {
+                if (_trappedHeros[i].HeroStats == data.HeroStats)
+                {
+                    _trappedHeros.Remove(_trappedHeros[i]);
+                }
+            }
         }
     }
 }

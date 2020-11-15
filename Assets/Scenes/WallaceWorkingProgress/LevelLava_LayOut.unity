@@ -229,7 +229,7 @@ GameObject:
   - component: {fileID: 132049260}
   - component: {fileID: 132049259}
   m_Layer: 0
-  m_Name: 64x64Square
+  m_Name: Lava
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -359,7 +359,7 @@ PrefabInstance:
     - target: {fileID: 6149011382563604382, guid: ed5a0f2f5c234174183cc5099b5e0095,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 6149011382563604382, guid: ed5a0f2f5c234174183cc5099b5e0095,
         type: 3}
