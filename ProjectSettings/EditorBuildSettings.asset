@@ -9,6 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelect.unity
     guid: c28738b1c6973f245b6cd6d90d71fb07
   - enabled: 1
+<<<<<<< HEAD
     path: Assets/Scenes/LevelIce.unity
+=======
+    path: Assets/Scenes/WallaceWorkingProgress/LevelIce_LayOut.unity
+>>>>>>> Wallace/LavaTrap
     guid: cec0230f8775500469dcdedc23c70ed0
   m_configObjects: {}
