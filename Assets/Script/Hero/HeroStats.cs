@@ -24,7 +24,7 @@ public class HeroStats : MonoBehaviour
     public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
     public float CDTime { get { return mTempCDTime; } set { mTempCDTime = value; } }
     public float CoolDown { get { return mCoolDown; } }
-    public float CurrentHealth { get { return mCurrentHealth; } }
+    public float CurrentHealth { get { return mCurrentHealth; } set { mCurrentHealth = value; } }
     public float MaxHealth { get { return mMaxHealth; } }
 
     //Elementa Type
