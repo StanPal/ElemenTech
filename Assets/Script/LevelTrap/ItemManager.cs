@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class ItemManager : MonoBehaviour
 {
     public List<Transform> ItemLocation = new List<Transform>();
-    public List<Transform> spawnLocation = new List<Transform>();
+    private List<Transform> spawnLocation = new List<Transform>();
     public List<Transform> SpawnLocation { get { return spawnLocation; } }
     public GameObject Health;
 
