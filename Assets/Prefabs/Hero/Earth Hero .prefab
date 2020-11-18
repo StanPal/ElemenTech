@@ -523,7 +523,8 @@ MonoBehaviour:
   mGuardTime: 0.5
   mShieldSize: 2.1
   mSpeedDecrease: 1
-  comboSkill: {fileID: 0}
+  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
+    type: 3}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0
