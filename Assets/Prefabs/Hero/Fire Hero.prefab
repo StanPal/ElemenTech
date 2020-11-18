@@ -347,7 +347,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1791110764907904910
 MonoBehaviour:
@@ -558,7 +558,7 @@ MonoBehaviour:
   controllerInput: 1
   isLeft: 0
   isJumping: 0
-  mJumpSpeed: 9.9
+  mJumpForce: 5
   mNumOfJumps: 0
   mMaxJumps: 1
   mGround:
@@ -587,7 +587,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mfallMultiplier: 2.5
-  mLowJumpMultiplier: 2
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0

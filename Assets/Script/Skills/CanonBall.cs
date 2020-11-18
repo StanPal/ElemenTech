@@ -78,24 +78,41 @@ public class CanonBall : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
                 var enemy = hitCollider.GetComponent<HeroStats>();
-                if (enemy && enemy.tag.Equals("Team2"))
+                if (tag.Equals("Team1"))
                 {
-                    var closestPont = hitCollider.ClosestPoint(transform.position);
-                    var distance = Vector3.Distance(closestPont, transform.position);
+                    if (enemy && enemy.tag.Equals("Team2"))
+                    {
+                        var closestPont = hitCollider.ClosestPoint(transform.position);
+                        var distance = Vector3.Distance(closestPont, transform.position);
 
-                    var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
-                    enemy.TakeDamage(damagePercent * mDamage);
+                        var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
+                        enemy.TakeDamage(damagePercent * mDamage);
+                    }
+                }
+                else if (tag.Equals("Team2"))
+                {
+                    if (enemy && enemy.tag.Equals("Team1"))
+                    {
+                        var closestPont = hitCollider.ClosestPoint(transform.position);
+                        var distance = Vector3.Distance(closestPont, transform.position);
+
+                        var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
+                        enemy.TakeDamage(damagePercent * mDamage);
+                    }
                 }
             }
         }
         else
         {
             var enemy = collider.GetComponent<HeroStats>();
-            if (enemy.tag.Equals("Team2"))
+            if (tag.Equals("Team1"))
             {
-                enemy.TakeDamage(mDamage);
+                if (enemy.tag.Equals("Team2"))
+                {
+                    enemy.TakeDamage(mDamage);
+                }
+                Destroy(gameObject);
             }
-            Destroy(gameObject);
         }
     }
 
