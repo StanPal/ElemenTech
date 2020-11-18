@@ -34,4 +34,8 @@ public class PlayerManager : MonoBehaviour
         mPlayersList.Add(EarthHero);
     }
 
+    private void Update()
+    {
+        
+    }
 }

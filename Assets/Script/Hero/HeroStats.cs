@@ -7,6 +7,16 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action onDebuffDeActivated;
 
+    public enum TeamSetting
+    {
+        Team1,
+        Team2,
+        FFA
+    };
+
+    [SerializeField]
+    public TeamSetting team = TeamSetting.FFA;
+
     // Basic Stats
     [SerializeField]
     private string mName;
