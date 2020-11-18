@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 6704002309030752188}
   - component: {fileID: 4720439842523956531}
   - component: {fileID: 8732188336187351686}
+  - component: {fileID: 2550955822974216917}
   m_Layer: 0
   m_Name: SteamCover
   m_TagString: Untagged
@@ -41,7 +42,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2130647349424703625}
   serializedVersion: 6
-  lengthInSec: 3
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -4767,4 +4768,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c146bf3a16d3134a9ebdf4d91195a3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mSteamDuration: 2
+  mSteamDuration: 4
+  mDamage: 3
+  mDamageTick: 0.4
+--- !u!60 &2550955822974216917
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130647349424703625}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.08881307, y: 4.868707}
+      - {x: -4.6157284, y: 1.8230528}
+      - {x: -2.7722607, y: -1.9038596}
+      - {x: 3.1275165, y: -1.8446498}
+      - {x: 4.7045383, y: 1.7638435}

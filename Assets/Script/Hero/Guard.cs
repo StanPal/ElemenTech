@@ -49,7 +49,16 @@ public class Guard : MonoBehaviour
         }
         if(isGuarding && ComboSkillOn)
         {
-            Instantiate(comboSkill, transform.position, Quaternion.identity);
+            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Water)
+            {
+                GameObject ComboSkillClone = Instantiate(comboSkill, transform.position, Quaternion.identity);
+                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            }
+            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Earth)
+            {
+                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            }
             Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
         }

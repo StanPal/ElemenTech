@@ -8,6 +8,11 @@ public class SteamCover : MonoBehaviour
     private ParticleSystem mSteamParticle;
     [SerializeField]
     private float mSteamDuration = 2f;
+    [SerializeField]
+    private float mDamage = 2f;
+    [SerializeField]
+    private float mDamageTick = 1f;
+    private float totalTime = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +25,33 @@ public class SteamCover : MonoBehaviour
     {
         mSteamParticle.Play();
         yield return new WaitForSeconds(mSteamDuration);
-        mSteamParticle.Stop();
+        Destroy(gameObject);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        totalTime += Time.deltaTime;
+        if (tag.Equals("Team1"))
+        {
+            if (collision.tag.Equals("Team2"))
+            {
+                if (totalTime > mDamageTick)
+                {
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    totalTime = 0;
+                }
+            }
+        }
+        if (tag.Equals("Team2"))
+        {
+            if (collision.tag.Equals("Team1"))
+            {
+                if (totalTime > mDamageTick)
+                {
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    totalTime = 0;
+                }
+            }
+        }
     }
 }
