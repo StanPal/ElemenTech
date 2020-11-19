@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
@@ -10,12 +11,34 @@ public class PauseUI : MonoBehaviour
 
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
-        playerManager.FireHero.GetComponent<HeroActions>().onPausePeformed += PauseGame;
-        playerManager.AirHero.GetComponent<HeroActions>().onPausePeformed += PauseGame;
-        playerManager.WaterHero.GetComponent<HeroActions>().onPausePeformed += PauseGame;
-        playerManager.EarthHero.GetComponent<HeroActions>().onPausePeformed += PauseGame;
+        GameLoader.CallOnComplete(Initialize);
     }
+
+    private void Initialize()
+    {
+        playerManager = ServiceLocator.Get<PlayerManager>();
+    }
+
+    private void Start()
+    {
+        if (playerManager.mPlayersList[0].gameObject != null)
+        {
+            playerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+        }
+        if (playerManager.mPlayersList[1].gameObject != null)
+        {
+            playerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+        }
+        if (playerManager.mPlayersList[2].gameObject != null)
+        {
+            playerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+        }
+        if (playerManager.mPlayersList[3].gameObject != null)
+        {
+            playerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+        }
+    }
+    
 
     public void PauseGame()
     {
@@ -30,8 +53,39 @@ public class PauseUI : MonoBehaviour
         Time.timeScale = 1;
     }
 
+    public void BackToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+        ResetPlayers();
+        Time.timeScale = 1f;
+    }
+
+    public void RestartScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        Time.timeScale = 1f;
+    }
+
     public void ExitGame()
     {
         Application.Quit();
+    }
+
+    private void ResetPlayers()
+    {
+        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.FireHero.SetActive(false);
+        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.WaterHero.SetActive(false);
+
+        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+
+
+        playerManager.mPlayersList[0] = playerManager.FireHero;
+        playerManager.mPlayersList[1] = playerManager.WaterHero;
+        playerManager.mPlayersList[2] = playerManager.AirHero;
+        playerManager.mPlayersList[3] = playerManager.EarthHero;
+
     }
 }

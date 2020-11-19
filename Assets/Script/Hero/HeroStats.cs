@@ -149,6 +149,10 @@ public class HeroStats : MonoBehaviour
     void HeroDie()
     {
         gameObject.SetActive(false);
+        PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
+        
+        PauseUI pauseUI = FindObjectOfType<PauseUI>();
+        pauseUI.PauseGame();
     }
 
 }

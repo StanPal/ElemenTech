@@ -13,9 +13,15 @@ public class ControllerSelect : MonoBehaviour
     int cntselect_2 = 0;
     int cntselect_3 = 0;
     int cntselect_4 = 0;
+
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        GameLoader.CallOnComplete(Initialize);        
+    }
+
+    private void Initialize()
+    {
+        playerManager = ServiceLocator.Get<PlayerManager>();
     }
 
     void Start()

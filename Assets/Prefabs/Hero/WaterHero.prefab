@@ -425,6 +425,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 2
   mName: Water Hero
   mAttack: 10
   mMaxHealth: 100
@@ -445,10 +446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 2
   isLeft: 0
   isJumping: 0
-  mJumpForce: 5
+  mJumpForce: 8
   mNumOfJumps: 0
   mMaxJumps: 2
   mGround:
@@ -456,8 +457,8 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 5
-  mDashCoolDown: 1
+  mDashSpeed: 3
+  mDashCoolDown: 3
   mDashStartUpTime: 1
   mSpeed: 10
   mKnockbackRecieved: 0
@@ -507,7 +508,8 @@ MonoBehaviour:
   mGuardTime: 0.5
   mShieldSize: 2.1
   mSpeedDecrease: 1
-  comboSkill: {fileID: 0}
+  comboSkill: {fileID: 2130647349424703625, guid: fbe6600f21a1c2b4499e7e059a851492,
+    type: 3}
 --- !u!1 &1371002032368287848
 GameObject:
   m_ObjectHideFlags: 0

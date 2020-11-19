@@ -441,6 +441,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 2
   mName: Earth Cyborg
   mAttack: 20
   mMaxHealth: 100
@@ -474,10 +475,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 0
   isLeft: 0
   isJumping: 0
-  mJumpForce: 5
+  mJumpForce: 6
   mNumOfJumps: 0
   mMaxJumps: 3
   mGround:
@@ -485,7 +486,7 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 5
+  mDashSpeed: 1
   mDashCoolDown: 1
   mDashStartUpTime: 1
   mSpeed: 5

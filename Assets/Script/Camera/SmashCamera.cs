@@ -26,7 +26,7 @@ public class SmashCamera : MonoBehaviour
     [SerializeField]
     private Vector3 mDesiredPosition;
 
-
+    private Vector3 targetLocalPos;
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
@@ -61,12 +61,18 @@ public class SmashCamera : MonoBehaviour
         for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
             // If the target isn't active, go on to the next one.
-            if (!playerManager.mPlayersList[i].gameObject.activeSelf)
-                continue;
+            if (playerManager.mPlayersList[i] != null)
+            {
+                if (!playerManager.mPlayersList[i].gameObject.activeSelf)
+                    continue;
+            }
 
             // Add to the average and increment the number of targets in the average.
-            averagePos += playerManager.mPlayersList[i].transform.position;
-            numTargets++;
+            if (playerManager.mPlayersList[i] != null)
+            {
+                averagePos += playerManager.mPlayersList[i].transform.position;
+                numTargets++;
+            }
         }
 
         // If there are targets divide the sum of the positions by the number of them to find the average.
@@ -101,11 +107,17 @@ public class SmashCamera : MonoBehaviour
         for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
 
-            if (!playerManager.mPlayersList[i].gameObject.activeSelf)
-                continue;
+            if (playerManager.mPlayersList[i] != null)
+            {
+                if (!playerManager.mPlayersList[i].gameObject.activeSelf)
+                    continue;
+            }
 
             // find the position of the target in the camera's local space.
-            Vector3 targetLocalPos = transform.InverseTransformPoint(playerManager.mPlayersList[i].transform.position);
+            if (playerManager.mPlayersList[i] != null)
+            {
+                targetLocalPos = transform.InverseTransformPoint(playerManager.mPlayersList[i].transform.position);
+            }
 
             // Find the position of the target from the desired position of the camera's local space.
             Vector3 desiredPosToTarget = targetLocalPos - desiredLocalPos;

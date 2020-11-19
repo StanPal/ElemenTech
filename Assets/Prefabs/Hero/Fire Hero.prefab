@@ -440,7 +440,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 2
   mName: Fire Cyborg
   mAttack: 20
   mMaxHealth: 100
@@ -558,7 +559,7 @@ MonoBehaviour:
   controllerInput: 1
   isLeft: 0
   isJumping: 0
-  mJumpForce: 5
+  mJumpForce: 9
   mNumOfJumps: 0
   mMaxJumps: 1
   mGround:
@@ -566,9 +567,9 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 0
   isDashing: 0
-  mDashSpeed: 5
-  mDashCoolDown: 1
-  mDashStartUpTime: 1
+  mDashSpeed: 3
+  mDashCoolDown: 3
+  mDashStartUpTime: 0
   mSpeed: 6
   mKnockbackRecieved: 0
   mKnockbackCount: 0

@@ -186,7 +186,7 @@ public class HeroMovement : MonoBehaviour
     }
 
     private void MultiJump()
-    {
+    { 
         rb.velocity = Vector2.up * mJumpForce;
     }
 
