@@ -565,26 +565,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5500db4977298f24abacd3968d11ede3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMaxHealth: 100
-  mCurrentHealth: 0
-  shootingInterval: 1
-  jumpTime: 0
+  mMaxHealth: 2
+  mCurrentHealth: 2
+  currentSpawnNodeIndex: 0
+  shootingInterval: 5
+  jumpTime: 3
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}
   gun: {fileID: 4544347526746678256}
   bullet: {fileID: -6625602420098716459, guid: 6737eb36e309cbf4ba388fb6e63c1b3e, type: 3}
   muzzle: {fileID: 1550714508109685991}
   bulletSpeed: 5
-  FasterMoveSpeed: 0
-  NormalMoveSpeed: 0
-  SlowerMoveSpeed: 0
-  mSpeed: 0
+  FasterMoveSpeed: 3
+  NormalMoveSpeed: 2
+  SlowerMoveSpeed: 1
+  mSpeed: 1
   mTime: 2
   mGolemType: 0
   reverse: 0
   selfGeren: 0
-  mJumpForce: 0
-  Drop: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941, type: 3}
+  mJumpForce: 15
+  FireElement: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941,
+    type: 3}
+  WaterElement: {fileID: 9196028788834740802, guid: 8177a206ad5b252459cd5fba0a3910c7,
+    type: 3}
+  AirElement: {fileID: 4073581993458647738, guid: 425a55974f6743f49805ff81cd27fbd8,
+    type: 3}
+  EarthElement: {fileID: 2384499793245904397, guid: 2d298489f2774bf4b947ae94b59d7c57,
+    type: 3}
 --- !u!1 &5786073200164854496
 GameObject:
   m_ObjectHideFlags: 0

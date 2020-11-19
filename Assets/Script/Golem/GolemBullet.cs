@@ -51,6 +51,7 @@ public class GolemBullet : MonoBehaviour
         else
         {
             Destroy(gameObject);
+            lifeSpan = 5.0f;
         }
     }
 }
