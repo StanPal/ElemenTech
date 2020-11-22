@@ -144,7 +144,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -347,7 +347,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 3
   m_TargetDisplay: 0
 --- !u!114 &1791110764907904910
 MonoBehaviour:
@@ -432,10 +432,11 @@ GameObject:
   - component: {fileID: 1791110765294023678}
   - component: {fileID: 1791110765294023673}
   - component: {fileID: 1791110765294023679}
+  - component: {fileID: 4636537091078077599}
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -521,6 +522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  team: 2
   mName: Air Hero
   mAttack: 20
   mMaxHealth: 100
@@ -556,17 +558,36 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   controllerInput: 0
   isLeft: 0
-  mJumpSpeed: 5
+  isJumping: 0
+  mJumpForce: 10
   mNumOfJumps: 0
-  mMaxJumps: 3
+  mMaxJumps: 2
   mGround:
     serializedVersion: 2
     m_Bits: 256
+  canDash: 1
   isDashing: 0
-  dashSpeed: 5
+  mDashSpeed: 2
+  mDashCoolDown: 4
+  mDashStartUpTime: 1
   mSpeed: 5
   mKnockbackRecieved: 0
   mKnockbackCount: 0
+  mRecoveryTime: 1
+  isRecovering: 0
+--- !u!114 &4636537091078077599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765294023672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mfallMultiplier: 2.5
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -875,6 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 2
   startTimeBtAttack: 1
+  mHitStun: 1
   attackPos: {fileID: 1791110764420600048}
   attackRange: 0.57
   target: {fileID: 1791110763999435355}

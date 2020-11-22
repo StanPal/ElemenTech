@@ -8,19 +8,32 @@ public class PlayerManager : MonoBehaviour
     public GameObject FireHero;
     public GameObject WaterHero;
     public GameObject AirHero;
-    public GameObject EarthHero;    
+    public GameObject EarthHero;
 
     public List<GameObject> mPlayersList = new List<GameObject>();
-
+    [SerializeField]
+    private bool playTestMode = false;
     private void Awake()
     {
-        //FireHero.SetActive(false);
-        //WaterHero.SetActive(false);
-        //AirHero.SetActive(false);
-        //EarthHero.SetActive(false);
-        mPlayersList.Add(FireHero);
-        mPlayersList.Add(WaterHero);
-        mPlayersList.Add(AirHero);
-        mPlayersList.Add(EarthHero);
+        ServiceLocator.Register<PlayerManager>(this);
+        if (!playTestMode)
+        {
+            FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+
+            FireHero.SetActive(false);
+            WaterHero.SetActive(false);
+            AirHero.SetActive(false);
+            EarthHero.SetActive(false);
+        }
+
+        mPlayersList[0] = FireHero;
+        mPlayersList[1] = WaterHero;
+        mPlayersList[2] = AirHero;
+        mPlayersList[3] = EarthHero;
+  
     }
+
 }

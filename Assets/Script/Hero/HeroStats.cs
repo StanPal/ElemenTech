@@ -7,6 +7,16 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action onDebuffDeActivated;
 
+    public enum TeamSetting
+    {
+        Team1,
+        Team2,
+        FFA
+    };
+
+    [SerializeField]
+    public TeamSetting team = TeamSetting.FFA;
+
     // Basic Stats
     [SerializeField]
     private string mName;
@@ -24,7 +34,7 @@ public class HeroStats : MonoBehaviour
     public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
     public float CDTime { get { return mTempCDTime; } set { mTempCDTime = value; } }
     public float CoolDown { get { return mCoolDown; } }
-    public float CurrentHealth { get { return mCurrentHealth; } }
+    public float CurrentHealth { get { return mCurrentHealth; } set { mCurrentHealth = value; } }
     public float MaxHealth { get { return mMaxHealth; } }
 
     //Elementa Type
@@ -57,7 +67,11 @@ public class HeroStats : MonoBehaviour
         {
             mTempCDTime -= Time.deltaTime;
         }
-
+        
+        if(mCurrentHealth <= 0)
+        {
+            HeroDie();
+        }
     }
 
     public void TakeDamage(float damage)
@@ -135,6 +149,10 @@ public class HeroStats : MonoBehaviour
     void HeroDie()
     {
         gameObject.SetActive(false);
+        PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
+        
+        PauseUI pauseUI = FindObjectOfType<PauseUI>();
+        pauseUI.PauseGame();
     }
 
 }

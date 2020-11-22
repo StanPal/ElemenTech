@@ -215,12 +215,12 @@ PrefabInstance:
     - target: {fileID: 1791110764095077244, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110764095077244, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
@@ -285,7 +285,7 @@ PrefabInstance:
     - target: {fileID: 1791110765294023672, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
@@ -300,12 +300,22 @@ PrefabInstance:
     - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: mJumpSpeed
-      value: 9.9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
         type: 3}
       propertyPath: mMaxJumps
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mDashSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 2e10122b180751a40b4999ab9c6f6eac,
+        type: 3}
+      propertyPath: mDashCoolDown
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
@@ -325,12 +335,12 @@ PrefabInstance:
     - target: {fileID: 1791110764095077244, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110764095077244, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
@@ -395,12 +405,27 @@ PrefabInstance:
     - target: {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
         type: 3}
       propertyPath: controllerInput
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
+        type: 3}
+      propertyPath: mJumpSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
+        type: 3}
+      propertyPath: mDashSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: d52c96831d5ac144cb35361e788f4342,
+        type: 3}
+      propertyPath: mDashCoolDown
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d52c96831d5ac144cb35361e788f4342, type: 3}
@@ -420,12 +445,12 @@ PrefabInstance:
     - target: {fileID: 1791110764095077244, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110764095077244, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023620, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
@@ -490,12 +515,27 @@ PrefabInstance:
     - target: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1791110765294023679, guid: 529284a16f8ac3747a744448d7147a6f,
         type: 3}
       propertyPath: controllerInput
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 529284a16f8ac3747a744448d7147a6f,
+        type: 3}
+      propertyPath: mDashSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 529284a16f8ac3747a744448d7147a6f,
+        type: 3}
+      propertyPath: mDashCoolDown
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1791110765294023679, guid: 529284a16f8ac3747a744448d7147a6f,
+        type: 3}
+      propertyPath: mJumpSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 529284a16f8ac3747a744448d7147a6f, type: 3}
@@ -592,6 +632,11 @@ PrefabInstance:
       propertyPath: WaterHero
       value: 
       objectReference: {fileID: 1245950679}
+    - target: {fileID: 1324117386745922379, guid: 61182018a349fda4785e8b9ba83dbf96,
+        type: 3}
+      propertyPath: playTestMode
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 61182018a349fda4785e8b9ba83dbf96, type: 3}
 --- !u!1001 &1245950678
@@ -619,7 +664,22 @@ PrefabInstance:
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
       propertyPath: controllerInput
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
+        type: 3}
+      propertyPath: mDashSpeed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
+        type: 3}
+      propertyPath: mJumpSpeed
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
+        type: 3}
+      propertyPath: mDashCoolDown
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544473, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}

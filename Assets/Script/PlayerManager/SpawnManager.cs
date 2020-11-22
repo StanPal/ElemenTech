@@ -8,21 +8,26 @@ public class SpawnManager : MonoBehaviour
     public List<Transform> mSpawnPoints = new List<Transform>();
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        GameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
+        playerManager = ServiceLocator.Get<PlayerManager>();
         if (playerManager.FireHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            playerManager.FireHero.SetActive(true);
-            playerManager.FireHero = Instantiate(playerManager.FireHero);
-            RandomizeSpawn(playerManager.FireHero); 
-            playerManager.mPlayersList[0] = playerManager.FireHero;
-            
+            GameObject fireHero = Instantiate(playerManager.FireHero);
+            fireHero.SetActive(true);
+            playerManager.mPlayersList[0] = fireHero;
+            RandomizeSpawn(fireHero);
+
         }
         if (playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            playerManager.WaterHero.SetActive(true);
-            playerManager.WaterHero = Instantiate(playerManager.WaterHero);
-            RandomizeSpawn(playerManager.WaterHero);
-            playerManager.mPlayersList[1] = playerManager.WaterHero;
+            GameObject waterHero = Instantiate(playerManager.WaterHero);
+            waterHero.SetActive(true);
+            playerManager.mPlayersList[1] = waterHero;
+            RandomizeSpawn(waterHero);
 
         }
         if (playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
@@ -30,15 +35,15 @@ public class SpawnManager : MonoBehaviour
             playerManager.EarthHero.SetActive(true);
             playerManager.EarthHero = Instantiate(playerManager.EarthHero);
             RandomizeSpawn(playerManager.EarthHero);
-            playerManager.mPlayersList[2] = playerManager.EarthHero;
+            playerManager.mPlayersList[3] = playerManager.EarthHero;
 
         }
         if (playerManager.AirHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            playerManager.AirHero.SetActive(true);
-            playerManager.AirHero = Instantiate(playerManager.AirHero);
-            RandomizeSpawn(playerManager.AirHero);
-            playerManager.mPlayersList[3] = playerManager.AirHero;
+            GameObject airHero = Instantiate(playerManager.AirHero);
+            airHero.SetActive(true);
+            playerManager.mPlayersList[2] = airHero;
+            RandomizeSpawn(airHero);
 
         }
     }
@@ -49,4 +54,5 @@ public class SpawnManager : MonoBehaviour
         player.transform.position = mSpawnPoints[randIndex].position;
         mSpawnPoints.RemoveAt(randIndex);
     }
+
 }

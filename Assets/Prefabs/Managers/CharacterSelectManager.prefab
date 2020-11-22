@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 1877892689618481538}
   - component: {fileID: 3656250752998256633}
   - component: {fileID: 1686054796}
+  - component: {fileID: 3164744553564996224}
   m_Layer: 0
   m_Name: CharacterSelectManager
   m_TagString: Untagged
@@ -56,7 +57,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cfd2839b4e2050242aab9a7773ade014, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  butonList:
+  buttonList:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+--- !u!114 &3164744553564996224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8655133727829777325}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76114c246aa03b041b20783bd7522538, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  teamButtonList:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 public class IceTrapManager : MonoBehaviour
 {
     public List<Transform> iceSpikesLocation = new List<Transform>();
-    public List<Transform> spawnLocation = new List<Transform>();
+    private List<Transform> spawnLocation = new List<Transform>();
     public List<Transform> SpawnLocation { get { return spawnLocation; } }
     public GameObject iceSpike;
 

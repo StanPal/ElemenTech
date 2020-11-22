@@ -13,9 +13,15 @@ public class ControllerSelect : MonoBehaviour
     int cntselect_2 = 0;
     int cntselect_3 = 0;
     int cntselect_4 = 0;
+
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        GameLoader.CallOnComplete(Initialize);        
+    }
+
+    private void Initialize()
+    {
+        playerManager = ServiceLocator.Get<PlayerManager>();
     }
 
     void Start()
@@ -35,7 +41,7 @@ public class ControllerSelect : MonoBehaviour
         switch (cntselect_1)
         {
             case 0:
-                buttonList[0].GetComponentInChildren<Text>().text = "None";
+                buttonList[0].GetComponentInChildren<Text>().text = "Controller None";
                 break;
             case 1:
                 buttonList[0].GetComponentInChildren<Text>().text = "Keyboard";
@@ -59,7 +65,7 @@ public class ControllerSelect : MonoBehaviour
         switch (cntselect_2)
         {
             case 0:
-                buttonList[1].GetComponentInChildren<Text>().text = "None";
+                buttonList[1].GetComponentInChildren<Text>().text = "Controller None";
                 break;
             case 1:
                 buttonList[1].GetComponentInChildren<Text>().text = "Keyboard";
@@ -83,7 +89,7 @@ public class ControllerSelect : MonoBehaviour
         switch (cntselect_3)
         {
             case 0:
-                buttonList[2].GetComponentInChildren<Text>().text = "None";
+                buttonList[2].GetComponentInChildren<Text>().text = "Controller None";
                 break;
             case 1:
                 buttonList[2].GetComponentInChildren<Text>().text = "Keyboard";
@@ -107,7 +113,7 @@ public class ControllerSelect : MonoBehaviour
         switch (cntselect_4)
         {
             case 0:
-                buttonList[3].GetComponentInChildren<Text>().text = "None";
+                buttonList[3].GetComponentInChildren<Text>().text = "Controller None";
                 break;
             case 1:
                 buttonList[3].GetComponentInChildren<Text>().text = "Keyboard";

@@ -18,49 +18,17 @@ public class HeroActions : MonoBehaviour
     public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
 
-    private enum Controller
-    {
-        None,
-        Keyboard,
-        PS4,
-        XBOX
-    }
-
-    private Controller controllerInput;
-
-
     private void Awake()
     {
-        
+        GameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
         mHeroMovement = GetComponent<HeroMovement>();
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
-        if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
-        {
-            mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
-            mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
-            mPlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
-            mPlayerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
-            mPlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
-        }
-
-        if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
-        {
-            mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
-            mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
-            mPlayerInput.PS4.Guard.performed += _ => Guard();
-            mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
-        }
-
-        if(HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
-        {
-            mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
-            mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
-            mPlayerInput.XBOX.Guard.performed += _ => Guard();
-            mPlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
-        }
     }
-
 
     private void OnEnable()
     {
@@ -71,10 +39,40 @@ public class HeroActions : MonoBehaviour
         mPlayerInput.Disable();
     }
 
-    private void Update()
+    private void Start()
     {
-        controllerInput = (Controller)mHeroMovement.controllerInput;
+ 
+        if (!mHeroMovement.Recovering)
+        {
+            if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
+            {
+                mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
+                mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                mPlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
+                mPlayerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
+                mPlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
+            }
+
+            if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
+            {
+                mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
+                mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
+                mPlayerInput.PS4.Guard.performed += _ => Guard();
+                mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
+                mPlayerInput.PS4.Pause.performed += _ => Pause();
+            }
+
+            if (HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
+            {
+                mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
+                mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
+                mPlayerInput.XBOX.Guard.performed += _ => Guard();
+                mPlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
+            }
+        }
     }
+
+
 
     private void Guard()
     {
@@ -88,12 +86,8 @@ public class HeroActions : MonoBehaviour
     
     private void ElementSpecial1()
     {
-        //if (HeroStats.CDFinished)
-        //{
-            onSkillPerformed.Invoke(HeroStats.GetElement);
-        //    HeroStats.CDTime = HeroStats.CoolDown;
-        //    HeroStats.CDFinished = false;
-        //}
+       onSkillPerformed.Invoke(HeroStats.GetElement);
+
     }
 
     private void SwordSwing()

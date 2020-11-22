@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelect.unity
     guid: c28738b1c6973f245b6cd6d90d71fb07
   - enabled: 1
-    path: Assets/Scenes/CameraTest.unity
-    guid: 938eab5a3701d2448b36454a0f51d81c
+    path: Assets/Scenes/LevelIce.unity
+    guid: cec0230f8775500469dcdedc23c70ed0
+  - enabled: 1
+    path: Assets/Scenes/LevelLava.unity
+    guid: 3e70447e2a097de4f9860f45fa1792c8
   m_configObjects: {}
