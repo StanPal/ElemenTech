@@ -15,6 +15,7 @@ public class PlayerManager : MonoBehaviour
     private bool playTestMode = false;
     private void Awake()
     {
+        ServiceLocator.Register<PlayerManager>(this);
         if (!playTestMode)
         {
             FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
@@ -28,10 +29,11 @@ public class PlayerManager : MonoBehaviour
             EarthHero.SetActive(false);
         }
 
-        mPlayersList.Add(FireHero);
-        mPlayersList.Add(WaterHero);
-        mPlayersList.Add(AirHero);
-        mPlayersList.Add(EarthHero);
+        mPlayersList[0] = FireHero;
+        mPlayersList[1] = WaterHero;
+        mPlayersList[2] = AirHero;
+        mPlayersList[3] = EarthHero;
+  
     }
 
 }

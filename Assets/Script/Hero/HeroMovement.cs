@@ -24,7 +24,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private bool isJumping = false;
     [SerializeField]
-    private float mJumpSpeed = 5f;
+    private float mJumpForce = 5f;
     [SerializeField]
     private int mNumOfJumps = 0;
     [SerializeField]
@@ -140,17 +140,54 @@ public class HeroMovement : MonoBehaviour
         {
             mNumOfJumps = mMaxJumps;
         }
-        if ((mPlayerInput.KeyboardMouse.Jump.triggered || mPlayerInput.PS4.Jump.triggered || mPlayerInput.XBOX.Jump.triggered)
-            && mNumOfJumps > 0)
+        switch (controllerInput)
         {
-           rb.velocity = Vector2.up * mJumpSpeed;
-            mNumOfJumps--;
+            case Controller.None:
+                break;
+            case Controller.Keyboard:
+                if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.PS4:
+                if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.XBOX:
+                if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            default:
+                break;
         }
-        else if ((mPlayerInput.KeyboardMouse.Jump.triggered || mPlayerInput.PS4.Jump.triggered || mPlayerInput.XBOX.Jump.triggered)
-            && mNumOfJumps == 0 && IsGrounded())
-        {
-            rb.velocity = Vector2.up * mJumpSpeed;
-        }
+    }
+
+    private void Jump()
+    {
+        rb.velocity = Vector2.up * mJumpForce;
+        mNumOfJumps--;
+    }
+
+    private void MultiJump()
+    { 
+        rb.velocity = Vector2.up * mJumpForce;
     }
 
     private void FixedUpdate()

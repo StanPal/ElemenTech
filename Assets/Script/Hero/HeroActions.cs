@@ -20,11 +20,28 @@ public class HeroActions : MonoBehaviour
 
     private void Awake()
     {
-        
+        GameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
         mHeroMovement = GetComponent<HeroMovement>();
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
+    }
 
+    private void OnEnable()
+    {
+        mPlayerInput.Enable();
+    }
+    private void OnDisable()
+    {
+        mPlayerInput.Disable();
+    }
+
+    private void Start()
+    {
+ 
         if (!mHeroMovement.Recovering)
         {
             if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
@@ -55,14 +72,7 @@ public class HeroActions : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        mPlayerInput.Enable();
-    }
-    private void OnDisable()
-    {
-        mPlayerInput.Disable();
-    }
+
 
     private void Guard()
     {
@@ -76,12 +86,8 @@ public class HeroActions : MonoBehaviour
     
     private void ElementSpecial1()
     {
-        //if (HeroStats.CDFinished)
-        //{
-            onSkillPerformed.Invoke(HeroStats.GetElement);
-        //    HeroStats.CDTime = HeroStats.CoolDown;
-        //    HeroStats.CDFinished = false;
-        //}
+       onSkillPerformed.Invoke(HeroStats.GetElement);
+
     }
 
     private void SwordSwing()
