@@ -58,6 +58,11 @@ public class ControllerSelect : MonoBehaviour
                 playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
             (HeroMovement.Controller)cntselect_1;
                 break;
+            case 4:
+                buttonList[0].GetComponentInChildren<Text>().text = "KeyboardLayout2";
+                playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
+            (HeroMovement.Controller)cntselect_1;
+                break;
             default:
                 break;
         }
@@ -79,6 +84,11 @@ public class ControllerSelect : MonoBehaviour
                 break;
             case 3:
                 buttonList[1].GetComponentInChildren<Text>().text = "XBOX";
+                playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput =
+            (HeroMovement.Controller)cntselect_2;
+                break;
+            case 4:
+                buttonList[1].GetComponentInChildren<Text>().text = "KeyboardLayout2";
                 playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput =
             (HeroMovement.Controller)cntselect_2;
                 break;
@@ -106,6 +116,11 @@ public class ControllerSelect : MonoBehaviour
                 playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput =
             (HeroMovement.Controller)cntselect_3;
                 break;
+            case 4:
+                buttonList[2].GetComponentInChildren<Text>().text = "KeyboardLayout2";
+                playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput =
+            (HeroMovement.Controller)cntselect_3;
+                break;
             default:
                 break;
         }
@@ -130,6 +145,11 @@ public class ControllerSelect : MonoBehaviour
                 playerManager.AirHero.GetComponent<HeroMovement>().controllerInput =
             (HeroMovement.Controller)cntselect_4;
                 break;
+            case 4:
+                buttonList[3].GetComponentInChildren<Text>().text = "KeyboardLayout2";
+                playerManager.AirHero.GetComponent<HeroMovement>().controllerInput =
+            (HeroMovement.Controller)cntselect_4;
+                break;
             default:
                 break;
         }
@@ -139,28 +159,28 @@ public class ControllerSelect : MonoBehaviour
     public void SelectController1()
     {
         cntselect_1++;
-        if (cntselect_1 > 3)
+        if (cntselect_1 > 4)
             cntselect_1 = 0; 
      
     }
     public void SelectController2()
     {
         cntselect_2++;
-        if (cntselect_2 > 3)
+        if (cntselect_2 > 4)
             cntselect_2 = 0;
 
     }
     public void SelectController3()
     {
         cntselect_3++;
-        if (cntselect_3 > 3)
+        if (cntselect_3 > 4)
             cntselect_3 = 0;
 
     }
     public void SelectController4()
     {
         cntselect_4++;
-        if (cntselect_4 > 3)
+        if (cntselect_4 > 4)
             cntselect_4 = 0;
 
     }

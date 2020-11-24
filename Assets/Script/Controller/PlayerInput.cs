@@ -149,17 +149,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""2c7e4c52-c213-4339-9e47-b4c0203a631e"",
-                    ""path"": ""<Keyboard>/g"",
-                    ""interactions"": ""Press"",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Guard"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""a1dc6e02-8059-4a3f-9881-aed797533fd5"",
                     ""path"": ""<Keyboard>/g"",
                     ""interactions"": ""Press(behavior=1)"",
@@ -183,7 +172,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a9ed5be7-296f-46a9-b9da-8788cadb6975"",
-                    ""path"": ""<Keyboard>/shift"",
+                    ""path"": ""<Keyboard>/leftShift"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -210,6 +199,218 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""JumpRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2c7e4c52-c213-4339-9e47-b4c0203a631e"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""KeyboardLayout2"",
+            ""id"": ""c47409d5-87b7-49e5-b6a9-bddc9ed31137"",
+            ""actions"": [
+                {
+                    ""name"": ""Move"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbb5afb2-d7dd-412e-a723-d860d76fa9e3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""0e5debf7-3a40-438c-a4af-68f6371df4b7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Jump Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""23b3f825-604e-4841-86e0-02b063febdb2"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""SwordSwing"",
+                    ""type"": ""Button"",
+                    ""id"": ""166b08e2-964e-4bfa-bc04-168add1e580c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Element Special 1"",
+                    ""type"": ""Button"",
+                    ""id"": ""43822585-38fa-4995-827b-9fb69f6ac519"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Guard"",
+                    ""type"": ""Button"",
+                    ""id"": ""3f7420fd-0019-405a-b109-bda66893df34"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Guard Release"",
+                    ""type"": ""Button"",
+                    ""id"": ""4bc0ac60-2172-472b-9192-17d137fec8ae"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""22ce2ba3-581f-41f7-bc1b-20b01799016c"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""cbd95263-c10a-49ea-8d22-f8f0df0c6097"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": ""1D Axis"",
+                    ""id"": ""26ad3a1d-854e-4840-bf2a-fd8fbf684374"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""6541a7ba-7655-49b1-9f9b-a06c6ab664f2"",
+                    ""path"": ""<Keyboard>/leftArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""a9cb5d1d-996b-477d-83b8-3b0a091f5064"",
+                    ""path"": ""<Keyboard>/rightArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Move"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""40286f35-ac63-4e81-a4af-4542b8519730"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8b3213a6-bbd4-4f16-91f0-92d07e1670ea"",
+                    ""path"": ""<Keyboard>/upArrow"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Jump Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9d717eb6-3eb0-4775-b1c3-307135c37ac9"",
+                    ""path"": ""<Keyboard>/j"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SwordSwing"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4a1f9ec8-352d-4b46-8752-2e44c192f90d"",
+                    ""path"": ""<Keyboard>/k"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Element Special 1"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a77afeaf-6dfb-4c6f-94da-5f6e86536a9d"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": ""Press"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b98259af-c79b-4642-afbc-78d9fe926981"",
+                    ""path"": ""<Keyboard>/l"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guard Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""fb515af9-403a-4df4-8058-ce70a1a398ff"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d1fc0090-abe3-4061-acd0-7ef29b885580"",
+                    ""path"": ""<Keyboard>/rightShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -271,6 +472,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""c27c59cc-2151-48d9-9ab1-2fa121d9499d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""88b1c53d-93e1-4a7e-afb4-89f85d447623"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -373,6 +582,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0a4c5404-b582-4f86-8bb4-fcda52d8e939"",
+                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -536,6 +756,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
+        // KeyboardLayout2
+        m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
+        m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
+        m_KeyboardLayout2_Jump = m_KeyboardLayout2.FindAction("Jump", throwIfNotFound: true);
+        m_KeyboardLayout2_JumpRelease = m_KeyboardLayout2.FindAction("Jump Release", throwIfNotFound: true);
+        m_KeyboardLayout2_SwordSwing = m_KeyboardLayout2.FindAction("SwordSwing", throwIfNotFound: true);
+        m_KeyboardLayout2_ElementSpecial1 = m_KeyboardLayout2.FindAction("Element Special 1", throwIfNotFound: true);
+        m_KeyboardLayout2_Guard = m_KeyboardLayout2.FindAction("Guard", throwIfNotFound: true);
+        m_KeyboardLayout2_GuardRelease = m_KeyboardLayout2.FindAction("Guard Release", throwIfNotFound: true);
+        m_KeyboardLayout2_Pause = m_KeyboardLayout2.FindAction("Pause", throwIfNotFound: true);
+        m_KeyboardLayout2_Dash = m_KeyboardLayout2.FindAction("Dash", throwIfNotFound: true);
         // PS4
         m_PS4 = asset.FindActionMap("PS4", throwIfNotFound: true);
         m_PS4_Move = m_PS4.FindAction("Move", throwIfNotFound: true);
@@ -545,6 +776,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PS4_Guard = m_PS4.FindAction("Guard", throwIfNotFound: true);
         m_PS4_GuardRelease = m_PS4.FindAction("Guard Release", throwIfNotFound: true);
         m_PS4_Pause = m_PS4.FindAction("Pause", throwIfNotFound: true);
+        m_PS4_Dash = m_PS4.FindAction("Dash", throwIfNotFound: true);
         // XBOX
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
@@ -696,6 +928,103 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     }
     public KeyboardMouseActions @KeyboardMouse => new KeyboardMouseActions(this);
 
+    // KeyboardLayout2
+    private readonly InputActionMap m_KeyboardLayout2;
+    private IKeyboardLayout2Actions m_KeyboardLayout2ActionsCallbackInterface;
+    private readonly InputAction m_KeyboardLayout2_Move;
+    private readonly InputAction m_KeyboardLayout2_Jump;
+    private readonly InputAction m_KeyboardLayout2_JumpRelease;
+    private readonly InputAction m_KeyboardLayout2_SwordSwing;
+    private readonly InputAction m_KeyboardLayout2_ElementSpecial1;
+    private readonly InputAction m_KeyboardLayout2_Guard;
+    private readonly InputAction m_KeyboardLayout2_GuardRelease;
+    private readonly InputAction m_KeyboardLayout2_Pause;
+    private readonly InputAction m_KeyboardLayout2_Dash;
+    public struct KeyboardLayout2Actions
+    {
+        private @PlayerInput m_Wrapper;
+        public KeyboardLayout2Actions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_KeyboardLayout2_Move;
+        public InputAction @Jump => m_Wrapper.m_KeyboardLayout2_Jump;
+        public InputAction @JumpRelease => m_Wrapper.m_KeyboardLayout2_JumpRelease;
+        public InputAction @SwordSwing => m_Wrapper.m_KeyboardLayout2_SwordSwing;
+        public InputAction @ElementSpecial1 => m_Wrapper.m_KeyboardLayout2_ElementSpecial1;
+        public InputAction @Guard => m_Wrapper.m_KeyboardLayout2_Guard;
+        public InputAction @GuardRelease => m_Wrapper.m_KeyboardLayout2_GuardRelease;
+        public InputAction @Pause => m_Wrapper.m_KeyboardLayout2_Pause;
+        public InputAction @Dash => m_Wrapper.m_KeyboardLayout2_Dash;
+        public InputActionMap Get() { return m_Wrapper.m_KeyboardLayout2; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(KeyboardLayout2Actions set) { return set.Get(); }
+        public void SetCallbacks(IKeyboardLayout2Actions instance)
+        {
+            if (m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface != null)
+            {
+                @Move.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnMove;
+                @Jump.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJump;
+                @JumpRelease.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpRelease;
+                @SwordSwing.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnSwordSwing;
+                @SwordSwing.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnSwordSwing;
+                @SwordSwing.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnSwordSwing;
+                @ElementSpecial1.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnElementSpecial1;
+                @ElementSpecial1.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnElementSpecial1;
+                @Guard.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuard;
+                @Guard.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuard;
+                @Guard.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuard;
+                @GuardRelease.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuardRelease;
+                @GuardRelease.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnGuardRelease;
+                @Pause.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnPause;
+                @Pause.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnPause;
+                @Pause.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnPause;
+                @Dash.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
+            }
+            m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
+                @JumpRelease.started += instance.OnJumpRelease;
+                @JumpRelease.performed += instance.OnJumpRelease;
+                @JumpRelease.canceled += instance.OnJumpRelease;
+                @SwordSwing.started += instance.OnSwordSwing;
+                @SwordSwing.performed += instance.OnSwordSwing;
+                @SwordSwing.canceled += instance.OnSwordSwing;
+                @ElementSpecial1.started += instance.OnElementSpecial1;
+                @ElementSpecial1.performed += instance.OnElementSpecial1;
+                @ElementSpecial1.canceled += instance.OnElementSpecial1;
+                @Guard.started += instance.OnGuard;
+                @Guard.performed += instance.OnGuard;
+                @Guard.canceled += instance.OnGuard;
+                @GuardRelease.started += instance.OnGuardRelease;
+                @GuardRelease.performed += instance.OnGuardRelease;
+                @GuardRelease.canceled += instance.OnGuardRelease;
+                @Pause.started += instance.OnPause;
+                @Pause.performed += instance.OnPause;
+                @Pause.canceled += instance.OnPause;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
+            }
+        }
+    }
+    public KeyboardLayout2Actions @KeyboardLayout2 => new KeyboardLayout2Actions(this);
+
     // PS4
     private readonly InputActionMap m_PS4;
     private IPS4Actions m_PS4ActionsCallbackInterface;
@@ -706,6 +1035,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_PS4_Guard;
     private readonly InputAction m_PS4_GuardRelease;
     private readonly InputAction m_PS4_Pause;
+    private readonly InputAction m_PS4_Dash;
     public struct PS4Actions
     {
         private @PlayerInput m_Wrapper;
@@ -717,6 +1047,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Guard => m_Wrapper.m_PS4_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_PS4_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_PS4_Pause;
+        public InputAction @Dash => m_Wrapper.m_PS4_Dash;
         public InputActionMap Get() { return m_Wrapper.m_PS4; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -747,6 +1078,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnPause;
+                @Dash.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_PS4ActionsCallbackInterface = instance;
             if (instance != null)
@@ -772,6 +1106,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -861,6 +1198,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
     }
+    public interface IKeyboardLayout2Actions
+    {
+        void OnMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
+        void OnJumpRelease(InputAction.CallbackContext context);
+        void OnSwordSwing(InputAction.CallbackContext context);
+        void OnElementSpecial1(InputAction.CallbackContext context);
+        void OnGuard(InputAction.CallbackContext context);
+        void OnGuardRelease(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
+    }
     public interface IPS4Actions
     {
         void OnMove(InputAction.CallbackContext context);
@@ -870,6 +1219,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
     public interface IXBOXActions
     {

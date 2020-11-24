@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Air Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -525,7 +525,7 @@ MonoBehaviour:
   team: 2
   mName: Air Hero
   mAttack: 20
-  mMaxHealth: 100
+  mMaxHealth: 125
   mCurrentHealth: 100
   mCoolDown: 0
   mElementalType: 3
@@ -568,7 +568,7 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   mDashSpeed: 2
-  mDashCoolDown: 4
+  mDashCoolDown: 0
   mDashStartUpTime: 1
   mSpeed: 5
   mKnockbackRecieved: 0

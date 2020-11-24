@@ -26,12 +26,6 @@ public class AirJet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (mExitTime <= 0.0f)
-        {
-            Destroy(gameObject);
-        }
-
-        mExitTime -= Time.deltaTime;
         mRigidbody.velocity = transform.right * mProjectileSpeed;
         transform.localScale = Vector3.Lerp(transform.localScale, mScaleSize, airskills.ScaleSpeed * Time.deltaTime);
     }

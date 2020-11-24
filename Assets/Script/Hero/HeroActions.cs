@@ -53,7 +53,16 @@ public class HeroActions : MonoBehaviour
                 mPlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
             }
 
-            if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
+           else if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard2)
+            {
+                mPlayerInput.KeyboardLayout2.SwordSwing.performed += _ => SwordSwing();
+                mPlayerInput.KeyboardLayout2.ElementSpecial1.performed += _ => ElementSpecial1();
+                mPlayerInput.KeyboardLayout2.Guard.performed += _ => Guard();
+                mPlayerInput.KeyboardLayout2.GuardRelease.performed += _ => GuardRelease();
+                mPlayerInput.KeyboardLayout2.Pause.performed += _ => Pause();
+            }
+
+           else if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
             {
                 mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
@@ -62,7 +71,7 @@ public class HeroActions : MonoBehaviour
                 mPlayerInput.PS4.Pause.performed += _ => Pause();
             }
 
-            if (HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
+           else if (HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
             {
                 mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
