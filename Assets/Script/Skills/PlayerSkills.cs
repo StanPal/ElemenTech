@@ -19,7 +19,7 @@ public class PlayerSkills : MonoBehaviour
  
     private PlayerManager playerManager;
 
-    private void Awake()
+    public void Initialize()
     {
 
         playerManager = FindObjectOfType<PlayerManager>();
