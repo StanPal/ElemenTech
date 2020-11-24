@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 272291266048372391}
   - component: {fileID: 272291266048372390}
   - component: {fileID: 272291266048372389}
+  - component: {fileID: 4409777473724737740}
   m_Layer: 8
   m_Name: Disappear Platform
   m_TagString: Untagged
@@ -108,3 +109,18 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &4409777473724737740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 272291266048372388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35571d68968f250469c8122f3a7372d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  disappearDelay: 2
+  reappearDelay: 4
+  enabled: 1

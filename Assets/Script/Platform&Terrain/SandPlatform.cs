@@ -5,9 +5,11 @@ using UnityEngine;
 public class SandPlatform : MonoBehaviour
 {
     float SandSpeed = 5f;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        other.gameObject.GetComponent<HeroMovement>().SandDecrease(SandSpeed);
+        collision.gameObject.GetComponent<HeroMovement>().Speed -= SandSpeed;
+    
     }
 
 }

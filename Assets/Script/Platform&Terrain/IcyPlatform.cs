@@ -5,13 +5,10 @@ using UnityEngine;
 public class IcyPlatform : MonoBehaviour
 {
     float SlidSpeed = 5f;
-    private void OnTriggerEnter(Collider other)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        SlidSpeed = Random.Range(0f, 10f);
-        other.gameObject.GetComponent<HeroMovement>().IcySlidding(SlidSpeed);
+            collision.gameObject.GetComponent<HeroMovement>().Speed += SlidSpeed;
+        
     }
-
-
-
-
 }
