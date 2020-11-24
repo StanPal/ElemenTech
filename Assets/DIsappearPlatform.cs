@@ -14,37 +14,40 @@ public class DIsappearPlatform : MonoBehaviour
         enabled = true;
     }
 
-    private void OncolliderEnter(Collider other)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (other.gameObject.GetComponent<HeroStats>() != null)
+        if (collision.gameObject.GetComponent<HeroStats>() != null)
         {
-            //gameObject.SetActive(enabled);
+            gameObject.SetActive(enabled);
             Invoke("Disappear", disappearDelay);
         }
     }
     //private void OnCollisionEnter(Collision other)
     //{
-        
 
+    //    if (other.gameObject.GetComponent<HeroStats>() != null)
+    //    {
+    //        gameObject.SetActive(false);
+
+    //        //gameObject.SetActive(enabled);
+    //        //Invoke("Disappear", disappearDelay);
+    //    }
     //}
 
     private void Disappear()
     {
         //Code to make the platform disappear...
-        foreach (Transform main in gameObject.transform)
-        {
-            main.gameObject.SetActive(enabled);
-        }
+        
+        gameObject.SetActive(false);
+
         Invoke("Reappear", reappearDelay);
     }
 
     private void Reappear()
     {
         //Make te platform appear again.
-        foreach (Transform main in gameObject.transform)
-        {
-            main.gameObject.SetActive(!enabled);
-        }
+       
+            gameObject.SetActive(true);
     }
 }
     //void TogglePlatform()

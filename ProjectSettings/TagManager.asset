@@ -9,6 +9,7 @@ TagManager:
   - Team2
   - Team1
   - IcyPlatform
+  - DIsappearPlatform
   layers:
   - Default
   - TransparentFX
