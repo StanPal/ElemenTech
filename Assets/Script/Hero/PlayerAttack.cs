@@ -123,8 +123,11 @@ public class PlayerAttack : MonoBehaviour
             {
                 collision.GetComponent<HeroStats>().TakeDamage(10f);
                 collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
-                collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
-                collision.GetComponent<HeroMovement>().Recovering = true;
+                if (!collision.GetComponent<Guard>().Guarding)
+                {
+                    collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
+                    collision.GetComponent<HeroMovement>().Recovering = true;
+                }
             }
         }
         if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
@@ -133,9 +136,11 @@ public class PlayerAttack : MonoBehaviour
             {
                 collision.GetComponent<HeroStats>().TakeDamage(10f);
                 collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
-                collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
-                collision.GetComponent<HeroMovement>().Recovering = true;
-
+                if (!collision.GetComponent<Guard>().Guarding)
+                {
+                    collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
+                    collision.GetComponent<HeroMovement>().Recovering = true;
+                }
             }
         }
 

@@ -32,10 +32,10 @@ public class SpawnManager : MonoBehaviour
         }
         if (playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            playerManager.EarthHero.SetActive(true);
-            playerManager.EarthHero = Instantiate(playerManager.EarthHero);
-            RandomizeSpawn(playerManager.EarthHero);
-            playerManager.mPlayersList[3] = playerManager.EarthHero;
+            GameObject earthHero = Instantiate(playerManager.EarthHero);
+            earthHero.SetActive(true);
+            playerManager.mPlayersList[3] = earthHero;
+            RandomizeSpawn(earthHero);
 
         }
         if (playerManager.AirHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
@@ -44,7 +44,6 @@ public class SpawnManager : MonoBehaviour
             airHero.SetActive(true);
             playerManager.mPlayersList[2] = airHero;
             RandomizeSpawn(airHero);
-
         }
     }
 

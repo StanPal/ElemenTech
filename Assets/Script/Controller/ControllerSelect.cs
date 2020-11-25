@@ -16,7 +16,7 @@ public class ControllerSelect : MonoBehaviour
 
     private void Awake()
     {
-        GameLoader.CallOnComplete(Initialize);        
+        GameLoader.CallOnComplete(Initialize);
     }
 
     private void Initialize()
@@ -26,27 +26,34 @@ public class ControllerSelect : MonoBehaviour
 
     void Start()
     {
-        buttonList[0].GetComponentInChildren<Text>().text =
-       cntselect_1.ToString();
-        buttonList[1].GetComponentInChildren<Text>().text =
-        cntselect_2.ToString();
-        buttonList[2].GetComponentInChildren<Text>().text =
-        cntselect_3.ToString();
-        buttonList[3].GetComponentInChildren<Text>().text =
-        cntselect_4.ToString();
+        buttonList[0].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)cntselect_1).ToString();
+        buttonList[1].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)cntselect_2).ToString();
+        buttonList[2].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)cntselect_3).ToString();
+        buttonList[3].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)cntselect_4).ToString();
     }
 
     private void Update()
     {
+
+    }
+
+
+    public void SelectController1()
+    {
+        cntselect_1++;
+        if (cntselect_1 > 4)
+            cntselect_1 = 0;
+
         switch (cntselect_1)
         {
             case 0:
                 buttonList[0].GetComponentInChildren<Text>().text = "Controller None";
+                playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = (HeroMovement.Controller)cntselect_1;
                 break;
             case 1:
                 buttonList[0].GetComponentInChildren<Text>().text = "Keyboard";
                 playerManager.FireHero.GetComponent<HeroMovement>().controllerInput =
-             (HeroMovement.Controller)cntselect_1;
+               (HeroMovement.Controller)cntselect_1;
                 break;
             case 2:
                 buttonList[0].GetComponentInChildren<Text>().text = "PS4";
@@ -67,15 +74,23 @@ public class ControllerSelect : MonoBehaviour
                 break;
         }
 
+    }
+    public void SelectController2()
+    {
+        cntselect_2++;
+        if (cntselect_2 > 4)
+            cntselect_2 = 0;
+
         switch (cntselect_2)
         {
             case 0:
                 buttonList[1].GetComponentInChildren<Text>().text = "Controller None";
+                playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = (HeroMovement.Controller)cntselect_2;
                 break;
             case 1:
                 buttonList[1].GetComponentInChildren<Text>().text = "Keyboard";
                 playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput =
-             (HeroMovement.Controller)cntselect_2;
+               (HeroMovement.Controller)cntselect_2;
                 break;
             case 2:
                 buttonList[1].GetComponentInChildren<Text>().text = "PS4";
@@ -96,15 +111,23 @@ public class ControllerSelect : MonoBehaviour
                 break;
         }
 
+    }
+    public void SelectController3()
+    {
+        cntselect_3++;
+        if (cntselect_3 > 4)
+            cntselect_3 = 0;
+
         switch (cntselect_3)
         {
             case 0:
                 buttonList[2].GetComponentInChildren<Text>().text = "Controller None";
+                playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = (HeroMovement.Controller)cntselect_3;
                 break;
             case 1:
                 buttonList[2].GetComponentInChildren<Text>().text = "Keyboard";
                 playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput =
-             (HeroMovement.Controller)cntselect_3;
+               (HeroMovement.Controller)cntselect_3;
                 break;
             case 2:
                 buttonList[2].GetComponentInChildren<Text>().text = "PS4";
@@ -125,15 +148,23 @@ public class ControllerSelect : MonoBehaviour
                 break;
         }
 
+    }
+    public void SelectController4()
+    {
+        cntselect_4++;
+        if (cntselect_4 > 4)
+            cntselect_4 = 0;
+
         switch (cntselect_4)
         {
             case 0:
                 buttonList[3].GetComponentInChildren<Text>().text = "Controller None";
+                playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = (HeroMovement.Controller)cntselect_4;
                 break;
             case 1:
                 buttonList[3].GetComponentInChildren<Text>().text = "Keyboard";
                 playerManager.AirHero.GetComponent<HeroMovement>().controllerInput =
-             (HeroMovement.Controller)cntselect_4;
+               (HeroMovement.Controller)cntselect_4;
                 break;
             case 2:
                 buttonList[3].GetComponentInChildren<Text>().text = "PS4";
@@ -153,36 +184,6 @@ public class ControllerSelect : MonoBehaviour
             default:
                 break;
         }
-    }
-
-
-    public void SelectController1()
-    {
-        cntselect_1++;
-        if (cntselect_1 > 4)
-            cntselect_1 = 0; 
-     
-    }
-    public void SelectController2()
-    {
-        cntselect_2++;
-        if (cntselect_2 > 4)
-            cntselect_2 = 0;
-
-    }
-    public void SelectController3()
-    {
-        cntselect_3++;
-        if (cntselect_3 > 4)
-            cntselect_3 = 0;
-
-    }
-    public void SelectController4()
-    {
-        cntselect_4++;
-        if (cntselect_4 > 4)
-            cntselect_4 = 0;
-
     }
 
 }

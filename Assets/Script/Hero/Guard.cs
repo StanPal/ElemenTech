@@ -19,6 +19,21 @@ public class Guard : MonoBehaviour
     private bool mShiendCreated = false;
     [SerializeField]
     private float mSpeedDecrease = 1f;
+    [SerializeField]
+    private float mShieldMaxEnergy = 100f;
+    public float ShieldMaxEnergy { get { return mShieldMaxEnergy; } }
+    [SerializeField]
+    private float mShieldEnergy = 100f;
+    public float ShieldEnergy { get { return mShieldEnergy; } set { mShieldEnergy = value; } }
+    [SerializeField]
+    private float mShieldEnergyTick = 0.2f;
+    [SerializeField]
+    private float mShieldRecoverAmount = 1f;
+    public float ShieldRecoveryAmount { get { return mShieldRecoverAmount; } }
+    [SerializeField]
+    private float mShieldRecoveryTick = 3f;
+    public float ShieldRecoveryTick { get { return mShieldRecoveryTick; } }
+    public bool isShieldDisabled = false;
 
 
     public GameObject comboSkill;
@@ -27,6 +42,7 @@ public class Guard : MonoBehaviour
 
     private void Start()
     {
+        mShieldEnergy = mShieldMaxEnergy;
         mHeroAction = GetComponentInParent<HeroActions>();
         mHeroAction.onGuardPerformed += GuardMove;
         mHeroAction.onGuardExit += DestroyGuard;
@@ -43,9 +59,24 @@ public class Guard : MonoBehaviour
         if (isGuarding)
         {
             if (mShield == null)
+            {
                 Debug.Log("Cannot Create Shield, No Element Attached");
+            }
             else
+            {
                 mShield.transform.position = Vector3.MoveTowards(mShield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+                if (mShieldEnergy > 0)
+                {
+                    mShieldEnergy -= Time.deltaTime / mShieldEnergyTick;
+                }
+                else
+                {
+                    isShieldDisabled = true;
+                }
+                Color color = mShield.GetComponent<SpriteRenderer>().color;
+                color.a = (mShieldEnergy * 0.01f);
+                mShield.GetComponent<SpriteRenderer>().color = color;
+            }
         }
         if(isGuarding && ComboSkillOn)
         {
@@ -79,10 +110,13 @@ public class Guard : MonoBehaviour
 
     private void SummonGuard()
     {
-        if (!mShiendCreated)
+        if (!mShiendCreated && !isShieldDisabled)
         {
             mShield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
             mShield.transform.localScale = new Vector3(mShieldSize,mShieldSize,mShieldSize);
+            Color color = mShield.GetComponent<SpriteRenderer>().color;
+            color.a = (mShieldEnergy * 0.01f);
+            mShield.GetComponent<SpriteRenderer>().color = color;
             mShiendCreated = true;
         }
     }    

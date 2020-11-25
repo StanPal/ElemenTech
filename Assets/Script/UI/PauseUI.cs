@@ -79,7 +79,9 @@ public class PauseUI : MonoBehaviour
         playerManager.WaterHero.SetActive(false);
 
         playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.AirHero.SetActive(false);
         playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.EarthHero.SetActive(false);
 
 
         playerManager.mPlayersList[0] = playerManager.FireHero;

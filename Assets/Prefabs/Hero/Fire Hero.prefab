@@ -605,6 +605,12 @@ MonoBehaviour:
   mGuardTime: 0.5
   mShieldSize: 2.1
   mSpeedDecrease: 1
+  mShieldMaxEnergy: 100
+  mShieldEnergy: 100
+  mShieldEnergyTick: 0.2
+  mShieldRecoverAmount: 5
+  mShieldRecoveryTick: 1
+  isShieldDisabled: 0
   comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
     type: 3}
 --- !u!1 &1791110765672992121

@@ -7,6 +7,8 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action onDebuffDeActivated;
 
+    private Guard guard;
+
     public enum TeamSetting
     {
         Team1,
@@ -54,9 +56,10 @@ public class HeroStats : MonoBehaviour
     {
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
+        guard = GetComponent<Guard>();
     }
-
-    private void Update()
+    
+    private void FixedUpdate()
     {
         if (mTempCDTime <= 0.0f)
         {
@@ -80,8 +83,14 @@ public class HeroStats : MonoBehaviour
         {
             HeroDie();
         }
-
-        mCurrentHealth -= damage;
+        if (guard.Guarding)
+        {
+            mCurrentHealth -= (damage * 0.75f);
+        }
+        else
+        {
+            mCurrentHealth -= damage;
+        }
         switch (mNegativeEffect)
         {
             case StatusEffects.NegativeEffects.OnFire:
@@ -96,9 +105,28 @@ public class HeroStats : MonoBehaviour
                 break;
             default:
                 break;
-        }
-    
+        }    
+    }
 
+
+    public void RestoreShield(float restoreAmount, float restoreTick)
+    {
+        StartCoroutine(RestoreShieldOverTimeCoroutine(restoreAmount, restoreTick));
+    }
+
+    IEnumerator RestoreShieldOverTimeCoroutine(float restoreAmount, float restoreTick)
+    {
+
+        float restoreperloop = restoreAmount / restoreTick;
+        while ((guard.ShieldEnergy < guard.ShieldMaxEnergy) && !guard.Guarding)
+        {
+            guard.ShieldEnergy += restoreperloop;
+            yield return new WaitForSeconds(1f);
+        }
+        if (guard.ShieldEnergy >= guard.ShieldMaxEnergy)
+        {
+            guard.isShieldDisabled = false;
+        }
     }
 
     public void DamageOverTime(float damageAmount, float damageDuration)
