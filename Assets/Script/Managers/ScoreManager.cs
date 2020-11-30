@@ -3,19 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
-{
-    private PlayerManager playerManager;
+{    
+    [SerializeField]
     private int mTeamOneScore = 0;
+    public int TeamOneScore { get { return mTeamOneScore; } }
+    [SerializeField]
     private int mTeamTwoScore = 0;
+    public int TeamTwoScore { get { return mTeamTwoScore; } }
 
     private void Awake()
-    {
-        GameLoader.CallOnComplete(Initialize);
-    }
-
-    private void Initialize()
-    {
-        playerManager = ServiceLocator.Get<PlayerManager>();
+    {        
+        ServiceLocator.Register<ScoreManager>(this);
     }
 
     public void AddPoints(int team, int points)

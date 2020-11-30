@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class LevelManager : MonoBehaviour
 {
+    [SerializeField]
     private ScoreManager mScoreManager;
+    [SerializeField]
     private PlayerManager mPlayerManager;
-
+    [SerializeField]
+    private MatchUI MatchUI;
+    private bool isMatchOver = false;
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -14,29 +18,31 @@ public class LevelManager : MonoBehaviour
 
     private void Initialize()
     {
-        mScoreManager = ServiceLocator.Get<ScoreManager>();
         mPlayerManager = ServiceLocator.Get<PlayerManager>();
+        mScoreManager = ServiceLocator.Get<ScoreManager>();
+        MatchUI = FindObjectOfType<MatchUI>();
     }
 
     private void Update()
     {
-        if(mPlayerManager.mPlayersList.Count == 1)
+        if (!isMatchOver)
         {
-            switch (mPlayerManager.mPlayersList[0].GetComponent<HeroStats>().team)
+            if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
             {
-                case HeroStats.TeamSetting.Team1:
-                    mScoreManager.AddPoints(1, 1);
-                    break;
-                case HeroStats.TeamSetting.Team2:
-                    mScoreManager.AddPoints(2, 1);
-                    break;
-                case HeroStats.TeamSetting.FFA:
-                    break;
-                default:
-                    break;
+                LevelEnd(1, 1);
             }
-
-
+            if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
+            {
+                LevelEnd(1, 1);
+            }
         }
+    }
+
+    private void LevelEnd(int team, int score)
+    {
+        isMatchOver = true;
+        mScoreManager.AddPoints(team, score);
+        MatchUI.mMatchCanvas.gameObject.SetActive(true);
+        MatchUI.displayTeamScore();
     }
 }

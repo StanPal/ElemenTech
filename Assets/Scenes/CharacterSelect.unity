@@ -1625,11 +1625,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: GameLoader
       objectReference: {fileID: 0}
-    - target: {fileID: 2480584443301088076, guid: 70d54219d5eedea4cbdb611bb122d4a8,
-        type: 3}
-      propertyPath: _moduleComponents.Array.size
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2480584443301088077, guid: 70d54219d5eedea4cbdb611bb122d4a8,
         type: 3}
       propertyPath: m_LocalPosition.x

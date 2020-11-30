@@ -13,6 +13,10 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> mPlayersList = new List<GameObject>();
     [SerializeField]
     private bool playTestMode = false;
+    
+    public List<GameObject> TeamOne;    
+    public List<GameObject> TeamTwo; 
+
     private void Awake()
     {
         ServiceLocator.Register<PlayerManager>(this);
