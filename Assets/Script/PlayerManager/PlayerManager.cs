@@ -37,7 +37,7 @@ public class PlayerManager : MonoBehaviour
         mPlayersList[1] = WaterHero;
         mPlayersList[2] = AirHero;
         mPlayersList[3] = EarthHero;
-  
+
     }
 
 }

@@ -30,4 +30,10 @@ public class ScoreManager : MonoBehaviour
                 break;
         }
     }
+
+    public void ResetScore()
+    {
+        mTeamOneScore = 0;
+        mTeamTwoScore = 0;
+    }
 }

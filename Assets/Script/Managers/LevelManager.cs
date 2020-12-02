@@ -33,7 +33,7 @@ public class LevelManager : MonoBehaviour
             }
             if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
             {
-                LevelEnd(1, 1);
+                LevelEnd(2, 1);
             }
         }
     }
@@ -44,5 +44,8 @@ public class LevelManager : MonoBehaviour
         mScoreManager.AddPoints(team, score);
         MatchUI.mMatchCanvas.gameObject.SetActive(true);
         MatchUI.displayTeamScore();
+        mPlayerManager.TeamOne.Clear();
+        mPlayerManager.TeamTwo.Clear();
+
     }
 }
