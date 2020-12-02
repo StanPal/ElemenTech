@@ -19,15 +19,21 @@ public class Laser : MonoBehaviour
     [SerializeField]
     private float mDamage = 10f;
     private float mTotalTime = 0;
+    private float mDuration = 2f;
     private void Awake()
+    {
+        
+
+    }
+
+    private void Start()
     {
         transform.position = GetComponentInParent<HeroMovement>().transform.position;
         mLineRenderer = GetComponent<LineRenderer>();
         guard = GetComponentInParent<Guard>();
         raycastHits = new RaycastHit2D[10];
-
     }
-    
+
     private void Update()
     {
         ShootLaser();
@@ -37,6 +43,7 @@ public class Laser : MonoBehaviour
     {
         if (guard.Guarding)
         {
+            StartCoroutine(LaserBeamDur());
             if (GetComponentInParent<HeroMovement>().GetIsLeft)
             {
                 raycastHits = Physics2D.RaycastAll(transform.position, transform.right * -1, Mathf.Infinity);
@@ -92,6 +99,11 @@ public class Laser : MonoBehaviour
         }
     }
 
+    IEnumerator LaserBeamDur()
+    {
+        yield return new WaitForSeconds(2f);
+        Destroy(gameObject);
+    }
 
     void Draw2DRay(Vector2 startPos, Vector2 endPos)
     {
