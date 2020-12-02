@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelect.unity
     guid: c28738b1c6973f245b6cd6d90d71fb07
   - enabled: 1
+    path: Assets/Scenes/Level_SpaceStation 1.unity
+    guid: a0e4970814eb5354f9be269981545374
+  - enabled: 1
     path: Assets/Scenes/LevelIce.unity
     guid: cec0230f8775500469dcdedc23c70ed0
   - enabled: 1

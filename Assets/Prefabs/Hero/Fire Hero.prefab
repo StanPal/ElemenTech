@@ -611,7 +611,7 @@ MonoBehaviour:
   mShieldRecoverAmount: 5
   mShieldRecoveryTick: 1
   isShieldDisabled: 0
-  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
+  comboSkill: {fileID: 2199930519875798088, guid: 41997a524e4ad22429e99f60fb8dcbbb,
     type: 3}
 --- !u!1 &1791110765672992121
 GameObject:

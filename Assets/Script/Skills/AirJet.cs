@@ -41,6 +41,19 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(airskills.Damage);
             }
         }
+
+        if (collision.GetComponent<Guard>())
+        {
+            Guard guard = collision.GetComponent<Guard>();
+            if (guard.Guarding)
+            {
+                Destroy(gameObject);
+                Debug.Log("Shield Hit");
+                collision.GetComponent<Guard>().ComboSkillOn = true;
+   
+            }
+        }
+
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);

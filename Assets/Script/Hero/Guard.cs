@@ -90,7 +90,12 @@ public class Guard : MonoBehaviour
                 GameObject ComboSkillClone = Instantiate(comboSkill, transform);
                 ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
             }
-            Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
+            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Fire)
+            {
+                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            }
+            //Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
         }
     }
