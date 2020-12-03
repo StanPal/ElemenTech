@@ -561,7 +561,7 @@ MonoBehaviour:
   isJumping: 0
   mJumpForce: 10
   mNumOfJumps: 0
-  mMaxJumps: 1
+  mMaxJumps: 2
   mGround:
     serializedVersion: 2
     m_Bits: 256
