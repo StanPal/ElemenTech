@@ -15,6 +15,9 @@ public class SpawnManager : MonoBehaviour
     private void Initialize()
     {
         playerManager = ServiceLocator.Get<PlayerManager>();
+        playerManager.TeamOne.Clear();
+        playerManager.TeamTwo.Clear();
+
         if (playerManager.FireHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
             GameObject fireHero = Instantiate(playerManager.FireHero);

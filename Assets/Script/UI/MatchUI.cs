@@ -34,7 +34,7 @@ public class MatchUI : MonoBehaviour
     {
         Time.timeScale = 1;
         mTransition.text = "Next Match will begin in...";
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(2);
         mTransition.text = "3";
         yield return new WaitForSeconds(1);
         mTransition.text = "2";

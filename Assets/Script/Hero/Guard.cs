@@ -109,8 +109,8 @@ public class Guard : MonoBehaviour
 
     private void OnDestroy()
     {
-        mHeroAction.onGuardPerformed -= GuardMove;
-        mHeroAction.onGuardExit -= DestroyGuard;
+        //mHeroAction.onGuardPerformed -= GuardMove;
+        //mHeroAction.onGuardExit -= DestroyGuard;
     }
 
     private void SummonGuard()

@@ -449,7 +449,7 @@ MonoBehaviour:
   controllerInput: 4
   isLeft: 0
   isJumping: 0
-  mJumpForce: 8
+  mJumpForce: 10
   mNumOfJumps: 0
   mMaxJumps: 2
   mGround:
@@ -459,7 +459,7 @@ MonoBehaviour:
   isDashing: 0
   mDashSpeed: 3
   mDashCoolDown: 3
-  mDashStartUpTime: 1
+  mDashStartUpTime: 0
   mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0

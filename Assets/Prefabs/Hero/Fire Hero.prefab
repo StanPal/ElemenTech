@@ -559,7 +559,7 @@ MonoBehaviour:
   controllerInput: 1
   isLeft: 0
   isJumping: 0
-  mJumpForce: 9
+  mJumpForce: 10
   mNumOfJumps: 0
   mMaxJumps: 1
   mGround:
