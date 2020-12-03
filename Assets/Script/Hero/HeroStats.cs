@@ -41,7 +41,7 @@ public class HeroStats : MonoBehaviour
 
     //Elementa Type
     [SerializeField]
-    private Elements.ElementalAttribute mElementalType;
+    public Elements.ElementalAttribute mElementalType;
     public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     //Buff & Debuff Effects

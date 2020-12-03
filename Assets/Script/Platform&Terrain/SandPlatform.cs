@@ -11,5 +11,10 @@ public class SandPlatform : MonoBehaviour
         collision.gameObject.GetComponent<HeroMovement>().Speed -= SandSpeed;
     
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<HeroMovement>().Speed += SandSpeed;
+
+    }
 
 }
