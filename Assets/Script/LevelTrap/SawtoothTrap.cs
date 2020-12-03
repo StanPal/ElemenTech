@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LavaTrap : MonoBehaviour
+public class SawtoothTrap : MonoBehaviour
 {
     [SerializeField] private float damageTime = 1.0f;
     [SerializeField] private float damage = 5.0f;
@@ -13,7 +13,9 @@ public class LavaTrap : MonoBehaviour
     private int current = 0;
     private float WPreadius = 1;
     [SerializeField]
-    private float speed;
+    private float moveSpeed = 0;
+    [SerializeField]
+    private float rotateSpeed = 0;
 
     public struct TrappedHeroData
     {
@@ -24,7 +26,7 @@ public class LavaTrap : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(LavaDamageRoutine());
+        StartCoroutine(SawtoothDamageRoutine());
     }
 
     void Update()
@@ -37,10 +39,12 @@ public class LavaTrap : MonoBehaviour
                 current = 0;
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
+
+        transform.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed));
     }
 
-    private IEnumerator LavaDamageRoutine()
+    private IEnumerator SawtoothDamageRoutine()
     {
         while (true)
         {
