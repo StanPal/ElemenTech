@@ -4,25 +4,13 @@ using UnityEngine;
 
 public class Portal : MonoBehaviour
 {
-
+    [SerializeField]
     private Transform destination;
-    public bool isOrange;
-
-    private void Start()
-    {
-        if (isOrange == false)
-        {
-            destination = GameObject.FindGameObjectWithTag("OrangePortal").GetComponent<Transform>();
-        }
-        else
-        {
-            destination = GameObject.FindGameObjectWithTag("BulePortal").GetComponent<Transform>();
-        }
-    }
+    private float distence = 0.3f;
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Vector2.Distance(transform.position, collision.transform.position) > 0.3f)
+        if (Vector2.Distance(transform.position, collision.transform.position) > distence)
         {
             collision.transform.position = new Vector3(destination.position.x, destination.position.y, destination.position.z);
             Debug.Log("move");
