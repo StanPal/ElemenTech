@@ -15,7 +15,8 @@ public class SawtoothTrap : MonoBehaviour
     [SerializeField]
     private float moveSpeed = 0;
     [SerializeField]
-    private float rotateSpeed = 0;
+    private bool workWay = false;
+    private bool isActive = false;
 
     public struct TrappedHeroData
     {
@@ -31,17 +32,33 @@ public class SawtoothTrap : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+        if (!workWay)
         {
-            current++;
-            if (current >= waypoints.Length)
+            if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
             {
-                current = 0;
+                current++;
+                if (current >= waypoints.Length)
+                {
+                    current = 0;
+                }
+            }
+            transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
+        }
+        else
+        {
+            if (isActive)
+            {
+                if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+                {
+                    current++;
+                    if (current >= waypoints.Length)
+                    {
+                        current = 0;
+                    }
+                }
+                transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
-
-        transform.Rotate(new Vector3(0.0f, 0.0f, rotateSpeed));
     }
 
     private IEnumerator SawtoothDamageRoutine()
