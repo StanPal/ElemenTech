@@ -46,6 +46,10 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private float mDashStartUpTime = 1f;
 
+    public GameObject defendEffectPrefab;
+    private float defendTimeVal = 1;
+    private bool isDefended = true;
+
     [SerializeField]
     private float mSpeed;
     public float Speed { get { return mSpeed; } set { mSpeed = value; } }
@@ -131,8 +135,28 @@ public class HeroMovement : MonoBehaviour
         if (canDash)
         {
             StartCoroutine(DashStartUp());
+            Invisable();
         }
     }
+
+    private void Invisable()
+    {
+
+        if (isDefended)
+        {
+           
+            defendEffectPrefab.SetActive(true);
+            defendTimeVal -= Time.deltaTime;
+            if (defendTimeVal <= 0)
+            {
+                isDefended = false;
+                defendEffectPrefab.SetActive(false);
+            }
+        }
+
+    }
+
+
 
     IEnumerator DashStartUp()
     {
