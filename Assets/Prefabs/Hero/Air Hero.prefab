@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 2
+  controllerInput: 1
   isLeft: 0
   isJumping: 0
   mJumpForce: 12
@@ -611,7 +611,8 @@ MonoBehaviour:
   mShieldRecoverAmount: 10
   mShieldRecoveryTick: 0.1
   isShieldDisabled: 0
-  comboSkill: {fileID: 0}
+  comboSkill: {fileID: 273737325032263211, guid: 8e300e1bf4bd0574b98e18cf0f85e587,
+    type: 3}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0
