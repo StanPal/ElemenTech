@@ -342,7 +342,7 @@ GameObject:
   - component: {fileID: 1371002032310544467}
   m_Layer: 0
   m_Name: WaterHero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -355,7 +355,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371002032310544464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.079773, y: -2.864831, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1650942040172233776}
@@ -446,10 +446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
+  controllerInput: 4
   isLeft: 0
   isJumping: 0
-  mJumpForce: 8
+  mJumpForce: 10
   mNumOfJumps: 0
   mMaxJumps: 2
   mGround:
@@ -459,7 +459,7 @@ MonoBehaviour:
   isDashing: 0
   mDashSpeed: 3
   mDashCoolDown: 3
-  mDashStartUpTime: 1
+  mDashStartUpTime: 0
   mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
