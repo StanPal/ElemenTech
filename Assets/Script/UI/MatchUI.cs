@@ -10,6 +10,7 @@ public class MatchUI : MonoBehaviour
     public Text mTeamOneScore;
     public Text mTeamTwoScore;
     public Text mTransition;
+
     private ScoreManager mScoreManager;
 
     private void Awake()
