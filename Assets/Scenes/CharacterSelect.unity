@@ -1630,20 +1630,26 @@ PrefabInstance:
       propertyPath: _moduleComponents.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2480584443301088076, guid: 70d54219d5eedea4cbdb611bb122d4a8,
+        type: 3}
+      propertyPath: _ScoreManager
+      value: 
+      objectReference: {fileID: 5340142389288448264, guid: 61c2469ac2f40644795e9c565621861d,
+        type: 3}
     - target: {fileID: 2480584443301088077, guid: 70d54219d5eedea4cbdb611bb122d4a8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 16.09474
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2480584443301088077, guid: 70d54219d5eedea4cbdb611bb122d4a8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.1943618
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2480584443301088077, guid: 70d54219d5eedea4cbdb611bb122d4a8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 189.81706
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2480584443301088077, guid: 70d54219d5eedea4cbdb611bb122d4a8,
         type: 3}

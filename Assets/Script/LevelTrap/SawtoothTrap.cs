@@ -1,13 +1,13 @@
-﻿using System;
+﻿
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SawtoothTrap : MonoBehaviour
 {
-    [SerializeField] private float damageTime = 1.0f;
-    [SerializeField] private float damage = 5.0f;
-    private const float delayTime = 1.0f;
+
+    [SerializeField]
+    private GameObject Saw;
     [SerializeField]
     private GameObject[] waypoints;
     private int current = 0;
@@ -17,24 +17,23 @@ public class SawtoothTrap : MonoBehaviour
     [SerializeField]
     private bool workWay = false;
     private bool isActive = false;
+    int mTriggerId = 0;
+    int count = 0;
 
-    public struct TrappedHeroData
+    public void Move(int TriggerId)
     {
-        public HeroStats HeroStats;
-        public DateTime EnterTime;
-    }
-    private List<TrappedHeroData> _trappedHeros = new List<TrappedHeroData>();
-
-    private void Awake()
-    {
-        StartCoroutine(SawtoothDamageRoutine());
+        if (!isActive)
+        {
+            isActive = true;
+            mTriggerId = TriggerId;
+        }
     }
 
     void Update()
     {
         if (!workWay)
         {
-            if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+            if (Vector3.Distance(waypoints[current].transform.position, Saw.transform.position) < WPreadius)
             {
                 current++;
                 if (current >= waypoints.Length)
@@ -42,71 +41,33 @@ public class SawtoothTrap : MonoBehaviour
                     current = 0;
                 }
             }
-            transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
+            Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
         }
         else
         {
             if (isActive)
             {
-                if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+                if (Saw.transform.position == waypoints[0].transform.position && count == 1)
                 {
-                    current++;
-                    if (current >= waypoints.Length)
-                    {
-                        current = 0;
-                    }
+                    isActive = false;
+                    count = 0;
                 }
-                transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * moveSpeed);
-            }
-        }
-    }
 
-    private IEnumerator SawtoothDamageRoutine()
-    {
-        while (true)
-        {
-            yield return new WaitForSeconds(delayTime);
-            if(_trappedHeros.Count > 0)
-            {
-                foreach(var trappedHero in _trappedHeros)
+                if(Saw.transform.position == waypoints[mTriggerId].transform.position)
                 {
-                    trappedHero.HeroStats.TakeDamage(damage);
+                    count = 1;
+                }
+
+                if(count == 1)
+                {
+                    Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[0].transform.position, Time.deltaTime * moveSpeed);
+                }
+                else
+                {
+                    Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[mTriggerId].transform.position, Time.deltaTime * moveSpeed);
                 }
             }
         }
-    }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.GetComponent<HeroStats>())
-        {
-            TrappedHeroData data = new TrappedHeroData()
-            {
-                HeroStats = collision.GetComponent<HeroStats>(),
-                EnterTime = DateTime.Now
-            };
-            _trappedHeros.Add(data);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.GetComponent<HeroStats>())
-        {
-            //TODO - remove hero from _trappedHeros list.
-            TrappedHeroData data = new TrappedHeroData()
-            {
-                HeroStats = collision.GetComponent<HeroStats>(),
-                EnterTime = DateTime.Now
-            };
-
-            for (int i = 0; i < _trappedHeros.Count; ++i)
-            {
-                if (_trappedHeros[i].HeroStats == data.HeroStats)
-                {
-                    _trappedHeros.Remove(_trappedHeros[i]);
-                }
-            }
-        }
     }
 }
