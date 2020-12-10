@@ -175,17 +175,12 @@ public class HeroStats : MonoBehaviour
     }
 
     void HeroDie()
-    {        
+    {
+        gameObject.SetActive(false);
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
-        if(playermanager.TeamOne.Contains(gameObject))
-        {
-            playermanager.TeamOne.Remove(gameObject);
-        }
-        if(playermanager.TeamTwo.Contains(gameObject))
-        {
-            playermanager.TeamTwo.Remove(gameObject);
-        }
-        this.gameObject.SetActive(false);
+        
+        PauseUI pauseUI = FindObjectOfType<PauseUI>();
+        pauseUI.PauseGame();
     }
 
 }
