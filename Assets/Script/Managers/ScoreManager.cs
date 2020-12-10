@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int mTeamOneScore = 0;
     public int TeamOneScore { get { return mTeamOneScore; } }
+
     [SerializeField]
     private int mTeamTwoScore = 0;
     public int TeamTwoScore { get { return mTeamTwoScore; } }
