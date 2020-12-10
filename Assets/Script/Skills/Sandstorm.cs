@@ -29,10 +29,12 @@ public class Sandstorm : MonoBehaviour
         {
             isFiredLeft = true;
         }
+        
     }
 
     private void Start()
     {
+  
         transform.parent = null;
         StartCoroutine(SandstormTimer());
         if(isFiredLeft)
@@ -49,7 +51,8 @@ public class Sandstorm : MonoBehaviour
     }
 
     private void FixedUpdate()
-    { 
+    {
+        transform.localScale = new Vector3(1f, 1f, 1f);
         mRigidbody.velocity = transform.right * mProjectileSpeed;
     }
 
