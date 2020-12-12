@@ -87,7 +87,7 @@ public class HeroStats : MonoBehaviour
         {
             mCurrentHealth -= (damage * 0.75f);
         }
-        else
+        else if(!gameObject.GetComponent<HeroMovement>().isDashing)
         {
             mCurrentHealth -= damage;
         }
