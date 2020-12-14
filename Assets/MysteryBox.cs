@@ -17,43 +17,52 @@ public class MysteryBox : MonoBehaviour
 
             if (n == 0) // n = 0,will turn to the earth
             {
-                target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Earth;
+                    Debug.Log("n = 0, Element:earth");
+                    target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Earth;
             }
             else if(n == 1)//air
-                {
+            {
+                Debug.Log("n = 1, Element:air");
                 target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Air;
                 }
             else if(n == 2)//fire
-                {
+            {
+                Debug.Log("n = 2, Element:fire");
                 target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Fire;
                 }
             else if(n == 3)//water
                 {
+                Debug.Log("n = 3, Element:water");
                 target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Water;
                 }
             else if(n == 4)//healthitem
                 {
-                if (heroStats.CurrentHealth + gameObject.GetComponent<HealthItem>().itemManager.HealthReply > heroStats.MaxHealth)
-                {
-                heroStats.CurrentHealth = heroStats.MaxHealth;
-                }
+                    Debug.Log("n = 4,healthitem");
+                    if (heroStats.CurrentHealth + gameObject.GetComponent<HealthItem>().itemManager.HealthReply > heroStats.MaxHealth)
+                    {
+                        heroStats.CurrentHealth = heroStats.MaxHealth;
+                    }
                 }
             else if(n == 5)//golem air
                 {
-                target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Air;
+                    Debug.Log("n = 5, golem Element:air");
+                    target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Air;
                 }
             else if (n == 6)//golem earth
-            {
-                target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Earth;
-            }
+                {
+                    Debug.Log("n = 6, golem Element:earth");
+                    target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Earth;
+                }
             else if (n == 7)//golem fire
-            {
-                target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Fire;
-            }
+                {
+                    Debug.Log("n = 7, golem Element:fire");
+                    target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Fire;
+                }
             else if (n == 8)//golem water
-            {
-                target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Water;
-            }
+                {
+                    Debug.Log("n = 8, golem Element:water");
+                    target.gameObject.GetComponent<Golem>().mGolemType = GolemData.elementType.Water;
+                }
         }
     }
 }
