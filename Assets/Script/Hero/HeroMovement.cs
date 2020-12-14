@@ -38,7 +38,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private bool canDash = true;
     [SerializeField]
-    private bool isDashing;
+    public bool isDashing;
     [SerializeField]
     private float mDashSpeed = 5f;
     [SerializeField]
@@ -135,26 +135,9 @@ public class HeroMovement : MonoBehaviour
         if (canDash)
         {
             StartCoroutine(DashStartUp());
-            Invisable();
         }
     }
 
-    private void Invisable()
-    {
-
-        if (isDefended)
-        {
-           
-            defendEffectPrefab.SetActive(true);
-            defendTimeVal -= Time.deltaTime;
-            if (defendTimeVal <= 0)
-            {
-                isDefended = false;
-                defendEffectPrefab.SetActive(false);
-            }
-        }
-
-    }
 
 
 
