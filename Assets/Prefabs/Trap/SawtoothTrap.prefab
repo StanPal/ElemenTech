@@ -154,9 +154,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d775610f02d24e349a0ee11ffe87703d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damageTime: 1
-  damage: 5
-  Saw: {fileID: 0}
+  Saw: {fileID: 1341258280518093538}
   waypoints:
   - {fileID: 2089919183895937094}
   - {fileID: 2089919184772551907}
