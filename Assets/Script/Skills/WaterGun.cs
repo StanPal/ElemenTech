@@ -51,18 +51,26 @@ public class WaterGun : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(damage);
-                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
-                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(damage);
+                
+                }
+                //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                //collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
             }
         }
         if (waterSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(damage);
-                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
-                collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(damage);
+                }
+                //collision.GetComponent<HeroStats>().TakeDamage(damage);
+                //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                //collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
             }
         }
 
