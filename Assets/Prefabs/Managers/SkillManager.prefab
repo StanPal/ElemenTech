@@ -14,8 +14,6 @@ GameObject:
   - component: {fileID: 639230565}
   - component: {fileID: 639230566}
   - component: {fileID: 639230567}
-  - component: {fileID: 1922073247}
-  - component: {fileID: 1922073248}
   m_Layer: 0
   m_Name: SkillManager
   m_TagString: Untagged
@@ -63,7 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mFireBall: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
     type: 3}
-  mSpeed: 10
+  mSpeed: 20
   mDamage: 10
   mDotDuration: 5
 --- !u!114 &639230565
@@ -123,40 +121,3 @@ MonoBehaviour:
   mSpikeHeight: 1
   mDamage: 10
   mEarthSpikeList: []
---- !u!114 &1922073247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298977985946996504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf75f85b09b1ef2459038b6ee28cacd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
-  mDamage: 2
-  mSpeed: 10
-  mExitTime: 10
-  mScale: {x: 0, y: 0, z: 0}
-  mScaleSpeed: 0
---- !u!114 &1922073248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1298977985946996504}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7539fc20dbe07449103b21bb014d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
-    type: 3}
-  mSpeed: 10
-  mDamage: 5
-  mExitTime: 0
-  mSlowAmount: 1
-  mSlowDuration: 1

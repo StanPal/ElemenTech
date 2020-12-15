@@ -11,18 +11,16 @@ public class WaterGun : MonoBehaviour
     private Rigidbody2D rigidbody;
     [SerializeField]
     private float exitTime = 2.0f;
-    private HeroMovement hero;
     private WaterSkills waterSkills;
     private void Awake()
     {
         rigidbody = GetComponent<Rigidbody2D>();
         waterSkills = FindObjectOfType<WaterSkills>();
-        hero = FindObjectOfType<HeroMovement>();
-        if (hero.GetIsLeft)
+
+        if (waterSkills.PlayerSkills.HeroMovement.GetIsLeft)
         {
             projectileSpeed = -projectileSpeed;
         }
-
     }
 
     private void FixedUpdate()

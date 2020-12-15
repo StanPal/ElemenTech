@@ -24,6 +24,16 @@ public class EarthSpike : MonoBehaviour
                 collision.GetComponent<HeroStats>().TakeDamage(EarthSkills.Damage);
             }
         }
+
+        if (collision.GetComponent<Guard>())
+        {
+            Guard guard = collision.GetComponent<Guard>();
+            if (guard.Guarding)
+            {
+                Debug.Log("Shield Hit");
+                collision.GetComponent<Guard>().ComboSkillOn = true;
+            }
+        }
         if (EarthSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
@@ -31,10 +41,5 @@ public class EarthSpike : MonoBehaviour
                 collision.GetComponent<HeroStats>().TakeDamage(EarthSkills.Damage);
             }
         }
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        
     }
 }
