@@ -760,6 +760,7 @@ MonoBehaviour:
   mDashSpeed: 3
   mDashCoolDown: 3
   mDashStartUpTime: 0
+  defendEffectPrefab: {fileID: 0}
   mSpeed: 15
   mKnockbackRecieved: 0
   mKnockbackCount: 0
