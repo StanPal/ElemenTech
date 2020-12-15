@@ -21,6 +21,11 @@ public class HeroActions : MonoBehaviour
     private PlayerInput mPlayerInput;
 
     private bool isGuardInvoked = false;
+    [SerializeField]
+    private bool isOnCooldown = false;
+    private float mNextFireTime;
+    public bool IsCooldown { get { return isOnCooldown; } set { isOnCooldown = value; } }
+  
 
     private void Awake()
     {
@@ -99,7 +104,16 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+   
+    }
 
+    private IEnumerator CoolDownTimer()
+    {
+        yield return new WaitForSeconds(mHeroStats.CoolDown);
+        isOnCooldown = false;
+    }
 
     private void Guard()
     {
@@ -117,9 +131,13 @@ public class HeroActions : MonoBehaviour
     
     private void ElementSpecial1()
     {
-        if (!isGuardInvoked)
+        if (Time.time > mNextFireTime)
         {
-            onSkillPerformed.Invoke(HeroStats.GetElement);
+            if (!isGuardInvoked && !isOnCooldown)
+            {
+                mNextFireTime = Time.time + HeroStats.CoolDown;
+                onSkillPerformed.Invoke(HeroStats.GetElement);
+            }
         }
     }
 

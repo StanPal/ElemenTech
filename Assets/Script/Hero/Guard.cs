@@ -90,7 +90,17 @@ public class Guard : MonoBehaviour
                 GameObject ComboSkillClone = Instantiate(comboSkill, transform);
                 ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
             }
-            Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
+            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Fire)
+            {
+                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            }
+            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Air)
+            {
+                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            }
+            //Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
         }
     }
@@ -104,8 +114,8 @@ public class Guard : MonoBehaviour
 
     private void OnDestroy()
     {
-        mHeroAction.onGuardPerformed -= GuardMove;
-        mHeroAction.onGuardExit -= DestroyGuard;
+        //mHeroAction.onGuardPerformed -= GuardMove;
+        //mHeroAction.onGuardExit -= DestroyGuard;
     }
 
     private void SummonGuard()

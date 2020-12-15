@@ -29,7 +29,7 @@ public class HeroStats : MonoBehaviour
     [SerializeField]
     private float mCurrentHealth = 100f;
     [SerializeField]
-    private float mCoolDown;
+    private float mCoolDown = 3f;
     private float mTempCDTime;   
 
     private bool isCDFinished;    

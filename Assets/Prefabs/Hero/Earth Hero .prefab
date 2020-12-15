@@ -444,7 +444,7 @@ MonoBehaviour:
   team: 2
   mName: Earth Cyborg
   mAttack: 20
-  mMaxHealth: 100
+  mMaxHealth: 250
   mCurrentHealth: 100
   mCoolDown: 0
   mElementalType: 1
@@ -463,6 +463,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1791110765894072927}
+  isOnCooldown: 0
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -475,10 +476,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
+  controllerInput: 1
   isLeft: 0
   isJumping: 0
-  mJumpForce: 6
+  mJumpForce: 10
   mNumOfJumps: 0
   mMaxJumps: 3
   mGround:
@@ -488,8 +489,8 @@ MonoBehaviour:
   isDashing: 0
   mDashSpeed: 1
   mDashCoolDown: 1
-  mDashStartUpTime: 1
-  mSpeed: 5
+  mDashStartUpTime: 0
+  mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
   mRecoveryTime: 1
