@@ -89,8 +89,7 @@ public class HeroMovement : MonoBehaviour
         }
         if (controllerInput == Controller.XBOX)
         {
-            
-
+            mPlayerInput.XBOX.Dash.performed += _ => OnDash();
         }
     }
 

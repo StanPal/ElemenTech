@@ -2349,49 +2349,6 @@ Canvas:
     type: 3}
   m_PrefabInstance: {fileID: 1023555080}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1922073242 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1298977985946996504, guid: 1e7ec5f10d3bc424aa3e2b3460c89a98,
-    type: 3}
-  m_PrefabInstance: {fileID: 46569231}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1922073247
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922073242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bf75f85b09b1ef2459038b6ee28cacd2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
-  mDamage: 2
-  mSpeed: 10
-  mExitTime: 10
-  mScale: {x: 0, y: 0, z: 0}
-  mScaleSpeed: 0
---- !u!114 &1922073248
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1922073242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9e7539fc20dbe07449103b21bb014d7b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
-    type: 3}
-  mSpeed: 10
-  mDamage: 5
-  mExitTime: 0
-  mSlowAmount: 1
-  mSlowDuration: 1
 --- !u!1 &1935164178
 GameObject:
   m_ObjectHideFlags: 0
