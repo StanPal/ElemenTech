@@ -446,7 +446,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
+  controllerInput: 3
   isLeft: 0
   isJumping: 0
   mJumpForce: 10
@@ -457,13 +457,13 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 3
-  mDashCoolDown: 3
+  mDashSpeed: 8
+  mDashCoolDown: 0.5
   mDashStartUpTime: 0
   mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
-  mRecoveryTime: 1
+  mRecoveryTime: 0.05
   isRecovering: 0
 --- !u!114 &1371002032310544466
 MonoBehaviour:

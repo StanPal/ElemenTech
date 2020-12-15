@@ -21,7 +21,11 @@ public class EarthSpike : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(EarthSkills.Damage);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(10f);
+                }
+                
             }
         }
 
@@ -38,7 +42,10 @@ public class EarthSpike : MonoBehaviour
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(EarthSkills.Damage);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(10f);
+                }
             }
         }
     }

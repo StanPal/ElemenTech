@@ -32,7 +32,7 @@ public class FireBall : MonoBehaviour
             golem.TakeDamage(fireSkills.Damage);
             Destroy(gameObject);
         }
-        if (collision.GetComponent<Guard>())
+        if (collision.GetComponent<Guard>() && this.tag.Equals(fireSkills.PlayerSkills.HeroMovement.tag))
         {
             Guard guard = collision.GetComponent<Guard>();
             if (guard.Guarding)
@@ -50,18 +50,22 @@ public class FireBall : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
-                collision.GetComponent<HeroStats>().TakeDamage(fireSkills.Damage);
-                collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
+                // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
 
-                Destroy(gameObject);
-            }
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(fireSkills.Damage);
+                    Destroy(gameObject);
+                }
+                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(fireSkills.Damage);
+                    //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);       
+                }            
         }
         if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
+               // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
                 collision.GetComponent<HeroStats>().TakeDamage(fireSkills.Damage);
                 collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
                 Destroy(gameObject);

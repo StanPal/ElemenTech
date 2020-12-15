@@ -444,7 +444,7 @@ MonoBehaviour:
   team: 2
   mName: Earth Cyborg
   mAttack: 20
-  mMaxHealth: 100
+  mMaxHealth: 250
   mCurrentHealth: 100
   mCoolDown: 0
   mElementalType: 1
@@ -490,7 +490,7 @@ MonoBehaviour:
   mDashSpeed: 1
   mDashCoolDown: 1
   mDashStartUpTime: 0
-  mSpeed: 5
+  mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
   mRecoveryTime: 1
