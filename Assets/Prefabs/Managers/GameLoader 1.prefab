@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2480584443301088067}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.09474, y: -1.1943618, z: 189.81706}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -44,8 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _PlayerManager: {fileID: 1324117386745922378, guid: 61182018a349fda4785e8b9ba83dbf96,
-    type: 3}
-  _ScoreManager: {fileID: 5340142389288448264, guid: 61c2469ac2f40644795e9c565621861d,
     type: 3}
   sceneIndexToLoad: 1
   _moduleComponents: []

@@ -20,11 +20,6 @@ public class Laser : MonoBehaviour
     private float mDamage = 10f;
     private float mTotalTime = 0;
     private float mDuration = 2f;
-    private void Awake()
-    {
-        
-
-    }
 
     private void Start()
     {

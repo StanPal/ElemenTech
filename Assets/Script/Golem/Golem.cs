@@ -43,7 +43,7 @@ public class Golem : MonoBehaviour
     private float mTime;
 
     [SerializeField]
-    private GolemData.elementType mGolemType;
+    public GolemData.elementType mGolemType;
 
     private GolemData.attackType mAttackType;
 

@@ -7,6 +7,7 @@ public class GameLoader : AsyncLoader
 {
     [SerializeField] private GameObject _PlayerManager = null;
     [SerializeField] private GameObject _ScoreManager = null;
+
     [SerializeField] private int sceneIndexToLoad = 1;
     private static int _sceneIndex = 0;
     private static GameLoader _instance; // The only singleton you should have.

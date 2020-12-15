@@ -38,13 +38,17 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private bool canDash = true;
     [SerializeField]
-    private bool isDashing;
+    public bool isDashing;
     [SerializeField]
     private float mDashSpeed = 5f;
     [SerializeField]
     private float mDashCoolDown = 1f;
     [SerializeField]
     private float mDashStartUpTime = 1f;
+
+    public GameObject defendEffectPrefab;
+    private float defendTimeVal = 1;
+    private bool isDefended = true;
 
     [SerializeField]
     private float mSpeed;
@@ -132,6 +136,9 @@ public class HeroMovement : MonoBehaviour
             StartCoroutine(DashStartUp());
         }
     }
+
+
+
 
     IEnumerator DashStartUp()
     {

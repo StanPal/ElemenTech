@@ -41,7 +41,7 @@ public class HeroStats : MonoBehaviour
 
     //Elementa Type
     [SerializeField]
-    private Elements.ElementalAttribute mElementalType;
+    public Elements.ElementalAttribute mElementalType;
     public Elements.ElementalAttribute GetElement { get { return mElementalType; } }
 
     //Buff & Debuff Effects
@@ -87,7 +87,7 @@ public class HeroStats : MonoBehaviour
         {
             mCurrentHealth -= (damage * 0.75f);
         }
-        else
+        else if(!gameObject.GetComponent<HeroMovement>().isDashing)
         {
             mCurrentHealth -= damage;
         }
@@ -175,17 +175,12 @@ public class HeroStats : MonoBehaviour
     }
 
     void HeroDie()
-    {        
+    {
+        gameObject.SetActive(false);
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
-        if(playermanager.TeamOne.Contains(gameObject))
-        {
-            playermanager.TeamOne.Remove(gameObject);
-        }
-        if(playermanager.TeamTwo.Contains(gameObject))
-        {
-            playermanager.TeamTwo.Remove(gameObject);
-        }
-        this.gameObject.SetActive(false);
+        
+        PauseUI pauseUI = FindObjectOfType<PauseUI>();
+        pauseUI.PauseGame();
     }
 
 }
