@@ -38,6 +38,7 @@ public class HeroStats : MonoBehaviour
     public float CoolDown { get { return mCoolDown; } }
     public float CurrentHealth { get { return mCurrentHealth; } set { mCurrentHealth = value; } }
     public float MaxHealth { get { return mMaxHealth; } }
+    public float AttackDamage { get { return mAttack; } }
 
     //Elementa Type
     [SerializeField]

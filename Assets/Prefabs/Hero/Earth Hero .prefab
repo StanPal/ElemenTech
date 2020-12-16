@@ -446,7 +446,7 @@ MonoBehaviour:
   mAttack: 20
   mMaxHealth: 250
   mCurrentHealth: 100
-  mCoolDown: 0
+  mCoolDown: 1
   mElementalType: 1
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -476,7 +476,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 2
   isLeft: 0
   isJumping: 0
   mJumpForce: 10
@@ -525,7 +525,7 @@ MonoBehaviour:
   mGuardTime: 0.5
   mShieldSize: 2.1
   mSpeedDecrease: 1
-  mShieldMaxEnergy: 100
+  mShieldMaxEnergy: 150
   mShieldEnergy: 100
   mShieldEnergyTick: 10
   mShieldRecoverAmount: 10
@@ -821,15 +821,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   startTimeBtAttack: 1
-  mHitStun: 1
+  mHitStun: 3
   attackPos: {fileID: 1791110764420600048}
   attackRange: 5
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100
-  mKnockBackAmount: 5
+  mKnockBackAmount: 3
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0

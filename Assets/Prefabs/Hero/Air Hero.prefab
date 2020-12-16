@@ -527,7 +527,7 @@ MonoBehaviour:
   mAttack: 20
   mMaxHealth: 125
   mCurrentHealth: 100
-  mCoolDown: 0
+  mCoolDown: 0.25
   mElementalType: 3
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -557,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 4
+  controllerInput: 0
   isLeft: 0
   isJumping: 0
   mJumpForce: 10
@@ -569,7 +569,7 @@ MonoBehaviour:
   canDash: 1
   isDashing: 0
   mDashSpeed: 2
-  mDashCoolDown: 0
+  mDashCoolDown: 1
   mDashStartUpTime: 0
   mSpeed: 10
   mKnockbackRecieved: 0
@@ -902,7 +902,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   startTimeBtAttack: 1
   mHitStun: 1
   attackPos: {fileID: 1791110764420600048}

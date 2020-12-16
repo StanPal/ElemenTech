@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
-  mDamage: 2
+  mDamage: 5
   mSpeed: 10
   mExitTime: 10
   mScale: {x: 0.5, y: 0.5, z: 0.5}
