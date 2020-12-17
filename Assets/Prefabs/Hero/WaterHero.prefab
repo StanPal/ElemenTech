@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   startTimeBtAttack: 0.5
   mHitStun: 1
   attackPos: {fileID: 1371002032368287851}
@@ -457,7 +456,7 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 8
+  mDashSpeed: 7
   mDashCoolDown: 0.5
   mDashStartUpTime: 0
   mSpeed: 10

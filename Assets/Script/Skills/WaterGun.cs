@@ -54,7 +54,8 @@ public class WaterGun : MonoBehaviour
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     heroStats.TakeDamage(damage);
-                
+                    Destroy(gameObject);
+
                 }
                 //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                 //collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
@@ -67,6 +68,8 @@ public class WaterGun : MonoBehaviour
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     heroStats.TakeDamage(damage);
+                    Destroy(gameObject);
+
                 }
                 //collision.GetComponent<HeroStats>().TakeDamage(damage);
                 //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;

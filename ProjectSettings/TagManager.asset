@@ -10,6 +10,8 @@ TagManager:
   - Team1
   - IcyPlatform
   - DIsappearPlatform
+  - BluePortal
+  - OrangePortal
   layers:
   - Default
   - TransparentFX

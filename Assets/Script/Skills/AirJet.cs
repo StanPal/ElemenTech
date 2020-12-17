@@ -41,8 +41,8 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(airskills.Damage);
             }
         }
-
-        if (collision.GetComponent<Guard>())
+        
+        if ( collision.GetComponent<Guard>() && this.tag.Equals(airskills.PlayerSkills.HeroMovement.tag))
         {
             Guard guard = collision.GetComponent<Guard>();
             if (guard.Guarding)
@@ -62,16 +62,22 @@ public class AirJet : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
         if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
     }
