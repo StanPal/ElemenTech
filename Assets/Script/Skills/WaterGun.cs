@@ -7,16 +7,16 @@ public class WaterGun : MonoBehaviour
     [SerializeField]
     private float damage = 2;
     [SerializeField]
-    private float projectileSpeed = 5;
-    private Rigidbody2D rigidbody;
+    private float projectileSpeed;
+    private Rigidbody2D mRigidbody;
     [SerializeField]
     private float exitTime = 2.0f;
     private WaterSkills waterSkills;
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        mRigidbody = GetComponent<Rigidbody2D>();
         waterSkills = FindObjectOfType<WaterSkills>();
-
+        projectileSpeed = waterSkills.Speed;
         if (waterSkills.PlayerSkills.HeroMovement.GetIsLeft)
         {
             projectileSpeed = -projectileSpeed;
@@ -30,7 +30,7 @@ public class WaterGun : MonoBehaviour
             Destroy(gameObject);
         }
         exitTime -= Time.deltaTime;
-        rigidbody.velocity = transform.right * projectileSpeed;
+        mRigidbody.velocity = transform.right * projectileSpeed;
     }
 
 
@@ -44,6 +44,20 @@ public class WaterGun : MonoBehaviour
             {
                 golem.TakeDamage(damage);
                 Destroy(gameObject);
+            }
+        }
+
+        if (collision.GetComponent<Guard>())
+        {
+            if (collision.GetComponent<Guard>().tag.Equals(waterSkills.PlayerSkills.HeroAction.tag))
+            {
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+                }
             }
         }
 

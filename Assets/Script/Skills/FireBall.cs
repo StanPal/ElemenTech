@@ -32,14 +32,17 @@ public class FireBall : MonoBehaviour
             golem.TakeDamage(fireSkills.Damage);
             Destroy(gameObject);
         }
-        if (collision.GetComponent<Guard>() && this.tag.Equals(fireSkills.PlayerSkills.HeroMovement.tag))
+        if (collision.GetComponent<Guard>())
         {
-            Guard guard = collision.GetComponent<Guard>();
-            if (guard.Guarding)
+            if (collision.GetComponent<Guard>().tag.Equals(fireSkills.PlayerSkills.HeroAction.tag))
             {
-                Debug.Log("Shield Hit");
-                collision.GetComponent<Guard>().ComboSkillOn = true;
-                Destroy(gameObject);
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+                }
             }
         }
         if (collision.GetComponentInParent<Walls>())

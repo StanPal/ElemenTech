@@ -339,8 +339,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
-      propertyPath: orthographic size
-      value: 14
+      propertyPath: m_ClearFlags
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329850, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -515,8 +515,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 988976424}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 31, y: 8, z: -325.7528}
-  m_LocalScale: {x: 2.8125, y: 34.276253, z: 1}
+  m_LocalPosition: {x: 31, y: 9, z: -325.7528}
+  m_LocalScale: {x: 2.8125, y: 30.848627, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 18
@@ -653,6 +653,11 @@ PrefabInstance:
       propertyPath: waypoints.Array.data[2]
       value: 
       objectReference: {fileID: 1212075658}
+    - target: {fileID: 7826326140953352212, guid: 2883cfc64dd777b479a65bc499cbde2e,
+        type: 3}
+      propertyPath: moveSpeed
+      value: 13
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2883cfc64dd777b479a65bc499cbde2e, type: 3}
 --- !u!114 &1212075656 stripped

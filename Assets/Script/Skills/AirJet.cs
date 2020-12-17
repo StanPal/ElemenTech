@@ -42,15 +42,18 @@ public class AirJet : MonoBehaviour
             }
         }
         
-        if ( collision.GetComponent<Guard>() && this.tag.Equals(airskills.PlayerSkills.HeroMovement.tag))
+        if (collision.GetComponent<Guard>())
         {
-            Guard guard = collision.GetComponent<Guard>();
-            if (guard.Guarding)
+            if (collision.GetComponent<Guard>().tag.Equals(airskills.PlayerSkills.HeroAction.tag))
             {
-                Destroy(gameObject);
-                Debug.Log("Shield Hit");
-                collision.GetComponent<Guard>().ComboSkillOn = true;
-   
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+
+                }
             }
         }
 

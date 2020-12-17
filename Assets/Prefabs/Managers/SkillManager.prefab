@@ -62,7 +62,7 @@ MonoBehaviour:
   mFireBall: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
     type: 3}
   mSpeed: 20
-  mDamage: 10
+  mDamage: 20
   mDotDuration: 5
 --- !u!114 &639230565
 MonoBehaviour:
@@ -78,8 +78,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
     type: 3}
-  mSpeed: 20
-  mDamage: 5
+  mSpeed: 25
+  mDamage: 10
   mExitTime: 3
   mSlowAmount: 1
   mSlowDuration: 1
@@ -96,10 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
-  mDamage: 5
-  mSpeed: 10
+  mDamage: 15
+  mSpeed: 15
   mExitTime: 10
-  mScale: {x: 0.5, y: 0.5, z: 0.5}
+  mScale: {x: 0.5, y: 5, z: 0.5}
   mScaleSpeed: 2
 --- !u!114 &639230567
 MonoBehaviour:
@@ -115,9 +115,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mEarthSpike: {fileID: 1854956812321698989, guid: d25b6ae191ca7e941b80eeefada72f58,
     type: 3}
-  mNumSpikes: 3
+  mNumSpikes: 5
   mSpikeHorizontalOffset: 1
-  mSkillDuration: 0.5
+  mSkillDuration: 0.75
   mSpikeHeight: 1
   mDamage: 10
   mEarthSpikeList: []

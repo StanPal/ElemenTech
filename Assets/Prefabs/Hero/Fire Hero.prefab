@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Fire Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Fire Cyborg
-  mAttack: 20
+  mAttack: 15
   mMaxHealth: 100
   mCurrentHealth: 100
   mCoolDown: 0.5
@@ -1098,7 +1098,7 @@ MonoBehaviour:
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100
-  mKnockBackAmount: 5
+  mKnockBackAmount: 8
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0
