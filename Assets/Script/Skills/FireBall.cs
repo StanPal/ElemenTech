@@ -13,15 +13,13 @@ public class FireBall : MonoBehaviour
         fireSkills = FindObjectOfType<FireSkills>();
         mRigidbody = GetComponent<Rigidbody2D>();
         mProjectileSpeed = fireSkills.Speed;
-        if (fireSkills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            mProjectileSpeed *= -1;
-        }
     }
 
     private void FixedUpdate()
     {
         mRigidbody.velocity = transform.right * mProjectileSpeed; 
+
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

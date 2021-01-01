@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class FireSkills : MonoBehaviour
 {
+ 
     // FireSkills 
     public GameObject mFireBall;
 
@@ -28,7 +29,7 @@ public class FireSkills : MonoBehaviour
 
     void FireBall()
     {
-        Instantiate(mFireBall, mHeroSkills.HeroAction.transform.position, Quaternion.identity);
+       Instantiate(mFireBall, mHeroSkills.HeroAction.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
     }
 
 }

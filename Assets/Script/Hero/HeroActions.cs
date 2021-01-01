@@ -25,7 +25,14 @@ public class HeroActions : MonoBehaviour
     private bool isOnCooldown = false;
     private float mNextFireTime;
     public bool IsCooldown { get { return isOnCooldown; } set { isOnCooldown = value; } }
-  
+
+    [SerializeField]
+    private Vector2 mLookDirection;
+    [SerializeField]
+    private float mLookAngle;
+
+    public Vector2 GetLookDir { get { return mLookDirection; } }
+    public float GetLookAngle { get { return mLookAngle; } }
 
     private void Awake()
     {
@@ -102,6 +109,12 @@ public class HeroActions : MonoBehaviour
                 mPlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
             }
         }
+    }
+
+    private void Update()
+    {
+        mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+        mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
     }
 
     private void FixedUpdate()
