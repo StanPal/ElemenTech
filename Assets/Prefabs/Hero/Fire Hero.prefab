@@ -622,7 +622,6 @@ GameObject:
   - component: {fileID: 1791110765294023679}
   - component: {fileID: 1462250077875475378}
   - component: {fileID: 1791110765294023676}
-  - component: {fileID: 8688314565285712888}
   m_Layer: 0
   m_Name: Fire Hero
   m_TagString: Team1
@@ -735,6 +734,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sword: {fileID: 1791110765894072927}
   isOnCooldown: 0
+  mLookDirection: {x: 0, y: 0}
+  mLookAngle: 0
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -747,7 +748,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
+  controllerInput: 1
   isLeft: 0
   isJumping: 0
   mJumpForce: 10
@@ -804,18 +805,6 @@ MonoBehaviour:
   isShieldDisabled: 0
   comboSkill: {fileID: 2199930519875798088, guid: 41997a524e4ad22429e99f60fb8dcbbb,
     type: 3}
---- !u!114 &8688314565285712888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791110765294023672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce54505e7e7e83247985d880bb1d4271, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0

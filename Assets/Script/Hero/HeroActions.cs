@@ -19,6 +19,7 @@ public class HeroActions : MonoBehaviour
     private HeroStats mHeroStats;
     public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
+    public PlayerInput PlayerInput { get { return mPlayerInput; } }
 
     private bool isGuardInvoked = false;
     [SerializeField]

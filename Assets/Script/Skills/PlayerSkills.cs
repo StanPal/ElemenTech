@@ -9,8 +9,6 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onAirSkillPerformed;
     public event System.Action onWaterSkillPerformed;
 
-    private Shooting mShooting;
-    public Shooting ShootProjectile { get { return mShooting; } }
     private HeroActions mHeroAction;
     public HeroActions HeroAction { get { return mHeroAction; } }
     private HeroMovement mHeroMovement;
