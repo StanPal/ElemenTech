@@ -25,29 +25,31 @@ public class LevelManager : MonoBehaviour
 
     private void Update()
     {
-        if (!isMatchOver)
-        {   
-            if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
+        if (!mScoreManager.PracticeMode)
+        {
+            if (!isMatchOver)
             {
-                LevelEnd(1, 1);
+                if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
+                {
+                    LevelEnd(1, 1);
+                }
+                else if (mPlayerManager.TeamOne.Count == 2 && mPlayerManager.TeamTwo.Count == 0)
+                {
+                    LevelEnd(1, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(2, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 2 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(2, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 0 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(1, 0);
+                }
             }
-           else if(mPlayerManager.TeamOne.Count == 2 && mPlayerManager.TeamTwo.Count == 0)
-            {
-                LevelEnd(1, 1);
-            }
-           else if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(2, 1);
-            }
-            else if (mPlayerManager.TeamTwo.Count == 2 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(2, 1);
-            }
-            else if (mPlayerManager.TeamTwo.Count == 0 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(1, 0);
-            }
-
         }
     }
 

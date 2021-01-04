@@ -17,9 +17,7 @@ public class FireBall : MonoBehaviour
 
     private void FixedUpdate()
     {
-        mRigidbody.velocity = transform.right * mProjectileSpeed; 
-
-
+        mRigidbody.velocity = transform.right * mProjectileSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -60,7 +58,7 @@ public class FireBall : MonoBehaviour
                 }
                     //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(fireSkills.Damage);
                     //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);       
-                }            
+                }
         }
         if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {

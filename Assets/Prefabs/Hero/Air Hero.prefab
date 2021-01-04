@@ -547,6 +547,7 @@ MonoBehaviour:
   isOnCooldown: 0
   mLookDirection: {x: 0, y: 0}
   mLookAngle: 0
+  axispos: {x: 0, y: 0}
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0

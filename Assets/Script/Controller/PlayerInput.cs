@@ -502,6 +502,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ac82f9b-5d6a-410c-b1c2-49aefbc1e1b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -614,6 +622,61 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""31889440-f4c2-4286-a377-9e08edd8e209"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""1d9582b1-78d7-4be0-bf7a-23eca2d480d6"",
+                    ""path"": ""<XInputController>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8ed893e8-9878-41e2-9981-ef0800e970f8"",
+                    ""path"": ""<XInputController>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""43bfed3b-ee64-43db-af6f-93ef745c9e05"",
+                    ""path"": ""<XInputController>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c819e446-c976-4629-b7fb-a868418d0777"",
+                    ""path"": ""<XInputController>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -816,6 +879,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PS4_GuardRelease = m_PS4.FindAction("Guard Release", throwIfNotFound: true);
         m_PS4_Pause = m_PS4.FindAction("Pause", throwIfNotFound: true);
         m_PS4_Dash = m_PS4.FindAction("Dash", throwIfNotFound: true);
+        m_PS4_Aim = m_PS4.FindAction("Aim", throwIfNotFound: true);
         // XBOX
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
@@ -1084,6 +1148,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_PS4_GuardRelease;
     private readonly InputAction m_PS4_Pause;
     private readonly InputAction m_PS4_Dash;
+    private readonly InputAction m_PS4_Aim;
     public struct PS4Actions
     {
         private @PlayerInput m_Wrapper;
@@ -1096,6 +1161,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @GuardRelease => m_Wrapper.m_PS4_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_PS4_Pause;
         public InputAction @Dash => m_Wrapper.m_PS4_Dash;
+        public InputAction @Aim => m_Wrapper.m_PS4_Aim;
         public InputActionMap Get() { return m_Wrapper.m_PS4; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1129,6 +1195,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
+                @Aim.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_PS4ActionsCallbackInterface = instance;
             if (instance != null)
@@ -1157,6 +1226,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -1277,6 +1349,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
     public interface IXBOXActions
     {

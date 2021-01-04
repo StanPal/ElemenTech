@@ -17,10 +17,6 @@ public class WaterGun : MonoBehaviour
         mRigidbody = GetComponent<Rigidbody2D>();
         waterSkills = FindObjectOfType<WaterSkills>();
         projectileSpeed = waterSkills.Speed;
-        if (waterSkills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            projectileSpeed = -projectileSpeed;
-        }
     }
 
     private void FixedUpdate()

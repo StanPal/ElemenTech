@@ -11,7 +11,6 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardExit;
 
     private Guard guard;
-
     public GameObject sword;
 
     private HeroMovement mHeroMovement;
@@ -31,6 +30,8 @@ public class HeroActions : MonoBehaviour
     private Vector2 mLookDirection;
     [SerializeField]
     private float mLookAngle;
+    [SerializeField]
+    private Vector2 axispos; 
 
     public Vector2 GetLookDir { get { return mLookDirection; } }
     public float GetLookAngle { get { return mLookAngle; } }
@@ -46,6 +47,7 @@ public class HeroActions : MonoBehaviour
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
         guard = GetComponent<Guard>();
+
     }
 
     private void OnEnable()
@@ -114,8 +116,27 @@ public class HeroActions : MonoBehaviour
 
     private void Update()
     {
-        mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
-        mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+        switch (HeroMovement.controllerInput)
+        {
+            case HeroMovement.Controller.None:
+                break;
+            case HeroMovement.Controller.Keyboard:
+                //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
+                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                break;
+            case HeroMovement.Controller.PS4:
+                axispos = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
+                mLookDirection = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                break;
+            case HeroMovement.Controller.XBOX:
+                break;
+            case HeroMovement.Controller.Keyboard2:
+                break;
+            default:
+                break;
+        }
     }
 
     private void FixedUpdate()

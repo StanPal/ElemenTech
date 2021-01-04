@@ -44,7 +44,6 @@ public class PauseUI : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Reached");
         mCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -57,9 +56,9 @@ public class PauseUI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
         ResetPlayers();
         scoreManager.ResetScore();
+        SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
 
@@ -76,15 +75,15 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.FireHero.SetActive(false);
-        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.WaterHero.SetActive(false);
+        //playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        //playerManager.FireHero.SetActive(false);
+        //playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        //playerManager.WaterHero.SetActive(false);
 
-        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.AirHero.SetActive(false);
-        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.EarthHero.SetActive(false);
+        //playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        //playerManager.AirHero.SetActive(false);
+        //playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        //playerManager.EarthHero.SetActive(false);
 
 
         playerManager.mPlayersList[0] = playerManager.FireHero;

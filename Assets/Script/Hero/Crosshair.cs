@@ -19,11 +19,15 @@ public class Crosshair : MonoBehaviour
         playerManager = FindObjectOfType<PlayerManager>();
         Cursor.visible = false;
     }
-    
+
 
     void Update()
-    {        
-        mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-        mCrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+    {
+        //mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
+        if (playerManager.mPlayersList[0].gameObject != null)
+        {
+            mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            mCrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+        }
     }
 }

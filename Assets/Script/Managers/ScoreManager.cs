@@ -10,7 +10,9 @@ public class ScoreManager : MonoBehaviour
     [SerializeField]
     private int mTeamTwoScore = 0;
     public int TeamTwoScore { get { return mTeamTwoScore; } }
-
+    [SerializeField]
+    bool isPracticeMode = false;
+    public bool PracticeMode { get { return isPracticeMode;} set { isPracticeMode = value; } }
     private void Awake()
     {        
         ServiceLocator.Register<ScoreManager>(this);

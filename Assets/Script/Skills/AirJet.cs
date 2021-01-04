@@ -18,10 +18,6 @@ public class AirJet : MonoBehaviour
         mProjectileSpeed = airskills.Speed;
         mScaleSize = airskills.Scale;
         mExitTime = airskills.ExitTime;
-        if (airskills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            mProjectileSpeed *= -1;
-        }
     }
 
     private void FixedUpdate()
