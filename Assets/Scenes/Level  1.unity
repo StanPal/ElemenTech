@@ -987,6 +987,26 @@ PrefabInstance:
       propertyPath: mCrossHairs
       value: 
       objectReference: {fileID: 1954180694}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P1CrossHairs
+      value: 
+      objectReference: {fileID: 1954180694}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P2CrossHairs
+      value: 
+      objectReference: {fileID: 1954180694}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P3CrossHairs
+      value: 
+      objectReference: {fileID: 1954180694}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P4CrossHairs
+      value: 
+      objectReference: {fileID: 1954180694}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,23 +33,23 @@ public class Crosshair : MonoBehaviour
         //mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
         if (playerManager.mPlayersList[0].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P1CrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+            _P1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            _P1CrossHairs.transform.position = new Vector3(_P1Target.x, _P1Target.y);
         }
         if (playerManager.mPlayersList[1].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P2CrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+            _P2Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            _P2CrossHairs.transform.position = new Vector3(_P2Target.x, _P2Target.y);
         }
         if (playerManager.mPlayersList[2].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P3CrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+            _P3Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            _P3CrossHairs.transform.position = new Vector3(_P3Target.x, _P3Target.y);
         }
         if (playerManager.mPlayersList[3].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P4CrossHairs.transform.position = new Vector3(mTarget.x, mTarget.y);
+            _P4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            _P4CrossHairs.transform.position = new Vector3(_P4Target.x, _P4Target.y);
         }
     }
 }

@@ -571,7 +571,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e343ef40-0f67-48ed-9c64-f0aa3e5be582"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
