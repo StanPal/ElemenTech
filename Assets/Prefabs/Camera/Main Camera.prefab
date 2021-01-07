@@ -45,7 +45,7 @@ Camera:
   m_GameObject: {fileID: 7255437403339329850}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0, g: 0.08071279, b: 0.20754719, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -165,5 +165,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mCrossHairs: {fileID: 4402385147274776756, guid: 8067cd5e98b64314c85901577014e523,
-    type: 3}
+  _P1CrossHairs: {fileID: 0}
+  _P2CrossHairs: {fileID: 0}
+  _P3CrossHairs: {fileID: 0}
+  _P4CrossHairs: {fileID: 0}
+  mTarget: {x: 0, y: 0, z: 0}

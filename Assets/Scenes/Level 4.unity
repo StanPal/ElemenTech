@@ -284,7 +284,22 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
-      propertyPath: mCrossHairs
+      propertyPath: _P1CrossHairs
+      value: 
+      objectReference: {fileID: 548945947}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P2CrossHairs
+      value: 
+      objectReference: {fileID: 548945947}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P3CrossHairs
+      value: 
+      objectReference: {fileID: 548945947}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _P4CrossHairs
       value: 
       objectReference: {fileID: 548945947}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
@@ -341,11 +356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
-        type: 3}
-      propertyPath: m_ClearFlags
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329850, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}

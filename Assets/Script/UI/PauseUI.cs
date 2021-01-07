@@ -75,20 +75,26 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        //playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        //playerManager.FireHero.SetActive(false);
-        //playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        //playerManager.WaterHero.SetActive(false);
+        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.FireHero.SetActive(true);
+        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.WaterHero.SetActive(false);
 
-        //playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        //playerManager.AirHero.SetActive(false);
-        //playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        //playerManager.EarthHero.SetActive(false);
+        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.AirHero.SetActive(false);
+        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.EarthHero.SetActive(false);
 
 
         playerManager.mPlayersList[0] = playerManager.FireHero;
         playerManager.mPlayersList[1] = playerManager.WaterHero;
         playerManager.mPlayersList[2] = playerManager.AirHero;
         playerManager.mPlayersList[3] = playerManager.EarthHero;
+
+        playerManager.TeamOne.Clear();
+        playerManager.TeamTwo.Clear();
+
+        scoreManager.PracticeMode = false;
+        Cursor.visible = true;
     }
 }

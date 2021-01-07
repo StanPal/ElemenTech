@@ -613,7 +613,7 @@
                 {
                     "name": "2D Vector",
                     "id": "31889440-f4c2-4286-a377-9e08edd8e209",
-                    "path": "2DVector",
+                    "path": "2DVector(mode=2)",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -626,7 +626,7 @@
                     "id": "1d9582b1-78d7-4be0-bf7a-23eca2d480d6",
                     "path": "<XInputController>/rightStick/up",
                     "interactions": "",
-                    "processors": "AxisDeadzone(min=0.1,max=1)",
+                    "processors": "AxisDeadzone",
                     "groups": "",
                     "action": "Aim",
                     "isComposite": false,
