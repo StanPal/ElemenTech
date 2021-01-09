@@ -147,7 +147,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e3fdd414-0724-42a9-a6c3-324ada27c141"",
-                    ""path"": ""<Keyboard>/q"",
+                    ""path"": ""<Mouse>/rightButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -560,7 +560,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""effed0dc-d7f5-4250-8a87-9cc688489c37"",
-                    ""path"": ""<XInputController>/rightShoulder"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -571,7 +571,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e343ef40-0f67-48ed-9c64-f0aa3e5be582"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<XInputController>/rightShoulder"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -739,6 +739,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""b94a50d8-a8e4-4639-855d-b683af846bb6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -789,7 +797,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f3bf3690-f900-4d2d-b24d-7a70fb14fb3e"",
-                    ""path"": ""<DualShockGamepad>/leftTrigger"",
+                    ""path"": ""<DualShockGamepad>/rightShoulder"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -800,7 +808,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3ed531df-46e8-45b4-abd7-17ce6f4581f5"",
-                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""path"": ""<DualShockGamepad>/buttonWest"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -840,6 +848,61 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""b31b9c9b-ab9b-4500-b955-5d7bff8ac20f"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""6401c924-982d-44f6-9ebf-7bb5063c6199"",
+                    ""path"": ""<DualShockGamepad>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""3d14badc-2459-49e7-a48e-d59bb5e0dafa"",
+                    ""path"": ""<DualShockGamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""dcb84487-55d7-453d-b170-85ca87746c3e"",
+                    ""path"": ""<DualShockGamepad>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""9cb3699f-9878-4a7e-aadf-079d3f2aa108"",
+                    ""path"": ""<DualShockGamepad>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -889,6 +952,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_XBOX_Guard = m_XBOX.FindAction("Guard", throwIfNotFound: true);
         m_XBOX_GuardRelease = m_XBOX.FindAction("Guard Release", throwIfNotFound: true);
         m_XBOX_Dash = m_XBOX.FindAction("Dash", throwIfNotFound: true);
+        m_XBOX_Aim = m_XBOX.FindAction("Aim", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -1244,6 +1308,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_XBOX_Guard;
     private readonly InputAction m_XBOX_GuardRelease;
     private readonly InputAction m_XBOX_Dash;
+    private readonly InputAction m_XBOX_Aim;
     public struct XBOXActions
     {
         private @PlayerInput m_Wrapper;
@@ -1255,6 +1320,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Guard => m_Wrapper.m_XBOX_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_XBOX_GuardRelease;
         public InputAction @Dash => m_Wrapper.m_XBOX_Dash;
+        public InputAction @Aim => m_Wrapper.m_XBOX_Aim;
         public InputActionMap Get() { return m_Wrapper.m_XBOX; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1285,6 +1351,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
+                @Aim.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_XBOXActionsCallbackInterface = instance;
             if (instance != null)
@@ -1310,6 +1379,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -1360,5 +1432,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
 }

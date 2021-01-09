@@ -22,9 +22,9 @@ TagManager:
   - 
   - 
   - Floor
-  - Enemy
+  - Player
   - Wall
-  - 
+  - Projectile
   - 
   - 
   - 

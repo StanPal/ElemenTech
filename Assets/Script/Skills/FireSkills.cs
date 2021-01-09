@@ -29,7 +29,7 @@ public class FireSkills : MonoBehaviour
 
     void FireBall()
     {
-       Instantiate(mFireBall, mHeroSkills.HeroAction.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
+       Instantiate(mFireBall, mHeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
     }
 
 }

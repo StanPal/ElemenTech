@@ -23,14 +23,9 @@ public class PlayerManager : MonoBehaviour
         if (!playTestMode)
         {
             FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-            WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+            WaterHero.GetComponentInChildren<HeroMovement>().controllerInput = HeroMovement.Controller.None;
             AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
             EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-
-            FireHero.SetActive(false);
-            WaterHero.SetActive(false);
-            AirHero.SetActive(false);
-            EarthHero.SetActive(false);
         }
 
         mPlayersList[0] = FireHero;
