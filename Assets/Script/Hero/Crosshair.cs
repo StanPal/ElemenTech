@@ -28,11 +28,28 @@ public class Crosshair : MonoBehaviour
     void Update()
     {
         //mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
-        if (playerManager.mPlayersList[0].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        switch (playerManager.mPlayersList[0].GetComponent<HeroMovement>().controllerInput)
         {
-            _P1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P1CrossHairs.transform.position = new Vector3(_P1Target.x, _P1Target.y);
+            case HeroMovement.Controller.None:
+                break;
+            case HeroMovement.Controller.Keyboard:
+                _P1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+                _P1CrossHairs.transform.position = new Vector3(_P1Target.x, _P1Target.y);
+                break;
+            case HeroMovement.Controller.PS4:
+                Debug.Log(Screen.width * playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x);
+                _P1CrossHairs.transform.position = new Vector3(
+                    (Screen.width * 0.02f) * playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x,
+                    (Screen.height * 0.03f) * playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y);
+                break;
+            case HeroMovement.Controller.XBOX:
+                break;
+            case HeroMovement.Controller.Keyboard2:
+                break;
+            default:
+                break;
         }
+
         if (playerManager.mPlayersList[1].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
             _P2Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());

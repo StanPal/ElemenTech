@@ -143,11 +143,7 @@ public class HeroActions : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
-    {
-   
-    }
-
+    
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(mHeroStats.CoolDown);
