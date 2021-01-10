@@ -134,7 +134,7 @@
                 {
                     "name": "",
                     "id": "e3fdd414-0724-42a9-a6c3-324ada27c141",
-                    "path": "<Keyboard>/q",
+                    "path": "<Mouse>/rightButton",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -145,7 +145,7 @@
                 {
                     "name": "",
                     "id": "a1dc6e02-8059-4a3f-9881-aed797533fd5",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
@@ -200,7 +200,7 @@
                 {
                     "name": "",
                     "id": "2c7e4c52-c213-4339-9e47-b4c0203a631e",
-                    "path": "<Keyboard>/g",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -547,7 +547,7 @@
                 {
                     "name": "",
                     "id": "effed0dc-d7f5-4250-8a87-9cc688489c37",
-                    "path": "<XInputController>/rightShoulder",
+                    "path": "<XInputController>/rightTrigger",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -558,7 +558,7 @@
                 {
                     "name": "",
                     "id": "e343ef40-0f67-48ed-9c64-f0aa3e5be582",
-                    "path": "<XInputController>/rightTrigger",
+                    "path": "<XInputController>/rightShoulder",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -726,6 +726,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Aim",
+                    "type": "Button",
+                    "id": "b94a50d8-a8e4-4639-855d-b683af846bb6",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -776,7 +784,7 @@
                 {
                     "name": "",
                     "id": "f3bf3690-f900-4d2d-b24d-7a70fb14fb3e",
-                    "path": "<DualShockGamepad>/leftTrigger",
+                    "path": "<DualShockGamepad>/rightShoulder",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -787,7 +795,7 @@
                 {
                     "name": "",
                     "id": "3ed531df-46e8-45b4-abd7-17ce6f4581f5",
-                    "path": "<DualShockGamepad>/rightTrigger",
+                    "path": "<DualShockGamepad>/buttonWest",
                     "interactions": "Press",
                     "processors": "",
                     "groups": "",
@@ -827,6 +835,61 @@
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "2D Vector",
+                    "id": "b31b9c9b-ab9b-4500-b955-5d7bff8ac20f",
+                    "path": "2DVector(mode=2)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6401c924-982d-44f6-9ebf-7bb5063c6199",
+                    "path": "<DualShockGamepad>/rightStick/up",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "3d14badc-2459-49e7-a48e-d59bb5e0dafa",
+                    "path": "<DualShockGamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "dcb84487-55d7-453d-b170-85ca87746c3e",
+                    "path": "<DualShockGamepad>/rightStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "9cb3699f-9878-4a7e-aadf-079d3f2aa108",
+                    "path": "<DualShockGamepad>/rightStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Aim",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

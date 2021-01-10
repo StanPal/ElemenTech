@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroActions : MonoBehaviour
@@ -12,6 +11,8 @@ public class HeroActions : MonoBehaviour
 
     private Guard guard;
     public GameObject sword;
+    public Transform PivotPoint;
+    public Transform FirePoint;
 
     private HeroMovement mHeroMovement;
     public HeroMovement HeroMovement { get { return mHeroMovement; } }
@@ -47,7 +48,7 @@ public class HeroActions : MonoBehaviour
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
         guard = GetComponent<Guard>();
-
+     
     }
 
     private void OnEnable()
@@ -60,8 +61,7 @@ public class HeroActions : MonoBehaviour
     }
 
     private void Start()
-    {
- 
+    { 
         if (!mHeroMovement.Recovering)
         {
             if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
@@ -123,7 +123,7 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.Keyboard:
                 //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
                 mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
-                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;                
                 break;
             case HeroMovement.Controller.PS4:
                 axispos = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
@@ -131,6 +131,9 @@ public class HeroActions : MonoBehaviour
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.XBOX:
+                axispos = mPlayerInput.XBOX.Aim.ReadValue<Vector2>();
+                mLookDirection = mPlayerInput.XBOX.Aim.ReadValue<Vector2>();
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.Keyboard2:
                 break;

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Crosshair : MonoBehaviour
 {
@@ -9,11 +7,10 @@ public class Crosshair : MonoBehaviour
     public GameObject _P3CrossHairs;
     public GameObject _P4CrossHairs;
 
-    [SerializeField]
-    private Vector3 _P1Target;
-    private Vector3 _P2Target;
-    private Vector3 _P3Target;
-    private Vector3 _P4Target;
+    [SerializeField] private Vector3 _P1Target;
+    [SerializeField] private Vector3 _P2Target;
+    [SerializeField] private Vector3 _P3Target;
+    [SerializeField] private Vector3 _P4Target;
 
     private PlayerManager playerManager;
 

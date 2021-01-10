@@ -3014,6 +3014,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Crosshair
       objectReference: {fileID: 0}
+    - target: {fileID: 4402385147274776756, guid: 8067cd5e98b64314c85901577014e523,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7714809240132846575, guid: 8067cd5e98b64314c85901577014e523,
         type: 3}
       propertyPath: m_LocalPosition.x
