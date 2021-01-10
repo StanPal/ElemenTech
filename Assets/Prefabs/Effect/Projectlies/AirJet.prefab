@@ -93,7 +93,7 @@ GameObject:
   - component: {fileID: -6662638282351874016}
   - component: {fileID: -5696345367691759399}
   - component: {fileID: -4706420022817792869}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: AirJet
   m_TagString: Untagged
   m_Icon: {fileID: 0}

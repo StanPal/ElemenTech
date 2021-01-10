@@ -624,7 +624,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -713,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Fire Cyborg
-  mAttack: 15
+  mAttack: 25
   mMaxHealth: 100
   mCurrentHealth: 100
   mCoolDown: 0.5
@@ -751,7 +751,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 2
   isLeft: 0
   isJumping: 0
   mJumpForce: 10
@@ -1285,7 +1285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5982465580042472988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.33, y: -0.03, z: 0}
+  m_LocalPosition: {x: 13.33, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4742860617384786225}

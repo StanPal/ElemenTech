@@ -61,8 +61,7 @@ public class HeroActions : MonoBehaviour
     }
 
     private void Start()
-    {
- 
+    { 
         if (!mHeroMovement.Recovering)
         {
             if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)

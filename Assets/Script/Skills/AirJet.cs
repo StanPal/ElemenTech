@@ -22,8 +22,16 @@ public class AirJet : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (mExitTime <= 0.0f)
+        {
+            Destroy(gameObject);
+        }
+        mExitTime -= Time.deltaTime;
         mRigidbody.velocity = transform.right * mProjectileSpeed;
         transform.localScale = Vector3.Lerp(transform.localScale, mScaleSize, airskills.ScaleSpeed * Time.deltaTime);
+
+        
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -53,10 +61,10 @@ public class AirJet : MonoBehaviour
             }
         }
 
-        if (collision.GetComponentInParent<Walls>())
-        {
-            Destroy(gameObject);
-        }
+        //if (collision.GetComponentInParent<Walls>())
+        //{
+        //    Destroy(gameObject);
+        //}
         if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
