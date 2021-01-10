@@ -31,7 +31,7 @@ public class TeamSelect : MonoBehaviour
                 break;
             case 1:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 1";
-                playerManager.FireHero.tag = "Team1";
+                playerManager.FireHero.tag = "Team1";     
                 break;
             case 2:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";

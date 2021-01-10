@@ -29,7 +29,7 @@ public class HeroStats : MonoBehaviour
     [SerializeField]
     private float mCurrentHealth = 100f;
     [SerializeField]
-    private float mCoolDown;
+    private float mCoolDown = 3f;
     private float mTempCDTime;   
 
     private bool isCDFinished;    
@@ -38,6 +38,7 @@ public class HeroStats : MonoBehaviour
     public float CoolDown { get { return mCoolDown; } }
     public float CurrentHealth { get { return mCurrentHealth; } set { mCurrentHealth = value; } }
     public float MaxHealth { get { return mMaxHealth; } }
+    public float AttackDamage { get { return mAttack; } }
 
     //Elementa Type
     [SerializeField]
@@ -175,12 +176,17 @@ public class HeroStats : MonoBehaviour
     }
 
     void HeroDie()
-    {
-        gameObject.SetActive(false);
+    {        
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
-        
-        PauseUI pauseUI = FindObjectOfType<PauseUI>();
-        pauseUI.PauseGame();
+        if(playermanager.TeamOne.Contains(gameObject))
+        {
+            playermanager.TeamOne.Remove(gameObject);
+        }
+        if(playermanager.TeamTwo.Contains(gameObject))
+        {
+            playermanager.TeamTwo.Remove(gameObject);
+        }
+        this.gameObject.SetActive(false);
     }
 
 }

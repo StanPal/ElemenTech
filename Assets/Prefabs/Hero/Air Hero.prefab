@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: Air Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -524,10 +524,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Air Hero
-  mAttack: 20
+  mAttack: 10
   mMaxHealth: 125
   mCurrentHealth: 100
-  mCoolDown: 0
+  mCoolDown: 0.25
   mElementalType: 3
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -544,6 +544,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1791110765894072927}
+  isOnCooldown: 0
+  mLookDirection: {x: 0, y: 0}
+  mLookAngle: 0
+  axispos: {x: 0, y: 0}
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -561,19 +565,19 @@ MonoBehaviour:
   isJumping: 0
   mJumpForce: 10
   mNumOfJumps: 0
-  mMaxJumps: 2
+  mMaxJumps: 8
   mGround:
     serializedVersion: 2
     m_Bits: 256
   canDash: 1
   isDashing: 0
   mDashSpeed: 2
-  mDashCoolDown: 0
-  mDashStartUpTime: 1
-  mSpeed: 5
+  mDashCoolDown: 1
+  mDashStartUpTime: 0
+  mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
-  mRecoveryTime: 1
+  mRecoveryTime: 0.1
   isRecovering: 0
 --- !u!114 &4636537091078077599
 MonoBehaviour:
@@ -611,7 +615,8 @@ MonoBehaviour:
   mShieldRecoverAmount: 10
   mShieldRecoveryTick: 0.1
   isShieldDisabled: 0
-  comboSkill: {fileID: 0}
+  comboSkill: {fileID: 273737325032263211, guid: 8e300e1bf4bd0574b98e18cf0f85e587,
+    type: 3}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0
@@ -900,15 +905,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   startTimeBtAttack: 1
-  mHitStun: 1
+  mHitStun: 0.5
   attackPos: {fileID: 1791110764420600048}
   attackRange: 0.57
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100
-  mKnockBackAmount: 5
+  mKnockBackAmount: 6
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0

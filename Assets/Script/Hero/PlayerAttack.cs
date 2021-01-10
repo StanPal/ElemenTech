@@ -7,8 +7,6 @@ public class PlayerAttack : MonoBehaviour
 {
 
     [SerializeField]
-    private float damage = 2;
-    [SerializeField]
     private float startTimeBtAttack;
     private float timeBtwAttack;
     [SerializeField]
@@ -121,8 +119,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(10f);
-                collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                }
                 if (!collision.GetComponent<Guard>().Guarding)
                 {
                     collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
@@ -134,8 +135,11 @@ public class PlayerAttack : MonoBehaviour
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(10f);
-                collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                }                
                 if (!collision.GetComponent<Guard>().Guarding)
                 {
                     collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;

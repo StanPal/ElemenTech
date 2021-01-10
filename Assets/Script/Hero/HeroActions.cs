@@ -11,7 +11,6 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardExit;
 
     private Guard guard;
-
     public GameObject sword;
 
     private HeroMovement mHeroMovement;
@@ -19,8 +18,23 @@ public class HeroActions : MonoBehaviour
     private HeroStats mHeroStats;
     public HeroStats HeroStats { get { return mHeroStats; } }
     private PlayerInput mPlayerInput;
+    public PlayerInput PlayerInput { get { return mPlayerInput; } }
 
     private bool isGuardInvoked = false;
+    [SerializeField]
+    private bool isOnCooldown = false;
+    private float mNextFireTime;
+    public bool IsCooldown { get { return isOnCooldown; } set { isOnCooldown = value; } }
+
+    [SerializeField]
+    private Vector2 mLookDirection;
+    [SerializeField]
+    private float mLookAngle;
+    [SerializeField]
+    private Vector2 axispos; 
+
+    public Vector2 GetLookDir { get { return mLookDirection; } }
+    public float GetLookAngle { get { return mLookAngle; } }
 
     private void Awake()
     {
@@ -33,6 +47,7 @@ public class HeroActions : MonoBehaviour
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
         guard = GetComponent<Guard>();
+
     }
 
     private void OnEnable()
@@ -99,7 +114,41 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        switch (HeroMovement.controllerInput)
+        {
+            case HeroMovement.Controller.None:
+                break;
+            case HeroMovement.Controller.Keyboard:
+                //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
+                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                break;
+            case HeroMovement.Controller.PS4:
+                axispos = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
+                mLookDirection = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                break;
+            case HeroMovement.Controller.XBOX:
+                break;
+            case HeroMovement.Controller.Keyboard2:
+                break;
+            default:
+                break;
+        }
+    }
 
+    private void FixedUpdate()
+    {
+   
+    }
+
+    private IEnumerator CoolDownTimer()
+    {
+        yield return new WaitForSeconds(mHeroStats.CoolDown);
+        isOnCooldown = false;
+    }
 
     private void Guard()
     {
@@ -117,9 +166,13 @@ public class HeroActions : MonoBehaviour
     
     private void ElementSpecial1()
     {
-        if (!isGuardInvoked)
+        if (Time.time > mNextFireTime)
         {
-            onSkillPerformed.Invoke(HeroStats.GetElement);
+            if (!isGuardInvoked && !isOnCooldown)
+            {
+                mNextFireTime = Time.time + HeroStats.CoolDown;
+                onSkillPerformed.Invoke(HeroStats.GetElement);
+            }
         }
     }
 

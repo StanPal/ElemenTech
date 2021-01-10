@@ -18,10 +18,6 @@ public class AirJet : MonoBehaviour
         mProjectileSpeed = airskills.Speed;
         mScaleSize = airskills.Scale;
         mExitTime = airskills.ExitTime;
-        if (airskills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            mProjectileSpeed *= -1;
-        }
     }
 
     private void FixedUpdate()
@@ -41,6 +37,22 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(airskills.Damage);
             }
         }
+        
+        if (collision.GetComponent<Guard>())
+        {
+            if (collision.GetComponent<Guard>().tag.Equals(airskills.PlayerSkills.HeroAction.tag))
+            {
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+
+                }
+            }
+        }
+
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
@@ -49,16 +61,22 @@ public class AirJet : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
         if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
     }

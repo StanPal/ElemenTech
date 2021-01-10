@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
   startTimeBtAttack: 0.5
   mHitStun: 1
   attackPos: {fileID: 1371002032368287851}
@@ -355,7 +354,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1371002032310544464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.079773, y: -2.864831, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1650942040172233776}
@@ -449,21 +448,21 @@ MonoBehaviour:
   controllerInput: 0
   isLeft: 0
   isJumping: 0
-  mJumpForce: 8
+  mJumpForce: 12
   mNumOfJumps: 0
-  mMaxJumps: 2
+  mMaxJumps: 1
   mGround:
     serializedVersion: 2
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 3
-  mDashCoolDown: 3
-  mDashStartUpTime: 1
+  mDashSpeed: 6.5
+  mDashCoolDown: 0.5
+  mDashStartUpTime: 0
   mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
-  mRecoveryTime: 1
+  mRecoveryTime: 0.05
   isRecovering: 0
 --- !u!114 &1371002032310544466
 MonoBehaviour:
@@ -478,6 +477,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1371002031773591929}
+  isOnCooldown: 0
+  mLookDirection: {x: 0, y: 0}
+  mLookAngle: 0
+  axispos: {x: 0, y: 0}
 --- !u!114 &5005666907566380715
 MonoBehaviour:
   m_ObjectHideFlags: 0

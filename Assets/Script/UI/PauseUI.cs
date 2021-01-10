@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class PauseUI : MonoBehaviour
 {
     private PlayerManager playerManager;
+    private ScoreManager scoreManager;
     public Canvas mCanvas;
 
     private void Awake()
@@ -17,6 +18,7 @@ public class PauseUI : MonoBehaviour
     private void Initialize()
     {
         playerManager = ServiceLocator.Get<PlayerManager>();
+        scoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     private void Start()
@@ -42,7 +44,6 @@ public class PauseUI : MonoBehaviour
 
     public void PauseGame()
     {
-        Debug.Log("Reached");
         mCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
@@ -55,8 +56,9 @@ public class PauseUI : MonoBehaviour
 
     public void BackToMainMenu()
     {
-        SceneManager.LoadScene(0);
         ResetPlayers();
+        scoreManager.ResetScore();
+        SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
 
@@ -74,7 +76,7 @@ public class PauseUI : MonoBehaviour
     private void ResetPlayers()
     {
         playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.FireHero.SetActive(false);
+        playerManager.FireHero.SetActive(true);
         playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
         playerManager.WaterHero.SetActive(false);
 
@@ -89,5 +91,10 @@ public class PauseUI : MonoBehaviour
         playerManager.mPlayersList[2] = playerManager.AirHero;
         playerManager.mPlayersList[3] = playerManager.EarthHero;
 
+        playerManager.TeamOne.Clear();
+        playerManager.TeamTwo.Clear();
+
+        scoreManager.PracticeMode = false;
+        Cursor.visible = true;
     }
 }

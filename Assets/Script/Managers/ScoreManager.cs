@@ -3,19 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
-{
-    private PlayerManager playerManager;
+{    
+    [SerializeField]
     private int mTeamOneScore = 0;
+    public int TeamOneScore { get { return mTeamOneScore; } }
+    [SerializeField]
     private int mTeamTwoScore = 0;
-
+    public int TeamTwoScore { get { return mTeamTwoScore; } }
+    [SerializeField]
+    bool isPracticeMode = false;
+    public bool PracticeMode { get { return isPracticeMode;} set { isPracticeMode = value; } }
     private void Awake()
-    {
-        GameLoader.CallOnComplete(Initialize);
-    }
-
-    private void Initialize()
-    {
-        playerManager = ServiceLocator.Get<PlayerManager>();
+    {        
+        ServiceLocator.Register<ScoreManager>(this);
     }
 
     public void AddPoints(int team, int points)
@@ -31,5 +31,11 @@ public class ScoreManager : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void ResetScore()
+    {
+        mTeamOneScore = 0;
+        mTeamTwoScore = 0;
     }
 }

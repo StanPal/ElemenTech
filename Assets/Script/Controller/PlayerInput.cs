@@ -89,6 +89,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Value"",
+                    ""id"": ""d5c9b8a4-dc50-4abf-b151-cdf5eebe687f"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -210,6 +218,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e1440919-aa54-4dba-a2a4-68274f4f4c18"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -483,13 +502,21 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Aim"",
+                    ""type"": ""Button"",
+                    ""id"": ""8ac82f9b-5d6a-410c-b1c2-49aefbc1e1b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""9f7f383f-4f9b-4129-aea0-ad9399d4e05d"",
-                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""path"": ""<XInputController>/buttonSouth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -511,7 +538,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""98694b70-9945-48d6-948c-a09ecb8625d2"",
-                    ""path"": ""<Gamepad>/leftStick/left"",
+                    ""path"": ""<XInputController>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -522,7 +549,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""79ea4a89-bd93-4936-b4d2-7e1c8e479aa5"",
-                    ""path"": ""<Gamepad>/leftStick/right"",
+                    ""path"": ""<XInputController>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -533,7 +560,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""effed0dc-d7f5-4250-8a87-9cc688489c37"",
-                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""path"": ""<XInputController>/rightShoulder"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -544,7 +571,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""e343ef40-0f67-48ed-9c64-f0aa3e5be582"",
-                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""path"": ""<XInputController>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -555,7 +582,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""93d57159-b81e-450d-a038-aca2d9516f85"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -566,7 +593,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8e9df7e9-7e31-44e1-9c32-a15ae16a0e88"",
-                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""path"": ""<XInputController>/buttonNorth"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
@@ -577,7 +604,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""c729b9a6-a44c-4173-bdac-5028c08d0afa"",
-                    ""path"": ""<Gamepad>/start"",
+                    ""path"": ""<XInputController>/start"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -588,13 +615,68 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""0a4c5404-b582-4f86-8bb4-fcda52d8e939"",
-                    ""path"": ""<Gamepad>/leftShoulder"",
+                    ""path"": ""<XInputController>/leftShoulder"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""2D Vector"",
+                    ""id"": ""31889440-f4c2-4286-a377-9e08edd8e209"",
+                    ""path"": ""2DVector(mode=2)"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""1d9582b1-78d7-4be0-bf7a-23eca2d480d6"",
+                    ""path"": ""<XInputController>/rightStick/up"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""8ed893e8-9878-41e2-9981-ef0800e970f8"",
+                    ""path"": ""<XInputController>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""43bfed3b-ee64-43db-af6f-93ef745c9e05"",
+                    ""path"": ""<XInputController>/rightStick/left"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""c819e446-c976-4629-b7fb-a868418d0777"",
+                    ""path"": ""<XInputController>/rightStick/right"",
+                    ""interactions"": """",
+                    ""processors"": ""AxisDeadzone(min=0.1,max=1)"",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         },
@@ -649,6 +731,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""60ddeeda-0c03-4a38-9a21-09234cea6f9a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -666,7 +756,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""negative"",
                     ""id"": ""60cd5c32-cffb-4000-a173-5dc055678404"",
-                    ""path"": ""<XInputController>/leftStick/left"",
+                    ""path"": ""<DualShockGamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -677,7 +767,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": ""positive"",
                     ""id"": ""b437c5ef-c523-40be-838b-df3c31ae04e6"",
-                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""path"": ""<DualShockGamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -688,7 +778,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""cd9db592-b9c0-471e-8fbd-3da6869ca521"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<DualShockGamepad>/buttonSouth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -699,7 +789,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""f3bf3690-f900-4d2d-b24d-7a70fb14fb3e"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<DualShockGamepad>/leftTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -710,7 +800,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3ed531df-46e8-45b4-abd7-17ce6f4581f5"",
-                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -721,7 +811,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""4253cc08-9c9c-4131-989d-ded338a0cc8a"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
@@ -732,11 +822,22 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""bbcc10a8-c475-4fd7-a2e8-5c09a991b141"",
-                    ""path"": ""<XInputController>/buttonNorth"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard Release"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a01ac0f8-50da-4898-9354-54fd858f922b"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -756,6 +857,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
+        m_KeyboardMouse_Aim = m_KeyboardMouse.FindAction("Aim", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -777,6 +879,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_PS4_GuardRelease = m_PS4.FindAction("Guard Release", throwIfNotFound: true);
         m_PS4_Pause = m_PS4.FindAction("Pause", throwIfNotFound: true);
         m_PS4_Dash = m_PS4.FindAction("Dash", throwIfNotFound: true);
+        m_PS4_Aim = m_PS4.FindAction("Aim", throwIfNotFound: true);
         // XBOX
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
@@ -785,6 +888,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_XBOX_ElementSpecial1 = m_XBOX.FindAction("Element Special 1", throwIfNotFound: true);
         m_XBOX_Guard = m_XBOX.FindAction("Guard", throwIfNotFound: true);
         m_XBOX_GuardRelease = m_XBOX.FindAction("Guard Release", throwIfNotFound: true);
+        m_XBOX_Dash = m_XBOX.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -843,6 +947,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_GuardRelease;
     private readonly InputAction m_KeyboardMouse_Pause;
     private readonly InputAction m_KeyboardMouse_Dash;
+    private readonly InputAction m_KeyboardMouse_Aim;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -856,6 +961,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
         public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
+        public InputAction @Aim => m_Wrapper.m_KeyboardMouse_Aim;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -892,6 +998,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
+                @Aim.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -923,6 +1032,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -1036,6 +1148,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_PS4_GuardRelease;
     private readonly InputAction m_PS4_Pause;
     private readonly InputAction m_PS4_Dash;
+    private readonly InputAction m_PS4_Aim;
     public struct PS4Actions
     {
         private @PlayerInput m_Wrapper;
@@ -1048,6 +1161,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @GuardRelease => m_Wrapper.m_PS4_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_PS4_Pause;
         public InputAction @Dash => m_Wrapper.m_PS4_Dash;
+        public InputAction @Aim => m_Wrapper.m_PS4_Aim;
         public InputActionMap Get() { return m_Wrapper.m_PS4; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1081,6 +1195,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnDash;
+                @Aim.started -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_PS4ActionsCallbackInterface.OnAim;
             }
             m_Wrapper.m_PS4ActionsCallbackInterface = instance;
             if (instance != null)
@@ -1109,6 +1226,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
             }
         }
     }
@@ -1123,6 +1243,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_XBOX_ElementSpecial1;
     private readonly InputAction m_XBOX_Guard;
     private readonly InputAction m_XBOX_GuardRelease;
+    private readonly InputAction m_XBOX_Dash;
     public struct XBOXActions
     {
         private @PlayerInput m_Wrapper;
@@ -1133,6 +1254,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @ElementSpecial1 => m_Wrapper.m_XBOX_ElementSpecial1;
         public InputAction @Guard => m_Wrapper.m_XBOX_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_XBOX_GuardRelease;
+        public InputAction @Dash => m_Wrapper.m_XBOX_Dash;
         public InputActionMap Get() { return m_Wrapper.m_XBOX; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1160,6 +1282,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GuardRelease.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuardRelease;
                 @GuardRelease.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuardRelease;
                 @GuardRelease.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuardRelease;
+                @Dash.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
+                @Dash.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
+                @Dash.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnDash;
             }
             m_Wrapper.m_XBOXActionsCallbackInterface = instance;
             if (instance != null)
@@ -1182,6 +1307,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @GuardRelease.started += instance.OnGuardRelease;
                 @GuardRelease.performed += instance.OnGuardRelease;
                 @GuardRelease.canceled += instance.OnGuardRelease;
+                @Dash.started += instance.OnDash;
+                @Dash.performed += instance.OnDash;
+                @Dash.canceled += instance.OnDash;
             }
         }
     }
@@ -1197,6 +1325,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {
@@ -1220,6 +1349,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnAim(InputAction.CallbackContext context);
     }
     public interface IXBOXActions
     {
@@ -1229,5 +1359,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnElementSpecial1(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

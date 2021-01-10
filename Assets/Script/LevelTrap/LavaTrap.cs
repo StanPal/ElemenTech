@@ -8,7 +8,13 @@ public class LavaTrap : MonoBehaviour
     [SerializeField] private float damageTime = 1.0f;
     [SerializeField] private float damage = 5.0f;
     private const float delayTime = 1.0f;
-    
+    [SerializeField]
+    private GameObject[] waypoints;
+    private int current = 0;
+    private float WPreadius = 1;
+    [SerializeField]
+    private float speed;
+
     public struct TrappedHeroData
     {
         public HeroStats HeroStats;
@@ -19,6 +25,19 @@ public class LavaTrap : MonoBehaviour
     private void Awake()
     {
         StartCoroutine(LavaDamageRoutine());
+    }
+
+    void Update()
+    {
+        if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+        {
+            current++;
+            if (current >= waypoints.Length)
+            {
+                current = 0;
+            }
+        }
+        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
     }
 
     private IEnumerator LavaDamageRoutine()

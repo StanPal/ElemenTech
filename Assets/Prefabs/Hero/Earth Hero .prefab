@@ -355,7 +355,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: 'Earth Hero '
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -443,10 +443,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Earth Cyborg
-  mAttack: 20
-  mMaxHealth: 100
+  mAttack: 15
+  mMaxHealth: 200
   mCurrentHealth: 100
-  mCoolDown: 0
+  mCoolDown: 1
   mElementalType: 1
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -463,6 +463,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sword: {fileID: 1791110765894072927}
+  isOnCooldown: 0
+  mLookDirection: {x: 0, y: 0}
+  mLookAngle: 0
+  axispos: {x: 0, y: 0}
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -478,18 +482,18 @@ MonoBehaviour:
   controllerInput: 0
   isLeft: 0
   isJumping: 0
-  mJumpForce: 6
+  mJumpForce: 12
   mNumOfJumps: 0
-  mMaxJumps: 3
+  mMaxJumps: 2
   mGround:
     serializedVersion: 2
     m_Bits: 256
   canDash: 1
   isDashing: 0
-  mDashSpeed: 1
+  mDashSpeed: 3
   mDashCoolDown: 1
-  mDashStartUpTime: 1
-  mSpeed: 5
+  mDashStartUpTime: 0
+  mSpeed: 10
   mKnockbackRecieved: 0
   mKnockbackCount: 0
   mRecoveryTime: 1
@@ -524,7 +528,7 @@ MonoBehaviour:
   mGuardTime: 0.5
   mShieldSize: 2.1
   mSpeedDecrease: 1
-  mShieldMaxEnergy: 100
+  mShieldMaxEnergy: 150
   mShieldEnergy: 100
   mShieldEnergyTick: 10
   mShieldRecoverAmount: 10
@@ -820,15 +824,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 2
   startTimeBtAttack: 1
-  mHitStun: 1
+  mHitStun: 1.75
   attackPos: {fileID: 1791110764420600048}
   attackRange: 5
   target: {fileID: 1791110763999435355}
   rotaSpeed: 100
   rotaBackSpeed: 100
-  mKnockBackAmount: 5
+  mKnockBackAmount: 3
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0
