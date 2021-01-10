@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class FireSkills : MonoBehaviour
 {
- 
     // FireSkills 
     public GameObject mFireBall;
 
@@ -18,6 +17,8 @@ public class FireSkills : MonoBehaviour
     private float mDotDuration = 5.0f;
     public float DotDuration { get { return mDotDuration; } }
 
+    private Elements.ElementalAttribute _Element = Elements.ElementalAttribute.Fire;
+    public Elements.ElementalAttribute GetElement { get { return _Element; } }
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
 

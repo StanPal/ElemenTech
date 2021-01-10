@@ -21,7 +21,8 @@ public class AirSkills : MonoBehaviour
     [SerializeField]
     float mScaleSpeed; 
     public float ScaleSpeed { get { return mScaleSpeed; } }
-
+    private Elements.ElementalAttribute _Element = Elements.ElementalAttribute.Air;
+    public Elements.ElementalAttribute GetElement { get { return _Element; } }
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
 
