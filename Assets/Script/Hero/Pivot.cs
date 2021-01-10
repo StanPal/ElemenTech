@@ -11,7 +11,20 @@ public class Pivot : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {   
-         transform.rotation = Quaternion.Euler(0.0f, 0.0f, _HeroActions.GetLookAngle);
+    {
+        if(_HeroActions.HeroMovement.GetIsLeft)
+        {
+            Vector3 objectscale = transform.localScale;
+            objectscale.x = -0.1f;
+            transform.localScale = objectscale; 
+        }
+        else
+        {
+            Vector3 objectscale = transform.localScale;
+            objectscale.x = 0.1f;
+            transform.localScale = objectscale;
+        }
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, _HeroActions.GetLookAngle);
+        
     }
 }
