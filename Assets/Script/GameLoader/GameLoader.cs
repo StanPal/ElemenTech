@@ -7,7 +7,6 @@ public class GameLoader : AsyncLoader
 {
     [SerializeField] private GameObject _PlayerManager = null;
     [SerializeField] private GameObject _ScoreManager = null;
-    [SerializeField] private GameObject _ComboList = null;
     [SerializeField] private int sceneIndexToLoad = 1;
     private static int _sceneIndex = 0;
     private static GameLoader _instance; // The only singleton you should have.
@@ -51,8 +50,8 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(systemsGO);
 
         // Queue up loading routines
-        Enqueue(IntializeCoreSystems(), 3);
-        Enqueue(InitializeModularSystems(), 3);
+        Enqueue(IntializeCoreSystems(), 2);
+        Enqueue(InitializeModularSystems(), 2);
 
         // Set completion callback
         CallOnComplete(OnComplete);
@@ -65,7 +64,7 @@ public class GameLoader : AsyncLoader
 
         Instantiate(_PlayerManager, SystemsParent);
         Instantiate(_ScoreManager, SystemsParent);
-        Instantiate(_ComboList, SystemsParent);
+
 
         yield return null;
     }

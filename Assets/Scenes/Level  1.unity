@@ -1462,6 +1462,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
+      propertyPath: _SpawnPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
       propertyPath: mSpawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 297948802}
@@ -1478,6 +1483,26 @@ PrefabInstance:
     - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
       propertyPath: mSpawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 2002005284}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _SpawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 297948802}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _SpawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 1532089019}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _SpawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 292544158}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _SpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 2002005284}
     m_RemovedComponents: []

@@ -14,11 +14,11 @@ public class SkillComboInfo : ScriptableObject
         public GameObject prefab;
     }
 
-    public List<SkillCombo> _skillCombos = new List<SkillCombo>();
+    public List<SkillCombo> _SkillCombos = new List<SkillCombo>();
 
     public GameObject GetPrefabForCombo(Elements.ElementalAttribute selfElement, Elements.ElementalAttribute teamElement)
     {
-        foreach (var skill in _skillCombos)
+        foreach (var skill in _SkillCombos)
         { 
             if (skill.ElementOne == selfElement && skill.ElementTwo == teamElement)
             { 

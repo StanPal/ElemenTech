@@ -346,7 +346,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1371002032310544473
 Transform:
   m_ObjectHideFlags: 0
@@ -425,15 +425,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 2
-  mName: Water Hero
-  mAttack: 20
-  mMaxHealth: 150
-  mCurrentHealth: 100
-  mCoolDown: 0.25
-  mElementalType: 2
-  mPositiveEffect: 3
-  mNegativeEffect: 3
+  Team: 2
+  _Name: 
+  _Attack: 10
+  _MaxHealth: 100
+  _CurrentHealth: 100
+  _CoolDown: 3
+  _PositiveEffect: 3
+  _NegativeEffect: 3
+  _ElementalType: 0
 --- !u!114 &1371002032310544469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -447,23 +447,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controllerInput: 0
-  isLeft: 0
-  isJumping: 0
-  mJumpForce: 12
-  mNumOfJumps: 0
-  mMaxJumps: 1
-  mGround:
+  _IsLeft: 0
+  _IsJumping: 0
+  _JumpForce: 5
+  _NumOfJumps: 0
+  _MaxJumps: 1
+  _Ground:
     serializedVersion: 2
-    m_Bits: 256
-  canDash: 1
+    m_Bits: 0
+  _CanDash: 1
   isDashing: 0
-  mDashSpeed: 6.5
-  mDashCoolDown: 0.5
-  mDashStartUpTime: 0
-  mSpeed: 10
+  mDashSpeed: 5
+  mDashCoolDown: 1
+  mDashStartUpTime: 1
+  mSpeed: 0
   mKnockbackRecieved: 0
   mKnockbackCount: 0
-  mRecoveryTime: 0.05
+  mRecoveryTime: 1
   isRecovering: 0
 --- !u!114 &1371002032310544466
 MonoBehaviour:

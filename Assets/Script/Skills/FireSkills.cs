@@ -1,36 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireSkills : MonoBehaviour
-{
+{ 
     // FireSkills 
-    public GameObject mFireBall;
+    public GameObject FireBall;
+    private PlayerSkills _HeroSkills;
 
-    [SerializeField]
-    private float mSpeed = 10.0f;
-    public float Speed { get { return mSpeed; } set { mSpeed = value; } }
-    [SerializeField]
-    private float mDamage = 10.0f;
-    public float Damage { get { return mDamage; } }
-    [SerializeField]
-    private float mDotDuration = 5.0f;
-    public float DotDuration { get { return mDotDuration; } }
+    [SerializeField] private float _Speed = 10.0f;
+    [SerializeField] private float _Damage = 10.0f;
+    [SerializeField] private float _DotDuration = 5.0f;
 
-    private Elements.ElementalAttribute _Element = Elements.ElementalAttribute.Fire;
-    public Elements.ElementalAttribute GetElement { get { return _Element; } }
-    PlayerSkills mHeroSkills;
-    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
+    // Getters & Setters
+    public float Speed { get { return _Speed; } set { _Speed = value; } }
+    public float Damage { get { return _Damage; } }
+    public float DotDuration { get { return _DotDuration; } }
+    public PlayerSkills PlayerSkills { get { return _HeroSkills; } }
 
     private void Start()
     {
-        mHeroSkills = GetComponent<PlayerSkills>();
-        mHeroSkills.onFireSkillPerformed += FireBall;
+        _HeroSkills = GetComponent<PlayerSkills>();
+        _HeroSkills.onFireSkillPerformed += FireBallCast;
     }
 
-    void FireBall()
+    private void FireBallCast()
     {
-       Instantiate(mFireBall, mHeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
+       Instantiate(FireBall, _HeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _HeroSkills.HeroAction.GetLookAngle));
     }
-
 }
