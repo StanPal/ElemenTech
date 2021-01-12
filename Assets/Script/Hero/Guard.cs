@@ -6,12 +6,16 @@ public class Guard : MonoBehaviour
 {
     private HeroActions mHeroAction;
     private HeroMovement mHeroMovement;
+    private HeroStats _HeroStats;
     public GameObject Shield;
     private GameObject mShield;
+    private Elements.ElementalAttribute _TeammateElement;
+    public Elements.ElementalAttribute TeamElement { set { _TeammateElement = value; } }
+    private ComboSkillManager _SkillComboInfo;
+
     [SerializeField]
     private bool isGuarding = false;
     public bool Guarding { get { return isGuarding; } }
-
     [SerializeField]
     private float mGuardTime = 0.5f;
     [SerializeField]
@@ -36,13 +40,15 @@ public class Guard : MonoBehaviour
     public bool isShieldDisabled = false;
 
 
-    public GameObject comboSkill;
+    private GameObject _ComboSkillPrefab;
     bool mSkillCombine = false;
     public bool ComboSkillOn { get { return mSkillCombine; } set { mSkillCombine = value; } }
 
     private void Start()
     {
+        _SkillComboInfo = FindObjectOfType<ComboSkillManager>();
         mShieldEnergy = mShieldMaxEnergy;
+        _HeroStats = GetComponentInParent<HeroStats>();
         mHeroAction = GetComponentInParent<HeroActions>();
         mHeroAction.onGuardPerformed += GuardMove;
         mHeroAction.onGuardExit += DestroyGuard;
@@ -80,26 +86,39 @@ public class Guard : MonoBehaviour
         }
         if(isGuarding && ComboSkillOn)
         {
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Water)
-            {
-                GameObject ComboSkillClone = Instantiate(comboSkill, transform.position, Quaternion.identity);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Earth)
-            {
-                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Fire)
-            {
-                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Air)
-            {
-                GameObject ComboSkillClone = Instantiate(comboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
+            //_ComboSkillPrefab = _SkillComboInfo.ScriptableComboSkill.GetPrefabForCombo(_HeroStats.GetElement, _TeammateElement);
+             _ComboSkillPrefab = Instantiate(_SkillComboInfo.ScriptableComboSkill.GetPrefabForCombo(_HeroStats.GetElement, _TeammateElement), transform);
+            //if (_ComboSkillPrefab.GetComponent<SteamCover>().NeedQuaternion)
+            //{
+            //    _ComboSkillPrefab = Instantiate(_SkillComboInfo.ScriptableComboSkill.GetPrefabForCombo(_HeroStats.GetElement, _TeammateElement), transform.position, Quaternion.identity);
+            //}
+            //else
+            //{
+            //    _ComboSkillPrefab = Instantiate(_SkillComboInfo.ScriptableComboSkill.GetPrefabForCombo(_HeroStats.GetElement, _TeammateElement), transform);
+            //}
+            _ComboSkillPrefab.tag = this.GetComponent<HeroStats>().tag;
+           
+            _TeammateElement = Elements.ElementalAttribute.None;
+            //if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Water)
+            //{
+            //    GameObject ComboSkillClone = Instantiate(comboSkill, transform.position, Quaternion.identity);
+            //    ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            //}
+            //if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Earth)
+            //{
+            //    GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+            //    ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            //}
+            //if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Fire)
+            //{
+            //    GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+            //    ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            //}
+            //if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Air)
+            //{
+            //    GameObject ComboSkillClone = Instantiate(comboSkill, transform);
+            //    ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
+            //}
             //Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
         }

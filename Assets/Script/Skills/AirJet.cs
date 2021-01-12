@@ -54,7 +54,7 @@ public class AirJet : MonoBehaviour
                 if (guard.Guarding)
                 {
                     Destroy(gameObject);
-                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().TeamElement = airskills.GetElement;
                     collision.GetComponent<Guard>().ComboSkillOn = true;
 
                 }

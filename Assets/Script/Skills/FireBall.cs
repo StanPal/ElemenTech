@@ -36,11 +36,11 @@ public class FireBall : MonoBehaviour
                 if (guard.Guarding)
                 {
                     Destroy(gameObject);
-                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().TeamElement = fireSkills.GetElement;
                     collision.GetComponent<Guard>().ComboSkillOn = true;
                 }
             }
-        }
+       }
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
