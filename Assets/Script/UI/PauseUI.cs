@@ -1,12 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    private PlayerManager playerManager;
+    private PlayerManager PlayerManager;
     private ScoreManager scoreManager;
     public Canvas mCanvas;
 
@@ -17,30 +14,29 @@ public class PauseUI : MonoBehaviour
 
     private void Initialize()
     {
-        playerManager = ServiceLocator.Get<PlayerManager>();
+        PlayerManager = ServiceLocator.Get<PlayerManager>();
         scoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     private void Start()
     {
-        if (playerManager.mPlayersList[0].gameObject != null)
+        if (PlayerManager.PlayersList[0].gameObject != null)
         {
-            playerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            PlayerManager.PlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[1].gameObject != null)
+        if (PlayerManager.PlayersList[1].gameObject != null)
         {
-            playerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            PlayerManager.PlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[2].gameObject != null)
+        if (PlayerManager.PlayersList[2].gameObject != null)
         {
-            playerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            PlayerManager.PlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[3].gameObject != null)
+        if (PlayerManager.PlayersList[3].gameObject != null)
         {
-            playerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            PlayerManager.PlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
-    
 
     public void PauseGame()
     {
@@ -75,24 +71,24 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.FireHero.SetActive(true);
-        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.WaterHero.SetActive(false);
+        PlayerManager.FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        PlayerManager.FireHero.SetActive(true);
+        PlayerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        PlayerManager.WaterHero.SetActive(false);
 
-        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.AirHero.SetActive(false);
-        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.EarthHero.SetActive(false);
+        PlayerManager.AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        PlayerManager.AirHero.SetActive(false);
+        PlayerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        PlayerManager.EarthHero.SetActive(false);
 
 
-        playerManager.mPlayersList[0] = playerManager.FireHero;
-        playerManager.mPlayersList[1] = playerManager.WaterHero;
-        playerManager.mPlayersList[2] = playerManager.AirHero;
-        playerManager.mPlayersList[3] = playerManager.EarthHero;
+        PlayerManager.PlayersList[0] = PlayerManager.FireHero;
+        PlayerManager.PlayersList[1] = PlayerManager.WaterHero;
+        PlayerManager.PlayersList[2] = PlayerManager.AirHero;
+        PlayerManager.PlayersList[3] = PlayerManager.EarthHero;
 
-        playerManager.TeamOne.Clear();
-        playerManager.TeamTwo.Clear();
+        PlayerManager.TeamOne.Clear();
+        PlayerManager.TeamTwo.Clear();
 
         scoreManager.PracticeMode = false;
         Cursor.visible = true;

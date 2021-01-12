@@ -1,20 +1,17 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {    
-    [SerializeField]
-    private int mTeamOneScore = 0;
-    public int TeamOneScore { get { return mTeamOneScore; } }
-    [SerializeField]
-    private int mTeamTwoScore = 0;
-    public int TeamTwoScore { get { return mTeamTwoScore; } }
-    [SerializeField]
-    bool isPracticeMode = false;
-    public bool PracticeMode { get { return isPracticeMode;} set { isPracticeMode = value; } }
+    [SerializeField] private int _TeamOneScore = 0;
+    [SerializeField] bool _IsPracticeMode = false;
+    [SerializeField] private int _TeamTwoScore = 0;
+
+    public int TeamOneScore { get { return _TeamOneScore; } }
+    public int TeamTwoScore { get { return _TeamTwoScore; } }
+    public bool PracticeMode { get { return _IsPracticeMode;} set { _IsPracticeMode = value; } }
+
     private void Awake()
-    {        
+    { 
         ServiceLocator.Register<ScoreManager>(this);
     }
 
@@ -23,10 +20,10 @@ public class ScoreManager : MonoBehaviour
         switch (team)
         {
             case 1:
-                mTeamOneScore++;
+                _TeamOneScore++;
                 break;
             case 2:
-                mTeamTwoScore++;
+                _TeamTwoScore++;
                 break; 
             default:
                 break;
@@ -35,7 +32,7 @@ public class ScoreManager : MonoBehaviour
 
     public void ResetScore()
     {
-        mTeamOneScore = 0;
-        mTeamTwoScore = 0;
+        _TeamOneScore = 0;
+        _TeamTwoScore = 0;
     }
 }

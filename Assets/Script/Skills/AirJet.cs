@@ -1,37 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AirJet : MonoBehaviour
-{       
-    private float mProjectileSpeed = 1f;
-    private float mExitTime = 1f; 
-    private Rigidbody2D mRigidbody;
-    private Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
-
+{
+    private float _ProjectileSpeed = 1f;
+    private float _ExitTime = 1f;
+    private Rigidbody2D _RigidBody;
+    private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills airskills;
 
     void Start()
     {
-        mRigidbody = GetComponent<Rigidbody2D>();
+        _RigidBody = GetComponent<Rigidbody2D>();
         airskills = FindObjectOfType<AirSkills>();
-        mProjectileSpeed = airskills.Speed;
-        mScaleSize = airskills.Scale;
-        mExitTime = airskills.ExitTime;
+        _ProjectileSpeed = airskills.Speed;
+        _ScaleSize = airskills.Scale;
+        _ExitTime = airskills.ExitTime;
     }
 
     private void FixedUpdate()
     {
-        if (mExitTime <= 0.0f)
+        if (_ExitTime <= 0.0f)
         {
             Destroy(gameObject);
         }
-        mExitTime -= Time.deltaTime;
-        mRigidbody.velocity = transform.right * mProjectileSpeed;
-        transform.localScale = Vector3.Lerp(transform.localScale, mScaleSize, airskills.ScaleSpeed * Time.deltaTime);
-
-        
-        
+        _ExitTime -= Time.deltaTime;
+        _RigidBody.velocity = transform.right * _ProjectileSpeed;
+        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, airskills.ScaleSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -45,7 +39,7 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(airskills.Damage);
             }
         }
-        
+
         if (collision.GetComponent<Guard>())
         {
             if (collision.GetComponent<Guard>().tag.Equals(airskills.PlayerSkills.HeroAction.tag))

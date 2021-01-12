@@ -5,22 +5,22 @@ using UnityEngine;
 public class ParticleSystemManager : MonoBehaviour
 {
     public List<GameObject> DebuffEffects;
-    private PlayerManager playerManager;
+    private PlayerManager PlayerManager;
     private Stack<GameObject> statusEffect = new Stack<GameObject>();
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
-        playerManager.AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        PlayerManager = FindObjectOfType<PlayerManager>();
+        PlayerManager.AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        PlayerManager.AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        PlayerManager.WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        PlayerManager.WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        PlayerManager.EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        PlayerManager.EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        playerManager.FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        playerManager.FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        PlayerManager.FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        PlayerManager.FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
     }
 
     private void DebuffEffectOn(GameObject hero)
