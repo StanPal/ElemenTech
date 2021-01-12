@@ -713,7 +713,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Fire Cyborg
-  mAttack: 15
+  mAttack: 25
   mMaxHealth: 100
   mCurrentHealth: 100
   mCoolDown: 0.5
@@ -1285,7 +1285,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5982465580042472988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.33, y: -0.03, z: 0}
+  m_LocalPosition: {x: 13.33, y: -0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4742860617384786225}
@@ -1318,7 +1318,7 @@ Transform:
   m_GameObject: {fileID: 8604336341423221083}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.19999999, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.19999999, z: 1}
   m_Children:
   - {fileID: 4264183723163891622}
   m_Father: {fileID: 1791110765959601703}

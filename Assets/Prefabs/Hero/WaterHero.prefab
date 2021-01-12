@@ -427,10 +427,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   team: 2
   mName: Water Hero
-  mAttack: 10
+  mAttack: 20
   mMaxHealth: 150
   mCurrentHealth: 100
-  mCoolDown: 0
+  mCoolDown: 0.25
   mElementalType: 2
   mPositiveEffect: 3
   mNegativeEffect: 3
@@ -1024,7 +1024,7 @@ Transform:
   m_GameObject: {fileID: 4956901514175417199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.099999994, y: 0.19999999, z: 1}
+  m_LocalScale: {x: 0.1, y: 0.19999999, z: 1}
   m_Children:
   - {fileID: 4467623121776858900}
   m_Father: {fileID: 1371002032310544473}
