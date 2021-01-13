@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class TeamSelect : MonoBehaviour
 {
+    //private TeamIndicator Indicator;
+
     public List<Button> teamButtonList = new List<Button>();
     private List<int> controllerList = new List<int>();
     private PlayerManager playerManager;
@@ -15,6 +17,12 @@ public class TeamSelect : MonoBehaviour
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
+
+        //Indicator = GetComponent<TeamIndicator>();
+
+        //Indicator.transform.position = new Vector3
+        // (this.GetComponent<HeroStats>().gameObject.transform.position.x,
+        //  this.GetComponent<HeroStats>().gameObject.transform.position.y);
     }
 
     void Start()
@@ -32,6 +40,7 @@ public class TeamSelect : MonoBehaviour
             case 1:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 1";
                 playerManager.FireHero.tag = "Team1";
+                
                 break;
             case 2:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";

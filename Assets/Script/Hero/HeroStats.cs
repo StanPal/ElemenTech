@@ -16,7 +16,7 @@ public class HeroStats : MonoBehaviour
         FFA
     };
 
-    [SerializeField]
+    //[SerializeField]
     public TeamSetting team = TeamSetting.FFA;
 
     // Basic Stats
@@ -57,6 +57,7 @@ public class HeroStats : MonoBehaviour
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
         guard = GetComponent<Guard>();
+       
     }
     
     private void FixedUpdate()
