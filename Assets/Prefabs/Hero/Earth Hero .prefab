@@ -450,6 +450,10 @@ MonoBehaviour:
   mElementalType: 1
   mPositiveEffect: 3
   mNegativeEffect: 3
+  DeadParticle: {fileID: 6834953017209929187, guid: 5665cfb03c827d24ab7fa5badc01c737,
+    type: 3}
+  HitParticle: {fileID: 996886446276154626, guid: 915e1e14e3447c7438b25616effe26bb,
+    type: 3}
 --- !u!114 &1791110765294023673
 MonoBehaviour:
   m_ObjectHideFlags: 0

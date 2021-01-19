@@ -531,6 +531,10 @@ MonoBehaviour:
   mElementalType: 3
   mPositiveEffect: 3
   mNegativeEffect: 3
+  DeadParticle: {fileID: 6834953017209929187, guid: 5665cfb03c827d24ab7fa5badc01c737,
+    type: 3}
+  HitParticle: {fileID: 996886446276154626, guid: 915e1e14e3447c7438b25616effe26bb,
+    type: 3}
 --- !u!114 &1791110765294023673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -560,7 +564,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 1
+  controllerInput: 2
   isLeft: 0
   isJumping: 0
   mJumpForce: 10

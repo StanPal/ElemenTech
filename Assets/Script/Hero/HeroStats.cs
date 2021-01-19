@@ -52,12 +52,17 @@ public class HeroStats : MonoBehaviour
     private StatusEffects.NegativeEffects mNegativeEffect = StatusEffects.NegativeEffects.None;
     public StatusEffects.PositiveEffects Buff { get { return mPositiveEffect; } set { mPositiveEffect = value; } }
     public StatusEffects.NegativeEffects DeBuff { get { return mNegativeEffect; } set { mNegativeEffect = value; } }
- 
+
+    //Hero particle
+    public GameObject DeadParticle;
+    public GameObject HitParticle;
+
     void Awake()
     {
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
         guard = GetComponent<Guard>();
+        //DeadParticle = GetComponent<ParticleSystem>();
     }
     
     private void FixedUpdate()
@@ -80,6 +85,7 @@ public class HeroStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        Instantiate(HitParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         if (mCurrentHealth <= 0)
         {
             HeroDie();
@@ -178,6 +184,7 @@ public class HeroStats : MonoBehaviour
     void HeroDie()
     {        
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
+        Instantiate(DeadParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         if(playermanager.TeamOne.Contains(gameObject))
         {
             playermanager.TeamOne.Remove(gameObject);
