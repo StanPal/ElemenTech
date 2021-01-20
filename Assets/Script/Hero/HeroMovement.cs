@@ -18,6 +18,9 @@ public class HeroMovement : MonoBehaviour
     }
 
     public Controller controllerInput = Controller.None;
+    private Animator _PlayerAnimator;
+    private float _HorizontalMove;
+
     [SerializeField]
     private bool isLeft = false;
     public bool GetIsLeft { get { return isLeft; } }
@@ -68,6 +71,7 @@ public class HeroMovement : MonoBehaviour
 
     private void Awake()
     {
+        _PlayerAnimator = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         mPlayerInput = new PlayerInput();
         col = GetComponent<Collider2D>();
@@ -129,6 +133,7 @@ public class HeroMovement : MonoBehaviour
     {
         if (canDash)
         {
+            _PlayerAnimator.SetTrigger("DashTrigger");
             StartCoroutine(DashStartUp());
         }
     }
@@ -136,6 +141,7 @@ public class HeroMovement : MonoBehaviour
     IEnumerator DashStartUp()
     {
         yield return new WaitForSeconds(mDashStartUpTime);
+
         isDashing = true;
     }
 
@@ -143,6 +149,8 @@ public class HeroMovement : MonoBehaviour
     {
         if (IsGrounded())
         {
+            _PlayerAnimator.SetBool("IsJumping", false);
+            _PlayerAnimator.SetBool("IsMultiJump", false);
             mNumOfJumps = mMaxJumps;
         }
         switch (controllerInput)
@@ -181,7 +189,7 @@ public class HeroMovement : MonoBehaviour
                 break;
             case Controller.XBOX:
                 if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps > 0)
-                {
+                {                    
                     Jump();
                 }
                 else if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
@@ -192,16 +200,19 @@ public class HeroMovement : MonoBehaviour
             default:
                 break;
         }
+        _HorizontalMove = mMoveInput * mSpeed;
+        _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_HorizontalMove));
     }
 
     private void Jump()
     {
+        _PlayerAnimator.SetBool("IsJumping", true);
         rb.velocity = Vector2.up * mJumpForce;
         mNumOfJumps--;
     }
 
     private void MultiJump()
-    { 
+    {  
         rb.velocity = Vector2.up * mJumpForce;
     }
 
@@ -230,6 +241,7 @@ public class HeroMovement : MonoBehaviour
                 Debug.Log("Keybindings not set");
             }
         }
+
 
         Vector3 currentPosition = transform.position;
         currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;

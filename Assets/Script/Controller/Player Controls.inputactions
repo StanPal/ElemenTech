@@ -81,7 +81,7 @@
                     "name": "Aim",
                     "type": "Value",
                     "id": "d5c9b8a4-dc50-4abf-b151-cdf5eebe687f",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": ""
                 }

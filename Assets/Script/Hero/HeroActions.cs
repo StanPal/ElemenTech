@@ -9,6 +9,8 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    private Animator _PlayerAnimator;
+
     private Guard guard;
     public GameObject sword;
     public Transform PivotPoint;
@@ -44,6 +46,7 @@ public class HeroActions : MonoBehaviour
 
     private void Initialize()
     {
+        _PlayerAnimator = GetComponentInChildren<Animator>();
         mHeroMovement = GetComponent<HeroMovement>();
         mHeroStats = GetComponent<HeroStats>();
         mPlayerInput = new PlayerInput();
@@ -122,8 +125,8 @@ public class HeroActions : MonoBehaviour
                 break;
             case HeroMovement.Controller.Keyboard:
                 //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
-                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
-                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;                
+                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector3>()) - transform.position;
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
                 axispos = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
@@ -169,6 +172,7 @@ public class HeroActions : MonoBehaviour
         {
             if (!isGuardInvoked && !isOnCooldown)
             {
+                _PlayerAnimator.SetTrigger("SkillTrigger");
                 mNextFireTime = Time.time + HeroStats.CoolDown;
                 onSkillPerformed.Invoke(HeroStats.GetElement);
             }
@@ -179,6 +183,8 @@ public class HeroActions : MonoBehaviour
     {
         if (!isGuardInvoked)
         {
+            _PlayerAnimator.SetBool("IsJumping",false);
+            _PlayerAnimator.SetTrigger("AttackTrigger");
             sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }

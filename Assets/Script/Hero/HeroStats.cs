@@ -8,7 +8,7 @@ public class HeroStats : MonoBehaviour
     public event System.Action onDebuffDeActivated;
 
     private Guard guard;
-
+    private Animator _Animator;
     public enum TeamSetting
     {
         Team1,
@@ -55,6 +55,7 @@ public class HeroStats : MonoBehaviour
  
     void Awake()
     {
+        _Animator = GetComponentInChildren<Animator>();
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
         guard = GetComponent<Guard>();
@@ -106,7 +107,8 @@ public class HeroStats : MonoBehaviour
                 break;
             default:
                 break;
-        }    
+        }
+        _Animator.SetTrigger("HurtTrigger");
     }
 
 
