@@ -1,125 +1,127 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class TeamSelect : MonoBehaviour
 {
-    public List<Button> teamButtonList = new List<Button>();
-    private List<int> controllerList = new List<int>();
-    private PlayerManager playerManager;
-    int cntselect_1 = 0;
-    int cntselect_2 = 0;
-    int cntselect_3 = 0;
-    int cntselect_4 = 0;
+    public List<Button> TeamButtonList = new List<Button>();
+    private List<int> _ControllerList = new List<int>();
+    private PlayerManager _PlayerManager;
+    private static int _ControllerSelect1 = 0;
+    private static int _ControllerSelect2 = 0;
+    private static int _ControllerSelect3 = 0;
+    private static int _ControllerSelect4 = 0;
+
     private void Awake()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        GameLoader.CallOnComplete(Initialize);
     }
 
-    void Start()
+    private void Initialize()
     {
-
-    }
+        _PlayerManager = ServiceLocator.Get<PlayerManager>();
+        TeamButtonList[0].GetComponentInChildren<Text>().text = _PlayerManager.FireHero.tag.ToString();
+        TeamButtonList[1].GetComponentInChildren<Text>().text = _PlayerManager.EarthHero.tag.ToString();
+        TeamButtonList[2].GetComponentInChildren<Text>().text = _PlayerManager.WaterHero.tag.ToString();
+        TeamButtonList[3].GetComponentInChildren<Text>().text = _PlayerManager.AirHero.tag.ToString();
+    }    
 
     private void FixedUpdate()
     {
-        switch (cntselect_1)
+        switch (_ControllerSelect1)
         {
             case 0:
-                teamButtonList[0].GetComponentInChildren<Text>().text = "Team None";
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "Team None";
                 break;
             case 1:
-                teamButtonList[0].GetComponentInChildren<Text>().text = "Team 1";
-                playerManager.FireHero.tag = "Team1";     
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "Team 1";
+                _PlayerManager.FireHero.tag = "Team1";
                 break;
             case 2:
-                teamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";
-                playerManager.FireHero.tag = "Team2";   
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";
+                _PlayerManager.FireHero.tag = "Team2";
                 break;
             default:
                 break;
         }
 
-        switch (cntselect_2)
+        switch (_ControllerSelect2)
         {
             case 0:
-                teamButtonList[1].GetComponentInChildren<Text>().text = "Team None";
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "Team None";
                 break;
             case 1:
-                teamButtonList[1].GetComponentInChildren<Text>().text = "Team 1";
-                playerManager.EarthHero.tag = "Team1";
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "Team 1";
+                _PlayerManager.EarthHero.tag = "Team1";
                 break;
             case 2:
-                teamButtonList[1].GetComponentInChildren<Text>().text = "Team 2";
-                playerManager.EarthHero.tag = "Team2";
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "Team 2";
+                _PlayerManager.EarthHero.tag = "Team2";
                 break;
             default:
                 break;
         }
 
-        switch (cntselect_3)
+        switch (_ControllerSelect3)
         {
             case 0:
-                teamButtonList[2].GetComponentInChildren<Text>().text = "Team None";
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "Team None";
                 break;
             case 1:
-                teamButtonList[2].GetComponentInChildren<Text>().text = "Team 1";
-                playerManager.WaterHero.tag = "Team1";
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "Team 1";
+                _PlayerManager.WaterHero.tag = "Team1";
                 break;
             case 2:
-                teamButtonList[2].GetComponentInChildren<Text>().text = "Team 2";
-                playerManager.WaterHero.tag = "Team2";
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "Team 2";
+                _PlayerManager.WaterHero.tag = "Team2";
                 break;
             default:
                 break;
         }
 
-        switch (cntselect_4)
+        switch (_ControllerSelect4)
         {
             case 0:
-                teamButtonList[3].GetComponentInChildren<Text>().text = "Team None";
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "Team None";
                 break;
             case 1:
-                teamButtonList[3].GetComponentInChildren<Text>().text = "Team 1";
-                playerManager.AirHero.tag = "Team1";
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "Team 1";
+                _PlayerManager.AirHero.tag = "Team1";
                 break;
             case 2:
-                teamButtonList[3].GetComponentInChildren<Text>().text = "Team 2";
-                playerManager.AirHero.tag = "Team2";
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "Team 2";
+                _PlayerManager.AirHero.tag = "Team2";
                 break;
             default:
                 break;
         }
     }
-
 
     public void SelectController1()
     {
-        cntselect_1++;
-        if (cntselect_1 > 2)
-            cntselect_1 = 0;
-
+        _ControllerSelect1++;
+        if (_ControllerSelect1 > 2)
+            _ControllerSelect1 = 0;
     }
+
     public void SelectController2()
     {
-        cntselect_2++;
-        if (cntselect_2 > 2)
-            cntselect_2 = 0;
-
+        _ControllerSelect2++;
+        if (_ControllerSelect2 > 2)
+            _ControllerSelect2 = 0;
     }
+
     public void SelectController3()
     {
-        cntselect_3++;
-        if (cntselect_3 > 2)
-            cntselect_3 = 0;
-
+        _ControllerSelect3++;
+        if (_ControllerSelect3 > 2)
+            _ControllerSelect3 = 0;
     }
+
     public void SelectController4()
     {
-        cntselect_4++;
-        if (cntselect_4 > 2)
-            cntselect_4 = 0;
-
+        _ControllerSelect4++;
+        if (_ControllerSelect4 > 2)
+            _ControllerSelect4 = 0;
     }
 }

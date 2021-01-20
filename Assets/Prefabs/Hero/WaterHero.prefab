@@ -384,7 +384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 2
+  controllerInput: 0
   isLeft: 0
   isJumping: 0
   mJumpForce: 12
@@ -448,18 +448,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 1a2ae9934b2a96e45b8cb85c4e2b29c5, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  mSpeedDecrease: 1
-  mShieldMaxEnergy: 100
-  mShieldEnergy: 100
-  mShieldEnergyTick: 0.2
-  mShieldRecoverAmount: 1
-  mShieldRecoveryTick: 10
-  isShieldDisabled: 0
-  comboSkill: {fileID: 2130647349424703625, guid: fbe6600f21a1c2b4499e7e059a851492,
-    type: 3}
+  IsShieldDisabled: 0
+  _IsGuarding: 0
+  _GuardTime: 0.5
+  _ShieldSize: 2.1
+  _ShieldRecoveryTick: 3
+  _SpeedDecrease: 1
+  _ShieldMaxEnergy: 100
+  _ShieldRecoverAmount: 1
+  _ShieldEnergyTick: 0.2
+  _ShieldEnergy: 100
+  ComboSkill: {fileID: 0}
 --- !u!1 &1371002032368287848
 GameObject:
   m_ObjectHideFlags: 0

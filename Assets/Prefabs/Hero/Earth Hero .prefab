@@ -450,11 +450,11 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 0
   m_Name: 'Earth Hero '
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -621,18 +621,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  mSpeedDecrease: 1
-  mShieldMaxEnergy: 150
-  mShieldEnergy: 100
-  mShieldEnergyTick: 10
-  mShieldRecoverAmount: 10
-  mShieldRecoveryTick: 0.1
-  isShieldDisabled: 0
-  comboSkill: {fileID: 1555080155839008538, guid: ac16b60647029a14ab0675d494d04c05,
-    type: 3}
+  IsShieldDisabled: 0
+  _IsGuarding: 0
+  _GuardTime: 0.5
+  _ShieldSize: 2.1
+  _ShieldRecoveryTick: 3
+  _SpeedDecrease: 1
+  _ShieldMaxEnergy: 100
+  _ShieldRecoverAmount: 1
+  _ShieldEnergyTick: 0.2
+  _ShieldEnergy: 100
+  ComboSkill: {fileID: 0}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0

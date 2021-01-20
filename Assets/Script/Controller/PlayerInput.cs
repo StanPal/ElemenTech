@@ -94,7 +94,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Aim"",
                     ""type"": ""Value"",
                     ""id"": ""d5c9b8a4-dc50-4abf-b151-cdf5eebe687f"",
-                    ""expectedControlType"": ""Vector3"",
+                    ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
                 }

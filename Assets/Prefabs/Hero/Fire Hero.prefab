@@ -714,18 +714,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  mSpeedDecrease: 1
-  mShieldMaxEnergy: 100
-  mShieldEnergy: 100
-  mShieldEnergyTick: 0.2
-  mShieldRecoverAmount: 5
-  mShieldRecoveryTick: 1
-  isShieldDisabled: 0
-  comboSkill: {fileID: 2199930519875798088, guid: 41997a524e4ad22429e99f60fb8dcbbb,
-    type: 3}
+  IsShieldDisabled: 0
+  _IsGuarding: 0
+  _GuardTime: 0.5
+  _ShieldSize: 2.1
+  _ShieldRecoveryTick: 3
+  _SpeedDecrease: 1
+  _ShieldMaxEnergy: 100
+  _ShieldRecoverAmount: 1
+  _ShieldEnergyTick: 0.1
+  _ShieldEnergy: 100
+  ComboSkill: {fileID: 0}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0
@@ -887,7 +886,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765795455628}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1791110765294023620}

@@ -72,7 +72,7 @@ public class HeroActions : MonoBehaviour
                 mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
 
-                if (!this.gameObject.GetComponent<Guard>().isShieldDisabled)
+                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     mPlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
                 }
@@ -84,7 +84,7 @@ public class HeroActions : MonoBehaviour
             {
                 mPlayerInput.KeyboardLayout2.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.KeyboardLayout2.ElementSpecial1.performed += _ => ElementSpecial1();
-                if (!this.gameObject.GetComponent<Guard>().isShieldDisabled)
+                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     mPlayerInput.KeyboardLayout2.Guard.performed += _ => Guard();
                 }
@@ -96,7 +96,7 @@ public class HeroActions : MonoBehaviour
             {
                 mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
-                if (!this.gameObject.GetComponent<Guard>().isShieldDisabled)
+                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     mPlayerInput.PS4.Guard.performed += _ => Guard();
                 }
@@ -108,7 +108,7 @@ public class HeroActions : MonoBehaviour
             {
                 mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
-                if (!this.gameObject.GetComponent<Guard>().isShieldDisabled)
+                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     mPlayerInput.XBOX.Guard.performed += _ => Guard();
                 }
@@ -125,7 +125,7 @@ public class HeroActions : MonoBehaviour
                 break;
             case HeroMovement.Controller.Keyboard:
                 //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
-                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector3>()) - transform.position;
+                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:

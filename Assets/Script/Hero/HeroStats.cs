@@ -128,7 +128,7 @@ public class HeroStats : MonoBehaviour
         }
         if (guard.ShieldEnergy >= guard.ShieldMaxEnergy)
         {
-            guard.isShieldDisabled = false;
+            guard.IsShieldDisabled = false;
         }
     }
 

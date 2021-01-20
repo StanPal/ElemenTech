@@ -1,16 +1,15 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MatchUI : MonoBehaviour
 {
-    public Canvas mMatchCanvas;
-    public Text mTeamOneScore;
-    public Text mTeamTwoScore;
-    public Text mTransition;
-    private ScoreManager mScoreManager;
+    public Canvas MatchCanvas;
+    public Text TeamOneScore;
+    public Text TeamTwoScore;
+    public Text Transition;
+    private ScoreManager _ScoreManager;
 
     private void Awake()
     {
@@ -19,27 +18,44 @@ public class MatchUI : MonoBehaviour
 
     private void Initialize()
     {
-        mScoreManager = ServiceLocator.Get<ScoreManager>();
+        _ScoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     public void displayTeamScore()
     {
-        mTeamOneScore.text = "Team 1: " + mScoreManager.TeamOneScore;
-        mTeamTwoScore.text = "Team 2: " + mScoreManager.TeamTwoScore;
+        TeamOneScore.text = "Team 1: " + _ScoreManager.TeamOneScore;
+        TeamTwoScore.text = "Team 2: " + _ScoreManager.TeamTwoScore;
         Time.timeScale = 0;
-        StartCoroutine(TransitionToNextScene());
+        Debug.Log("Current Scene" + SceneManager.GetActiveScene().buildIndex);
+        Debug.Log("Total Scene Count" + SceneManager.sceneCountInBuildSettings);
+
+        if (SceneManager.GetActiveScene().buildIndex + 1 == SceneManager.sceneCountInBuildSettings - 1)
+        {
+            StartCoroutine(TransitionToGameEndScene());
+        }
+        else
+        {
+            StartCoroutine(TransitionToNextScene());
+        }
+    }
+
+    IEnumerator TransitionToGameEndScene()
+    {
+        Time.timeScale = 1;
+        yield return new WaitForSeconds(1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     IEnumerator TransitionToNextScene()
     {
         Time.timeScale = 1;
-        mTransition.text = "Next Match will begin in...";
+        Transition.text = "Next Match will begin in...";
         yield return new WaitForSeconds(2);
-        mTransition.text = "3";
+        Transition.text = "3";
         yield return new WaitForSeconds(1);
-        mTransition.text = "2";
+        Transition.text = "2";
         yield return new WaitForSeconds(1);
-        mTransition.text = "1";
+        Transition.text = "1";
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }

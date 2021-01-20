@@ -525,18 +525,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
-  isGuarding: 0
-  mGuardTime: 0.5
-  mShieldSize: 2.1
-  mSpeedDecrease: 1
-  mShieldMaxEnergy: 100
-  mShieldEnergy: 100
-  mShieldEnergyTick: 10
-  mShieldRecoverAmount: 10
-  mShieldRecoveryTick: 0.1
-  isShieldDisabled: 0
-  comboSkill: {fileID: 273737325032263211, guid: 8e300e1bf4bd0574b98e18cf0f85e587,
-    type: 3}
+  IsShieldDisabled: 0
+  _IsGuarding: 0
+  _GuardTime: 0.5
+  _ShieldSize: 2.1
+  _ShieldRecoveryTick: 3
+  _SpeedDecrease: 1
+  _ShieldMaxEnergy: 100
+  _ShieldRecoverAmount: 1
+  _ShieldEnergyTick: 0.2
+  _ShieldEnergy: 100
+  ComboSkill: {fileID: 0}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0

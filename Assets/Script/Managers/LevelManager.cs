@@ -57,7 +57,7 @@ public class LevelManager : MonoBehaviour
     {
         isMatchOver = true;
         mScoreManager.AddPoints(team, score);
-        MatchUI.mMatchCanvas.gameObject.SetActive(true);
+        MatchUI.MatchCanvas.gameObject.SetActive(true);
         MatchUI.displayTeamScore();
         mPlayerManager.TeamOne.Clear();
         mPlayerManager.TeamTwo.Clear();
