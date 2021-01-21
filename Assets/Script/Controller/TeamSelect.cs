@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TeamSelect : MonoBehaviour
 {
-    //private TeamIndicator Indicator;
+    //public SpriteRenderer spriteRenderer;
 
     public List<Button> teamButtonList = new List<Button>();
     private List<int> controllerList = new List<int>();
@@ -17,12 +17,8 @@ public class TeamSelect : MonoBehaviour
     private void Awake()
     {
         playerManager = FindObjectOfType<PlayerManager>();
+       // spriteRenderer = GetComponent<SpriteRenderer>();
 
-        //Indicator = GetComponent<TeamIndicator>();
-
-        //Indicator.transform.position = new Vector3
-        // (this.GetComponent<HeroStats>().gameObject.transform.position.x,
-        //  this.GetComponent<HeroStats>().gameObject.transform.position.y);
     }
 
     void Start()
@@ -40,11 +36,13 @@ public class TeamSelect : MonoBehaviour
             case 1:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 1";
                 playerManager.FireHero.tag = "Team1";
-                
+               // spriteRenderer.color = Color.blue;
+
                 break;
             case 2:
                 teamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";
-                playerManager.FireHero.tag = "Team2";   
+                playerManager.FireHero.tag = "Team2";
+               // spriteRenderer.color = Color.red;
                 break;
             default:
                 break;
@@ -58,10 +56,12 @@ public class TeamSelect : MonoBehaviour
             case 1:
                 teamButtonList[1].GetComponentInChildren<Text>().text = "Team 1";
                 playerManager.EarthHero.tag = "Team1";
+              //  spriteRenderer.color = Color.blue;
                 break;
             case 2:
                 teamButtonList[1].GetComponentInChildren<Text>().text = "Team 2";
                 playerManager.EarthHero.tag = "Team2";
+              //  spriteRenderer.color = Color.red;
                 break;
             default:
                 break;
@@ -75,10 +75,12 @@ public class TeamSelect : MonoBehaviour
             case 1:
                 teamButtonList[2].GetComponentInChildren<Text>().text = "Team 1";
                 playerManager.WaterHero.tag = "Team1";
+             //   spriteRenderer.color = Color.blue;
                 break;
             case 2:
                 teamButtonList[2].GetComponentInChildren<Text>().text = "Team 2";
                 playerManager.WaterHero.tag = "Team2";
+              //  spriteRenderer.color = Color.red;
                 break;
             default:
                 break;
@@ -92,10 +94,12 @@ public class TeamSelect : MonoBehaviour
             case 1:
                 teamButtonList[3].GetComponentInChildren<Text>().text = "Team 1";
                 playerManager.AirHero.tag = "Team1";
+              //  spriteRenderer.color = Color.blue;
                 break;
             case 2:
                 teamButtonList[3].GetComponentInChildren<Text>().text = "Team 2";
                 playerManager.AirHero.tag = "Team2";
+               // spriteRenderer.color = Color.red;
                 break;
             default:
                 break;
