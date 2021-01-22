@@ -9,34 +9,29 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    public GameObject Sword;
     private Animator _PlayerAnimator;
-
-    private Guard guard;
-    public GameObject sword;
+    private Guard _Guard;
     public Transform PivotPoint;
     public Transform FirePoint;
+    private HeroMovement _HeroMovement;
+    private HeroStats _HeroStats;
+    private PlayerInput _PlayerInput;
+    private Rigidbody2D _Rb;
 
-    private HeroMovement mHeroMovement;
-    public HeroMovement HeroMovement { get { return mHeroMovement; } }
-    private HeroStats mHeroStats;
-    public HeroStats HeroStats { get { return mHeroStats; } }
-    private PlayerInput mPlayerInput;
-    public PlayerInput PlayerInput { get { return mPlayerInput; } }
+    [SerializeField] private bool _IsOnCooldown = false;
+    [SerializeField] private Vector2 mLookDirection;
+    [SerializeField] private float mLookAngle;
+    [SerializeField] private Vector2 axispos;
 
-    private bool isGuardInvoked = false;
-    [SerializeField]
-    private bool isOnCooldown = false;
-    private float mNextFireTime;
-    public bool IsCooldown { get { return isOnCooldown; } set { isOnCooldown = value; } }
-
-    [SerializeField]
-    private Vector2 mLookDirection;
-    [SerializeField]
-    private float mLookAngle;
-    [SerializeField]
-    private Vector2 axispos;
-
-    Rigidbody2D _Rb;
+    private bool _IsGuardInvoked = false;
+    private float _NextFireTime;
+    public bool IsCooldown { get { return _IsOnCooldown; } set { _IsOnCooldown = value; } }
+    
+    //Getters & Setters
+    public HeroMovement HeroMovement { get { return _HeroMovement; } }
+    public HeroStats HeroStats { get { return _HeroStats; } }
+    public PlayerInput PlayerInput { get { return _PlayerInput; } }
     public Vector2 GetLookDir { get { return mLookDirection; } }
     public float GetLookAngle { get { return mLookAngle; } }
 
@@ -49,98 +44,96 @@ public class HeroActions : MonoBehaviour
     {
         _Rb = GetComponent<Rigidbody2D>();
         _PlayerAnimator = GetComponentInChildren<Animator>();
-        mHeroMovement = GetComponent<HeroMovement>();
-        mHeroStats = GetComponent<HeroStats>();
-        mPlayerInput = new PlayerInput();
-        guard = GetComponent<Guard>();
-     
+        _HeroMovement = GetComponent<HeroMovement>();
+        _HeroStats = GetComponent<HeroStats>();
+        _PlayerInput = new PlayerInput();
+        _Guard = GetComponent<Guard>();
     }
 
     private void OnEnable()
     {
-        mPlayerInput.Enable();
+        _PlayerInput.Enable();
     }
     private void OnDisable()
     {
-        mPlayerInput.Disable();
+        _PlayerInput.Disable();
     }
 
     private void Start()
     { 
-        if (!mHeroMovement.Recovering)
+        if (!_HeroMovement.Recovering)
         {    
-            if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
+            if (_HeroMovement.ControllerInput == HeroMovement.Controller.Keyboard)
             {
-
-                mPlayerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
-
-                mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
-                mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                _PlayerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
+                _PlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
 
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
-                    mPlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
+                    _PlayerInput.KeyboardMouse.Guard.performed += _ => Guard();
                 }
-                mPlayerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
-                mPlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
+                _PlayerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
+                _PlayerInput.KeyboardMouse.Pause.performed += _ => Pause();
             }
 
-           if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard2)
+           if (_HeroMovement.ControllerInput == HeroMovement.Controller.Keyboard2)
             {
-                mPlayerInput.KeyboardLayout2.SwordSwing.performed += _ => SwordSwing();
-                mPlayerInput.KeyboardLayout2.ElementSpecial1.performed += _ => ElementSpecial1();
+                _PlayerInput.KeyboardLayout2.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.KeyboardLayout2.ElementSpecial1.performed += _ => ElementSpecial1();
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
-                    mPlayerInput.KeyboardLayout2.Guard.performed += _ => Guard();
+                    _PlayerInput.KeyboardLayout2.Guard.performed += _ => Guard();
                 }
-                mPlayerInput.KeyboardLayout2.GuardRelease.performed += _ => GuardRelease();
-                mPlayerInput.KeyboardLayout2.Pause.performed += _ => Pause();
+                _PlayerInput.KeyboardLayout2.GuardRelease.performed += _ => GuardRelease();
+                _PlayerInput.KeyboardLayout2.Pause.performed += _ => Pause();
             }
 
-            if (HeroMovement.controllerInput == HeroMovement.Controller.PS4)
+            if (HeroMovement.ControllerInput == HeroMovement.Controller.PS4)
             {
-                mPlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
-                mPlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
+                _PlayerInput.PS4.FastFall.performed += _ => FastFall();
+                _PlayerInput.PS4.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
-                    mPlayerInput.PS4.Guard.performed += _ => Guard();
+                    _PlayerInput.PS4.Guard.performed += _ => Guard();
                 }
-                mPlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
-                mPlayerInput.PS4.Pause.performed += _ => Pause();
+                _PlayerInput.PS4.GuardRelease.performed += _ => GuardRelease();
+                _PlayerInput.PS4.Pause.performed += _ => Pause();
             }
 
-           if (HeroMovement.controllerInput == HeroMovement.Controller.XBOX)
+           if (HeroMovement.ControllerInput == HeroMovement.Controller.XBOX)
             {
-                mPlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
-                mPlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
+                _PlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
-                    mPlayerInput.XBOX.Guard.performed += _ => Guard();
+                    _PlayerInput.XBOX.Guard.performed += _ => Guard();
                 }
-                mPlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
+                _PlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
             }
         }
     }
 
     private void Update()
     {
-        switch (HeroMovement.controllerInput)
+        switch (HeroMovement.ControllerInput)
         {
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                //axispos = mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
-                mLookDirection = Camera.main.ScreenToWorldPoint(mPlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                //axispos = _PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
+                mLookDirection = Camera.main.ScreenToWorldPoint(_PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
-                axispos = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
-                mLookDirection = mPlayerInput.PS4.Aim.ReadValue<Vector2>();
+                axispos = _PlayerInput.PS4.Aim.ReadValue<Vector2>();
+                mLookDirection = _PlayerInput.PS4.Aim.ReadValue<Vector2>();
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.XBOX:
-                axispos = mPlayerInput.XBOX.Aim.ReadValue<Vector2>();
-                mLookDirection = mPlayerInput.XBOX.Aim.ReadValue<Vector2>();
+                axispos = _PlayerInput.XBOX.Aim.ReadValue<Vector2>();
+                mLookDirection = _PlayerInput.XBOX.Aim.ReadValue<Vector2>();
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.Keyboard2:
@@ -150,35 +143,34 @@ public class HeroActions : MonoBehaviour
         }
     }
 
-    
     private IEnumerator CoolDownTimer()
     {
-        yield return new WaitForSeconds(mHeroStats.CoolDown);
-        isOnCooldown = false;
+        yield return new WaitForSeconds(_HeroStats.CoolDown);
+        _IsOnCooldown = false;
     }
 
     private void Guard()
     {
-        isGuardInvoked = true;
-        sword.gameObject.SetActive(false);
+        _IsGuardInvoked = true;
+        Sword.gameObject.SetActive(false);
          onGuardPerformed.Invoke();
     }
 
     private void GuardRelease()
     {
-        isGuardInvoked = false;
+        _IsGuardInvoked = false;
         onGuardExit.Invoke();
-        mHeroStats.RestoreShield(guard.ShieldRecoveryAmount, guard.ShieldRecoveryTick);
+        _HeroStats.RestoreShield(_Guard.ShieldRecoveryAmount, _Guard.ShieldRecoveryTick);
     }
     
     private void ElementSpecial1()
     {
-        if (Time.time > mNextFireTime)
+        if (Time.time > _NextFireTime)
         {
-            if (!isGuardInvoked && !isOnCooldown)
+            if (!_IsGuardInvoked && !_IsOnCooldown && !_HeroMovement.Dashing)
             {
                 _PlayerAnimator.SetTrigger("SkillTrigger");
-                mNextFireTime = Time.time + HeroStats.CoolDown;
+                _NextFireTime = Time.time + HeroStats.CoolDown;
                 onSkillPerformed.Invoke(HeroStats.GetElement);
             }
         }
@@ -186,11 +178,11 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if (!isGuardInvoked)
+        if (!_IsGuardInvoked && !_HeroMovement.Dashing)
         {
             _PlayerAnimator.SetBool("IsJumping",false);
             _PlayerAnimator.SetTrigger("AttackTrigger");
-            sword.gameObject.SetActive(true);
+            Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
     }
@@ -199,6 +191,7 @@ public class HeroActions : MonoBehaviour
     {
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
+            _PlayerAnimator.SetBool("IsJumping", false);
             _PlayerAnimator.SetTrigger("FastFallTrigger");
             StartCoroutine(GravityModifier());
         }
@@ -206,6 +199,7 @@ public class HeroActions : MonoBehaviour
 
     private IEnumerator GravityModifier()
     {
+        yield return new WaitForSeconds(0.2f);
         _Rb.gravityScale = 10;
         yield return new WaitForSeconds(0.5f);
         _Rb.gravityScale = 1;
@@ -216,5 +210,4 @@ public class HeroActions : MonoBehaviour
         Debug.Log("Called");
         onPausePeformed.Invoke();
     }
- 
 }

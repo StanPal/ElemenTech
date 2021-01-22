@@ -52,14 +52,14 @@ public class GameFinish : MonoBehaviour
 
     private void ResetPlayers()
     {
-        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         playerManager.FireHero.SetActive(false);
-        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         playerManager.WaterHero.SetActive(false);
 
-        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         playerManager.AirHero.SetActive(false);
-        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         playerManager.EarthHero.SetActive(false);
 
 

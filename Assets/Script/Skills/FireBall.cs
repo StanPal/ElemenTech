@@ -1,23 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
     //private CanonBall canonball;
-    private FireSkills fireSkills;
-    private Rigidbody2D mRigidbody;
-    private float mProjectileSpeed;
+    private FireSkills _FireSkills;
+    private Rigidbody2D _RigidBody;
+    private float _ProjectileSpeed;
+
     private void Awake()
     {
-        fireSkills = FindObjectOfType<FireSkills>();
-        mRigidbody = GetComponent<Rigidbody2D>();
-        mProjectileSpeed = fireSkills.Speed;
+        _FireSkills = FindObjectOfType<FireSkills>();
+        _RigidBody = GetComponent<Rigidbody2D>();
+        _ProjectileSpeed = _FireSkills.Speed;
     }
 
     private void FixedUpdate()
     {
-        mRigidbody.velocity = transform.right * mProjectileSpeed;
+        _RigidBody.velocity = transform.right * _ProjectileSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,12 +24,12 @@ public class FireBall : MonoBehaviour
         if (collision.GetComponent<Golem>())
         {
             Golem golem = collision.GetComponent<Golem>();
-            golem.TakeDamage(fireSkills.Damage);
+            golem.TakeDamage(_FireSkills.Damage);
             Destroy(gameObject);
         }
         if (collision.GetComponent<Guard>())
         {
-            if (collision.GetComponent<Guard>().tag.Equals(fireSkills.PlayerSkills.HeroAction.tag))
+            if (collision.GetComponent<Guard>().tag.Equals(_FireSkills.PlayerSkills.HeroAction.tag))
             {
                 Guard guard = collision.GetComponent<Guard>();
                 if (guard.Guarding)
@@ -45,7 +44,7 @@ public class FireBall : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
@@ -53,20 +52,20 @@ public class FireBall : MonoBehaviour
 
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(fireSkills.Damage);
+                    heroStats.TakeDamageFromProjectile(_FireSkills.Damage);
                     Destroy(gameObject);
                 }
-                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(fireSkills.Damage);
-                    //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);       
+                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(_FireSkills.Damage);
+                    //collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);       
                 }
         }
-        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+        if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
                // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
-                collision.GetComponent<HeroStats>().TakeDamageFromProjectile(fireSkills.Damage);
-                //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
+                collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_FireSkills.Damage);
+                //collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);
                 Destroy(gameObject);
             }
         }

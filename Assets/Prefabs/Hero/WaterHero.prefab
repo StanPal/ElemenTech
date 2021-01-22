@@ -377,15 +377,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 2
-  mName: Water Hero
-  mAttack: 20
-  mMaxHealth: 150
-  mCurrentHealth: 100
-  mCoolDown: 0.25
-  mElementalType: 2
-  mPositiveEffect: 3
-  mNegativeEffect: 3
+  Team: 2
+  _Name: 
+  _Attack: 15
+  _MaxHealth: 100
+  _CurrentHealth: 100
+  _CoolDown: 3
+  _ElementalType: 2
+  _PositiveEffect: 3
+  _NegativeEffect: 3
 --- !u!114 &1371002032310544469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -398,25 +398,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
-  isLeft: 0
-  isJumping: 0
-  mJumpForce: 12
-  mNumOfJumps: 0
-  mMaxJumps: 1
-  mGround:
+  ControllerInput: 1
+  mSpeed: 11
+  _IsLeft: 0
+  _IsJumping: 0
+  _JumpForce: 10
+  _NumOfJumps: 0
+  _MaxJumps: 1
+  _Ground:
     serializedVersion: 2
     m_Bits: 256
   canDash: 1
-  isDashing: 0
-  mDashSpeed: 6.5
-  mDashCoolDown: 0.5
-  mDashStartUpTime: 0
-  mSpeed: 11
-  mKnockbackRecieved: 0
-  mKnockbackCount: 0
-  mRecoveryTime: 0.05
+  _IsDashing: 0
+  _DashSpeed: 10
+  _DashCoolDown: 1
+  _DashStartUpTime: 0
+  _RecoveryTime: 1
   isRecovering: 0
+  _KnockBackRecieved: 0
+  _KnockBackCount: 0
 --- !u!114 &1371002032310544466
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -429,10 +429,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0d58edb421c474682a9c1f646f490c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1371002031773591929}
+  Sword: {fileID: 1371002031773591929}
   PivotPoint: {fileID: 7317380116810873624}
   FirePoint: {fileID: 4467623121776858900}
-  isOnCooldown: 0
+  _IsOnCooldown: 0
   mLookDirection: {x: 0, y: 0}
   mLookAngle: 0
   axispos: {x: 0, y: 0}

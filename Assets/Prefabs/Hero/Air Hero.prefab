@@ -441,15 +441,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f975b944ade24424bad21fa258455f96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  team: 2
-  mName: Air Hero
-  mAttack: 20
-  mMaxHealth: 125
-  mCurrentHealth: 100
-  mCoolDown: 0.5
-  mElementalType: 3
-  mPositiveEffect: 3
-  mNegativeEffect: 3
+  Team: 2
+  _Name: 
+  _Attack: 20
+  _MaxHealth: 100
+  _CurrentHealth: 100
+  _CoolDown: 1
+  _ElementalType: 3
+  _PositiveEffect: 3
+  _NegativeEffect: 3
 --- !u!114 &1791110765294023673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -462,10 +462,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0d58edb421c474682a9c1f646f490c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sword: {fileID: 1791110765894072927}
+  Sword: {fileID: 1791110765894072927}
   PivotPoint: {fileID: 1573514005131078975}
   FirePoint: {fileID: 7832531724153277597}
-  isOnCooldown: 0
+  _IsOnCooldown: 0
   mLookDirection: {x: 0, y: 0}
   mLookAngle: 0
   axispos: {x: 0, y: 0}
@@ -481,25 +481,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  controllerInput: 0
-  isLeft: 0
-  isJumping: 0
-  mJumpForce: 10
-  mNumOfJumps: 0
-  mMaxJumps: 8
-  mGround:
+  ControllerInput: 1
+  mSpeed: 10
+  _IsLeft: 0
+  _IsJumping: 0
+  _JumpForce: 10
+  _NumOfJumps: 0
+  _MaxJumps: 8
+  _Ground:
     serializedVersion: 2
     m_Bits: 256
   canDash: 1
-  isDashing: 0
-  mDashSpeed: 2
-  mDashCoolDown: 1
-  mDashStartUpTime: 0
-  mSpeed: 10
-  mKnockbackRecieved: 0
-  mKnockbackCount: 0
-  mRecoveryTime: 0.1
+  _IsDashing: 0
+  _DashSpeed: 7
+  _DashCoolDown: 1
+  _DashStartUpTime: 0
+  _RecoveryTime: 1
   isRecovering: 0
+  _KnockBackRecieved: 0
+  _KnockBackCount: 0
 --- !u!114 &4636537091078077599
 MonoBehaviour:
   m_ObjectHideFlags: 0

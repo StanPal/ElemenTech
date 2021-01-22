@@ -28,7 +28,7 @@ public class Crosshair : MonoBehaviour
     void Update()
     {
         //mTarget = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
-        switch (playerManager.mPlayersList[0].GetComponent<HeroMovement>().controllerInput)
+        switch (playerManager.mPlayersList[0].GetComponent<HeroMovement>().ControllerInput)
         {
             case HeroMovement.Controller.None:
                 break;
@@ -38,7 +38,6 @@ public class Crosshair : MonoBehaviour
                 break;
             case HeroMovement.Controller.PS4:
                 _P1CrossHairs.transform.SetParent(playerManager.mPlayersList[0].transform);
-                Debug.Log(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
                 if (playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -61,7 +60,7 @@ public class Crosshair : MonoBehaviour
                 break;
         }
 
-        switch (playerManager.mPlayersList[1].GetComponent<HeroMovement>().controllerInput)
+        switch (playerManager.mPlayersList[1].GetComponent<HeroMovement>().ControllerInput)
         {
             case HeroMovement.Controller.None:
                 break;
@@ -93,12 +92,12 @@ public class Crosshair : MonoBehaviour
                 break;
         }
 
-        if (playerManager.mPlayersList[2].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.mPlayersList[2].GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             _P3Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
             _P3CrossHairs.transform.position = new Vector3(_P3Target.x, _P3Target.y);
         }
-        if (playerManager.mPlayersList[3].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.mPlayersList[3].GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             _P4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
             _P4CrossHairs.transform.position = new Vector3(_P4Target.x, _P4Target.y);

@@ -18,7 +18,7 @@ public class SpawnManager : MonoBehaviour
         playerManager.TeamOne.Clear();
         playerManager.TeamTwo.Clear();
 
-        if (playerManager.FireHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             GameObject fireHero = Instantiate(playerManager.FireHero);
             fireHero.SetActive(true);
@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
             RandomizeSpawn(fireHero);
 
         }
-        if (playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             GameObject waterHero = Instantiate(playerManager.WaterHero);
             waterHero.SetActive(true);
@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
             RandomizeSpawn(waterHero);
 
         }
-        if (playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             GameObject earthHero = Instantiate(playerManager.EarthHero);
             earthHero.SetActive(true);
@@ -66,7 +66,7 @@ public class SpawnManager : MonoBehaviour
             RandomizeSpawn(earthHero);
 
         }
-        if (playerManager.AirHero.GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
             GameObject airHero = Instantiate(playerManager.AirHero);
             airHero.SetActive(true);
