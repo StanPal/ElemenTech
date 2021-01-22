@@ -48,6 +48,8 @@ public class HeroMovement : MonoBehaviour
     private float mDashCoolDown = 1f;
     [SerializeField]
     private float mDashStartUpTime = 1f;
+    private AnimationEvents _AnimationEvents;
+
 
     [SerializeField]
     private float mSpeed;
@@ -68,7 +70,7 @@ public class HeroMovement : MonoBehaviour
     private bool isRecovering = false;
     public bool Recovering { get { return isRecovering; } set { isRecovering = value; } }
     private float mOriginalRecoveryTime;
-
+    
     private void Awake()
     {
         _PlayerAnimator = GetComponentInChildren<Animator>();
@@ -77,7 +79,7 @@ public class HeroMovement : MonoBehaviour
         col = GetComponent<Collider2D>();
         mHeroActions = GetComponent<HeroActions>();
         mOriginalRecoveryTime = mRecoveryTime;
-
+        _AnimationEvents = GetComponentInChildren<AnimationEvents>();
         canDash = true;
         if (controllerInput == Controller.Keyboard)
         {
@@ -95,7 +97,14 @@ public class HeroMovement : MonoBehaviour
         {
             mPlayerInput.XBOX.Dash.performed += _ => OnDash();
         }
+        if(IsGrounded())
+        {
+            _PlayerAnimator.SetBool("IsJumping", false);
+
+        }
     }
+
+
 
     private void OnEnable()
     {
@@ -299,6 +308,7 @@ public class HeroMovement : MonoBehaviour
         float gravity = rb.gravityScale;
         rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.4f);
+        //.DashProjectileInvincibility = false;
         rb.gravityScale = 1f;
         isDashing = false;
         canDash = false;

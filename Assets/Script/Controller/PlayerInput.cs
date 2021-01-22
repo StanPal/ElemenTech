@@ -97,6 +97,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Vector2"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""FastFall"",
+                    ""type"": ""Button"",
+                    ""id"": ""c954365a-ce45-4872-9d19-1cde1d6edb41"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -229,6 +237,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""de0b24c6-d3d6-41d4-82a6-7f199a813f9a"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""FastFall"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -921,6 +940,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
         m_KeyboardMouse_Aim = m_KeyboardMouse.FindAction("Aim", throwIfNotFound: true);
+        m_KeyboardMouse_FastFall = m_KeyboardMouse.FindAction("FastFall", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -1012,6 +1032,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Pause;
     private readonly InputAction m_KeyboardMouse_Dash;
     private readonly InputAction m_KeyboardMouse_Aim;
+    private readonly InputAction m_KeyboardMouse_FastFall;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -1026,6 +1047,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
         public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
         public InputAction @Aim => m_Wrapper.m_KeyboardMouse_Aim;
+        public InputAction @FastFall => m_Wrapper.m_KeyboardMouse_FastFall;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1065,6 +1087,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Aim.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
                 @Aim.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
                 @Aim.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnAim;
+                @FastFall.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
+                @FastFall.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
+                @FastFall.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -1099,6 +1124,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Aim.started += instance.OnAim;
                 @Aim.performed += instance.OnAim;
                 @Aim.canceled += instance.OnAim;
+                @FastFall.started += instance.OnFastFall;
+                @FastFall.performed += instance.OnFastFall;
+                @FastFall.canceled += instance.OnFastFall;
             }
         }
     }
@@ -1398,6 +1426,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnFastFall(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {

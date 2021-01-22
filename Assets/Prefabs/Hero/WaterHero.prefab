@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1371002031773591933}
   - component: {fileID: 1371002031773591930}
   - component: {fileID: 1371002031773591931}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Sword
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371002032263941962}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: feetPos
   m_TagString: Untagged
   m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
@@ -172,7 +172,8 @@ GameObject:
   - component: {fileID: 1371002032290494643}
   - component: {fileID: 1371002032290494642}
   - component: {fileID: 2327372857929155168}
-  m_Layer: 0
+  - component: {fileID: 7905377223245595492}
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -262,6 +263,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7905377223245595492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371002032290494640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8ccd796fa5184419109b1fb47b90b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsInvincible: 0
 --- !u!1 &1371002032310544464
 GameObject:
   m_ObjectHideFlags: 0
@@ -278,9 +292,9 @@ GameObject:
   - component: {fileID: 1371002032310544466}
   - component: {fileID: 5005666907566380715}
   - component: {fileID: 1371002032310544467}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: WaterHero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -338,7 +352,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.041233063}
+  m_Offset: {x: 0, y: -0.059914112}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -349,7 +363,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1.7971783}
+  m_Size: {x: 1, y: 1.8345404}
   m_EdgeRadius: 0
 --- !u!114 &1371002032310544468
 MonoBehaviour:
@@ -468,7 +482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371002032368287851}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: AttackPos
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -500,7 +514,7 @@ GameObject:
   - component: {fileID: 1371002032425859069}
   - component: {fileID: 1371002032425859071}
   - component: {fileID: 1371002032425859068}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -572,7 +586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371002033255612099}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: rangeSpawPosistion
   m_TagString: Untagged
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
@@ -604,7 +618,7 @@ GameObject:
   - component: {fileID: 1371002033496945497}
   - component: {fileID: 1371002033496945499}
   - component: {fileID: 1371002033496945496}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -703,7 +717,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371002033526347869}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -739,7 +753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1371002033529172033}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
@@ -772,7 +786,7 @@ GameObject:
   - component: {fileID: 1371002033641574305}
   - component: {fileID: 1371002033641574307}
   - component: {fileID: 1371002033641574304}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +861,7 @@ GameObject:
   - component: {fileID: 1371002033688476635}
   - component: {fileID: 1371002033688476632}
   - component: {fileID: 1371002033688476633}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: HeroHealthBar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +959,7 @@ GameObject:
   - component: {fileID: 7317380116810873624}
   - component: {fileID: 7080996931893551333}
   - component: {fileID: 6691093597474203349}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1038,7 +1052,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4467623121776858900}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}

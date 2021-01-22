@@ -34,8 +34,9 @@ public class HeroActions : MonoBehaviour
     [SerializeField]
     private float mLookAngle;
     [SerializeField]
-    private Vector2 axispos; 
+    private Vector2 axispos;
 
+    Rigidbody2D _Rb;
     public Vector2 GetLookDir { get { return mLookDirection; } }
     public float GetLookAngle { get { return mLookAngle; } }
 
@@ -46,6 +47,7 @@ public class HeroActions : MonoBehaviour
 
     private void Initialize()
     {
+        _Rb = GetComponent<Rigidbody2D>();
         _PlayerAnimator = GetComponentInChildren<Animator>();
         mHeroMovement = GetComponent<HeroMovement>();
         mHeroStats = GetComponent<HeroStats>();
@@ -66,9 +68,12 @@ public class HeroActions : MonoBehaviour
     private void Start()
     { 
         if (!mHeroMovement.Recovering)
-        {
+        {    
             if (mHeroMovement.controllerInput == HeroMovement.Controller.Keyboard)
             {
+
+                mPlayerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
+
                 mPlayerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
                 mPlayerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
 
@@ -188,6 +193,22 @@ public class HeroActions : MonoBehaviour
             sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
+    }
+
+    private void FastFall()
+    {
+        if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
+        {
+            _PlayerAnimator.SetTrigger("FastFallTrigger");
+            StartCoroutine(GravityModifier());
+        }
+    }
+
+    private IEnumerator GravityModifier()
+    {
+        _Rb.gravityScale = 10;
+        yield return new WaitForSeconds(0.5f);
+        _Rb.gravityScale = 1;
     }
 
     private void Pause()

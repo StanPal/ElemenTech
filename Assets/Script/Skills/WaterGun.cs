@@ -65,7 +65,7 @@ public class WaterGun : MonoBehaviour
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamage(damage);
+                        heroStats.TakeDamageFromProjectile(damage);
                         Destroy(gameObject);
 
                     }
@@ -79,7 +79,7 @@ public class WaterGun : MonoBehaviour
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamage(damage);
+                        heroStats.TakeDamageFromProjectile(damage);
                         Destroy(gameObject);
 
                     }

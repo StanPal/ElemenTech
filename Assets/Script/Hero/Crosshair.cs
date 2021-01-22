@@ -71,7 +71,7 @@ public class Crosshair : MonoBehaviour
                 break;
             case HeroMovement.Controller.PS4:
                 _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);
-                Debug.Log(playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
+                Debug.Log(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
                 if (playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {

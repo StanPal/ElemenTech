@@ -389,12 +389,12 @@ PrefabInstance:
         type: 3}
       propertyPath: _P3CrossHairs
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4402385146858200443}
     - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: _P4CrossHairs
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 4402385146675419866}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -453,7 +453,7 @@ PrefabInstance:
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: orthographic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -2072,6 +2072,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9148265198575252897, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
+        type: 3}
+      propertyPath: m_Name
+      value: TopCeiling
+      objectReference: {fileID: 0}
     - target: {fileID: 9148265198575252898, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2081,6 +2086,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9148265198743562287, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
+        type: 3}
+      propertyPath: m_Name
+      value: LeftWall
       objectReference: {fileID: 0}
     - target: {fileID: 9148265198853775771, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
         type: 3}
@@ -2177,6 +2187,11 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9148265200449314115, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
+        type: 3}
+      propertyPath: m_Name
+      value: RightWall
+      objectReference: {fileID: 0}
     - target: {fileID: 9148265200449314236, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2207,3 +2222,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f4cffc7e62ff8c41a66c6fbf798e12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &9148265200610569024 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9148265200449314115, guid: c38ad03a4fdbc5843bcad70fc09cf06b,
+    type: 3}
+  m_PrefabInstance: {fileID: 9148265200610569021}
+  m_PrefabAsset: {fileID: 0}
+--- !u!251 &9148265200610569025
+PlatformEffector2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9148265200610569024}
+  m_Enabled: 1
+  m_UseColliderMask: 1
+  m_ColliderMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RotationalOffset: 0
+  m_UseOneWay: 1
+  m_UseOneWayGrouping: 0
+  m_SurfaceArc: 180
+  m_UseSideFriction: 1
+  m_UseSideBounce: 0
+  m_SideArc: 1

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class HeroStats : MonoBehaviour
@@ -7,6 +6,7 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action onDebuffDeActivated;
 
+    private AnimationEvents _AnimationEvent;
     private Guard guard;
     private Animator _Animator;
     public enum TeamSetting
@@ -56,6 +56,7 @@ public class HeroStats : MonoBehaviour
     void Awake()
     {
         _Animator = GetComponentInChildren<Animator>();
+        _AnimationEvent = GetComponentInChildren<AnimationEvents>();
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
         guard = GetComponent<Guard>();
@@ -76,6 +77,14 @@ public class HeroStats : MonoBehaviour
         if(mCurrentHealth <= 0)
         {
             HeroDie();
+        }
+    }
+
+    public void TakeDamageFromProjectile(float damage)
+    {
+        if(!_AnimationEvent.DashProjectileInvincibility)
+        {
+            mCurrentHealth -= damage;
         }
     }
 

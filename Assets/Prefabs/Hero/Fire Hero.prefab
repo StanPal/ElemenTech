@@ -1032,7 +1032,8 @@ GameObject:
   - component: {fileID: 1791110765959601703}
   - component: {fileID: 1791110765959601696}
   - component: {fileID: 3614023548331368187}
-  m_Layer: 0
+  - component: {fileID: 3465350450628158918}
+  m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,6 +1124,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3465350450628158918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765959601702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b8ccd796fa5184419109b1fb47b90b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _IsInvincible: 0
 --- !u!1 &3804422716898975042
 GameObject:
   m_ObjectHideFlags: 0
@@ -1207,7 +1221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4264183723163891622}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: FirePoint
   m_TagString: Untagged
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
@@ -1239,7 +1253,7 @@ GameObject:
   - component: {fileID: 4742860617384786225}
   - component: {fileID: 8989277846392316768}
   - component: {fileID: 2645739008014899530}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: PivotPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
