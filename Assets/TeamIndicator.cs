@@ -18,18 +18,24 @@ public class TeamIndicator : MonoBehaviour
     }
     void Update()
     {
-        //var dir = Target.position - transform.position;
-        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team1"))
+        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Water)
         {
-           // GetComponent<HeroStats>().team == HeroStats.TeamSetting.Team1
+
                 spriteRenderer.color = Color.blue;
         }
-        
-
-        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
+        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Air)
         {
-            //GetComponent<HeroStats>().team == HeroStats.TeamSetting.Team2
-                spriteRenderer.color = Color.red;
+
+            spriteRenderer.color = Color.white;
+        }
+        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Fire)
+        {
+
+            spriteRenderer.color = Color.red;
+        }
+        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+        {
+            spriteRenderer.color = Color.black;
         }
     }
 }
