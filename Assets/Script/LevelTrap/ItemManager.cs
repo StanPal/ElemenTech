@@ -17,6 +17,10 @@ public class ItemManager : MonoBehaviour
     public float HealthReply { get { return health; } }
     private int itemCounter = 0;
 
+    [SerializeField]
+    private float delateTime = 20.0f;
+    private float currentDalateTime = 0.0f;
+
     public int ItemCounter { set { itemCounter = value; } get { return itemCounter; } }
     private void Awake()
     {
@@ -28,6 +32,7 @@ public class ItemManager : MonoBehaviour
         {
             SpawnIteam();
         }
+        currentDalateTime = delateTime;
     }
 
     private void Update()
@@ -35,7 +40,15 @@ public class ItemManager : MonoBehaviour
         Debug.Log(spawnLocation.Count);
         if (itemCounter < maxSpawnlocation)
         {
-            SpawnIteam();
+            if (currentDalateTime <= 0)
+            {
+                SpawnIteam();
+                currentDalateTime = delateTime;
+            }
+            else
+            {
+                currentDalateTime -= Time.deltaTime;
+            }
         }
     }
 
