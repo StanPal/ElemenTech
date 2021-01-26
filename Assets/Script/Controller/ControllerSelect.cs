@@ -65,8 +65,8 @@ public class ControllerSelect : MonoBehaviour
             default:
                 break;
         }
-
     }
+
     public void SelectController2()
     {
         _ControllerSelect2++;
@@ -102,8 +102,8 @@ public class ControllerSelect : MonoBehaviour
             default:
                 break;
         }
-
     }
+
     public void SelectController3()
     {
         _ControllerSelect3++;
@@ -139,8 +139,8 @@ public class ControllerSelect : MonoBehaviour
             default:
                 break;
         }
-
     }
+
     public void SelectController4()
     {
         _ControllerSelect4++;
@@ -177,5 +177,4 @@ public class ControllerSelect : MonoBehaviour
                 break;
         }
     }
-
 }

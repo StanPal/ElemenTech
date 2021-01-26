@@ -2,17 +2,17 @@
 
 public class Crosshair : MonoBehaviour
 {
-    public GameObject _P1CrossHairs;
-    public GameObject _P2CrossHairs;
-    public GameObject _P3CrossHairs;
-    public GameObject _P4CrossHairs;
+    public GameObject P1CrossHairs;
+    public GameObject P2CrossHairs;
+    public GameObject P3CrossHairs;
+    public GameObject P4CrossHairs;
 
     [SerializeField] private Vector3 _P1Target;
     [SerializeField] private Vector3 _P2Target;
     [SerializeField] private Vector3 _P3Target;
     [SerializeField] private Vector3 _P4Target;
 
-    private PlayerManager playerManager;
+    private PlayerManager _PlayerManager;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class Crosshair : MonoBehaviour
 
     private void Initialize()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+        _PlayerManager = FindObjectOfType<PlayerManager>();
         Cursor.visible = false;
     }
 
@@ -95,13 +95,13 @@ public class Crosshair : MonoBehaviour
 
         if (playerManager.mPlayersList[2].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
         {
-            _P3Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P3CrossHairs.transform.position = new Vector3(_P3Target.x, _P3Target.y);
+            _P3Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_PlayerManager.PlayersList[2].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            P3CrossHairs.transform.position = new Vector3(_P3Target.x, _P3Target.y);
         }
-        if (playerManager.mPlayersList[3].GetComponent<HeroMovement>().controllerInput != HeroMovement.Controller.None)
+        if (_PlayerManager.PlayersList[3].GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
-            _P4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-            _P4CrossHairs.transform.position = new Vector3(_P4Target.x, _P4Target.y);
+            _P4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_PlayerManager.PlayersList[3].GetComponent<HeroActions>().PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+            P4CrossHairs.transform.position = new Vector3(_P4Target.x, _P4Target.y);
         }
     }
 }
