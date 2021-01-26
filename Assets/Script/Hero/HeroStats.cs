@@ -54,15 +54,16 @@ public class HeroStats : MonoBehaviour
     public StatusEffects.NegativeEffects DeBuff { get { return mNegativeEffect; } set { mNegativeEffect = value; } }
 
     //Hero particle
-    public GameObject DeadParticle;
-    public GameObject HitParticle;
+    [SerializeField]
+    private GameObject DeadParticle;
+    [SerializeField]
+    private GameObject HitParticle;
 
-    void Awake()
+    private void Awake()
     {
         mCurrentHealth = mMaxHealth;
         mTempCDTime = 0;
         guard = GetComponent<Guard>();
-        //DeadParticle = GetComponent<ParticleSystem>();
     }
     
     private void FixedUpdate()
@@ -181,7 +182,7 @@ public class HeroStats : MonoBehaviour
         onDebuffDeActivated?.Invoke();
     }
 
-    void HeroDie()
+    public void HeroDie()
     {        
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
         Instantiate(DeadParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();

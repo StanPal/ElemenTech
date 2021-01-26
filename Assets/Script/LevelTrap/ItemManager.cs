@@ -15,13 +15,13 @@ public class ItemManager : MonoBehaviour
     [SerializeField]
     private float health = 50.0f;
     public float HealthReply { get { return health; } }
-    private int itemCounter = 0;
+    private int _itemCounter = 0;
 
     [SerializeField]
-    private float delateTime = 20.0f;
-    private float currentDalateTime = 0.0f;
+    private float _delateTime = 20.0f;
+    private float _currentDalateTime = 0.0f;
 
-    public int ItemCounter { set { itemCounter = value; } get { return itemCounter; } }
+    public int ItemCounter { get { return _itemCounter; } set { _itemCounter = value; } }
     private void Awake()
     {
         for (int i = 0; i < ItemLocation.Count; i++)
@@ -32,22 +32,22 @@ public class ItemManager : MonoBehaviour
         {
             SpawnIteam();
         }
-        currentDalateTime = delateTime;
+        _currentDalateTime = _delateTime;
     }
 
     private void Update()
     {
         Debug.Log(spawnLocation.Count);
-        if (itemCounter < maxSpawnlocation)
+        if (_itemCounter < maxSpawnlocation)
         {
-            if (currentDalateTime <= 0)
+            if (_currentDalateTime <= 0)
             {
                 SpawnIteam();
-                currentDalateTime = delateTime;
+                _currentDalateTime = _delateTime;
             }
             else
             {
-                currentDalateTime -= Time.deltaTime;
+                _currentDalateTime -= Time.deltaTime;
             }
         }
     }
@@ -57,7 +57,7 @@ public class ItemManager : MonoBehaviour
         Transform location = spawnLocation[Random.Range(0, spawnLocation.Count)];
         Instantiate(Health, location.position, Quaternion.identity);
         spawnLocation.Remove(location);
-        itemCounter++;
+        _itemCounter++;
     }
 
     public void addNewLocation(Transform newLocation)
