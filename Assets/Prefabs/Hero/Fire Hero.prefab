@@ -543,11 +543,11 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -631,7 +631,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Team: 2
   _Name: 
-  _Attack: 25
+  _Attack: 30
   _MaxHealth: 100
   _CurrentHealth: 100
   _CoolDown: 1
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 1
+  ControllerInput: 0
   mSpeed: 12
   _IsLeft: 0
   _IsJumping: 0
@@ -684,7 +684,7 @@ MonoBehaviour:
   _DashSpeed: 5
   _DashCoolDown: 1
   _DashStartUpTime: 0
-  _RecoveryTime: 1
+  _RecoveryTime: 0.2
   isRecovering: 0
   _KnockBackRecieved: 0
   _KnockBackCount: 0

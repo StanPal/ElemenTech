@@ -24,18 +24,20 @@ public class EarthStomp : MonoBehaviour
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     heroStats.TakeDamage(_StompDamage);
+                    heroStats.GetComponent<HeroMovement>().Recovering = true; 
                 }
             }
         }
 
-      if(_HeroStats.tag.Equals("Team2"))
+      if(_HeroStats.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     heroStats.TakeDamage(_StompDamage);
-                }                
+                    heroStats.GetComponent<HeroMovement>().Recovering = true;
+                }
             }
         }
     }

@@ -60,8 +60,10 @@ public class CanonBall : MonoBehaviour
 
     void Arrived()
     {
+        Explode();
         Destroy(gameObject);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collider)
     {
@@ -69,7 +71,7 @@ public class CanonBall : MonoBehaviour
         {
             Debug.Log("wall hit");
             Explode();
-           // OnDrawGizmosSelected();
+            // OnDrawGizmosSelected();
             Destroy(gameObject);
         }
         if (SplashRange > 0)
@@ -102,14 +104,25 @@ public class CanonBall : MonoBehaviour
                 }
             }
         }
-        else
+
+        if (collider.GetComponent<HeroStats>()) ;
         {
-            var enemy = collider.GetComponent<HeroStats>();
             if (tag.Equals("Team1"))
             {
-                if (enemy.tag.Equals("Team2"))
+                if (collider.tag.Equals("Team2"))
                 {
-                    enemy.TakeDamage(mDamage);
+                    Explode();
+                    collider.GetComponent<HeroStats>().TakeDamageFromProjectile(mDamage);
+                }
+                Destroy(gameObject);
+            }
+
+            if (tag.Equals("Team2"))
+            {
+                if (collider.tag.Equals("Team1"))
+                {
+                    Explode();
+                    collider.GetComponent<HeroStats>().TakeDamageFromProjectile(mDamage);
                 }
                 Destroy(gameObject);
             }

@@ -17,7 +17,8 @@ public class HeroMovement : MonoBehaviour
         Keyboard,
         PS4,
         XBOX,
-        Keyboard2
+        Keyboard2,
+        Gamepad
     }
     public Controller ControllerInput = Controller.None;
 
@@ -83,6 +84,10 @@ public class HeroMovement : MonoBehaviour
         {
             _PlayerInput.XBOX.Dash.performed += _ => OnDash();
         }
+        if (ControllerInput == Controller.Gamepad)
+        {
+            _PlayerInput.Gamepad.Dash.performed += _ => OnDash();
+        }
     }
 
     private void Start()
@@ -115,6 +120,10 @@ public class HeroMovement : MonoBehaviour
             else if (ControllerInput == Controller.Keyboard2 && !_IsDashing)
             {
                 _MoveInput = _PlayerInput.KeyboardLayout2.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.Gamepad && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.Gamepad.Move.ReadValue<float>();
             }
             else
             {
@@ -208,6 +217,16 @@ public class HeroMovement : MonoBehaviour
                     Jump();
                 }
                 else if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.Gamepad:
+                if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }

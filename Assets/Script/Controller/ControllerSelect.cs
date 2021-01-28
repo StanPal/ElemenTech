@@ -33,7 +33,7 @@ public class ControllerSelect : MonoBehaviour
     public void SelectController1()
     {
         _ControllerSelect1++;
-        if (_ControllerSelect1 > 4)
+        if (_ControllerSelect1 > 5)
             _ControllerSelect1 = 0;
 
         switch (_ControllerSelect1)
@@ -62,6 +62,11 @@ public class ControllerSelect : MonoBehaviour
                 _PlayerManager.FireHero.GetComponent<HeroMovement>().ControllerInput =
             (HeroMovement.Controller)_ControllerSelect1;
                 break;
+            case 5:
+                ButtonList[0].GetComponentInChildren<Text>().text = "GamePad";
+                _PlayerManager.FireHero.GetComponent<HeroMovement>().ControllerInput =
+            (HeroMovement.Controller)_ControllerSelect1;
+                break;
             default:
                 break;
         }
@@ -70,7 +75,7 @@ public class ControllerSelect : MonoBehaviour
     public void SelectController2()
     {
         _ControllerSelect2++;
-        if (_ControllerSelect2 > 4)
+        if (_ControllerSelect2 > 5)
             _ControllerSelect2 = 0;
 
         switch (_ControllerSelect2)
@@ -99,6 +104,11 @@ public class ControllerSelect : MonoBehaviour
                 _PlayerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput =
             (HeroMovement.Controller)_ControllerSelect2;
                 break;
+            case 5:
+                ButtonList[1].GetComponentInChildren<Text>().text = "GamePad";
+                _PlayerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput =
+            (HeroMovement.Controller)_ControllerSelect2;
+                break;
             default:
                 break;
         }
@@ -107,7 +117,7 @@ public class ControllerSelect : MonoBehaviour
     public void SelectController3()
     {
         _ControllerSelect3++;
-        if (_ControllerSelect3 > 4)
+        if (_ControllerSelect3 > 5)
             _ControllerSelect3 = 0;
 
         switch (_ControllerSelect3)
@@ -136,6 +146,11 @@ public class ControllerSelect : MonoBehaviour
                 _PlayerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput =
             (HeroMovement.Controller)_ControllerSelect3;
                 break;
+            case 5:
+                ButtonList[2].GetComponentInChildren<Text>().text = "Gamepad";
+                _PlayerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput =
+            (HeroMovement.Controller)_ControllerSelect3;
+                break;
             default:
                 break;
         }
@@ -144,7 +159,7 @@ public class ControllerSelect : MonoBehaviour
     public void SelectController4()
     {
         _ControllerSelect4++;
-        if (_ControllerSelect4 > 4)
+        if (_ControllerSelect4 > 5)
             _ControllerSelect4 = 0;
 
         switch (_ControllerSelect4)
@@ -170,6 +185,11 @@ public class ControllerSelect : MonoBehaviour
                 break;
             case 4:
                 ButtonList[3].GetComponentInChildren<Text>().text = "KeyboardLayout2";
+                _PlayerManager.AirHero.GetComponent<HeroMovement>().ControllerInput =
+            (HeroMovement.Controller)_ControllerSelect4;
+                break;
+            case 5:
+                ButtonList[3].GetComponentInChildren<Text>().text = "GamePad";
                 _PlayerManager.AirHero.GetComponent<HeroMovement>().ControllerInput =
             (HeroMovement.Controller)_ControllerSelect4;
                 break;

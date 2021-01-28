@@ -105,12 +105,26 @@ public class HeroActions : MonoBehaviour
            if (HeroMovement.ControllerInput == HeroMovement.Controller.XBOX)
             {
                 _PlayerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.XBOX.FastFall.performed += _ => FastFall();
                 _PlayerInput.XBOX.ElementSpecial1.performed += _ => ElementSpecial1();
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _PlayerInput.XBOX.Guard.performed += _ => Guard();
                 }
                 _PlayerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
+                _PlayerInput.XBOX.Pause.performed += _ => Pause();
+            }
+
+            if (HeroMovement.ControllerInput == HeroMovement.Controller.Gamepad)
+            {
+                _PlayerInput.Gamepad.SwordSwing.performed += _ => SwordSwing();
+                _PlayerInput.Gamepad.FastFall.performed += _ => FastFall();
+                _PlayerInput.Gamepad.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
+                {
+                    _PlayerInput.Gamepad.Guard.performed += _ => Guard();
+                }
+                _PlayerInput.Gamepad.GuardRelease.performed += _ => GuardRelease();
             }
         }
     }
@@ -134,6 +148,11 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.XBOX:
                 axispos = _PlayerInput.XBOX.Aim.ReadValue<Vector2>();
                 mLookDirection = _PlayerInput.XBOX.Aim.ReadValue<Vector2>();
+                mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
+                break;
+            case HeroMovement.Controller.Gamepad:
+                axispos = _PlayerInput.Gamepad.Aim.ReadValue<Vector2>();
+                mLookDirection = _PlayerInput.Gamepad.Aim.ReadValue<Vector2>();
                 mLookAngle = Mathf.Atan2(mLookDirection.y, mLookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.Keyboard2:
@@ -198,9 +217,8 @@ public class HeroActions : MonoBehaviour
     }
 
     private IEnumerator GravityModifier()
-    {
-        yield return new WaitForSeconds(0.2f);
-        _Rb.gravityScale = 10;
+    {        
+        _Rb.gravityScale = 15;
         yield return new WaitForSeconds(0.5f);
         _Rb.gravityScale = 1;
     }
