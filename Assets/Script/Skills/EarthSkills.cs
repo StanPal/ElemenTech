@@ -37,21 +37,21 @@ public class EarthSkills : MonoBehaviour
 
     }
 
-    private void Start()
-    {
-        for (int i = 0; i < _NumberOfPoints; ++i)
-        {
-            _PointsArr[i] = Instantiate(Points, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.identity);
-        }
-    }
+    //private void Start()
+    //{
+    //    for (int i = 0; i < _NumberOfPoints; ++i)
+    //    {
+    //        _PointsArr[i] = Instantiate(Points, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.identity);
+    //    }
+    //}
 
-    private void Update()
-    {
-        for (int i = 0; i < _NumberOfPoints; ++i)
-        {
-            _PointsArr[i].transform.position = PointPosition(i * _SpaceBetweenPoints);
-        }
-    }
+    //private void Update()
+    //{
+    //    for (int i = 0; i < _NumberOfPoints; ++i)
+    //    {
+    //        _PointsArr[i].transform.position = PointPosition(i * _SpaceBetweenPoints);
+    //    }
+    //}
 
     private void Boulder()
     {

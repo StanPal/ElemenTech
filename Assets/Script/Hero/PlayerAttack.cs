@@ -1,10 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private ParticleSystemManager _ParticleSystemManager;
+    public event System.Action<GameObject> onAuraActivated;
+    public event System.Action<GameObject> onAuraDeActivated;
 
     [SerializeField]
     private float startTimeBtAttack;
@@ -32,10 +32,11 @@ public class PlayerAttack : MonoBehaviour
 
     private Transform originalRotation;
     [SerializeField]
-    private float mKnockBackAmount = 5f;
+    private float mKnockBackAmount = 5f;    
 
     private void Awake()
     {
+        _ParticleSystemManager = FindObjectOfType<ParticleSystemManager>();
         mHeroAction = GetComponentInParent<HeroActions>();
         mHeroMovement = GetComponentInParent<HeroMovement>();
         mHeroAction.onAttackPerformed += AttackPerformed;
@@ -123,6 +124,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    _ParticleSystemManager.FireAura(mHeroMovement.gameObject);
                 }
                 if (!collision.GetComponent<Guard>().Guarding)
                 {

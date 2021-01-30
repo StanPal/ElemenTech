@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7953942593888774018}
   - component: {fileID: 7953942593888774016}
   - component: {fileID: 7953942593888774017}
+  - component: {fileID: 7068098091841588388}
+  - component: {fileID: 2256087279105345156}
   m_Layer: 0
   m_Name: FireAura
   m_TagString: Untagged
@@ -115,7 +117,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0.81
+      scalar: 0.52
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -168,7 +170,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2.33
+      scalar: 2.06
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -659,7 +661,7 @@ ParticleSystem:
   ShapeModule:
     serializedVersion: 6
     enabled: 1
-    type: 4
+    type: 18
     angle: 25
     length: 5
     boxThickness: {x: 0, y: 0, z: 0}
@@ -734,7 +736,7 @@ ParticleSystem:
     m_SpriteRenderer: {fileID: 0}
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
-    alignToDirection: 0
+    alignToDirection: 1
     m_Texture: {fileID: 0}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
@@ -742,11 +744,11 @@ ParticleSystem:
     m_TextureColorAffectsParticles: 1
     m_TextureAlphaAffectsParticles: 1
     m_TextureBilinearFiltering: 0
-    randomDirectionAmount: 0
-    sphericalDirectionAmount: 0
+    randomDirectionAmount: 0.36
+    sphericalDirectionAmount: 0.29
     randomPositionAmount: 0
     radius:
-      value: 0.49
+      value: 0.0001
       mode: 0
       spread: 0
       speed:
@@ -865,7 +867,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 20
+      scalar: 37
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -4754,3 +4756,46 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
+--- !u!60 &7068098091841588388
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7953942593888774019}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.0014020503, y: 2.0360656}
+      - {x: -2.312449, y: 0.4771953}
+      - {x: -1.5488985, y: -1.7802582}
+      - {x: 1.3677506, y: -1.8661025}
+      - {x: 2.388834, y: 0.50172234}
+--- !u!114 &2256087279105345156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7953942593888774019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb37ec20576e43d4ba2b13e111eeb1d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _AuraDamage: 0.1

@@ -48,24 +48,22 @@ public class FireBall : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
-
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
+                    collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
                     heroStats.TakeDamageFromProjectile(_FireSkills.Damage);
+                    collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);
                     Destroy(gameObject);
                 }
-                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(_FireSkills.Damage);
-                    //collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);       
-                }
+            }
         }
         if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-               // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
+               collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
                 collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_FireSkills.Damage);
-                //collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);
+                collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);
                 Destroy(gameObject);
             }
         }

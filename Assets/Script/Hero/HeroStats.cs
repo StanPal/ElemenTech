@@ -4,7 +4,7 @@ using UnityEngine;
 public class HeroStats : MonoBehaviour
 {
     public event System.Action<GameObject> onDebuffActivated;
-    public event System.Action onDebuffDeActivated;
+    public event System.Action<GameObject> onDebuffDeActivated;
 
     private AnimationEvents _AnimationEvent;
     private Animator _Animator;
@@ -78,6 +78,21 @@ public class HeroStats : MonoBehaviour
         if (!_AnimationEvent.DashProjectileInvincibility)
         {
             _CurrentHealth -= damage;
+            switch (_NegativeEffect)
+            {
+                case StatusEffects.NegativeEffects.OnFire:
+                    onDebuffActivated?.Invoke(gameObject);
+                    break;
+                case StatusEffects.NegativeEffects.Slowed:
+                    onDebuffActivated?.Invoke(gameObject);
+                    break;
+                case StatusEffects.NegativeEffects.Stunned:
+                    break;
+                case StatusEffects.NegativeEffects.None:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -95,21 +110,7 @@ public class HeroStats : MonoBehaviour
         {
             _CurrentHealth -= damage;
         }
-        switch (_NegativeEffect)
-        {
-            case StatusEffects.NegativeEffects.OnFire:
-                onDebuffActivated?.Invoke(gameObject);
-                break;
-            case StatusEffects.NegativeEffects.Slowed:
-                onDebuffActivated?.Invoke(gameObject);
-                break;
-            case StatusEffects.NegativeEffects.Stunned:
-                break;
-            case StatusEffects.NegativeEffects.None:
-                break;
-            default:
-                break;
-        }
+     
         _Animator.SetTrigger("HurtTrigger");
     }
 
@@ -139,7 +140,7 @@ public class HeroStats : MonoBehaviour
         StartCoroutine(DamageOverTimeCoroutine(damageAmount, damageDuration));
     }
 
-    IEnumerator DamageOverTimeCoroutine(float damageAmount, float duration)
+    private IEnumerator DamageOverTimeCoroutine(float damageAmount, float duration)
     {
         float amountDamaged = 0;
         float damagePerloop = damageAmount / duration;
@@ -155,7 +156,7 @@ public class HeroStats : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         _NegativeEffect = StatusEffects.NegativeEffects.None;
-        onDebuffDeActivated?.Invoke();
+        onDebuffDeActivated?.Invoke(gameObject);
     }
 
     public void SlowMovement(float mSlowAmount, float mSlowDuration)
@@ -163,7 +164,7 @@ public class HeroStats : MonoBehaviour
         StartCoroutine(SlowEffectCoroutine(mSlowAmount, mSlowDuration));
     }
 
-    IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
+    private IEnumerator SlowEffectCoroutine(float slowAmount, float duration)
     {
         HeroMovement heromovement = GetComponent<HeroMovement>();
         float maxSpeed = heromovement.Speed;
@@ -176,7 +177,7 @@ public class HeroStats : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         _NegativeEffect = StatusEffects.NegativeEffects.None;
-        onDebuffDeActivated?.Invoke();
+        onDebuffDeActivated?.Invoke(gameObject);
     }
 
     void HeroDie()

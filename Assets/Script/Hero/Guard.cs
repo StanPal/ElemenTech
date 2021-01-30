@@ -108,7 +108,7 @@ public class Guard : MonoBehaviour
         Destroy(_Shield);
         if (_ShieldBreak)
         {
-            GameObject shieldBreak = Instantiate(_ParticleSystemManager.OtherEffects[0]);
+            GameObject shieldBreak = Instantiate(_ParticleSystemManager.GetDebuffEffects[0]);
             shieldBreak.transform.position = this.transform.position;
             _ShieldBreak = false;
             shieldBreak.GetComponent<ParticleSystem>().Play();
