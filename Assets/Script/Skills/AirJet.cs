@@ -54,10 +54,7 @@ public class AirJet : MonoBehaviour
                 }
             }
         }
-        //if (collision.GetComponentInParent<Walls>())
-        //{
-        //    Destroy(gameObject);
-        //}
+ 
         if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
@@ -72,6 +69,18 @@ public class AirJet : MonoBehaviour
         if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
+            {
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
+                    Destroy(gameObject);
+                }
+            }
+        }
+
+        if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
+        {
+            if (!collision.Equals(this) && collision.tag.Equals("FFA"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {

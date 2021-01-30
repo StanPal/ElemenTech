@@ -50,6 +50,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _KnockBackCount;
 
     //Getters and Setters
+    public BoxCollider2D GetBoxCollider2D { get { return _BoxCollider2D; } }
     public PlayerInput PlayerInput { get { return _PlayerInput; } }
     public bool Dashing { get { return _IsDashing; } }
     public float Speed { get { return mSpeed; } set { mSpeed = value; } }
@@ -236,6 +237,24 @@ public class HeroMovement : MonoBehaviour
         }
         _HorizontalMove = _MoveInput * mSpeed;
         _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_HorizontalMove));
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (this.tag.Equals("Team1"))
+        {
+            if (collision.collider.tag.Equals("Team1"))
+            {
+                Physics2D.IgnoreCollision(_BoxCollider2D, collision.collider,true);
+            }
+        }
+        if (this.tag.Equals("Team2"))
+        {
+            if (collision.collider.tag.Equals("Team2"))
+            {
+                Physics2D.IgnoreCollision(_BoxCollider2D, collision.collider,true);
+            }
+        }
     }
 
     private void OnEnable()

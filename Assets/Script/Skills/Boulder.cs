@@ -41,7 +41,7 @@ public class Boulder : MonoBehaviour
                     var distance = Vector3.Distance(closestPont, transform.position);
                     var damagePercent = Mathf.InverseLerp(_EarthSkills.SplashRange, 0, distance);
                     if (enemyStats && enemyStats.tag.Equals("Team2"))
-                    {                        
+                    {
                         enemyStats.TakeDamageFromProjectile(damagePercent * _EarthSkills.Damage);
                         enemyMovement.OnKnockBackHit(_EarthSkills.KnockBack, enemyMovement.GetIsLeft);
                     }
@@ -67,7 +67,6 @@ public class Boulder : MonoBehaviour
                         enemyMovement.OnKnockBackHit((_EarthSkills.KnockBack / 2f), !enemyMovement.GetIsLeft);
                     }
                 }
-                
             }
         }
 
@@ -91,6 +90,17 @@ public class Boulder : MonoBehaviour
                 {
                     heroStats.TakeDamageFromProjectile(_EarthSkills.Damage);
                     Explode();
+                    Destroy(gameObject);
+                }
+            }
+        }
+        if (_EarthSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
+        {
+            if (!collision.collider.Equals(this) && collision.collider.tag.Equals("FFA"))
+            {
+                if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamageFromProjectile(_EarthSkills.Damage);
                     Destroy(gameObject);
                 }
             }
