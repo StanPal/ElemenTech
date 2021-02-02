@@ -106,8 +106,8 @@ public class Golem : MonoBehaviour
         // }
 
         KillEnemy();
-        Move();
-        Shoot();
+       // Move();
+       // Shoot();
         SelfRegen();
         //Jump();
     }
@@ -250,7 +250,10 @@ public class Golem : MonoBehaviour
     {
         if (mCurrentHealth <= 0)
         {
-            golemManager._instance.getSpawnNodeList().Remove(this.currentSpawnNodeIndex);
+            if (golemManager._instance)
+            {
+                golemManager._instance.getSpawnNodeList().Remove(this.currentSpawnNodeIndex);
+            }
             deadPosition = this.gameObject.transform;
             Destroy(this.gameObject);
             genePickup(mGolemType);

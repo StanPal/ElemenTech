@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class AIPlayer : MonoBehaviour
 {
-    [SerializeField] private Animator _aiController;
+    [SerializeField] public Animator _aiController;
     public int nodeIndex;
 
     private Transform target = null;
@@ -12,6 +12,8 @@ public class AIPlayer : MonoBehaviour
     public float currentHP;
     public pickUp[] mkPickups;
     public Hero[] mHeros ;
+    public Hero nearestHero;
+    public Hero nearestHealth;
 
     void Start()
     {
@@ -27,25 +29,18 @@ public class AIPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyUp(KeyCode.Space))
-        {
-            currentHP -= 10.0f;
-        }
-        // _aiController.SetFloat("distToTarget", Vector2.Distance(transform.position, target.position));
-       
-         _aiController.SetFloat("HP", currentHP);
-        
-
+        currentHP = this.GetComponent<Golem>().CurrentHealth;
+        _aiController.SetFloat("HP", currentHP);
     }
 
     public void Attack()
     {
-        Debug.Log("hp > 40, attack");
+        Debug.Log("hp > 40, attack the players");
     }
 
     public void Run()
     {
-        Debug.Log("hp < 40, run");
+        Debug.Log("hp < 40, try to run away and looking for health");
     }
 
     public void setReturnTure()
@@ -65,11 +60,46 @@ public class AIPlayer : MonoBehaviour
 
     public void IsPlayerNearby()
     {
+        foreach(var t in mHeros)
+        {
+            if(Mathf.Abs((t.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x)) < 5 
+                && Mathf.Abs((t.GetComponent<Hero>().transform.position.y - this.GetComponent<Transform>().position.y)) < 5)
+            {
+                _aiController.SetBool("isPlayerNearby", true);
+                nearestHero = t;
+                return;
+            }
+        }
+        _aiController.SetBool("isPlayerNearby", false);
+    }
+    public void IsPickUpNearby()
+    {
+        foreach (var t in mkPickups)
+        {
+            if(Mathf.Abs((t.GetComponent<pickUp>().transform.position.x - this.GetComponent<Transform>().position.x)) < 0.5f
+                && Mathf.Abs((t.GetComponent<pickUp>().transform.position.y - this.GetComponent<Transform>().position.y)) < 0.5f)
+            {
+                _aiController.SetBool("isPickupNearby", true);
+                return;
+            }
+        }
         _aiController.SetBool("isPlayerNearby", false);
     }
 
     public void findHealth()
     {
-        Debug.Log("looking for health");
+        Debug.Log("Move to the health position");
+
+        float step = this.GetComponent<Golem>().mSpeed * Time.deltaTime;
+        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, mkPickups[0].transform.position, step);
+    }
+
+    public void dashAway()
+    {
+        Debug.Log("run away from players!");
+        if(nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x < 5)
+        {
+            transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        }                  
     }
 }

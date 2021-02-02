@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class runAway : StateMachineBehaviour
+public class playerNotNearby : StateMachineBehaviour
 {
     [SerializeField] private string name = "";
     [SerializeField] private AIPlayer _player = null;
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        var manager = ServiceLocator.Get<AIPlayerManager>();       
+        var manager = ServiceLocator.Get<AIPlayerManager>();
+        
         _player = manager.GetPlayer(0);
     }
 
@@ -17,8 +18,8 @@ public class runAway : StateMachineBehaviour
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         
-       
-        _player.IsPlayerNearby();
+        _player.IsPickUpNearby();
+
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
