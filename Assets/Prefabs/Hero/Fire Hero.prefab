@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -585,7 +585,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -604,7 +604,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.04296434, y: -0.035383463}
+  m_Offset: {x: -0.04296434, y: -0.0082342625}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -615,7 +615,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.0859284, y: 1.8956819}
+  m_Size: {x: 1.0859284, y: 1.8413835}
   m_EdgeRadius: 0
 --- !u!114 &1791110765294023678
 MonoBehaviour:
@@ -631,10 +631,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Team: 2
   _Name: 
-  _Attack: 30
+  _Attack: 10
   _MaxHealth: 100
   _CurrentHealth: 100
-  _CoolDown: 1
+  _CoolDown: 0.5
   _ElementalType: 0
   _PositiveEffect: 3
   _NegativeEffect: 3
@@ -669,11 +669,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 1
-  mSpeed: 12
+  ControllerInput: 0
+  mSpeed: 14
   _IsLeft: 0
   _IsJumping: 0
-  _JumpForce: 11
+  _JumpForce: 15
   _NumOfJumps: 0
   _MaxJumps: 1
   _Ground:
@@ -681,13 +681,17 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 0
   _IsDashing: 0
-  _DashSpeed: 5
+  _DashSpeed: 4
   _DashCoolDown: 1
   _DashStartUpTime: 0
   _RecoveryTime: 0.2
   isRecovering: 0
   _KnockBackRecieved: 0
   _KnockBackCount: 0
+  _NoFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
+  _FullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  _SlopeCheckDistance: 1
+  _MaxSlopeAngle: 0
 --- !u!114 &1462250077875475378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -700,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mfallMultiplier: 2.5
+  mfallMultiplier: 4
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -919,8 +923,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765894072927}
   m_LocalRotation: {x: -0, y: -0, z: 0.100820296, w: 0.99490464}
-  m_LocalPosition: {x: 0.639, y: -0.179, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.2, z: 0}
+  m_LocalPosition: {x: 1.139, y: 0.071, z: 0}
+  m_LocalScale: {x: 2.5776, y: 0.2, z: 0}
   m_Children: []
   m_Father: {fileID: 1791110765294023620}
   m_RootOrder: 2
@@ -1018,9 +1022,9 @@ MonoBehaviour:
   attackPos: {fileID: 1791110764420600048}
   attackRange: 5
   target: {fileID: 1791110763999435355}
-  rotaSpeed: 100
+  rotaSpeed: 180
   rotaBackSpeed: 100
-  mKnockBackAmount: 8
+  mKnockBackAmount: 4
 --- !u!1 &1791110765959601702
 GameObject:
   m_ObjectHideFlags: 0

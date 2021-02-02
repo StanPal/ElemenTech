@@ -49,6 +49,21 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _KnockBackRecieved;
     [SerializeField] private float _KnockBackCount;
 
+    [SerializeField] private PhysicsMaterial2D _NoFriction;
+    [SerializeField] private PhysicsMaterial2D _FullFriction;
+
+    [SerializeField] private float _SlopeCheckDistance;
+    [SerializeField] private float _MaxSlopeAngle;
+    private float _SlopeDownAngle;
+    private float _SlopeSideAngle;
+    private float _SlopeDownAngleOld;
+    private bool _IsOnSlope;
+    private bool _CanWalkOnSlope;
+    private Vector2 _NewVelocity;
+    private Vector2 _NewForce;
+    private Vector2 _ColliderSize;
+    private Vector2 _SlopeNormalPerp;
+
     //Getters and Setters
     public BoxCollider2D GetBoxCollider2D { get { return _BoxCollider2D; } }
     public PlayerInput PlayerInput { get { return _PlayerInput; } }
@@ -68,6 +83,7 @@ public class HeroMovement : MonoBehaviour
         _OriginalRecoveryTime = _RecoveryTime;
         _AnimationEvents = GetComponentInChildren<AnimationEvents>();
         _BoxCollider2D = GetComponent<BoxCollider2D>();
+        _ColliderSize = _BoxCollider2D.size;
         canDash = true;
         if (ControllerInput == Controller.Keyboard)
         {
@@ -104,6 +120,7 @@ public class HeroMovement : MonoBehaviour
             _NumOfJumps = _MaxJumps;
         }
 
+        SlopeCheck();
         if (!isRecovering)
         {
             if (ControllerInput == Controller.Keyboard && !_IsDashing)
@@ -132,9 +149,27 @@ public class HeroMovement : MonoBehaviour
             }
         }
 
-        Vector3 currentPosition = transform.position;
-        currentPosition.x += _MoveInput * mSpeed * Time.deltaTime;
-        transform.position = currentPosition;
+        _NewVelocity.Set(mSpeed * _MoveInput, _Rb.velocity.y);
+        _Rb.velocity = _NewVelocity;
+        //Vector3 currentPosition = transform.position;
+        //currentPosition.x += _MoveInput * mSpeed * Time.deltaTime;
+        //transform.position = currentPosition;
+
+        //if(IsGrounded() && !_IsOnSlope)
+        //{
+        //    _NewVelocity.Set(mSpeed * _MoveInput, 0.0f);
+        //    _Rb.velocity = _NewVelocity;
+        //}
+        //else if(IsGrounded() && _IsOnSlope)
+        //{
+        //    _NewVelocity.Set(mSpeed * _SlopeNormalPerp.x * -_MoveInput, mSpeed * _SlopeNormalPerp.y * -_MoveInput);
+        //    _Rb.velocity = _NewVelocity;
+        //}
+        //else if(!IsGrounded())
+        //{
+        //    _NewVelocity.Set(mSpeed * _MoveInput, _Rb.velocity.y);
+        //    _Rb.velocity = _NewVelocity;
+        //}
 
         if (_KnockBackCount > 0)
         {
@@ -266,6 +301,60 @@ public class HeroMovement : MonoBehaviour
         _PlayerInput.Disable();
     }
 
+    private void SlopeCheck()
+    {
+        Vector2 checkPos = transform.position -  (Vector3)(new Vector2(0.0f, _ColliderSize.y / 2));
+        SlopeCheckHorizontal(checkPos);
+        SlopeCheckVertical(checkPos);
+    }
+
+    private void SlopeCheckHorizontal(Vector2 checkPos)
+    {
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _SlopeCheckDistance,_Ground);
+        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _SlopeCheckDistance, _Ground);
+        if(slopeHitFront)
+        {
+            _IsOnSlope = true;
+            _SlopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+        }
+        else if(slopeHitBack)
+        {
+            _IsOnSlope = true;
+            _SlopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+        }
+        else
+        {
+            _SlopeSideAngle = 0.0f;
+            _IsOnSlope = false;
+        }
+    }
+
+    private void SlopeCheckVertical(Vector2 checkPos)
+    {
+        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _SlopeCheckDistance, _Ground);
+        if (hit)
+        {
+            _SlopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
+            //Return angle between y-axis and our normal
+            _SlopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+            if (_SlopeDownAngle != _SlopeDownAngleOld)
+            {
+                _IsOnSlope = true;
+            }
+            _SlopeDownAngleOld = _SlopeDownAngle;
+            Debug.DrawRay(hit.point, _SlopeNormalPerp, Color.red);
+            Debug.DrawRay(hit.point, hit.normal,Color.green);
+        }
+        if(_IsOnSlope && _MoveInput == 0.0f)
+        {
+            _Rb.sharedMaterial = _FullFriction;
+        }
+        else
+        {
+            _Rb.sharedMaterial = _NoFriction;
+        }
+    }
+
     public void IcySlidding(float SliddingSpeed)
     {
         mSpeed += SliddingSpeed;
@@ -280,16 +369,16 @@ public class HeroMovement : MonoBehaviour
     {
         float extraHeightText = .05f;
         RaycastHit2D raycastHit2D = Physics2D.Raycast(_BoxCollider2D.bounds.center, Vector2.down, _BoxCollider2D.bounds.extents.y + extraHeightText, _Ground);
-        Color rayColor;
-        if (raycastHit2D.collider != null)
-        {
-            rayColor = Color.green;
-        }
-        else
-        {
-            rayColor = Color.red;
-        }
-        Debug.DrawRay(_BoxCollider2D.bounds.center, Vector2.down * (_BoxCollider2D.bounds.extents.y + extraHeightText),rayColor);
+        //Color rayColor;
+        //if (raycastHit2D.collider != null)
+        //{
+        //    rayColor = Color.green;
+        //}
+        //else
+        //{
+        //    rayColor = Color.red;
+        //}
+        //Debug.DrawRay(_BoxCollider2D.bounds.center, Vector2.down * (_BoxCollider2D.bounds.extents.y + extraHeightText),rayColor);
         return raycastHit2D.collider != null;
     }
 
@@ -312,6 +401,7 @@ public class HeroMovement : MonoBehaviour
     private void Jump()
     {
         _PlayerAnimator.SetBool("IsJumping", true);
+
         _Rb.velocity = Vector2.up * _JumpForce;
         _NumOfJumps--;
     }

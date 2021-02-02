@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 6305441564539892452}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -500,6 +500,10 @@ MonoBehaviour:
   isRecovering: 0
   _KnockBackRecieved: 0
   _KnockBackCount: 0
+  _NoFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
+  _FullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  _SlopeCheckDistance: 0
+  _MaxSlopeAngle: 0
 --- !u!114 &4636537091078077599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +739,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1791110765894072920
 Transform:
   m_ObjectHideFlags: 0
@@ -744,8 +748,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765894072927}
   m_LocalRotation: {x: -0, y: -0, z: 0.100820296, w: 0.99490464}
-  m_LocalPosition: {x: 0.639, y: -0.179, z: 0}
-  m_LocalScale: {x: 1.5, y: 0.2, z: 0}
+  m_LocalPosition: {x: 1.139, y: 0.071, z: 0}
+  m_LocalScale: {x: 2.5776, y: 0.2, z: 0}
   m_Children: []
   m_Father: {fileID: 1791110765294023620}
   m_RootOrder: 2

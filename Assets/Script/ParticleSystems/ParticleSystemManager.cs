@@ -100,7 +100,7 @@ public class ParticleSystemManager : MonoBehaviour
             _AuraType.tag = hero.tag;
             _AuraType.GetComponent<FireAura>().SetDamage = _AuraDamage;
             _AuraType.transform.parent = hero.transform;
-            _AuraType.transform.localScale = new Vector3(1f, 1f, 1f);
+            _AuraType.transform.localScale = new Vector3(3f, 3f, 3f);
             _AuraType.GetComponent<ParticleSystem>().Play();
             _IsAuraExist = true;
         }

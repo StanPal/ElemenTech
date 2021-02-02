@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class FireAura : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class FireAura : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_Damage);
+                    StartCoroutine(DamageOverTimeCoroutine(heroStats,_Damage, 1f));
                 }
             }
         }
@@ -23,9 +24,22 @@ public class FireAura : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_Damage);
+                    StartCoroutine(DamageOverTimeCoroutine(heroStats,_Damage, 1f));
                 }
             }
         }
     }
+
+
+    private IEnumerator DamageOverTimeCoroutine(HeroStats hero, float damageAmount, float duration)
+    {
+        float amountDamaged = 0;
+        float damagePerloop = damageAmount / duration;
+        while (amountDamaged < damageAmount)
+        {
+            hero.TakeDamageFromProjectile(damagePerloop);
+            yield return new WaitForSeconds(1f);
+        }
+    }
+
 }
