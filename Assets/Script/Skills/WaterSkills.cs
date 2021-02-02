@@ -1,41 +1,35 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WaterSkills : MonoBehaviour
 {
-    public GameObject mWaterGun;
+    public GameObject WaterGun;
+    PlayerSkills _HeroSkills;
 
-    [SerializeField]
-    private float mSpeed = 10f;
-    public float Speed { get { return mSpeed; } }
-    [SerializeField]
-    private float mDamage = 5f;
-    public float Damage { get { return mDamage; } }
-    [SerializeField]
+    [SerializeField] private float _Speed = 10f;
+    [SerializeField] private float _Damage = 5f;
     //After a certain duration of time destroy gameobject if it is active
-    private float mExitTime;
-    public float ExitTime { get { return mExitTime; } }
-    PlayerSkills mHeroSkills;
-    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
+    [SerializeField] private float _ExitTime;
+    [SerializeField] private float _SlowAmount = 1f;
+    [SerializeField] private float _SlowDuration = 1f;
 
-    [SerializeField]
-    private float mSlowAmount = 1f;
-    public float SlowAmount { get { return mSlowAmount; } }
-    [SerializeField]
-    private float mSlowDuration = 1f;
-    public float SlowDuration { get { return mSlowAmount; } }
+    // Getters
+    public PlayerSkills PlayerSkills { get { return _HeroSkills; } }
+    public float Speed { get { return _Speed; } }
+    public float Damage { get { return _Damage; } }
+    public float ExitTime { get { return _ExitTime; } }
+    public float SlowAmount { get { return _SlowAmount; } }
+    public float SlowDuration { get { return _SlowAmount; } }
 
 
     private void Start()
     {
-        mHeroSkills = GetComponent<PlayerSkills>();
-        mHeroSkills.onWaterSkillPerformed += WaterGun;
+        _HeroSkills = GetComponent<PlayerSkills>();
+        _HeroSkills.onWaterSkillPerformed += WaterGunCast;
     }
 
-    void WaterGun()
+    void WaterGunCast()
     {
-        Instantiate(mWaterGun, mHeroSkills.HeroAction.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
+        Instantiate(WaterGun, _HeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _HeroSkills.HeroAction.GetLookAngle));
 
     }
 

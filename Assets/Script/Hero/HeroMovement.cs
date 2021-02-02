@@ -1,13 +1,7 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 public class HeroMovement : MonoBehaviour
 {
-    HeroActions mHeroActions;
-
-    private PlayerInput mPlayerInput;
-    public PlayerInput PlayerInput { get { return mPlayerInput; } }
     public enum Controller
     {
         None,
@@ -16,90 +10,196 @@ public class HeroMovement : MonoBehaviour
         XBOX,
         Keyboard2
     }
+    public Controller ControllerInput = Controller.None;
 
-    public Controller controllerInput = Controller.None;
-    [SerializeField]
-    private bool isLeft = false;
-    public bool GetIsLeft { get { return isLeft; } }
+    [SerializeField] private bool _IsLeft = false;
+    [SerializeField] private bool _IsJumping = false;
+    [SerializeField] private float _JumpForce = 5f;
+    [SerializeField] private int _NumOfJumps = 0;
+    [SerializeField] private int _MaxJumps = 1;
+    [SerializeField] private LayerMask _Ground;
+    [SerializeField] private bool _CanDash = true;
+    [SerializeField] private bool _IsDashing;
+    [SerializeField] private float _DashSpeed = 5f;
+    [SerializeField] private float _DashCooldown = 1f;
+    [SerializeField] private float _DashStartUpTime = 1f;
+    [SerializeField] private float mSpeed = 8f;
+    [SerializeField] private float _KnockBackRecieved;
+    [SerializeField] private float _KnockBackCount;
+    [SerializeField] private float _RecoveryTime = 1f;
+    [SerializeField] private bool _IsRecovering = false;
 
-    [SerializeField]
-    private bool isJumping = false;
-    [SerializeField]
-    private float mJumpForce = 5f;
-    [SerializeField]
-    private int mNumOfJumps = 0;
-    [SerializeField]
-    private int mMaxJumps = 1;
-    [SerializeField]
-    private LayerMask mGround;
-    private Collider2D col;
+    private HeroActions _HeroActions;
+    private PlayerInput _PlayerInput;
+    private Collider2D _Col;
+    private float _MoveInput;
+    private Rigidbody2D _Rb;
+    private bool _OnHitLeft = false;
+    private float _OriginalRecoveryTime;
 
-
-    [SerializeField]
-    private bool canDash = true;
-    [SerializeField]
-    private bool isDashing;
-    [SerializeField]
-    private float mDashSpeed = 5f;
-    [SerializeField]
-    private float mDashCoolDown = 1f;
-    [SerializeField]
-    private float mDashStartUpTime = 1f;
-
-    [SerializeField]
-    private float mSpeed;
+    // Getters/Setters 
+    public PlayerInput PlayerInput { get { return _PlayerInput; } }
+    public bool GetIsLeft { get { return _IsLeft; } }
     public float Speed { get { return mSpeed; } set { mSpeed = value; } }
-    private float mMoveInput;
-    private Rigidbody2D rb;
-
-    [SerializeField]
-    private float mKnockbackRecieved;
-    [SerializeField]
-    private float mKnockbackCount;
-    private bool mOnHitLeft = false;
-
-    [SerializeField]
-    private float mRecoveryTime = 1f;
-    public float RecoveryTime { get { return mRecoveryTime; } set { mRecoveryTime = value; } }
-    [SerializeField]
-    private bool isRecovering = false;
-    public bool Recovering { get { return isRecovering; } set { isRecovering = value; } }
-    private float mOriginalRecoveryTime;
+    public float RecoveryTime { get { return _RecoveryTime; } set { _RecoveryTime = value; } }
+    public bool Recovering { get { return _IsRecovering; } set { _IsRecovering = value; } }
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        mPlayerInput = new PlayerInput();
-        col = GetComponent<Collider2D>();
-        mHeroActions = GetComponent<HeroActions>();
-        mOriginalRecoveryTime = mRecoveryTime;
+        _Rb = GetComponent<Rigidbody2D>();
+        _PlayerInput = new PlayerInput();
+        _Col = GetComponent<Collider2D>();
+        _HeroActions = GetComponent<HeroActions>();
+        _OriginalRecoveryTime = _RecoveryTime;
 
-        canDash = true;
-        if (controllerInput == Controller.Keyboard)
+        _CanDash = true;
+        if (ControllerInput == Controller.Keyboard)
         {
-            mPlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+            _PlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.Keyboard2)
+        if (ControllerInput == Controller.Keyboard2)
         {
-            mPlayerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
+            _PlayerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.PS4)
+        if (ControllerInput == Controller.PS4)
         {
-            mPlayerInput.PS4.Dash.performed += _ => OnDash();
+            _PlayerInput.PS4.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.XBOX)
+        if (ControllerInput == Controller.XBOX)
         {
-            mPlayerInput.XBOX.Dash.performed += _ => OnDash();
+            _PlayerInput.XBOX.Dash.performed += _ => OnDash();
         }
+    }
+
+    private void Update()
+    {
+        if (IsGrounded())
+        {
+            _NumOfJumps = _MaxJumps;
+        }
+        switch (ControllerInput)
+        {
+            case Controller.None:
+                break;
+            case Controller.Keyboard:
+                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.Keyboard2:
+                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.PS4:
+                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.XBOX:
+                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (!_IsRecovering)
+        {
+            if (ControllerInput == Controller.Keyboard && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.KeyboardMouse.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.PS4 && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.PS4.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.XBOX && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.XBOX.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.Keyboard2 && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.KeyboardLayout2.Move.ReadValue<float>();
+            }
+            else
+            {
+                Debug.Log("Keybindings not set");
+            }
+        }
+
+        Vector3 currentPosition = transform.position;
+        currentPosition.x += _MoveInput * mSpeed * Time.deltaTime;
+        transform.position = currentPosition;
+
+        if (_KnockBackCount > 0)
+        {
+            if (_OnHitLeft)
+            {
+                _Rb.velocity = new Vector2(-_KnockBackRecieved, _KnockBackRecieved);
+            }
+            else
+            {
+                _Rb.velocity = new Vector2(_KnockBackRecieved, _KnockBackRecieved);
+
+            }
+            _KnockBackCount--;
+        }
+
+        if (_IsDashing)
+        {
+            StartCoroutine(Dash(_IsLeft));
+        }
+
+        if (_IsRecovering)
+        {
+            StartCoroutine(Recover());
+        }
+        Vector3 characterScale = transform.localScale;
+        if (_MoveInput < 0)
+        {
+            characterScale.x = -1;
+            _IsLeft = true;
+        }
+        if (_MoveInput > 0)
+        {
+            characterScale.x = 1;
+            _IsLeft = false;
+        }
+        transform.localScale = characterScale;
     }
 
     private void OnEnable()
     {
-        mPlayerInput.Enable();
+        _PlayerInput.Enable();
     }
     private void OnDisable()
     {
-        mPlayerInput.Disable();
+        _PlayerInput.Disable();
     }
 
     public void IcySlidding(float SliddingSpeed)
@@ -115,201 +215,78 @@ public class HeroMovement : MonoBehaviour
     public bool IsGrounded()
     {
         Vector2 topLeftPoint = transform.position;
-        topLeftPoint.x -= col.bounds.extents.x;
-        topLeftPoint.y += col.bounds.extents.y;
+        topLeftPoint.x -= _Col.bounds.extents.x;
+        topLeftPoint.y += _Col.bounds.extents.y;
 
         Vector2 bottomRight = transform.position;
-        bottomRight.x += col.bounds.extents.x;
-        bottomRight.y -= col.bounds.extents.y;
+        bottomRight.x += _Col.bounds.extents.x;
+        bottomRight.y -= _Col.bounds.extents.y;
 
-        return Physics2D.OverlapArea(topLeftPoint, bottomRight, mGround);
+        return Physics2D.OverlapArea(topLeftPoint, bottomRight, _Ground);
     }
 
     private void OnDash()
     {
-        if (canDash)
+        if (_CanDash)
         {
             StartCoroutine(DashStartUp());
         }
     }
 
-    IEnumerator DashStartUp()
+    private IEnumerator DashStartUp()
     {
-        yield return new WaitForSeconds(mDashStartUpTime);
-        isDashing = true;
-    }
-
-    private void Update()
-    {
-        if (IsGrounded())
-        {
-            mNumOfJumps = mMaxJumps;
-        }
-        switch (controllerInput)
-        {
-            case Controller.None:
-                break;
-            case Controller.Keyboard:
-                if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
-                {
-                    Jump();
-                }
-                else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
-                break;
-            case Controller.Keyboard2:
-                if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps > 0)
-                {
-                    Jump();
-                }
-                else if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
-                break;
-            case Controller.PS4:
-                if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps > 0)
-                {
-                    Jump();
-                }
-                else if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
-                break;
-            case Controller.XBOX:
-                if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps > 0)
-                {
-                    Jump();
-                }
-                else if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
-                break;
-            default:
-                break;
-        }
+        yield return new WaitForSeconds(_DashStartUpTime);
+        _IsDashing = true;
     }
 
     private void Jump()
     {
-        rb.velocity = Vector2.up * mJumpForce;
-        mNumOfJumps--;
+        _Rb.velocity = Vector2.up * _JumpForce;
+        _NumOfJumps--;
     }
 
     private void MultiJump()
-    { 
-        rb.velocity = Vector2.up * mJumpForce;
-    }
-
-    private void FixedUpdate()
     {
-        if (!isRecovering)
-        {
-            if (controllerInput == Controller.Keyboard && !isDashing)
-            {
-                mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.PS4 && !isDashing)
-            {
-                mMoveInput = mPlayerInput.PS4.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.XBOX && !isDashing)
-            {
-                mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.Keyboard2 && !isDashing)
-            {
-                mMoveInput = mPlayerInput.KeyboardLayout2.Move.ReadValue<float>();
-            }
-            else
-            {
-                Debug.Log("Keybindings not set");
-            }
-        }
-
-        Vector3 currentPosition = transform.position;
-        currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
-        transform.position = currentPosition;
-
-        if (mKnockbackCount > 0)
-        {
-            if (mOnHitLeft)
-            {
-                rb.velocity = new Vector2(-mKnockbackRecieved, mKnockbackRecieved);
-            }
-            else
-            {
-                rb.velocity = new Vector2(mKnockbackRecieved, mKnockbackRecieved);
-
-            }
-            mKnockbackCount--;
-        }
-
-        if(isDashing)
-        {
-            StartCoroutine(Dash(isLeft));
-        }
-
-        if(isRecovering)
-        {
-            StartCoroutine(Recover());
-        }
-        Vector3 characterScale = transform.localScale;
-        if (mMoveInput < 0)
-        {
-            characterScale.x = -1;
-            isLeft = true;
-        }
-        if (mMoveInput > 0)
-        {
-            characterScale.x = 1;
-            isLeft = false;
-        }
-        transform.localScale = characterScale;
+        _Rb.velocity = Vector2.up * _JumpForce;
     }
 
-    IEnumerator Dash(bool isLeft)
-    { 
+    private IEnumerator Dash(bool _IsLeft)
+    {
         Vector3 currentPosition = transform.position;
-        if (isLeft)
+        if (_IsLeft)
         {
-            currentPosition.x -= (mDashSpeed * 0.1f);
+            currentPosition.x -= (_DashSpeed * 0.1f);
         }
         else
         {
-            currentPosition.x += (mDashSpeed * 0.1f);
+            currentPosition.x += (_DashSpeed * 0.1f);
         }
         transform.position = currentPosition;
-        float gravity = rb.gravityScale;
-        rb.gravityScale = 0f;
+        float gravity = _Rb.gravityScale;
+        _Rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.4f);
-        rb.gravityScale = 1f;
-        isDashing = false;
-        canDash = false;
-        isRecovering = true;
-        yield return new WaitForSeconds(mDashCoolDown);
-        canDash = true;
+        _Rb.gravityScale = 1f;
+        _IsDashing = false;
+        _CanDash = false;
+        _IsRecovering = true;
+        yield return new WaitForSeconds(_DashCooldown);
+        _CanDash = true;
     }
 
-    IEnumerator Recover()
+    private IEnumerator Recover()
     {
-        mHeroActions.enabled = false;
-        isRecovering = true;
-        yield return new WaitForSeconds(mRecoveryTime);
-        mRecoveryTime = mOriginalRecoveryTime;
-        mHeroActions.enabled = true;
-        isRecovering = false;
+        _HeroActions.enabled = false;
+        _IsRecovering = true;
+        yield return new WaitForSeconds(_RecoveryTime);
+        _RecoveryTime = _OriginalRecoveryTime;
+        _HeroActions.enabled = true;
+        _IsRecovering = false;
     }
 
     public void OnKnockBackHit(float knockbackamount, bool direction)
     {
-        mKnockbackCount++;
-        mKnockbackRecieved = knockbackamount;
-        mOnHitLeft = direction;
+        _KnockBackCount++;
+        _KnockBackRecieved = knockbackamount;
+        _OnHitLeft = direction;
     }
-
 }

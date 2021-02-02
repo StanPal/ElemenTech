@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour
     {
         if (isGameFinish == false)
         {
-            Debug.Log("GameOver");
+            Debug.Log("GameOver!!");
             isGameFinish = true;
             Invoke("moveToGameOverScence", DelayForNextScence);
         }

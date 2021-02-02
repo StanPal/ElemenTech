@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1353044321709334707}
   - component: {fileID: 1353044321709334704}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 64x64Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,10 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 685d003f86336f545aa484f25952dcab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
-  projectileSpeed: 2
-  exitTime: 3
-  ScaleSize: {x: 0.001, y: 0.001, z: 0.001}
 --- !u!50 &-5696345367691759399
 Rigidbody2D:
   serializedVersion: 4
