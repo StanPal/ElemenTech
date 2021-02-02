@@ -1,14 +1,15 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 
 public class HeroStats : MonoBehaviour
 {
-    public event System.Action<GameObject> onDebuffActivated;
-    public event System.Action onDebuffDeActivated;
+    public event Action<GameObject> onDebuffActivated;
+    public event Action onDebuffDeActivated;
 
-    private AnimationEvents _AnimationEvent;
-    private Animator _Animator;
-    private Guard _Guard;
+    private AnimationEvents _animationEvent;
+    private Animator _animator;
+    private Guard _guard;
 
     public enum TeamSetting
     {
@@ -20,54 +21,54 @@ public class HeroStats : MonoBehaviour
     public TeamSetting Team = TeamSetting.FFA;
 
     // Basic Stats
-    [SerializeField] private string _Name;
-    [SerializeField] private float _Attack = 10f;
-    [SerializeField] private float _MaxHealth = 100f;
-    [SerializeField] private float _CurrentHealth = 100f;
-    [SerializeField] private float _CoolDown = 3f;
-    private float mTempCDTime;
-    private bool isCDFinished;
+    [SerializeField] private string _name;
+    [SerializeField] private float _attack = 10f;
+    [SerializeField] private float _maxHealth = 100f;
+    [SerializeField] private float _currentHealth = 100f;
+    [SerializeField] private float _coolDown = 3f;
+    private float _tempCooldDownTime;
+    private bool _isCoolDownFinished;
 
     // Getters & Setters 
-    public bool CDFinished { get { return isCDFinished; } set { isCDFinished = value; } }
-    public float CDTime { get { return mTempCDTime; } set { mTempCDTime = value; } }
-    public float CoolDown { get { return _CoolDown; } }
-    public float CurrentHealth { get { return _CurrentHealth; } set { _CurrentHealth = value; } }
-    public float MaxHealth { get { return _MaxHealth; } }
-    public float AttackDamage { get { return _Attack; } }
+    public bool CDFinished { get => _isCoolDownFinished; set => _isCoolDownFinished = value; } 
+    public float CDTime { get =>  _tempCooldDownTime; set => _tempCooldDownTime = value; }
+    public float CoolDown { get => _coolDown; }
+    public float CurrentHealth { get => _currentHealth; set => _currentHealth = value; } 
+    public float MaxHealth { get => _maxHealth; }
+    public float AttackDamage { get => _attack; }
 
     //Elemental Type
-    [SerializeField] private Elements.ElementalAttribute _ElementalType;
-    public Elements.ElementalAttribute GetElement { get { return _ElementalType; } }
+    [SerializeField] private Elements.ElementalAttribute _elementalType;
+    public Elements.ElementalAttribute GetElement { get => _elementalType; }
 
     //Buff & Debuff Effects
-    [SerializeField] private StatusEffects.PositiveEffects _PositiveEffect = StatusEffects.PositiveEffects.None;
-    [SerializeField] private StatusEffects.NegativeEffects _NegativeEffect = StatusEffects.NegativeEffects.None;
-    public StatusEffects.PositiveEffects Buff { get { return _PositiveEffect; } set { _PositiveEffect = value; } }
-    public StatusEffects.NegativeEffects DeBuff { get { return _NegativeEffect; } set { _NegativeEffect = value; } }
+    [SerializeField] private StatusEffects.PositiveEffects _positiveEffects = StatusEffects.PositiveEffects.None;
+    [SerializeField] private StatusEffects.NegativeEffects _negativeEffects = StatusEffects.NegativeEffects.None;
+    public StatusEffects.PositiveEffects Buff { get => _positiveEffects;  set  => _positiveEffects = value; }
+    public StatusEffects.NegativeEffects DeBuff { get => _negativeEffects; set => _negativeEffects = value; }
 
-    void Awake()
+    private void Awake()
     {
-        _Animator = GetComponentInChildren<Animator>();
-        _AnimationEvent = GetComponentInChildren<AnimationEvents>();
-        _CurrentHealth = _MaxHealth;
-        mTempCDTime = 0;
-        _Guard = GetComponent<Guard>();
+        _animator = GetComponentInChildren<Animator>();
+        _animationEvent = GetComponentInChildren<AnimationEvents>();
+        _currentHealth = _maxHealth;
+        _tempCooldDownTime = 0;
+        _guard = GetComponent<Guard>();
     }
 
     private void FixedUpdate()
     {
-        if (mTempCDTime <= 0.0f)
+        if (_tempCooldDownTime <= 0.0f)
         {
-            mTempCDTime = 0.0f;
-            isCDFinished = true;
+            _tempCooldDownTime = 0.0f;
+            _isCoolDownFinished = true;
         }
-        if (mTempCDTime > 0.0f)
+        if (_tempCooldDownTime > 0.0f)
         {
-            mTempCDTime -= Time.deltaTime;
+            _tempCooldDownTime -= Time.deltaTime;
         }
 
-        if (_CurrentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             HeroDie();
         }
@@ -75,27 +76,27 @@ public class HeroStats : MonoBehaviour
 
     public void TakeDamageFromProjectile(float damage)
     {
-        if (!_AnimationEvent.DashProjectileInvincibility)
+        if (!_animationEvent.DashProjectileInvincibility)
         {
-            _CurrentHealth -= damage;
+            _currentHealth -= damage;
         }
     }
 
     public void TakeDamage(float damage)
     {
-        if (_CurrentHealth <= 0)
+        if (_currentHealth <= 0)
         {
             HeroDie();
         }
-        if (_Guard.Guarding)
+        if (_guard.Guarding)
         {
-            _CurrentHealth -= (damage * 0.75f);
+            _currentHealth -= (damage * 0.75f);
         }
         else
         {
-            _CurrentHealth -= damage;
+            _currentHealth -= damage;
         }
-        switch (_NegativeEffect)
+        switch (_negativeEffects)
         {
             case StatusEffects.NegativeEffects.OnFire:
                 onDebuffActivated?.Invoke(gameObject);
@@ -110,7 +111,7 @@ public class HeroStats : MonoBehaviour
             default:
                 break;
         }
-        _Animator.SetTrigger("HurtTrigger");
+        _animator.SetTrigger("HurtTrigger");
     }
 
 
@@ -123,14 +124,14 @@ public class HeroStats : MonoBehaviour
     {
 
         float restoreperloop = restoreAmount / restoreTick;
-        while ((_Guard.ShieldEnergy < _Guard.ShieldMaxEnergy) && !_Guard.Guarding)
+        while ((_guard.ShieldEnergy < _guard.ShieldMaxEnergy) && !_guard.Guarding)
         {
-            _Guard.ShieldEnergy += restoreperloop;
+            _guard.ShieldEnergy += restoreperloop;
             yield return new WaitForSeconds(1f);
         }
-        if (_Guard.ShieldEnergy >= _Guard.ShieldMaxEnergy)
+        if (_guard.ShieldEnergy >= _guard.ShieldMaxEnergy)
         {
-            _Guard.IsShieldDisabled = false;
+            _guard.IsShieldDisabled = false;
         }
     }
 
@@ -145,16 +146,16 @@ public class HeroStats : MonoBehaviour
         float damagePerloop = damageAmount / duration;
         while (amountDamaged < damageAmount)
         {
-            _CurrentHealth -= damagePerloop;
-            if (_CurrentHealth <= 0)
+            _currentHealth -= damagePerloop;
+            if (_currentHealth <= 0)
             {
                 HeroDie();
             }
-            Debug.Log(_ElementalType.ToString() + "Hero Current Health" + _CurrentHealth);
+            Debug.Log(_elementalType.ToString() + "Hero Current Health" + _currentHealth);
             amountDamaged += damagePerloop;
             yield return new WaitForSeconds(1f);
         }
-        _NegativeEffect = StatusEffects.NegativeEffects.None;
+        _negativeEffects = StatusEffects.NegativeEffects.None;
         onDebuffDeActivated?.Invoke();
     }
 
@@ -172,10 +173,10 @@ public class HeroStats : MonoBehaviour
         while (heromovement.Speed < maxSpeed)
         {
             heromovement.Speed += slowPerLoop;
-            Debug.Log(_ElementalType.ToString() + "Hero Current Speed" + heromovement.Speed);
+            Debug.Log(_elementalType.ToString() + "Hero Current Speed" + heromovement.Speed);
             yield return new WaitForSeconds(1f);
         }
-        _NegativeEffect = StatusEffects.NegativeEffects.None;
+        _negativeEffects = StatusEffects.NegativeEffects.None;
         onDebuffDeActivated?.Invoke();
     }
 

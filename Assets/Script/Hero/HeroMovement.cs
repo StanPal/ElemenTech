@@ -94,6 +94,7 @@ public class HeroMovement : MonoBehaviour
     {
         _PlayerAnimator.SetBool("IsJumping", false);
     }
+
     private void FixedUpdate()
     {
         if (IsGrounded())
@@ -283,7 +284,7 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    IEnumerator DashStartUp()
+    private IEnumerator DashStartUp()
     {
         yield return new WaitForSeconds(_DashStartUpTime);
 
@@ -302,7 +303,7 @@ public class HeroMovement : MonoBehaviour
         _Rb.velocity = Vector2.up * _JumpForce;
     }
 
-    IEnumerator Dash(bool _IsLeft)
+    private IEnumerator Dash(bool _IsLeft)
     { 
         Vector3 currentPosition = transform.position;
         if (_IsLeft)
@@ -327,7 +328,7 @@ public class HeroMovement : MonoBehaviour
         canDash = true;
     }
 
-    IEnumerator Recover()
+    private IEnumerator Recover()
     {
         _HeroActions.enabled = false;
         isRecovering = true;

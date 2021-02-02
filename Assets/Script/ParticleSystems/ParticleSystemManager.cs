@@ -3,24 +3,28 @@ using UnityEngine;
 
 public class ParticleSystemManager : MonoBehaviour
 {
-    public List<GameObject> DebuffEffects;
-    public List<GameObject> OtherEffects = new List<GameObject>();
-    private PlayerManager _PlayerManager;
-    private Stack<GameObject> _StatusEffects = new Stack<GameObject>();
+    [SerializeField] private List<GameObject> _debuffEffects = new List<GameObject>();
+    [SerializeField] private List<GameObject> _otherEffects = new List<GameObject>();
+    private PlayerManager _playerManager;
+    private Stack<GameObject> _statusEffects = new Stack<GameObject>();
+
+    public List<GameObject> DebuffEffects { get => _debuffEffects; }
+    public List<GameObject> OtherEffects { get => _otherEffects; }
+
     private void Awake()
     {
-        _PlayerManager = FindObjectOfType<PlayerManager>();
-        _PlayerManager.AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        _PlayerManager.AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        _playerManager = FindObjectOfType<PlayerManager>();
+        _playerManager.AirHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        _playerManager.AirHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        _PlayerManager.WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        _PlayerManager.WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        _playerManager.WaterHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        _playerManager.WaterHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        _PlayerManager.EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        _PlayerManager.EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        _playerManager.EarthHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        _playerManager.EarthHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
-        _PlayerManager.FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-        _PlayerManager.FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+        _playerManager.FireHero.GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+        _playerManager.FireHero.GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
     }
 
     private void DebuffEffectOn(GameObject hero)
@@ -42,31 +46,31 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void Burning(GameObject hero)
     {
-        ParticleSystem ps = DebuffEffects[0].GetComponent<ParticleSystem>();
+        ParticleSystem ps = _debuffEffects[0].GetComponent<ParticleSystem>();
         
         GameObject BurningEffect = Instantiate(ps.gameObject, hero.transform.position, Quaternion.identity);
         BurningEffect.transform.parent = hero.transform;
         BurningEffect.transform.localScale = new Vector3(1f, 1f, 1f);
         BurningEffect.GetComponent<ParticleSystem>().Play();
 
-        _StatusEffects.Push(BurningEffect);
+        _statusEffects.Push(BurningEffect);
     }
 
     private void Slowed(GameObject hero)
     {
-        ParticleSystem ps = DebuffEffects[1].GetComponent<ParticleSystem>();
+        ParticleSystem ps = _debuffEffects[1].GetComponent<ParticleSystem>();
 
         GameObject SlowEffect = Instantiate(ps.gameObject, hero.transform.position, Quaternion.identity);
         SlowEffect.transform.parent = hero.transform;
         SlowEffect.transform.localScale = new Vector3(0.5f, 0.5f, 1f);
         SlowEffect.GetComponent<ParticleSystem>().Play();
 
-        _StatusEffects.Push(SlowEffect);
+        _statusEffects.Push(SlowEffect);
     }
 
     private void DebuffEffectOff()
     {
-        Destroy(_StatusEffects.Pop());
+        Destroy(_statusEffects.Pop());
     }
 
 }
