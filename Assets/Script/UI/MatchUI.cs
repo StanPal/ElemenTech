@@ -5,11 +5,16 @@ using UnityEngine.UI;
 
 public class MatchUI : MonoBehaviour
 {
-    public Canvas MatchCanvas;
-    public Text TeamOneScore;
-    public Text TeamTwoScore;
-    public Text Transition;
-    private ScoreManager _ScoreManager;
+    [SerializeField] private Canvas _matchCanvas;
+    [SerializeField] private Text _teamOneScore;
+    [SerializeField] private Text _teamTwoScore;
+    [SerializeField] private Text _transition;
+
+    public Canvas MatchCanvas { get => _matchCanvas; }
+    public Text TeamOneScore { get => _teamOneScore; }
+    public Text TeamTwoScore { get => _teamTwoScore; }
+    public Text Transition { get => _transition; }
+    private ScoreManager _scoreManager;
 
     private void Awake()
     {
@@ -18,13 +23,13 @@ public class MatchUI : MonoBehaviour
 
     private void Initialize()
     {
-        _ScoreManager = ServiceLocator.Get<ScoreManager>();
+        _scoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     public void displayTeamScore()
     {
-        TeamOneScore.text = "Team 1: " + _ScoreManager.TeamOneScore;
-        TeamTwoScore.text = "Team 2: " + _ScoreManager.TeamTwoScore;
+        _teamOneScore.text = "Team 1: " + _scoreManager.TeamOneScore;
+        _teamTwoScore.text = "Team 2: " + _scoreManager.TeamTwoScore;
         Time.timeScale = 0;
         Debug.Log("Current Scene" + SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Total Scene Count" + SceneManager.sceneCountInBuildSettings);
@@ -39,14 +44,14 @@ public class MatchUI : MonoBehaviour
         }
     }
 
-    IEnumerator TransitionToGameEndScene()
+    private IEnumerator TransitionToGameEndScene()
     {
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    IEnumerator TransitionToNextScene()
+    private IEnumerator TransitionToNextScene()
     {
         Time.timeScale = 1;
         Transition.text = "Next Match will begin in...";
@@ -59,6 +64,4 @@ public class MatchUI : MonoBehaviour
         yield return new WaitForSeconds(1);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-
 }

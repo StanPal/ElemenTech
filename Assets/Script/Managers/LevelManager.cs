@@ -2,9 +2,9 @@
 
 public class LevelManager : MonoBehaviour
 {
-    [SerializeField] private ScoreManager _ScoreManager;
-    [SerializeField] private PlayerManager _PlayerManager;
-    [SerializeField] private MatchUI _MatchUI;
+    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private PlayerManager mPlayerManager;
+    [SerializeField] private MatchUI _matchUi;
     private bool isMatchOver = false;
 
     private void Awake()
@@ -14,34 +14,34 @@ public class LevelManager : MonoBehaviour
 
     private void Initialize()
     {
-        _PlayerManager = ServiceLocator.Get<PlayerManager>();
-        _ScoreManager = ServiceLocator.Get<ScoreManager>();
-        _MatchUI = FindObjectOfType<MatchUI>();
+        mPlayerManager = ServiceLocator.Get<PlayerManager>();
+        _scoreManager = ServiceLocator.Get<ScoreManager>();
+        _matchUi = FindObjectOfType<MatchUI>();
     }
 
     private void Update()
     {
-        if (!_ScoreManager.PracticeMode)
+        if (!_scoreManager.PracticeMode)
         {
             if (!isMatchOver)
             {
-                if (_PlayerManager.TeamOne.Count == 1 && _PlayerManager.TeamTwo.Count == 0)
+                if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
                 {
                     LevelEnd(1, 1);
                 }
-                else if (_PlayerManager.TeamOne.Count == 2 && _PlayerManager.TeamTwo.Count == 0)
+                else if (mPlayerManager.TeamOne.Count == 2 && mPlayerManager.TeamTwo.Count == 0)
                 {
                     LevelEnd(1, 1);
                 }
-                else if (_PlayerManager.TeamTwo.Count == 1 && _PlayerManager.TeamOne.Count == 0)
+                else if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
                 {
                     LevelEnd(2, 1);
                 }
-                else if (_PlayerManager.TeamTwo.Count == 2 && _PlayerManager.TeamOne.Count == 0)
+                else if (mPlayerManager.TeamTwo.Count == 2 && mPlayerManager.TeamOne.Count == 0)
                 {
                     LevelEnd(2, 1);
                 }
-                else if (_PlayerManager.TeamTwo.Count == 0 && _PlayerManager.TeamOne.Count == 0)
+                else if (mPlayerManager.TeamTwo.Count == 0 && mPlayerManager.TeamOne.Count == 0)
                 {
                     LevelEnd(1, 0);
                 }
@@ -52,11 +52,10 @@ public class LevelManager : MonoBehaviour
     private void LevelEnd(int team, int score)
     {
         isMatchOver = true;
-        mScoreManager.AddPoints(team, score);
-        MatchUI.MatchCanvas.gameObject.SetActive(true);
-        MatchUI.displayTeamScore();
+        _scoreManager.AddPoints(team, score);
+        _matchUi.MatchCanvas.gameObject.SetActive(true);
+        _matchUi.displayTeamScore();
         mPlayerManager.TeamOne.Clear();
         mPlayerManager.TeamTwo.Clear();
-
     }
 }

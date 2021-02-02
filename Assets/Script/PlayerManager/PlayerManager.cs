@@ -18,10 +18,10 @@ public class PlayerManager : MonoBehaviour
     private void Awake()
     {
         ServiceLocator.Register<PlayerManager>(this);
-        FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        WaterHero.GetComponentInChildren<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        WaterHero.GetComponentInChildren<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
 
         mPlayersList[0] = FireHero;
         mPlayersList[1] = WaterHero;

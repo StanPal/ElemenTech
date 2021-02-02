@@ -1,52 +1,52 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
     public GameObject Shield;
-    private GameObject _Shield;
-    private HeroActions _HeroAction;
-    private HeroMovement _HeroMovement;
-    private bool _ShieldCreated = false;
-    private bool _SkillCombine = false;
-    public bool IsShieldDisabled = false;
-    private bool _ShieldBreak = false;
+    private GameObject _shield;
+    private HeroActions _heroAction;
+    private HeroMovement _heroMovement;
+    private bool _shieldCreated = false;
+    private bool _skillCombine = false;
+    private bool _isShieldDisabled = false;
+    private bool _shieldBreak = false;
 
-    private ParticleSystemManager _ParticleSystemManager;
+    private ParticleSystemManager _particleSystemManager;
 
     [SerializeField] private bool _IsGuarding = false;
     [SerializeField] private float _GuardTime = 0.5f;
-    [SerializeField] private float _ShieldSize = 2.1f;
-    [SerializeField] private float _ShieldRecoveryTick = 3f;
+    [SerializeField] private float _shieldSize = 2.1f;
+    [SerializeField] private float _shieldRecoveryTick = 3f;
     [SerializeField] private float _SpeedDecrease = 1f;
-    [SerializeField] private float _ShieldMaxEnergy = 100f;
-    [SerializeField] private float _ShieldRecoverAmount = 1f;
-    [SerializeField] private float _ShieldEnergyTick = 0.2f;
-    [SerializeField] private float _ShieldEnergy = 100f;
+    [SerializeField] private float _shieldMaxEnergy = 100f;
+    [SerializeField] private float _shieldRecoverAmount = 1f;
+    [SerializeField] private float _shieldEnergyTick = 0.2f;
+    [SerializeField] private float _shieldEnergy = 100f;
 
-    // Setters & Getters
-    public bool Guarding { get { return _IsGuarding; } }
-    public float ShieldMaxEnergy { get { return _ShieldMaxEnergy; } }
-    public float ShieldEnergy { get { return _ShieldEnergy; } set { _ShieldEnergy = value; } }
-    public float ShieldRecoveryAmount { get { return _ShieldRecoverAmount; } }
-    public float ShieldRecoveryTick { get { return _ShieldRecoveryTick; } }
-    public bool ComboSkillOn { get { return _SkillCombine; } set { _SkillCombine = value; } }
+    // Setters & Getters    
+    public bool Guarding { get => _IsGuarding; set => _IsGuarding = value; } 
+    public bool IsShieldDisabled { get => _isShieldDisabled; set => _isShieldDisabled = value; } 
+    public float ShieldMaxEnergy { get => _shieldMaxEnergy; set => _shieldMaxEnergy = value; }
+    public float ShieldEnergy { get => _shieldEnergy; set => _shieldEnergy = value; } 
+    public float ShieldRecoveryAmount { get => _shieldRecoverAmount; }
+    public float ShieldRecoveryTick { get => _shieldRecoveryTick; } 
+    public bool ComboSkillOn { get => _skillCombine; set => _skillCombine = value; }
 
 
     public GameObject ComboSkill;
 
     private void Start()
     {
-        _ParticleSystemManager = FindObjectOfType<ParticleSystemManager>();
-        _ShieldEnergy = _ShieldMaxEnergy;
-        _HeroAction = GetComponentInParent<HeroActions>();
-        _HeroAction.onGuardPerformed += GuardMove;
-        _HeroAction.onGuardExit += DestroyGuard;
+        _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
+        _shieldEnergy = _shieldMaxEnergy;
+        _heroAction = GetComponentInParent<HeroActions>();
+        _heroAction.onGuardPerformed += OnGuardPerformed;
+        _heroAction.onGuardExit += OnGuardExit;
     }
 
-    private void GuardMove()
+    private void OnGuardPerformed()
     {
-        _IsGuarding = true;
+        Guarding = true;
         SummonGuard();
     }
 
@@ -54,26 +54,26 @@ public class Guard : MonoBehaviour
     {
         if (_IsGuarding)
         {
-            if (_Shield == null)
+            if (_shield == null)
             {
                 Debug.Log("Cannot Create Shield, No Element Attached");
             }
             else
             {
-                _Shield.transform.position = Vector3.MoveTowards(_Shield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
-                if (_ShieldEnergy > 0)
+                _shield.transform.position = Vector3.MoveTowards(_shield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
+                if (_shieldEnergy > 0)
                 {
-                    _ShieldEnergy -= Time.deltaTime / _ShieldEnergyTick;
+                    _shieldEnergy -= Time.deltaTime / _shieldEnergyTick;
                 }
                 else
                 {
-                    IsShieldDisabled = true;
-                    _ShieldBreak = true;
-                    DestroyGuard();
+                    _isShieldDisabled = true;
+                    _shieldBreak = true;
+                    OnGuardExit();
                 }
-                Color color = _Shield.GetComponent<SpriteRenderer>().color;
-                color.a = (_ShieldEnergy * 0.01f);
-                _Shield.GetComponent<SpriteRenderer>().color = color;
+                Color color = _shield.GetComponent<SpriteRenderer>().color;
+                color.a = (_shieldEnergy * 0.01f);
+                _shield.GetComponent<SpriteRenderer>().color = color;
             }
         }
         if(_IsGuarding && ComboSkillOn)
@@ -103,36 +103,39 @@ public class Guard : MonoBehaviour
         }
     }
 
-    private void DestroyGuard()
+    private void OnGuardExit()
     {
-        Destroy(_Shield);
-        if (_ShieldBreak)
+        Destroy(_shield);
+        if (_shieldBreak)
         {
-            GameObject shieldBreak = Instantiate(_ParticleSystemManager.OtherEffects[0]);
+            GameObject shieldBreak = Instantiate(_particleSystemManager.OtherEffects[0]);
             shieldBreak.transform.position = this.transform.position;
-            _ShieldBreak = false;
-            shieldBreak.GetComponent<ParticleSystem>().Play();
+            _shieldBreak = false;
+            if (shieldBreak.TryGetComponent<ParticleSystem>(out ParticleSystem particle))
+            {
+                particle.Play();
+            }
         }
         _IsGuarding = false;
-        _ShieldCreated = false;
+        _shieldCreated = false;
     }
 
     private void OnDestroy()
     {
-        _HeroAction.onGuardPerformed -= GuardMove;
-        _HeroAction.onGuardExit -= DestroyGuard;
+        _heroAction.onGuardPerformed -= OnGuardPerformed;
+        _heroAction.onGuardExit -= OnGuardExit;
     }
 
     private void SummonGuard()
     {
-        if (!_ShieldCreated && !IsShieldDisabled)
+        if (!_shieldCreated && !_isShieldDisabled)
         {
-            _Shield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
-            _Shield.transform.localScale = new Vector3(_ShieldSize,_ShieldSize,_ShieldSize);
-            Color color = _Shield.GetComponent<SpriteRenderer>().color;
-            color.a = (_ShieldEnergy * 0.01f);
-            _Shield.GetComponent<SpriteRenderer>().color = color;
-            _ShieldCreated = true;
+            _shield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
+            _shield.transform.localScale = new Vector3(_shieldSize,_shieldSize,_shieldSize);
+            Color color = _shield.GetComponent<SpriteRenderer>().color;
+            color.a = (_shieldEnergy * 0.01f);
+            _shield.GetComponent<SpriteRenderer>().color = color;
+            _shieldCreated = true;
         }
     }    
 }
