@@ -12,6 +12,7 @@ public class ParticleSystemManager : MonoBehaviour
     public List<GameObject> GetDebuffEffects { get { return _DebuffEffects; } }
 
     [SerializeField] private float _AuraDuration = 1f;
+    [SerializeField] private float _auratick = 0.5f;
     [SerializeField] private float _AuraDamage = 0.1f;
     private bool _IsAuraExist = false;
     private GameObject _AuraType;
@@ -99,6 +100,7 @@ public class ParticleSystemManager : MonoBehaviour
             _AuraType = Instantiate(_AuraEffects[0].gameObject, hero.transform.position, Quaternion.identity);
             _AuraType.tag = hero.tag;
             _AuraType.GetComponent<FireAura>().SetDamage = _AuraDamage;
+            _AuraType.GetComponent<FireAura>().SetTick = _auratick;
             _AuraType.transform.parent = hero.transform;
             _AuraType.transform.localScale = new Vector3(3f, 3f, 3f);
             _AuraType.GetComponent<ParticleSystem>().Play();
