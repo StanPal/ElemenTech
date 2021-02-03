@@ -122,7 +122,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
-                    if (heroStats.GetElement == Elements.ElementalAttribute.Fire)
+                    if (mHeroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
                     {
                         _ParticleSystemManager.FireAura(mHeroMovement.gameObject);
                     }
@@ -142,7 +142,7 @@ public class PlayerAttack : MonoBehaviour
                 {
                     heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
-                    if (heroStats.GetElement == Elements.ElementalAttribute.Fire)
+                    if (mHeroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)
                     {
                         _ParticleSystemManager.FireAura(mHeroMovement.gameObject);
                     }
