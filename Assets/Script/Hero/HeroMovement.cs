@@ -31,6 +31,12 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private int mMaxJumps = 1;
     [SerializeField]
+    private float jumpPressure = 0f;
+    [SerializeField]
+    private float MinjumpPressure = 3f;
+    [SerializeField]
+    private float MaxjumpPressure = 10f;
+    [SerializeField]
     private LayerMask mGround;
     private Collider2D col;
 
@@ -157,24 +163,79 @@ public class HeroMovement : MonoBehaviour
             case Controller.None:
                 break;
             case Controller.Keyboard:
-                if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+
+                if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
                 {
-                    Jump();
+                    if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+                    {
+                        if (jumpPressure < MaxjumpPressure)
+                        {
+                            jumpPressure += Time.deltaTime * 10f;
+                        }
+                        else
+                        {
+                            jumpPressure = MaxjumpPressure;
+                        }
+                        print("hold:" + jumpPressure);
+                        //IsPressureJump();
+                    }
+                    else
+                    {
+                        if (jumpPressure > 0)
+                        {
+                            jumpPressure += MinjumpPressure;
+                            rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
+                            jumpPressure = 0f;
+                            print("PressureJump successful!");
+                        }
+                    }
                 }
                 else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
-                break;
-            case Controller.Keyboard2:
-                if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps > 0)
+                else
                 {
                     Jump();
                 }
+                break;
+
+            case Controller.Keyboard2:
+                if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+                {
+                    if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps > 0)
+                    {
+                        if(jumpPressure < MaxjumpPressure)
+                        {
+                            jumpPressure += Time.deltaTime * 10f;
+                        }
+                        else
+                        {
+                            jumpPressure = MaxjumpPressure;
+                        }
+                        print("hold:" + jumpPressure);
+                        //IsPressureJump();
+                    }
+                    else
+                    {
+                        if (jumpPressure > 0)
+                        {
+                            jumpPressure += MinjumpPressure;
+                            rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
+                            jumpPressure = 0f;
+                        }
+                    }
+                }
+                    
                 else if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
+                else
+                {
+                    Jump();
+                }
+
                 break;
             case Controller.PS4:
                 if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps > 0)
@@ -210,6 +271,39 @@ public class HeroMovement : MonoBehaviour
     private void MultiJump()
     { 
         rb.velocity = Vector2.up * mJumpForce;
+    }
+
+    private void IsPressureJump()
+    {
+        if(GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+        {
+            if (Input.GetKeyDown("space"))
+            {
+                if (jumpPressure < MaxjumpPressure)
+                {
+                    jumpPressure += Time.deltaTime * 10f;
+                }
+                else
+                {
+                    jumpPressure = MaxjumpPressure;
+                }
+                print("hold:" + jumpPressure);
+            }
+            else
+            {
+                if (jumpPressure > 0)
+                {
+                    jumpPressure += MinjumpPressure;
+                    rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
+                    jumpPressure = 0f;
+                }
+            }
+        }
+        else
+        {
+            rb.velocity = Vector2.up * mJumpForce;
+        }
+        mNumOfJumps--;
     }
 
     private void FixedUpdate()
