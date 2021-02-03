@@ -11,28 +11,26 @@ public class PlayerAttack : MonoBehaviour
     private float timeBtwAttack;
     [SerializeField]
     private float mHitStun = 1f;
-
-    [SerializeField]
-    private Transform attackPos;
     [SerializeField]
     private float attackRange;
     
-    [SerializeField]
-    public GameObject target;
     [SerializeField]
     private float rotaSpeed;
     [SerializeField]
     private float rotaBackSpeed;
     HeroActions mHeroAction;
     HeroMovement mHeroMovement;
-    private float swordAngle = 45.0f;
+
+    [SerializeField] private float swordAngle = 45.0f;
     private bool swingdown = false;
     private bool beginSwing = false;
     private bool swingActive = false;
 
-    private Transform originalRotation;
-    [SerializeField]
-    private float mKnockBackAmount = 5f;    
+    [SerializeField] private float _rotationpersec = 20f;
+    [SerializeField] private float _rotationLimit = 10f;
+    [SerializeField] private float _rotation = 0;
+    [SerializeField] private float originalRotation = 60f;
+    [SerializeField] private float mKnockBackAmount = 5f; 
 
     private void Awake()
     {
@@ -40,9 +38,8 @@ public class PlayerAttack : MonoBehaviour
         mHeroAction = GetComponentInParent<HeroActions>();
         mHeroMovement = GetComponentInParent<HeroMovement>();
         mHeroAction.onAttackPerformed += AttackPerformed;
-        originalRotation = transform;
     }
-        
+
 
     private void AttackPerformed()
     {
@@ -57,61 +54,62 @@ public class PlayerAttack : MonoBehaviour
         {
             if (mHeroMovement.GetIsLeft)
             {
-                if (swingdown && beginSwing)
+                if(swingActive)
                 {
-                    SwordSwing(rotaBackSpeed);
-                }
-                else if (!swingdown && beginSwing)
-                {
-                    SwordSwing(-rotaSpeed);
-                }
-                if (transform.rotation.z <= -0.45f)
-                {
-                    swingdown = true;
-                }
-                if (transform.rotation.z >= 0.0f)
-                {
-                    beginSwing = false;
-                    swingdown = false;
-                    this.gameObject.SetActive(false);
-                    transform.position = originalRotation.position;
-
+                    SwordSwing(true);
                 }
             }
             else
             {
-
-                if (swingdown && beginSwing)
+                if (swingActive)
                 {
-                    SwordSwing(-rotaBackSpeed);
-                }
-                else if (!swingdown && beginSwing)
-                {
-                    SwordSwing(rotaSpeed);
-                }
-                if (transform.rotation.z >= 0.45f)
-                {
-                    swingdown = true;
-                }
-                if (transform.rotation.z <= 0.0f)
-                {
-                    beginSwing = false;
-                    swingdown = false;
-                    this.gameObject.SetActive(false);
-                    transform.position = originalRotation.position;
+                    SwordSwing(false);
                 }
             }
         }
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(attackPos.position, attackRange);
     }
 
-    void SwordSwing(float Speed)
+    void SwordSwing(bool isLeft)
     {
-        transform.RotateAround(target.transform.position, Vector3.forward, Speed * Time.deltaTime);
+        if (isLeft)
+        {
+            transform.RotateAround(transform.position, Vector3.forward, rotaBackSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationpersec);
+            if (_rotation >= _rotationLimit)
+            {
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -originalRotation);
+                this.gameObject.SetActive(false);
+                swingActive = false;
+            }
+        }
+        else
+        {
+            //    if (Vector3.Distance(transform.eulerAngles, target.transform.eulerAngles) > 0.01f)
+            //    {
+            //        transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, -target.transform.eulerAngles, Time.deltaTime);
+            //    }
+            //    else
+            //    {
+            //        transform.eulerAngles = target.transform.eulerAngles;
+            //        this.gameObject.SetActive(false);
+
+            //    }
+            transform.RotateAround(transform.position, -Vector3.forward, rotaBackSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationpersec);
+            if (_rotation >= _rotationLimit)
+            {
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);
+                this.gameObject.SetActive(false);
+                swingActive = false;
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

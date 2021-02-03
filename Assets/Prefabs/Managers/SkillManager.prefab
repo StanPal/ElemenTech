@@ -118,8 +118,8 @@ MonoBehaviour:
   Points: {fileID: 6930636138351268449, guid: 3f4c780beaef3814fb6f2ffe02fef6b8, type: 3}
   _NumberOfPoints: 50
   _SpaceBetweenPoints: 0.02
-  _LaunchForce: 20
-  _Gravity: 2
+  _LaunchForce: 5
+  _Gravity: 1
   _Damage: 30
   _SplashRange: 3
   _KnockBackAmount: 6

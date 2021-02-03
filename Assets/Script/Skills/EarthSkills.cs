@@ -9,15 +9,16 @@ public class EarthSkills : MonoBehaviour
     [SerializeField] int _NumberOfPoints = 20;
     [SerializeField] float _SpaceBetweenPoints = 0.01f;
     [SerializeField] private float _LaunchForce = 10f;
-    [SerializeField] private float _Gravity = 1f;
+    [SerializeField] private float _mass = 1f;
     [SerializeField] private float _Damage = 10f;
     [SerializeField] private float _SplashRange = 1.5f;
     [SerializeField] private float _KnockBackAmount = 2f;
+    public Vector3 LaunchOffset;
     private PlayerSkills mHeroSkills;
     public float KnockBack { get { return _KnockBackAmount; } }
     public float SplashRange { get { return _SplashRange; } }
     public float Damage { get { return _Damage; } }
-    public float Gravity { get { return _Gravity; } }
+    public float Mass { get { return _mass; } }
     public float LaunchForce { get {return _LaunchForce; } }
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
     private PlayerManager _PlayerManager;
@@ -34,6 +35,11 @@ public class EarthSkills : MonoBehaviour
         _PlayerManager = FindObjectOfType<PlayerManager>();
         mHeroSkills = GetComponent<PlayerSkills>();
         mHeroSkills.onEarthSkillPerformed += Boulder;
+
+    }
+
+    private void Update()
+    {
 
     }
 
@@ -55,16 +61,25 @@ public class EarthSkills : MonoBehaviour
 
     private void Boulder()
     {
-        GameObject earthskill = Instantiate(EarthBoulder, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.Euler(0, 0, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle));
-        if (_PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle<= 90 &&
-            _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle >= -90)
-        {
-            earthskill.GetComponent<Rigidbody2D>().velocity = transform.right * LaunchForce;
-        }
-        else
-        {
-            earthskill.GetComponent<Rigidbody2D>().velocity = -transform.right * LaunchForce;
-        }
+        //Quaternion.Euler(0, 0, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle)
+        //if(_PlayerManager.mPlayersList[3].GetComponent<HeroMovement>().GetIsLeft)
+        //{
+        //    _LaunchForce *= -1;
+        //}
+        //else
+        //{
+        //    _LaunchForce = Mathf.Abs(_LaunchForce);
+        //}
+        GameObject earthskill = Instantiate(EarthBoulder, _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
+        //if (_PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle<= 90 &&
+        //    _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookAngle >= -90)
+        //{
+        //    earthskill.GetComponent<Rigidbody2D>().velocity = transform.right * LaunchForce;
+        //}
+        //else
+        //{
+        //    earthskill.GetComponent<Rigidbody2D>().velocity = -transform.right * LaunchForce;
+        //}
         earthskill.tag = PlayerSkills.HeroMovement.tag;
     }
 

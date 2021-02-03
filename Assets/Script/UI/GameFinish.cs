@@ -39,6 +39,7 @@ public class GameFinish : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        ScoreManager.IsMatchOver = false;
         ScoreManager.ResetScore();
         ResetPlayers();
         SceneManager.LoadScene(0);
@@ -52,20 +53,24 @@ public class GameFinish : MonoBehaviour
 
     private void ResetPlayers()
     {
-        playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        playerManager.FireHero.SetActive(false);
-        playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        playerManager.WaterHero.SetActive(false);
+        //playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        //playerManager.FireHero.SetActive(false);
+        //playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        //playerManager.WaterHero.SetActive(false);
 
-        playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        playerManager.AirHero.SetActive(false);
-        playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        playerManager.EarthHero.SetActive(false);
+        //playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        //playerManager.AirHero.SetActive(false);
+        //playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        //playerManager.EarthHero.SetActive(false);
 
 
         playerManager.mPlayersList[0] = playerManager.FireHero;
         playerManager.mPlayersList[1] = playerManager.WaterHero;
         playerManager.mPlayersList[2] = playerManager.AirHero;
         playerManager.mPlayersList[3] = playerManager.EarthHero;
+
+        playerManager.TeamOne.Clear();
+        playerManager.TeamTwo.Clear();
+
     }
 }

@@ -12,6 +12,9 @@ public class ScoreManager : MonoBehaviour
     public int TeamTwoScore { get { return mTeamTwoScore; } }
     [SerializeField]
     bool isPracticeMode = false;
+    [SerializeField] bool _isMatchOver = false;
+
+    public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }
     public bool PracticeMode { get { return isPracticeMode;} set { isPracticeMode = value; } }
     private void Awake()
     {        
@@ -37,5 +40,6 @@ public class ScoreManager : MonoBehaviour
     {
         mTeamOneScore = 0;
         mTeamTwoScore = 0;
+        _isMatchOver = false;
     }
 }

@@ -43,6 +43,7 @@ public class MatchUI : MonoBehaviour
     {
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
+        _ScoreManager.IsMatchOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
@@ -57,6 +58,7 @@ public class MatchUI : MonoBehaviour
         yield return new WaitForSeconds(1);
         Transition.text = "1";
         yield return new WaitForSeconds(1);
+        _ScoreManager.IsMatchOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
