@@ -14,6 +14,7 @@ public class ParticleSystemManager : MonoBehaviour
     [SerializeField] private float _AuraDuration = 1f;
     [SerializeField] private float _auratick = 0.5f;
     [SerializeField] private float _AuraDamage = 0.1f;
+    [SerializeField] private Vector3 _auraSize = new Vector3(2f, 2f, 2f);
     private bool _IsAuraExist = false;
     private GameObject _AuraType;
     private void Awake()
@@ -102,7 +103,7 @@ public class ParticleSystemManager : MonoBehaviour
             _AuraType.GetComponent<FireAura>().SetDamage = _AuraDamage;
             _AuraType.GetComponent<FireAura>().SetTick = _auratick;
             _AuraType.transform.parent = hero.transform;
-            _AuraType.transform.localScale = new Vector3(3f, 3f, 3f);
+            _AuraType.transform.localScale = _auraSize;
             _AuraType.GetComponent<ParticleSystem>().Play();
             _IsAuraExist = true;
         }

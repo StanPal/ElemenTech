@@ -547,7 +547,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 1
+  ControllerInput: 0
   mSpeed: 14
   _IsLeft: 0
   _IsJumping: 0
@@ -1135,7 +1135,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1881918719589034174
 Transform:
   m_ObjectHideFlags: 0
@@ -1214,15 +1214,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeBtAttack: 1
   mHitStun: 1
-  attackRange: 5
-  rotaSpeed: 200
-  rotaBackSpeed: 200
-  swordAngle: 45
-  _rotationpersec: 20
-  _rotationLimit: 10
-  _rotation: 0
+  _rotationSpeed: 200
+  _rotationPerFrame: 20
+  _rotationgAngleLimit: 10
   originalRotation: 60
   mKnockBackAmount: 5
+  _rotation: 0
 --- !u!61 &6787430628808783305
 BoxCollider2D:
   m_ObjectHideFlags: 0

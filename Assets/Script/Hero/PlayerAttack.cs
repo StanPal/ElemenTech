@@ -5,33 +5,24 @@ public class PlayerAttack : MonoBehaviour
     private ParticleSystemManager _ParticleSystemManager;
     public event System.Action<GameObject> onAuraActivated;
     public event System.Action<GameObject> onAuraDeActivated;
+    HeroActions mHeroAction;
+    HeroMovement mHeroMovement;
 
     [SerializeField]
     private float startTimeBtAttack;
     private float timeBtwAttack;
-    [SerializeField]
-    private float mHitStun = 1f;
-    [SerializeField]
-    private float attackRange;
-    
-    [SerializeField]
-    private float rotaSpeed;
-    [SerializeField]
-    private float rotaBackSpeed;
-    HeroActions mHeroAction;
-    HeroMovement mHeroMovement;
-
-    [SerializeField] private float swordAngle = 45.0f;
+    [SerializeField] private float mHitStun = 1f;
     private bool swingdown = false;
     private bool beginSwing = false;
     private bool swingActive = false;
 
-    [SerializeField] private float _rotationpersec = 20f;
-    [SerializeField] private float _rotationLimit = 10f;
-    [SerializeField] private float _rotation = 0;
+    [SerializeField] private float _rotationSpeed = 200f;
+    [SerializeField] private float _rotationPerFrame = 20f;
+    [SerializeField] private float _rotationgAngleLimit = 10f;
     [SerializeField] private float originalRotation = 60f;
     [SerializeField] private float mKnockBackAmount = 5f; 
 
+    [SerializeField] private float _rotation = 0;
     private void Awake()
     {
         _ParticleSystemManager = FindObjectOfType<ParticleSystemManager>();
@@ -78,9 +69,10 @@ public class PlayerAttack : MonoBehaviour
     {
         if (isLeft)
         {
-            transform.RotateAround(transform.position, Vector3.forward, rotaBackSpeed * Time.deltaTime);
-            _rotation = _rotation + (Time.deltaTime * _rotationpersec);
-            if (_rotation >= _rotationLimit)
+            transform.RotateAround(transform.position, Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
+            swingdown = true;
+            if (_rotation >= _rotationgAngleLimit)
             {
                 _rotation = 0;
                 transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -originalRotation);
@@ -90,19 +82,10 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-            //    if (Vector3.Distance(transform.eulerAngles, target.transform.eulerAngles) > 0.01f)
-            //    {
-            //        transform.eulerAngles = Vector3.Lerp(transform.rotation.eulerAngles, -target.transform.eulerAngles, Time.deltaTime);
-            //    }
-            //    else
-            //    {
-            //        transform.eulerAngles = target.transform.eulerAngles;
-            //        this.gameObject.SetActive(false);
 
-            //    }
-            transform.RotateAround(transform.position, -Vector3.forward, rotaBackSpeed * Time.deltaTime);
-            _rotation = _rotation + (Time.deltaTime * _rotationpersec);
-            if (_rotation >= _rotationLimit)
+            transform.RotateAround(transform.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
+            if (_rotation >= _rotationgAngleLimit)
             {
                 _rotation = 0;
                 transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);

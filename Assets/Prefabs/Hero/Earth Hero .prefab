@@ -454,7 +454,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -899,15 +899,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeBtAttack: 1
   mHitStun: 1.75
-  attackRange: 5
-  rotaSpeed: 100
-  rotaBackSpeed: 110.28
-  swordAngle: 30
-  _rotationpersec: 10
-  _rotationLimit: 10
-  _rotation: 0
+  _rotationSpeed: 200
+  _rotationPerFrame: 20
+  _rotationgAngleLimit: 10
   originalRotation: 70
   mKnockBackAmount: 3
+  _rotation: 0
 --- !u!61 &6134250042116378172
 BoxCollider2D:
   m_ObjectHideFlags: 0

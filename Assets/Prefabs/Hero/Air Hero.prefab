@@ -356,11 +356,11 @@ GameObject:
   - component: {fileID: 6305441564539892452}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -818,15 +818,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startTimeBtAttack: 1
   mHitStun: 0.5
-  attackRange: 0.57
-  rotaSpeed: 100
-  rotaBackSpeed: 100
-  swordAngle: 45
-  _rotationpersec: 20
-  _rotationLimit: 10
-  _rotation: 0
+  _rotationSpeed: 200
+  _rotationPerFrame: 20
+  _rotationgAngleLimit: 10
   originalRotation: 70
   mKnockBackAmount: 50
+  _rotation: 0
 --- !u!61 &6276325098899010750
 BoxCollider2D:
   m_ObjectHideFlags: 0
