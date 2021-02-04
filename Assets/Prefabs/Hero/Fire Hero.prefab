@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 1791110765294023676}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -585,7 +585,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 2
+  m_GravityScale: 1.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -669,7 +669,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 0
+  ControllerInput: 3
   mSpeed: 14
   _IsLeft: 0
   _IsJumping: 0
@@ -1218,7 +1218,7 @@ MonoBehaviour:
   _rotationPerFrame: 20
   _rotationgAngleLimit: 10
   originalRotation: 60
-  mKnockBackAmount: 5
+  mKnockBackAmount: 7
   _rotation: 0
 --- !u!61 &6787430628808783305
 BoxCollider2D:

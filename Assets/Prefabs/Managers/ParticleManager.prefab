@@ -55,4 +55,6 @@ MonoBehaviour:
   _AuraEffects:
   - {fileID: 7953942593888774019, guid: 9a732adc574449145b75859449ddf254, type: 3}
   _AuraDuration: 5
-  _AuraDamage: 0.001
+  _auratick: 0.5
+  _AuraDamage: 2
+  _auraSize: {x: 2, y: 2, z: 2}

@@ -903,7 +903,7 @@ MonoBehaviour:
   _rotationPerFrame: 20
   _rotationgAngleLimit: 10
   originalRotation: 70
-  mKnockBackAmount: 3
+  mKnockBackAmount: 10
   _rotation: 0
 --- !u!61 &6134250042116378172
 BoxCollider2D:
