@@ -55,9 +55,13 @@ public class HeroStats : MonoBehaviour
 
     //Hero particle
     [SerializeField]
-    private GameObject DeadParticle;
+    private GameObject _deadParticle;
     [SerializeField]
-    private GameObject HitParticle;
+    private GameObject _hitParticle;
+    [SerializeField]
+    private GameObject _projectileParticle;
+    public GameObject ProjectileParticle { get { return _projectileParticle; } set { _projectileParticle = value; } }
+
 
     private void Awake()
     {
@@ -86,7 +90,7 @@ public class HeroStats : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Instantiate(HitParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+        Instantiate(_hitParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         if (mCurrentHealth <= 0)
         {
             HeroDie();
@@ -185,7 +189,7 @@ public class HeroStats : MonoBehaviour
     public void HeroDie()
     {        
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
-        Instantiate(DeadParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
+        Instantiate(_deadParticle, transform.position, Quaternion.identity).GetComponent<ParticleSystem>().Play();
         if(playermanager.TeamOne.Contains(gameObject))
         {
             playermanager.TeamOne.Remove(gameObject);
