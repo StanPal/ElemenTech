@@ -39,7 +39,9 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private bool _IsDashing;
     [SerializeField] private float _DashSpeed = 5f;
     [SerializeField] private float _DashCoolDown = 1f;
+    [SerializeField] private float _dashTime = 1f;
     [SerializeField] private float _DashStartUpTime = 1f;
+    private float _originalGravity;
 
     //Recovery Time until the player can move again 
     [SerializeField] private float _RecoveryTime = 1f;
@@ -110,6 +112,7 @@ public class HeroMovement : MonoBehaviour
     private void Start()
     {
         _PlayerAnimator.SetBool("IsJumping", false);
+        _originalGravity = _Rb.gravityScale;
     }
     private void FixedUpdate()
     {
@@ -387,14 +390,13 @@ public class HeroMovement : MonoBehaviour
         if (canDash)
         {
             _PlayerAnimator.SetTrigger("DashTrigger");
-            StartCoroutine(DashStartUp());
+            _IsDashing = true;
         }
     }
 
     IEnumerator DashStartUp()
     {
         yield return new WaitForSeconds(_DashStartUpTime);
-
         _IsDashing = true;
     }
 
@@ -412,23 +414,30 @@ public class HeroMovement : MonoBehaviour
     }
 
     IEnumerator Dash(bool _IsLeft)
-    { 
-        Vector3 currentPosition = transform.position;
+    {
+        //Vector3 currentPosition = transform.position;
+        //if(_IsLeft)
+        //{
+        //    currentPosition.x -= (_DashSpeed * 0.1f);
+        //}
+        //else
+        //{
+        //    currentPosition.x += (_DashSpeed * 0.1f);
+        //}
+        //transform.position = currentPosition;
         if (_IsLeft)
         {
-            currentPosition.x -= (_DashSpeed * 0.1f);
+            _Rb.velocity = Vector2.left * _DashSpeed;
         }
 
         else
         {
-            currentPosition.x += (_DashSpeed * 0.1f);
+            _Rb.velocity = Vector2.right * _DashSpeed;
         }
-
-        transform.position = currentPosition;
-        float gravity = _Rb.gravityScale;
         _Rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.4f);
-        _Rb.gravityScale = 1f;
+        //_Rb.velocity = Vector2.zero;
+        _Rb.gravityScale = _originalGravity;
         _IsDashing = false;
         canDash = false;
         isRecovering = true;

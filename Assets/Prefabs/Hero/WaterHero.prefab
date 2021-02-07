@@ -267,8 +267,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 0
-  mSpeed: 11
+  ControllerInput: 1
+  mSpeed: 12
   _IsLeft: 0
   _IsJumping: 0
   _JumpForce: 10
@@ -279,8 +279,9 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   _IsDashing: 0
-  _DashSpeed: 8
+  _DashSpeed: 45
   _DashCoolDown: 1
+  _dashTime: 1
   _DashStartUpTime: 0
   _RecoveryTime: 0.2
   isRecovering: 0
@@ -379,7 +380,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -888,7 +889,7 @@ MonoBehaviour:
   _rotationPerFrame: 20
   _rotationgAngleLimit: 10
   originalRotation: 60
-  mKnockBackAmount: 8
+  mKnockBackAmount: 15
   _rotation: 0
 --- !u!1 &4956901514175417199
 GameObject:
@@ -917,7 +918,7 @@ Transform:
   m_GameObject: {fileID: 4956901514175417199}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.2, z: 1}
+  m_LocalScale: {x: 0.05, y: 0.05, z: 1}
   m_Children:
   - {fileID: 4467623121776858900}
   m_Father: {fileID: 1371002032310544473}

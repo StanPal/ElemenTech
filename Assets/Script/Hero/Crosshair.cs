@@ -22,10 +22,10 @@ public class Crosshair : MonoBehaviour
     private void Initialize()
     {
         playerManager = FindObjectOfType<PlayerManager>();
-        if(playerManager.mPlayersList[0].activeSelf)
+        if (playerManager.mPlayersList[0].activeSelf)
         {
             _P1CrossHairs.SetActive(true);
-        }        
+        }
         if (playerManager.mPlayersList[1].activeSelf)
         {
             _P2CrossHairs.SetActive(true);
@@ -38,8 +38,10 @@ public class Crosshair : MonoBehaviour
         {
             _P4CrossHairs.SetActive(true);
         }
+
         Cursor.visible = false;
     }
+
 
     void Update()
     {

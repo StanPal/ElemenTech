@@ -21,8 +21,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _rotationgAngleLimit = 10f;
     [SerializeField] private float originalRotation = 60f;
     [SerializeField] private float mKnockBackAmount = 5f; 
-
     [SerializeField] private float _rotation = 0;
+    private bool _originalDirLeft;
     private void Awake()
     {
         _ParticleSystemManager = FindObjectOfType<ParticleSystemManager>();
@@ -30,32 +30,48 @@ public class PlayerAttack : MonoBehaviour
         mHeroMovement = GetComponentInParent<HeroMovement>();
         mHeroAction.onAttackPerformed += AttackPerformed;
     }
-
+  
 
     private void AttackPerformed()
     {
         Debug.Log("Action Performed");
         swingActive = true;
         beginSwing = true;
+        if (mHeroMovement.GetIsLeft)
+        {
+            _originalDirLeft = true;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -originalRotation);
+        }
+        else
+        {
+            _originalDirLeft = false;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);
+        }
     }
 
     private void Update()
     {
         if (swingActive)
-        {
+        {            
             if (mHeroMovement.GetIsLeft)
             {
                 if(swingActive)
                 {
                     SwordSwing(true);
                 }
-            }
+            }            
             else
             {
                 if (swingActive)
                 {
                     SwordSwing(false);
                 }
+            }
+            if (mHeroMovement.GetIsLeft == !_originalDirLeft)
+            {
+                _rotation = 0;
+               
+                gameObject.SetActive(false);
             }
         }
     }
@@ -71,7 +87,6 @@ public class PlayerAttack : MonoBehaviour
         {
             transform.RotateAround(transform.position, Vector3.forward, _rotationSpeed * Time.deltaTime);
             _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
-            swingdown = true;
             if (_rotation >= _rotationgAngleLimit)
             {
                 _rotation = 0;
@@ -82,13 +97,12 @@ public class PlayerAttack : MonoBehaviour
         }
         else
         {
-
             transform.RotateAround(transform.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
-            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame); 
             if (_rotation >= _rotationgAngleLimit)
             {
                 _rotation = 0;
-                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);                
                 this.gameObject.SetActive(false);
                 swingActive = false;
             }
