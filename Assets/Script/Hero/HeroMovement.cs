@@ -36,6 +36,7 @@ public class HeroMovement : MonoBehaviour
 
     //Dash Modifiers
     [SerializeField] private bool canDash = true;
+    [SerializeField] private LayerMask _Wall;
     [SerializeField] private bool _IsDashing;
     [SerializeField] private float _DashSpeed = 5f;
     [SerializeField] private float _DashCoolDown = 1f;
@@ -221,7 +222,7 @@ public class HeroMovement : MonoBehaviour
             case Controller.None:
                 break;
             case Controller.Keyboard:
-                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0)
+                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
                 {
                     Jump();
                 }
@@ -231,7 +232,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.Keyboard2:
-                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0)
+                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
                 {
                     Jump();
                 }
@@ -241,7 +242,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.PS4:
-                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0)
+                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
                 {
                     Jump();
                 }
@@ -251,7 +252,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.XBOX:
-                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0)
+                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
                 {
                     Jump();
                 }
@@ -273,8 +274,13 @@ public class HeroMovement : MonoBehaviour
             default:
                 break;
         }
+
         _HorizontalMove = _MoveInput * mSpeed;
         _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_HorizontalMove));
+        if (IsWall())
+        {
+
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -292,6 +298,12 @@ public class HeroMovement : MonoBehaviour
             {
                 Physics2D.IgnoreCollision(_BoxCollider2D, collision.collider,true);
             }
+            else
+            {
+                _Rb.velocity = new Vector2(_KnockBackRecieved, _KnockBackRecieved);
+
+            }
+            _KnockBackCount--;
         }
     }
 
@@ -385,6 +397,36 @@ public class HeroMovement : MonoBehaviour
         return raycastHit2D.collider != null;
     }
 
+    public bool IsWall()
+    {
+        float extraLengthText = .05f;
+        RaycastHit2D raycastHit2DLeft = Physics2D.Raycast(_Col.bounds.center , Vector2.left, -(_Col.bounds.extents.x + extraLengthText), _Wall);
+        RaycastHit2D raycastHit2DRight = Physics2D.Raycast(_Col.bounds.center, Vector2.left, (_Col.bounds.extents.x + extraLengthText), _Wall);
+        Color rayColor;
+        if (raycastHit2DLeft.collider != null || raycastHit2DRight.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(_Col.bounds.center, Vector2.left * -(_Col.bounds.extents.x + extraLengthText), rayColor);
+        Debug.DrawRay(_Col.bounds.center, Vector2.left * (_Col.bounds.extents.x + extraLengthText), rayColor);
+        if (raycastHit2DLeft.collider != null)
+        {
+            return true;
+        }
+        else if (raycastHit2DRight.collider != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
     private void OnDash()
     {
         if (canDash)
@@ -405,7 +447,10 @@ public class HeroMovement : MonoBehaviour
         _PlayerAnimator.SetBool("IsJumping", true);
 
         _Rb.velocity = Vector2.up * _JumpForce;
-        _NumOfJumps--;
+        if (!IsWall())
+        {
+            _NumOfJumps--;
+        }
     }
 
     private void MultiJump()
