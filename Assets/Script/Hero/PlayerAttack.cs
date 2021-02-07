@@ -34,17 +34,19 @@ public class PlayerAttack : MonoBehaviour
 
     private void AttackPerformed()
     {
-        Debug.Log("Action Performed");
         swingActive = true;
         beginSwing = true;
         if (mHeroMovement.GetIsLeft)
         {
             _originalDirLeft = true;
+                _rotation = 0;
             transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -originalRotation);
         }
         else
         {
             _originalDirLeft = false;
+            _rotation = 0;
+
             transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, originalRotation);
         }
     }
