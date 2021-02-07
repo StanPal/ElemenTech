@@ -17,6 +17,8 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _JumpForce = 5f;
     [SerializeField] private int _NumOfJumps = 0;
     [SerializeField] private int _MaxJumps = 1;
+    [SerializeField] private int _NumOfWallJump = 0;
+    [SerializeField] private int _MaxWallJump = 1;
     [SerializeField] private LayerMask _Ground;
     [SerializeField] private LayerMask _Wall;
     [SerializeField] private bool _CanDash = true;
@@ -77,13 +79,14 @@ public class HeroMovement : MonoBehaviour
         if (IsGrounded())
         {
             _NumOfJumps = _MaxJumps;
+            _NumOfWallJump = _MaxWallJump;
         }
         switch (ControllerInput)
         {
             case Controller.None:
                 break;
             case Controller.Keyboard:
-                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
+                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump >0)
                 {
                     Jump();
                 }
@@ -93,7 +96,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.Keyboard2:
-                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
+                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump > 0)
                 {
                     Jump();
                 }
@@ -103,7 +106,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.PS4:
-                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
+                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump > 0)
                 {
                     Jump();
                 }
@@ -113,7 +116,7 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.XBOX:
-                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall())
+                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump > 0)
                 {
                     Jump();
                 }
@@ -280,7 +283,11 @@ public class HeroMovement : MonoBehaviour
     private void Jump()
     {
         _Rb.velocity = Vector2.up * _JumpForce;
-        if (!IsWall())
+        if (IsWall())
+        {
+            _NumOfWallJump--;
+        }
+        else
         {
             _NumOfJumps--;
         }
