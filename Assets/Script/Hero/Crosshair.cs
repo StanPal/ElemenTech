@@ -161,8 +161,6 @@ public class Crosshair : MonoBehaviour
                                   playerManager.mPlayersList[1].transform.position.x + (playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
                                   playerManager.mPlayersList[1].transform.position.y + playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
-            case HeroMovement.Controller.Keyboard2:
-                break;
             default:
                 break;
         }
@@ -208,8 +206,6 @@ public class Crosshair : MonoBehaviour
                                   playerManager.mPlayersList[2].transform.position.x + (playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
                                   playerManager.mPlayersList[2].transform.position.y + playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
-            case HeroMovement.Controller.Keyboard2:
-                break;
             default:
                 break;
         }
@@ -253,8 +249,6 @@ public class Crosshair : MonoBehaviour
                 _P4CrossHairs.transform.position = new Vector3(
                                   playerManager.mPlayersList[3].transform.position.x + (playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
                                   playerManager.mPlayersList[3].transform.position.y + playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
-                break;
-            case HeroMovement.Controller.Keyboard2:
                 break;
             default:
                 break;
