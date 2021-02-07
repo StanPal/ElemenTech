@@ -90,19 +90,11 @@ public class HeroMovement : MonoBehaviour
                 {
                     Jump();
                 }
-                else if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
                 break;
             case Controller.Keyboard2:
                 if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump > 0)
                 {
                     Jump();
-                }
-                else if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
                 }
                 break;
             case Controller.PS4:
@@ -110,19 +102,11 @@ public class HeroMovement : MonoBehaviour
                 {
                     Jump();
                 }
-                else if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
                 break;
             case Controller.XBOX:
                 if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0 || _PlayerInput.KeyboardMouse.Jump.triggered && IsWall() && _NumOfWallJump > 0)
                 {
                     Jump();
-                }
-                else if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
                 }
                 break;
             default:
@@ -291,11 +275,6 @@ public class HeroMovement : MonoBehaviour
         {
             _NumOfJumps--;
         }
-    }
-
-    private void MultiJump()
-    {
-        _Rb.velocity = Vector2.up * _JumpForce;
     }
 
     private IEnumerator Dash(bool _IsLeft)
