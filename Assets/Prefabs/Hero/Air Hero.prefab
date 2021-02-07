@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 6305441564539892452}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: FFA
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -517,7 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mfallMultiplier: 2.5
+  _fallMultiplier: 2.5
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0

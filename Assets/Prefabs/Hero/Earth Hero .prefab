@@ -587,10 +587,10 @@ MonoBehaviour:
     m_Bits: 256
   canDash: 1
   _IsDashing: 0
-  _DashSpeed: 20
+  _DashSpeed: 25
   _DashCoolDown: 1
   _dashTime: 1
-  _DashStartUpTime: 0
+  _DashStartUpTime: 0.3
   _RecoveryTime: 0
   isRecovering: 0
   _KnockBackRecieved: 0
@@ -611,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mfallMultiplier: 2.5
+  _fallMultiplier: 2.5
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0

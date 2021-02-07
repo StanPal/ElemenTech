@@ -435,8 +435,8 @@ public class HeroMovement : MonoBehaviour
             _Rb.velocity = Vector2.right * _DashSpeed;
         }
         _Rb.gravityScale = 0f;
-        yield return new WaitForSeconds(0.4f);
-        //_Rb.velocity = Vector2.zero;
+        yield return new WaitForSeconds(_DashStartUpTime);
+        _Rb.velocity = Vector2.zero;
         _Rb.gravityScale = _originalGravity;
         _IsDashing = false;
         canDash = false;
