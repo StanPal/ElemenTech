@@ -24,10 +24,12 @@ public class ElevatorPlatform : MonoBehaviour
         {
             if (_isPlatformMovingDown)
             {
+                _platformManager.IsTimerOn = true;
                 MoveDown();
             }
             else
             {
+                _platformManager.IsTimerOn = true;
                 MoveUp();
             }
         }
@@ -51,8 +53,7 @@ public class ElevatorPlatform : MonoBehaviour
     }
 
     private void MoveUp()
-    {
-        _platformManager.IsTimerOn = true;
+    {        
         transform.position =
             Vector2.MoveTowards(transform.position,
             _wayPointList[0].position, _platformManager.PlatformSpeed * Time.deltaTime);

@@ -38,20 +38,13 @@ public class PlatformManager : MonoBehaviour
         if (IsTimerOn)
         {
             StartCoroutine(TimerCountDown());
-        }
-        else
-        {
-            ColorSwitch(IsTimerOn);
-        }
+        }        
     }
 
     private IEnumerator TimerCountDown()
     {
-        ColorSwitch(IsTimerOn);
         yield return new WaitForSeconds(_timer);
         IsTimerOn = false;
-        yield return new WaitForSeconds(0.1f);
-        ColorSwitch(IsTimerOn);
     }
 
     private void ColorSwitch(bool toggle)
@@ -74,42 +67,45 @@ public class PlatformManager : MonoBehaviour
 
     private void OnSwitchActivated(int switchID)
     {
-        for (int i = 0; i < _elevatorList.Count; i++)
+        if (!_isTimerOn)
         {
-            if (switchID.Equals(i) && i.Equals(0))
+            for (int i = 0; i < _elevatorList.Count; i++)
             {
-                _platformOne = _elevatorList[switchID].GetComponent<ElevatorPlatform>();
-                if (!_platformTwo.Activated && !_platformOne.Activated &&
-                   !_platformOne.PlatformMovingDown && !_isTimerOn)
+                if (switchID.Equals(i) && i.Equals(0))
                 {
-                    _platformOne.Activated = true;
-                    _platformOne.PlatformMovingDown = true;
-                    _platformOne.WayPointList = _platformOnePoints;
+                    _platformOne = _elevatorList[switchID].GetComponent<ElevatorPlatform>();
+                    if (!_platformTwo.Activated && !_platformOne.Activated &&
+                       !_platformOne.PlatformMovingDown)
+                    {
+                        _platformOne.Activated = true;
+                        _platformOne.PlatformMovingDown = true;
+                        _platformOne.WayPointList = _platformOnePoints;
+                    }
+                    else if (!_platformTwo.Activated && !_platformOne.Activated &&
+                        _platformOne.PlatformMovingDown)
+                    {
+                        _platformOne.Activated = true;
+                        _platformOne.PlatformMovingDown = false;
+                        _platformOne.WayPointList = _platformOnePoints;
+                    }
                 }
-                else if (!_platformTwo.Activated && !_platformOne.Activated &&
-                    _platformOne.PlatformMovingDown && !_isTimerOn)
+                if (switchID.Equals(i) && i.Equals(1))
                 {
-                    _platformOne.Activated = true;
-                    _platformOne.PlatformMovingDown = false;
-                    _platformOne.WayPointList = _platformOnePoints;
-                }
-            }
-            if (switchID.Equals(i) && i.Equals(1))
-            {
-                _platformTwo = _elevatorList[switchID].GetComponent<ElevatorPlatform>();
-                if (!_platformOne.Activated && !_platformTwo.Activated &&
-                    !_platformTwo.PlatformMovingDown && !_isTimerOn)
-                {
-                    _platformTwo.Activated = true;
-                    _platformTwo.PlatformMovingDown = true;
-                    _platformTwo.WayPointList = _platformTwoPoints;
-                }
-                else if (!_platformOne.Activated && !_platformTwo.Activated
-                    && _platformTwo.PlatformMovingDown && !_isTimerOn)
-                {
-                    _platformTwo.Activated = true;
-                    _platformTwo.PlatformMovingDown = false;
-                    _platformTwo.WayPointList = _platformTwoPoints;
+                    _platformTwo = _elevatorList[switchID].GetComponent<ElevatorPlatform>();
+                    if (!_platformOne.Activated && !_platformTwo.Activated &&
+                        !_platformTwo.PlatformMovingDown)
+                    {
+                        _platformTwo.Activated = true;
+                        _platformTwo.PlatformMovingDown = true;
+                        _platformTwo.WayPointList = _platformTwoPoints;
+                    }
+                    else if (!_platformOne.Activated && !_platformTwo.Activated
+                        && _platformTwo.PlatformMovingDown)
+                    {
+                        _platformTwo.Activated = true;
+                        _platformTwo.PlatformMovingDown = false;
+                        _platformTwo.WayPointList = _platformTwoPoints;
+                    }
                 }
             }
         }
