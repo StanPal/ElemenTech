@@ -128,22 +128,18 @@ public class HeroMovement : MonoBehaviour
             {
                 _moveInput = _playerInput.KeyboardMouse.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.PS4 && !_isDashing)
+            if (ControllerInput == Controller.PS4 && !_isDashing)
             {
                 _moveInput = _playerInput.PS4.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.XBOX && !_isDashing)
+            if (ControllerInput == Controller.XBOX && !_isDashing)
             {
                 _moveInput = _playerInput.XBOX.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.Gamepad && !_isDashing)
+            if (ControllerInput == Controller.Gamepad && !_isDashing)
             {
                 _moveInput = _playerInput.Gamepad.Move.ReadValue<float>();
-            }
-            else
-            {
-                Debug.Log("Keybindings not set");
-            }
+            }            
         }
 
         _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);

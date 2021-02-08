@@ -1,93 +1,100 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
 {
-    private PlayerManager playerManager;
-    public List<Transform> mSpawnPoints = new List<Transform>();
+    private PlayerManager _playerManager;
+    [SerializeField] private List<Transform> _startSpawnPoints = new List<Transform>();
+    [SerializeField] private List<Transform> _respawnPoints = new List<Transform>();
+
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
-        
+        _respawnPoints = _startSpawnPoints;
     }
 
     private void Initialize()
     {
-        playerManager = ServiceLocator.Get<PlayerManager>();
-        playerManager.TeamOne.Clear();
-        playerManager.TeamTwo.Clear();
+        _playerManager = ServiceLocator.Get<PlayerManager>();
+        _playerManager.TeamOne.Clear();
+        _playerManager.TeamTwo.Clear();
 
-        if (playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
+        if (_playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
-            GameObject fireHero = Instantiate(playerManager.FireHero);
+            GameObject fireHero = Instantiate(_playerManager.FireHero);
             fireHero.SetActive(true);
-            playerManager.mPlayersList[0] = fireHero;
-            if (playerManager.mPlayersList[0].tag == "Team1")
+            _playerManager.mPlayersList[0] = fireHero;
+            if (_playerManager.mPlayersList[0].tag == "Team1")
             {
-                playerManager.TeamOne.Add(playerManager.mPlayersList[0]);
+                _playerManager.TeamOne.Add(_playerManager.mPlayersList[0]);
             }
-            if (playerManager.mPlayersList[0].tag == "Team2")
+            if (_playerManager.mPlayersList[0].tag == "Team2")
             {
-                playerManager.TeamTwo.Add(playerManager.mPlayersList[0]);
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[0]);
             }
             RandomizeSpawn(fireHero);
 
         }
-        if (playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
+        if (_playerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
-            GameObject waterHero = Instantiate(playerManager.WaterHero);
+            GameObject waterHero = Instantiate(_playerManager.WaterHero);
             waterHero.SetActive(true);
-            playerManager.mPlayersList[1] = waterHero;
-            if (playerManager.mPlayersList[1].tag == "Team1")
+            _playerManager.mPlayersList[1] = waterHero;
+            if (_playerManager.mPlayersList[1].tag == "Team1")
             {
-                playerManager.TeamOne.Add(playerManager.mPlayersList[1]);
+                _playerManager.TeamOne.Add(_playerManager.mPlayersList[1]);
             }
-            if (playerManager.mPlayersList[1].tag == "Team2")
+            if (_playerManager.mPlayersList[1].tag == "Team2")
             {
-                playerManager.TeamTwo.Add(playerManager.mPlayersList[1]);
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[1]);
             }
             RandomizeSpawn(waterHero);
 
         }
-        if (playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
+        if (_playerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
-            GameObject earthHero = Instantiate(playerManager.EarthHero);
+            GameObject earthHero = Instantiate(_playerManager.EarthHero);
             earthHero.SetActive(true);
-            playerManager.mPlayersList[3] = earthHero;
-            if (playerManager.mPlayersList[3].tag == "Team1")
+            _playerManager.mPlayersList[3] = earthHero;
+            if (_playerManager.mPlayersList[3].tag == "Team1")
             {
-                playerManager.TeamOne.Add(playerManager.mPlayersList[3]);
+                _playerManager.TeamOne.Add(_playerManager.mPlayersList[3]);
             }
-            if (playerManager.mPlayersList[3].tag == "Team2")
+            if (_playerManager.mPlayersList[3].tag == "Team2")
             {
-                playerManager.TeamTwo.Add(playerManager.mPlayersList[3]);
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[3]);
             }
             RandomizeSpawn(earthHero);
 
         }
-        if (playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
+        if (_playerManager.AirHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
-            GameObject airHero = Instantiate(playerManager.AirHero);
+            GameObject airHero = Instantiate(_playerManager.AirHero);
             airHero.SetActive(true);
-            playerManager.mPlayersList[2] = airHero;
-            if (playerManager.mPlayersList[2].tag == "Team1")
+            _playerManager.mPlayersList[2] = airHero;
+            if (_playerManager.mPlayersList[2].tag == "Team1")
             {
-                playerManager.TeamOne.Add(playerManager.mPlayersList[2]);
+                _playerManager.TeamOne.Add(_playerManager.mPlayersList[2]);
             }
-            if (playerManager.mPlayersList[2].tag == "Team2")
+            if (_playerManager.mPlayersList[2].tag == "Team2")
             {
-                playerManager.TeamTwo.Add(playerManager.mPlayersList[2]);
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[2]);
             }
             RandomizeSpawn(airHero);
         }
     }
 
-    void RandomizeSpawn(GameObject player)
+    private void RandomizeSpawn(GameObject player)
     {
-        int randIndex = Random.Range(0, mSpawnPoints.Count);
-        player.transform.position = mSpawnPoints[randIndex].position;
-        mSpawnPoints.RemoveAt(randIndex);
+        int randIndex = Random.Range(0, _startSpawnPoints.Count);
+        player.transform.position = _startSpawnPoints[randIndex].position;
+        _startSpawnPoints.RemoveAt(randIndex);
+    }
+
+    public void RespawnPlayer(GameObject player)
+    {
+        int randIndex = Random.Range(0, _respawnPoints.Count);
+        player.transform.position = _respawnPoints[randIndex].position;
     }
 
 }

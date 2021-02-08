@@ -46,7 +46,7 @@ public class HeroStats : MonoBehaviour
     public StatusEffects.PositiveEffects Buff { get => _positiveEffect;  set => _positiveEffect = value; } 
     public StatusEffects.NegativeEffects DeBuff { get => _negativeEffect;  set => _negativeEffect = value; }
 
-    void Awake()
+    private void Awake()
     {
         _animator = GetComponentInChildren<Animator>();
         _animationEvent = GetComponentInChildren<AnimationEvents>();
@@ -114,6 +114,20 @@ public class HeroStats : MonoBehaviour
         }
      
         _animator.SetTrigger("HurtTrigger");
+    }
+
+    public void FallOutOfMap()
+    {
+        _currentHealth -= MaxHealth / 2f;
+        if(_currentHealth <= 0)
+        {
+            HeroDie();
+        }
+        else
+        {
+            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();            
+            spawnManager.RespawnPlayer(gameObject);
+        }
     }
 
     public void RestoreHealthOverTime(float duration, float amount, float maxAmount)
@@ -203,7 +217,7 @@ public class HeroStats : MonoBehaviour
         onDebuffDeActivated?.Invoke(gameObject);
     }
 
-    void HeroDie()
+    private void HeroDie()
     {
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
         if (playermanager.TeamOne.Contains(gameObject))
