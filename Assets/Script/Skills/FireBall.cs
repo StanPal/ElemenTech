@@ -40,10 +40,12 @@ public class FireBall : MonoBehaviour
                 }
             }
         }
+
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }
+
         if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
@@ -57,6 +59,7 @@ public class FireBall : MonoBehaviour
                 }
             }
         }
+
         if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
@@ -70,13 +73,17 @@ public class FireBall : MonoBehaviour
 
         if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
         {
-            if (!collision.Equals(_FireSkills.PlayerSkills.HeroMovement.tag))
+            if (!collision.Equals(_FireSkills.PlayerSkills.HeroMovement.gameObject))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     heroStats.TakeDamageFromProjectile(_FireSkills.Damage);
                     Destroy(gameObject);
                 }
+            }
+            else
+            {
+
             }
         }
     }

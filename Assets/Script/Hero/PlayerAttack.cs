@@ -15,7 +15,7 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _rotationPerFrame = 20f;
     [SerializeField] private float _rotationgAngleLimit = 10f;
     [SerializeField] private float _originalRotation = 60f;
-    [SerializeField] private float _knockBackAmount = 5f; 
+    [SerializeField] private float _knockBackAmount = 20f; 
     [SerializeField] private float _rotation = 0;
     private bool _originalDirLeft;
 

@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 6305441564539892452}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: FFA
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -465,10 +465,10 @@ MonoBehaviour:
   Sword: {fileID: 5620810093717837379}
   PivotPoint: {fileID: 1573514005131078975}
   FirePoint: {fileID: 7832531724153277597}
-  _IsOnCooldown: 0
-  mLookDirection: {x: 0, y: 0}
-  mLookAngle: 0
-  axispos: {x: 0, y: 0}
+  _isOnCooldown: 0
+  _mLookDirection: {x: 0, y: 0}
+  _lookAngle: 0
+  _axisPos: {x: 0, y: 0}
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,30 +481,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 0
-  mSpeed: 10
-  _IsLeft: 0
-  _IsJumping: 0
-  _JumpForce: 10
-  _NumOfJumps: 0
-  _MaxJumps: 10
-  _Ground:
+  ControllerInput: 1
+  _moveSpeed: 14
+  _isLeft: 0
+  _isJumping: 0
+  _jumpForce: 12
+  _numOfJumps: 0
+  _maxJumps: 8
+  _numOfWallJumps: 0
+  _maxWallJump: 1
+  _whatIsGround:
     serializedVersion: 2
     m_Bits: 256
-  canDash: 1
-  _IsDashing: 0
-  _DashSpeed: 15
-  _DashCoolDown: 1
+  _whatIsWall:
+    serializedVersion: 2
+    m_Bits: 1024
+  _canDash: 1
+  _isDashing: 0
+  _dashSpeed: 20
+  _dashCoolDown: 1
   _dashTime: 1
-  _DashStartUpTime: 0
-  _RecoveryTime: 0.3
-  isRecovering: 0
-  _KnockBackRecieved: 0
-  _KnockBackCount: 0
-  _NoFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
-  _FullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
-  _SlopeCheckDistance: 0
-  _MaxSlopeAngle: 0
+  _dashStartUpTime: 0.2
+  _recoveryTime: 0.2
+  _isRecovering: 0
+  _knockBackRecieved: 0
+  _knockBackCount: 0
+  _noFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
+  _fullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  _slopeCheckDistance: 1
+  _maxSlopeAngle: 0
 --- !u!114 &4636537091078077599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1040,13 +1045,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtAttack: 0
-  mHitStun: 1
+  _hitStun: 1
   _rotationSpeed: 200
   _rotationPerFrame: 20
   _rotationgAngleLimit: 10
-  originalRotation: 60
-  mKnockBackAmount: 25
+  _originalRotation: 60
+  _knockBackAmount: 5
   _rotation: 0
 --- !u!1 &8210359937382917956
 GameObject:
