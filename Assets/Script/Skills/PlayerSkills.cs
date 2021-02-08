@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerSkills : MonoBehaviour
 {
@@ -9,14 +7,14 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onAirSkillPerformed;
     public event System.Action onWaterSkillPerformed;
 
-    private HeroActions mHeroAction;
-    public HeroActions HeroAction { get { return mHeroAction; } }
-    private HeroMovement mHeroMovement;
-    public HeroMovement HeroMovement { get { return mHeroMovement; } }
-    private bool mIsSkillActivated = false;
-    public bool SkillActive { get { return mIsSkillActivated; } set { mIsSkillActivated = value; } }
+    private HeroActions _heroAction;
+    public HeroActions HeroAction { get => _heroAction; } 
+    private HeroMovement _heroMovement;
+    public HeroMovement HeroMovement { get => _heroMovement; } 
+    private bool _isSkillActivated = false;
+    public bool SkillActive { get => _isSkillActivated;  set => _isSkillActivated = value; } 
  
-    private PlayerManager PlayerManager;
+    private PlayerManager _playerManager;
 
     private void Awake()
     {
@@ -25,26 +23,26 @@ public class PlayerSkills : MonoBehaviour
 
     private void Initialize()
     {
-        PlayerManager = FindObjectOfType<PlayerManager>();
+        _playerManager = FindObjectOfType<PlayerManager>();
     }
 
     private void Start()
     {
-        if (PlayerManager.PlayersList[0].gameObject != null)
+        if (_playerManager.PlayersList[0].gameObject != null)
         {
-            PlayerManager.PlayersList[0].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+            _playerManager.PlayersList[0].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         }
-        if (PlayerManager.PlayersList[1].gameObject != null)
+        if (_playerManager.PlayersList[1].gameObject != null)
         {
-            PlayerManager.PlayersList[1].GetComponentInChildren<HeroActions>().onSkillPerformed += PerformSkill;
+            _playerManager.PlayersList[1].GetComponentInChildren<HeroActions>().onSkillPerformed += PerformSkill;
         }
-        if (PlayerManager.PlayersList[2].gameObject != null)
+        if (_playerManager.PlayersList[2].gameObject != null)
         {
-            PlayerManager.PlayersList[2].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+            _playerManager.PlayersList[2].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         }
-        if (PlayerManager.PlayersList[3].gameObject != null)
+        if (_playerManager.PlayersList[3].gameObject != null)
         {
-            PlayerManager.PlayersList[3].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+            _playerManager.PlayersList[3].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
         }
     }
 
@@ -53,23 +51,23 @@ public class PlayerSkills : MonoBehaviour
         switch (elementalAttribute)
         {
             case Elements.ElementalAttribute.Fire:
-                mHeroAction = PlayerManager.PlayersList[0].GetComponent<HeroActions>();
-                mHeroMovement = PlayerManager.PlayersList[0].GetComponent<HeroMovement>();
+                _heroAction = _playerManager.PlayersList[0].GetComponent<HeroActions>();
+                _heroMovement = _playerManager.PlayersList[0].GetComponent<HeroMovement>();
                 onFireSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Earth:
-                mHeroAction = PlayerManager.PlayersList[3].GetComponent<HeroActions>();
-                mHeroMovement = PlayerManager.PlayersList[3].GetComponent<HeroMovement>();
+                _heroAction = _playerManager.PlayersList[3].GetComponent<HeroActions>();
+                _heroMovement = _playerManager.PlayersList[3].GetComponent<HeroMovement>();
                 onEarthSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Water:
-                mHeroAction = PlayerManager.PlayersList[1].GetComponent<HeroActions>();
-                mHeroMovement = PlayerManager.PlayersList[1].GetComponent<HeroMovement>();
+                _heroAction = _playerManager.PlayersList[1].GetComponent<HeroActions>();
+                _heroMovement = _playerManager.PlayersList[1].GetComponent<HeroMovement>();
                 onWaterSkillPerformed.Invoke();
                 break;
             case Elements.ElementalAttribute.Air:
-                mHeroAction = PlayerManager.PlayersList[2].GetComponent<HeroActions>();
-                mHeroMovement = PlayerManager.PlayersList[2].GetComponent<HeroMovement>();
+                _heroAction = _playerManager.PlayersList[2].GetComponent<HeroActions>();
+                _heroMovement = _playerManager.PlayersList[2].GetComponent<HeroMovement>();
                 onAirSkillPerformed.Invoke();
                 break;
             default:
@@ -79,22 +77,21 @@ public class PlayerSkills : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (PlayerManager.PlayersList[0].gameObject != null)
+        if (_playerManager.PlayersList[0].gameObject != null)
         {
-            PlayerManager.PlayersList[0].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
+            _playerManager.PlayersList[0].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
         }
-        if (PlayerManager.PlayersList[1].gameObject != null)
+        if (_playerManager.PlayersList[1].gameObject != null)
         {
-            PlayerManager.PlayersList[1].GetComponentInChildren<HeroActions>().onSkillPerformed -= PerformSkill;
+            _playerManager.PlayersList[2].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
         }
-        if (PlayerManager.PlayersList[2].gameObject != null)
+        if (_playerManager.PlayersList[2].gameObject != null)
         {
-            PlayerManager.PlayersList[2].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
+            _playerManager.PlayersList[2].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
         }
-        if (PlayerManager.PlayersList[3].gameObject != null)
+        if (_playerManager.PlayersList[3].gameObject != null)
         {
-            PlayerManager.PlayersList[3].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
+            _playerManager.PlayersList[3].GetComponent<HeroActions>().onSkillPerformed -= PerformSkill;
         }
-
     }
 }

@@ -3,8 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    private PlayerManager PlayerManager;
-    private ScoreManager scoreManager;
+    private PlayerManager _PlayerManager;
+    private ScoreManager _ScoreManager;
     public Canvas mCanvas;
 
     private void Awake()
@@ -14,27 +14,27 @@ public class PauseUI : MonoBehaviour
 
     private void Initialize()
     {
-        PlayerManager = ServiceLocator.Get<PlayerManager>();
-        scoreManager = ServiceLocator.Get<ScoreManager>();
+        _PlayerManager = ServiceLocator.Get<PlayerManager>();
+        _ScoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     private void Start()
     {
-        if (PlayerManager.PlayersList[0].gameObject != null)
+        if (_PlayerManager.mPlayersList[0].gameObject != null)
         {
-            PlayerManager.PlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (PlayerManager.PlayersList[1].gameObject != null)
+        if (_PlayerManager.mPlayersList[1].gameObject != null)
         {
-            PlayerManager.PlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (PlayerManager.PlayersList[2].gameObject != null)
+        if (_PlayerManager.mPlayersList[2].gameObject != null)
         {
-            PlayerManager.PlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (PlayerManager.PlayersList[3].gameObject != null)
+        if (_PlayerManager.mPlayersList[3].gameObject != null)
         {
-            PlayerManager.PlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
 
@@ -53,7 +53,7 @@ public class PauseUI : MonoBehaviour
     public void BackToMainMenu()
     {
         ResetPlayers();
-        scoreManager.ResetScore();
+        _ScoreManager.ResetScore();
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
@@ -71,26 +71,15 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        PlayerManager.FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        PlayerManager.FireHero.SetActive(true);
-        PlayerManager.WaterHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        PlayerManager.WaterHero.SetActive(false);
+        _PlayerManager.mPlayersList[0] = _PlayerManager.FireHero;
+        _PlayerManager.mPlayersList[1] = _PlayerManager.WaterHero;
+        _PlayerManager.mPlayersList[2] = _PlayerManager.AirHero;
+        _PlayerManager.mPlayersList[3] = _PlayerManager.EarthHero;
 
-        PlayerManager.AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        PlayerManager.AirHero.SetActive(false);
-        PlayerManager.EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
-        PlayerManager.EarthHero.SetActive(false);
+        _PlayerManager.TeamOne.Clear();
+        _PlayerManager.TeamTwo.Clear();
 
-
-        PlayerManager.PlayersList[0] = PlayerManager.FireHero;
-        PlayerManager.PlayersList[1] = PlayerManager.WaterHero;
-        PlayerManager.PlayersList[2] = PlayerManager.AirHero;
-        PlayerManager.PlayersList[3] = PlayerManager.EarthHero;
-
-        PlayerManager.TeamOne.Clear();
-        PlayerManager.TeamTwo.Clear();
-
-        scoreManager.PracticeMode = false;
+        _ScoreManager.PracticeMode = false;
         Cursor.visible = true;
     }
 }

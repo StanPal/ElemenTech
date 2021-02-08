@@ -406,6 +406,26 @@ PrefabInstance:
       propertyPath: mTransition
       value: 
       objectReference: {fileID: 1410027712}
+    - target: {fileID: 700599838571124591, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: MatchCanvas
+      value: 
+      objectReference: {fileID: 1410027711}
+    - target: {fileID: 700599838571124591, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: TeamOneScore
+      value: 
+      objectReference: {fileID: 1410027714}
+    - target: {fileID: 700599838571124591, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: TeamTwoScore
+      value: 
+      objectReference: {fileID: 1410027713}
+    - target: {fileID: 700599838571124591, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: Transition
+      value: 
+      objectReference: {fileID: 1410027712}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89165e1d69e008047903b1a33333ef1b, type: 3}
 --- !u!1 &83518125

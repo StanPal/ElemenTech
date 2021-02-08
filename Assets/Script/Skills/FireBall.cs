@@ -51,7 +51,7 @@ public class FireBall : MonoBehaviour
 
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_FireSkills.Damage);
+                    heroStats.TakeDamageFromProjectile(fireSkills.Damage);
                     Destroy(gameObject);
                 }
                     //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(_FireSkills.Damage);
@@ -63,8 +63,8 @@ public class FireBall : MonoBehaviour
             if (collision.tag.Equals("Team1"))
             {
                // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
-                collision.GetComponent<HeroStats>().TakeDamage(_FireSkills.Damage);
-                collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);
+                collision.GetComponent<HeroStats>().TakeDamageFromProjectile(fireSkills.Damage);
+                //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
                 Destroy(gameObject);
             }
         }

@@ -65,7 +65,7 @@ public class AirJet : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(airskills.Damage);
+                    heroStats.TakeDamageFromProjectile(airskills.Damage);
                     Destroy(gameObject);
                 }
             }
@@ -76,7 +76,7 @@ public class AirJet : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(airskills.Damage);
+                    heroStats.TakeDamageFromProjectile(airskills.Damage);
                     Destroy(gameObject);
                 }
             }
