@@ -64,8 +64,7 @@ public class Crosshair : MonoBehaviour
                 else
                 {
                     _P1CrossHairs.SetActive(true);
-                }
-                //Debug.Log(Screen.width * playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x);
+                }                
                 _P1CrossHairs.transform.position = new Vector3(
                     playerManager.mPlayersList[0].transform.position.x + (playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
                     playerManager.mPlayersList[0].transform.position.y + playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
@@ -114,8 +113,7 @@ public class Crosshair : MonoBehaviour
                 _P2CrossHairs.transform.position = new Vector3(_P2Target.x, _P2Target.y);
                 break;
             case HeroMovement.Controller.PS4:
-                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);
-                Debug.Log(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
+                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);                
                 if (playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -130,8 +128,7 @@ public class Crosshair : MonoBehaviour
                                   playerManager.mPlayersList[1].transform.position.y + playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             case HeroMovement.Controller.XBOX:
-                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);
-                Debug.Log(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>());
+                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);                
                 if (playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -146,8 +143,7 @@ public class Crosshair : MonoBehaviour
                                   playerManager.mPlayersList[1].transform.position.y + playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             case HeroMovement.Controller.Gamepad:
-                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);
-                Debug.Log(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>());
+                _P2CrossHairs.transform.SetParent(playerManager.mPlayersList[1].transform);                
                 if (playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -191,8 +187,7 @@ public class Crosshair : MonoBehaviour
                                   playerManager.mPlayersList[2].transform.position.y + playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             case HeroMovement.Controller.XBOX:
-                _P3CrossHairs.transform.SetParent(playerManager.mPlayersList[2].transform);
-                Debug.Log(playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>());
+                _P3CrossHairs.transform.SetParent(playerManager.mPlayersList[2].transform);            
                 if (playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[2].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -219,8 +214,7 @@ public class Crosshair : MonoBehaviour
                 _P4CrossHairs.transform.position = new Vector3(_P4Target.x, _P4Target.y);
                 break;
             case HeroMovement.Controller.PS4:
-                _P4CrossHairs.transform.SetParent(playerManager.mPlayersList[3].transform);
-                Debug.Log(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>());
+                _P4CrossHairs.transform.SetParent(playerManager.mPlayersList[3].transform);             
                 if (playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
@@ -236,7 +230,7 @@ public class Crosshair : MonoBehaviour
                 break;
             case HeroMovement.Controller.XBOX:
                 _P4CrossHairs.transform.SetParent(playerManager.mPlayersList[3].transform);
-                Debug.Log(playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>());
+
                 if (playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
                     playerManager.mPlayersList[3].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
                 {
