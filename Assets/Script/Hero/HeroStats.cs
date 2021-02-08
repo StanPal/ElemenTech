@@ -56,11 +56,8 @@ public class HeroStats : MonoBehaviour
     //Hero particle
     [SerializeField]
     private GameObject _deadParticle;
-    [SerializeField]
     private GameObject _hitParticle;
-    [SerializeField]
-    private GameObject _projectileParticle;
-    public GameObject ProjectileParticle { get { return _projectileParticle; } set { _projectileParticle = value; } }
+    public GameObject HitParticle { get { return _hitParticle; } set { _hitParticle = value; } }
 
 
     private void Awake()

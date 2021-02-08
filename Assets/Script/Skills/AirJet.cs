@@ -4,26 +4,28 @@ using UnityEngine;
 
 public class AirJet : MonoBehaviour
 {       
-    private float mProjectileSpeed = 1f;
-    private float mExitTime = 1f; 
-    private Rigidbody2D mRigidbody;
-    private Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
+    private float _projectileSpeed = 1f;
+    private float _exitTime = 1f; 
+    private Rigidbody2D _rigidbody;
+    private Vector3 _scaleSize = new Vector3(0.5f, 0.5f, 0.5f);
 
-    private AirSkills airskills;
+    private AirSkills _airskills;
+    [SerializeField]
+    private GameObject _hitParticle;
 
     void Start()
     {
-        mRigidbody = GetComponent<Rigidbody2D>();
-        airskills = FindObjectOfType<AirSkills>();
-        mProjectileSpeed = airskills.Speed;
-        mScaleSize = airskills.Scale;
-        mExitTime = airskills.ExitTime;
+        _rigidbody = GetComponent<Rigidbody2D>();
+        _airskills = FindObjectOfType<AirSkills>();
+        _projectileSpeed = _airskills.Speed;
+        _scaleSize = _airskills.Scale;
+        _exitTime = _airskills.ExitTime;
     }
 
     private void FixedUpdate()
     {
-        mRigidbody.velocity = transform.right * mProjectileSpeed;
-        transform.localScale = Vector3.Lerp(transform.localScale, mScaleSize, airskills.ScaleSpeed * Time.deltaTime);
+        _rigidbody.velocity = transform.right * _projectileSpeed;
+        transform.localScale = Vector3.Lerp(transform.localScale, _scaleSize, _airskills.ScaleSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,13 +36,13 @@ public class AirJet : MonoBehaviour
             Golem golem = collision.gameObject.GetComponent<Golem>();
             if (golem != null)
             {
-                golem.TakeDamage(airskills.Damage);
+                golem.TakeDamage(_airskills.Damage);
             }
         }
         
         if (collision.GetComponent<Guard>())
         {
-            if (collision.GetComponent<Guard>().tag.Equals(airskills.PlayerSkills.HeroAction.tag))
+            if (collision.GetComponent<Guard>().tag.Equals(_airskills.PlayerSkills.HeroAction.tag))
             {
                 Guard guard = collision.GetComponent<Guard>();
                 if (guard.Guarding)
@@ -53,28 +55,33 @@ public class AirJet : MonoBehaviour
             }
         }
 
+        //if hit walls
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }
-        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        //chieck if Team1 hit 
+        if (_airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(airskills.Damage);
+                    heroStats.HitParticle = _hitParticle;
+                    heroStats.TakeDamage(_airskills.Damage);
                     Destroy(gameObject);
                 }
             }
         }
-        if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+        //chieck if Team1 hit
+        if (_airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(airskills.Damage);
+                    heroStats.HitParticle = _hitParticle;
+                    heroStats.TakeDamage(_airskills.Damage);
                     Destroy(gameObject);
                 }
             }
