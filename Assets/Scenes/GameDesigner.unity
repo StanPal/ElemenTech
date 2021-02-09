@@ -205,26 +205,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
---- !u!1 &172706870 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8803437093652992147, guid: 94499eefc4ecd914490f51288903aeb2,
-    type: 3}
-  m_PrefabInstance: {fileID: 192836508}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &172706878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 172706870}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2246565614fb4a4bb12b12a999f47af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {fileID: 1245950679}
-  HideDistance: 0
 --- !u!1001 &192836508
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -251,6 +231,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Team1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803437093652992148, guid: 94499eefc4ecd914490f51288903aeb2,
+        type: 3}
+      propertyPath: controllerInput
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8803437093652992148, guid: 94499eefc4ecd914490f51288903aeb2,
+        type: 3}
+      propertyPath: isJumping
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8803437093652992175, guid: 94499eefc4ecd914490f51288903aeb2,
         type: 3}
@@ -832,7 +822,7 @@ PrefabInstance:
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}
       propertyPath: controllerInput
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1371002032310544469, guid: d95bedd6962ac8a468e26b2b40ea888a,
         type: 3}

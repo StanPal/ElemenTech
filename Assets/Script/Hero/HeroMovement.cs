@@ -31,6 +31,10 @@ public class HeroMovement : MonoBehaviour
     [SerializeField]
     private int mMaxJumps = 1;
     [SerializeField]
+    bool OnGround;
+    [SerializeField]
+    private bool IsJumpPressure = true;
+    [SerializeField]
     private float jumpPressure = 0f;
     [SerializeField]
     private float MinjumpPressure = 3f;
@@ -78,6 +82,7 @@ public class HeroMovement : MonoBehaviour
 
     private void Awake()
     {
+        OnGround = true;
         rb = GetComponent<Rigidbody2D>();
         mPlayerInput = new PlayerInput();
         col = GetComponent<Collider2D>();
@@ -158,6 +163,7 @@ public class HeroMovement : MonoBehaviour
         {
             mNumOfJumps = mMaxJumps;
         }
+        
         switch (controllerInput)
         {
             case Controller.None:
@@ -166,45 +172,64 @@ public class HeroMovement : MonoBehaviour
 
                 if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
                 {
-                    if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
-                    {
-                        if (jumpPressure < MaxjumpPressure)
+
+                    
+                        if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
                         {
-                            jumpPressure += Time.deltaTime * 10f;
+                           
+                            if (jumpPressure < MaxjumpPressure)
+                            {
+                                print("JumpPressure < MaJumpPressure successful!");
+                                jumpPressure += Time.deltaTime * 10f;
+                            }
+                            else
+                            {
+
+                                jumpPressure = MaxjumpPressure;
+                            print("JumpPressure  =  MaxJumpPressure successful!");
+                            }
+
                         }
-                        else
+                        else if (mPlayerInput.KeyboardMouse.JumpRelease.triggered && mNumOfJumps > 0)
                         {
-                            jumpPressure = MaxjumpPressure;
-                        }
-                        print("hold:" + jumpPressure);
-                        //IsPressureJump();
-                    }
-                    else
-                    {
+                            print("hold:" + jumpPressure);
+                            
                         if (jumpPressure > 0)
-                        {
-                            jumpPressure += MinjumpPressure;
-                            rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
-                            jumpPressure = 0f;
-                            print("PressureJump successful!");
-                        }
+                            {
+                                jumpPressure += MinjumpPressure;
+
+                            print("jumpPressure + MinjumpPressure = " + jumpPressure);
+
+                                rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
+                                 jumpPressure = 0f;
+                                OnGround = false;
+                                print("PressureJump successful!");
+                            }
+                            mNumOfJumps--;
+                            print("number of jumps : " + mNumOfJumps);
+
                     }
+
+                    
+
+                }
+                else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+                {
+                    Jump();
                 }
                 else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
-                else
-                {
-                    Jump();
-                }
                 break;
+
 
             case Controller.Keyboard2:
                 if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
                 {
-                    if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps > 0)
+                    if (mPlayerInput.KeyboardLayout2.JumpHold.triggered && mNumOfJumps > 0)
                     {
+
                         if(jumpPressure < MaxjumpPressure)
                         {
                             jumpPressure += Time.deltaTime * 10f;
@@ -214,15 +239,14 @@ public class HeroMovement : MonoBehaviour
                             jumpPressure = MaxjumpPressure;
                         }
                         print("hold:" + jumpPressure);
-                        //IsPressureJump();
                     }
                     else
                     {
                         if (jumpPressure > 0)
                         {
                             jumpPressure += MinjumpPressure;
-                            rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
-                            jumpPressure = 0f;
+                            rb.velocity = Vector2.up * (mJumpForce * jumpPressure);
+                            //jumpPressure = 0f;
                         }
                     }
                 }
@@ -273,41 +297,19 @@ public class HeroMovement : MonoBehaviour
         rb.velocity = Vector2.up * mJumpForce;
     }
 
-    private void IsPressureJump()
-    {
-        if(GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
-        {
-            if (Input.GetKeyDown("space"))
-            {
-                if (jumpPressure < MaxjumpPressure)
-                {
-                    jumpPressure += Time.deltaTime * 10f;
-                }
-                else
-                {
-                    jumpPressure = MaxjumpPressure;
-                }
-                print("hold:" + jumpPressure);
-            }
-            else
-            {
-                if (jumpPressure > 0)
-                {
-                    jumpPressure += MinjumpPressure;
-                    rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
-                    jumpPressure = 0f;
-                }
-            }
-        }
-        else
-        {
-            rb.velocity = Vector2.up * mJumpForce;
-        }
-        mNumOfJumps--;
-    }
+    //private void OnCollisionEnter(Collision other)
+    //{
+    //    if(other.gameObject.tag == "wall")
+    //    {
+    //        OnGround = true;
+    //    }
+    //}
 
+    
     private void FixedUpdate()
     {
+        //OnGround = true;
+
         if (!isRecovering)
         {
             if (controllerInput == Controller.Keyboard && !isDashing)

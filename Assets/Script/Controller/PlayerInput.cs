@@ -89,6 +89,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""JumpHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""7463d438-1a41-4b95-bba6-7ad92855e370"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -184,7 +192,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""2f2f4320-dbff-40a6-82aa-ea89a3460b98"",
                     ""path"": ""<Keyboard>/space"",
-                    ""interactions"": """",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Jump"",
@@ -210,6 +218,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""398c2e88-5cdd-4897-933a-50f21c596d14"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -290,6 +309,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""JumpHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""00b5ae85-dc91-47cc-9d23-ff6ed0dec419"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -411,6 +438,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c60546a6-6dea-4335-b86a-f420487eb9d4"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpHold"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -775,6 +813,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
+        m_KeyboardMouse_JumpHold = m_KeyboardMouse.FindAction("JumpHold", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -786,6 +825,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardLayout2_GuardRelease = m_KeyboardLayout2.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardLayout2_Pause = m_KeyboardLayout2.FindAction("Pause", throwIfNotFound: true);
         m_KeyboardLayout2_Dash = m_KeyboardLayout2.FindAction("Dash", throwIfNotFound: true);
+        m_KeyboardLayout2_JumpHold = m_KeyboardLayout2.FindAction("JumpHold", throwIfNotFound: true);
         // PS4
         m_PS4 = asset.FindActionMap("PS4", throwIfNotFound: true);
         m_PS4_Move = m_PS4.FindAction("Move", throwIfNotFound: true);
@@ -863,6 +903,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_GuardRelease;
     private readonly InputAction m_KeyboardMouse_Pause;
     private readonly InputAction m_KeyboardMouse_Dash;
+    private readonly InputAction m_KeyboardMouse_JumpHold;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -876,6 +917,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
         public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
+        public InputAction @JumpHold => m_Wrapper.m_KeyboardMouse_JumpHold;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -912,6 +954,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
+                @JumpHold.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnJumpHold;
+                @JumpHold.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnJumpHold;
+                @JumpHold.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnJumpHold;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -943,6 +988,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @JumpHold.started += instance.OnJumpHold;
+                @JumpHold.performed += instance.OnJumpHold;
+                @JumpHold.canceled += instance.OnJumpHold;
             }
         }
     }
@@ -960,6 +1008,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardLayout2_GuardRelease;
     private readonly InputAction m_KeyboardLayout2_Pause;
     private readonly InputAction m_KeyboardLayout2_Dash;
+    private readonly InputAction m_KeyboardLayout2_JumpHold;
     public struct KeyboardLayout2Actions
     {
         private @PlayerInput m_Wrapper;
@@ -973,6 +1022,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardLayout2_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardLayout2_Pause;
         public InputAction @Dash => m_Wrapper.m_KeyboardLayout2_Dash;
+        public InputAction @JumpHold => m_Wrapper.m_KeyboardLayout2_JumpHold;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardLayout2; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1009,6 +1059,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnDash;
+                @JumpHold.started -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpHold;
+                @JumpHold.performed -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpHold;
+                @JumpHold.canceled -= m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface.OnJumpHold;
             }
             m_Wrapper.m_KeyboardLayout2ActionsCallbackInterface = instance;
             if (instance != null)
@@ -1040,6 +1093,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
+                @JumpHold.started += instance.OnJumpHold;
+                @JumpHold.performed += instance.OnJumpHold;
+                @JumpHold.canceled += instance.OnJumpHold;
             }
         }
     }
@@ -1225,6 +1281,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnJumpHold(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {
@@ -1237,6 +1294,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
+        void OnJumpHold(InputAction.CallbackContext context);
     }
     public interface IPS4Actions
     {
