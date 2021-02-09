@@ -1,35 +1,31 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
+
 public class HeroMovement : MonoBehaviour
 {
-    HeroActions mHeroActions;
+    private HeroActions _HeroActions;
+    private PlayerInput _PlayerInput;
+    private Animator _PlayerAnimator;
+    private BoxCollider2D _BoxCollider2D;
+    private Collider2D _Col;
+    private AnimationEvents _AnimationEvents;
+    private Rigidbody2D _Rb;
 
-    private PlayerInput mPlayerInput;
-    public PlayerInput PlayerInput { get { return mPlayerInput; } }
     public enum Controller
     {
         None,
         Keyboard,
         PS4,
         XBOX,
-        Keyboard2
+        Keyboard2,
+        Gamepad
     }
+    public Controller ControllerInput = Controller.None;
 
-    public Controller controllerInput = Controller.None;
-    [SerializeField]
-    private bool isLeft = false;
-    public bool GetIsLeft { get { return isLeft; } }
+    private float _HorizontalMove;
+    private float _MoveInput;
+    private bool _OnHitLeft = false;
 
-    [SerializeField]
-    private bool isJumping = false;
-    [SerializeField]
-    private float mJumpForce = 5f;
-    [SerializeField]
-    private int mNumOfJumps = 0;
-    [SerializeField]
-    private int mMaxJumps = 1;
     [SerializeField]
     bool OnGround;
     [SerializeField]
@@ -40,10 +36,21 @@ public class HeroMovement : MonoBehaviour
     private float MinjumpPressure = 3f;
     [SerializeField]
     private float MaxjumpPressure = 10f;
-    [SerializeField]
-    private LayerMask mGround;
     private Collider2D col;
+    [SerializeField] private float mSpeed = 8f;
+    [SerializeField] private bool _IsLeft = false;
+    [SerializeField] private bool _IsJumping = false;
+    [SerializeField] private float _JumpForce = 5f;
+    [SerializeField] private int _NumOfJumps = 0;
+    [SerializeField] private int _MaxJumps = 1;
+    [SerializeField] private LayerMask _Ground;
 
+    //Dash Modifiers
+    [SerializeField] private bool canDash = true;
+    [SerializeField] private bool _IsDashing;
+    [SerializeField] private float _DashSpeed = 5f;
+    [SerializeField] private float _DashCoolDown = 1f;
+    [SerializeField] private float _DashStartUpTime = 1f;
 
     [SerializeField]
     private bool canDash = true;
@@ -55,125 +62,163 @@ public class HeroMovement : MonoBehaviour
     private float mDashCoolDown = 1f;
     [SerializeField]
     private float mDashStartUpTime = 1f;
-
-    public GameObject defendEffectPrefab;
-    private float defendTimeVal = 1;
-    private bool isDefended = true;
+    //Recovery Time until the player can move again 
+    [SerializeField] private float _RecoveryTime = 1f;
+    [SerializeField] private bool isRecovering = false;
+    private float _OriginalRecoveryTime;
+    
+    [SerializeField] private float _KnockBackRecieved;
+    [SerializeField] private float _KnockBackCount;
 
     [SerializeField]
     private float mSpeed;
+    public GameObject defendEffectPrefab;
+    private float defendTimeVal = 1;
+    private bool isDefended = true;
+    //Getters and Setters
+    public PlayerInput PlayerInput { get { return _PlayerInput; } }
+    public bool Dashing { get { return _IsDashing; } }
     public float Speed { get { return mSpeed; } set { mSpeed = value; } }
-    private float mMoveInput;
-    private Rigidbody2D rb;
-
-    [SerializeField]
-    private float mKnockbackRecieved;
-    [SerializeField]
-    private float mKnockbackCount;
-    private bool mOnHitLeft = false;
-
-    [SerializeField]
-    private float mRecoveryTime = 1f;
-    public float RecoveryTime { get { return mRecoveryTime; } set { mRecoveryTime = value; } }
-    [SerializeField]
-    private bool isRecovering = false;
+    public bool GetIsLeft { get { return _IsLeft; } }
+    public float RecoveryTime { get { return _RecoveryTime; } set { _RecoveryTime = value; } }
     public bool Recovering { get { return isRecovering; } set { isRecovering = value; } }
-    private float mOriginalRecoveryTime;
-
+    
     private void Awake()
     {
         OnGround = true;
-        rb = GetComponent<Rigidbody2D>();
-        mPlayerInput = new PlayerInput();
-        col = GetComponent<Collider2D>();
-        mHeroActions = GetComponent<HeroActions>();
-        mOriginalRecoveryTime = mRecoveryTime;
 
+        _PlayerAnimator = GetComponentInChildren<Animator>();
+        _Rb = GetComponent<Rigidbody2D>();
+        _PlayerInput = new PlayerInput();
+        _Col = GetComponent<Collider2D>();
+        _HeroActions = GetComponent<HeroActions>();
+        _OriginalRecoveryTime = _RecoveryTime;
+        _AnimationEvents = GetComponentInChildren<AnimationEvents>();
+        _BoxCollider2D = GetComponent<BoxCollider2D>();
         canDash = true;
-        if (controllerInput == Controller.Keyboard)
+        if (ControllerInput == Controller.Keyboard)
         {
-            mPlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+            _PlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.Keyboard2)
+        if (ControllerInput == Controller.Keyboard2)
         {
-            mPlayerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
+            _PlayerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.PS4)
+        if (ControllerInput == Controller.PS4)
         {
-            mPlayerInput.PS4.Dash.performed += _ => OnDash();
+            _PlayerInput.PS4.Dash.performed += _ => OnDash();
         }
-        if (controllerInput == Controller.XBOX)
+        if (ControllerInput == Controller.XBOX)
         {
-            mPlayerInput.XBOX.Dash.performed += _ => OnDash();
+            _PlayerInput.XBOX.Dash.performed += _ => OnDash();
         }
-    }
-
-    private void OnEnable()
-    {
-        mPlayerInput.Enable();
-    }
-    private void OnDisable()
-    {
-        mPlayerInput.Disable();
-    }
-
-    public void IcySlidding(float SliddingSpeed)
-    {
-        mSpeed += SliddingSpeed;
-    }
-
-    public void SandDecrease(float SandDecreaseSpeed)
-    {
-        mSpeed -= SandDecreaseSpeed;
-    }
-
-    public bool IsGrounded()
-    {
-        Vector2 topLeftPoint = transform.position;
-        topLeftPoint.x -= col.bounds.extents.x;
-        topLeftPoint.y += col.bounds.extents.y;
-
-        Vector2 bottomRight = transform.position;
-        bottomRight.x += col.bounds.extents.x;
-        bottomRight.y -= col.bounds.extents.y;
-
-        return Physics2D.OverlapArea(topLeftPoint, bottomRight, mGround);
-    }
-
-    private void OnDash()
-    {
-        if (canDash)
+        if (ControllerInput == Controller.Gamepad)
         {
-            StartCoroutine(DashStartUp());
+            _PlayerInput.Gamepad.Dash.performed += _ => OnDash();
         }
     }
 
+    private void Start()
+    {
+        _PlayerAnimator.SetBool("IsJumping", false);
+    }
 
+    private void FixedUpdate()
+    {
+        if (IsGrounded())
+        {
+            _PlayerAnimator.SetBool("IsJumping", false);
+            _PlayerAnimator.SetBool("IsMultiJump", false);
+            _NumOfJumps = _MaxJumps;
+        }
 
+        if (!isRecovering)
+        {
+            if (ControllerInput == Controller.Keyboard && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.KeyboardMouse.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.PS4 && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.PS4.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.XBOX && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.XBOX.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.Keyboard2 && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.KeyboardLayout2.Move.ReadValue<float>();
+            }
+            else if (ControllerInput == Controller.Gamepad && !_IsDashing)
+            {
+                _MoveInput = _PlayerInput.Gamepad.Move.ReadValue<float>();
+            }
+            else
+            {
+                Debug.Log("Keybindings not set");
+            }
+        }
+
+        Vector3 currentPosition = transform.position;
+        currentPosition.x += _MoveInput * mSpeed * Time.deltaTime;
+        transform.position = currentPosition;
+
+        if (_KnockBackCount > 0)
+        {
+            if (_OnHitLeft)
+            {
+                _Rb.velocity = new Vector2(-_KnockBackRecieved, _KnockBackRecieved);
+            }
+            else
+            {
+                _Rb.velocity = new Vector2(_KnockBackRecieved, _KnockBackRecieved);
+
+            }
+            _KnockBackCount--;
+        }
+
+        if (_IsDashing)
+        {
+            StartCoroutine(Dash(_IsLeft));
+        }
+
+        if (isRecovering)
+        {
+            StartCoroutine(Recover());
+        }
+
+        Vector3 characterScale = transform.localScale;
+        if (_MoveInput < 0)
+        {
+            characterScale.x = -1;
+            _IsLeft = true;
+        }
+
+        if (_MoveInput > 0)
+        {
+            characterScale.x = 1;
+            _IsLeft = false;
+        }
+	}
 
     IEnumerator DashStartUp()
     {
         yield return new WaitForSeconds(mDashStartUpTime);
         isDashing = true;
+        transform.localScale = characterScale;
     }
 
     private void Update()
     {
-        if (IsGrounded())
-        {
-            mNumOfJumps = mMaxJumps;
-        }
-        
+        mNumOfJumps = mMaxJumps;
         switch (controllerInput)
         {
             case Controller.None:
                 break;
             case Controller.Keyboard:
-
-                if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+                if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
                 {
-
-                    
                         if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
                         {
                            
@@ -213,11 +258,11 @@ public class HeroMovement : MonoBehaviour
                     
 
                 }
-                else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0)
                 {
                     Jump();
                 }
-                else if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                else if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
@@ -225,7 +270,7 @@ public class HeroMovement : MonoBehaviour
 
 
             case Controller.Keyboard2:
-                if (GetComponent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0)
                 {
                     if (mPlayerInput.KeyboardLayout2.JumpHold.triggered && mNumOfJumps > 0)
                     {
@@ -250,33 +295,42 @@ public class HeroMovement : MonoBehaviour
                         }
                     }
                 }
-                    
-                else if (mPlayerInput.KeyboardLayout2.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                else if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
                 else
+                break;
+            case Controller.PS4:
+                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0)
                 {
                     Jump();
                 }
 
-                break;
-            case Controller.PS4:
-                if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps > 0)
                 {
                     Jump();
                 }
-                else if (mPlayerInput.PS4.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                else if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
                 break;
             case Controller.XBOX:
-                if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps > 0)
+                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0)
                 {
                     Jump();
                 }
-                else if (mPlayerInput.XBOX.Jump.triggered && mNumOfJumps == 0 && IsGrounded())
+                else if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.Gamepad:
+                if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
@@ -284,135 +338,113 @@ public class HeroMovement : MonoBehaviour
             default:
                 break;
         }
+        _HorizontalMove = _MoveInput * mSpeed;
+        _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_HorizontalMove));
+    }
+
+    private void OnEnable()
+    {
+        _PlayerInput.Enable();
+    }
+    private void OnDisable()
+    {
+        _PlayerInput.Disable();
+    }
+
+    public void IcySlidding(float SliddingSpeed)
+    {
+        mSpeed += SliddingSpeed;
+    }
+
+    public void SandDecrease(float SandDecreaseSpeed)
+    {
+        mSpeed -= SandDecreaseSpeed;
+    }
+
+    public bool IsGrounded()
+    {
+        float extraHeightText = .05f;
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(_BoxCollider2D.bounds.center, Vector2.down, _BoxCollider2D.bounds.extents.y + extraHeightText, _Ground);
+        Color rayColor;
+        if (raycastHit2D.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }
+        Debug.DrawRay(_BoxCollider2D.bounds.center, Vector2.down * (_BoxCollider2D.bounds.extents.y + extraHeightText),rayColor);
+        return raycastHit2D.collider != null;
+    }
+
+    private void OnDash()
+    {
+        if (canDash)
+        {
+            _PlayerAnimator.SetTrigger("DashTrigger");
+            StartCoroutine(DashStartUp());
+        }
+    }
+
+    private IEnumerator DashStartUp()
+    {
+        yield return new WaitForSeconds(_DashStartUpTime);
+
+        _IsDashing = true;
     }
 
     private void Jump()
     {
-        rb.velocity = Vector2.up * mJumpForce;
-        mNumOfJumps--;
+        _PlayerAnimator.SetBool("IsJumping", true);
+        _Rb.velocity = Vector2.up * _JumpForce;
+        _NumOfJumps--;
     }
 
     private void MultiJump()
-    { 
-        rb.velocity = Vector2.up * mJumpForce;
+    {  
+        _Rb.velocity = Vector2.up * _JumpForce;
     }
 
-    //private void OnCollisionEnter(Collision other)
-    //{
-    //    if(other.gameObject.tag == "wall")
-    //    {
-    //        OnGround = true;
-    //    }
-    //}
-
-    
-    private void FixedUpdate()
-    {
-        //OnGround = true;
-
-        if (!isRecovering)
-        {
-            if (controllerInput == Controller.Keyboard && !isDashing)
-            {
-                mMoveInput = mPlayerInput.KeyboardMouse.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.PS4 && !isDashing)
-            {
-                mMoveInput = mPlayerInput.PS4.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.XBOX && !isDashing)
-            {
-                mMoveInput = mPlayerInput.XBOX.Move.ReadValue<float>();
-            }
-            else if (controllerInput == Controller.Keyboard2 && !isDashing)
-            {
-                mMoveInput = mPlayerInput.KeyboardLayout2.Move.ReadValue<float>();
-            }
-            else
-            {
-                Debug.Log("Keybindings not set");
-            }
-        }
-
-        Vector3 currentPosition = transform.position;
-        currentPosition.x += mMoveInput * mSpeed * Time.deltaTime;
-        transform.position = currentPosition;
-
-        if (mKnockbackCount > 0)
-        {
-            if (mOnHitLeft)
-            {
-                rb.velocity = new Vector2(-mKnockbackRecieved, mKnockbackRecieved);
-            }
-            else
-            {
-                rb.velocity = new Vector2(mKnockbackRecieved, mKnockbackRecieved);
-
-            }
-            mKnockbackCount--;
-        }
-
-        if(isDashing)
-        {
-            StartCoroutine(Dash(isLeft));
-        }
-
-        if(isRecovering)
-        {
-            StartCoroutine(Recover());
-        }
-        Vector3 characterScale = transform.localScale;
-        if (mMoveInput < 0)
-        {
-            characterScale.x = -1;
-            isLeft = true;
-        }
-        if (mMoveInput > 0)
-        {
-            characterScale.x = 1;
-            isLeft = false;
-        }
-        transform.localScale = characterScale;
-    }
-
-    IEnumerator Dash(bool isLeft)
+    private IEnumerator Dash(bool _IsLeft)
     { 
         Vector3 currentPosition = transform.position;
-        if (isLeft)
+        if (_IsLeft)
         {
-            currentPosition.x -= (mDashSpeed * 0.1f);
+            currentPosition.x -= (_DashSpeed * 0.1f);
         }
+
         else
         {
-            currentPosition.x += (mDashSpeed * 0.1f);
+            currentPosition.x += (_DashSpeed * 0.1f);
         }
+
         transform.position = currentPosition;
-        float gravity = rb.gravityScale;
-        rb.gravityScale = 0f;
+        float gravity = _Rb.gravityScale;
+        _Rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.4f);
-        rb.gravityScale = 1f;
-        isDashing = false;
+        _Rb.gravityScale = 1f;
+        _IsDashing = false;
         canDash = false;
         isRecovering = true;
-        yield return new WaitForSeconds(mDashCoolDown);
+        yield return new WaitForSeconds(_DashCoolDown);
         canDash = true;
     }
 
-    IEnumerator Recover()
+    private IEnumerator Recover()
     {
-        mHeroActions.enabled = false;
+        _HeroActions.enabled = false;
         isRecovering = true;
-        yield return new WaitForSeconds(mRecoveryTime);
-        mRecoveryTime = mOriginalRecoveryTime;
-        mHeroActions.enabled = true;
+        yield return new WaitForSeconds(_RecoveryTime);
+        _RecoveryTime = _OriginalRecoveryTime;
+        _HeroActions.enabled = true;
         isRecovering = false;
     }
 
     public void OnKnockBackHit(float knockbackamount, bool direction)
     {
-        mKnockbackCount++;
-        mKnockbackRecieved = knockbackamount;
-        mOnHitLeft = direction;
+        _KnockBackCount++;
+        _KnockBackRecieved = knockbackamount;
+        _OnHitLeft = direction;
     }
-
 }

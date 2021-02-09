@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameLoader : AsyncLoader
 {
-    [SerializeField] private GameObject _PlayerManager = null;
-    [SerializeField] private int sceneIndexToLoad = 1;
+    [SerializeField] private GameObject _playerManager = null;
+    [SerializeField] private GameObject _scoreManager = null; 
+    [SerializeField] private int _sceneIndexToLoad = 1;
     private static int _sceneIndex = 0;
     private static GameLoader _instance; // The only singleton you should have.
 
@@ -34,13 +35,13 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(gameObject);
 
         // Scene Index Check
-        if (sceneIndexToLoad < 0 || sceneIndexToLoad >= SceneManager.sceneCountInBuildSettings)
+        if (_sceneIndexToLoad < 0 || _sceneIndexToLoad >= SceneManager.sceneCountInBuildSettings)
         {
-            Debug.Log($"Invalid Scene Index {sceneIndexToLoad} ... using default value of {_sceneIndex}");
+            Debug.Log($"Invalid Scene Index {_sceneIndexToLoad} ... using default value of {_sceneIndex}");
         }
         //else
         //{
-        //    _sceneIndex = sceneIndexToLoad;
+        //    _sceneIndex = _sceneIndexToLoad;
         //}
 
         // Setup System GameObject
@@ -49,7 +50,7 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(systemsGO);
 
         // Queue up loading routines
-        Enqueue(IntializeCoreSystems(), 1);
+        Enqueue(IntializeCoreSystems(), 2);
         Enqueue(InitializeModularSystems(), 2);
 
         // Set completion callback
@@ -61,7 +62,8 @@ public class GameLoader : AsyncLoader
         // Setup Core Systems
         Debug.Log("Loading Core Systems");
 
-        Instantiate(_PlayerManager, SystemsParent);
+        Instantiate(_playerManager, SystemsParent);
+        Instantiate(_scoreManager, SystemsParent);
 
         yield return null;
     }

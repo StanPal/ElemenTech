@@ -7,8 +7,6 @@ public class PlayerAttack : MonoBehaviour
 {
 
     [SerializeField]
-    private float damage = 2;
-    [SerializeField]
     private float startTimeBtAttack;
     private float timeBtwAttack;
     [SerializeField]
@@ -123,7 +121,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(10f);
+                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
                 }
                 if (!collision.GetComponent<Guard>().Guarding)
@@ -139,7 +137,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(10f);
+                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
                 }                
                 if (!collision.GetComponent<Guard>().Guarding)

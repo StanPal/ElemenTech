@@ -24,9 +24,10 @@ TagManager:
   - 
   - 
   - Floor
-  - Enemy
+  - Player
   - Wall
   - CamBoxLayer
+  - Projectile
   - 
   - 
   - 

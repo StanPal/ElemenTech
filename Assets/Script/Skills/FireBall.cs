@@ -1,27 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireBall : MonoBehaviour
 {
     //private CanonBall canonball;
-    private FireSkills fireSkills;
-    private Rigidbody2D mRigidbody;
-    private float mProjectileSpeed;
+    private FireSkills _FireSkills;
+    private Rigidbody2D _RigidBody;
+    private float _ProjectileSpeed;
     private void Awake()
     {
-        fireSkills = FindObjectOfType<FireSkills>();
-        mRigidbody = GetComponent<Rigidbody2D>();
-        mProjectileSpeed = fireSkills.Speed;
-        if (fireSkills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            mProjectileSpeed *= -1;
-        }
+        _FireSkills = FindObjectOfType<FireSkills>();
+        _RigidBody = GetComponent<Rigidbody2D>();
+        _ProjectileSpeed = _FireSkills.Speed;
     }
 
     private void FixedUpdate()
     {
-        mRigidbody.velocity = transform.right * mProjectileSpeed; 
+        _RigidBody.velocity = transform.right * _ProjectileSpeed;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,24 +23,27 @@ public class FireBall : MonoBehaviour
         if (collision.GetComponent<Golem>())
         {
             Golem golem = collision.GetComponent<Golem>();
-            golem.TakeDamage(fireSkills.Damage);
+            golem.TakeDamage(_FireSkills.Damage);
             Destroy(gameObject);
         }
-        if (collision.GetComponent<Guard>() && this.tag.Equals(fireSkills.PlayerSkills.HeroMovement.tag))
+        if (collision.GetComponent<Guard>())
         {
-            Guard guard = collision.GetComponent<Guard>();
-            if (guard.Guarding)
+            if (collision.GetComponent<Guard>().tag.Equals(_FireSkills.PlayerSkills.HeroAction.tag))
             {
-                Debug.Log("Shield Hit");
-                collision.GetComponent<Guard>().ComboSkillOn = true;
-                Destroy(gameObject);
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+                }
             }
         }
         if (collision.GetComponentInParent<Walls>())
         {
             Destroy(gameObject);
         }
-        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
@@ -54,20 +51,20 @@ public class FireBall : MonoBehaviour
 
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(fireSkills.Damage);
+                    heroStats.TakeDamageFromProjectile(fireSkills.Damage);
                     Destroy(gameObject);
                 }
-                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(fireSkills.Damage);
-                    //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);       
-                }            
+                    //collision.TryGetComponent<HeroStats>(out HeroStats).TakeDamage(_FireSkills.Damage);
+                    //collision.GetComponent<HeroStats>().DamageOverTime(_FireSkills.Damage, _FireSkills.DotDuration);       
+                }
         }
-        if (fireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+        if (_FireSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
                // collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
-                collision.GetComponent<HeroStats>().TakeDamage(fireSkills.Damage);
-                collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
+                collision.GetComponent<HeroStats>().TakeDamageFromProjectile(fireSkills.Damage);
+                //collision.GetComponent<HeroStats>().DamageOverTime(fireSkills.Damage, fireSkills.DotDuration);
                 Destroy(gameObject);
             }
         }

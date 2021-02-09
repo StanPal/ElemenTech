@@ -1,33 +1,31 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class AirJet : MonoBehaviour
-{       
-    private float mProjectileSpeed = 1f;
-    private float mExitTime = 1f; 
-    private Rigidbody2D mRigidbody;
-    private Vector3 mScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
-
+{
+    private float _ProjectileSpeed = 1f;
+    private float _ExitTime = 1f;
+    private Rigidbody2D _RigidBody;
+    private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills airskills;
 
     void Start()
     {
-        mRigidbody = GetComponent<Rigidbody2D>();
+        _RigidBody = GetComponent<Rigidbody2D>();
         airskills = FindObjectOfType<AirSkills>();
-        mProjectileSpeed = airskills.Speed;
-        mScaleSize = airskills.Scale;
-        mExitTime = airskills.ExitTime;
-        if (airskills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            mProjectileSpeed *= -1;
-        }
+        _ProjectileSpeed = airskills.Speed;
+        _ScaleSize = airskills.Scale;
+        _ExitTime = airskills.ExitTime;
     }
 
     private void FixedUpdate()
     {
-        mRigidbody.velocity = transform.right * mProjectileSpeed;
-        transform.localScale = Vector3.Lerp(transform.localScale, mScaleSize, airskills.ScaleSpeed * Time.deltaTime);
+        if (_ExitTime <= 0.0f)
+        {
+            Destroy(gameObject);
+        }
+        _ExitTime -= Time.deltaTime;
+        _RigidBody.velocity = transform.right * _ProjectileSpeed;
+        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, airskills.ScaleSpeed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -41,24 +39,46 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(airskills.Damage);
             }
         }
-        if (collision.GetComponentInParent<Walls>())
+
+        if (collision.GetComponent<Guard>())
         {
-            Destroy(gameObject);
+            if (collision.GetComponent<Guard>().tag.Equals(airskills.PlayerSkills.HeroAction.tag))
+            {
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+
+                }
+            }
         }
+
+        //if (collision.GetComponentInParent<Walls>())
+        //{
+        //    Destroy(gameObject);
+        //}
         if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamageFromProjectile(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
         if (airskills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<HeroStats>().TakeDamage(airskills.Damage);
-                Destroy(gameObject);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamageFromProjectile(airskills.Damage);
+                    Destroy(gameObject);
+                }
             }
         }
     }

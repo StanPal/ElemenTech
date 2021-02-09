@@ -31,11 +31,15 @@ public class EarthSpike : MonoBehaviour
 
         if (collision.GetComponent<Guard>())
         {
-            Guard guard = collision.GetComponent<Guard>();
-            if (guard.Guarding)
+            if (collision.GetComponent<Guard>().tag.Equals(EarthSkills.PlayerSkills.HeroAction.tag))
             {
-                Debug.Log("Shield Hit");
-                collision.GetComponent<Guard>().ComboSkillOn = true;
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+                }
             }
         }
         if (EarthSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
