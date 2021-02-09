@@ -207,34 +207,34 @@ public class HeroMovement : MonoBehaviour
 
                         if (jumpPressure < MaxjumpPressure)
                         {
-                            print("JumpPressure < MaJumpPressure successful!");
+                            Debug.Log("JumpPressure < MaJumpPressure successful!");
                             jumpPressure += Time.deltaTime * 10f;
                         }
                         else
                         {
 
                             jumpPressure = MaxjumpPressure;
-                            print("JumpPressure  =  MaxJumpPressure successful!");
+                            Debug.Log("JumpPressure  =  MaxJumpPressure successful!");
                         }
 
                     }
                     else if (_playerInput.KeyboardMouse.JumpRelease.triggered && _numOfJumps > 0)
                     {
-                        print("hold:" + jumpPressure);
+                        Debug.Log("hold:" + jumpPressure);
 
                         if (jumpPressure > 0)
                         {
                             jumpPressure += MinjumpPressure;
 
-                            print("jumpPressure + MinjumpPressure = " + jumpPressure);
+                            Debug.Log("jumpPressure + MinjumpPressure = " + jumpPressure);
 
                             _Rb.velocity = Vector2.up * (_jumpForce + jumpPressure);
                             jumpPressure = 0f;
                             _onGround = false;
-                            print("PressureJump successful!");
+                            Debug.Log("PressureJump successful!");
                         }
                         _numOfJumps--;
-                        print("number of jumps : " + _numOfJumps);
+                        Debug.Log("number of jumps : " + _numOfJumps);
 
                     }
                 }
@@ -250,28 +250,28 @@ public class HeroMovement : MonoBehaviour
             case Controller.Keyboard2:
                 if (_playerInput.KeyboardLayout2.Jump.triggered && _numOfJumps > 0)
                 {
-                    //if (_playerInput.KeyboardLayout2.JumpHold.triggered && _numOfJumps > 0)
-                    //{
+                    if (_playerInput.KeyboardLayout2.JumpHold.triggered && _numOfJumps > 0)
+                    {
 
-                    //    if (jumpPressure < MaxjumpPressure)
-                    //    {
-                    //        jumpPressure += Time.deltaTime * 10f;
-                    //    }
-                    //    else
-                    //    {
-                    //        jumpPressure = MaxjumpPressure;
-                    //    }
-                    //    print("hold:" + jumpPressure);
-                    //}
-                    //else
-                    //{
-                    //    if (jumpPressure > 0)
-                    //    {
-                    //        jumpPressure += MinjumpPressure;
-                    //        _Rb.velocity = Vector2.up * (_jumpForce * jumpPressure);
-                    //        //jumpPressure = 0f;
-                    //    }
-                    //}
+                        if (jumpPressure < MaxjumpPressure)
+                        {
+                            jumpPressure += Time.deltaTime * 10f;
+                        }
+                        else
+                        {
+                            jumpPressure = MaxjumpPressure;
+                        }
+                        Debug.Log("hold:" + jumpPressure);
+                    }
+                    else
+                    {
+                        if (jumpPressure > 0)
+                        {
+                            jumpPressure += MinjumpPressure;
+                            _Rb.velocity = Vector2.up * (_jumpForce * jumpPressure);
+                            //jumpPressure = 0f;
+                        }
+                    }
                 }
                 else if (_playerInput.KeyboardLayout2.Jump.triggered && _numOfJumps == 0 && IsGrounded())
                 {
