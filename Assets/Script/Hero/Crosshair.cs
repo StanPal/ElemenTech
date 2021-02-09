@@ -27,22 +27,22 @@ public class Crosshair : MonoBehaviour
     private void Initialize()
     {
         _playerManager = FindObjectOfType<PlayerManager>();
-        if(_playerManager.mPlayersList.Count == 1)
+        if(_playerManager.PlayersList.Count == 1)
         {
             _P1CrossHairs.SetActive(true);
         }        
-        if (_playerManager.mPlayersList.Count == 2)
+        if (_playerManager.PlayersList.Count == 2)
         {
             _P1CrossHairs.SetActive(true);
             _P2CrossHairs.SetActive(true);
         }        
-        if (_playerManager.mPlayersList.Count == 3)
+        if (_playerManager.PlayersList.Count == 3)
         {
             _P1CrossHairs.SetActive(true);
             _P2CrossHairs.SetActive(true);
             _P3CrossHairs.SetActive(true);
         }        
-        if (_playerManager.mPlayersList.Count == 4)
+        if (_playerManager.PlayersList.Count == 4)
         {
             _P1CrossHairs.SetActive(true);
             _P2CrossHairs.SetActive(true);
@@ -51,10 +51,10 @@ public class Crosshair : MonoBehaviour
         }        
         Cursor.visible = false;
 
-        _playerOne = _playerManager.mPlayersList[0].GetComponent<HeroActions>();
-        _playerTwo = _playerManager.mPlayersList[1].GetComponent<HeroActions>();
-        _playerThree = _playerManager.mPlayersList[2].GetComponent<HeroActions>();
-        _playerFour = _playerManager.mPlayersList[3].GetComponent<HeroActions>();
+        _playerOne = _playerManager.PlayersList[0].GetComponent<HeroActions>();
+        _playerTwo = _playerManager.PlayersList[1].GetComponent<HeroActions>();
+        _playerThree = _playerManager.PlayersList[2].GetComponent<HeroActions>();
+        _playerFour = _playerManager.PlayersList[3].GetComponent<HeroActions>();
 
     }
 
@@ -110,8 +110,8 @@ public class Crosshair : MonoBehaviour
                     _P1CrossHairs.SetActive(true);
                 }
                 _P1CrossHairs.transform.position = new Vector3(
-                    _playerOne.transform.position.x + (_playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
-                    _playerOne.transform.position.y + _playerManager.mPlayersList[0].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
+                    _playerOne.transform.position.x + (_playerManager.PlayersList[0].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
+                    _playerOne.transform.position.y + _playerManager.PlayersList[0].GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             default:
                 break;

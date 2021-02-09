@@ -23,10 +23,10 @@ public class PlayerManager : MonoBehaviour
         AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
 
-        mPlayersList[0] = FireHero;
-        mPlayersList[1] = WaterHero;
-        mPlayersList[2] = AirHero;
-        mPlayersList[3] = EarthHero;
+        PlayersList[0] = FireHero;
+        PlayersList[1] = WaterHero;
+        PlayersList[2] = AirHero;
+        PlayersList[3] = EarthHero;
 
         TeamOne.Capacity = 0;
         TeamTwo.Capacity = 0;

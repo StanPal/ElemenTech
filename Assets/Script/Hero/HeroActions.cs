@@ -187,7 +187,7 @@ public class HeroActions : MonoBehaviour
     {
         if (Time.time > _nextFireTime)
         {
-            if (!_isGuardInvoked && !_isOnCooldown && !_heroMovement.Dashing)
+            if (!_isGuardInvoked && !_isOnCooldown && !_heroMovement.IsDashing)
             {
                 _playerAnimator.SetTrigger("SkillTrigger");
                 _nextFireTime = Time.time + HeroStats.CoolDown;
@@ -198,7 +198,7 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if (!_isGuardInvoked && !_heroMovement.Dashing)
+        if (!_isGuardInvoked && !_heroMovement.IsDashing)
         {
             _playerAnimator.SetBool("IsJumping",false);
             _playerAnimator.SetTrigger("AttackTrigger");

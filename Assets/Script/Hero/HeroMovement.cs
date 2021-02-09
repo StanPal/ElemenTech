@@ -4,12 +4,19 @@ using UnityEngine;
 public class HeroMovement : MonoBehaviour
 {
     private HeroActions _HeroActions;
-    private PlayerInput _PlayerInput;
+    private PlayerInput _playerInput;
     private Animator _PlayerAnimator;
     private BoxCollider2D _BoxCollider2D;
     private Collider2D _Col;
     private AnimationEvents _AnimationEvents;
     private Rigidbody2D _Rb;
+    private Collider2D col;
+
+    private float _defendTimeVal = 1f;
+    private bool _isDefended = true;
+    private float _horizontalMove;
+    private float _moveInput;
+    private bool _onHitLeft = false;
 
     public enum Controller
     {
@@ -22,99 +29,76 @@ public class HeroMovement : MonoBehaviour
     }
     public Controller ControllerInput = Controller.None;
 
-    private float _HorizontalMove;
-    private float _MoveInput;
-    private bool _OnHitLeft = false;
+    [SerializeField] private bool _onGround;
+    [SerializeField] private bool _isJumpPressure = true;
+    [SerializeField] private float jumpPressure = 0f;
+    [SerializeField] private float MinjumpPressure = 3f;
+    [SerializeField] private float MaxjumpPressure = 10f;
 
-    [SerializeField]
-    bool OnGround;
-    [SerializeField]
-    private bool IsJumpPressure = true;
-    [SerializeField]
-    private float jumpPressure = 0f;
-    [SerializeField]
-    private float MinjumpPressure = 3f;
-    [SerializeField]
-    private float MaxjumpPressure = 10f;
-    private Collider2D col;
-    [SerializeField] private float mSpeed = 8f;
-    [SerializeField] private bool _IsLeft = false;
-    [SerializeField] private bool _IsJumping = false;
-    [SerializeField] private float _JumpForce = 5f;
-    [SerializeField] private int _NumOfJumps = 0;
-    [SerializeField] private int _MaxJumps = 1;
+    [SerializeField] private float _speed = 8f;
+    [SerializeField] private bool _isLeft = false;
+    [SerializeField] private bool _isJumping = false;
+    [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private int _numOfJumps = 0;
+    [SerializeField] private int _maxJumps = 1;
     [SerializeField] private LayerMask _Ground;
 
     //Dash Modifiers
-    [SerializeField] private bool canDash = true;
-    [SerializeField] private bool _IsDashing;
-    [SerializeField] private float _DashSpeed = 5f;
-    [SerializeField] private float _DashCoolDown = 1f;
-    [SerializeField] private float _DashStartUpTime = 1f;
+    [SerializeField] private bool _canDash = true;
+    [SerializeField] private bool _isDashing;
+    [SerializeField] private float _dashSpeed = 5f;
+    [SerializeField] private float _dashCoolDown = 1f;
+    [SerializeField] private float _dashStartUpTime = 1f;
 
-    [SerializeField]
-    private bool canDash = true;
-    [SerializeField]
-    public bool isDashing;
-    [SerializeField]
-    private float mDashSpeed = 5f;
-    [SerializeField]
-    private float mDashCoolDown = 1f;
-    [SerializeField]
-    private float mDashStartUpTime = 1f;
     //Recovery Time until the player can move again 
-    [SerializeField] private float _RecoveryTime = 1f;
-    [SerializeField] private bool isRecovering = false;
-    private float _OriginalRecoveryTime;
-    
-    [SerializeField] private float _KnockBackRecieved;
-    [SerializeField] private float _KnockBackCount;
+    [SerializeField] private float _recoveryTime = 1f;
+    [SerializeField] private bool _isRecovering = false;
+    private float _originalRecoveryTime;
 
-    [SerializeField]
-    private float mSpeed;
-    public GameObject defendEffectPrefab;
-    private float defendTimeVal = 1;
-    private bool isDefended = true;
+    [SerializeField] private float _knockBackRecieved;
+    [SerializeField] private float _knockBackCount;
+
     //Getters and Setters
-    public PlayerInput PlayerInput { get { return _PlayerInput; } }
-    public bool Dashing { get { return _IsDashing; } }
-    public float Speed { get { return mSpeed; } set { mSpeed = value; } }
-    public bool GetIsLeft { get { return _IsLeft; } }
-    public float RecoveryTime { get { return _RecoveryTime; } set { _RecoveryTime = value; } }
-    public bool Recovering { get { return isRecovering; } set { isRecovering = value; } }
-    
+    public GameObject defendEffectPrefab;
+    public PlayerInput PlayerInput { get { return _playerInput; } }
+    public bool IsDashing { get { return _isDashing; } set { _isDashing = value; } }
+    public float Speed { get { return _speed; } set { _speed = value; } }
+    public bool GetIsLeft { get { return _isLeft; } }
+    public float RecoveryTime { get { return _recoveryTime; } set { _recoveryTime = value; } }
+    public bool Recovering { get { return _isRecovering; } set { _isRecovering = value; } }
+
     private void Awake()
     {
-        OnGround = true;
-
+        _onGround = true;
         _PlayerAnimator = GetComponentInChildren<Animator>();
         _Rb = GetComponent<Rigidbody2D>();
-        _PlayerInput = new PlayerInput();
+        _playerInput = new PlayerInput();
         _Col = GetComponent<Collider2D>();
         _HeroActions = GetComponent<HeroActions>();
-        _OriginalRecoveryTime = _RecoveryTime;
+        _originalRecoveryTime = _recoveryTime;
         _AnimationEvents = GetComponentInChildren<AnimationEvents>();
         _BoxCollider2D = GetComponent<BoxCollider2D>();
-        canDash = true;
+        _canDash = true;
+
         if (ControllerInput == Controller.Keyboard)
         {
-            _PlayerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+            _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
         }
         if (ControllerInput == Controller.Keyboard2)
         {
-            _PlayerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
+            _playerInput.KeyboardLayout2.Dash.performed += _ => OnDash();
         }
         if (ControllerInput == Controller.PS4)
         {
-            _PlayerInput.PS4.Dash.performed += _ => OnDash();
+            _playerInput.PS4.Dash.performed += _ => OnDash();
         }
         if (ControllerInput == Controller.XBOX)
         {
-            _PlayerInput.XBOX.Dash.performed += _ => OnDash();
+            _playerInput.XBOX.Dash.performed += _ => OnDash();
         }
         if (ControllerInput == Controller.Gamepad)
         {
-            _PlayerInput.Gamepad.Dash.performed += _ => OnDash();
+            _playerInput.Gamepad.Dash.performed += _ => OnDash();
         }
     }
 
@@ -129,30 +113,30 @@ public class HeroMovement : MonoBehaviour
         {
             _PlayerAnimator.SetBool("IsJumping", false);
             _PlayerAnimator.SetBool("IsMultiJump", false);
-            _NumOfJumps = _MaxJumps;
+            _numOfJumps = _maxJumps;
         }
 
-        if (!isRecovering)
+        if (!_isRecovering)
         {
-            if (ControllerInput == Controller.Keyboard && !_IsDashing)
+            if (ControllerInput == Controller.Keyboard && !_isDashing)
             {
-                _MoveInput = _PlayerInput.KeyboardMouse.Move.ReadValue<float>();
+                _moveInput = _playerInput.KeyboardMouse.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.PS4 && !_IsDashing)
+            else if (ControllerInput == Controller.PS4 && !_isDashing)
             {
-                _MoveInput = _PlayerInput.PS4.Move.ReadValue<float>();
+                _moveInput = _playerInput.PS4.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.XBOX && !_IsDashing)
+            else if (ControllerInput == Controller.XBOX && !_isDashing)
             {
-                _MoveInput = _PlayerInput.XBOX.Move.ReadValue<float>();
+                _moveInput = _playerInput.XBOX.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.Keyboard2 && !_IsDashing)
+            else if (ControllerInput == Controller.Keyboard2 && !_isDashing)
             {
-                _MoveInput = _PlayerInput.KeyboardLayout2.Move.ReadValue<float>();
+                _moveInput = _playerInput.KeyboardLayout2.Move.ReadValue<float>();
             }
-            else if (ControllerInput == Controller.Gamepad && !_IsDashing)
+            else if (ControllerInput == Controller.Gamepad && !_isDashing)
             {
-                _MoveInput = _PlayerInput.Gamepad.Move.ReadValue<float>();
+                _moveInput = _playerInput.Gamepad.Move.ReadValue<float>();
             }
             else
             {
@@ -161,176 +145,170 @@ public class HeroMovement : MonoBehaviour
         }
 
         Vector3 currentPosition = transform.position;
-        currentPosition.x += _MoveInput * mSpeed * Time.deltaTime;
+        currentPosition.x += _moveInput * _speed * Time.deltaTime;
         transform.position = currentPosition;
 
-        if (_KnockBackCount > 0)
+        if (_knockBackCount > 0)
         {
-            if (_OnHitLeft)
+            if (_onHitLeft)
             {
-                _Rb.velocity = new Vector2(-_KnockBackRecieved, _KnockBackRecieved);
+                _Rb.velocity = new Vector2(-_knockBackRecieved, _knockBackRecieved);
             }
             else
             {
-                _Rb.velocity = new Vector2(_KnockBackRecieved, _KnockBackRecieved);
+                _Rb.velocity = new Vector2(_knockBackRecieved, _knockBackRecieved);
 
             }
-            _KnockBackCount--;
+            _knockBackCount--;
         }
 
-        if (_IsDashing)
+        if (_isDashing)
         {
-            StartCoroutine(Dash(_IsLeft));
+            StartCoroutine(Dash(_isLeft));
         }
 
-        if (isRecovering)
+        if (_isRecovering)
         {
             StartCoroutine(Recover());
         }
 
         Vector3 characterScale = transform.localScale;
-        if (_MoveInput < 0)
+        if (_moveInput < 0)
         {
             characterScale.x = -1;
-            _IsLeft = true;
+            _isLeft = true;
         }
 
-        if (_MoveInput > 0)
+        if (_moveInput > 0)
         {
             characterScale.x = 1;
-            _IsLeft = false;
+            _isLeft = false;
         }
-	}
+    }
 
     IEnumerator DashStartUp()
     {
-        yield return new WaitForSeconds(mDashStartUpTime);
-        isDashing = true;
-        transform.localScale = characterScale;
+        yield return new WaitForSeconds(_dashStartUpTime);
+        IsDashing = true;
     }
 
     private void Update()
     {
-        mNumOfJumps = mMaxJumps;
-        switch (controllerInput)
+        _numOfJumps = _maxJumps;
+        switch (ControllerInput)
         {
             case Controller.None:
                 break;
             case Controller.Keyboard:
-                if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
+                if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0)
                 {
-                        if (mPlayerInput.KeyboardMouse.Jump.triggered && mNumOfJumps > 0)
-                        {
-                           
-                            if (jumpPressure < MaxjumpPressure)
-                            {
-                                print("JumpPressure < MaJumpPressure successful!");
-                                jumpPressure += Time.deltaTime * 10f;
-                            }
-                            else
-                            {
-
-                                jumpPressure = MaxjumpPressure;
-                            print("JumpPressure  =  MaxJumpPressure successful!");
-                            }
-
-                        }
-                        else if (mPlayerInput.KeyboardMouse.JumpRelease.triggered && mNumOfJumps > 0)
-                        {
-                            print("hold:" + jumpPressure);
-                            
-                        if (jumpPressure > 0)
-                            {
-                                jumpPressure += MinjumpPressure;
-
-                            print("jumpPressure + MinjumpPressure = " + jumpPressure);
-
-                                rb.velocity = Vector2.up * (mJumpForce + jumpPressure);
-                                 jumpPressure = 0f;
-                                OnGround = false;
-                                print("PressureJump successful!");
-                            }
-                            mNumOfJumps--;
-                            print("number of jumps : " + mNumOfJumps);
-
-                    }
-
-                    
-
-                }
-                if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps > 0)
-                {
-                    Jump();
-                }
-                else if (_PlayerInput.KeyboardMouse.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
-                {
-                    MultiJump();
-                }
-                break;
-
-
-            case Controller.Keyboard2:
-                if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps > 0)
-                {
-                    if (mPlayerInput.KeyboardLayout2.JumpHold.triggered && mNumOfJumps > 0)
+                    if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0)
                     {
 
-                        if(jumpPressure < MaxjumpPressure)
+                        if (jumpPressure < MaxjumpPressure)
                         {
+                            print("JumpPressure < MaJumpPressure successful!");
                             jumpPressure += Time.deltaTime * 10f;
                         }
                         else
                         {
+
                             jumpPressure = MaxjumpPressure;
+                            print("JumpPressure  =  MaxJumpPressure successful!");
                         }
-                        print("hold:" + jumpPressure);
+
                     }
-                    else
+                    else if (_playerInput.KeyboardMouse.JumpRelease.triggered && _numOfJumps > 0)
                     {
+                        print("hold:" + jumpPressure);
+
                         if (jumpPressure > 0)
                         {
                             jumpPressure += MinjumpPressure;
-                            rb.velocity = Vector2.up * (mJumpForce * jumpPressure);
-                            //jumpPressure = 0f;
+
+                            print("jumpPressure + MinjumpPressure = " + jumpPressure);
+
+                            _Rb.velocity = Vector2.up * (_jumpForce + jumpPressure);
+                            jumpPressure = 0f;
+                            _onGround = false;
+                            print("PressureJump successful!");
                         }
+                        _numOfJumps--;
+                        print("number of jumps : " + _numOfJumps);
+
                     }
                 }
-                else if (_PlayerInput.KeyboardLayout2.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0)
+                {
+                    Jump();
+                }
+                else if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps == 0 && IsGrounded())
+                {
+                    MultiJump();
+                }
+                break;
+            case Controller.Keyboard2:
+                if (_playerInput.KeyboardLayout2.Jump.triggered && _numOfJumps > 0)
+                {
+                    //if (_playerInput.KeyboardLayout2.JumpHold.triggered && _numOfJumps > 0)
+                    //{
+
+                    //    if (jumpPressure < MaxjumpPressure)
+                    //    {
+                    //        jumpPressure += Time.deltaTime * 10f;
+                    //    }
+                    //    else
+                    //    {
+                    //        jumpPressure = MaxjumpPressure;
+                    //    }
+                    //    print("hold:" + jumpPressure);
+                    //}
+                    //else
+                    //{
+                    //    if (jumpPressure > 0)
+                    //    {
+                    //        jumpPressure += MinjumpPressure;
+                    //        _Rb.velocity = Vector2.up * (_jumpForce * jumpPressure);
+                    //        //jumpPressure = 0f;
+                    //    }
+                    //}
+                }
+                else if (_playerInput.KeyboardLayout2.Jump.triggered && _numOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
                 else
+                {
+
+                }
                 break;
             case Controller.PS4:
-                if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps > 0)
+                if (_playerInput.PS4.Jump.triggered && _numOfJumps > 0)
                 {
                     Jump();
                 }
-
-                {
-                    Jump();
-                }
-                else if (_PlayerInput.PS4.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                else if (_playerInput.PS4.Jump.triggered && _numOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
                 break;
+
             case Controller.XBOX:
-                if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps > 0)
+                if (_playerInput.XBOX.Jump.triggered && _numOfJumps > 0)
                 {
                     Jump();
                 }
-                else if (_PlayerInput.XBOX.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                else if (_playerInput.XBOX.Jump.triggered && _numOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
                 break;
             case Controller.Gamepad:
-                if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps > 0)
+                if (_playerInput.Gamepad.Jump.triggered && _numOfJumps > 0)
                 {
                     Jump();
                 }
-                else if (_PlayerInput.Gamepad.Jump.triggered && _NumOfJumps == 0 && IsGrounded())
+                else if (_playerInput.Gamepad.Jump.triggered && _numOfJumps == 0 && IsGrounded())
                 {
                     MultiJump();
                 }
@@ -338,27 +316,27 @@ public class HeroMovement : MonoBehaviour
             default:
                 break;
         }
-        _HorizontalMove = _MoveInput * mSpeed;
-        _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_HorizontalMove));
+        _horizontalMove = _moveInput * _speed;
+        _PlayerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
     }
 
     private void OnEnable()
     {
-        _PlayerInput.Enable();
+        _playerInput.Enable();
     }
     private void OnDisable()
     {
-        _PlayerInput.Disable();
+        _playerInput.Disable();
     }
 
     public void IcySlidding(float SliddingSpeed)
     {
-        mSpeed += SliddingSpeed;
+        _speed += SliddingSpeed;
     }
 
     public void SandDecrease(float SandDecreaseSpeed)
     {
-        mSpeed -= SandDecreaseSpeed;
+        _speed -= SandDecreaseSpeed;
     }
 
     public bool IsGrounded()
@@ -374,49 +352,42 @@ public class HeroMovement : MonoBehaviour
         {
             rayColor = Color.red;
         }
-        Debug.DrawRay(_BoxCollider2D.bounds.center, Vector2.down * (_BoxCollider2D.bounds.extents.y + extraHeightText),rayColor);
+        Debug.DrawRay(_BoxCollider2D.bounds.center, Vector2.down * (_BoxCollider2D.bounds.extents.y + extraHeightText), rayColor);
         return raycastHit2D.collider != null;
     }
 
     private void OnDash()
     {
-        if (canDash)
+        if (_canDash)
         {
             _PlayerAnimator.SetTrigger("DashTrigger");
             StartCoroutine(DashStartUp());
         }
     }
 
-    private IEnumerator DashStartUp()
-    {
-        yield return new WaitForSeconds(_DashStartUpTime);
-
-        _IsDashing = true;
-    }
-
     private void Jump()
     {
         _PlayerAnimator.SetBool("IsJumping", true);
-        _Rb.velocity = Vector2.up * _JumpForce;
-        _NumOfJumps--;
+        _Rb.velocity = Vector2.up * _jumpForce;
+        _numOfJumps--;
     }
 
     private void MultiJump()
-    {  
-        _Rb.velocity = Vector2.up * _JumpForce;
+    {
+        _Rb.velocity = Vector2.up * _jumpForce;
     }
 
     private IEnumerator Dash(bool _IsLeft)
-    { 
+    {
         Vector3 currentPosition = transform.position;
         if (_IsLeft)
         {
-            currentPosition.x -= (_DashSpeed * 0.1f);
+            currentPosition.x -= (_dashSpeed * 0.1f);
         }
 
         else
         {
-            currentPosition.x += (_DashSpeed * 0.1f);
+            currentPosition.x += (_dashSpeed * 0.1f);
         }
 
         transform.position = currentPosition;
@@ -424,27 +395,27 @@ public class HeroMovement : MonoBehaviour
         _Rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.4f);
         _Rb.gravityScale = 1f;
-        _IsDashing = false;
-        canDash = false;
-        isRecovering = true;
-        yield return new WaitForSeconds(_DashCoolDown);
-        canDash = true;
+        _isDashing = false;
+        _canDash = false;
+        _isRecovering = true;
+        yield return new WaitForSeconds(_dashCoolDown);
+        _canDash = true;
     }
 
     private IEnumerator Recover()
     {
         _HeroActions.enabled = false;
-        isRecovering = true;
-        yield return new WaitForSeconds(_RecoveryTime);
-        _RecoveryTime = _OriginalRecoveryTime;
+        _isRecovering = true;
+        yield return new WaitForSeconds(_recoveryTime);
+        _recoveryTime = _originalRecoveryTime;
         _HeroActions.enabled = true;
-        isRecovering = false;
+        _isRecovering = false;
     }
 
     public void OnKnockBackHit(float knockbackamount, bool direction)
     {
-        _KnockBackCount++;
-        _KnockBackRecieved = knockbackamount;
-        _OnHitLeft = direction;
+        _knockBackCount++;
+        _knockBackRecieved = knockbackamount;
+        _onHitLeft = direction;
     }
 }

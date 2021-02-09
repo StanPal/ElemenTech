@@ -20,21 +20,21 @@ public class PauseUI : MonoBehaviour
 
     private void Start()
     {
-        if (_PlayerManager.mPlayersList[0].gameObject != null)
+        if (_PlayerManager.PlayersList[0].gameObject != null)
         {
-            _PlayerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.PlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager.mPlayersList[1].gameObject != null)
+        if (_PlayerManager.PlayersList[1].gameObject != null)
         {
-            _PlayerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.PlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager.mPlayersList[2].gameObject != null)
+        if (_PlayerManager.PlayersList[2].gameObject != null)
         {
-            _PlayerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.PlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager.mPlayersList[3].gameObject != null)
+        if (_PlayerManager.PlayersList[3].gameObject != null)
         {
-            _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.PlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
 
@@ -71,10 +71,10 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        _PlayerManager.mPlayersList[0] = _PlayerManager.FireHero;
-        _PlayerManager.mPlayersList[1] = _PlayerManager.WaterHero;
-        _PlayerManager.mPlayersList[2] = _PlayerManager.AirHero;
-        _PlayerManager.mPlayersList[3] = _PlayerManager.EarthHero;
+        _PlayerManager.PlayersList[0] = _PlayerManager.FireHero;
+        _PlayerManager.PlayersList[1] = _PlayerManager.WaterHero;
+        _PlayerManager.PlayersList[2] = _PlayerManager.AirHero;
+        _PlayerManager.PlayersList[3] = _PlayerManager.EarthHero;
 
         _PlayerManager.TeamOne.Clear();
         _PlayerManager.TeamTwo.Clear();
