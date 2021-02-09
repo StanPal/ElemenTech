@@ -4,19 +4,21 @@ using UnityEngine;
 
 public class ParticleSystemManager : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _DebuffEffects = new List<GameObject>();
-    [SerializeField] private List<GameObject> _OtherEffects = new List<GameObject>();
-    [SerializeField] private List<GameObject> _AuraEffects = new List<GameObject>();
-    private PlayerManager _PlayerManager;
-    private Dictionary<GameObject, GameObject> _NegativeDict = new Dictionary<GameObject, GameObject>();
-    public List<GameObject> GetDebuffEffects { get { return _DebuffEffects; } }
+    private PlayerManager _playerManager;
+    private Dictionary<GameObject, GameObject> _negativeBuffDict = new Dictionary<GameObject, GameObject>();
 
-    [SerializeField] private float _AuraDuration = 1f;
-    [SerializeField] private float _auratick = 0.5f;
-    [SerializeField] private float _AuraDamage = 0.1f;
+    [SerializeField] private List<GameObject> _debuffEffects = new List<GameObject>();
+    [SerializeField] private List<GameObject> _otherEffects = new List<GameObject>();
+    [SerializeField] private List<GameObject> _auraEffects = new List<GameObject>();
+    [SerializeField] private float _auraDuration = 1f;
+    [SerializeField] private float _auraTick = 0.5f;
+    [SerializeField] private float _auraDamage = 0.1f;
     [SerializeField] private Vector3 _auraSize = new Vector3(2f, 2f, 2f);
-    private bool _IsAuraExist = false;
-    private GameObject _AuraType;
+
+    public List<GameObject> GetDebuffEffects { get => _debuffEffects; } 
+    private bool _isAuraExist = false;
+    private GameObject _auraType;
+
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -24,11 +26,11 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void Initialize()
     {
-        _PlayerManager = FindObjectOfType<PlayerManager>();
-        for (int i = 0; i < _PlayerManager.mPlayersList.Count; i++)
+        _playerManager = FindObjectOfType<PlayerManager>();
+        for (int i = 0; i < _playerManager.mPlayersList.Count; i++)
         {
-            _PlayerManager.mPlayersList[i].GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
-            _PlayerManager.mPlayersList[i].GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
+            _playerManager.mPlayersList[i].GetComponent<HeroStats>().onDebuffActivated += DebuffEffectOn;
+            _playerManager.mPlayersList[i].GetComponent<HeroStats>().onDebuffDeActivated += DebuffEffectOff;
 
         }
     }
@@ -53,12 +55,12 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void DebuffEffectOff(GameObject hero)
     {
-        foreach (var statuseffect in _NegativeDict)
+        foreach (var statuseffect in _negativeBuffDict)
         {
             if (statuseffect.Key.GetComponent<HeroStats>().DeBuff == StatusEffects.NegativeEffects.None)
             {
                 statuseffect.Value.GetComponent<ParticleSystem>().Stop();
-                _NegativeDict.Remove(statuseffect.Key);
+                _negativeBuffDict.Remove(statuseffect.Key);
                 break;
             }
         }
@@ -66,26 +68,26 @@ public class ParticleSystemManager : MonoBehaviour
 
     private void Burning(GameObject hero)
     {
-        ParticleSystem ps = _DebuffEffects[0].GetComponent<ParticleSystem>();
+        ParticleSystem ps = _debuffEffects[0].GetComponent<ParticleSystem>();
         
         GameObject BurningEffect = Instantiate(ps.gameObject, new Vector3(hero.transform.position.x,hero.transform.position.y - 1) , Quaternion.identity);
         BurningEffect.transform.parent = hero.transform;
         BurningEffect.transform.localScale = new Vector3(1f, 1.5f, 1f);
         BurningEffect.GetComponent<ParticleSystem>().Play();
-        if (_NegativeDict.ContainsKey(hero))
+        if (_negativeBuffDict.ContainsKey(hero))
         {
-            _NegativeDict.Remove(hero);
-            _NegativeDict.Add(hero, BurningEffect);
+            _negativeBuffDict.Remove(hero);
+            _negativeBuffDict.Add(hero, BurningEffect);
         }
         else
         {
-            _NegativeDict.Add(hero, BurningEffect);
+            _negativeBuffDict.Add(hero, BurningEffect);
         }
     }
 
     private void Slowed(GameObject hero)
     {
-        ParticleSystem ps = _DebuffEffects[1].GetComponent<ParticleSystem>();
+        ParticleSystem ps = _debuffEffects[1].GetComponent<ParticleSystem>();
 
         GameObject SlowEffect = Instantiate(ps.gameObject, hero.transform.position, Quaternion.identity);
         SlowEffect.transform.parent = hero.transform;
@@ -96,29 +98,28 @@ public class ParticleSystemManager : MonoBehaviour
     public void FireAura(GameObject hero)
     {
         Debug.Log("reached");
-        if (!_IsAuraExist)
+        if (!_isAuraExist)
         {
-            _AuraType = Instantiate(_AuraEffects[0].gameObject, hero.transform.position, Quaternion.identity);
-            _AuraType.tag = hero.tag;
-            _AuraType.GetComponent<FireAura>().SetDamage = _AuraDamage;
-            _AuraType.GetComponent<FireAura>().SetTick = _auratick;
-            _AuraType.transform.parent = hero.transform;
-            _AuraType.transform.localScale = _auraSize;
-            _AuraType.GetComponent<ParticleSystem>().Play();
-            _IsAuraExist = true;
+            _auraType = Instantiate(_auraEffects[0].gameObject, hero.transform.position, Quaternion.identity);
+            _auraType.tag = hero.tag;
+            _auraType.GetComponent<FireAura>().SetDamage = _auraDamage;
+            _auraType.GetComponent<FireAura>().SetTick = _auraTick;
+            _auraType.transform.parent = hero.transform;
+            _auraType.transform.localScale = _auraSize;
+            _auraType.GetComponent<ParticleSystem>().Play();
+            _isAuraExist = true;
         }
         else
         {
-            _AuraType.GetComponent<ParticleSystem>().Play();
+            _auraType.GetComponent<ParticleSystem>().Play();
         }
-        StartCoroutine(TurnOffAura(_AuraType));
+        StartCoroutine(TurnOffAura(_auraType));
     }
     
     private IEnumerator TurnOffAura(GameObject Aura)
     {
-        yield return new WaitForSeconds(_AuraDuration);
-        _IsAuraExist = false;
+        yield return new WaitForSeconds(_auraDuration);
+        _isAuraExist = false;
         Destroy(Aura);
     }
-
 }

@@ -23,7 +23,7 @@ public class HeroActions : MonoBehaviour
     private float _nextFireTime;
 
     [SerializeField] private bool _isOnCooldown = false;
-    [SerializeField] private Vector2 _mLookDirection;
+    [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector2 _axisPos;
 
@@ -34,7 +34,7 @@ public class HeroActions : MonoBehaviour
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
-    public Vector2 GetLookDir { get => _mLookDirection; }
+    public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
 
     private void Awake()
@@ -126,23 +126,23 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                _mLookDirection = Camera.main.ScreenToWorldPoint(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
-                _lookAngle = Mathf.Atan2(_mLookDirection.y, _mLookDirection.x) * Mathf.Rad2Deg;
+                _lookDirection = Camera.main.ScreenToWorldPoint(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
                 _axisPos = _playerInput.PS4.Aim.ReadValue<Vector2>();
-                _mLookDirection = _playerInput.PS4.Aim.ReadValue<Vector2>();
-                _lookAngle = Mathf.Atan2(_mLookDirection.y, _mLookDirection.x) * Mathf.Rad2Deg;
+                _lookDirection = _playerInput.PS4.Aim.ReadValue<Vector2>();
+                _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.XBOX:
                 _axisPos = _playerInput.XBOX.Aim.ReadValue<Vector2>();
-                _mLookDirection = _playerInput.XBOX.Aim.ReadValue<Vector2>();
-                _lookAngle = Mathf.Atan2(_mLookDirection.y, _mLookDirection.x) * Mathf.Rad2Deg;
+                _lookDirection = _playerInput.XBOX.Aim.ReadValue<Vector2>();
+                _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.Gamepad:
                 _axisPos = _playerInput.Gamepad.Aim.ReadValue<Vector2>();
-                _mLookDirection = _playerInput.Gamepad.Aim.ReadValue<Vector2>();
-                _lookAngle = Mathf.Atan2(_mLookDirection.y, _mLookDirection.x) * Mathf.Rad2Deg;
+                _lookDirection = _playerInput.Gamepad.Aim.ReadValue<Vector2>();
+                _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             default:
                 break;

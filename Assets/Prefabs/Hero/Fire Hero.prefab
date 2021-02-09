@@ -653,7 +653,7 @@ MonoBehaviour:
   PivotPoint: {fileID: 4742860617384786225}
   FirePoint: {fileID: 4264183723163891622}
   _isOnCooldown: 0
-  _mLookDirection: {x: 0, y: 0}
+  _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0}
 --- !u!114 &1791110765294023679
@@ -724,15 +724,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
   IsShieldDisabled: 0
-  _IsGuarding: 0
-  _GuardTime: 0.5
-  _ShieldSize: 2.1
-  _ShieldRecoveryTick: 3
-  _SpeedDecrease: 1
-  _ShieldMaxEnergy: 100
-  _ShieldRecoverAmount: 1
-  _ShieldEnergyTick: 0.1
-  _ShieldEnergy: 100
+  _isGuarding: 0
+  _guardTime: 0.5
+  _shieldSize: 2.1
+  _shieldRecoveryTick: 3
+  _speedDecrease: 1
+  _shieldMaxEnergy: 100
+  _shieldRecoverAmount: 1
+  _shieldEnergyTick: 0.2
+  _shieldEnergy: 100
   ComboSkill: {fileID: 0}
 --- !u!1 &1791110765672992121
 GameObject:

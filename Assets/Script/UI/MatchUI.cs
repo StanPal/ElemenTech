@@ -9,7 +9,7 @@ public class MatchUI : MonoBehaviour
     public Text TeamOneScore;
     public Text TeamTwoScore;
     public Text Transition;
-    private ScoreManager _ScoreManager;
+    private ScoreManager _scoreManager;
 
     private void Awake()
     {
@@ -18,13 +18,13 @@ public class MatchUI : MonoBehaviour
 
     private void Initialize()
     {
-        _ScoreManager = ServiceLocator.Get<ScoreManager>();
+        _scoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     public void displayTeamScore()
     {
-        TeamOneScore.text = "Team 1: " + _ScoreManager.TeamOneScore;
-        TeamTwoScore.text = "Team 2: " + _ScoreManager.TeamTwoScore;
+        TeamOneScore.text = "Team 1: " + _scoreManager.TeamOneScore;
+        TeamTwoScore.text = "Team 2: " + _scoreManager.TeamTwoScore;
         Time.timeScale = 0;
         Debug.Log("Current Scene" + SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Total Scene Count" + SceneManager.sceneCountInBuildSettings);
@@ -39,15 +39,15 @@ public class MatchUI : MonoBehaviour
         }
     }
 
-    IEnumerator TransitionToGameEndScene()
+    private IEnumerator TransitionToGameEndScene()
     {
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
-        _ScoreManager.IsMatchOver = false;
+        _scoreManager.IsMatchOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    IEnumerator TransitionToNextScene()
+    private IEnumerator TransitionToNextScene()
     {
         Time.timeScale = 1;
         Transition.text = "Next Match will begin in...";
@@ -58,9 +58,7 @@ public class MatchUI : MonoBehaviour
         yield return new WaitForSeconds(1);
         Transition.text = "1";
         yield return new WaitForSeconds(1);
-        _ScoreManager.IsMatchOver = false;
+        _scoreManager.IsMatchOver = false;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
-
-
 }
