@@ -535,19 +535,19 @@ GameObject:
   m_Component:
   - component: {fileID: 1791110765294023620}
   - component: {fileID: 1791110765294023675}
-  - component: {fileID: 1791110765294023674}
   - component: {fileID: 1791110765294023678}
   - component: {fileID: 1791110765294023673}
   - component: {fileID: 1791110765294023679}
   - component: {fileID: 1462250077875475378}
   - component: {fileID: 1791110765294023676}
+  - component: {fileID: 122998365925269869}
   m_Layer: 9
   m_Name: Fire Hero
   m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -591,32 +591,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1791110765294023674
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1791110765294023672}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.04296434, y: -0.0082342625}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 5.12, y: 2.56}
-    newSize: {x: 10.24, y: 5.12}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1.0859284, y: 1.8413835}
-  m_EdgeRadius: 0
 --- !u!114 &1791110765294023678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -695,7 +669,7 @@ MonoBehaviour:
   _knockBackCount: 0
   _noFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   _fullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
-  _slopeCheckDistance: 1
+  _slopeCheckDistance: 2
   _maxSlopeAngle: 0
 --- !u!114 &1462250077875475378
 MonoBehaviour:
@@ -734,6 +708,22 @@ MonoBehaviour:
   _shieldEnergyTick: 0.2
   _shieldEnergy: 100
   ComboSkill: {fileID: 0}
+--- !u!70 &122998365925269869
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765294023672}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0

@@ -2,15 +2,15 @@
 
 public class Crosshair : MonoBehaviour
 {
-     [SerializeField] private GameObject _p1CrossHairs;
-     [SerializeField] private GameObject _p2CrossHairs;
-     [SerializeField] private GameObject _p3CrossHairs;
-     [SerializeField] private GameObject _p4CrossHairs;
+    public GameObject _p1CrossHairs;
+    public GameObject _p2CrossHairs;
+    public GameObject _p3CrossHairs;
+    public GameObject _p4CrossHairs;
 
-    [SerializeField] private Vector3 _p1Target;
-    [SerializeField] private Vector3 _p2Target;
-    [SerializeField] private Vector3 _p3Target;
-    [SerializeField] private Vector3 _p4Target;
+    private Vector3 _p1Target;
+    private Vector3 _p2Target;
+    private Vector3 _p3Target;
+    private Vector3 _p4Target;
 
     private HeroActions _fireHero;
     private HeroActions _waterHero;
@@ -33,7 +33,7 @@ public class Crosshair : MonoBehaviour
         _earthHero = _playerManager.mPlayersList[3].GetComponent<HeroActions>();
         if (_fireHero.gameObject.activeSelf)
         {
-            _p1CrossHairs.SetActive(true);
+            Instantiate(_p1CrossHairs);
         }
         if (_waterHero.gameObject.activeSelf)
         {
@@ -53,7 +53,7 @@ public class Crosshair : MonoBehaviour
 
 
     void Update()
-    {        
+    {
         switch (_fireHero.HeroMovement.ControllerInput)
         {
             case HeroMovement.Controller.None:
@@ -72,7 +72,7 @@ public class Crosshair : MonoBehaviour
                 else
                 {
                     _p1CrossHairs.SetActive(true);
-                }                
+                }
                 _p1CrossHairs.transform.position = new Vector3(
                     _fireHero.transform.position.x + (_fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
                     _fireHero.transform.position.y + _fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
@@ -132,7 +132,7 @@ public class Crosshair : MonoBehaviour
                 }
                 _p2CrossHairs.transform.position = new Vector3(
                                   _waterHero.transform.position.x + (_waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _waterHero.transform.position.y +  _waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                                  _waterHero.transform.position.y + _waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             case HeroMovement.Controller.XBOX:
                 _p2CrossHairs.transform.SetParent(_waterHero.transform);
@@ -162,7 +162,7 @@ public class Crosshair : MonoBehaviour
                 }
                 _p2CrossHairs.transform.position = new Vector3(
                                   _waterHero.transform.position.x + (_waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _waterHero.transform.position.y +  _waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
+                                  _waterHero.transform.position.y + _waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             default:
                 break;
@@ -190,7 +190,7 @@ public class Crosshair : MonoBehaviour
                 }
                 _p3CrossHairs.transform.position = new Vector3(
                                   _airHero.transform.position.x + (_airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _airHero.transform.position.y +  _airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                                  _airHero.transform.position.y + _airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             case HeroMovement.Controller.XBOX:
                 _p3CrossHairs.transform.SetParent(_airHero.transform);
@@ -205,7 +205,7 @@ public class Crosshair : MonoBehaviour
                 }
                 _p3CrossHairs.transform.position = new Vector3(
                                   _airHero.transform.position.x + (_airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _airHero.transform.position.y +  _airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                                  _airHero.transform.position.y + _airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             default:
                 break;
@@ -248,7 +248,7 @@ public class Crosshair : MonoBehaviour
                 }
                 _p4CrossHairs.transform.position = new Vector3(
                                   _earthHero.transform.position.x + (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _earthHero.transform.position.y +  _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                                  _earthHero.transform.position.y + _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
                 break;
             default:
                 break;

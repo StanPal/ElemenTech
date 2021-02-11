@@ -6,7 +6,7 @@ public class HeroMovement : MonoBehaviour
     private HeroActions _heroActions;
     private PlayerInput _playerInput;
     private Animator _playerAnimator;
-    private BoxCollider2D _boxCollider2D;
+    private CapsuleCollider2D _capsuleCollider;
     private Collider2D _col2D;
     private AnimationEvents _animationEvents;
     private Rigidbody2D _rb;
@@ -68,7 +68,7 @@ public class HeroMovement : MonoBehaviour
     private Vector2 _slopeNormalPerp;
 
     //Getters and Setters
-    public BoxCollider2D GetBoxCollider2D { get => _boxCollider2D;  }
+    public CapsuleCollider2D GetBoxCollider2D { get => _capsuleCollider;  }
     public PlayerInput PlayerInput { get => _playerInput; } 
     public bool Dashing { get => _isDashing; } 
     public float Speed { get => _moveSpeed;  set => _moveSpeed = value; } 
@@ -85,8 +85,8 @@ public class HeroMovement : MonoBehaviour
         _heroActions = GetComponent<HeroActions>();
         _originalRecoveryTime = _recoveryTime;
         _animationEvents = GetComponentInChildren<AnimationEvents>();
-        _boxCollider2D = GetComponent<BoxCollider2D>();
-        _col2DSize = _boxCollider2D.size;
+        _capsuleCollider = GetComponent<CapsuleCollider2D>();
+        _col2DSize = _capsuleCollider.size;
         _canDash = true;
         if (ControllerInput == Controller.Keyboard)
         {
@@ -231,14 +231,14 @@ public class HeroMovement : MonoBehaviour
         {
             if (collision.collider.tag.Equals("Team1"))
             {
-                Physics2D.IgnoreCollision(_boxCollider2D, collision.collider,true);
+                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider,true);
             }
         }
         if (this.tag.Equals("Team2"))
         {
             if (collision.collider.tag.Equals("Team2"))
             {
-                Physics2D.IgnoreCollision(_boxCollider2D, collision.collider, true);
+                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
             }
         }
     }
@@ -319,7 +319,7 @@ public class HeroMovement : MonoBehaviour
     public bool IsGrounded()
     {
         float extraHeightText = .05f;
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(_boxCollider2D.bounds.center, Vector2.down, _boxCollider2D.bounds.extents.y + extraHeightText, _whatIsGround);
+        RaycastHit2D raycastHit2D = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeightText, _whatIsGround);
         //Color rayColor;
         //if (raycastHit2D.collider != null)
         //{
@@ -329,7 +329,7 @@ public class HeroMovement : MonoBehaviour
         //{
         //    rayColor = Color.red;
         //}
-        //Debug.DrawRay(_boxCollider2D.bounds.center, Vector2.down * (_boxCollider2D.bounds.extents.y + extraHeightText),rayColor);
+        //Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeightText),rayColor);
         return raycastHit2D.collider != null;
     }
 
