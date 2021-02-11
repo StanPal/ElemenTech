@@ -1,46 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Prefabs for Heros
+    // Prefabs for Hero's
     public GameObject FireHero;
     public GameObject WaterHero;
     public GameObject AirHero;
     public GameObject EarthHero;
 
-    public List<GameObject> mPlayersList = new List<GameObject>();
-    [SerializeField]
-    private bool playTestMode = false;
+    public List<GameObject> _playersList = new List<GameObject>();
+    public List<GameObject> _teamOne = new List<GameObject>();
+    public List<GameObject> _teamTwo = new List<GameObject>();
 
-    public List<GameObject> TeamOne = new List<GameObject>();
-    public List<GameObject> TeamTwo = new List<GameObject>();
+    [SerializeField] private bool _PlayTestMode = false;
 
     private void Awake()
     {
         ServiceLocator.Register<PlayerManager>(this);
-        if (!playTestMode)
-        {
-            FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-            WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-            AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-            EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
+        FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        WaterHero.GetComponentInChildren<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
+        EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
 
-            FireHero.SetActive(false);
-            WaterHero.SetActive(false);
-            AirHero.SetActive(false);
-            EarthHero.SetActive(false);
-        }
+        _playersList[0] = FireHero;
+        _playersList[1] = WaterHero;
+        _playersList[2] = AirHero;
+        _playersList[3] = EarthHero;
 
-        mPlayersList[0] = FireHero;
-        mPlayersList[1] = WaterHero;
-        mPlayersList[2] = AirHero;
-        mPlayersList[3] = EarthHero;
-
-
-        TeamOne.Capacity = 0;
-        TeamTwo.Capacity = 0;
+        _teamOne.Capacity = 0;
+        _teamTwo.Capacity = 0;
     }
-
 }

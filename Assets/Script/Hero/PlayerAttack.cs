@@ -33,6 +33,8 @@ public class PlayerAttack : MonoBehaviour
     private Transform originalRotation;
     [SerializeField]
     private float mKnockBackAmount = 5f;
+    [SerializeField] private GameObject _hitParticle;
+
 
     private void Awake()
     {
@@ -121,6 +123,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
+                    heroStats.HitParticle = _hitParticle;
                     heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
                 }
@@ -137,6 +140,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
+                    heroStats.HitParticle = _hitParticle;
                     heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
                 }                
@@ -153,6 +157,4 @@ public class PlayerAttack : MonoBehaviour
             collision.GetComponent<Golem>().TakeDamage(50);
         }
     }
-
-
 }

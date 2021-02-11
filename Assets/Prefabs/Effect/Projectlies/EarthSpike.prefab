@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4465170668750065623}
   - component: {fileID: 34767663955727313}
   - component: {fileID: -129941563527451108}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: EarthSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}

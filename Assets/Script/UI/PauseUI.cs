@@ -1,13 +1,10 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
-    private PlayerManager playerManager;
-    private ScoreManager scoreManager;
+    private PlayerManager _PlayerManager;
+    private ScoreManager _ScoreManager;
     public Canvas mCanvas;
 
     private void Awake()
@@ -17,30 +14,29 @@ public class PauseUI : MonoBehaviour
 
     private void Initialize()
     {
-        playerManager = ServiceLocator.Get<PlayerManager>();
-        scoreManager = ServiceLocator.Get<ScoreManager>();
+        _PlayerManager = ServiceLocator.Get<PlayerManager>();
+        _ScoreManager = ServiceLocator.Get<ScoreManager>();
     }
 
     private void Start()
     {
-        if (playerManager.mPlayersList[0].gameObject != null)
+        if (_PlayerManager._playersList[0].gameObject != null)
         {
-            playerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager._playersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[1].gameObject != null)
+        if (_PlayerManager._playersList[1].gameObject != null)
         {
-            playerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager._playersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[2].gameObject != null)
+        if (_PlayerManager._playersList[2].gameObject != null)
         {
-            playerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager._playersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (playerManager.mPlayersList[3].gameObject != null)
+        if (_PlayerManager._playersList[3].gameObject != null)
         {
-            playerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager._playersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
-    
 
     public void PauseGame()
     {
@@ -57,7 +53,7 @@ public class PauseUI : MonoBehaviour
     public void BackToMainMenu()
     {
         ResetPlayers();
-        scoreManager.ResetScore();
+        _ScoreManager.ResetScore();
         SceneManager.LoadScene(0);
         Time.timeScale = 1f;
     }
@@ -75,26 +71,15 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        playerManager.FireHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.FireHero.SetActive(true);
-        playerManager.WaterHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.WaterHero.SetActive(false);
+        _PlayerManager._playersList[0] = _PlayerManager.FireHero;
+        _PlayerManager._playersList[1] = _PlayerManager.WaterHero;
+        _PlayerManager._playersList[2] = _PlayerManager.AirHero;
+        _PlayerManager._playersList[3] = _PlayerManager.EarthHero;
 
-        playerManager.AirHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.AirHero.SetActive(false);
-        playerManager.EarthHero.GetComponent<HeroMovement>().controllerInput = HeroMovement.Controller.None;
-        playerManager.EarthHero.SetActive(false);
+        _PlayerManager._teamOne.Clear();
+        _PlayerManager._teamTwo.Clear();
 
-
-        playerManager.mPlayersList[0] = playerManager.FireHero;
-        playerManager.mPlayersList[1] = playerManager.WaterHero;
-        playerManager.mPlayersList[2] = playerManager.AirHero;
-        playerManager.mPlayersList[3] = playerManager.EarthHero;
-
-        playerManager.TeamOne.Clear();
-        playerManager.TeamTwo.Clear();
-
-        scoreManager.PracticeMode = false;
+        _ScoreManager.PracticeMode = false;
         Cursor.visible = true;
     }
 }
