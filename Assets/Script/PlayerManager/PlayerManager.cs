@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Prefabs for Hero's
+    // Prefabs for Heros
     public GameObject FireHero;
     public GameObject WaterHero;
     public GameObject AirHero;
     public GameObject EarthHero;
 
-    public List<GameObject> _playersList = new List<GameObject>();
-    public List<GameObject> _teamOne = new List<GameObject>();
-    public List<GameObject> _teamTwo = new List<GameObject>();
+    public List<GameObject> mPlayersList = new List<GameObject>();
+    [SerializeField]
+    private bool playTestMode = false;
 
-    [SerializeField] private bool _PlayTestMode = false;
+    public List<GameObject> TeamOne = new List<GameObject>();
+    public List<GameObject> TeamTwo = new List<GameObject>();
 
     private void Awake()
     {
@@ -23,12 +25,13 @@ public class PlayerManager : MonoBehaviour
         AirHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         EarthHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
 
-        _playersList[0] = FireHero;
-        _playersList[1] = WaterHero;
-        _playersList[2] = AirHero;
-        _playersList[3] = EarthHero;
+        mPlayersList[0] = FireHero;
+        mPlayersList[1] = WaterHero;
+        mPlayersList[2] = AirHero;
+        mPlayersList[3] = EarthHero;
 
-        _teamOne.Capacity = 0;
-        _teamTwo.Capacity = 0;
+        TeamOne.Capacity = 0;
+        TeamTwo.Capacity = 0;
     }
+
 }

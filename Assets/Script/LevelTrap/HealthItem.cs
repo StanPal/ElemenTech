@@ -28,6 +28,7 @@ public class HealthItem : MonoBehaviour
             
 
             // If it hits anything, destroy it.
+            itemManager.SpawnIteam();
             itemManager.ItemCounter--;
             itemManager.addNewLocation(transform);
             Destroy(gameObject);

@@ -12,6 +12,7 @@ TagManager:
   - DIsappearPlatform
   - BluePortal
   - OrangePortal
+  - FFA
   layers:
   - Default
   - TransparentFX

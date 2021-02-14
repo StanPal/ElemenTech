@@ -1,118 +1,104 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-
-    [SerializeField]
-    private float startTimeBtAttack;
-    private float timeBtwAttack;
-    [SerializeField]
-    private float mHitStun = 1f;
-
-    [SerializeField]
-    private Transform attackPos;
-    [SerializeField]
-    private float attackRange;
-    
-    [SerializeField]
-    public GameObject target;
-    [SerializeField]
-    private float rotaSpeed;
-    [SerializeField]
-    private float rotaBackSpeed;
-    HeroActions mHeroAction;
-    HeroMovement mHeroMovement;
-    private float swordAngle = 45.0f;
-    private bool swingdown = false;
-    private bool beginSwing = false;
+    private ParticleSystemManager _particleSystemManager;
+    public event System.Action<GameObject> onAuraActivated;
+    public event System.Action<GameObject> onAuraDeActivated;
+    private HeroActions _heroAction;
+    private HeroMovement _heroMovement;
+        
     private bool swingActive = false;
 
-    private Transform originalRotation;
-    [SerializeField]
-    private float mKnockBackAmount = 5f;
-    [SerializeField] private GameObject _hitParticle;
-
+    [SerializeField] private float _hitStun = 1f;
+    [SerializeField] private float _rotationSpeed = 200f;
+    [SerializeField] private float _rotationPerFrame = 20f;
+    [SerializeField] private float _rotationgAngleLimit = 10f;
+    [SerializeField] private float _originalRotation = 60f;
+    [SerializeField] private float _knockBackAmount = 20f; 
+    [SerializeField] private float _rotation = 0;
+    private bool _originalDirLeft;
 
     private void Awake()
     {
-        mHeroAction = GetComponentInParent<HeroActions>();
-        mHeroMovement = GetComponentInParent<HeroMovement>();
-        mHeroAction.onAttackPerformed += AttackPerformed;
-        originalRotation = transform;
+        _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
+        _heroAction = GetComponentInParent<HeroActions>();
+        _heroMovement = GetComponentInParent<HeroMovement>();
+        _heroAction.onAttackPerformed += AttackPerformed;
     }
-        
-
+  
     private void AttackPerformed()
     {
-        Debug.Log("Action Performed");
         swingActive = true;
-        beginSwing = true;
+        if (_heroMovement.GetIsLeft)
+        {
+            _originalDirLeft = true;
+             _rotation = 0;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -_originalRotation);
+        }
+        else
+        {
+            _originalDirLeft = false;
+            _rotation = 0;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);
+        }
     }
 
     private void Update()
     {
         if (swingActive)
-        {
-            if (mHeroMovement.GetIsLeft)
+        {            
+            if (_heroMovement.GetIsLeft)
             {
-                if (swingdown && beginSwing)
+                if(swingActive)
                 {
-                    SwordSwing(rotaBackSpeed);
+                    SwordSwing(true);
                 }
-                else if (!swingdown && beginSwing)
-                {
-                    SwordSwing(-rotaSpeed);
-                }
-                if (transform.rotation.z <= -0.45f)
-                {
-                    swingdown = true;
-                }
-                if (transform.rotation.z >= 0.0f)
-                {
-                    beginSwing = false;
-                    swingdown = false;
-                    this.gameObject.SetActive(false);
-                    transform.position = originalRotation.position;
-
-                }
-            }
+            }            
             else
             {
-
-                if (swingdown && beginSwing)
+                if (swingActive)
                 {
-                    SwordSwing(-rotaBackSpeed);
+                    SwordSwing(false);
                 }
-                else if (!swingdown && beginSwing)
-                {
-                    SwordSwing(rotaSpeed);
-                }
-                if (transform.rotation.z >= 0.45f)
-                {
-                    swingdown = true;
-                }
-                if (transform.rotation.z <= 0.0f)
-                {
-                    beginSwing = false;
-                    swingdown = false;
-                    this.gameObject.SetActive(false);
-                    transform.position = originalRotation.position;
-                }
+            }
+            if (_heroMovement.GetIsLeft == !_originalDirLeft)
+            {
+                _rotation = 0;
+                _heroAction._isSwinging = false;
+                gameObject.SetActive(false);
             }
         }
     }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
-    }
 
-    void SwordSwing(float Speed)
+    void SwordSwing(bool isLeft)
     {
-        transform.RotateAround(target.transform.position, Vector3.forward, Speed * Time.deltaTime);
+        if (isLeft)
+        {
+            transform.RotateAround(transform.position, Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
+            if (_rotation >= _rotationgAngleLimit)
+            {
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -_originalRotation);
+                _heroAction._isSwinging = false;
+                swingActive = false;
+                this.gameObject.SetActive(false);
+            }
+        }
+        else
+        {
+            transform.RotateAround(transform.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame); 
+            if (_rotation >= _rotationgAngleLimit)
+            {
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);                
+                _heroAction._isSwinging = false;
+                swingActive = false;
+                this.gameObject.SetActive(false);
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -123,13 +109,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.HitParticle = _hitParticle;
-                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
+                    {
+                        _particleSystemManager.FireAura(_heroMovement.gameObject);
+                    }
                 }
                 if (!collision.GetComponent<Guard>().Guarding)
                 {
-                    collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
+                    collision.GetComponent<HeroMovement>().RecoveryTime = _hitStun;
                     collision.GetComponent<HeroMovement>().Recovering = true;
                 }
             }
@@ -140,13 +129,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.HitParticle = _hitParticle;
-                    heroStats.TakeDamage(mHeroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(mKnockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)
+                    {
+                        _particleSystemManager.FireAura(_heroMovement.gameObject);
+                    }
                 }                
                 if (!collision.GetComponent<Guard>().Guarding)
                 {
-                    collision.GetComponent<HeroMovement>().RecoveryTime = mHitStun;
+                    collision.GetComponent<HeroMovement>().RecoveryTime = _hitStun;
                     collision.GetComponent<HeroMovement>().Recovering = true;
                 }
             }
@@ -154,7 +146,7 @@ public class PlayerAttack : MonoBehaviour
 
         if (collision.GetComponent<Golem>())
         {
-            collision.GetComponent<Golem>().TakeDamage(50);
+            collision.GetComponent<Golem>().TakeDamage(_heroAction.HeroStats.AttackDamage);
         }
     }
 }

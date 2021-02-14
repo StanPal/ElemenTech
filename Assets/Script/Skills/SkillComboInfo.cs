@@ -2,26 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "SkillComboInfo", menuName = "Skill Combos")]
+[CreateAssetMenu(menuName = "Skill Combos")]
 public class SkillComboInfo : ScriptableObject
 {
-    [System.Serializable]
+    [SerializeField]
     public class SkillCombo
     {
-        public Elements.ElementalAttribute ElementOne;
-        public Elements.ElementalAttribute ElementTwo;
-        public bool NeedQuaternion; 
-        public GameObject prefab;
+        public Elements.ElementalAttribute ElementOne = Elements.ElementalAttribute.None;
+        public Elements.ElementalAttribute ElementTwo = Elements.ElementalAttribute.None;
+        public GameObject prefab = null;
     }
 
-    public List<SkillCombo> _SkillCombos = new List<SkillCombo>();
+    [SerializeField]
+    private List<SkillCombo> _skillCombos = new List<SkillCombo>();
 
-    public GameObject GetPrefabForCombo(Elements.ElementalAttribute selfElement, Elements.ElementalAttribute teamElement)
+    public GameObject GetPrefabForCombo(Elements.ElementalAttribute element1, Elements.ElementalAttribute element2)
     {
-        foreach (var skill in _SkillCombos)
-        { 
-            if (skill.ElementOne == selfElement && skill.ElementTwo == teamElement)
-            { 
+        foreach(var skill in _skillCombos)
+        {
+            if(skill.ElementOne == Elements.ElementalAttribute.Fire && skill.ElementTwo == Elements.ElementalAttribute.Water)
+            {
                 return skill.prefab;
             }
         }

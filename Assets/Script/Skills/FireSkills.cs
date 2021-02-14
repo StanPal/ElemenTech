@@ -1,29 +1,29 @@
 ﻿using UnityEngine;
 
 public class FireSkills : MonoBehaviour
-{ 
+{
     // FireSkills 
-    public GameObject FireBall;
-    private PlayerSkills _HeroSkills;
+    public GameObject FireBallPrefab;
+    private PlayerSkills _heroSkills;
 
-    [SerializeField] private float _Speed = 10.0f;
-    [SerializeField] private float _Damage = 10.0f;
-    [SerializeField] private float _DotDuration = 5.0f;
+    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _damage = 10.0f;
+    [SerializeField] private float _dotDuration = 5.0f;
 
-    // Getters & Setters
-    public float Speed { get { return _Speed; } set { _Speed = value; } }
-    public float Damage { get { return _Damage; } }
-    public float DotDuration { get { return _DotDuration; } }
-    public PlayerSkills PlayerSkills { get { return _HeroSkills; } }
+    public float Speed { get => _speed;  set => _speed = value; } 
+    public float Damage { get => _damage; } 
+    public PlayerSkills PlayerSkills { get => _heroSkills; } 
+    public float DotDuration { get => _dotDuration; } 
 
     private void Start()
     {
-        _HeroSkills = GetComponent<PlayerSkills>();
-        _HeroSkills.onFireSkillPerformed += FireBallCast;
+        _heroSkills = GetComponent<PlayerSkills>();
+        _heroSkills.onFireSkillPerformed += FireBall;
     }
 
-    private void FireBallCast()
+    void FireBall()
     {
-       Instantiate(FireBall, _HeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _HeroSkills.HeroAction.GetLookAngle));
+       Instantiate(FireBallPrefab, _heroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _heroSkills.HeroAction.GetLookAngle));
     }
+
 }

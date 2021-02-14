@@ -1,34 +1,38 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class AirSkills : MonoBehaviour
 {
-    public GameObject AirJet;
-    private PlayerSkills _HeroSkills;
+    public GameObject mAirJet;
 
-    [SerializeField] float _Damage = 2.0f;
-    [SerializeField] float _Speed = 10.0f;
-    [SerializeField] float _ExitTime = 10.0f;
-    [SerializeField] Vector3 _Scale = new Vector3(0.5f, 0.5f, 0.5f);
-    [SerializeField] float _ScaleSpeed = 0.5f;
-    
+    [SerializeField]
+    float mDamage = 2.0f;
+    public float Damage { get { return mDamage; } }
+    [SerializeField]
+    float mSpeed = 10.0f;
+    public float Speed { get { return mSpeed; } }
+    [SerializeField]
+    float mExitTime = 10.0f;
+    public float ExitTime { get { return mExitTime; } }
+    [SerializeField]
+    Vector3 mScale;
+    public Vector3 Scale { get { return mScale; } }
+    [SerializeField]
+    float mScaleSpeed; 
+    public float ScaleSpeed { get { return mScaleSpeed; } }
 
-    //Getters
-    public float Damage { get { return _Damage; } }
-    public float Speed { get { return _Speed; } }
-    public float ExitTime { get { return _ExitTime; } }
-    public Vector3 Scale { get { return _Scale; } }
-    public float ScaleSpeed { get { return _ScaleSpeed; } }
-    public PlayerSkills PlayerSkills { get { return _HeroSkills; } }
-
+    PlayerSkills mHeroSkills;
+    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
 
     private void Start()
     {
-        _HeroSkills = GetComponent<PlayerSkills>();
-        _HeroSkills.onAirSkillPerformed += AirJetCast;
+        mHeroSkills = GetComponent<PlayerSkills>();
+        mHeroSkills.onAirSkillPerformed += AirJet;
     }
 
-    void AirJetCast()
+    void AirJet()
     {
-        Instantiate(AirJet, _HeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _HeroSkills.HeroAction.GetLookAngle));
+        Instantiate(mAirJet, mHeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
     }
 }

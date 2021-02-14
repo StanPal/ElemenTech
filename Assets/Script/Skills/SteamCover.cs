@@ -5,22 +5,26 @@ using UnityEngine;
 
 public class SteamCover : MonoBehaviour
 {
-    private ParticleSystem _SteamParticle;
-    [SerializeField] private float _SteamDuration = 2f;
-    [SerializeField] private float _Damage = 2f;
-    [SerializeField] private float _DamageTick = 1f;
+    private ParticleSystem mSteamParticle;
+    [SerializeField]
+    private float mSteamDuration = 2f;
+    [SerializeField]
+    private float mDamage = 2f;
+    [SerializeField]
+    private float mDamageTick = 1f;
     private float totalTime = 0;
-    
+
+    // Start is called before the first frame update
     void Start()
     {
-        _SteamParticle = GetComponent<ParticleSystem>();
+        mSteamParticle = GetComponent<ParticleSystem>();
         StartCoroutine(SteamTimer());
     }
     
     IEnumerator SteamTimer()
     {
-        _SteamParticle.Play();
-        yield return new WaitForSeconds(_SteamDuration);
+        mSteamParticle.Play();
+        yield return new WaitForSeconds(mSteamDuration);
         Destroy(gameObject);
     }
 
@@ -31,9 +35,9 @@ public class SteamCover : MonoBehaviour
         {
             if (collision.tag.Equals("Team2"))
             {
-                if (totalTime > _DamageTick)
+                if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(_Damage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
                     totalTime = 0;
                 }
             }
@@ -42,9 +46,9 @@ public class SteamCover : MonoBehaviour
         {
             if (collision.tag.Equals("Team1"))
             {
-                if (totalTime > _DamageTick)
+                if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(_Damage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
                     totalTime = 0;
                 }
             }

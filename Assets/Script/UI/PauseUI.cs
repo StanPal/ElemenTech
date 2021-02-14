@@ -20,23 +20,24 @@ public class PauseUI : MonoBehaviour
 
     private void Start()
     {
-        if (_PlayerManager._playersList[0].gameObject != null)
+        if (_PlayerManager.mPlayersList[0].gameObject != null)
         {
-            _PlayerManager._playersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[0].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager._playersList[1].gameObject != null)
+        if (_PlayerManager.mPlayersList[1].gameObject != null)
         {
-            _PlayerManager._playersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[1].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager._playersList[2].gameObject != null)
+        if (_PlayerManager.mPlayersList[2].gameObject != null)
         {
-            _PlayerManager._playersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[2].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
-        if (_PlayerManager._playersList[3].gameObject != null)
+        if (_PlayerManager.mPlayersList[3].gameObject != null)
         {
-            _PlayerManager._playersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
+            _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
+    
 
     public void PauseGame()
     {
@@ -71,13 +72,13 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        _PlayerManager._playersList[0] = _PlayerManager.FireHero;
-        _PlayerManager._playersList[1] = _PlayerManager.WaterHero;
-        _PlayerManager._playersList[2] = _PlayerManager.AirHero;
-        _PlayerManager._playersList[3] = _PlayerManager.EarthHero;
+        _PlayerManager.mPlayersList[0] = _PlayerManager.FireHero;
+        _PlayerManager.mPlayersList[1] = _PlayerManager.WaterHero;
+        _PlayerManager.mPlayersList[2] = _PlayerManager.AirHero;
+        _PlayerManager.mPlayersList[3] = _PlayerManager.EarthHero;
 
-        _PlayerManager._teamOne.Clear();
-        _PlayerManager._teamTwo.Clear();
+        _PlayerManager.TeamOne.Clear();
+        _PlayerManager.TeamTwo.Clear();
 
         _ScoreManager.PracticeMode = false;
         Cursor.visible = true;

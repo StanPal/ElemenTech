@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+
+
 public class MainMenu : MonoBehaviour
 {    
-    private ScoreManager _ScoreManager;
+    private ScoreManager scoreManager;
 
     private void Awake()
     {
@@ -15,7 +17,7 @@ public class MainMenu : MonoBehaviour
 
     private void Initialize()
     {
-        _ScoreManager = FindObjectOfType<ScoreManager>();        
+        scoreManager = FindObjectOfType<ScoreManager>();        
     }
 
     public void PlayWorkingLevel()
@@ -35,12 +37,13 @@ public class MainMenu : MonoBehaviour
 
     public void PracticeMode()
     {
-        if (!_ScoreManager.PracticeMode)
-            _ScoreManager.PracticeMode = true;
+        if (!scoreManager.PracticeMode)
+            scoreManager.PracticeMode = true;
         else
-            _ScoreManager.PracticeMode = false;
+            scoreManager.PracticeMode = false;
     }
     
+
     public void QuitGame()
     {
         Debug.Log("QUIT");
