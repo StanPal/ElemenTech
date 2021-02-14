@@ -607,7 +607,7 @@ MonoBehaviour:
   _meleeAttack: 10
   _maxHealth: 100
   _currentHealth: 100
-  _coolDown: 3
+  _coolDown: 1.5
   _elementalType: 0
   _positiveEffect: 3
   _negativeEffect: 3

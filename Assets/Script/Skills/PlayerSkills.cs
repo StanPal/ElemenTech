@@ -20,12 +20,13 @@ public class PlayerSkills : MonoBehaviour
 
     private void Awake()
     {
-        GameLoader.CallOnComplete(Initialize);
+        playerManager = FindObjectOfType<PlayerManager>();
+       // GameLoader.CallOnComplete(Initialize);
     }
 
     private void Initialize()
     {
-        playerManager = FindObjectOfType<PlayerManager>();
+       playerManager = FindObjectOfType<PlayerManager>();
     }
 
     private void Start()

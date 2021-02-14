@@ -38,8 +38,14 @@ public class HeroActions : MonoBehaviour
     public float GetLookAngle { get => _lookAngle; } 
 
     private void Awake()
-    {
-        GameLoader.CallOnComplete(Initialize);
+    {        
+            _rb = GetComponent<Rigidbody2D>();
+            _playerAnimator = GetComponentInChildren<Animator>();
+            _heroMovement = GetComponent<HeroMovement>();
+            _heroStats = GetComponent<HeroStats>();
+            _playerInput = new PlayerInput();
+            _guard = GetComponent<Guard>();
+     //       GameLoader.CallOnComplete(Initialize);
     }
 
     private void Initialize()

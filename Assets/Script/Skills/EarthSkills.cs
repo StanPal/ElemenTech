@@ -28,16 +28,21 @@ public class EarthSkills : MonoBehaviour
 
     private void Awake()
     {
-        GameLoader.CallOnComplete(Initialize);
+        //GameLoader.CallOnComplete(Initialize);
+        _playerManager = FindObjectOfType<PlayerManager>();
+        _heroSkills = GetComponent<PlayerSkills>();
         _pointsArr = new GameObject[_numberOfPoints];
+    }
+
+    private void Start()
+    {
+        _heroSkills.onEarthSkillPerformed += Boulder;
     }
 
     private void Initialize()
     {
         _playerManager = FindObjectOfType<PlayerManager>();
-        _heroSkills = GetComponent<PlayerSkills>();
-        _heroSkills.onEarthSkillPerformed += Boulder;
-
+        _heroSkills = GetComponent<PlayerSkills>();        
     }
     private void Boulder()
     {
