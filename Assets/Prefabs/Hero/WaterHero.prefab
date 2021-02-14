@@ -155,12 +155,12 @@ GameObject:
   m_Component:
   - component: {fileID: 1371002032310544473}
   - component: {fileID: 1371002032310544470}
-  - component: {fileID: 1371002032310544471}
   - component: {fileID: 1371002032310544468}
   - component: {fileID: 1371002032310544469}
   - component: {fileID: 1371002032310544466}
   - component: {fileID: 5005666907566380715}
   - component: {fileID: 1371002032310544467}
+  - component: {fileID: 110387772121362058}
   m_Layer: 9
   m_Name: WaterHero
   m_TagString: Team1
@@ -208,32 +208,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!61 &1371002032310544471
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1371002032310544464}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.059914112}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1.8345404}
-  m_EdgeRadius: 0
 --- !u!114 &1371002032310544468
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,14 +221,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
-  _Name: 
-  _Attack: 15
-  _MaxHealth: 100
-  _CurrentHealth: 100
-  _CoolDown: 0.5
-  _ElementalType: 2
-  _PositiveEffect: 3
-  _NegativeEffect: 3
+  _meleeAttack: 25
+  _maxHealth: 100
+  _currentHealth: 100
+  _coolDown: 0.45
+  _elementalType: 2
+  _positiveEffect: 3
+  _negativeEffect: 3
 --- !u!114 &1371002032310544469
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -267,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 0
+  ControllerInput: 1
   _moveSpeed: 12
   _isLeft: 0
   _isJumping: 0
@@ -288,7 +261,7 @@ MonoBehaviour:
   _dashCoolDown: 1
   _dashTime: 1
   _dashStartUpTime: 0.3
-  _recoveryTime: 0.2
+  _recoveryTime: 0
   _isRecovering: 0
   _knockBackRecieved: 0
   _knockBackCount: 0
@@ -312,7 +285,7 @@ MonoBehaviour:
   PivotPoint: {fileID: 7317380116810873624}
   FirePoint: {fileID: 4467623121776858900}
   _isOnCooldown: 0
-  _mLookDirection: {x: 0, y: 0}
+  _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0}
 --- !u!114 &5005666907566380715
@@ -342,16 +315,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 1a2ae9934b2a96e45b8cb85c4e2b29c5, type: 3}
   IsShieldDisabled: 0
-  _IsGuarding: 0
-  _GuardTime: 0.5
-  _ShieldSize: 2.1
-  _ShieldRecoveryTick: 3
-  _SpeedDecrease: 1
-  _ShieldMaxEnergy: 100
-  _ShieldRecoverAmount: 1
-  _ShieldEnergyTick: 0.2
-  _ShieldEnergy: 100
+  _isGuarding: 0
+  _guardTime: 0.5
+  _shieldSize: 2.1
+  _shieldRecoveryTick: 3
+  _speedDecrease: 1
+  _shieldMaxEnergy: 100
+  _shieldRecoverAmount: 1
+  _shieldEnergyTick: 0.2
+  _shieldEnergy: 100
   ComboSkill: {fileID: 0}
+--- !u!70 &110387772121362058
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371002032310544464}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 2}
+  m_Direction: 0
 --- !u!1 &1371002032425859066
 GameObject:
   m_ObjectHideFlags: 0
@@ -893,7 +882,7 @@ MonoBehaviour:
   _rotationPerFrame: 20
   _rotationgAngleLimit: 10
   _originalRotation: 60
-  _knockBackAmount: 5
+  _knockBackAmount: 15
   _rotation: 0
 --- !u!1 &4956901514175417199
 GameObject:

@@ -585,7 +585,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -607,7 +607,7 @@ MonoBehaviour:
   _meleeAttack: 10
   _maxHealth: 100
   _currentHealth: 100
-  _coolDown: 3
+  _coolDown: 0.8
   _elementalType: 0
   _positiveEffect: 3
   _negativeEffect: 3
@@ -649,7 +649,7 @@ MonoBehaviour:
   _jumpForce: 16
   _numOfJumps: 0
   _maxJumps: 1
-  _numOfWallJumps: 0
+  _numOfWallJumps: 1
   _maxWallJump: 1
   _whatIsGround:
     serializedVersion: 2
@@ -683,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fallMultiplier: 3.5
+  _fallMultiplier: 4.5
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
