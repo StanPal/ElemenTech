@@ -190,6 +190,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
+      propertyPath: _startSpawnPoints.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
       propertyPath: mSpawnPoints.Array.data[0]
       value: 
       objectReference: {fileID: 697717469}
@@ -206,6 +211,26 @@ PrefabInstance:
     - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
         type: 3}
       propertyPath: mSpawnPoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 56460258}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _startSpawnPoints.Array.data[0]
+      value: 
+      objectReference: {fileID: 697717469}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _startSpawnPoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 37180456}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _startSpawnPoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 1391325603}
+    - target: {fileID: 8056833770172814345, guid: a5c0b0fd647832a47af5d262557da90a,
+        type: 3}
+      propertyPath: _startSpawnPoints.Array.data[3]
       value: 
       objectReference: {fileID: 56460258}
     m_RemovedComponents: []
@@ -1220,6 +1245,26 @@ PrefabInstance:
     - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: _P4CrossHairs
+      value: 
+      objectReference: {fileID: 4402385147084421235}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _p1CrossHairs
+      value: 
+      objectReference: {fileID: 4402385146317423215}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _p2CrossHairs
+      value: 
+      objectReference: {fileID: 4402385146351155258}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _p3CrossHairs
+      value: 
+      objectReference: {fileID: 4402385147204005173}
+    - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
+        type: 3}
+      propertyPath: _p4CrossHairs
       value: 
       objectReference: {fileID: 4402385147084421235}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,

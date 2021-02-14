@@ -773,6 +773,20 @@ MonoBehaviour:
       m_Height: 66
     m_Scale: 1
     m_AtlasIndex: 0
+  - m_Index: 24
+    m_Metrics:
+      m_Width: 46.75
+      m_Height: 63.984375
+      m_HorizontalBearingX: 2.421875
+      m_HorizontalBearingY: 63.984375
+      m_HorizontalAdvance: 51.640625
+    m_GlyphRect:
+      m_X: 763
+      m_Y: 178
+      m_Width: 48
+      m_Height: 64
+    m_Scale: 1
+    m_AtlasIndex: 0
   m_CharacterTable:
   - m_ElementType: 1
     m_Unicode: 95
@@ -954,6 +968,10 @@ MonoBehaviour:
     m_Unicode: 48
     m_GlyphIndex: 20
     m_Scale: 1
+  - m_ElementType: 1
+    m_Unicode: 52
+    m_GlyphIndex: 24
+    m_Scale: 1
   m_AtlasTextures:
   - {fileID: 28204114720316640}
   m_AtlasTextureIndex: 0
@@ -1134,6 +1152,10 @@ MonoBehaviour:
     m_Y: 156
     m_Width: 63
     m_Height: 85
+  - m_X: 753
+    m_Y: 168
+    m_Width: 67
+    m_Height: 83
   m_FreeGlyphRects:
   - m_X: 0
     m_Y: 29
@@ -1175,10 +1197,6 @@ MonoBehaviour:
     m_Y: 69
     m_Width: 2
     m_Height: 18
-  - m_X: 755
-    m_Y: 87
-    m_Width: 6
-    m_Height: 936
   - m_X: 75
     m_Y: 276
     m_Width: 948
@@ -1260,10 +1278,6 @@ MonoBehaviour:
     m_Width: 156
     m_Height: 856
   - m_X: 247
-    m_Y: 241
-    m_Width: 776
-    m_Height: 782
-  - m_X: 247
     m_Y: 239
     m_Width: 443
     m_Height: 784
@@ -1271,30 +1285,42 @@ MonoBehaviour:
     m_Y: 220
     m_Width: 376
     m_Height: 803
-  - m_X: 753
-    m_Y: 219
-    m_Width: 270
-    m_Height: 804
-  - m_X: 753
-    m_Y: 218
-    m_Width: 142
-    m_Height: 805
   - m_X: 469
     m_Y: 204
     m_Width: 221
     m_Height: 819
-  - m_X: 753
-    m_Y: 168
-    m_Width: 80
-    m_Height: 855
-  - m_X: 753
-    m_Y: 156
-    m_Width: 8
-    m_Height: 867
   - m_X: 690
     m_Y: 119
     m_Width: 5
     m_Height: 37
+  - m_X: 755
+    m_Y: 87
+    m_Width: 6
+    m_Height: 81
+  - m_X: 247
+    m_Y: 251
+    m_Width: 776
+    m_Height: 772
+  - m_X: 247
+    m_Y: 241
+    m_Width: 506
+    m_Height: 782
+  - m_X: 820
+    m_Y: 219
+    m_Width: 203
+    m_Height: 804
+  - m_X: 820
+    m_Y: 218
+    m_Width: 75
+    m_Height: 805
+  - m_X: 820
+    m_Y: 168
+    m_Width: 13
+    m_Height: 855
+  - m_X: 753
+    m_Y: 156
+    m_Width: 8
+    m_Height: 12
   m_fontInfo:
     Name: Roboto
     PointSize: 146

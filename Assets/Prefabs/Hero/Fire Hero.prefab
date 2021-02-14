@@ -585,7 +585,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1.5
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -604,16 +604,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Team: 2
-  _name: 
-  _attack: 10
+  _meleeAttack: 10
   _maxHealth: 100
   _currentHealth: 100
-  _coolDown: 3
+  _coolDown: 0.8
   _elementalType: 0
-  _positiveEffects: 3
-  _negativeEffects: 3
-  _deadParticle: {fileID: 6834953017209929187, guid: 5665cfb03c827d24ab7fa5badc01c737,
-    type: 3}
+  _positiveEffect: 3
+  _negativeEffect: 3
 --- !u!114 &1791110765294023673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,9 +623,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c0d58edb421c474682a9c1f646f490c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Sword: {fileID: 7190133704008389944}
   PivotPoint: {fileID: 4742860617384786225}
   FirePoint: {fileID: 4264183723163891622}
-  _sword: {fileID: 0}
   _isOnCooldown: 0
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
@@ -646,24 +643,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ControllerInput: 1
-  mSpeed: 8
-  _IsLeft: 0
-  _IsJumping: 0
-  _JumpForce: 5
-  _NumOfJumps: 0
-  _MaxJumps: 1
-  _Ground:
+  _moveSpeed: 13
+  _isLeft: 0
+  _isJumping: 0
+  _jumpForce: 16
+  _numOfJumps: 0
+  _maxJumps: 1
+  _numOfWallJumps: 1
+  _maxWallJump: 1
+  _whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
-  canDash: 1
-  _IsDashing: 0
-  _DashSpeed: 5
-  _DashCoolDown: 1
-  _DashStartUpTime: 1
-  _RecoveryTime: 1
-  isRecovering: 0
-  _KnockBackRecieved: 0
-  _KnockBackCount: 0
+    m_Bits: 256
+  _whatIsWall:
+    serializedVersion: 2
+    m_Bits: 1024
+  _canDash: 1
+  _isDashing: 0
+  _dashSpeed: 25
+  _dashCoolDown: 1
+  _dashTime: 1
+  _dashStartUpTime: 0.2
+  _recoveryTime: 0.3
+  _isRecovering: 0
+  _knockBackRecieved: 0
+  _knockBackCount: 0
+  _noFriction: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
+  _fullFriction: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  _slopeCheckDistance: 2
+  _maxSlopeAngle: 0
 --- !u!114 &1462250077875475378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -676,7 +683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mfallMultiplier: 2.5
+  _fallMultiplier: 4.5
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -690,11 +697,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Shield: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
-  _IsGuarding: 0
-  _GuardTime: 0.5
+  IsShieldDisabled: 0
+  _isGuarding: 0
+  _guardTime: 0.5
   _shieldSize: 2.1
   _shieldRecoveryTick: 3
-  _SpeedDecrease: 1
+  _speedDecrease: 1
   _shieldMaxEnergy: 100
   _shieldRecoverAmount: 1
   _shieldEnergyTick: 0.2
@@ -1199,15 +1207,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startTimeBtAttack: 0
-  mHitStun: 1
-  attackPos: {fileID: 0}
-  attackRange: 0
-  target: {fileID: 0}
-  rotaSpeed: 0
-  rotaBackSpeed: 0
-  mKnockBackAmount: 5
-  _hitParticle: {fileID: 0}
+  _hitStun: 1
+  _rotationSpeed: 200
+  _rotationPerFrame: 20
+  _rotationgAngleLimit: 10
+  _originalRotation: 60
+  _knockBackAmount: 5
+  _rotation: 0
 --- !u!61 &6787430628808783305
 BoxCollider2D:
   m_ObjectHideFlags: 0
