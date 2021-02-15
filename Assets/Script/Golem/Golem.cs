@@ -5,11 +5,11 @@ using UnityEngine;
 public class Golem : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField]
-    float mMaxHealth = 100.0f;
-    [SerializeField]
-    float mCurrentHealth;
     
+    public float mMaxHealth = 100.0f;
+
+    public float mCurrentHealth;
+
     public int currentSpawnNodeIndex = 0;
     /// ///////////////////////////////////////////
 
@@ -52,7 +52,7 @@ public class Golem : MonoBehaviour
     public bool selfGeren = false;
 
     public float MaxHealth { get { return mMaxHealth; } }
-    public float CurrentHealth { get { return mCurrentHealth; } }
+    
     /////////////////////////////////////////////////
     GameObject teamOneObj;
     Transform teamOnePos;
@@ -86,7 +86,7 @@ public class Golem : MonoBehaviour
         if (GameObject.FindWithTag("Team2"))
         {
             teamTwoObj = GameObject.FindWithTag("Team2");
-            teamTwoPos = teamTwoObj.transform;
+           teamTwoPos = teamTwoObj.transform;
         }        
     }
 
@@ -221,7 +221,7 @@ public class Golem : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
         if (mAttackType == GolemData.attackType.Ranged)
         {

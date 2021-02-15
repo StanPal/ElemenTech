@@ -9,15 +9,16 @@ public class playerNotNearby : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        var manager = ServiceLocator.Get<AIPlayerManager>();
-        
-        _player = manager.GetPlayer(0);
+        //var manager = ServiceLocator.Get<AIPlayerManager>();
+        //_player = manager.GetPlayer(0);
+
+        _player = animator.gameObject.GetComponent<AIPlayer>();
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
-        
+        //Find the nearest pickup in the list and move to the position
         _player.IsPickUpNearby();
 
     }

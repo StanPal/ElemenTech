@@ -780,7 +780,7 @@ PrefabInstance:
     - target: {fileID: 5768544537369164436, guid: c762589e65c02a84d9f3e704eb80e25b,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7940048648316017097, guid: c762589e65c02a84d9f3e704eb80e25b,
         type: 3}
@@ -1311,7 +1311,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1393653627
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1326,8 +1326,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnNodes:
   - {fileID: 1948425026}
-  - {fileID: 1497040626}
-  - {fileID: 1497040626}
   golemPrefab: {fileID: 5768544537369164436, guid: c762589e65c02a84d9f3e704eb80e25b,
     type: 3}
   timeLag: 2

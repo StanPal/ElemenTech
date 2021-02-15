@@ -8,9 +8,10 @@ public class findPickup : StateMachineBehaviour
     [SerializeField] private AIPlayer _player = null;
     public override  void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        var manager = ServiceLocator.Get<AIPlayerManager>();
+        //var manager = ServiceLocator.Get<AIPlayerManager>();
+        //_player = manager.GetPlayer(0);
 
-        _player = manager.GetPlayer(0);
+        _player = animator.gameObject.GetComponent<AIPlayer>();
     }
     public override  void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {

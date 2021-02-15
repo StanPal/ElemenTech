@@ -15,8 +15,11 @@ public class AIPlayer : MonoBehaviour
     public Hero nearestHero;
     public Hero nearestHealth;
 
+    private Golem golem;
+
     void Start()
     {
+        golem = this.GetComponent<Golem>();
         //nodeIndex = 0;//get number
         currentHP = 100.0f;
         _manager = ServiceLocator.Get<AIPlayerManager>();
@@ -29,13 +32,17 @@ public class AIPlayer : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentHP = this.GetComponent<Golem>().CurrentHealth;
+        currentHP = this.GetComponent<Golem>().mCurrentHealth;
         _aiController.SetFloat("HP", currentHP);
+
+        //need track player position in both condition 
+        IsPlayerNearby();
     }
 
     public void Attack()
     {
         Debug.Log("hp > 40, attack the players");
+        //golem.Shoot();
     }
 
     public void Run()
@@ -60,7 +67,9 @@ public class AIPlayer : MonoBehaviour
 
     public void IsPlayerNearby()
     {
-        foreach(var t in mHeros)
+        
+
+        foreach (var t in mHeros)
         {
             if(Mathf.Abs((t.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x)) < 5 
                 && Mathf.Abs((t.GetComponent<Hero>().transform.position.y - this.GetComponent<Transform>().position.y)) < 5)
@@ -74,16 +83,20 @@ public class AIPlayer : MonoBehaviour
     }
     public void IsPickUpNearby()
     {
-        foreach (var t in mkPickups)
-        {
-            if(Mathf.Abs((t.GetComponent<pickUp>().transform.position.x - this.GetComponent<Transform>().position.x)) < 0.5f
-                && Mathf.Abs((t.GetComponent<pickUp>().transform.position.y - this.GetComponent<Transform>().position.y)) < 0.5f)
-            {
-                _aiController.SetBool("isPickupNearby", true);
-                return;
-            }
-        }
-        _aiController.SetBool("isPlayerNearby", false);
+        Debug.Log("track any pickup nearby!  moving to the pickup");
+
+        transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+
+        // foreach (var t in mkPickups)
+        // {
+        //     if(Mathf.Abs((t.GetComponent<pickUp>().transform.position.x - this.GetComponent<Transform>().position.x)) < 0.5f
+        //         && Mathf.Abs((t.GetComponent<pickUp>().transform.position.y - this.GetComponent<Transform>().position.y)) < 0.5f)
+        //     {
+        //         _aiController.SetBool("isPickupNearby", true);
+        //         return;
+        //     }
+        // }
+        // _aiController.SetBool("isPlayerNearby", false);
     }
 
     public void findHealth()
@@ -91,15 +104,21 @@ public class AIPlayer : MonoBehaviour
         Debug.Log("Move to the health position");
 
         float step = this.GetComponent<Golem>().mSpeed * Time.deltaTime;
-        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.localPosition, mkPickups[0].transform.position, step);
+        gameObject.transform.localPosition = Vector3.MoveTowards(gameObject.transform.position, mkPickups[0].transform.position, step);
     }
 
     public void dashAway()
     {
         Debug.Log("run away from players!");
-        if(nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x < 5)
-        {
-            transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
-        }                  
+       // float dis = nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x;
+       //
+       // if (dis < 5.0f && dis > 0.0f)
+       // {
+       //     transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+       // }   
+       // else if(dis < 0.0f && dis > -5.0f)
+       // {
+       //     transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+       // }
     }
 }

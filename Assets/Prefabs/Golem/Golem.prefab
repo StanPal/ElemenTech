@@ -480,6 +480,8 @@ GameObject:
   - component: {fileID: 4298406671086658541}
   - component: {fileID: 7940048648316017097}
   - component: {fileID: 1165230724}
+  - component: {fileID: 8896482103446061387}
+  - component: {fileID: 4508553077995094321}
   m_Layer: 9
   m_Name: Golem
   m_TagString: Enemy
@@ -565,10 +567,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5500db4977298f24abacd3968d11ede3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mMaxHealth: 2
-  mCurrentHealth: 2
+  mMaxHealth: 100
+  mCurrentHealth: 0
   currentSpawnNodeIndex: 0
-  shootingInterval: 5
+  shootingInterval: 1
   jumpTime: 3
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}
@@ -593,6 +595,44 @@ MonoBehaviour:
     type: 3}
   EarthElement: {fileID: 2384499793245904397, guid: 2d298489f2774bf4b947ae94b59d7c57,
     type: 3}
+--- !u!95 &8896482103446061387
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768544537369164436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57074bd2573c42743b53dba9481fc0b3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4508553077995094321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768544537369164436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eaac0e2830ed46a5f0f36ee28c9ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aiController: {fileID: 8896482103446061387}
+  nodeIndex: 0
+  currentHP: 0
+  mkPickups: []
+  mHeros: []
+  nearestHero: {fileID: 0}
+  nearestHealth: {fileID: 0}
 --- !u!1 &5786073200164854496
 GameObject:
   m_ObjectHideFlags: 0
