@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -423,6 +423,8 @@ MonoBehaviour:
   _elementalType: 3
   _positiveEffect: 3
   _negativeEffect: 3
+  _deadParticle: {fileID: 6834953017209929187, guid: 5665cfb03c827d24ab7fa5badc01c737,
+    type: 3}
 --- !u!114 &1791110765294023673
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -454,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 3
+  ControllerInput: 1
   _moveSpeed: 14
   _isLeft: 0
   _isJumping: 0

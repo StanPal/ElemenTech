@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5643832147947486397}
   - component: {fileID: 2349867504799658412}
   - component: {fileID: 5679827783626823176}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Particle System
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4710,7 +4710,7 @@ ParticleSystemRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e823cd5b5d27c0f4b8256e7c12ee3e6d, type: 2}
-  - {fileID: 2100000, guid: 60c4f99d55be7ee44a8521d1da5a59c6, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4766,7 +4766,8 @@ GameObject:
   - component: {fileID: 3280369587369324418}
   - component: {fileID: 8460735159771555133}
   - component: {fileID: 6680200039355185748}
-  m_Layer: 0
+  - component: {fileID: 6021012362367053203}
+  m_Layer: 11
   m_Name: WaterProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4801,7 +4802,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14cb1a50035c5564daf6008299335015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Damage: 2
   _ProjectileSpeed: 0
   _ExitTime: 2
   _hitParticle: {fileID: 996886446276154626, guid: 915e1e14e3447c7438b25616effe26bb,
@@ -4837,7 +4837,7 @@ EdgeCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -4847,6 +4847,32 @@ EdgeCollider2D:
   - {x: 1.2310382, y: -0.16280973}
   - {x: 1.231118, y: 0.2372259}
   - {x: 1.8282907, y: 0.036896944}
+--- !u!61 &6021012362367053203
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3280369587369324419}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.99269706, y: 0.027677536}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9483355, y: 0.46490335}
+  m_EdgeRadius: 0
 --- !u!1 &4948736695423287557
 GameObject:
   m_ObjectHideFlags: 0
@@ -4857,7 +4883,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5123668722891219414}
   - component: {fileID: 3547095769187029636}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: 64x64Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}

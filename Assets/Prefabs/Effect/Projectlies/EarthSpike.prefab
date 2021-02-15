@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4982595282167376654}
   - component: {fileID: 8753960227415837199}
   - component: {fileID: 3290349024855339617}
-  - component: {fileID: 2306434161361125002}
+  - component: {fileID: 3631964894323277268}
   m_Layer: 11
-  m_Name: Boulder
+  m_Name: EarthSpike
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &2306434161361125002
+--- !u!114 &3631964894323277268
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -130,7 +130,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 456878591809443157}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1bacdc4d7f4fc3546b0fe153fa40c17a, type: 3}
+  m_Script: {fileID: 11500000, guid: a976491f0104f8b4d80befe5a75150df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ExplosionEffect: {fileID: 6690933303270406711, guid: 989e63ed0df65b6498444700de10dbb8,
