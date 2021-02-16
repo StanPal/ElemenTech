@@ -228,48 +228,50 @@ public class Crosshair : MonoBehaviour
                     break;
             }
         }
-
-        switch (_earthHero.HeroMovement.ControllerInput)
+        if (_earthHero.TryGetComponent<HeroMovement>(out HeroMovement earthMovment))
         {
-            case HeroMovement.Controller.None:
-                break;
-            case HeroMovement.Controller.Keyboard:
-                _p4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_earthHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                _p4CrossHairs.transform.position = new Vector3(_p4Target.x, _p4Target.y);
-                break;
-            case HeroMovement.Controller.PS4:
-                _p4CrossHairs.transform.SetParent(_earthHero.transform);
-                if (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                    _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
-                {
-                    _p4CrossHairs.SetActive(false);
-                }
-                else
-                {
-                    _p4CrossHairs.SetActive(true);
-                }
-                _p4CrossHairs.transform.position = new Vector3(
-                                  _earthHero.transform.position.x + (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _earthHero.transform.position.y + _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
-                break;
-            case HeroMovement.Controller.XBOX:
-                _p4CrossHairs.transform.SetParent(_earthHero.transform);
+            switch (earthMovment.ControllerInput)
+            {
+                case HeroMovement.Controller.None:
+                    break;
+                case HeroMovement.Controller.Keyboard:
+                    _p4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_earthHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+                    _p4CrossHairs.transform.position = new Vector3(_p4Target.x, _p4Target.y);
+                    break;
+                case HeroMovement.Controller.PS4:
+                    _p4CrossHairs.transform.SetParent(_earthHero.transform);
+                    if (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
+                        _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
+                    {
+                        _p4CrossHairs.SetActive(false);
+                    }
+                    else
+                    {
+                        _p4CrossHairs.SetActive(true);
+                    }
+                    _p4CrossHairs.transform.position = new Vector3(
+                                      _earthHero.transform.position.x + (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
+                                      _earthHero.transform.position.y + _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                    break;
+                case HeroMovement.Controller.XBOX:
+                    _p4CrossHairs.transform.SetParent(_earthHero.transform);
 
-                if (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                    _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
-                {
-                    _p4CrossHairs.SetActive(false);
-                }
-                else
-                {
-                    _p4CrossHairs.SetActive(true);
-                }
-                _p4CrossHairs.transform.position = new Vector3(
-                                  _earthHero.transform.position.x + (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _earthHero.transform.position.y + _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
-                break;
-            default:
-                break;
+                    if (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
+                        _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
+                    {
+                        _p4CrossHairs.SetActive(false);
+                    }
+                    else
+                    {
+                        _p4CrossHairs.SetActive(true);
+                    }
+                    _p4CrossHairs.transform.position = new Vector3(
+                                      _earthHero.transform.position.x + (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
+                                      _earthHero.transform.position.y + _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }
