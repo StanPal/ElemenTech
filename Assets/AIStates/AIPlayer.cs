@@ -42,7 +42,10 @@ public class AIPlayer : MonoBehaviour
     public void Attack()
     {
         Debug.Log("hp > 40, attack the players");
-        //golem.Shoot();
+
+        //find nearest hero and face to his positon.
+
+        golem.Shoot();
     }
 
     public void Run()
@@ -85,18 +88,19 @@ public class AIPlayer : MonoBehaviour
     {
         Debug.Log("track any pickup nearby!  moving to the pickup");
 
-        transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
-
-        // foreach (var t in mkPickups)
-        // {
-        //     if(Mathf.Abs((t.GetComponent<pickUp>().transform.position.x - this.GetComponent<Transform>().position.x)) < 0.5f
-        //         && Mathf.Abs((t.GetComponent<pickUp>().transform.position.y - this.GetComponent<Transform>().position.y)) < 0.5f)
-        //     {
-        //         _aiController.SetBool("isPickupNearby", true);
-        //         return;
-        //     }
-        // }
-        // _aiController.SetBool("isPlayerNearby", false);
+        //find all the pickups and find which one is close to the player.
+        if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) > 0)
+        {
+            transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        }
+        else if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) < 0)
+        {
+            transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        }
+        else
+        {
+            Debug.Log("cant find any pickup");
+        }
     }
 
     public void findHealth()
@@ -110,15 +114,15 @@ public class AIPlayer : MonoBehaviour
     public void dashAway()
     {
         Debug.Log("run away from players!");
-       // float dis = nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x;
-       //
-       // if (dis < 5.0f && dis > 0.0f)
-       // {
-       //     transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
-       // }   
-       // else if(dis < 0.0f && dis > -5.0f)
-       // {
-       //     transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
-       // }
+        float dis = nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x;
+       
+        if (dis < 5.0f && dis > 0.0f)
+        {
+            transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        }   
+        else if(dis < 0.0f && dis > -5.0f)
+        {
+            transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        }
     }
 }

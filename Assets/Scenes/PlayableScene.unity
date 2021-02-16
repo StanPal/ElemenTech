@@ -582,7 +582,7 @@ PrefabInstance:
     - target: {fileID: 1908906516552659155, guid: 425a55974f6743f49805ff81cd27fbd8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.76
+      value: 5.97
       objectReference: {fileID: 0}
     - target: {fileID: 1908906516552659155, guid: 425a55974f6743f49805ff81cd27fbd8,
         type: 3}
@@ -1581,7 +1581,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1948425025}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75, y: -5.41, z: -1.2765875}
+  m_LocalPosition: {x: -3.61, y: -5.41, z: -1.2765875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1723,6 +1723,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: RoomLayout
+      objectReference: {fileID: 0}
+    - target: {fileID: 7269365260102937061, guid: af6e52aed0c49b7459ec7685db824e72,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7269365260102937062, guid: af6e52aed0c49b7459ec7685db824e72,
         type: 3}

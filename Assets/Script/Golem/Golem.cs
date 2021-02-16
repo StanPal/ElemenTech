@@ -223,6 +223,8 @@ public class Golem : MonoBehaviour
 
     public void Shoot()
     {
+
+
         if (mAttackType == GolemData.attackType.Ranged)
         {
             if (currentTime > 0.0f)
