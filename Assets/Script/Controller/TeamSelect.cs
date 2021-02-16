@@ -41,6 +41,10 @@ public class TeamSelect : MonoBehaviour
                 TeamButtonList[0].GetComponentInChildren<Text>().text = "Team 2";
                 _playerManager.FireHero.tag = "Team2";
                 break;
+            case 3:
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "FFA";
+                _playerManager.FireHero.tag = "FFA";
+                break;
             default:
                 break;
         }
@@ -57,6 +61,10 @@ public class TeamSelect : MonoBehaviour
             case 2:
                 TeamButtonList[1].GetComponentInChildren<Text>().text = "Team 2";
                 _playerManager.EarthHero.tag = "Team2";
+                break;
+            case 3:
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "FFA";
+                _playerManager.EarthHero.tag = "FFA";
                 break;
             default:
                 break;
@@ -75,6 +83,10 @@ public class TeamSelect : MonoBehaviour
                 TeamButtonList[2].GetComponentInChildren<Text>().text = "Team 2";
                 _playerManager.WaterHero.tag = "Team2";
                 break;
+            case 3:
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "FFA";
+                _playerManager.WaterHero.tag = "FFA";
+                break;
             default:
                 break;
         }
@@ -92,6 +104,10 @@ public class TeamSelect : MonoBehaviour
                 TeamButtonList[3].GetComponentInChildren<Text>().text = "Team 2";
                 _playerManager.AirHero.tag = "Team2";
                 break;
+            case 3:
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "FFA";
+                _playerManager.AirHero.tag = "FFA";
+                break;
             default:
                 break;
         }
@@ -100,36 +116,28 @@ public class TeamSelect : MonoBehaviour
     public void SelectController1()
     {
         ControllerSelect1++;
-        if (ControllerSelect1 > 2)
-        {
+        if (ControllerSelect1 > 3)
             ControllerSelect1 = 0;
-        }
     }
 
     public void SelectController2()
     {
         ControllerSelect2++;
-        if (ControllerSelect2 > 2)
-        {
+        if (ControllerSelect2 > 3)
             ControllerSelect2 = 0;
-        }
     }
 
     public void SelectController3()
     {
         ControllerSelect3++;
-        if (ControllerSelect3 > 2)
-        {
+        if (ControllerSelect3 > 3)
             ControllerSelect3 = 0;
-        }
     }
 
     public void SelectController4()
     {
         ControllerSelect4++;
-        if (ControllerSelect4 > 2)
-        {
+        if (ControllerSelect4 > 3)
             ControllerSelect4 = 0;
-        }
     }
 }

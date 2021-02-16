@@ -43,11 +43,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daeb57efe7dc67b4ebe63ea3d6801ab7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DebuffEffects:
+  _debuffEffects:
   - {fileID: 4140346808447460214, guid: 80ce73f8a0ea0014788499489b71de74, type: 3}
   - {fileID: 3037826689406433846, guid: 185110e6966399f448c0417abfea9fe5, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  OtherEffects:
+  _otherEffects:
   - {fileID: 1369876698311157786, guid: 7f6c45a4065fe3b449c48b32e2013dad, type: 3}
+  - {fileID: 0}
+  _auraEffects:
+  - {fileID: 7953942593888774019, guid: 9a732adc574449145b75859449ddf254, type: 3}
+  _auraDuration: 1
+  _auraTick: 0.5
+  _auraDamage: 0.1
+  _auraSize: {x: 2, y: 2, z: 2}

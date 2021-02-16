@@ -2,16 +2,18 @@
 
 public class ScoreManager : MonoBehaviour
 {    
-    [SerializeField] private int _TeamOneScore = 0;
-    [SerializeField] bool _IsPracticeMode = false;
-    [SerializeField] private int _TeamTwoScore = 0;
+    [SerializeField] private int _teamOneScore = 0;
+    [SerializeField] private int _teamTwoScore = 0;
+    [SerializeField] bool _isPracticeMode = false;
+    [SerializeField] bool _isMatchOver = false;
 
-    public int TeamOneScore { get { return _TeamOneScore; } }
-    public int TeamTwoScore { get { return _TeamTwoScore; } }
-    public bool PracticeMode { get { return _IsPracticeMode;} set { _IsPracticeMode = value; } }
+    public int TeamOneScore { get => _teamOneScore; }
+    public int TeamTwoScore { get => _teamTwoScore; }
+    public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }
+    public bool PracticeMode { get { return _isPracticeMode;} set { _isPracticeMode = value; } }
 
     private void Awake()
-    { 
+    {
         ServiceLocator.Register<ScoreManager>(this);
     }
 
@@ -20,10 +22,10 @@ public class ScoreManager : MonoBehaviour
         switch (team)
         {
             case 1:
-                _TeamOneScore++;
+                _teamOneScore++;
                 break;
             case 2:
-                _TeamTwoScore++;
+                _teamTwoScore++;
                 break; 
             default:
                 break;
@@ -32,7 +34,8 @@ public class ScoreManager : MonoBehaviour
 
     public void ResetScore()
     {
-        _TeamOneScore = 0;
-        _TeamTwoScore = 0;
+        _teamOneScore = 0;
+        _teamTwoScore = 0;
+        _isMatchOver = false;
     }
 }

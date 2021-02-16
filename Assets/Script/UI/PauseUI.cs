@@ -37,6 +37,7 @@ public class PauseUI : MonoBehaviour
             _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
     }
+    
 
     public void PauseGame()
     {

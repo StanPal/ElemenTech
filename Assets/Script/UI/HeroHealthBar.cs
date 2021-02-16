@@ -1,23 +1,25 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
 public class HeroHealthBar : MonoBehaviour
 {
-    private HeroStats _Hero;
-    private Slider _Slider;
+    private HeroStats mHero;
+    private Slider slider;
 
     void Awake()
     {
-        _Hero = GetComponentInParent<HeroStats>();
-        _Slider = GetComponent<Slider>();
-        _Slider.transform.position = 
+        mHero = GetComponentInParent<HeroStats>();
+        slider = GetComponent<Slider>();
+        slider.transform.position = 
             new Vector3(this.GetComponentInParent<HeroStats>().gameObject.transform.position.x,
                         this.GetComponentInParent<HeroStats>().gameObject.transform.position.y + 1.0f);
     }
 
     void Update()
     {
-        float fillValue = _Hero.CurrentHealth / _Hero.MaxHealth;
-        _Slider.value = fillValue;
+        float fillValue = mHero.CurrentHealth / mHero.MaxHealth;
+        slider.value = fillValue;
     }
 }

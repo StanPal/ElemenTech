@@ -2,11 +2,10 @@
 
 public class WaterGun : MonoBehaviour
 {
-    [SerializeField] private float _Damage = 2;
-    [SerializeField] private float _ProjectileSpeed;
     private Rigidbody2D _RigidBody;
-    [SerializeField] private float _ExitTime = 2.0f;
     private WaterSkills _WaterSkills;
+    [SerializeField] private float _ProjectileSpeed;
+    [SerializeField] private float _ExitTime = 2.0f;
     private bool _CanDamagePlayer = false;
 
     private void Awake()
@@ -24,7 +23,7 @@ public class WaterGun : MonoBehaviour
             Destroy(gameObject);
         }
         _ExitTime -= Time.deltaTime;
-        _RigidBody.velocity = transform.right * _ProjectileSpeed;
+        _RigidBody.velocity = transform.right * _WaterSkills.Speed;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -37,7 +36,7 @@ public class WaterGun : MonoBehaviour
                 Golem golem = collision.gameObject.GetComponent<Golem>();
                 if (golem != null)
                 {
-                    golem.TakeDamage(_Damage);
+                    golem.TakeDamage(_WaterSkills.Damage);
                     Destroy(gameObject);
                 }
             }
@@ -62,7 +61,7 @@ public class WaterGun : MonoBehaviour
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamageFromProjectile(damage);
+                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
                         Destroy(gameObject);
 
                     }
@@ -76,7 +75,7 @@ public class WaterGun : MonoBehaviour
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamageFromProjectile(damage);
+                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
                         Destroy(gameObject);
 
                     }
@@ -92,10 +91,10 @@ public class WaterGun : MonoBehaviour
             }
         }
     }
-
     private void OnCollisionExit2D(Collision2D collision)
     {
         Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
         _CanDamagePlayer = true;
     }
+
 }

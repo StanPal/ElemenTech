@@ -13,7 +13,7 @@ public class SmashCamera : MonoBehaviour
     // The smallest orthographic size the camera can be.
     [SerializeField]
     private float mMinSize = 6.5f;
-    PlayerManager PlayerManager;
+    PlayerManager playerManager;
 
     private Camera mCamera;
     // Reference speed for the smooth damping of the orthographic size.
@@ -29,7 +29,7 @@ public class SmashCamera : MonoBehaviour
     private Vector3 targetLocalPos;
     private void Awake()
     {
-        PlayerManager = FindObjectOfType<PlayerManager>();
+        playerManager = FindObjectOfType<PlayerManager>();
         mCamera = GetComponent<Camera>();
     }
 
@@ -58,19 +58,19 @@ public class SmashCamera : MonoBehaviour
         int numTargets = 0;
 
         // Go through all the targets and add their positions together.
-        for (int i = 0; i < PlayerManager.PlayersList.Count; i++)
+        for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
             // If the target isn't active, go on to the next one.
-            if (PlayerManager.PlayersList[i] != null)
+            if (playerManager.mPlayersList[i] != null)
             {
-                if (!PlayerManager.PlayersList[i].gameObject.activeSelf)
+                if (!playerManager.mPlayersList[i].gameObject.activeSelf)
                     continue;
             }
 
             // Add to the average and increment the number of targets in the average.
-            if (PlayerManager.PlayersList[i] != null)
+            if (playerManager.mPlayersList[i] != null)
             {
-                averagePos += PlayerManager.PlayersList[i].transform.position;
+                averagePos += playerManager.mPlayersList[i].transform.position;
                 numTargets++;
             }
         }
@@ -104,19 +104,19 @@ public class SmashCamera : MonoBehaviour
         // Start the camera's size calculation at zero.
         float size = 0f;
 
-        for (int i = 0; i < PlayerManager.PlayersList.Count; i++)
+        for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
 
-            if (PlayerManager.PlayersList[i] != null)
+            if (playerManager.mPlayersList[i] != null)
             {
-                if (!PlayerManager.PlayersList[i].gameObject.activeSelf)
+                if (!playerManager.mPlayersList[i].gameObject.activeSelf)
                     continue;
             }
 
             // find the position of the target in the camera's local space.
-            if (PlayerManager.PlayersList[i] != null)
+            if (playerManager.mPlayersList[i] != null)
             {
-                targetLocalPos = transform.InverseTransformPoint(PlayerManager.PlayersList[i].transform.position);
+                targetLocalPos = transform.InverseTransformPoint(playerManager.mPlayersList[i].transform.position);
             }
 
             // Find the position of the target from the desired position of the camera's local space.

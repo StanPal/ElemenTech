@@ -1,19 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerManager : MonoBehaviour
 {
-    // Prefabs for Hero's
+    // Prefabs for Heros
     public GameObject FireHero;
     public GameObject WaterHero;
     public GameObject AirHero;
     public GameObject EarthHero;
 
-    public List<GameObject> PlayersList = new List<GameObject>();
+    public List<GameObject> mPlayersList = new List<GameObject>();
+    [SerializeField]
+    private bool playTestMode = false;
+
     public List<GameObject> TeamOne = new List<GameObject>();
     public List<GameObject> TeamTwo = new List<GameObject>();
-
-    [SerializeField] private bool _PlayTestMode = false;
 
     private void Awake()
     {
@@ -31,4 +33,5 @@ public class PlayerManager : MonoBehaviour
         TeamOne.Capacity = 0;
         TeamTwo.Capacity = 0;
     }
+
 }

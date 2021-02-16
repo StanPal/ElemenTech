@@ -9,6 +9,7 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    public GameObject Sword;
     public Transform PivotPoint;
     public Transform FirePoint;
     private Animator _playerAnimator;
@@ -16,24 +17,25 @@ public class HeroActions : MonoBehaviour
     private HeroMovement _heroMovement;
     private HeroStats _heroStats;
     private PlayerInput _playerInput;
-    private Rigidbody2D _rigidBody;
+    private Rigidbody2D _rb;
+    private bool _isGuardInvoked = false;
+    private bool _isSwordSwinging = false;
+    private float _nextFireTime;
 
-    [SerializeField] private GameObject _sword;
     [SerializeField] private bool _isOnCooldown = false;
     [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector2 _axisPos;
 
-    private bool _isGuardInvoked = false;
-    private float _nextFireTime;
-
+    
     //Getters & Setters
-    public bool IsCooldown { get => _isOnCooldown; set => _isOnCooldown = value; } 
+    public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
+    public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
-    public HeroStats HeroStats { get => _heroStats; }
-    public PlayerInput PlayerInput { get => _playerInput; }
+    public HeroStats HeroStats { get => _heroStats; } 
+    public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
-    public float GetLookAngle { get => _lookAngle; }
+    public float GetLookAngle { get => _lookAngle; } 
 
     private void Awake()
     {
@@ -42,7 +44,7 @@ public class HeroActions : MonoBehaviour
 
     private void Initialize()
     {
-        _rigidBody = GetComponent<Rigidbody2D>();
+        _rb = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _heroMovement = GetComponent<HeroMovement>();
         _heroStats = GetComponent<HeroStats>();
@@ -54,7 +56,6 @@ public class HeroActions : MonoBehaviour
     {
         _playerInput.Enable();
     }
-
     private void OnDisable()
     {
         _playerInput.Disable();
@@ -76,18 +77,6 @@ public class HeroActions : MonoBehaviour
                 }
                 _playerInput.KeyboardMouse.GuardRelease.performed += _ => GuardRelease();
                 _playerInput.KeyboardMouse.Pause.performed += _ => Pause();
-            }
-
-           if (_heroMovement.ControllerInput == HeroMovement.Controller.Keyboard2)
-            {
-                _playerInput.KeyboardLayout2.SwordSwing.performed += _ => SwordSwing();
-                _playerInput.KeyboardLayout2.ElementSpecial1.performed += _ => ElementSpecial1();
-                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
-                {
-                    _playerInput.KeyboardLayout2.Guard.performed += _ => Guard();
-                }
-                _playerInput.KeyboardLayout2.GuardRelease.performed += _ => GuardRelease();
-                _playerInput.KeyboardLayout2.Pause.performed += _ => Pause();
             }
 
             if (HeroMovement.ControllerInput == HeroMovement.Controller.PS4)
@@ -137,7 +126,6 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                //_axisPos = _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>();
                 _lookDirection = Camera.main.ScreenToWorldPoint(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
@@ -156,8 +144,6 @@ public class HeroActions : MonoBehaviour
                 _lookDirection = _playerInput.Gamepad.Aim.ReadValue<Vector2>();
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
-            case HeroMovement.Controller.Keyboard2:
-                break;
             default:
                 break;
         }
@@ -172,7 +158,7 @@ public class HeroActions : MonoBehaviour
     private void Guard()
     {
         _isGuardInvoked = true;
-        _sword.gameObject.SetActive(false);
+        Sword.gameObject.SetActive(false);
          onGuardPerformed.Invoke();
     }
 
@@ -198,11 +184,12 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if (!_isGuardInvoked && !_heroMovement.Dashing)
+        if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
+            _isSwinging = true;
             _playerAnimator.SetBool("IsJumping",false);
-            _playerAnimator.SetTrigger("AttackTrigger");
-            _sword.gameObject.SetActive(true);
+            //_playerAnimator.SetTrigger("AttackTrigger");
+            Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
     }
@@ -219,14 +206,13 @@ public class HeroActions : MonoBehaviour
 
     private IEnumerator GravityModifier()
     {        
-        _rigidBody.gravityScale = 15;
+        _rb.gravityScale = 15;
         yield return new WaitForSeconds(0.5f);
-        _rigidBody.gravityScale = 1;
+        _rb.gravityScale = 1;
     }
 
     private void Pause()
     {
-        Debug.Log("Called");
         onPausePeformed.Invoke();
     }
 }

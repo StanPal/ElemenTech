@@ -5,7 +5,7 @@ using UnityEngine;
 public class SupCam : MonoBehaviour
 {
     public FocusLevel FocusLevel;
-    private PlayerManager PlayerManager;
+    private PlayerManager playerManager;
 
     [SerializeField]
     private float DepthUpdateSpeed = 5f;
@@ -31,12 +31,12 @@ public class SupCam : MonoBehaviour
 
     private void Awake()
     {
-        PlayerManager = FindObjectOfType<PlayerManager>();
+        playerManager = FindObjectOfType<PlayerManager>();
     }
 
     void Start()
     {
-        PlayerManager.PlayersList.Add(FocusLevel.gameObject);
+        playerManager.mPlayersList.Add(FocusLevel.gameObject);
         
     }
    
@@ -72,9 +72,9 @@ public class SupCam : MonoBehaviour
         Vector3 totalPositions = Vector3.zero;
         Bounds playerBounds = new Bounds();
 
-        for (int i = 0; i < PlayerManager.PlayersList.Count; i++)
+        for (int i = 0; i < playerManager.mPlayersList.Count; i++)
         {
-            Vector3 playerPosition = PlayerManager.PlayersList[i].transform.position;
+            Vector3 playerPosition = playerManager.mPlayersList[i].transform.position;
 
             if(FocusLevel.FocusBounds.Contains(playerPosition))
             {
@@ -88,7 +88,7 @@ public class SupCam : MonoBehaviour
             playerBounds.Encapsulate(playerPosition);
         }
 
-        averageCenter = (totalPositions / PlayerManager.PlayersList.Count);
+        averageCenter = (totalPositions / playerManager.mPlayersList.Count);
 
         float extents = (playerBounds.extents.x + playerBounds.extents.y);
         float lerpPercent = Mathf.InverseLerp(0, (FocusLevel.HalfXBounds + FocusLevel.HalfYBounds) / 2, extents);

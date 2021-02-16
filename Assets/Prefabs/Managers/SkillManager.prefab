@@ -59,11 +59,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9ae2b8293fe9a46a7794daaf431660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mFireBall: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
+  FireBallPrefab: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
     type: 3}
-  mSpeed: 20
-  mDamage: 20
-  mDotDuration: 5
+  _speed: 10
+  _damage: 10
+  _dotDuration: 5
 --- !u!114 &639230565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
   mDamage: 8
-  mSpeed: 10
+  mSpeed: 20
   mExitTime: 1.5
   mScale: {x: 0.5, y: 3, z: 0.5}
   mScaleSpeed: 2
@@ -116,8 +116,11 @@ MonoBehaviour:
   EarthBoulder: {fileID: 456878591809443157, guid: f0c547ba5311eaf499b7de438e7e3901,
     type: 3}
   Points: {fileID: 6930636138351268449, guid: 3f4c780beaef3814fb6f2ffe02fef6b8, type: 3}
-  _NumberOfPoints: 50
-  _SpaceBetweenPoints: 0.02
-  _LaunchForce: 10
-  _Gravity: 1
-  _Damage: 10
+  LaunchOffset: {x: 0, y: 0, z: 0}
+  _numberOfPoints: 20
+  _spaceBetweenPoints: 0.01
+  _lanchForce: 10
+  _mass: 2
+  _damage: 10
+  _splashRange: 1.5
+  _knockBackAmount: 2
