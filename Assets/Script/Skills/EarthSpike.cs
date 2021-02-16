@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EarthSpike : MonoBehaviour
 {
-    EarthSkills EarthSkills;
+    private EarthSkills EarthSkills;
     private void Awake()
     {
         EarthSkills = FindObjectOfType<EarthSkills>();
@@ -12,23 +12,44 @@ public class EarthSpike : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<Golem>())
+        if (collision.GetComponent<Golem>())
         {
             Golem golem = collision.GetComponent<Golem>();
             golem.TakeDamage(EarthSkills.Damage);
         }
-        if (EarthSkills.PlayerSkills.Hero.tag.Equals("Team1"))
+        if (EarthSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
-           if (collision.tag.Equals("Team2"))
-             {
-                collision.GetComponent<Hero>().TakeDamage(EarthSkills.Damage);
-             }
+            if (collision.tag.Equals("Team2"))
+            {
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(10f);
+                }
+                
+            }
         }
-        if (EarthSkills.PlayerSkills.Hero.tag.Equals("Team2"))
+
+        if (collision.GetComponent<Guard>())
+        {
+            if (collision.GetComponent<Guard>().tag.Equals(EarthSkills.PlayerSkills.HeroAction.tag))
+            {
+                Guard guard = collision.GetComponent<Guard>();
+                if (guard.Guarding)
+                {
+                    Destroy(gameObject);
+                    Debug.Log("Shield Hit");
+                    collision.GetComponent<Guard>().ComboSkillOn = true;
+                }
+            }
+        }
+        if (EarthSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<Hero>().TakeDamage(EarthSkills.Damage);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(10f);
+                }
             }
         }
     }

@@ -1,138 +1,152 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UIElements;
+﻿using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
+    private ParticleSystemManager _particleSystemManager;
+    public event System.Action<GameObject> onAuraActivated;
+    public event System.Action<GameObject> onAuraDeActivated;
+    private HeroActions _heroAction;
+    private HeroMovement _heroMovement;
+        
+    private bool swingActive = false;
 
-    [SerializeField]
-    float damage = 2;
-    [SerializeField]
-    float startTimeBtAttack;
-    float timeBtwAttack;
-
-    [SerializeField]
-    Transform attackPos;
-    [SerializeField]
-    LayerMask whatIsEnemy;
-    [SerializeField]
-    float attackRange;
-
-    [SerializeField]
-    GameObject target;
-    [SerializeField]
-    float rotaSpeed;
-    [SerializeField]
-    float rotaBackSpeed;
-    Hero hero;
-    float swordAngle = 45.0f;
-    bool swingdown = false;
-    bool beginSwing = false;
+    [SerializeField] private float _hitStun = 1f;
+    [SerializeField] private float _rotationSpeed = 200f;
+    [SerializeField] private float _rotationPerFrame = 20f;
+    [SerializeField] private float _rotationgAngleLimit = 10f;
+    [SerializeField] private float _originalRotation = 60f;
+    [SerializeField] private float _knockBackAmount = 20f; 
+    [SerializeField] private float _rotation = 0;
+    private bool _originalDirLeft;
 
     private void Awake()
     {
-        hero = GetComponentInParent<Hero>();
+        _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
+        _heroAction = GetComponentInParent<HeroActions>();
+        _heroMovement = GetComponentInParent<HeroMovement>();
+        _heroAction.onAttackPerformed += AttackPerformed;
+    }
+  
+    private void AttackPerformed()
+    {
+        swingActive = true;
+        if (_heroMovement.GetIsLeft)
+        {
+            _originalDirLeft = true;
+             _rotation = 0;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -_originalRotation);
+        }
+        else
+        {
+            _originalDirLeft = false;
+            _rotation = 0;
+            transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);
+        }
     }
 
     private void Update()
     {
-        //if (transform.rotation.z.Equals(-20.0f))
-        //{
-        //    SwordSwing(rotaSpeed);
-        //}
-        //else if (transform.rotation.z.Equals(0.0f))
-        //{
-        //    SwordSwing(rotaBackSpeed);
-        //}
+        if (swingActive)
+        {            
+            if (_heroMovement.GetIsLeft)
+            {
+                if(swingActive)
+                {
+                    SwordSwing(true);
+                }
+            }            
+            else
+            {
+                if (swingActive)
+                {
+                    SwordSwing(false);
+                }
+            }
+            if (_heroMovement.GetIsLeft == !_originalDirLeft)
+            {
+                _rotation = 0;
+                _heroAction._isSwinging = false;
+                gameObject.SetActive(false);
+            }
+        }
+    }
 
-        if (hero.GetIsLeft)
+    void SwordSwing(bool isLeft)
+    {
+        if (isLeft)
         {
-            if (swingdown && beginSwing)
+            transform.RotateAround(transform.position, Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame);
+            if (_rotation >= _rotationgAngleLimit)
             {
-                SwordSwing(rotaBackSpeed);
-            }
-            else if (!swingdown && beginSwing)
-            {
-                SwordSwing(-rotaSpeed);
-            }
-            if (transform.rotation.z <= -0.45f)
-            {
-                swingdown = true;
-            }
-            if (transform.rotation.z >= 0.0f)
-            {
-                beginSwing = false;
-                swingdown = false;
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, -_originalRotation);
+                _heroAction._isSwinging = false;
+                swingActive = false;
+                this.gameObject.SetActive(false);
             }
         }
         else
         {
-
-            if (swingdown && beginSwing)
+            transform.RotateAround(transform.position, -Vector3.forward, _rotationSpeed * Time.deltaTime);
+            _rotation = _rotation + (Time.deltaTime * _rotationPerFrame); 
+            if (_rotation >= _rotationgAngleLimit)
             {
-                SwordSwing(-rotaBackSpeed);
-            }
-            else if (!swingdown && beginSwing)
-            {
-                SwordSwing(rotaSpeed);
-            }
-            if (transform.rotation.z >= 0.45f )
-            {
-                swingdown = true;
-            }
-            if (transform.rotation.z <= 0.0f)
-            {
-                beginSwing = false;
-                swingdown = false;
+                _rotation = 0;
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);                
+                _heroAction._isSwinging = false;
+                swingActive = false;
+                this.gameObject.SetActive(false);
             }
         }
-
-        if (GetComponentInParent<Hero>().controllerType == Hero.Controller.PS4)
-        {
-            if (!beginSwing && Input.GetButtonDown("PS4Attack"))
-                beginSwing = true;
-        }
-        if (GetComponentInParent<Hero>().controllerType == Hero.Controller.KeyBoard)
-        {
-            if (!beginSwing && Input.GetMouseButtonDown(0))
-            {
-                //Collider2D[] enemiesToDamage = Physics2D.OverlapCircleAll(attackPos.position,attackRange,whatIsEnemy);
-                //for (int i = 0; i < enemiesToDamage.Length; ++i)
-                //{
-                //    enemiesToDamage[i].GetComponent<Golem>().TakeDamage(damage);
-                //}
-                beginSwing = true;
-            }
-        }
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(attackPos.position, attackRange);
-    }
-
-    void SwordSwing(float Speed)
-    {
-        transform.RotateAround(target.transform.position, Vector3.forward, Speed * Time.deltaTime);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponentInParent<Hero>().gameObject.tag.Equals("Team1"))
+        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
-                collision.GetComponent<Hero>().TakeDamage(10f);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
+                    {
+                        _particleSystemManager.FireAura(_heroMovement.gameObject);
+                    }
+                }
+                if (!collision.GetComponent<Guard>().Guarding)
+                {
+                    collision.GetComponent<HeroMovement>().RecoveryTime = _hitStun;
+                    collision.GetComponent<HeroMovement>().Recovering = true;
+                }
             }
         }
-        if (GetComponentInParent<Hero>().gameObject.tag.Equals("Team2"))
+        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))
             {
-                collision.GetComponent<Hero>().TakeDamage(10f);
+                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                {
+                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)
+                    {
+                        _particleSystemManager.FireAura(_heroMovement.gameObject);
+                    }
+                }                
+                if (!collision.GetComponent<Guard>().Guarding)
+                {
+                    collision.GetComponent<HeroMovement>().RecoveryTime = _hitStun;
+                    collision.GetComponent<HeroMovement>().Recovering = true;
+                }
             }
+        }
+
+        if (collision.GetComponent<Golem>())
+        {
+            collision.GetComponent<Golem>().TakeDamage(_heroAction.HeroStats.AttackDamage);
         }
     }
 }

@@ -9,6 +9,7 @@ public class Elements : MonoBehaviour
         Fire,
         Earth,
         Water,
-        Air
+        Air,
+        None
     }
 }

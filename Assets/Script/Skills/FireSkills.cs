@@ -1,31 +1,29 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FireSkills : MonoBehaviour
 {
     // FireSkills 
-    public GameObject mFireBall;
+    public GameObject FireBallPrefab;
+    private PlayerSkills _heroSkills;
 
-    [SerializeField]
-    private float mSpeed = 10.0f;
-    public float Speed { get { return mSpeed; } }
-    [SerializeField]
-    private float mDamage = 10.0f;
-    public float Damage { get { return mDamage; } }
+    [SerializeField] private float _speed = 10.0f;
+    [SerializeField] private float _damage = 10.0f;
+    [SerializeField] private float _dotDuration = 5.0f;
 
-    PlayerSkills mHeroSkills;
-    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
+    public float Speed { get => _speed;  set => _speed = value; } 
+    public float Damage { get => _damage; } 
+    public PlayerSkills PlayerSkills { get => _heroSkills; } 
+    public float DotDuration { get => _dotDuration; } 
 
     private void Start()
     {
-        mHeroSkills = GetComponent<PlayerSkills>();
-        mHeroSkills.onFireSkillPerformed += FireBall;
+        _heroSkills = GetComponent<PlayerSkills>();
+        _heroSkills.onFireSkillPerformed += FireBall;
     }
 
     void FireBall()
-    {    
-        Instantiate(mFireBall, mHeroSkills.Hero.transform.position, Quaternion.identity);
+    {
+       Instantiate(FireBallPrefab, _heroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, _heroSkills.HeroAction.GetLookAngle));
     }
 
 }
