@@ -21,11 +21,12 @@ public class HeroActions : MonoBehaviour
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
     private float _nextFireTime;
+    private Camera _camera;
 
     [SerializeField] private bool _isOnCooldown = false;
-    [SerializeField] private Vector2 _lookDirection;
+    [SerializeField] private Vector3 _lookDirection;
     [SerializeField] private float _lookAngle;
-    [SerializeField] private Vector2 _axisPos;
+    [SerializeField] private Vector3 _axisPos;
 
     
     //Getters & Setters
@@ -50,6 +51,7 @@ public class HeroActions : MonoBehaviour
         _heroStats = GetComponent<HeroStats>();
         _playerInput = new PlayerInput();
         _guard = GetComponent<Guard>();
+        _camera = FindObjectOfType<Camera>();
     }
 
     private void OnEnable()
@@ -126,7 +128,9 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                _lookDirection = Camera.main.ScreenToWorldPoint(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                Debug.Log(_camera.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
+                _lookDirection = Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
+                                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z));
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:

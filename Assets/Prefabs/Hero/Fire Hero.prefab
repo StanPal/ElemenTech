@@ -627,9 +627,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 4742860617384786225}
   FirePoint: {fileID: 4264183723163891622}
   _isOnCooldown: 0
-  _lookDirection: {x: 0, y: 0}
+  _lookDirection: {x: 0, y: 0, z: 0}
   _lookAngle: 0
-  _axisPos: {x: 0, y: 0}
+  _axisPos: {x: 0, y: 0, z: 0}
 --- !u!114 &1791110765294023679
 MonoBehaviour:
   m_ObjectHideFlags: 0

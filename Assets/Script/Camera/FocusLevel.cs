@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class FocusLevel : MonoBehaviour
 {
@@ -9,7 +7,6 @@ public class FocusLevel : MonoBehaviour
     public float HalfZBounds = 15f;
 
     public Bounds FocusBounds; 
-
     
     private void Update()
     {
