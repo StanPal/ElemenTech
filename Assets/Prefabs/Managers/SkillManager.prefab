@@ -99,8 +99,8 @@ MonoBehaviour:
   mDamage: 8
   mSpeed: 20
   mExitTime: 1.5
-  mScale: {x: 0.5, y: 3, z: 0.5}
-  mScaleSpeed: 2
+  mScale: {x: 1, y: 2, z: 1}
+  mScaleSpeed: 1
 --- !u!114 &639230567
 MonoBehaviour:
   m_ObjectHideFlags: 0
