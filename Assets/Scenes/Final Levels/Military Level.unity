@@ -312,6 +312,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3045387163052780626, guid: 28e3ce56773391549bbc5805ea5e2d16,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
 --- !u!223 &306839414 stripped
@@ -347,11 +352,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
       propertyPath: _depthMin
-      value: -60
+      value: -40
       objectReference: {fileID: 0}
     - target: {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
       propertyPath: _depthMax
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -406,7 +411,7 @@ PrefabInstance:
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -10
+      value: -17
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329847, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -456,7 +461,7 @@ PrefabInstance:
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: field of view
-      value: 108.25274
+      value: 78
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -2287,6 +2292,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: LevelFocus
+      objectReference: {fileID: 0}
+    - target: {fileID: 626247835298582183, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
+        type: 3}
+      propertyPath: HalfXBounds
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 626247835298582183, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
+        type: 3}
+      propertyPath: HalfYBounds
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df3d1f3ae8f8e54b8db64950990e6c4, type: 3}
