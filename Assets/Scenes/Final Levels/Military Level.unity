@@ -341,6 +341,18 @@ PrefabInstance:
       propertyPath: _focusLevel
       value: 
       objectReference: {fileID: 1926482578}
+    - target: {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
+      propertyPath: _angleMax
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
+      propertyPath: _depthMin
+      value: -60
+      objectReference: {fileID: 0}
+    - target: {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
+      propertyPath: _depthMax
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: _P1CrossHairs
