@@ -11,9 +11,9 @@ public class AIPlayer : MonoBehaviour
     private AIPlayerManager _manager = null;
     public float currentHP;
     public pickUp[] mkPickups;
-    public Hero[] mHeros ;
-    public Hero nearestHero;
-    public Hero nearestHealth;
+    public HeroStats[] mHeros ;
+    public HeroStats nearestHero;
+    public HeroStats nearestHealth;
 
     private Golem golem;
 
@@ -25,7 +25,7 @@ public class AIPlayer : MonoBehaviour
         _manager = ServiceLocator.Get<AIPlayerManager>();
         _manager.AddAIPlayer(this);
 
-        mHeros = GameObject.FindObjectsOfType<Hero>();
+        mHeros = GameObject.FindObjectsOfType<HeroStats>();
         mkPickups = GameObject.FindObjectsOfType<pickUp>();
     }
 
@@ -74,8 +74,8 @@ public class AIPlayer : MonoBehaviour
 
         foreach (var t in mHeros)
         {
-            if(Mathf.Abs((t.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x)) < 5 
-                && Mathf.Abs((t.GetComponent<Hero>().transform.position.y - this.GetComponent<Transform>().position.y)) < 5)
+            if(Mathf.Abs((t.GetComponent<HeroStats>().transform.position.x - this.GetComponent<Transform>().position.x)) < 5 
+                && Mathf.Abs((t.GetComponent<HeroStats>().transform.position.y - this.GetComponent<Transform>().position.y)) < 5)
             {
                 _aiController.SetBool("isPlayerNearby", true);
                 nearestHero = t;
@@ -114,7 +114,7 @@ public class AIPlayer : MonoBehaviour
     public void dashAway()
     {
         Debug.Log("run away from players!");
-        float dis = nearestHero.GetComponent<Hero>().transform.position.x - this.GetComponent<Transform>().position.x;
+        float dis = nearestHero.GetComponent<HeroStats>().transform.position.x - this.GetComponent<Transform>().position.x;
        
         if (dis < 5.0f && dis > 0.0f)
         {
