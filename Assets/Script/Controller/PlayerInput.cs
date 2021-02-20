@@ -105,6 +105,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""HoldJump"",
+                    ""type"": ""Button"",
+                    ""id"": ""171bfa00-f7dc-46b9-9e56-6b141da48cba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Hold""
                 }
             ],
             ""bindings"": [
@@ -248,6 +256,17 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""FastFall"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dd5b303e-0a5c-4b16-a501-ef6f17531533"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldJump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1243,6 +1262,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
         m_KeyboardMouse_Aim = m_KeyboardMouse.FindAction("Aim", throwIfNotFound: true);
         m_KeyboardMouse_FastFall = m_KeyboardMouse.FindAction("FastFall", throwIfNotFound: true);
+        m_KeyboardMouse_HoldJump = m_KeyboardMouse.FindAction("HoldJump", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -1349,6 +1369,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Dash;
     private readonly InputAction m_KeyboardMouse_Aim;
     private readonly InputAction m_KeyboardMouse_FastFall;
+    private readonly InputAction m_KeyboardMouse_HoldJump;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -1364,6 +1385,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
         public InputAction @Aim => m_Wrapper.m_KeyboardMouse_Aim;
         public InputAction @FastFall => m_Wrapper.m_KeyboardMouse_FastFall;
+        public InputAction @HoldJump => m_Wrapper.m_KeyboardMouse_HoldJump;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1406,6 +1428,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @FastFall.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
                 @FastFall.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
                 @FastFall.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnFastFall;
+                @HoldJump.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldJump;
+                @HoldJump.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldJump;
+                @HoldJump.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldJump;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -1443,6 +1468,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @FastFall.started += instance.OnFastFall;
                 @FastFall.performed += instance.OnFastFall;
                 @FastFall.canceled += instance.OnFastFall;
+                @HoldJump.started += instance.OnHoldJump;
+                @HoldJump.performed += instance.OnHoldJump;
+                @HoldJump.canceled += instance.OnHoldJump;
             }
         }
     }
@@ -1864,6 +1892,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFastFall(InputAction.CallbackContext context);
+        void OnHoldJump(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {

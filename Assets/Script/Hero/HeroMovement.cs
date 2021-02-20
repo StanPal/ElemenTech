@@ -4,6 +4,7 @@ using UnityEngine;
 public class HeroMovement : MonoBehaviour
 {
     private HeroActions _heroActions;
+    private HeroStats _heroStats;
     private PlayerInput _playerInput;
     private Animator _playerAnimator;
     private CapsuleCollider2D _capsuleCollider;
@@ -26,7 +27,7 @@ public class HeroMovement : MonoBehaviour
     private bool _onHitLeft = false;
     private float _originalGravity;
     private float _originalRecoveryTime;
-
+    
     [SerializeField] private float _moveSpeed = 12f;
     [SerializeField] private bool _isLeft = false;
     [SerializeField] private bool _isJumping = false;
@@ -35,6 +36,10 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private int _maxJumps = 1;
     [SerializeField] private int _numOfWallJumps = 0;
     [SerializeField] private int _maxWallJump = 1;
+    [SerializeField] private float _jumpTimer = 5;
+    private bool _isJumpHeld = false;
+    private float _jumpTimeCounter = 5;
+    private float _extraJumpForce = 0;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private LayerMask _whatIsWall;
 
@@ -86,8 +91,10 @@ public class HeroMovement : MonoBehaviour
         _originalRecoveryTime = _recoveryTime;
         _animationEvents = GetComponentInChildren<AnimationEvents>();
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
+        _heroStats = GetComponent<HeroStats>();
         _col2DSize = _capsuleCollider.size;
         _canDash = true;
+        _jumpTimeCounter = _jumpTimer;
         if (ControllerInput == Controller.Keyboard)
         {
             _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
@@ -119,6 +126,20 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetBool("IsMultiJump", false);
             _numOfJumps = _maxJumps;
             _numOfWallJumps = _maxWallJump;
+            if(!_isJumpHeld)
+            {
+                _jumpTimeCounter = _jumpTimer;
+                _extraJumpForce = 0;
+            }
+        }
+
+        if(_isJumpHeld)
+        {
+            if(_jumpTimeCounter > 0)
+            {
+               _jumpTimeCounter -= Time.deltaTime;
+                _extraJumpForce += Time.deltaTime;
+            }
         }
 
         SlopeCheck();
@@ -191,9 +212,24 @@ public class HeroMovement : MonoBehaviour
             case Controller.None:
                 break;
             case Controller.Keyboard:
-                if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0 || _playerInput.KeyboardMouse.Jump.triggered && IsWall() && _numOfWallJumps >0)
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {
-                    Jump();
+                    if (_playerInput.KeyboardMouse.HoldJump.triggered)
+                    {
+                        _isJumpHeld = true;
+                    }
+                    if(_playerInput.KeyboardMouse.JumpRelease.triggered)
+                    {
+                        _isJumpHeld = false;
+                        HeldJump();
+                    }
+                }
+                else
+                {
+                    if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0 || _playerInput.KeyboardMouse.Jump.triggered && IsWall() && _numOfWallJumps > 0)
+                    {
+                        Jump();
+                    }
                 }
                 break;
             case Controller.PS4:
@@ -225,6 +261,16 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        _playerInput.Enable();
+    }
+
+    private void OnDisable()
+    {
+        _playerInput.Disable();
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (this.tag.Equals("Team1"))
@@ -241,15 +287,6 @@ public class HeroMovement : MonoBehaviour
                 Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
             }
         }
-    }
-
-    private void OnEnable()
-    {
-        _playerInput.Enable();
-    }
-    private void OnDisable()
-    {
-        _playerInput.Disable();
     }
 
     private void SlopeCheck()
@@ -370,6 +407,12 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetTrigger("DashTrigger");
             _isDashing = true;
         }
+    }
+
+    private void HeldJump()
+    {
+        _playerAnimator.SetBool("IsJumping", true);
+        _rb.velocity = Vector2.up * (_jumpForce + _extraJumpForce);
     }
 
     private void Jump()
