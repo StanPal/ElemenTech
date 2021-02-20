@@ -2,8 +2,11 @@
 
 public class EarthStomp : MonoBehaviour
 {
-    private HeroStats _HeroStats;
-    private float _StompDamage = 20f;
+    private HeroStats _heroStats;
+    private HeroActions _heroActions;
+    private HeroMovement _heroMovement;
+    private float _stompDamage = 20f;
+    private bool _isHit = false;
 
     private void Awake()
     {
@@ -12,33 +15,50 @@ public class EarthStomp : MonoBehaviour
 
     private void Initialize()
     {
-        _HeroStats = GetComponentInParent<HeroStats>();
+        _heroMovement = GetComponent<HeroMovement>();
+        _heroActions = GetComponentInParent<HeroActions>();
+        _heroStats = GetComponentInParent<HeroStats>();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-      if(_HeroStats.tag.Equals("Team1"))
-        {
-            if(collision.tag.Equals("Team2"))
+        if(!_isHit)
             {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+            if (_heroStats.tag.Equals("Team1"))
+            {
+                if (collision.collider.tag.Equals("Team2"))
                 {
-                    heroStats.TakeDamage(_StompDamage);
-                    heroStats.GetComponent<HeroMovement>().Recovering = true; 
+                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                    {
+                        _isHit = true;
+                        this.gameObject.SetActive(false);
+                        heroStats.TakeDamage(_stompDamage);
+                        heroStats.GetComponent<HeroMovement>().Recovering = true;
+                    }
+                }
+            }
+            if (_heroStats.tag.Equals("Team2"))
+            {
+                if (collision.collider.tag.Equals("Team1"))
+                {
+                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                    {
+                        heroStats.TakeDamage(_stompDamage);
+                        heroStats.GetComponent<HeroMovement>().Recovering = true;
+                    }
                 }
             }
         }
 
-      if(_HeroStats.tag.Equals("Team1"))
+        if(collision.collider.GetComponentInParent<Walls>())
         {
-            if (collision.tag.Equals("Team2"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamage(_StompDamage);
-                    heroStats.GetComponent<HeroMovement>().Recovering = true;
-                }
-            }
+            this.gameObject.SetActive(false);
         }
     }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        _isHit = false;
+    }
+
 }

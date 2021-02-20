@@ -29,8 +29,8 @@ public class HeroMovement : MonoBehaviour
     private float _originalRecoveryTime;
     
     [SerializeField] private float _moveSpeed = 12f;
-    [SerializeField] private bool _isLeft = false;
-    [SerializeField] private bool _isJumping = false;
+     private bool _isLeft = false;
+     private bool _isJumping = false;
     [SerializeField] private float _jumpForce = 5f;
     [SerializeField] private int _numOfJumps = 0;
     [SerializeField] private int _maxJumps = 1;
@@ -40,12 +40,13 @@ public class HeroMovement : MonoBehaviour
     private bool _isJumpHeld = false;
     private float _jumpTimeCounter = 5;
     private float _extraJumpForce = 0;
+    [SerializeField] private float _extraJumpForceRate = 1;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private LayerMask _whatIsWall;
 
     //Dash Modifiers
-    [SerializeField] private bool _canDash = true;
-    [SerializeField] private bool _isDashing;
+    private bool _canDash = true;
+    private bool _isDashing;
     [SerializeField] private float _dashSpeed = 5f;
     [SerializeField] private float _dashCoolDown = 1f;
     [SerializeField] private float _dashTime = 1f;
@@ -53,7 +54,7 @@ public class HeroMovement : MonoBehaviour
 
     //Recovery Time until the player can move again 
     [SerializeField] private float _recoveryTime = 1f;
-    [SerializeField] private bool _isRecovering = false;
+    private bool _isRecovering = false;
     
     [SerializeField] private float _knockBackRecieved;
     [SerializeField] private float _knockBackCount;
@@ -118,6 +119,7 @@ public class HeroMovement : MonoBehaviour
         _playerAnimator.SetBool("IsJumping", false);
         _originalGravity = _rb.gravityScale;
     }
+
     private void FixedUpdate()
     {
         if (IsGrounded())
@@ -126,6 +128,7 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetBool("IsMultiJump", false);
             _numOfJumps = _maxJumps;
             _numOfWallJumps = _maxWallJump;
+            _isJumping = false;
             if(!_isJumpHeld)
             {
                 _jumpTimeCounter = _jumpTimer;
@@ -133,12 +136,18 @@ public class HeroMovement : MonoBehaviour
             }
         }
 
+        if(_isJumping && !_isJumpHeld)
+        {
+            _jumpTimeCounter = _jumpTimer;
+            _extraJumpForce = 0;
+        }
+
         if(_isJumpHeld)
         {
             if(_jumpTimeCounter > 0)
             {
                _jumpTimeCounter -= Time.deltaTime;
-                _extraJumpForce += Time.deltaTime;
+                _extraJumpForce += Time.deltaTime * _extraJumpForceRate;
             }
         }
 
@@ -221,6 +230,7 @@ public class HeroMovement : MonoBehaviour
                     if(_playerInput.KeyboardMouse.JumpRelease.triggered)
                     {
                         _isJumpHeld = false;
+                        _isJumping = true;
                         HeldJump();
                     }
                 }

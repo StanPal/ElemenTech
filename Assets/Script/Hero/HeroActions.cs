@@ -9,9 +9,10 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    [SerializeField] private GameObject Stomp;
     public GameObject Sword;
     public Transform PivotPoint;
-    public Transform FirePoint;
+    public Transform FirePoint;    
     private Animator _playerAnimator;
     private Guard _guard;
     private HeroMovement _heroMovement;
@@ -52,6 +53,7 @@ public class HeroActions : MonoBehaviour
         _playerInput = new PlayerInput();
         _guard = GetComponent<Guard>();
         _camera = FindObjectOfType<Camera>();
+        
     }
 
     private void OnEnable()
@@ -211,14 +213,15 @@ public class HeroActions : MonoBehaviour
     {
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
-            _playerAnimator.SetBool("IsJumping", false);
-            _playerAnimator.SetTrigger("FastFallTrigger");
+            Stomp.SetActive(true);
+            //_playerAnimator.SetBool("IsJumping", false);
+            //_playerAnimator.SetTrigger("FastFallTrigger");
             StartCoroutine(GravityModifier());
         }
     }
 
     private IEnumerator GravityModifier()
-    {        
+    {
         _rb.gravityScale = 15;
         yield return new WaitForSeconds(0.5f);
         _rb.gravityScale = 1;
