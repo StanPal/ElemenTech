@@ -93,7 +93,7 @@ public class PlayerAttack : MonoBehaviour
             if (_rotation >= _rotationgAngleLimit)
             {
                 _rotation = 0;
-                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);                
+                transform.eulerAngles = new Vector3(transform.position.x, transform.position.y, _originalRotation);          
                 _heroAction._isSwinging = false;
                 swingActive = false;
                 this.gameObject.SetActive(false);

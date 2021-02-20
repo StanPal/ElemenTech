@@ -804,6 +804,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 55742806, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Name
+      value: PlayMilitaryRoom_Button (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 55742807, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -289
@@ -922,6 +926,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1345396969, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Name
+      value: PlayLabRoom_Button
+      objectReference: {fileID: 0}
     - target: {fileID: 1345396970, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -281
@@ -996,6 +1004,10 @@ PrefabInstance:
       propertyPath: m_FontData.m_MinSize
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1521778077, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Name
+      value: PlayWarehouseRoom_Button
+      objectReference: {fileID: 0}
     - target: {fileID: 1521778078, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -333
@@ -1033,6 +1045,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: e71ecd6b0e8118545848347de416d8f6,
         type: 3}
+    - target: {fileID: 1727589213, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Text
+      value: Play Lab
+      objectReference: {fileID: 0}
     - target: {fileID: 1809835383, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.42
@@ -1054,6 +1070,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: e71ecd6b0e8118545848347de416d8f6,
         type: 3}
+    - target: {fileID: 1809835384, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Text
+      value: Play Warehouse
+      objectReference: {fileID: 0}
     - target: {fileID: 1848780719, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: 237.1
@@ -1083,6 +1103,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: e71ecd6b0e8118545848347de416d8f6,
         type: 3}
+    - target: {fileID: 2033523426, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_Text
+      value: Play Military
+      objectReference: {fileID: 0}
     - target: {fileID: 587259195830917613, guid: d1e3e086e704ce145b6c48714009af9e,
         type: 3}
       propertyPath: m_Sprite

@@ -35,7 +35,7 @@ public class HeroActions : MonoBehaviour
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
-    public Vector2 GetLookDir { get => _lookDirection; }
+    public Vector3 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
 
     private void Awake()
@@ -128,9 +128,9 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                Debug.Log(_camera.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
+               // Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
                 _lookDirection = Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
-                                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z));
+                                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z) - transform.position);
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
@@ -151,6 +151,15 @@ public class HeroActions : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    private Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+        float distance;
+        xy.Raycast(ray, out distance);
+        return ray.GetPoint(distance);
     }
 
     private IEnumerator CoolDownTimer()
