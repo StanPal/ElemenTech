@@ -73,8 +73,9 @@ public class Crosshair : MonoBehaviour
                 case HeroMovement.Controller.None:
                     break;
                 case HeroMovement.Controller.Keyboard:
-                    _p1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(_fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
-                                _fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, Camera.main.transform.position.z));
+                    _p1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+                    //_p1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(new Vector3(_fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
+                    //            _fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, Camera.main.transform.position.z) - _fireHero.transform.position);
                     _p1CrossHairs.transform.position = new Vector3(_p1Target.x, _p1Target.y, 0);
                     break;
                 case HeroMovement.Controller.PS4:

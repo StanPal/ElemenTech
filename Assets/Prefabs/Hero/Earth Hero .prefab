@@ -1021,7 +1021,7 @@ GameObject:
   - component: {fileID: 5687556942659871051}
   - component: {fileID: 2482097772392215309}
   m_Layer: 9
-  m_Name: Stomp
+  m_Name: GroundStomp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

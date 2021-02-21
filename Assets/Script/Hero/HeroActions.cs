@@ -25,7 +25,7 @@ public class HeroActions : MonoBehaviour
     private Camera _camera;
 
     [SerializeField] private bool _isOnCooldown = false;
-    [SerializeField] private Vector3 _lookDirection;
+    [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector3 _axisPos;
 
@@ -36,7 +36,7 @@ public class HeroActions : MonoBehaviour
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
-    public Vector3 GetLookDir { get => _lookDirection; }
+    public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
 
     private void Awake()
@@ -130,9 +130,10 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-               // Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
-                _lookDirection = Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
-                                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z) - transform.position);
+                // Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
+                //_lookDirection = Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
+                //                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z) - transform.position);
+                _lookDirection = Camera.main.ScreenToWorldPoint((Vector3)_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
