@@ -1033,6 +1033,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: MatchUI
       objectReference: {fileID: 0}
+    - target: {fileID: 700599838571124585, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 700599838571124591, guid: 89165e1d69e008047903b1a33333ef1b,
         type: 3}
       propertyPath: mMatchCanvas
@@ -1264,6 +1269,11 @@ PrefabInstance:
     - target: {fileID: 2827583883305087851, guid: 28e3ce56773391549bbc5805ea5e2d16,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3045387163052780626, guid: 28e3ce56773391549bbc5805ea5e2d16,
+        type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

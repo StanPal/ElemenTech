@@ -1466,20 +1466,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2827583883305087848, guid: 28e3ce56773391549bbc5805ea5e2d16,
-        type: 3}
-      propertyPath: mCanvas
-      value: 
-      objectReference: {fileID: 1311230125}
     - target: {fileID: 2827583883305087849, guid: 28e3ce56773391549bbc5805ea5e2d16,
         type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827583883305087849, guid: 28e3ce56773391549bbc5805ea5e2d16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2827583883305087851, guid: 28e3ce56773391549bbc5805ea5e2d16,
         type: 3}
@@ -1538,12 +1528,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
---- !u!223 &1311230125 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3045387163052780627, guid: 28e3ce56773391549bbc5805ea5e2d16,
-    type: 3}
-  m_PrefabInstance: {fileID: 1311230124}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1337138871
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1705,7 +1689,7 @@ GameObject:
   - component: {fileID: 1552086986}
   - component: {fileID: 1552086988}
   - component: {fileID: 1552086987}
-  m_Layer: 10
+  m_Layer: 8
   m_Name: 64x64Square (11)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

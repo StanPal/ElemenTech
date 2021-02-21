@@ -35,7 +35,10 @@ public class SmashCamera : MonoBehaviour
 
     private void Start()
     {
-        Players.Add(_focusLevel.gameObject);
+        if (_focusLevel != null)
+        {
+            Players.Add(_focusLevel.gameObject);
+        }
     }
 
     private void LateUpdate()
@@ -80,7 +83,7 @@ public class SmashCamera : MonoBehaviour
         {
             Vector3 playerPosition = Players[i].transform.position;
           
-            if(!_focusLevel.FocusBounds.Contains(playerPosition))
+            if(!_focusLevel.FocusBounds.Contains(playerPosition) && _focusLevel != null)
             {
                 float playerX = Mathf.Clamp(playerPosition.x, _focusLevel.FocusBounds.min.x, _focusLevel.FocusBounds.max.x);
                 float playerY = Mathf.Clamp(playerPosition.y, _focusLevel.FocusBounds.min.y, _focusLevel.FocusBounds.max.y);

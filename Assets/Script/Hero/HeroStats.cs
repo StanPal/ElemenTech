@@ -9,6 +9,7 @@ public class HeroStats : MonoBehaviour
     private AnimationEvents _animationEvent;
     private Animator _animator;
     private Guard _guard;
+    private HeroMovement _heroMovement;
 
     public enum TeamSetting
     {
@@ -29,6 +30,7 @@ public class HeroStats : MonoBehaviour
     private bool _isCoolDownFinished;
 
     // Getters & Setters 
+    public HeroMovement HeroMovement { get => _heroMovement; }
     public bool CDFinished { get { return _isCoolDownFinished; } set { _isCoolDownFinished = value; } }
     public float CDTime { get { return _tempCoolDownTime; } set { _tempCoolDownTime = value; } }
     public float CoolDown { get { return _coolDown; } }
@@ -53,6 +55,7 @@ public class HeroStats : MonoBehaviour
         _currentHealth = _maxHealth;
         _tempCoolDownTime = 0;
         _guard = GetComponent<Guard>();
+        _heroMovement = GetComponent<HeroMovement>();
     }
 
     private void FixedUpdate()

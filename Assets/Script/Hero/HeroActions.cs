@@ -38,6 +38,7 @@ public class HeroActions : MonoBehaviour
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
+    public Animator PlayerAnimator { get => _playerAnimator; }
 
     private void Awake()
     {
@@ -216,16 +217,16 @@ public class HeroActions : MonoBehaviour
         {
             Stomp.SetActive(true);
             //_playerAnimator.SetBool("IsJumping", false);
-            //_playerAnimator.SetTrigger("FastFallTrigger");
+            _playerAnimator.SetBool("IsFastFall", true);
             StartCoroutine(GravityModifier());
         }
     }
 
     private IEnumerator GravityModifier()
     {
-        _rb.gravityScale = 15;
+        _rb.gravityScale = _heroMovement.OriginalGravity * 2f;
         yield return new WaitForSeconds(0.5f);
-        _rb.gravityScale = 1;
+        _rb.gravityScale = _heroMovement.OriginalGravity;
     }
 
     private void Pause()

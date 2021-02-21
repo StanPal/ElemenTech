@@ -33,6 +33,7 @@ public class EarthStomp : MonoBehaviour
                         _isHit = true;
                         this.gameObject.SetActive(false);
                         heroStats.TakeDamage(_stompDamage);
+                        heroStats.HeroMovement.Rigidbody2D.velocity = -Vector2.up * _stompDamage;
                         heroStats.GetComponent<HeroMovement>().Recovering = true;
                     }
                 }
@@ -54,6 +55,8 @@ public class EarthStomp : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+
+        _heroActions.PlayerAnimator.SetBool("IsFastFall", false);
     }
 
     private void OnCollisionExit2D(Collision2D collision)

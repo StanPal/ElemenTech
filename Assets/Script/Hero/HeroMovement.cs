@@ -76,12 +76,13 @@ public class HeroMovement : MonoBehaviour
     //Getters and Setters
     public CapsuleCollider2D GetBoxCollider2D { get => _capsuleCollider;  }
     public PlayerInput PlayerInput { get => _playerInput; } 
-    public bool Dashing { get => _isDashing; } 
+    public Rigidbody2D Rigidbody2D { get => _rb; }
     public float Speed { get => _moveSpeed;  set => _moveSpeed = value; } 
-    public bool GetIsLeft { get  => _isLeft; } 
     public float RecoveryTime { get => _recoveryTime;  set => _recoveryTime = value; } 
+    public float OriginalGravity { get => _originalGravity; }
+    public bool Dashing { get => _isDashing; } 
+    public bool GetIsLeft { get  => _isLeft; } 
     public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }
-    
     private void Awake()
     {
         _playerAnimator = GetComponentInChildren<Animator>();
@@ -236,9 +237,12 @@ public class HeroMovement : MonoBehaviour
                 }
                 else
                 {
-                    if (_playerInput.KeyboardMouse.Jump.triggered && _numOfJumps > 0 || _playerInput.KeyboardMouse.Jump.triggered && IsWall() && _numOfWallJumps > 0)
+                    if (_playerInput.KeyboardMouse.Jump.triggered)
                     {
-                        Jump();
+                        if (_numOfJumps > 0 || (IsWall() && _numOfWallJumps > 0))
+                        {
+                            Jump();
+                        }
                     }
                 }
                 break;
@@ -429,12 +433,24 @@ public class HeroMovement : MonoBehaviour
     {
         _playerAnimator.SetBool("IsJumping", true);
 
-        _rb.velocity = Vector2.up * _jumpForce;
-        _numOfJumps--;
         if (IsWall())
         {
             _numOfWallJumps--;
         }
+        else
+        {
+            _numOfJumps--;
+        }
+        if (_numOfJumps > 0)
+        {
+            _rb.velocity = Vector2.up * _jumpForce;
+        }
+        if (_numOfWallJumps > 0)
+        {
+            _rb.velocity = Vector2.up * _jumpForce;
+
+        }
+
     }
 
     public void OnKnockBackHit(float knockbackamount, bool direction)
