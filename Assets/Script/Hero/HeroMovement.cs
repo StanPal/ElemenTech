@@ -376,11 +376,15 @@ public class HeroMovement : MonoBehaviour
     {
         _playerAnimator.SetBool("IsJumping", true);
 
-        _rb.velocity = Vector2.up * _jumpForce;
-        _numOfJumps--;
         if (IsWall())
         {
+            _rb.velocity = Vector2.up * _jumpForce;
             _numOfWallJumps--;
+        }
+        else
+        {
+            _rb.velocity = Vector2.up * _jumpForce;
+            _numOfJumps--;
         }
     }
 

@@ -11,23 +11,23 @@ public class IceTrapManager : MonoBehaviour
     public GameObject iceSpike;
 
     [SerializeField]
-    float delayTime = 5.0f;
-    float currentDelayTime = 0.0f;
+    private float _DelayTime = 5.0f;
+    private float _CurrentDelayTime = 0.0f;
     [SerializeField]
-    int maxSpawnlocation = 3;
+    private int _MaxSpawnlocation = 3;
     [SerializeField]
-    float damage = 50.0f;
-    public float Damage { get { return damage; } }
-    int iceSpikeCounter =0;
+    private float _Damage = 50.0f;
+    public float Damage { get { return _Damage; } }
+    private int _IceSpikeCounter =0;
 
-    public int IceSpikeCounter { set { iceSpikeCounter = value; } get { return iceSpikeCounter; } }
+    public int IceSpikeCounter { set { _IceSpikeCounter = value; } get { return _IceSpikeCounter; } }
     private void Awake()
     {
         for (int i = 0; i < iceSpikesLocation.Count; i++)
         {
             spawnLocation.Add(iceSpikesLocation[i]);
         }
-        for (int i = 0; i < maxSpawnlocation; ++i)
+        for (int i = 0; i < _MaxSpawnlocation; ++i)
         {
             SpawnSpike();
         }
@@ -36,9 +36,9 @@ public class IceTrapManager : MonoBehaviour
     private void Update()
     {
         Debug.Log(spawnLocation.Count);
-        if (iceSpikeCounter < maxSpawnlocation && currentDelayTime < Time.time)
+        if (_IceSpikeCounter < _MaxSpawnlocation && _CurrentDelayTime < Time.time)
         {
-            currentDelayTime = Time.time + delayTime;
+            _CurrentDelayTime = Time.time + _DelayTime;
             SpawnSpike();
         }
     }
@@ -47,15 +47,8 @@ public class IceTrapManager : MonoBehaviour
     {
         Transform location = spawnLocation[Random.Range(0, spawnLocation.Count)];
         Instantiate(iceSpike, location.position, Quaternion.identity);
-        //for (int i = 0; i < spawnLocation.Count; ++i)
-        //{
-        //    if (spawnLocation[i].gameObject.transform.Equals(location))
-        //    {
-        //        spawnLocation[i].gameObject.SetActive(false);
-        //    }
-        //}
         spawnLocation.Remove(location);
-        iceSpikeCounter++;
+        _IceSpikeCounter++;
     }
 
     public void addNewLocation(Transform newLocation)
