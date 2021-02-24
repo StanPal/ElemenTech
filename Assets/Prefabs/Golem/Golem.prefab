@@ -528,7 +528,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &7940048648316017097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -570,7 +570,7 @@ MonoBehaviour:
   mMaxHealth: 100
   mCurrentHealth: 0
   currentSpawnNodeIndex: 0
-  shootingInterval: 1
+  shootingInterval: 5
   jumpTime: 3
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}

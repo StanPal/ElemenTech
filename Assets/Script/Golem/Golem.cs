@@ -6,7 +6,7 @@ public class Golem : MonoBehaviour
 {
     private Rigidbody2D rb;
     
-    public float mMaxHealth = 100.0f;
+    public float mMaxHealth ;
 
     public float mCurrentHealth;
 
@@ -72,6 +72,7 @@ public class Golem : MonoBehaviour
 
     private void Awake()
     {
+        mMaxHealth = 50.0f;
         jumpTimeCounter = jumpTime;
         currentTime = shootingInterval;
        // currentTimeForJump = jumpingInterval;
@@ -92,6 +93,10 @@ public class Golem : MonoBehaviour
 
     private void Update()
     {
+
+        muzzle.transform.localScale = this.transform.localScale;
+
+
         // if(Input.GetKeyDown(KeyCode.Q))
         // {
         //     Rigidbody2D temp = Instantiate(bullet, muzzle.position, transform.rotation);
@@ -223,7 +228,7 @@ public class Golem : MonoBehaviour
 
     public void Shoot()
     {
-
+        
 
         if (mAttackType == GolemData.attackType.Ranged)
         {
@@ -235,7 +240,7 @@ public class Golem : MonoBehaviour
             {
                 currentTime = shootingInterval;
                 Rigidbody2D mBullet = Instantiate(bullet, muzzle.position, transform.rotation);
-                if (!reverse)
+                if (muzzle.transform.localScale.x > 0)
                 {
                     mBullet.velocity = new Vector2(bulletSpeed, 0);
                 }
