@@ -27,11 +27,15 @@ public class HeroMovement : MonoBehaviour
     private bool _onHitLeft = false;
     private float _originalGravity;
     private float _originalRecoveryTime;
-    
-    [SerializeField] private float _moveSpeed = 12f;
+    private float _originalMoveSpeed;
+    private float _originalJumpForce;
+
      private bool _isLeft = false;
      private bool _isJumping = false;
-    [SerializeField] private float _jumpForce = 5f;
+    [SerializeField] private float _moveSpeed = 12f;
+    [SerializeField] private float _airStrifeSpeed = 6f;
+    [SerializeField] private float _groundJumpForce = 15f;
+    [SerializeField] private float _airJumpForce = 10f;
     [SerializeField] private int _numOfJumps = 0;
     [SerializeField] private int _maxJumps = 1;
     [SerializeField] private int _numOfWallJumps = 0;
@@ -97,6 +101,8 @@ public class HeroMovement : MonoBehaviour
         _col2DSize = _capsuleCollider.size;
         _canDash = true;
         _jumpTimeCounter = _jumpTimer;
+        _originalMoveSpeed = _moveSpeed;
+        _originalJumpForce = _groundJumpForce;
         if (ControllerInput == Controller.Keyboard)
         {
             _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
@@ -129,6 +135,8 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetBool("IsMultiJump", false);
             _numOfJumps = _maxJumps;
             _numOfWallJumps = _maxWallJump;
+            _moveSpeed = _originalMoveSpeed;
+            _groundJumpForce = _originalJumpForce;
             _isJumping = false;
             if(!_isJumpHeld)
             {
@@ -136,21 +144,27 @@ public class HeroMovement : MonoBehaviour
                 _extraJumpForce = 0;
             }
         }
-
-        if(_isJumping && !_isJumpHeld)
+        else
         {
+            _isJumping = true;
+            _groundJumpForce = _airJumpForce;
+        }
+
+        if(_isJumping)
+        {
+            _moveSpeed = _airStrifeSpeed; 
             _jumpTimeCounter = _jumpTimer;
             _extraJumpForce = 0;
         }
 
-        if(_isJumpHeld)
-        {
-            if(_jumpTimeCounter > 0)
-            {
-               _jumpTimeCounter -= Time.deltaTime;
-                _extraJumpForce += Time.deltaTime * _extraJumpForceRate;
-            }
-        }
+        //if(_isJumpHeld)
+        //{
+        //    if(_jumpTimeCounter > 0)
+        //    {
+        //       _jumpTimeCounter -= Time.deltaTime;
+        //        _extraJumpForce += Time.deltaTime * _extraJumpForceRate;
+        //    }
+        //}
 
         SlopeCheck();
         if (!_isRecovering)
@@ -170,7 +184,7 @@ public class HeroMovement : MonoBehaviour
             if (ControllerInput == Controller.Gamepad && !_isDashing)
             {
                 _moveInput = _playerInput.Gamepad.Move.ReadValue<float>();
-            }            
+            }
         }
 
         _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
@@ -223,24 +237,28 @@ public class HeroMovement : MonoBehaviour
                 break;
             case Controller.Keyboard:
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
-                {
-                    if (_playerInput.KeyboardMouse.HoldJump.triggered)
+                {    
+                    if(_playerInput.KeyboardMouse.TapJump.triggered)
                     {
-                        _isJumpHeld = true;
+                        if (CheckCanJump())
+                        {
+                            TapJump();
+                        }
                     }
-                    if(_playerInput.KeyboardMouse.JumpRelease.triggered)
+                    else if(_playerInput.KeyboardMouse.Jump.triggered)
                     {
-                        _isJumpHeld = false;
-                        _isJumping = true;
-                        HeldJump();
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
                     }
                 }
                 else
                 {
                     if (_playerInput.KeyboardMouse.Jump.triggered)
                     {
-                        if (_numOfJumps > 0 || (IsWall() && _numOfWallJumps > 0))
-                        {
+                        if (CheckCanJump())
+                        {  
                             Jump();
                         }
                     }
@@ -423,16 +441,24 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    private void HeldJump()
+    private void TapJump()
     {
         _playerAnimator.SetBool("IsJumping", true);
-        _rb.velocity = Vector2.up * (_jumpForce + _extraJumpForce);
+        if (IsWall())
+        {
+            _numOfWallJumps--;
+        }
+        else
+        {
+            _numOfJumps--;
+        }
+        _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
     }
 
     private void Jump()
     {
         _playerAnimator.SetBool("IsJumping", true);
-
+        _isJumping = true;
         if (IsWall())
         {
             _numOfWallJumps--;
@@ -443,11 +469,11 @@ public class HeroMovement : MonoBehaviour
         }
         if (_numOfJumps > 0)
         {
-            _rb.velocity = Vector2.up * _jumpForce;
+            _rb.velocity = Vector2.up * _groundJumpForce;
         }
         if (_numOfWallJumps > 0)
         {
-            _rb.velocity = Vector2.up * _jumpForce;
+            _rb.velocity = Vector2.up * _groundJumpForce;
 
         }
 
@@ -460,7 +486,12 @@ public class HeroMovement : MonoBehaviour
         _onHitLeft = direction;
     }
 
-    IEnumerator Dash(bool _isLeft)
+    private bool CheckCanJump()
+    {
+        return (_numOfJumps > 0 || ((IsWall() && _numOfWallJumps > 0)));
+    }
+
+    private IEnumerator Dash(bool _isLeft)
     {        
         if (_isLeft)
         {
@@ -481,7 +512,7 @@ public class HeroMovement : MonoBehaviour
         _canDash = true;
     }
 
-    IEnumerator Recover()
+    private IEnumerator Recover()
     {
         _heroActions.enabled = false;
         _isRecovering = true;

@@ -204,9 +204,10 @@ public class HeroActions : MonoBehaviour
         if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
             _isSwinging = true;
-            _playerAnimator.SetBool("IsJumping",false);
-            //_playerAnimator.SetTrigger("AttackTrigger");
-            Sword.gameObject.SetActive(true);
+            //_playerAnimator.SetBool("IsJumping",false);
+            _playerAnimator.SetBool("IsAttacking", true);
+            _playerAnimator.SetTrigger("AttackTrigger");
+            //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
     }

@@ -400,7 +400,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1791110765294023620}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1791110765294023672
 GameObject:
@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 6066433788430600090}
   m_Layer: 9
   m_Name: 'Earth Hero '
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -439,8 +439,8 @@ Transform:
   - {fileID: 5503431817922030253}
   - {fileID: 1791110765959601703}
   - {fileID: 1791110765795455629}
-  - {fileID: 1791110765894072920}
   - {fileID: 1791110765005670643}
+  - {fileID: 1791110765894072920}
   - {fileID: 1791110764420600048}
   - {fileID: 1791110764907904908}
   m_Father: {fileID: 0}
@@ -461,7 +461,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 9
+  m_GravityScale: 5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -519,9 +519,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 3
+  ControllerInput: 1
   _moveSpeed: 12
-  _jumpForce: 35
+  _airStrifeSpeed: 6
+  _groundJumpForce: 30
+  _airJumpForce: 20
   _numOfJumps: 0
   _maxJumps: 2
   _numOfWallJumps: 0
@@ -796,7 +798,7 @@ Transform:
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1791110765294023620}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 70}
 --- !u!212 &1791110765894072923
 SpriteRenderer:
@@ -855,7 +857,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1791110765894072927}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6247aa3d93294e34fb2b98eb398c8852, type: 3}
   m_Name: 
@@ -904,7 +906,9 @@ GameObject:
   - component: {fileID: 1791110765959601703}
   - component: {fileID: 1791110765959601696}
   - component: {fileID: 8841355276493218716}
+  - component: {fileID: 602523265634506374}
   - component: {fileID: 8695610312681426275}
+  - component: {fileID: 4121919547445135332}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -996,6 +1000,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &602523265634506374
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765959601702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _knockBackAmount: 30
+  _hitStun: 1
 --- !u!114 &8695610312681426275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,6 +1027,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsInvincible: 0
+--- !u!61 &4121919547445135332
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765959601702}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 10.24, y: 5.12}
+    newSize: {x: 0.64, y: 0.64}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 10.24, y: 5.12}
+  m_EdgeRadius: 0
 --- !u!1 &4535927150688111358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1077,7 +1121,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 0.2}
+  m_Size: {x: 1.75, y: 0.2}
   m_EdgeRadius: 0
 --- !u!1 &8240490176634165531
 GameObject:

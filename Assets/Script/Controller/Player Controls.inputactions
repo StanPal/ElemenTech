@@ -94,12 +94,12 @@
                     "interactions": ""
                 },
                 {
-                    "name": "HoldJump",
+                    "name": "TapJump",
                     "type": "Button",
-                    "id": "171bfa00-f7dc-46b9-9e56-6b141da48cba",
+                    "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold(duration=0.1)"
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -206,7 +206,7 @@
                     "name": "",
                     "id": "654a7d94-5b12-4aa7-8cbc-667f5dcfe622",
                     "path": "<Keyboard>/space",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press(pressPoint=0.3,behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "JumpRelease",
@@ -248,12 +248,12 @@
                 },
                 {
                     "name": "",
-                    "id": "dd5b303e-0a5c-4b16-a501-ef6f17531533",
+                    "id": "55a95c71-6524-4969-ba10-e3577e14adf5",
                     "path": "<Keyboard>/space",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
-                    "action": "HoldJump",
+                    "action": "TapJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
