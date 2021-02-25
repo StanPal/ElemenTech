@@ -217,7 +217,7 @@ public class HeroActions : MonoBehaviour
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
             Stomp.SetActive(true);
-            //_playerAnimator.SetBool("IsJumping", false);
+            _playerAnimator.SetBool("IsJumping", false);
             _playerAnimator.SetBool("IsFastFall", true);
             StartCoroutine(GravityModifier());
         }

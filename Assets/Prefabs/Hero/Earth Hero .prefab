@@ -521,7 +521,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ControllerInput: 1
   _moveSpeed: 12
-  _airStrifeSpeed: 6
+  _airStrifeSpeed: 8
   _groundJumpForce: 30
   _airJumpForce: 20
   _numOfJumps: 0

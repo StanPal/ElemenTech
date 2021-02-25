@@ -55,7 +55,7 @@ public class EarthStomp : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
-
+        
         _heroActions.PlayerAnimator.SetBool("IsFastFall", false);
     }
 
