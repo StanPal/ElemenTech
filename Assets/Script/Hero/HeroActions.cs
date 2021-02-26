@@ -121,6 +121,11 @@ public class HeroActions : MonoBehaviour
 
     private void Update()
     {
+        if (HeroMovement == null)
+        {
+            return;
+        }
+
         switch (HeroMovement.ControllerInput)
         {
             case HeroMovement.Controller.None:

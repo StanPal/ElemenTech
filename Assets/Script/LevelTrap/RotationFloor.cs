@@ -1,86 +1,97 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class RotationFloor : MonoBehaviour
 {
-    [SerializeField] private GameObject _floor;
-    [SerializeField] private GameObject _floorRS;
-    [SerializeField] private GameObject _floorLS;
-
+    [SerializeField] private GameObject _floor = null;
+    [SerializeField] private GameObject _floorRS = null;
+    [SerializeField] private GameObject _floorLS = null;
     [SerializeField] private float _delayTime = 5.0f;
-    private float _currentdelayTime = 0.0f;
+    [SerializeField] private float _rotationSpeed = 0;
+    [SerializeField] private float _finalZRotation = 0;
+    [SerializeField] private float _startZRotation = 0;
 
-    [SerializeField] private float _rotaSpeed = 0;
-    [SerializeField] private float _rotationAngle = 0;
-    [SerializeField] private float _starAngle= 0;
 
-    private bool _isRota = false;
-    private bool _isRotaBack = false;
-    private bool _starRota = false;
+    private Quaternion startRotation = new Quaternion(0f, 0f, 0f, 1f);
+    private Quaternion endRotation = new Quaternion(0f, 0f, 90f, 1f);
 
-    private void Update()
+    public enum RotationState
     {
-        float eulerAngles = transform.rotation.eulerAngles.z;
-        if (eulerAngles > 180f)
-        {
-            eulerAngles -= 360f;
-        }
+        Uknown,
+        Ready,
+        Clockwise,
+        Waiting,
+        CounterClockwise,
+        Finished,
+    }
+    private RotationState _state = RotationState.Uknown;
 
-        // set rota clock or unclock
-        if (_isRota && !_starRota)
+    private void Awake()
+    {
+        _state = RotationState.Ready;
+        float zRotation = transform.rotation.eulerAngles.z;
+        if (zRotation > 180f)
         {
-            if (!_isRotaBack)
-            {
-                _starRota = true;
-                _floor.layer = 10;
-                _floorLS.layer = 8;
-                _floorRS.layer = 8;
-            }
-            else if(_currentdelayTime < Time.time && _isRotaBack)
-            {
-                _starRota = true;
-                _floor.layer = 8;
-                _floorLS.layer = 10;
-                _floorRS.layer = 10;
-            }
-        }
-
-        if (_starRota)
-        {
-            Rotafloor(_isRotaBack);
-        }
-
-        if (_starRota && eulerAngles < _starAngle )
-        {
-            _starRota = false;
-            _isRota = false;
-            _isRotaBack = false;
-            transform.rotation.eulerAngles.Set(0, 0, _starAngle) ;
-        }
-        else if ( _starRota && _rotationAngle < eulerAngles)
-        {
-            _currentdelayTime = Time.time + _delayTime;
-            _starRota = false;
-            _isRotaBack = true;
-            transform.rotation.eulerAngles.Set(0, 0, _rotationAngle);
+            zRotation -= 360f;
         }
     }
 
-    private void Rotafloor(bool isRotaBack)
+    public void StartRotating()
     {
-        if (isRotaBack)
+        if (_state == RotationState.Ready)
         {
-            transform.RotateAround(transform.position, -Vector3.forward, _rotaSpeed * Time.deltaTime);
-        }
-        else
-        {
-            transform.RotateAround(transform.position, Vector3.forward, _rotaSpeed * Time.deltaTime);
+            Debug.Log("Starting Floor Rotation");
+            StartCoroutine(RotationRoutine());
         }
     }
 
-    public void StartRota()
+    private IEnumerator RotationRoutine()
     {
-        _isRota = true;
+        _state = RotationState.Clockwise;
+        while (_state != RotationState.Finished)
+        {
+            RotateFloor();
+            UpdateState();
+            if (_state == RotationState.Waiting)
+            {
+                yield return new WaitForSeconds(_delayTime);
+                _state = RotationState.CounterClockwise;
+            }
+            yield return null;
+        }
+        Debug.Log("Finished Rotating Floor");
+        _state = RotationState.Ready;
+    }
+
+    private void RotateFloor()
+    {
+        var refVector = _state == RotationState.Clockwise ? -Vector3.forward : Vector3.forward;
+        transform.RotateAround(transform.position, refVector, _rotationSpeed * Time.deltaTime);
+    }
+
+    private void UpdateState()
+    {
+        float zRotation = transform.rotation.eulerAngles.z;
+        switch (_state)
+        {
+            case RotationState.Clockwise:
+                zRotation = Mathf.Abs(zRotation - 360f);
+                if (zRotation > _finalZRotation)
+                {
+                    _state = RotationState.Waiting;
+                }
+                break;
+            case RotationState.CounterClockwise:
+                if(transform.rotation.z < 0)
+                {
+                    zRotation -= 360f;
+                }
+                if (zRotation > _startZRotation)
+                {
+                    _state = RotationState.Finished;
+                }
+                break;
+        }
+        Debug.Log($"Rotating Floor State: {_state}");
     }
 }

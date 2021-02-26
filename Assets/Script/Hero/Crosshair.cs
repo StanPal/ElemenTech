@@ -66,6 +66,11 @@ public class Crosshair : MonoBehaviour
 
     void Update()
     {
+        if(_fireHero == null)
+        {
+            return;
+        }
+
         if (_fireHero.TryGetComponent<HeroMovement>(out HeroMovement fireMovement))
         {
             switch (fireMovement.ControllerInput)

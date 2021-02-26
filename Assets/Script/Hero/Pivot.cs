@@ -2,21 +2,26 @@
 
 public class Pivot : MonoBehaviour
 {
-    private HeroActions _HeroActions;
+    private HeroActions _heroActions;
 
     private void Awake()
     {
-        _HeroActions = GetComponentInParent<HeroActions>();
+        _heroActions = GetComponentInParent<HeroActions>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(_HeroActions.HeroMovement.GetIsLeft)
+        if (_heroActions.HeroMovement == null)
+        {
+            return;
+        }
+
+        if (_heroActions.HeroMovement.GetIsLeft)
         {
             Vector3 objectscale = transform.localScale;
             objectscale.x = -0.1f;
-            transform.localScale = objectscale; 
+            transform.localScale = objectscale;
         }
         else
         {
@@ -24,7 +29,7 @@ public class Pivot : MonoBehaviour
             objectscale.x = 0.1f;
             transform.localScale = objectscale;
         }
-        transform.rotation = Quaternion.Euler(0.0f, 0.0f, _HeroActions.GetLookAngle);
-        
+        transform.rotation = Quaternion.Euler(0.0f, 0.0f, _heroActions.GetLookAngle);
+
     }
 }

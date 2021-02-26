@@ -11,7 +11,7 @@ public class RotaBatton : MonoBehaviour
         var heroStats = collision.gameObject.GetComponent<HeroStats>();
         if (heroStats)
         {
-            _rotationFloor.StartRota();
+            _rotationFloor.StartRotating();
         }
     }
 }
