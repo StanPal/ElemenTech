@@ -17,30 +17,53 @@ public class RotationFloor : MonoBehaviour
 
     private bool _isRota = false;
     private bool _isRotaBack = false;
-
+    private bool _starRota = false;
 
     private void Update()
     {
-        if (_currentdelayTime < Time.deltaTime && transform.rotation.eulerAngles.z <= _starAngle)
+        float eulerAngles = transform.rotation.eulerAngles.z;
+        if (eulerAngles > 180f)
         {
-            _isRota = true;
-            _isRotaBack = false;
-        }
-        else if(_currentdelayTime < Time.deltaTime && transform.rotation.eulerAngles.z >= _rotationAngle)
-        {
-            _isRota = true;
-            _isRotaBack = true;
+            eulerAngles -= 360f;
         }
 
-        if (_isRota)
+        // set rota clock or unclock
+        if (_isRota && !_starRota)
+        {
+            if (!_isRotaBack)
+            {
+                _starRota = true;
+                _floor.layer = 10;
+                _floorLS.layer = 8;
+                _floorRS.layer = 8;
+            }
+            else if(_currentdelayTime < Time.time && _isRotaBack)
+            {
+                _starRota = true;
+                _floor.layer = 8;
+                _floorLS.layer = 10;
+                _floorRS.layer = 10;
+            }
+        }
+
+        if (_starRota)
         {
             Rotafloor(_isRotaBack);
         }
 
-        if (_isRota && transform.rotation.z <= _starAngle || _isRota && transform.rotation.eulerAngles.z >= _rotationAngle)
+        if (_starRota && eulerAngles < _starAngle )
         {
+            _starRota = false;
             _isRota = false;
-            _currentdelayTime = Time.deltaTime + _delayTime;
+            _isRotaBack = false;
+            transform.rotation.eulerAngles.Set(0, 0, _starAngle) ;
+        }
+        else if ( _starRota && _rotationAngle < eulerAngles)
+        {
+            _currentdelayTime = Time.time + _delayTime;
+            _starRota = false;
+            _isRotaBack = true;
+            transform.rotation.eulerAngles.Set(0, 0, _rotationAngle);
         }
     }
 
@@ -53,7 +76,11 @@ public class RotationFloor : MonoBehaviour
         else
         {
             transform.RotateAround(transform.position, Vector3.forward, _rotaSpeed * Time.deltaTime);
-
         }
+    }
+
+    public void StartRota()
+    {
+        _isRota = true;
     }
 }
