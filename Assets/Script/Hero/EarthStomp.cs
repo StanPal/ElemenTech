@@ -63,5 +63,4 @@ public class EarthStomp : MonoBehaviour
     {
         _isHit = false;
     }
-
 }

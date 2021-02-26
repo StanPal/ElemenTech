@@ -128,7 +128,7 @@ public class HeroStats : MonoBehaviour
         }
         else
         {
-            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();            
+            SpawnManager spawnManager = FindObjectOfType<SpawnManager>();
             spawnManager.RespawnPlayer(gameObject);
         }
     }

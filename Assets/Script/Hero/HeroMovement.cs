@@ -157,15 +157,6 @@ public class HeroMovement : MonoBehaviour
             _extraJumpForce = 0;
         }
 
-        //if(_isJumpHeld)
-        //{
-        //    if(_jumpTimeCounter > 0)
-        //    {
-        //       _jumpTimeCounter -= Time.deltaTime;
-        //        _extraJumpForce += Time.deltaTime * _extraJumpForceRate;
-        //    }
-        //}
-
         SlopeCheck();
         if (!_isRecovering)
         {
@@ -389,16 +380,6 @@ public class HeroMovement : MonoBehaviour
     {
         float extraHeightText = .05f;
         RaycastHit2D raycastHit2D = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeightText, _whatIsGround);
-        //Color rayColor;
-        //if (raycastHit2D.collider != null)
-        //{
-        //    rayColor = Color.green;
-        //}
-        //else
-        //{
-        //    rayColor = Color.red;
-        //}
-        //Debug.DrawRay(_capsuleCollider.bounds.center, Vector2.down * (_capsuleCollider.bounds.extents.y + extraHeightText),rayColor);
         return raycastHit2D.collider != null;
     }
 

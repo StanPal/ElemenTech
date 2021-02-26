@@ -100,6 +100,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "DashTap",
+                    "type": "Button",
+                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -254,6 +262,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "TapJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DashTap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

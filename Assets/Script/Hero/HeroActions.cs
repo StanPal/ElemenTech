@@ -131,9 +131,6 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                // Debug.Log(Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x , _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z)));
-                //_lookDirection = Camera.main.ScreenToWorldPoint(new Vector3(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().x,
-                //                _playerInput.KeyboardMouse.Aim.ReadValue<Vector2>().y, _camera.transform.position.z) - transform.position);
                 _lookDirection = Camera.main.ScreenToWorldPoint((Vector3)_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;

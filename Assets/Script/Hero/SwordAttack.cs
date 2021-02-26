@@ -10,8 +10,6 @@ public class SwordAttack : MonoBehaviour
     private ParticleSystemManager _particleSystemManager;
     private Animator _animator;
 
-    // Start is called before the first frame update
-
     private void Awake()
     {
         _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
@@ -20,7 +18,7 @@ public class SwordAttack : MonoBehaviour
         _animator = GetComponent<Animator>();
     }
 
-    void Start()
+   private void Start()
     {
         _heroAction.onAttackPerformed += OnAttackPerformed;
     }
@@ -35,12 +33,6 @@ public class SwordAttack : MonoBehaviour
         yield return new WaitForSeconds(0.182f);
         _animator.SetBool("IsAttacking", false);
         _heroAction._isSwinging = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
- 
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -65,6 +57,7 @@ public class SwordAttack : MonoBehaviour
                 }
             }
         }
+
         if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
         {
             if (collision.tag.Equals("Team1"))

@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class SmashCamera : MonoBehaviour
 {
+    [SerializeField] private FocusLevel _focusLevel;
     private PlayerManager _playerManager;
-    private Camera _Camera;
+    private Camera _camera;
 
     [SerializeField] private List<GameObject> Players;
-    public FocusLevel _focusLevel;
     [SerializeField] private float _depthUpdateSpeed = 5f;
     [SerializeField] private float _angleUpdateSpeed = 7f;
     [SerializeField] private float _positionUpdateSpeed = 5f;
@@ -15,7 +15,8 @@ public class SmashCamera : MonoBehaviour
     [SerializeField] private float _depthMin = -22f;
     [SerializeField] private float _angleMax = -11f;
     [SerializeField] private float _angleMin = 3f;
-    private float CameraEulerX;
+
+    private float _cameraEulerX;
     private Vector3 _cameraPosition;
     private Vector3 _desiredPos;
     private Vector3 _targetLocalPos;
@@ -30,7 +31,7 @@ public class SmashCamera : MonoBehaviour
                 Players.Add(_playerManager.mPlayersList[i]);
             }
         }
-        _Camera = GetComponent<Camera>();
+        _camera = GetComponent<Camera>();
     }
 
     private void Start()
@@ -49,8 +50,6 @@ public class SmashCamera : MonoBehaviour
         }
         CalculateCameraLocations();
         MoveCamera();
-        //Move();
-        //Zoom();
     }
 
     private void MoveCamera()
@@ -59,16 +58,17 @@ public class SmashCamera : MonoBehaviour
         if(position != _cameraPosition)
         {
             Vector3 targetPosition = Vector3.zero;
+            //How quickly it moves left and right top or bottom
             targetPosition.x = Mathf.MoveTowards(position.x, _cameraPosition.x, _positionUpdateSpeed * Time.deltaTime);
             targetPosition.y = Mathf.MoveTowards(position.y, _cameraPosition.y, _positionUpdateSpeed * Time.deltaTime);
-            targetPosition.z = Mathf.MoveTowards(position.z, _cameraPosition.z, _depthUpdateSpeed * Time.deltaTime); //How quickly it moves left and right top or bottom
+            targetPosition.z = Mathf.MoveTowards(position.z, _cameraPosition.z, _depthUpdateSpeed * Time.deltaTime); 
             gameObject.transform.position = targetPosition;
         }
 
         Vector3 localEulerAngles = gameObject.transform.localEulerAngles;
-        if(localEulerAngles.x != CameraEulerX)
+        if(localEulerAngles.x != _cameraEulerX)
         {
-            Vector3 targetEulerAngles = new Vector3(CameraEulerX, localEulerAngles.y, localEulerAngles.z);
+            Vector3 targetEulerAngles = new Vector3(_cameraEulerX, localEulerAngles.y, localEulerAngles.z);
             gameObject.transform.localEulerAngles = Vector3.MoveTowards(localEulerAngles, targetEulerAngles, _angleUpdateSpeed * Time.deltaTime);
         }
     }
@@ -101,8 +101,7 @@ public class SmashCamera : MonoBehaviour
         float depth = Mathf.Lerp(_depthMax, _depthMin, lerpPercent);
         float angle = Mathf.Lerp(_angleMax, _angleMin, lerpPercent);
 
-        CameraEulerX = angle;
+        _cameraEulerX = angle;
         _cameraPosition = new Vector3(averageCenter.x, averageCenter.y, depth);
-        
     }
 }
