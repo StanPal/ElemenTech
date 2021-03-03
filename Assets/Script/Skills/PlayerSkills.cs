@@ -9,7 +9,6 @@ public class PlayerSkills : MonoBehaviour
     public event System.Action onAirSkillPerformed;
     public event System.Action onWaterSkillPerformed;
 
-    
     private HeroActions mHeroAction;
     public HeroActions HeroAction { get { return mHeroAction; } }
     private HeroMovement mHeroMovement;
@@ -37,7 +36,7 @@ public class PlayerSkills : MonoBehaviour
         }
         if (playerManager.mPlayersList[1].gameObject != null)
         {
-            playerManager.mPlayersList[1].GetComponent<HeroActions>().onSkillPerformed += PerformSkill;
+            playerManager.mPlayersList[1].GetComponentInChildren<HeroActions>().onSkillPerformed += PerformSkill;
         }
         if (playerManager.mPlayersList[2].gameObject != null)
         {

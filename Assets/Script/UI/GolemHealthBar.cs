@@ -20,7 +20,7 @@ public class GolemHealthBar : MonoBehaviour
 
     void Update()
     {
-        float fillValue = mGolem.CurrentHealth / mGolem.MaxHealth;
+        float fillValue = mGolem.mCurrentHealth / mGolem.mMaxHealth;
         slider.value = fillValue;
     }
 }

@@ -1,82 +1,100 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class WaterGun : MonoBehaviour
 {
-    [SerializeField]
-    private float damage = 2;
-    [SerializeField]
-    private float projectileSpeed = 5;
-    private Rigidbody2D rigidbody;
-    [SerializeField]
-    private float exitTime = 2.0f;
-    private WaterSkills waterSkills;
+    private Rigidbody2D _RigidBody;
+    private WaterSkills _WaterSkills;
+    [SerializeField] private float _ProjectileSpeed;
+    [SerializeField] private float _ExitTime = 2.0f;
+    private bool _CanDamagePlayer = false;
+
     private void Awake()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
-        waterSkills = FindObjectOfType<WaterSkills>();
-
-        if (waterSkills.PlayerSkills.HeroMovement.GetIsLeft)
-        {
-            projectileSpeed = -projectileSpeed;
-        }
+        _CanDamagePlayer = false;
+        _RigidBody = GetComponent<Rigidbody2D>();
+        _WaterSkills = FindObjectOfType<WaterSkills>();
+        _ProjectileSpeed = _WaterSkills.Speed;
     }
 
     private void FixedUpdate()
     {
-        if (exitTime <= 0.0f)
+        if (_ExitTime <= 0.0f)
         {
             Destroy(gameObject);
         }
-        exitTime -= Time.deltaTime;
-        rigidbody.velocity = transform.right * projectileSpeed;
+        _ExitTime -= Time.deltaTime;
+        _RigidBody.velocity = transform.right * _WaterSkills.Speed;
     }
 
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.GetComponent<Golem>())
+        Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
+        if (_CanDamagePlayer)
         {
-            Debug.Log("Trigger");
-            Golem golem = collision.gameObject.GetComponent<Golem>();
-            if (golem != null)
+            if (collision.collider.GetComponent<Golem>())
             {
-                golem.TakeDamage(damage);
+                Golem golem = collision.gameObject.GetComponent<Golem>();
+                if (golem != null)
+                {
+                    golem.TakeDamage(_WaterSkills.Damage);
+                    Destroy(gameObject);
+                }
+            }
+
+            if (collision.collider.GetComponent<Guard>())
+            {
+                if (collision.collider.GetComponent<Guard>().tag.Equals(_WaterSkills.PlayerSkills.HeroAction.tag))
+                {
+                    Guard guard = collision.collider.GetComponent<Guard>();
+                    if (guard.Guarding)
+                    {
+                        Destroy(gameObject);
+                        Debug.Log("Shield Hit");
+                        collision.collider.GetComponent<Guard>().ComboSkillOn = true;
+                    }
+                }
+            }
+
+            if (_WaterSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+            {
+                if (collision.collider.tag.Equals("Team2"))
+                {
+                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                    {
+                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        Destroy(gameObject);
+
+                    }
+                    //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                    //collision.GetComponent<HeroStats>().SlowMovement(_WaterSkills.SlowAmount, _WaterSkills.SlowDuration);
+                }
+            }
+            if (_WaterSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
+            {
+                if (collision.collider.tag.Equals("Team1"))
+                {
+                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
+                    {
+                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        Destroy(gameObject);
+
+                    }
+                    //collision.GetComponent<HeroStats>().TakeDamage(_Damage);
+                    //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
+                    //collision.GetComponent<HeroStats>().SlowMovement(_WaterSkills.SlowAmount, _WaterSkills.SlowDuration);
+                }
+            }
+
+            if (collision.collider.GetComponentInParent<Walls>())
+            {
                 Destroy(gameObject);
             }
         }
-
-        if (waterSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
-        {
-            if (collision.tag.Equals("Team2"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamage(damage);
-                
-                }
-                //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
-                //collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
-            }
-        }
-        if (waterSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
-        {
-            if (collision.tag.Equals("Team1"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamage(damage);
-                }
-                //collision.GetComponent<HeroStats>().TakeDamage(damage);
-                //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
-                //collision.GetComponent<HeroStats>().SlowMovement(waterSkills.SlowAmount, waterSkills.SlowDuration);
-            }
-        }
-
-        if (collision.GetComponentInParent<Walls>())
-        {
-            Destroy(gameObject);
-        }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
+        _CanDamagePlayer = true;
+    }
+
 }

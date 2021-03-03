@@ -5,14 +5,14 @@ using UnityEngine;
 public class Golem : MonoBehaviour
 {
     private Rigidbody2D rb;
-    [SerializeField]
-    private float mMaxHealth = 100.0f;
-    [SerializeField]
-    private float mCurrentHealth;
+    
+    public float mMaxHealth = 100.0f;
 
-    /// <summary>
+    public float mCurrentHealth;
+
+    public int currentSpawnNodeIndex = 0;
     /// ///////////////////////////////////////////
-    /// </summary>
+
     [SerializeField]
     private float shootingInterval;
     private float currentTime;
@@ -52,16 +52,23 @@ public class Golem : MonoBehaviour
     public bool selfGeren = false;
 
     public float MaxHealth { get { return mMaxHealth; } }
-    public float CurrentHealth { get { return mCurrentHealth; } }
+    
     /////////////////////////////////////////////////
-    public GameObject tagObject;
-    private Transform targetPosition;
+    GameObject teamOneObj;
+    Transform teamOnePos;
+
+    GameObject teamTwoObj;
+    Transform teamTwoPos;
     [SerializeField]
-    private float mJumpForce;
+    float mJumpForce;
 
     private Transform deadPosition;
 
-    public GameObject Drop;
+    [SerializeField]
+    private GameObject FireElement;
+    public GameObject WaterElement;
+    public GameObject AirElement;
+    public GameObject EarthElement;
 
     private void Awake()
     {
@@ -71,10 +78,16 @@ public class Golem : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         mCurrentHealth = mMaxHealth;
         initGolemFeature();
-        tagObject = GameObject.FindWithTag("Team2");
-        targetPosition = tagObject.transform;
-        ////
-       
+        if (GameObject.FindWithTag("Team1"))
+        {
+            teamOneObj = GameObject.FindWithTag("Team1");
+            teamOnePos = teamOneObj.transform;
+        }
+        if (GameObject.FindWithTag("Team2"))
+        {
+            teamTwoObj = GameObject.FindWithTag("Team2");
+           teamTwoPos = teamTwoObj.transform;
+        }        
     }
 
     private void Update()
@@ -92,37 +105,54 @@ public class Golem : MonoBehaviour
         //     }
         // }
 
-        //Debug.Log("Golem Health" + mCurrentHealth);
-        //mCurrentHealth--;
-        Move();
-        Shoot();
-        SelfRegen();
-        Jump();
         KillEnemy();
+       // Move();
+       // Shoot();
+        SelfRegen();
+        //Jump();
     }
 
     private void OnCollisionEnter2D(Collision2D coll)
     {
         if (coll.gameObject.tag == "Wall")
-        {
+        {          
             reverse = !reverse;
-            Debug.Log("hit the block");
+            //Debug.Log("hit the block");
             transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
         }
         if (coll.gameObject.tag == "Enemy")
         {
             reverse = !reverse;
-            Debug.Log("hit the block");
+            //Debug.Log("hit the block");
             transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
         }
+        if (coll.gameObject.tag == "Team1")
+        {
+            reverse = !reverse;
+           // Debug.Log("hit the Hero");
+            transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
+        }
+        if (coll.gameObject.tag == "Team2")
+        {
+            reverse = !reverse;
+           // Debug.Log("hit the Hero");
+            transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
+        }     
     }
+    //void OnTriggerEnter2D(Collider2D other)
+    //{
+    //    if (other.gameObject.tag == ("pickup"))
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
 
     private void initGolemFeature()
     {
         if (mGolemType == GolemData.elementType.Air)
         {
             mAttackType = GolemData.attackType.Ranged;
-            Debug.Log("init Air bot attack to ranged");
+            //Debug.Log("init Air bot attack to ranged");
             mSpeed = NormalMoveSpeed;
             Sword.SetActive(false);
             longSword.SetActive(false);
@@ -131,7 +161,7 @@ public class Golem : MonoBehaviour
         else if (mGolemType == GolemData.elementType.Earth)
         {
             mAttackType = GolemData.attackType.Melee;
-            Debug.Log("init Earth bot attack to Melee");
+            //Debug.Log("init Earth bot attack to Melee");
             mSpeed = SlowerMoveSpeed;
             mCurrentHealth = 2 * mMaxHealth;
             longSword.SetActive(false);
@@ -140,7 +170,7 @@ public class Golem : MonoBehaviour
         else if (mGolemType == GolemData.elementType.Fire)
         {
             mAttackType = GolemData.attackType.Ranged;
-            Debug.Log("init Fire bot attack to Ranged");
+            //Debug.Log("init Fire bot attack to Ranged");
             mSpeed = NormalMoveSpeed;
             Sword.SetActive(false);
             longSword.SetActive(false);
@@ -148,7 +178,7 @@ public class Golem : MonoBehaviour
         else if (mGolemType == GolemData.elementType.Water)
         {
             mAttackType = GolemData.attackType.midRanged;
-            Debug.Log("init Water bot attack to midRanged");
+            //Debug.Log("init Water bot attack to midRanged");
             mSpeed = FasterMoveSpeed;
             selfGeren = true;
             Sword.SetActive(false);
@@ -178,7 +208,12 @@ public class Golem : MonoBehaviour
         else
         {
             //Debug.Log("Jump");
-            if (targetPosition.position.y - 1.0f > this.transform.position.y)
+            if (teamTwoPos.position.y - 1.0f > this.transform.position.y)
+            {
+                rb.velocity = Vector2.up * mJumpForce;
+                jumpTimeCounter = jumpTime;
+            }
+            else if(teamOnePos.position.y - 1.0f > this.transform.position.y)
             {
                 rb.velocity = Vector2.up * mJumpForce;
                 jumpTimeCounter = jumpTime;
@@ -186,8 +221,10 @@ public class Golem : MonoBehaviour
         }
     }
 
-    private void Shoot()
+    public void Shoot()
     {
+
+
         if (mAttackType == GolemData.attackType.Ranged)
         {
             if (currentTime > 0.0f)
@@ -215,16 +252,20 @@ public class Golem : MonoBehaviour
     {
         if (mCurrentHealth <= 0)
         {
+            if (golemManager._instance)
+            {
+                golemManager._instance.getSpawnNodeList().Remove(this.currentSpawnNodeIndex);
+            }
             deadPosition = this.gameObject.transform;
             Destroy(this.gameObject);
-            Instantiate(Drop, deadPosition.position, deadPosition.rotation);
+            genePickup(mGolemType);
         }
     }
 
     public void TakeDamage(float damage)
     {
         mCurrentHealth -= damage;
-        Debug.Log("damage TAKEN");
+        //Debug.Log("damage TAKEN");
     }
 
     public void SelfRegen()
@@ -245,6 +286,36 @@ public class Golem : MonoBehaviour
                 mTime += Time.deltaTime;
             }
         }
+    }
+
+    private void genePickup(GolemData.elementType temp)
+    {
+        if (mGolemType == GolemData.elementType.Air)
+        {
+            Instantiate(AirElement, deadPosition.position, deadPosition.rotation);
+        }
+        else if (mGolemType == GolemData.elementType.Earth)
+        {
+            Instantiate(EarthElement, deadPosition.position, deadPosition.rotation);
+        }
+        else if (mGolemType == GolemData.elementType.Fire)
+        {
+            Instantiate(FireElement, deadPosition.position, deadPosition.rotation);
+        }
+        else if (mGolemType == GolemData.elementType.Water)
+        {
+            Instantiate(WaterElement, deadPosition.position, deadPosition.rotation);
+        }
+    }
+
+    public GolemData.elementType getGolemType()
+    {
+        return mGolemType;
+    }
+
+    public void SetGolemType(GolemData.elementType temp)
+    {
+        mGolemType = temp;
     }
 }
 

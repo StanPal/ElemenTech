@@ -480,6 +480,8 @@ GameObject:
   - component: {fileID: 4298406671086658541}
   - component: {fileID: 7940048648316017097}
   - component: {fileID: 1165230724}
+  - component: {fileID: 8896482103446061387}
+  - component: {fileID: 4508553077995094321}
   m_Layer: 9
   m_Name: Golem
   m_TagString: Enemy
@@ -566,25 +568,71 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mMaxHealth: 100
-  mCurrentHealth: 100
+  mCurrentHealth: 0
+  currentSpawnNodeIndex: 0
   shootingInterval: 1
-  jumpTime: 1
+  jumpTime: 3
   Sword: {fileID: 2589507756769091490}
   longSword: {fileID: 5455026804038331512}
   gun: {fileID: 4544347526746678256}
   bullet: {fileID: -6625602420098716459, guid: 6737eb36e309cbf4ba388fb6e63c1b3e, type: 3}
   muzzle: {fileID: 1550714508109685991}
   bulletSpeed: 5
-  FasterMoveSpeed: 1
-  NormalMoveSpeed: 1
+  FasterMoveSpeed: 3
+  NormalMoveSpeed: 2
   SlowerMoveSpeed: 1
   mSpeed: 1
   mTime: 2
   mGolemType: 0
   reverse: 0
   selfGeren: 0
-  mJumpForce: 4
-  Drop: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941, type: 3}
+  mJumpForce: 15
+  FireElement: {fileID: 979773451687419697, guid: ab0bf128b6fc29f4c9abf92f98616941,
+    type: 3}
+  WaterElement: {fileID: 9196028788834740802, guid: 8177a206ad5b252459cd5fba0a3910c7,
+    type: 3}
+  AirElement: {fileID: 4073581993458647738, guid: 425a55974f6743f49805ff81cd27fbd8,
+    type: 3}
+  EarthElement: {fileID: 2384499793245904397, guid: 2d298489f2774bf4b947ae94b59d7c57,
+    type: 3}
+--- !u!95 &8896482103446061387
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768544537369164436}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 57074bd2573c42743b53dba9481fc0b3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &4508553077995094321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5768544537369164436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 231eaac0e2830ed46a5f0f36ee28c9ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _aiController: {fileID: 8896482103446061387}
+  nodeIndex: 0
+  currentHP: 0
+  mkPickups: []
+  mHeros: []
+  nearestHero: {fileID: 0}
+  nearestHealth: {fileID: 0}
 --- !u!1 &5786073200164854496
 GameObject:
   m_ObjectHideFlags: 0

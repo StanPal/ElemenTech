@@ -1,21 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
-{
-    private PlayerManager playerManager;
-    private int mTeamOneScore = 0;
-    private int mTeamTwoScore = 0;
+{    
+    [SerializeField] private int _teamOneScore = 0;
+    [SerializeField] private int _teamTwoScore = 0;
+    [SerializeField] bool _isPracticeMode = false;
+    [SerializeField] bool _isMatchOver = false;
+
+    public int TeamOneScore { get => _teamOneScore; }
+    public int TeamTwoScore { get => _teamTwoScore; }
+    public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }
+    public bool PracticeMode { get { return _isPracticeMode;} set { _isPracticeMode = value; } }
 
     private void Awake()
     {
-        GameLoader.CallOnComplete(Initialize);
-    }
-
-    private void Initialize()
-    {
-        playerManager = ServiceLocator.Get<PlayerManager>();
+        ServiceLocator.Register<ScoreManager>(this);
     }
 
     public void AddPoints(int team, int points)
@@ -23,13 +22,20 @@ public class ScoreManager : MonoBehaviour
         switch (team)
         {
             case 1:
-                mTeamOneScore++;
+                _teamOneScore++;
                 break;
             case 2:
-                mTeamTwoScore++;
+                _teamTwoScore++;
                 break; 
             default:
                 break;
         }
+    }
+
+    public void ResetScore()
+    {
+        _teamOneScore = 0;
+        _teamTwoScore = 0;
+        _isMatchOver = false;
     }
 }

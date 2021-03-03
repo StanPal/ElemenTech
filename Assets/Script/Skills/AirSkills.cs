@@ -33,6 +33,6 @@ public class AirSkills : MonoBehaviour
 
     void AirJet()
     {
-        Instantiate(mAirJet, mHeroSkills.HeroMovement.transform.position, Quaternion.identity);
+        Instantiate(mAirJet, mHeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
     }
 }
