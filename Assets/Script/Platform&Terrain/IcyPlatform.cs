@@ -11,4 +11,8 @@ public class IcyPlatform : MonoBehaviour
             collision.gameObject.GetComponent<HeroMovement>().Speed += SlidSpeed;
         
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        collision.gameObject.GetComponent<HeroMovement>().Speed -= SlidSpeed;
+    }
 }

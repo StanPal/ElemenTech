@@ -23,11 +23,12 @@ public class LevelManager : MonoBehaviour
         MatchUI = FindObjectOfType<MatchUI>();
     }
 
+
     private void Update()
     {
         if (!mScoreManager.PracticeMode)
         {
-            if (!isMatchOver)
+            if (!mScoreManager.IsMatchOver)
             {
                 if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
                 {
@@ -55,9 +56,9 @@ public class LevelManager : MonoBehaviour
 
     private void LevelEnd(int team, int score)
     {
-        isMatchOver = true;
+        mScoreManager.IsMatchOver = true;
         mScoreManager.AddPoints(team, score);
-        MatchUI.mMatchCanvas.gameObject.SetActive(true);
+        MatchUI.MatchCanvas.gameObject.SetActive(true);
         MatchUI.displayTeamScore();
         mPlayerManager.TeamOne.Clear();
         mPlayerManager.TeamTwo.Clear();

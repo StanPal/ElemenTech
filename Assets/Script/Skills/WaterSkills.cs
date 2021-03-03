@@ -35,7 +35,7 @@ public class WaterSkills : MonoBehaviour
 
     void WaterGun()
     {
-        Instantiate(mWaterGun, mHeroSkills.HeroAction.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
+        Instantiate(mWaterGun, mHeroSkills.HeroAction.FirePoint.transform.position, Quaternion.Euler(0, 0, mHeroSkills.HeroAction.GetLookAngle));
 
     }
 

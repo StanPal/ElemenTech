@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HealthItem : MonoBehaviour
 {
-    private ItemManager itemManager;
+    public ItemManager itemManager;
 
     private void Awake()
     {
