@@ -13,27 +13,27 @@ public class MysteryBox : MonoBehaviour
         if (target.gameObject.GetComponent<HeroStats>() != null)
         {
             Destroy(gameObject);
-            Elements.ElementalAttribute prestate = target.gameObject.GetComponent<HeroStats>().mElementalType;
+            Elements.ElementalAttribute prestate = target.gameObject.GetComponent<HeroStats>()._elementalType;
 
             if (n == 0) // n = 0,will turn to the earth
             {
                     Debug.Log("n = 0, Element:earth");
-                    target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Earth;
+                    target.gameObject.GetComponent<HeroStats>()._elementalType = Elements.ElementalAttribute.Earth;
             }
             else if(n == 1)//air
             {
                 Debug.Log("n = 1, Element:air");
-                target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Air;
+                target.gameObject.GetComponent<HeroStats>()._elementalType = Elements.ElementalAttribute.Air;
                 }
             else if(n == 2)//fire
             {
                 Debug.Log("n = 2, Element:fire");
-                target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Fire;
+                target.gameObject.GetComponent<HeroStats>()._elementalType = Elements.ElementalAttribute.Fire;
                 }
             else if(n == 3)//water
                 {
                 Debug.Log("n = 3, Element:water");
-                target.gameObject.GetComponent<HeroStats>().mElementalType = Elements.ElementalAttribute.Water;
+                target.gameObject.GetComponent<HeroStats>()._elementalType = Elements.ElementalAttribute.Water;
                 }
             else if(n == 4)//healthitem
                 {

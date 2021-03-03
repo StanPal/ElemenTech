@@ -36,7 +36,17 @@ public class HeroActions : MonoBehaviour
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
+    public bool onWall;
+    public bool onLeftWall;
+    public bool onRightWall;
+    public float collisionRadius;
+    public Vector2 rightOffset;
+    public Vector2 leftOffset;
+    public Vector2 groundOfset;
+    public LayerMask groundLayer;
 
+    public Color gizmoColor = Color.red;
+    public int side;
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -121,6 +131,11 @@ public class HeroActions : MonoBehaviour
 
     private void Update()
     {
+        onWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset,collisionRadius,groundLayer)||
+                Physics2D.OverlapCircle((Vector2)transform.position + leftOffset,collisionRadius,groundLayer);
+                onRightWall = Physics2D.OverlapCircle((Vector2)transform.position + rightOffset,collisionRadius,groundLayer);
+                onLeftWall = Physics2D.OverlapCircle((Vector2)transform.position + leftOffset,collisionRadius,groundLayer);
+
         switch (HeroMovement.ControllerInput)
         {
             case HeroMovement.Controller.None:
@@ -149,6 +164,12 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+private void OnDrawGizmos() {
+    Gizmos.color = gizmoColor;
+    Gizmos.DrawWireSphere((Vector2)transform.position + groundOfset,collisionRadius);
+     Gizmos.DrawWireSphere((Vector2)transform.position + rightOffset,collisionRadius);
+      Gizmos.DrawWireSphere((Vector2)transform.position + leftOffset,collisionRadius);
+}
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(_heroStats.CoolDown);

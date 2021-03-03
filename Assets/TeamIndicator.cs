@@ -18,22 +18,22 @@ public class TeamIndicator : MonoBehaviour
     }
     void Update()
     {
-        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Water)
+        if (GetComponentInParent<HeroStats>()._elementalType == Elements.ElementalAttribute.Water)
         {
 
                 spriteRenderer.color = Color.blue;
         }
-        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Air)
+        if (GetComponentInParent<HeroStats>()._elementalType == Elements.ElementalAttribute.Air)
         {
 
             spriteRenderer.color = Color.white;
         }
-        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Fire)
+        if (GetComponentInParent<HeroStats>()._elementalType == Elements.ElementalAttribute.Fire)
         {
 
             spriteRenderer.color = Color.red;
         }
-        if (GetComponentInParent<HeroStats>().mElementalType == Elements.ElementalAttribute.Earth)
+        if (GetComponentInParent<HeroStats>()._elementalType == Elements.ElementalAttribute.Earth)
         {
             spriteRenderer.color = Color.black;
         }
