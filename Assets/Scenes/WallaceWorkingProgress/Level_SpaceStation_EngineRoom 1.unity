@@ -5824,10 +5824,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 242029fe980f94843b8fdbc072f5b9f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sounds: []
+  _sounds:
+  - _name: 
+    _clip: {fileID: 0}
+    _volume: 0
+    _pitch: 0
+    _loop: 0
+    source: {fileID: 0}
   _playMusic: []
-  _playMusicLoop: []
-  _speedOfChangeFocus: 0
+  _playMusicLoopBetweenATime: []
 --- !u!1 &1693719295 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4691732855524430682, guid: 2883cfc64dd777b479a65bc499cbde2e,

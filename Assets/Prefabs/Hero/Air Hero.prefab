@@ -456,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 1
+  ControllerInput: 2
   _moveSpeed: 14
   _isLeft: 0
   _isJumping: 0
