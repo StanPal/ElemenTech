@@ -9,7 +9,6 @@ public class SoundManager : MonoBehaviour
     public string[] _playMusic;
     public string[] _playMusicLoopBetweenATime;
     public static SoundManager _instance;
-    public float _speedOfChangeFocus = 0.0f;
 
     private void Awake()
     {
