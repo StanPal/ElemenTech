@@ -78,53 +78,16 @@ public class Crosshair : MonoBehaviour
                 case HeroMovement.Controller.None:
                     break;
                 case HeroMovement.Controller.Keyboard:
-                    _p1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                    _p1CrossHairs.transform.position = new Vector3(_p1Target.x, _p1Target.y);
+                    KeyboardCorssHairs(_fireHero,_p1CrossHairs,_p1Target);
                     break;
                 case HeroMovement.Controller.PS4:
-                    _p1CrossHairs.transform.SetParent(_fireHero.transform);
-                    if (_fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p1CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p1CrossHairs.SetActive(true);
-                    }
-                    _p1CrossHairs.transform.position = new Vector3(
-                        _fireHero.transform.position.x + (_fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                        _fireHero.transform.position.y + _fireHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                    PS4CorssHairs(_fireHero,_p1CrossHairs);
                     break;
                 case HeroMovement.Controller.XBOX:
-                    _p1CrossHairs.transform.SetParent(_fireHero.transform);
-                    if (_fireHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _fireHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p1CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p1CrossHairs.SetActive(true);
-                    }
-                    _p1CrossHairs.transform.position = new Vector3(
-                        _fireHero.transform.position.x + (_fireHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                        _fireHero.transform.position.y + _fireHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                    XBOXCorssHairs(_fireHero,_p1CrossHairs);
                     break;
                 case HeroMovement.Controller.Gamepad:
-                    _p1CrossHairs.transform.SetParent(_fireHero.transform);
-                    if (_fireHero.PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _fireHero.PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p1CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p1CrossHairs.SetActive(true);
-                    }
-                    _p1CrossHairs.transform.position = new Vector3(
-                        _fireHero.transform.position.x + (_fireHero.PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
-                        _fireHero.transform.position.y + _fireHero.PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
+                    GamepadCorssHairs(_fireHero,_p1CrossHairs);
                     break;
                 default:
                     break;
@@ -137,53 +100,16 @@ public class Crosshair : MonoBehaviour
                 case HeroMovement.Controller.None:
                     break;
                 case HeroMovement.Controller.Keyboard:
-                    _p2Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_waterHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                    _p2CrossHairs.transform.position = new Vector3(_p2Target.x, _p2Target.y);
+                    KeyboardCorssHairs(_waterHero, _p2CrossHairs, _p2Target);
                     break;
                 case HeroMovement.Controller.PS4:
-                    _p2CrossHairs.transform.SetParent(_waterHero.transform);
-                    if (_waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p2CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p2CrossHairs.SetActive(true);
-                    }
-                    _p2CrossHairs.transform.position = new Vector3(
-                                      _waterHero.transform.position.x + (_waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                      _waterHero.transform.position.y + _waterHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                    PS4CorssHairs(_waterHero, _p2CrossHairs);
                     break;
                 case HeroMovement.Controller.XBOX:
-                    _p2CrossHairs.transform.SetParent(_waterHero.transform);
-                    if (_waterHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _waterHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p2CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p2CrossHairs.SetActive(true);
-                    }
-                    _p2CrossHairs.transform.position = new Vector3(
-                                      _waterHero.transform.position.x + (_playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                      _waterHero.transform.position.y + _playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                    XBOXCorssHairs(_waterHero, _p2CrossHairs);
                     break;
                 case HeroMovement.Controller.Gamepad:
-                    _p2CrossHairs.transform.SetParent(_waterHero.transform);
-                    if (_waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p2CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p2CrossHairs.SetActive(true);
-                    }
-                    _p2CrossHairs.transform.position = new Vector3(
-                                      _waterHero.transform.position.x + (_waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
-                                      _waterHero.transform.position.y + _waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
+                    GamepadCorssHairs(_waterHero,_p2CrossHairs);
                     break;
                 default:
                     break;
@@ -196,38 +122,16 @@ public class Crosshair : MonoBehaviour
                 case HeroMovement.Controller.None:
                     break;
                 case HeroMovement.Controller.Keyboard:
-                    _p3Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_airHero.HeroMovement.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                    _p3CrossHairs.transform.position = new Vector3(_p3Target.x, _p3Target.y);
+                    KeyboardCorssHairs(_airHero, _p3CrossHairs, _p3Target);
                     break;
                 case HeroMovement.Controller.PS4:
-                    _p3CrossHairs.transform.SetParent(_airHero.transform);
-                    if (_airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p3CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p3CrossHairs.SetActive(true);
-                    }
-                    _p3CrossHairs.transform.position = new Vector3(
-                                      _airHero.transform.position.x + (_airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                      _airHero.transform.position.y + _airHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                    PS4CorssHairs(_airHero,_p3CrossHairs);
                     break;
                 case HeroMovement.Controller.XBOX:
-                    _p3CrossHairs.transform.SetParent(_airHero.transform);
-                    if (_airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                        _airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
-                    {
-                        _p3CrossHairs.SetActive(false);
-                    }
-                    else
-                    {
-                        _p3CrossHairs.SetActive(true);
-                    }
-                    _p3CrossHairs.transform.position = new Vector3(
-                                      _airHero.transform.position.x + (_airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                      _airHero.transform.position.y + _airHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                    XBOXCorssHairs(_airHero,_p3CrossHairs);
+                    break;
+                case HeroMovement.Controller.Gamepad:
+                    GamepadCorssHairs(_airHero, _p3CrossHairs);
                     break;
                 default:
                     break;
@@ -239,42 +143,76 @@ public class Crosshair : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                _p4Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_earthHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                _p4CrossHairs.transform.position = new Vector3(_p4Target.x, _p4Target.y);
+                KeyboardCorssHairs(_earthHero,_p4CrossHairs,_p4Target);
                 break;
             case HeroMovement.Controller.PS4:
-                _p4CrossHairs.transform.SetParent(_earthHero.transform);
-                if (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                    _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
-                {
-                    _p4CrossHairs.SetActive(false);
-                }
-                else
-                {
-                    _p4CrossHairs.SetActive(true);
-                }
-                _p4CrossHairs.transform.position = new Vector3(
-                                  _earthHero.transform.position.x + (_earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _earthHero.transform.position.y + _earthHero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+                PS4CorssHairs(_earthHero,_p4CrossHairs);
                 break;
             case HeroMovement.Controller.XBOX:
-                _p4CrossHairs.transform.SetParent(_earthHero.transform);
-
-                if (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-                    _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
-                {
-                    _p4CrossHairs.SetActive(false);
-                }
-                else
-                {
-                    _p4CrossHairs.SetActive(true);
-                }
-                _p4CrossHairs.transform.position = new Vector3(
-                                  _earthHero.transform.position.x + (_earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
-                                  _earthHero.transform.position.y + _earthHero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+                XBOXCorssHairs(_earthHero,_p4CrossHairs);
+                break;
+            case HeroMovement.Controller.Gamepad:
+                GamepadCorssHairs(_earthHero, _p4CrossHairs);
                 break;
             default:
                 break;
         }
+    }
+
+    void KeyboardCorssHairs(HeroActions hero, GameObject crossHairs, Vector3 target)
+    {
+        target = transform.GetComponent<Camera>().ScreenToWorldPoint(hero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+        crossHairs.transform.position = new Vector3(target.x, target.y);
+    }
+
+    void PS4CorssHairs(HeroActions hero, GameObject crossHairs)
+    {
+        crossHairs.transform.SetParent(hero.transform);
+        if (hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
+            hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
+        {
+            crossHairs.SetActive(false);
+        }
+        else
+        {
+            crossHairs.SetActive(true);
+        }
+        crossHairs.transform.position = new Vector3(
+                          hero.transform.position.x + (hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
+                          hero.transform.position.y + hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+    }
+
+    void XBOXCorssHairs(HeroActions hero, GameObject crossHairs)
+    {
+        crossHairs.transform.SetParent(hero.transform);
+        if (hero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().x.Equals(0f) &&
+            hero.PlayerInput.XBOX.Aim.ReadValue<Vector2>().y.Equals(0f))
+        {
+            crossHairs.SetActive(false);
+        }
+        else
+        {
+            crossHairs.SetActive(true);
+        }
+        crossHairs.transform.position = new Vector3(
+                          hero.transform.position.x + (_playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().x * 5.5f),
+                          hero.transform.position.y + _playerManager.mPlayersList[1].GetComponent<HeroActions>().PlayerInput.XBOX.Aim.ReadValue<Vector2>().y * 5.5f);
+    }
+
+    void GamepadCorssHairs(HeroActions hero, GameObject crossHairs)
+    {
+        crossHairs.transform.SetParent(_waterHero.transform);
+        if (hero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x.Equals(0f) &&
+            hero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y.Equals(0f))
+        {
+            crossHairs.SetActive(false);
+        }
+        else
+        {
+            crossHairs.SetActive(true);
+        }
+        crossHairs.transform.position = new Vector3(
+                          hero.transform.position.x + (_waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().x * 5.5f),
+                          hero.transform.position.y + _waterHero.GetComponent<HeroActions>().PlayerInput.Gamepad.Aim.ReadValue<Vector2>().y * 5.5f);
     }
 }

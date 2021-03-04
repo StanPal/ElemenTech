@@ -79,6 +79,9 @@ public class RotationFloor : MonoBehaviour
                 if (zRotation > _finalZRotation)
                 {
                     _state = RotationState.Waiting;
+                    _floor.layer = 10;
+                    _floorLS.layer = 8;
+                    _floorRS.layer = 8;
                 }
                 break;
             case RotationState.CounterClockwise:
@@ -89,9 +92,13 @@ public class RotationFloor : MonoBehaviour
                 if (zRotation > _startZRotation)
                 {
                     _state = RotationState.Finished;
+                    _floor.layer = 8;
+                    _floorLS.layer = 10;
+                    _floorRS.layer = 10;
                 }
                 break;
         }
         Debug.Log($"Rotating Floor State: {_state}");
     }
+
 }
