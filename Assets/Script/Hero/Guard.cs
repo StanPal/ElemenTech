@@ -1,24 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class Guard : MonoBehaviour
 {
-    public GameObject Shield;
-    private GameObject _shield;
+    public event System.Action OnShieldRecover;
+
+    [SerializeField] private GameObject _shield;
+    [SerializeField] private ParticleSystem _shieldBreakEffect;
     private HeroActions _heroAction;
     private HeroMovement _heroMovement;
     private bool _shieldCreated = false;
     private bool _skillCombine = false;
     private bool _shieldBreak = false;
-    public bool IsShieldDisabled = false;
+    private bool _isShieldDisabled = false;
 
     private ParticleSystemManager _particleSystemManager;
 
     [SerializeField] private bool _isGuarding = false;
-    [SerializeField] private float _guardTime = 0.5f;
     [SerializeField] private float _shieldSize = 2.1f;
     [SerializeField] private float _shieldRecoveryTick = 3f;
     [SerializeField] private float _speedDecrease = 1f;
     [SerializeField] private float _shieldMaxEnergy = 100f;
+    [SerializeField] private float _shieldExpendAmount = 2f;
     [SerializeField] private float _shieldRecoverAmount = 1f;
     [SerializeField] private float _shieldEnergyTick = 0.2f;
     [SerializeField] private float _shieldEnergy = 100f;
@@ -30,7 +33,7 @@ public class Guard : MonoBehaviour
     public float ShieldRecoveryAmount { get { return _shieldRecoverAmount; } }
     public float ShieldRecoveryTick { get { return _shieldRecoveryTick; } }
     public bool ComboSkillOn { get { return _skillCombine; } set { _skillCombine = value; } }
-
+    public bool IsShieldDisabled { get => _isShieldDisabled; set => _isShieldDisabled = true; }
 
     public GameObject ComboSkill;
 
@@ -41,35 +44,26 @@ public class Guard : MonoBehaviour
         _heroAction = GetComponentInParent<HeroActions>();
         _heroAction.onGuardPerformed += OnGuardPerformed;
         _heroAction.onGuardExit += OnGuardExit;
-    }
+        _heroAction.HeroStats.OnShieldRecovered += HeroStats_OnShieldRecovered;
+    } 
 
     private void Update()
     {
-        if (_isGuarding)
+        if (_isGuarding && !_isShieldDisabled)
         {
             if (_shield == null)
             {
                 Debug.Log("Cannot Create Shield, No Element Attached");
             }
             else
-            {
-                _shield.transform.position = Vector3.MoveTowards(_shield.transform.position, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), 1.0f);
-                if (_shieldEnergy > 0)
-                {
-                    _shieldEnergy -= Time.deltaTime / _shieldEnergyTick;
-                }
-                else
-                {
-                    IsShieldDisabled = true;
-                    _shieldBreak = true;
-                    OnGuardExit();
-                }
+            { 
+               StartCoroutine(ShieldEnergyDecrease());
                 Color color = _shield.GetComponent<SpriteRenderer>().color;
                 color.a = (_shieldEnergy * 0.01f);
                 _shield.GetComponent<SpriteRenderer>().color = color;
             }
         }
-        if(_isGuarding && ComboSkillOn)
+        if (_isGuarding && ComboSkillOn)
         {
             if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Water)
             {
@@ -91,47 +85,82 @@ public class Guard : MonoBehaviour
                 GameObject ComboSkillClone = Instantiate(ComboSkill, transform);
                 ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
             }
-            //Debug.Log(FindObjectOfType<Guard>().gameObject.transform.position);
             ComboSkillOn = false;
+        }
+
+        if (_shieldBreak)
+        {
+            _shieldBreak = false;
+            ShieldBreakEffect();
+            OnGuardExit();
         }
     }
 
     private void OnGuardPerformed()
     {
-        _isGuarding = true;
-        SummonGuard();
+        if (!_isShieldDisabled)
+        {
+            _isGuarding = true;
+            SummonGuard();
+        }
     }
 
     private void OnGuardExit()
     {
-        Destroy(_shield);
-        if (_shieldBreak)
-        {
-            GameObject shieldBreak = Instantiate(_particleSystemManager.GetDebuffEffects[0]);
-            shieldBreak.transform.position = this.transform.position;
-            _shieldBreak = false;
-            shieldBreak.GetComponent<ParticleSystem>().Play();
-        }
+        //Destroy(_shield);
+        _shield.SetActive(false);
         _isGuarding = false;
         _shieldCreated = false;
+        OnShieldRecover.Invoke();
     }
 
     private void OnDestroy()
     {
-        _heroAction.onGuardPerformed -= OnGuardPerformed; 
+        _heroAction.onGuardPerformed -= OnGuardPerformed;
         _heroAction.onGuardExit -= OnGuardExit;
     }
 
     private void SummonGuard()
     {
-        if (!_shieldCreated && !IsShieldDisabled)
+        if (!_shieldCreated && !_isShieldDisabled)
         {
-            _shield = Instantiate(Shield, new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f), Quaternion.identity);
-            _shield.transform.localScale = new Vector3(_shieldSize,_shieldSize,_shieldSize);
+            _shield.SetActive(true);
             Color color = _shield.GetComponent<SpriteRenderer>().color;
             color.a = (_shieldEnergy * 0.01f);
             _shield.GetComponent<SpriteRenderer>().color = color;
             _shieldCreated = true;
         }
-    }    
+    }
+
+    private void HeroStats_OnShieldRecovered()
+    {
+        _isShieldDisabled = false;
+    }
+
+    public void TakeShieldDamage(float damage)
+    {
+        ShieldEnergy -= damage;
+        if (ShieldEnergy <= 0)
+        {
+            _shieldBreak = true;
+        }
+    }
+
+    private void ShieldBreakEffect()
+    {
+
+        _isShieldDisabled = true;
+        _shieldBreakEffect.Play();
+    }
+
+    private IEnumerator ShieldEnergyDecrease()
+    {
+        _shieldEnergy -= _shieldExpendAmount;
+        yield return new WaitForSeconds(_shieldEnergyTick);
+        if(ShieldEnergy <= 0)
+        {
+            _shieldEnergy = 0;
+            _shieldBreak = true;
+        }
+    }
 }

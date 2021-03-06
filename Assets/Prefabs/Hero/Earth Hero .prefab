@@ -519,7 +519,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 3
+  _dust: {fileID: 0}
+  _dashParticleEffect: {fileID: 0}
+  ControllerInput: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -536,6 +538,7 @@ MonoBehaviour:
   _whatIsWall:
     serializedVersion: 2
     m_Bits: 1024
+  _tapDashMultiplier: 0.3
   _dashSpeed: 25
   _dashCoolDown: 1
   _dashTime: 0.3

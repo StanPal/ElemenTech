@@ -9,7 +9,8 @@ public class SwordAttack : MonoBehaviour
     private HeroMovement _heroMovement;
     private ParticleSystemManager _particleSystemManager;
     private Animator _animator;
-
+    private bool _isOriginalDirectionleft;
+    private Vector3 _originalLocalScale;
     private void Awake()
     {
         _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
@@ -20,7 +21,22 @@ public class SwordAttack : MonoBehaviour
 
    private void Start()
     {
+        _originalLocalScale = _heroMovement.transform.localScale;
+        _heroMovement.onPlayerFlip += OnPlayerFlipPerformed;
         _heroAction.onAttackPerformed += OnAttackPerformed;
+        
+    }   
+
+    private void OnPlayerFlipPerformed()
+    {
+
+    }
+
+    private IEnumerator TurnBackAnimator()
+    {
+        _animator.enabled = false;
+        yield return new WaitForSeconds(0.1f);
+        _animator.enabled = true;
     }
 
     private void OnAttackPerformed()
@@ -29,8 +45,8 @@ public class SwordAttack : MonoBehaviour
     }
 
     private IEnumerator SwordStart()
-    {
-        yield return new WaitForSeconds(0.182f);
+    {  
+        yield return new WaitForSeconds(0.217f);
         _animator.SetBool("IsAttacking", false);
         _heroAction._isSwinging = false;
     }
@@ -42,7 +58,7 @@ public class SwordAttack : MonoBehaviour
             if (collision.tag.Equals("Team2"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
+                { 
                     heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
                     collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
                     if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
@@ -50,10 +66,14 @@ public class SwordAttack : MonoBehaviour
                         _particleSystemManager.FireAura(_heroMovement.gameObject);
                     }
                 }
-                if (!collision.GetComponent<Guard>().Guarding)
+                if (collision.TryGetComponent<Guard>(out Guard guard))
                 {
-                    collision.GetComponent<HeroMovement>().RecoveryTime = _hitStun;
-                    collision.GetComponent<HeroMovement>().Recovering = true;
+                    if (guard.Guarding)
+                    {                        
+                        //guard.RecoveryTime = _hitStun;
+                        //guard..Recovering = true;
+                    }
+
                 }
             }
         }

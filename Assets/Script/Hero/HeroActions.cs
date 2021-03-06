@@ -28,10 +28,11 @@ public class HeroActions : MonoBehaviour
     [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector3 _axisPos;
-
+    private bool _isDashStriking = false;
     
     //Getters & Setters
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
+    public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
     public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
@@ -76,7 +77,7 @@ public class HeroActions : MonoBehaviour
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
 
-                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
+                if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();
                 }
@@ -172,7 +173,6 @@ public class HeroActions : MonoBehaviour
     private void Guard()
     {
         _isGuardInvoked = true;
-        Sword.gameObject.SetActive(false);
          onGuardPerformed.Invoke();
     }
 
@@ -180,7 +180,6 @@ public class HeroActions : MonoBehaviour
     {
         _isGuardInvoked = false;
         onGuardExit.Invoke();
-        _heroStats.RestoreShield(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick);
     }
     
     private void ElementSpecial1()
@@ -198,16 +197,39 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
+        if(HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+        {
+            if(_heroMovement.Dashing || _heroMovement.TapDashing)
+            {
+                _playerAnimator.SetBool("IsDashStriking", true);
+                _playerAnimator.SetBool("IsDashing", false);
+                DashStriking = true;
+                _heroMovement.Dashing = false;
+                _heroMovement.TapDashing = false;
+
+            }
+            else if (!_isGuardInvoked && !_isSwinging && !_isDashStriking)
+            {
+                _isSwinging = true;
+                //_playerAnimator.SetBool("IsJumping",false);
+                _playerAnimator.SetBool("IsAttacking", true);
+                //_playerAnimator.SetTrigger("AttackTrigger");
+                //Sword.gameObject.SetActive(true);
+                onAttackPerformed.Invoke();
+            }
+        }
+        else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
             _isSwinging = true;
             //_playerAnimator.SetBool("IsJumping",false);
             _playerAnimator.SetBool("IsAttacking", true);
-            _playerAnimator.SetTrigger("AttackTrigger");
+            //_playerAnimator.SetTrigger("AttackTrigger");
             //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
     }
+
+
 
     private void FastFall()
     {

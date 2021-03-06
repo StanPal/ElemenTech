@@ -5,6 +5,7 @@ public class HeroStats : MonoBehaviour
 {
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action<GameObject> onDebuffDeActivated;
+    public event System.Action OnShieldRecovered;
 
     private AnimationEvents _animationEvent;
     private Animator _animator;
@@ -56,6 +57,11 @@ public class HeroStats : MonoBehaviour
         _tempCoolDownTime = 0;
         _guard = GetComponent<Guard>();
         _heroMovement = GetComponent<HeroMovement>();
+    }
+
+    private void Start()
+    {
+        _guard.OnShieldRecover += RestoreShield;
     }
 
     private void FixedUpdate()
@@ -155,23 +161,21 @@ public class HeroStats : MonoBehaviour
             }
     }
 
-    public void RestoreShield(float restoreAmount, float restoreTick)
-    {
-        StartCoroutine(RestoreShieldOverTimeCoroutine(restoreAmount, restoreTick));
+    private void RestoreShield()
+    {        
+        StartCoroutine(RestoreShieldOverTimeCoroutine(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick));
     }
 
     private IEnumerator RestoreShieldOverTimeCoroutine(float restoreAmount, float restoreTick)
-    {
-
-        float restoreperloop = restoreAmount / restoreTick;
+    {        
         while ((_guard.ShieldEnergy < _guard.ShieldMaxEnergy) && !_guard.Guarding)
         {
-            _guard.ShieldEnergy += restoreperloop;
-            yield return new WaitForSeconds(1f);
+            _guard.ShieldEnergy += restoreAmount;
+            yield return new WaitForSeconds(restoreTick);
         }
-        if (_guard.ShieldEnergy >= _guard.ShieldMaxEnergy)
+        if (_guard.IsShieldDisabled && (_guard.ShieldEnergy >= _guard.ShieldMaxEnergy))
         {
-            _guard.IsShieldDisabled = false;
+            OnShieldRecovered?.Invoke();
         }
     }
 
