@@ -93,6 +93,7 @@ public class Crosshair : MonoBehaviour
                     break;
             }
         }
+
         if (_waterHero.TryGetComponent<HeroMovement>(out HeroMovement waterMovement))
         {
             switch (waterMovement.ControllerInput)
@@ -115,6 +116,7 @@ public class Crosshair : MonoBehaviour
                     break;
             }
         }
+
         if (_airHero.TryGetComponent<HeroMovement>(out HeroMovement airMovement))
         {
             switch (airMovement.ControllerInput)
@@ -138,24 +140,27 @@ public class Crosshair : MonoBehaviour
             }
         }
 
-        switch (_earthHero.HeroMovement.ControllerInput)
+        if (_earthHero.TryGetComponent<HeroMovement>(out HeroMovement earthMovement))
         {
-            case HeroMovement.Controller.None:
-                break;
-            case HeroMovement.Controller.Keyboard:
-                KeyboardCorssHairs(_earthHero,_p4CrossHairs,_p4Target);
-                break;
-            case HeroMovement.Controller.PS4:
-                PS4CorssHairs(_earthHero,_p4CrossHairs);
-                break;
-            case HeroMovement.Controller.XBOX:
-                XBOXCorssHairs(_earthHero,_p4CrossHairs);
-                break;
-            case HeroMovement.Controller.Gamepad:
-                PS4CorssHairs(_earthHero, _p4CrossHairs);
-                break;
-            default:
-                break;
+            switch (earthMovement.ControllerInput)
+            {
+                case HeroMovement.Controller.None:
+                    break;
+                case HeroMovement.Controller.Keyboard:
+                    KeyboardCorssHairs(_earthHero, _p4CrossHairs, _p4Target);
+                    break;
+                case HeroMovement.Controller.PS4:
+                    PS4CorssHairs(_earthHero, _p4CrossHairs);
+                    break;
+                case HeroMovement.Controller.XBOX:
+                    XBOXCorssHairs(_earthHero, _p4CrossHairs);
+                    break;
+                case HeroMovement.Controller.Gamepad:
+                    PS4CorssHairs(_earthHero, _p4CrossHairs);
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -167,19 +172,37 @@ public class Crosshair : MonoBehaviour
 
     void PS4CorssHairs(HeroActions hero, GameObject crossHairs)
     {
+        // Read it in once and cache instead of making multiple property access calls.
+        var aimDirection = hero.PlayerInput.PS4.Aim.ReadValue<Vector2>();
+        Debug.Log($"[INPUT] PS4 RAWINPUT X:{aimDirection.x} Y:{aimDirection.y}");
+
+        // Why is this here? The crosshairs should be a child already, and SetParent is an _extremely_ expensive operation.
+        // DO NOT DO THIS.
         crossHairs.transform.SetParent(hero.transform);
-        if (hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x.Equals(0f) &&
-            hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y.Equals(0f))
+
+        // From what you have told me you want to keep the crosshairs active all the time. 
+        if (aimDirection.x.Equals(0f) && aimDirection.y.Equals(0f))
         {
-            crossHairs.SetActive(false);
+            //crossHairs.SetActive(false);
+            
+            // If the player isn't actively aiming we'll just exit and not update the position of the crosshairs.
+            return;
         }
-        else
-        {
-            crossHairs.SetActive(true);
-        }
-        crossHairs.transform.position = new Vector3(
-                          hero.transform.position.x + (hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().x * 5.5f),
-                          hero.transform.position.y + hero.PlayerInput.PS4.Aim.ReadValue<Vector2>().y * 5.5f);
+        //else
+        //{
+        //    crossHairs.SetActive(true);
+        //}
+
+        // Normalize your direction input to get the unit vector in the direction the player is aiming.
+        aimDirection.Normalize();
+        var aimDirVec3 = new Vector3(aimDirection.x, aimDirection.y, 0.0f);
+        Debug.Log($"[INPUT] PS4 NORMALIZED X:{aimDirVec3.x} Y:{aimDirVec3.y}");
+
+        // Now set the crosshairs position to be a scalar value away from the hero position in the direction the player is aiming.
+        // This 5.5f value should be either set as a const define, or made as a [SerializeField] private float _crossHairDist; so that it can be tuned in the inspector.
+        var crossHairPos = hero.transform.position + (aimDirVec3 * 5.5f);
+        crossHairs.transform.position = new Vector3(crossHairPos.x, crossHairPos.y, crossHairPos.z);
+        Debug.Log($"[INPUT] PS4 FINAL X: {crossHairs.transform.position.x} Y: {crossHairs.transform.position.y}");
     }
 
     void XBOXCorssHairs(HeroActions hero, GameObject crossHairs)
