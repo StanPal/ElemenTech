@@ -99,12 +99,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a9d69929276ea9478592ab6e3c4f19c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mDampTime: 0.2
-  mScreenEdgeBuffer: 4
-  mMinSize: 6.5
-  mZoomSpeed: 0
-  mMoveVelocity: {x: 0, y: 0, z: 0}
-  mDesiredPosition: {x: 0, y: 0, z: 0}
+  _focusLevel: {fileID: 0}
+  Players: []
+  _depthUpdateSpeed: 5
+  _angleUpdateSpeed: 7
+  _positionUpdateSpeed: 5
+  _depthMax: -10
+  _depthMin: -22
+  _angleMax: 0
+  _angleMin: 3
 --- !u!114 &-2189412413965870646
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,8 +168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _P1CrossHairs: {fileID: 0}
-  _P2CrossHairs: {fileID: 0}
-  _P3CrossHairs: {fileID: 0}
-  _P4CrossHairs: {fileID: 0}
-  mTarget: {x: 0, y: 0, z: 0}
+  _p1CrossHairs: {fileID: 0}
+  _p2CrossHairs: {fileID: 0}
+  _p3CrossHairs: {fileID: 0}
+  _p4CrossHairs: {fileID: 0}

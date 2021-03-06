@@ -1,10 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
-
-
 
 public class MainMenu : MonoBehaviour
 {    
@@ -17,7 +12,7 @@ public class MainMenu : MonoBehaviour
 
     private void Initialize()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();        
+        scoreManager = FindObjectOfType<ScoreManager>();
     }
 
     public void PlayWorkingLevel()
@@ -43,7 +38,6 @@ public class MainMenu : MonoBehaviour
             scoreManager.PracticeMode = false;
     }
     
-
     public void QuitGame()
     {
         Debug.Log("QUIT");

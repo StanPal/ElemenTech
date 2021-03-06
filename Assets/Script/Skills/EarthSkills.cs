@@ -49,7 +49,7 @@ public class EarthSkills : MonoBehaviour
     private Vector2 PointPosition(float t)
     { 
         Vector2 position = (Vector2)_playerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position + 
-            (_playerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookDir * LaunchForce * t)
+            ((Vector2)_playerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookDir * LaunchForce * t)
             + 0.5f * Physics2D.gravity * (t * t);
         return position;
     }

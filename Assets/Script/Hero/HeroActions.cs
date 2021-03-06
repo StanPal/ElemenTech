@@ -9,9 +9,10 @@ public class HeroActions : MonoBehaviour
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
 
+    [SerializeField] private GameObject Stomp;
     public GameObject Sword;
     public Transform PivotPoint;
-    public Transform FirePoint;
+    public Transform FirePoint;    
     private Animator _playerAnimator;
     private Guard _guard;
     private HeroMovement _heroMovement;
@@ -21,21 +22,24 @@ public class HeroActions : MonoBehaviour
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
     private float _nextFireTime;
+    private Camera _camera;
 
     [SerializeField] private bool _isOnCooldown = false;
     [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
-    [SerializeField] private Vector2 _axisPos;
-
+    [SerializeField] private Vector3 _axisPos;
+    private bool _isDashStriking = false;
     
     //Getters & Setters
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
+    public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
     public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; } 
+    public Animator PlayerAnimator { get => _playerAnimator; }
 
     private void Awake()
     {
@@ -50,6 +54,8 @@ public class HeroActions : MonoBehaviour
         _heroStats = GetComponent<HeroStats>();
         _playerInput = new PlayerInput();
         _guard = GetComponent<Guard>();
+        _camera = FindObjectOfType<Camera>();
+        
     }
 
     private void OnEnable()
@@ -71,7 +77,7 @@ public class HeroActions : MonoBehaviour
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
 
-                if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
+                if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();
                 }
@@ -126,7 +132,7 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                _lookDirection = Camera.main.ScreenToWorldPoint(_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
+                _lookDirection = Camera.main.ScreenToWorldPoint((Vector3)_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
                 _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
@@ -149,6 +155,15 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+    private Vector3 GetWorldPositionOnPlane(Vector3 screenPosition, float z)
+    {
+        Ray ray = Camera.main.ScreenPointToRay(screenPosition);
+        Plane xy = new Plane(Vector3.forward, new Vector3(0, 0, z));
+        float distance;
+        xy.Raycast(ray, out distance);
+        return ray.GetPoint(distance);
+    }
+
     private IEnumerator CoolDownTimer()
     {
         yield return new WaitForSeconds(_heroStats.CoolDown);
@@ -158,7 +173,6 @@ public class HeroActions : MonoBehaviour
     private void Guard()
     {
         _isGuardInvoked = true;
-        Sword.gameObject.SetActive(false);
          onGuardPerformed.Invoke();
     }
 
@@ -166,7 +180,6 @@ public class HeroActions : MonoBehaviour
     {
         _isGuardInvoked = false;
         onGuardExit.Invoke();
-        _heroStats.RestoreShield(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick);
     }
     
     private void ElementSpecial1()
@@ -184,31 +197,56 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
+        if(HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+        {
+            if(_heroMovement.Dashing || _heroMovement.TapDashing)
+            {
+                _playerAnimator.SetBool("IsDashStriking", true);
+                _playerAnimator.SetBool("IsDashing", false);
+                DashStriking = true;
+                _heroMovement.Dashing = false;
+                _heroMovement.TapDashing = false;
+
+            }
+            else if (!_isGuardInvoked && !_isSwinging && !_isDashStriking)
+            {
+                _isSwinging = true;
+                //_playerAnimator.SetBool("IsJumping",false);
+                _playerAnimator.SetBool("IsAttacking", true);
+                //_playerAnimator.SetTrigger("AttackTrigger");
+                //Sword.gameObject.SetActive(true);
+                onAttackPerformed.Invoke();
+            }
+        }
+        else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
             _isSwinging = true;
-            _playerAnimator.SetBool("IsJumping",false);
+            //_playerAnimator.SetBool("IsJumping",false);
+            _playerAnimator.SetBool("IsAttacking", true);
             //_playerAnimator.SetTrigger("AttackTrigger");
-            Sword.gameObject.SetActive(true);
+            //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
         }
     }
+
+
 
     private void FastFall()
     {
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
+            Stomp.SetActive(true);
             _playerAnimator.SetBool("IsJumping", false);
-            _playerAnimator.SetTrigger("FastFallTrigger");
+            _playerAnimator.SetBool("IsFastFall", true);
             StartCoroutine(GravityModifier());
         }
     }
 
     private IEnumerator GravityModifier()
-    {        
-        _rb.gravityScale = 15;
+    {
+        _rb.gravityScale = _heroMovement.OriginalGravity * 2f;
         yield return new WaitForSeconds(0.5f);
-        _rb.gravityScale = 1;
+        _rb.gravityScale = _heroMovement.OriginalGravity;
     }
 
     private void Pause()

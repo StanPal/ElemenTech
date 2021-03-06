@@ -18,7 +18,7 @@ public class Crosshair : MonoBehaviour
     private HeroActions _earthHero = null;
 
     private PlayerManager _playerManager;
-
+    private Camera _camera;
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -59,7 +59,7 @@ public class Crosshair : MonoBehaviour
         {
             _p4CrossHairs.SetActive(true);
         }
-
+        _camera = FindObjectOfType<Camera>();
         Cursor.visible = false;
     }
 
@@ -74,7 +74,7 @@ public class Crosshair : MonoBehaviour
                     break;
                 case HeroMovement.Controller.Keyboard:
                     _p1Target = transform.GetComponent<Camera>().ScreenToWorldPoint(_fireHero.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                    _p1CrossHairs.transform.position = new Vector3(_p1Target.x, _p1Target.y);
+                    _p1CrossHairs.transform.position = new Vector3(_p1Target.x, _p1Target.y, 0);
                     break;
                 case HeroMovement.Controller.PS4:
                     _p1CrossHairs.transform.SetParent(_fireHero.transform);
