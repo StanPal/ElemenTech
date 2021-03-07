@@ -182,7 +182,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""a1dc6e02-8059-4a3f-9881-aed797533fd5"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
@@ -237,7 +237,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""2c7e4c52-c213-4339-9e47-b4c0203a631e"",
-                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""path"": ""<Mouse>/middleButton"",
                     ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
