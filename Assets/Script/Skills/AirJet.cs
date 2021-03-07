@@ -3,7 +3,7 @@
 public class AirJet : MonoBehaviour
 {
     private float _ProjectileSpeed = 1f;
-    private float _ExitTime = 1f; 
+    private float _ExitTime = 1f;
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
@@ -39,29 +39,21 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(_AirSkills.Damage);
             }
         }
-        
-        if (collision.GetComponent<Guard>())
-        {
-            if (collision.GetComponent<Guard>().tag.Equals(_AirSkills.PlayerSkills.HeroAction.tag))
-            {
-                Guard guard = collision.GetComponent<Guard>();
-                if (guard.Guarding)
-                {
-                    Destroy(gameObject);
-                    Debug.Log("Shield Hit");
-                    collision.GetComponent<Guard>().ComboSkillOn = true;
 
-                }
-            }
-        }
- 
         if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_AirSkills.Damage);
+                    }
+                    else
+                    {
+                        collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                    }
                     Destroy(gameObject);
                 }
             }
@@ -72,7 +64,14 @@ public class AirJet : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_AirSkills.Damage);
+                    }
+                    else
+                    {
+                        collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                    }
                     Destroy(gameObject);
                 }
             }

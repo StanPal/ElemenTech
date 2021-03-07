@@ -66,7 +66,8 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _recoveryTime = 1f;
     private bool _isRecovering = false;
     
-    [SerializeField] private float _knockBackRecieved;
+    [SerializeField] private float _knockBackXRecieved;
+    [SerializeField] private float _knockBackYRecieved;
     [SerializeField] private float _knockBackCount;
 
     [SerializeField] private PhysicsMaterial2D _noFriction;
@@ -172,20 +173,22 @@ public class HeroMovement : MonoBehaviour
             }
         }
 
-        _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
-        _rb.velocity = _newVelocity;
-
-        if (_knockBackCount > 0)
+        if(_knockBackCount <= 0)
+        {
+            _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
+            _rb.velocity = _newVelocity;
+        }
+        else
         {
             if (_onHitLeft)
             {
-                _rb.velocity = new Vector2(-_knockBackRecieved, _knockBackRecieved);
+                _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
             }
             else
             {
-                _rb.velocity = new Vector2(_knockBackRecieved, _knockBackRecieved);
+                _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
             }
-            _knockBackCount--;
+            _knockBackCount -= Time.deltaTime;
         }
 
         if (_isDashing)
@@ -349,6 +352,23 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    public void flipCharacter()
+    {
+        Vector3 characterScale = transform.localScale;
+        if(characterScale.x == -1)
+        {
+            characterScale.x = 1;
+            _isLeft = false;
+
+        }
+        else if (characterScale.x == 1)
+        {
+            characterScale.x = -1;
+            _isLeft = true;
+        }
+        transform.localScale = characterScale;
+    }
+
     private void SlopeCheck()
     {
         Vector2 checkPos = transform.position -  (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
@@ -509,10 +529,11 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
-    public void OnKnockBackHit(float knockbackamount, bool direction)
+    public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength ,bool direction)
     {
-        _knockBackCount++;
-        _knockBackRecieved = knockbackamount;
+        _knockBackCount = knockBackLength;
+        _knockBackXRecieved = knockBackX;
+        _knockBackYRecieved = knockBackY;
         _onHitLeft = direction;
     }
 

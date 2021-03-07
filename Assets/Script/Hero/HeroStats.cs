@@ -9,6 +9,7 @@ public class HeroStats : MonoBehaviour
 
     private AnimationEvents _animationEvent;
     private Animator _animator;
+    private HeroActions _heroActions;
     private Guard _guard;
     private HeroMovement _heroMovement;
 
@@ -32,6 +33,8 @@ public class HeroStats : MonoBehaviour
 
     // Getters & Setters 
     public HeroMovement HeroMovement { get => _heroMovement; }
+    public HeroActions HeroActions { get => _heroActions; }
+    public Guard Guard { get => _guard; }
     public bool CDFinished { get { return _isCoolDownFinished; } set { _isCoolDownFinished = value; } }
     public float CDTime { get { return _tempCoolDownTime; } set { _tempCoolDownTime = value; } }
     public float CoolDown { get { return _coolDown; } }
@@ -57,6 +60,7 @@ public class HeroStats : MonoBehaviour
         _tempCoolDownTime = 0;
         _guard = GetComponent<Guard>();
         _heroMovement = GetComponent<HeroMovement>();
+        _heroActions = GetComponent<HeroActions>();
     }
 
     private void Start()

@@ -15,14 +15,16 @@ public class EarthSkills : MonoBehaviour
     [SerializeField] private float _mass = 1f;
     [SerializeField] private float _damage = 10f;
     [SerializeField] private float _splashRange = 1.5f;
-    [SerializeField] private float _knockBackAmount = 2f;
+    [SerializeField] private float _knockBackAmount = 8f;
+    [SerializeField] private float _knockBackLength = 0.2f;
     private PlayerSkills _heroSkills;
 
     public float KnockBack { get => _knockBackAmount; }
+    public float KnockBackLength { get => _knockBackLength; }
     public float SplashRange { get => _splashRange; } 
     public float Damage { get => _damage; } 
     public float Mass { get => _mass; } 
-    public float LaunchForce { get => _lanchForce; } 
+    public float LaunchForce { get => _lanchForce; }     
     public PlayerSkills PlayerSkills { get => _heroSkills; } 
 
 

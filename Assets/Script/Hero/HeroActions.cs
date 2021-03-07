@@ -8,11 +8,13 @@ public class HeroActions : MonoBehaviour
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
+    public event System.Action onParryPerformed;
 
     [SerializeField] private GameObject Stomp;
     public GameObject Sword;
     public Transform PivotPoint;
-    public Transform FirePoint;    
+    public Transform FirePoint;
+    private SpriteRenderer _spriteRenderer;
     private Animator _playerAnimator;
     private Guard _guard;
     private HeroMovement _heroMovement;
@@ -23,6 +25,7 @@ public class HeroActions : MonoBehaviour
     private bool _isSwordSwinging = false;
     private float _nextFireTime;
     private Camera _camera;
+    private Color _originalSpriteColor;
 
     [SerializeField] private bool _isOnCooldown = false;
     [SerializeField] private Vector2 _lookDirection;
@@ -55,7 +58,8 @@ public class HeroActions : MonoBehaviour
         _playerInput = new PlayerInput();
         _guard = GetComponent<Guard>();
         _camera = FindObjectOfType<Camera>();
-        
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _originalSpriteColor = _spriteRenderer.color;
     }
 
     private void OnEnable()
@@ -229,7 +233,29 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+    public void InvokeParry()
+    {
+        _playerAnimator.SetBool("IsAttacking", true);
+        onAttackPerformed.Invoke();
+        StartCoroutine(Flash());
+        //onParryPerformed?.Invoke();
+    }
 
+    private IEnumerator Flash()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            SetSpriteColor(Color.white);
+            yield return new WaitForSeconds(0.1f);
+            SetSpriteColor(_originalSpriteColor);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private void SetSpriteColor(Color spriteColor)
+    {
+        _spriteRenderer.color = spriteColor;
+    }
 
     private void FastFall()
     {
