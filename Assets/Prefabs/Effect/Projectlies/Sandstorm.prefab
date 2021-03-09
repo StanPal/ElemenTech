@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5006828662375348717}
   - component: {fileID: 2184060612588593754}
   - component: {fileID: 2155141496247772953}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Sandstorm
   m_TagString: Untagged
   m_Icon: {fileID: 0}

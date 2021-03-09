@@ -23,6 +23,16 @@ public class pickUp : MonoBehaviour
         {
             this.gameObject.SetActive(false);
         }
+        else if(other.gameObject.tag == ("Team1"))
+        {
+            this.gameObject.SetActive(false);
+        }
+        else if(other.gameObject.tag == ("Enemy"))
+        {
 
+            //Destroy(this.gameObject);
+            this.gameObject.SetActive(false);
+            other.gameObject.GetComponent<Golem>().mCurrentHealth = 100.0f;
+        }
     }
 }

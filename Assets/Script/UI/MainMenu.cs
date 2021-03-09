@@ -1,10 +1,19 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
-{
+{    
+    private ScoreManager scoreManager;
+
+    private void Awake()
+    {
+        GameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
+        scoreManager = FindObjectOfType<ScoreManager>();
+    }
 
     public void PlayWorkingLevel()
     {
@@ -21,6 +30,14 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 3);
     }
 
+    public void PracticeMode()
+    {
+        if (!scoreManager.PracticeMode)
+            scoreManager.PracticeMode = true;
+        else
+            scoreManager.PracticeMode = false;
+    }
+    
     public void QuitGame()
     {
         Debug.Log("QUIT");

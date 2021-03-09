@@ -23,39 +23,42 @@ public class LevelManager : MonoBehaviour
         MatchUI = FindObjectOfType<MatchUI>();
     }
 
+
     private void Update()
     {
-        if (!isMatchOver)
-        {   
-            if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
+        if (!mScoreManager.PracticeMode)
+        {
+            if (!mScoreManager.IsMatchOver)
             {
-                LevelEnd(1, 1);
+                if (mPlayerManager.TeamOne.Count == 1 && mPlayerManager.TeamTwo.Count == 0)
+                {
+                    LevelEnd(1, 1);
+                }
+                else if (mPlayerManager.TeamOne.Count == 2 && mPlayerManager.TeamTwo.Count == 0)
+                {
+                    LevelEnd(1, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(2, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 2 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(2, 1);
+                }
+                else if (mPlayerManager.TeamTwo.Count == 0 && mPlayerManager.TeamOne.Count == 0)
+                {
+                    LevelEnd(1, 0);
+                }
             }
-           else if(mPlayerManager.TeamOne.Count == 2 && mPlayerManager.TeamTwo.Count == 0)
-            {
-                LevelEnd(1, 1);
-            }
-           else if (mPlayerManager.TeamTwo.Count == 1 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(2, 1);
-            }
-            else if (mPlayerManager.TeamTwo.Count == 2 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(2, 1);
-            }
-            else if (mPlayerManager.TeamTwo.Count == 0 && mPlayerManager.TeamOne.Count == 0)
-            {
-                LevelEnd(1, 0);
-            }
-
         }
     }
 
     private void LevelEnd(int team, int score)
     {
-        isMatchOver = true;
+        mScoreManager.IsMatchOver = true;
         mScoreManager.AddPoints(team, score);
-        MatchUI.mMatchCanvas.gameObject.SetActive(true);
+        MatchUI.MatchCanvas.gameObject.SetActive(true);
         MatchUI.displayTeamScore();
         mPlayerManager.TeamOne.Clear();
         mPlayerManager.TeamTwo.Clear();

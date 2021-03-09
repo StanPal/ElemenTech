@@ -1,99 +1,56 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class EarthSkills : MonoBehaviour
 {
     // Earth Skills
-    public GameObject mEarthSpike;
-    [SerializeField]
-    private int mNumSpikes = 3;
-    [SerializeField]
-    private int mSpikeHorizontalOffset = 1;
-    [SerializeField]
-    private float mSkillDuration = 0.5f;
-    [SerializeField]
-    private float mSpikeHeight = 1.0f;
-    [SerializeField]
-    private float mDamage = 10.0f;
-    public float Damage { get { return mDamage; } }
-    private bool mIsSpikeUp = true;
-    [SerializeField]
-    private List<GameObject> mEarthSpikeList = new List<GameObject>();
+    public GameObject EarthBoulder;
+    public GameObject Points;
+    private GameObject[] _pointsArr;
+    public Vector3 LaunchOffset;
+    private PlayerManager _playerManager;
 
-    private PlayerSkills mHeroSkills;
-    public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
-    private void Start()
+    [SerializeField] int _numberOfPoints = 20;
+    [SerializeField] float _spaceBetweenPoints = 0.01f;
+    [SerializeField] private float _lanchForce = 10f;
+    [SerializeField] private float _mass = 1f;
+    [SerializeField] private float _damage = 10f;
+    [SerializeField] private float _splashRange = 1.5f;
+    [SerializeField] private float _knockBackAmount = 2f;
+    private PlayerSkills _heroSkills;
+
+    public float KnockBack { get => _knockBackAmount; }
+    public float SplashRange { get => _splashRange; } 
+    public float Damage { get => _damage; } 
+    public float Mass { get => _mass; } 
+    public float LaunchForce { get => _lanchForce; } 
+    public PlayerSkills PlayerSkills { get => _heroSkills; } 
+
+
+    private void Awake()
     {
-        mHeroSkills = GetComponent<PlayerSkills>();
-        mHeroSkills.onEarthSkillPerformed += EarthSlam;
+        GameLoader.CallOnComplete(Initialize);
+        _pointsArr = new GameObject[_numberOfPoints];
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Initialize()
     {
-        if (mHeroSkills.SkillActive)
-            StartCoroutine("EarthSpikes");
-    }
-
-    IEnumerator EarthSpikes()
-    {
-        if (mIsSpikeUp)
-            EarthSpikesUp();
-        yield return new WaitForSeconds(mSkillDuration);
-        EarthSpikesDown();
-        yield return new WaitForSeconds(mSkillDuration * 2);
-        ClearSpikes();
-    }
-
-    void EarthSlam()
-    {
-        if (PlayerSkills.HeroMovement.IsGrounded())
-        {
-            for (int i = 0; i < mNumSpikes; ++i)
-            {
-                GameObject mSpike;
-                if (mHeroSkills.HeroAction.HeroMovement.GetIsLeft)
-                {
-                    mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.HeroMovement.transform.position.x - (mSpikeHorizontalOffset + i),
-                                        mHeroSkills.HeroMovement.transform.position.y - 0.5f, 0.0f), Quaternion.identity);
-                }
-                else
-                {
-                    mSpike = Instantiate(mEarthSpike, new Vector3(mHeroSkills.HeroMovement.transform.position.x + (mSpikeHorizontalOffset + i),
-                                        mHeroSkills.HeroMovement.transform.position.y - 0.5f, 0.0f), Quaternion.identity);
-                }
-                mEarthSpikeList.Add(mSpike);
-            }
-            mHeroSkills.SkillActive = true;
-            mIsSpikeUp = true;
-        }
-    }
-
-    void EarthSpikesUp()
-    {
-        for (int i = 0; i < mEarthSpikeList.Count; ++i)
-        {
-            mEarthSpikeList[i].transform.Translate(new Vector3(0.0f, mSpikeHeight) * Time.deltaTime);
-        }
+        _playerManager = FindObjectOfType<PlayerManager>();
+        _heroSkills = GetComponent<PlayerSkills>();
+        _heroSkills.onEarthSkillPerformed += Boulder;
 
     }
-    void EarthSpikesDown()
+    private void Boulder()
     {
-        mIsSpikeUp = false;
-        for (int i = 0; i < mEarthSpikeList.Count; ++i)
-        {
-            mEarthSpikeList[i].transform.Translate(new Vector3(0.0f, -mSpikeHeight) * Time.deltaTime);
-        }
+        GameObject earthskill = Instantiate(EarthBoulder, 
+            _playerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.Euler(0, 0, _heroSkills.HeroAction.GetLookAngle));
+        earthskill.tag = PlayerSkills.HeroMovement.tag;
     }
 
-    void ClearSpikes()
-    {
-        for (int i = 0; i < mEarthSpikeList.Count; ++i)
-        {
-            Destroy(mEarthSpikeList[i]);
-            mEarthSpikeList.Remove(mEarthSpikeList[i]);
-        }
-        mHeroSkills.SkillActive = false;
+    private Vector2 PointPosition(float t)
+    { 
+        Vector2 position = (Vector2)_playerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position + 
+            ((Vector2)_playerManager.mPlayersList[3].GetComponent<HeroActions>().GetLookDir * LaunchForce * t)
+            + 0.5f * Physics2D.gravity * (t * t);
+        return position;
     }
 }
