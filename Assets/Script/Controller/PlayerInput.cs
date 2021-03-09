@@ -238,7 +238,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""2c7e4c52-c213-4339-9e47-b4c0203a631e"",
                     ""path"": ""<Mouse>/middleButton"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(pressPoint=0.2)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Guard"",

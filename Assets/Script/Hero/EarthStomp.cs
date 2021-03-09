@@ -60,6 +60,7 @@ public class EarthStomp : MonoBehaviour
         }
         
         _heroActions.PlayerAnimator.SetBool("IsFastFall", false);
+        _heroActions.IsEarthStomping = false;
     }
 
     private void OnCollisionExit2D(Collision2D collision)

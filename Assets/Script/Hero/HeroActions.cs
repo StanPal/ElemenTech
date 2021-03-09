@@ -23,6 +23,7 @@ public class HeroActions : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
+    private bool _isEarthStomping = false;
     private float _nextFireTime;
     private Camera _camera;
     private Color _originalSpriteColor;
@@ -37,11 +38,12 @@ public class HeroActions : MonoBehaviour
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
     public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
     public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
+    public bool IsEarthStomping { get => _isEarthStomping; set => _isEarthStomping = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
-    public float GetLookAngle { get => _lookAngle; } 
+    public float GetLookAngle { get => _lookAngle; }     
     public Animator PlayerAnimator { get => _playerAnimator; }
 
     private void Awake()
@@ -201,7 +203,7 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if(HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+        if (HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
         {
             if(_heroMovement.Dashing || _heroMovement.TapDashing)
             {
@@ -262,6 +264,7 @@ public class HeroActions : MonoBehaviour
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
             Stomp.SetActive(true);
+            IsEarthStomping = true;
             _playerAnimator.SetBool("IsJumping", false);
             _playerAnimator.SetBool("IsFastFall", true);
             StartCoroutine(GravityModifier());

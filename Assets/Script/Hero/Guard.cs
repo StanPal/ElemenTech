@@ -11,6 +11,8 @@ public class Guard : MonoBehaviour
     [SerializeField] private ParticleSystem _shieldBreakEffect;
     private HeroActions _heroAction;
     private HeroMovement _heroMovement;
+    private float _guardTimer = 1f;
+    private bool _isGuardTimerActive = false; 
     private bool _shieldCreated = false;
     private bool _skillCombine = false;
     private bool _shieldBreak = false;
@@ -114,10 +116,13 @@ public class Guard : MonoBehaviour
     private void OnGuardExit()
     {
         //Destroy(_shield);
-        _shield.SetActive(false);
-        _isGuarding = false;
-        _shieldCreated = false;
-        OnShieldRecover.Invoke();
+        if (_isGuarding  || _shieldBreak )
+        {
+            _shield.SetActive(false);
+            _isGuarding = false;
+            _shieldCreated = false;
+            OnShieldRecover.Invoke();
+        }
     }
 
     private void OnDestroy()
@@ -130,6 +135,7 @@ public class Guard : MonoBehaviour
     {
         if (!_shieldCreated && !_isShieldDisabled)
         {
+            OnGuardTimer();
             _shield.SetActive(true);
             Color color = _shield.GetComponent<SpriteRenderer>().color;
             color.a = (_shieldEnergy * 0.01f);
@@ -153,6 +159,18 @@ public class Guard : MonoBehaviour
             yield return new WaitForSeconds(0.2f);
         }
         _canParry = false;
+    }
+
+    private void OnGuardTimer()
+    {
+        StartCoroutine(StartGuardTimer());
+    }
+
+    private IEnumerator StartGuardTimer()
+    {
+        _isGuardTimerActive = true;
+        yield return new WaitForSeconds(_guardTimer);
+        _isGuardTimerActive = false;
     }
 
     private void HeroStats_OnShieldRecovered()

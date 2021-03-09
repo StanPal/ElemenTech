@@ -12,6 +12,7 @@ public class HeroStats : MonoBehaviour
     private HeroActions _heroActions;
     private Guard _guard;
     private HeroMovement _heroMovement;
+    [SerializeField] private ParticleSystem _bloodSplatterEffect;
 
     public enum TeamSetting
     {
@@ -117,15 +118,12 @@ public class HeroStats : MonoBehaviour
         {
             HeroDie();
         }
-        if (_guard.Guarding)
-        {
-            _currentHealth -= (damage * 0.75f);
-        }
         else
         {
             _currentHealth -= damage;
         }
-     
+
+        BloodEffect();
         _animator.SetTrigger("HurtTrigger");
     }
 
@@ -240,5 +238,10 @@ public class HeroStats : MonoBehaviour
             playermanager.TeamTwo.Remove(gameObject);
         }
         this.gameObject.SetActive(false);
+    }
+
+    private void BloodEffect()
+    {
+        _bloodSplatterEffect.Play();
     }
 }

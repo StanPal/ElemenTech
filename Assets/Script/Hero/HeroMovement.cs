@@ -133,7 +133,7 @@ public class HeroMovement : MonoBehaviour
             _moveSpeed = _originalMoveSpeed;
             _groundJumpForce = _originalJumpForce;
             _isJumping = false;
-            if(!_isJumpHeld)
+            if (!_isJumpHeld)
             {
                 _jumpTimeCounter = _jumpTimer;
                 _extraJumpForce = 0;
@@ -145,9 +145,9 @@ public class HeroMovement : MonoBehaviour
             _groundJumpForce = _airJumpForce;
         }
 
-        if(_isJumping)
+        if (_isJumping)
         {
-            _moveSpeed = _airStrifeSpeed; 
+            _moveSpeed = _airStrifeSpeed;
             _jumpTimeCounter = _jumpTimer;
             _extraJumpForce = 0;
         }
@@ -175,7 +175,15 @@ public class HeroMovement : MonoBehaviour
 
         if(_knockBackCount <= 0)
         {
-            _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
+            if (_heroActions.IsEarthStomping)
+            {
+                _newVelocity.Set(0, _rb.velocity.y);
+
+            }
+            else
+            {
+                _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
+            }
             _rb.velocity = _newVelocity;
         }
         else
@@ -267,19 +275,19 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.PS4:
-                if (_playerInput.PS4.Jump.triggered && _numOfJumps > 0 || _playerInput.KeyboardMouse.Jump.triggered && IsWall() && _numOfWallJumps > 0)
+                if (_playerInput.PS4.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
             case Controller.XBOX:
-                if (_playerInput.XBOX.Jump.triggered && _numOfJumps > 0 || _playerInput.KeyboardMouse.Jump.triggered && IsWall() && _numOfWallJumps > 0)
+                if (_playerInput.XBOX.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
             case Controller.Gamepad:
-                if (_playerInput.Gamepad.Jump.triggered && _numOfJumps > 0)
+                if (_playerInput.Gamepad.Jump.triggered)
                 {
                     Jump();
                 }
@@ -319,8 +327,8 @@ public class HeroMovement : MonoBehaviour
             _playerInput.Gamepad.Dash.performed += _ => OnDash();
         }
 
-        _horizontalMove = _moveInput * _moveSpeed;
-        _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
+            _horizontalMove = _moveInput * _moveSpeed;
+            _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
 
     }
 
@@ -435,8 +443,18 @@ public class HeroMovement : MonoBehaviour
 
     public bool IsGrounded()
     {
-        float extraHeightText = .05f;
-        RaycastHit2D raycastHit2D = Physics2D.Raycast(_capsuleCollider.bounds.center, Vector2.down, _capsuleCollider.bounds.extents.y + extraHeightText, _whatIsGround);
+        float extraHeightText = 0.5f;
+        RaycastHit2D raycastHit2D = Physics2D.CapsuleCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, CapsuleDirection2D.Vertical, 0f,Vector2.down,extraHeightText, _whatIsGround);
+        Color rayColor;
+        if(raycastHit2D.collider != null)
+        {
+            rayColor = Color.green;
+        }
+        else
+        {
+            rayColor = Color.red;
+        }        
+        Debug.Log(raycastHit2D.collider);
         return raycastHit2D.collider != null;
     }
 
@@ -454,8 +472,8 @@ public class HeroMovement : MonoBehaviour
         {
             rayColor = Color.red;
         }
-        Debug.DrawRay(_col2D.bounds.center, Vector2.left * -(_col2D.bounds.extents.x + extraLengthText), rayColor);
-        Debug.DrawRay(_col2D.bounds.center, Vector2.left * (_col2D.bounds.extents.x + extraLengthText), rayColor);
+        //Debug.DrawRay(_col2D.bounds.center, Vector2.left * -(_col2D.bounds.extents.x + extraLengthText), rayColor);
+        //Debug.DrawRay(_col2D.bounds.center, Vector2.left * (_col2D.bounds.extents.x + extraLengthText), rayColor);
         if (raycastHit2DLeft.collider != null)
         {
             return true;
@@ -472,10 +490,9 @@ public class HeroMovement : MonoBehaviour
 
     private void OnDash()
     {
-        if (_canDash)
+        if (_canDash && !_heroActions.IsEarthStomping)
         {
             _playerAnimator.SetBool("IsDashing", true);
-            //_playerAnimator.SetTrigger("DashTrigger");
             _isDashing = true;
         }
     }
@@ -486,23 +503,31 @@ public class HeroMovement : MonoBehaviour
         {
             _tapDashMultiplier = 0.3f;
             _playerAnimator.SetBool("IsDashing", true);
-            //_playerAnimator.SetTrigger("DashTrigger");
             _isTapDashing = true;
         }
     }
 
     private void TapJump()
     {
+        CreateDust();
         _playerAnimator.SetBool("IsJumping", true);
+        _isJumping = true;
         if (IsWall())
         {
-            _numOfWallJumps--;
+            if (_numOfWallJumps > 0)
+            {
+                _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
+                _numOfWallJumps--;
+            }
         }
         else
         {
-            _numOfJumps--;
+            if (_numOfJumps > 0)
+            {
+                _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
+                _numOfJumps--;
+            }
         }
-        _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
     }
 
     private void Jump()
@@ -512,21 +537,20 @@ public class HeroMovement : MonoBehaviour
         _isJumping = true;
         if (IsWall())
         {
+            if (_numOfWallJumps > 0)
+            {
+            _rb.velocity = Vector2.up * _groundJumpForce;
             _numOfWallJumps--;
+            }
         }
         else
         {
-            _numOfJumps--;
-        }
-        if (_numOfJumps > 0)
-        {
-            _rb.velocity = Vector2.up * _groundJumpForce;
-        }
-        if (_numOfWallJumps > 0)
-        {
-            _rb.velocity = Vector2.up * _groundJumpForce;
-
-        }
+            if (_numOfJumps > 0)
+            {
+                _rb.velocity = Vector2.up * _groundJumpForce;
+                _numOfJumps--;
+            }
+        } 
     }
 
     public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength ,bool direction)
@@ -603,4 +627,5 @@ public class HeroMovement : MonoBehaviour
     {
         _dashParticleEffect.Play();
     }
+
 }
