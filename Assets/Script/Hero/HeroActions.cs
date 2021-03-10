@@ -8,11 +8,13 @@ public class HeroActions : MonoBehaviour
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
+    public event System.Action onParryPerformed;
 
     [SerializeField] private GameObject Stomp;
     public GameObject Sword;
     public Transform PivotPoint;
-    public Transform FirePoint;    
+    public Transform FirePoint;
+    private SpriteRenderer _spriteRenderer;
     private Animator _playerAnimator;
     private Guard _guard;
     private HeroMovement _heroMovement;
@@ -21,8 +23,10 @@ public class HeroActions : MonoBehaviour
     private Rigidbody2D _rb;
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
+    private bool _isEarthStomping = false;
     private float _nextFireTime;
     private Camera _camera;
+    private Color _originalSpriteColor;
 
     [SerializeField] private bool _isOnCooldown = false;
     [SerializeField] private Vector2 _lookDirection;
@@ -34,11 +38,12 @@ public class HeroActions : MonoBehaviour
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
     public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
     public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
+    public bool IsEarthStomping { get => _isEarthStomping; set => _isEarthStomping = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
-    public float GetLookAngle { get => _lookAngle; } 
+    public float GetLookAngle { get => _lookAngle; }     
     public Animator PlayerAnimator { get => _playerAnimator; }
 
     private void Awake()
@@ -55,7 +60,8 @@ public class HeroActions : MonoBehaviour
         _playerInput = new PlayerInput();
         _guard = GetComponent<Guard>();
         _camera = FindObjectOfType<Camera>();
-        
+        _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        _originalSpriteColor = _spriteRenderer.color;
     }
 
     private void OnEnable()
@@ -197,7 +203,7 @@ public class HeroActions : MonoBehaviour
 
     private void SwordSwing()
     {
-        if(HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+        if (HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
         {
             if(_heroMovement.Dashing || _heroMovement.TapDashing)
             {
@@ -229,13 +235,36 @@ public class HeroActions : MonoBehaviour
         }
     }
 
+    public void InvokeParry()
+    {
+        _playerAnimator.SetBool("IsAttacking", true);
+        onAttackPerformed.Invoke();
+        StartCoroutine(Flash());
+        //onParryPerformed?.Invoke();
+    }
 
+    private IEnumerator Flash()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            SetSpriteColor(Color.white);
+            yield return new WaitForSeconds(0.1f);
+            SetSpriteColor(_originalSpriteColor);
+            yield return new WaitForSeconds(0.1f);
+        }
+    }
+
+    private void SetSpriteColor(Color spriteColor)
+    {
+        _spriteRenderer.color = spriteColor;
+    }
 
     private void FastFall()
     {
         if (HeroStats.GetElement == Elements.ElementalAttribute.Earth)
         {
             Stomp.SetActive(true);
+            IsEarthStomping = true;
             _playerAnimator.SetBool("IsJumping", false);
             _playerAnimator.SetBool("IsFastFall", true);
             StartCoroutine(GravityModifier());

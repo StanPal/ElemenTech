@@ -27,6 +27,7 @@ public class Boulder : MonoBehaviour
     {
         transform.position += transform.right * _earthSkills.LaunchForce * Time.deltaTime;
     }
+    
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -50,13 +51,28 @@ public class Boulder : MonoBehaviour
                     var damagePercent = Mathf.InverseLerp(_earthSkills.SplashRange, 0, distance);
                     if (enemyStats && enemyStats.tag.Equals("Team2"))
                     {
-                        enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage));
-                        enemyMovement.OnKnockBackHit(_earthSkills.KnockBack, enemyMovement.GetIsLeft);
+                        if (enemyStats.Guard.Guarding)
+                        {
+                            enemyStats.Guard.TakeShieldDamage(damagePercent * _earthSkills.Damage);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage));
+                            enemyMovement.OnKnockBackHit(_earthSkills.KnockBack, _earthSkills.KnockBack, _earthSkills.KnockBackLength, !enemyMovement.GetIsLeft);
+                        }
                     }
                     if (enemyStats && enemyStats.tag.Equals("Team1"))
                     {
-                        //enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage / 2f));
-                        enemyMovement.OnKnockBackHit((_earthSkills.KnockBack / 2f), !enemyMovement.GetIsLeft);
+                        if (enemyStats.Guard.Guarding)
+                        {
+                            enemyStats.Guard.TakeShieldDamage(damagePercent * _earthSkills.Damage);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage));
+                            //enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage / 2f));
+                            enemyMovement.OnKnockBackHit((_earthSkills.KnockBack / 2f), _earthSkills.KnockBack, _earthSkills.KnockBackLength, !enemyMovement.GetIsLeft);
+                        }
                     }
                 }
                 if (tag.Equals("Team2"))
@@ -66,13 +82,27 @@ public class Boulder : MonoBehaviour
                     var damagePercent = Mathf.InverseLerp(_earthSkills.SplashRange, 0, distance);
                     if (enemyStats && enemyStats.tag.Equals("Team1"))
                     {
-                        enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage));
-                        enemyMovement.OnKnockBackHit(_earthSkills.KnockBack, !enemyMovement.GetIsLeft);
+                        if (enemyStats.Guard.Guarding)
+                        {
+                            enemyStats.Guard.TakeShieldDamage(damagePercent * _earthSkills.Damage);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage));
+                            enemyMovement.OnKnockBackHit(_earthSkills.KnockBack, _earthSkills.KnockBack, _earthSkills.KnockBackLength, !enemyMovement.GetIsLeft);
+                        }
                     }
                     if (enemyStats && enemyStats.tag.Equals("Team2"))
                     {
-                        //enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage / 2f));
-                        enemyMovement.OnKnockBackHit((_earthSkills.KnockBack / 2f), !enemyMovement.GetIsLeft);
+                        if (enemyStats.Guard.Guarding)
+                        {
+                            enemyStats.Guard.TakeShieldDamage(damagePercent * _earthSkills.Damage);
+                        }
+                        else
+                        {
+                            enemyStats.TakeDamageFromProjectile(damagePercent * (_earthSkills.Damage / 2f));
+                            enemyMovement.OnKnockBackHit((_earthSkills.KnockBack / 2f), _earthSkills.KnockBack, _earthSkills.KnockBackLength, !enemyMovement.GetIsLeft);
+                        }
                     }
                 }
             }
@@ -84,7 +114,14 @@ public class Boulder : MonoBehaviour
             {
                 if (collision.gameObject.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_earthSkills.Damage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
+                    }
                     Explode();
                     Destroy(gameObject);
                 }
@@ -96,23 +133,30 @@ public class Boulder : MonoBehaviour
             {
                 if (collision.gameObject.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_earthSkills.Damage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
+                    }
                     Explode();
                     Destroy(gameObject);
                 }
             }
         }
-        if (_earthSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
-        {
-            if (!collision.collider.Equals(this) && collision.collider.tag.Equals("FFA"))
-            {
-                if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
-                    Destroy(gameObject);
-                }
-            }
-        }
+        //if (_earthSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
+        //{
+        //    if (!collision.Equals(this) && collision.tag.Equals("FFA"))
+        //    {
+        //        if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+        //        {
+        //            heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
+        //            Destroy(gameObject);
+        //        }
+        //    }
+        //}
     }
 
     private void Explode()

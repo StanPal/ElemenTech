@@ -27,38 +27,26 @@ public class Crosshair : MonoBehaviour
     private void Initialize()
     {
         _playerManager = FindObjectOfType<PlayerManager>();
-        if (_playerManager.mPlayersList[0] != null)
+        if (_playerManager.mPlayersList[0].activeSelf)
         {
             _fireHero = _playerManager.mPlayersList[0].GetComponent<HeroActions>();
-        }
-        if (_playerManager.mPlayersList[1] != null)
-        {
-            _waterHero = _playerManager.mPlayersList[1].GetComponent<HeroActions>();
-        }
-        if (_playerManager.mPlayersList[2] != null)
-        {
-            _airHero = _playerManager.mPlayersList[2].GetComponent<HeroActions>();
-        }
-        if (_playerManager.mPlayersList[3] != null)
-        {
-            _earthHero = _playerManager.mPlayersList[3].GetComponent<HeroActions>();
-        }
-        if (_fireHero.gameObject.activeSelf)
-        {
             _p1CrossHairs.SetActive(true);
         }
-        if (_waterHero.gameObject.activeSelf)
+        if (_playerManager.mPlayersList[1].activeSelf)
         {
+            _waterHero = _playerManager.mPlayersList[1].GetComponent<HeroActions>();
             _p2CrossHairs.SetActive(true);
         }
-        if (_airHero.gameObject.activeSelf)
+        if (_playerManager.mPlayersList[2].activeSelf)
         {
+            _airHero = _playerManager.mPlayersList[2].GetComponent<HeroActions>();
             _p3CrossHairs.SetActive(true);
         }
-        if (_earthHero.gameObject.activeSelf)
+        if (_playerManager.mPlayersList[3].activeSelf)
         {
+            _earthHero = _playerManager.mPlayersList[3].GetComponent<HeroActions>();
             _p4CrossHairs.SetActive(true);
-        }
+        }        
         _camera = FindObjectOfType<Camera>();
         Cursor.visible = false;
     }

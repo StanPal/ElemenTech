@@ -28,9 +28,7 @@ public class WaterGun : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
-        if (_CanDamagePlayer)
-        {
+        //Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), true);
             if (collision.collider.GetComponent<Golem>())
             {
                 Golem golem = collision.gameObject.GetComponent<Golem>();
@@ -41,29 +39,21 @@ public class WaterGun : MonoBehaviour
                 }
             }
 
-            if (collision.collider.GetComponent<Guard>())
-            {
-                if (collision.collider.GetComponent<Guard>().tag.Equals(_WaterSkills.PlayerSkills.HeroAction.tag))
-                {
-                    Guard guard = collision.collider.GetComponent<Guard>();
-                    if (guard.Guarding)
-                    {
-                        Destroy(gameObject);
-                        Debug.Log("Shield Hit");
-                        collision.collider.GetComponent<Guard>().ComboSkillOn = true;
-                    }
-                }
-            }
-
             if (_WaterSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
             {
                 if (collision.collider.tag.Equals("Team2"))
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        if (heroStats.Guard.Guarding)
+                        {
+                            heroStats.Guard.TakeShieldDamage(_WaterSkills.Damage);
+                        }
+                        else
+                        {
+                            heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        }
                         Destroy(gameObject);
-
                     }
                     //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                     //collision.GetComponent<HeroStats>().SlowMovement(_WaterSkills.SlowAmount, _WaterSkills.SlowDuration);
@@ -75,7 +65,14 @@ public class WaterGun : MonoBehaviour
                 {
                     if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                     {
-                        heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        if (heroStats.Guard.Guarding)
+                        {
+                            heroStats.Guard.TakeShieldDamage(_WaterSkills.Damage);
+                        }
+                        else
+                        {
+                            heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                        }
                         Destroy(gameObject);
 
                     }
@@ -83,8 +80,6 @@ public class WaterGun : MonoBehaviour
                     //collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.Slowed;
                     //collision.GetComponent<HeroStats>().SlowMovement(_WaterSkills.SlowAmount, _WaterSkills.SlowDuration);
                 }
-            }
-
             if (collision.collider.GetComponentInParent<Walls>())
             {
                 Destroy(gameObject);

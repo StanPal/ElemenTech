@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed8511c2602631439e5507d2ac11fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EarthBoulder: {fileID: 456878591809443157, guid: f0c547ba5311eaf499b7de438e7e3901,
+  EarthBoulder: {fileID: 456878591809443157, guid: d25b6ae191ca7e941b80eeefada72f58,
     type: 3}
-  Points: {fileID: 6930636138351268449, guid: 3f4c780beaef3814fb6f2ffe02fef6b8, type: 3}
+  Points: {fileID: 0}
   LaunchOffset: {x: 0, y: 0, z: 0}
   _numberOfPoints: 20
   _spaceBetweenPoints: 0.01
@@ -124,3 +124,4 @@ MonoBehaviour:
   _damage: 12
   _splashRange: 1.5
   _knockBackAmount: 8
+  _knockBackLength: 0.2

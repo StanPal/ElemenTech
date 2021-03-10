@@ -1,0 +1,14 @@
+fileFormatVersion: 2
+<<<<<<< HEAD:Assets/AIStates/AIExample.controller.meta
+guid: 1dab26d913b503942a5e8cf58d4c66fd
+||||||| 6927c7f:Assets/Prefabs/Animation/PlayerDash.anim.meta
+guid: ca450bb31f2021d4a8978afcf7de021b
+=======
+guid: ddf6ed9bb6b5d1e4090bd2343ba94904
+>>>>>>> StanPalisoc/CombatMechanics:Assets/Prefabs/Animation/RobotAnim/RobotAnim.controller.meta
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
