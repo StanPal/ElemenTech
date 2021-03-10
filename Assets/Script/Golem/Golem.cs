@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Golem : MonoBehaviour
 {
-    private Rigidbody2D rb;
+    //private Rigidbody2D rb;
     
     public float mMaxHealth ;
 
@@ -72,11 +72,11 @@ public class Golem : MonoBehaviour
 
     private void Awake()
     {
-        mMaxHealth = 50.0f;
+        mMaxHealth = 40.0f;
         jumpTimeCounter = jumpTime;
         currentTime = shootingInterval;
        // currentTimeForJump = jumpingInterval;
-        rb = GetComponent<Rigidbody2D>();
+       // rb = GetComponent<Rigidbody2D>();
         mCurrentHealth = mMaxHealth;
         initGolemFeature();
         if (GameObject.FindWithTag("Team1"))
@@ -93,23 +93,7 @@ public class Golem : MonoBehaviour
 
     private void Update()
     {
-
-        muzzle.transform.localScale = this.transform.localScale;
-
-
-        // if(Input.GetKeyDown(KeyCode.Q))
-        // {
-        //     Rigidbody2D temp = Instantiate(bullet, muzzle.position, transform.rotation);
-        //     if (!reverse)
-        //     {
-        //         temp.velocity = new Vector2(bulletSpeed, 0);
-        //     }
-        //     else
-        //     {
-        //         temp.velocity = new Vector2(-bulletSpeed, 0);
-        //     }
-        // }
-
+        muzzle.transform.localScale = this.transform.localScale;   
         KillEnemy();
        // Move();
        // Shoot();
@@ -144,13 +128,6 @@ public class Golem : MonoBehaviour
             transform.localScale = new Vector3(-1 * transform.localScale.x, 1, 0);
         }     
     }
-    //void OnTriggerEnter2D(Collider2D other)
-    //{
-    //    if (other.gameObject.tag == ("pickup"))
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
 
     private void initGolemFeature()
     {
@@ -206,30 +183,28 @@ public class Golem : MonoBehaviour
     private void Jump()
     {
         
-        if (jumpTimeCounter > 0.0f)
-        {
-            jumpTimeCounter -= Time.deltaTime;
-        }
-        else
-        {
-            //Debug.Log("Jump");
-            if (teamTwoPos.position.y - 1.0f > this.transform.position.y)
-            {
-                rb.velocity = Vector2.up * mJumpForce;
-                jumpTimeCounter = jumpTime;
-            }
-            else if(teamOnePos.position.y - 1.0f > this.transform.position.y)
-            {
-                rb.velocity = Vector2.up * mJumpForce;
-                jumpTimeCounter = jumpTime;
-            }
-        }
+        //if (jumpTimeCounter > 0.0f)
+        //{
+        //    jumpTimeCounter -= Time.deltaTime;
+        //}
+        //else
+        //{
+        //    //Debug.Log("Jump");
+        //    if (teamTwoPos.position.y - 1.0f > this.transform.position.y)
+        //    {
+        //        rb.velocity = Vector2.up * mJumpForce;
+        //        jumpTimeCounter = jumpTime;
+        //    }
+        //    else if(teamOnePos.position.y - 1.0f > this.transform.position.y)
+        //    {
+        //        rb.velocity = Vector2.up * mJumpForce;
+        //        jumpTimeCounter = jumpTime;
+        //    }
+        //}
     }
 
     public void Shoot()
-    {
-        
-
+    {       
         if (mAttackType == GolemData.attackType.Ranged)
         {
             if (currentTime > 0.0f)

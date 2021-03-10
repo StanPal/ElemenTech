@@ -15,7 +15,7 @@ public class AIIdleState : StateMachineBehaviour
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         _player.setReturnFalse();
-        _player.showHP();
+        //_player.showHP();
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

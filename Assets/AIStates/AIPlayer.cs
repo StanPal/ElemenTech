@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -6,7 +7,7 @@ public class AIPlayer : MonoBehaviour
 {
     [SerializeField] public Animator _aiController;
     public int nodeIndex;
-
+    private Agent mAgent;
     private Transform target = null;
     private AIPlayerManager _manager = null;
     public float currentHP;
@@ -16,11 +17,15 @@ public class AIPlayer : MonoBehaviour
 
     public HeroStats nearestHero;
     public HeroStats nearestHealth;
+    public bool isMoving;
 
     private Golem golem;
 
+
     void Start()
     {
+        isMoving = false;
+        mAgent = GetComponent<Agent>();
         golem = this.GetComponent<Golem>();
         //nodeIndex = 0;//get number
         
@@ -44,7 +49,7 @@ public class AIPlayer : MonoBehaviour
 
     public void AttackMode()
     {
-        Debug.Log("hp > 40, attack the players");
+       // Debug.Log("hp > 40, attack the players");
 
         //find nearest hero and face to his positon.
         if (this.GetComponent<Transform>().position.x - mHeros[0].transform.position.x > 0)
@@ -57,12 +62,12 @@ public class AIPlayer : MonoBehaviour
         }
 
         golem.Shoot();
+        isMoving = false;
     }
 
     public void Run()
     {
-        Debug.Log("hp < 40, try to run away and looking for health");
-
+       // Debug.Log("hp < 40, try to run away and looking for health");
     }
 
     public void setReturnTure()
@@ -96,23 +101,39 @@ public class AIPlayer : MonoBehaviour
     }
     public void IsPickUpNearby()
     {
-        Debug.Log("track any pickup nearby!  moving to the pickup");
-
-        //find all the pickups and find which one is close to the player.
-        if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) > 0)
-        {
-            transform.localScale = new Vector3(1.0f,1.0f,1.0f);
-            transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
-        }
-        else if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) < 0)
-        {
-            transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
-            transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        if (isMoving)
+        {                     
+           // Debug.Log("move to pickup nearby!");
         }
         else
         {
-            Debug.Log("cant find any pickup");
+            foreach (var t in mkPickups)
+            {
+                if (t.isActiveAndEnabled && !isMoving)
+                {
+                   // Debug.Log("track any pickup nearby!");
+                    mAgent.findPickup(t.gameObject.transform);
+                    isMoving = true;
+                }
+            }
         }
+            
+
+        //find all the pickups and find which one is close to the player.
+        // if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) > 0)
+        // {
+        //     transform.localScale = new Vector3(1.0f,1.0f,1.0f);
+        //     transform.Translate(new Vector2(this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        // }
+        // else if(mkPickups[0] && (mkPickups[0].transform.position.x - this.transform.position.x) < 0)
+        // {
+        //     transform.localScale = new Vector3(-1.0f, 1.0f, 1.0f);
+        //     transform.Translate(new Vector2(-this.GetComponent<Golem>().mSpeed, 0) * Time.deltaTime);
+        // }
+        // else
+        // {
+        //     Debug.Log("cant find any pickup");
+        // }
     }
 
     public void findHealth()
@@ -125,7 +146,7 @@ public class AIPlayer : MonoBehaviour
 
     public void dashAway()
     {
-        Debug.Log("run away from players!");
+        //Debug.Log("run away from players!");
         float dis = nearestHero.GetComponent<HeroStats>().transform.position.x - this.GetComponent<Transform>().position.x;
        
         if (dis < 5.0f && dis > 0.0f)
