@@ -526,7 +526,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -583,7 +583,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shield: {fileID: 2956839593243826331}
   _shieldBreakEffect: {fileID: 1768745933477380657}
-  _guardTimer: 10
+  _guardTimer: 1
   _isGuarding: 0
   _brokenShieldRecovery: 3
   _shieldSize: 2.1
@@ -858,7 +858,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1791110765894072924
