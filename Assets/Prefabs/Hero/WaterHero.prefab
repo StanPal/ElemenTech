@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 4
+  ControllerInput: 3
   _moveSpeed: 12
   _airStrifeSpeed: 6
   _groundJumpForce: 27
@@ -369,7 +369,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _shield: {fileID: 3870868949774532766}
   _shieldBreakEffect: {fileID: 1324866224582060998}
+  _guardTimer: 1
   _isGuarding: 0
+  _brokenShieldRecovery: 3
   _shieldSize: 2.1
   _shieldRecoveryTick: 3
   _speedDecrease: 1
@@ -379,7 +381,6 @@ MonoBehaviour:
   _shieldEnergyTick: 0.2
   _shieldEnergy: 100
   _parryTimeWindow: 1
-  ComboSkill: {fileID: 0}
 --- !u!70 &110387772121362058
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
