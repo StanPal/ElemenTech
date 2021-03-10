@@ -48,11 +48,13 @@ MonoBehaviour:
   WaterHero: {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a,
     type: 3}
   AirHero: {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342, type: 3}
-  EarthHero: {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f,
+  EarthHero: {fileID: 1791110765294023672, guid: 1eac5ce36518dce47a75adcb476efb89,
     type: 3}
   mPlayersList:
   - {fileID: 1791110765294023672, guid: 2e10122b180751a40b4999ab9c6f6eac, type: 3}
   - {fileID: 1371002032310544464, guid: d95bedd6962ac8a468e26b2b40ea888a, type: 3}
   - {fileID: 1791110765294023672, guid: d52c96831d5ac144cb35361e788f4342, type: 3}
-  - {fileID: 1791110765294023672, guid: 529284a16f8ac3747a744448d7147a6f, type: 3}
+  - {fileID: 1791110765294023672, guid: 1eac5ce36518dce47a75adcb476efb89, type: 3}
   playTestMode: 0
+  TeamOne: []
+  TeamTwo: []

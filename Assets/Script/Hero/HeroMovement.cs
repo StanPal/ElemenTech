@@ -89,9 +89,10 @@ public class HeroMovement : MonoBehaviour
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Rigidbody2D Rigidbody2D { get => _rb; }
     public float Speed { get => _moveSpeed;  set => _moveSpeed = value; } 
+    public float OriginalMoveSpeed { get => _originalMoveSpeed; }
     public float RecoveryTime { get => _recoveryTime;  set => _recoveryTime = value; } 
     public float OriginalGravity { get => _originalGravity; }
-    public float DashSpeed { get => _dashSpeed; }
+    public float DashSpeed { get => _dashSpeed; }    
     public bool Dashing { get => _isDashing; set => _isDashing = value; } 
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
     public bool GetIsLeft { get  => _isLeft; } 
@@ -130,7 +131,6 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetBool("IsMultiJump", false);
             _numOfJumps = _maxJumps;
             _numOfWallJumps = _maxWallJump;
-            _moveSpeed = _originalMoveSpeed;
             _groundJumpForce = _originalJumpForce;
             _isJumping = false;
             if (!_isJumpHeld)

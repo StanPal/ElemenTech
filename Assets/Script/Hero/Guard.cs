@@ -11,8 +11,8 @@ public class Guard : MonoBehaviour
     [SerializeField] private ParticleSystem _shieldBreakEffect;
     private HeroActions _heroAction;
     private HeroMovement _heroMovement;
-    private float _guardTimer = 1f;
-    private bool _isGuardTimerActive = false; 
+    private float _resetTimer;
+    private bool _isGuardTimerActive = false;
     private bool _shieldCreated = false;
     private bool _skillCombine = false;
     private bool _shieldBreak = false;
@@ -21,7 +21,9 @@ public class Guard : MonoBehaviour
 
     private ParticleSystemManager _particleSystemManager;
 
+    [SerializeField] private float _guardTimer = 1f;
     [SerializeField] private bool _isGuarding = false;
+    [SerializeField] private float _brokenShieldRecovery = 3f;
     [SerializeField] private float _shieldSize = 2.1f;
     [SerializeField] private float _shieldRecoveryTick = 3f;
     [SerializeField] private float _speedDecrease = 1f;
@@ -37,25 +39,44 @@ public class Guard : MonoBehaviour
     public float ShieldMaxEnergy { get { return _shieldMaxEnergy; } }
     public float ShieldEnergy { get { return _shieldEnergy; } set { _shieldEnergy = value; } }
     public float ShieldRecoveryAmount { get { return _shieldRecoverAmount; } }
+    public float ShieldRecoveryTime { get => _brokenShieldRecovery; }
     public float ShieldRecoveryTick { get { return _shieldRecoveryTick; } }
     public bool ComboSkillOn { get { return _skillCombine; } set { _skillCombine = value; } }
     public bool IsShieldDisabled { get => _isShieldDisabled; set => _isShieldDisabled = true; }
     public bool CanParry { get => _canParry; }
-    public GameObject ComboSkill;
 
     private void Start()
     {
         _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
         _shieldEnergy = _shieldMaxEnergy;
+        _heroMovement = GetComponentInParent<HeroMovement>();
         _heroAction = GetComponentInParent<HeroActions>();
         _heroAction.onGuardPerformed += OnGuardPerformed;
         _heroAction.onGuardExit += OnGuardExit;
         _heroAction.HeroStats.OnShieldRecovered += HeroStats_OnShieldRecovered;
         onParryWindowActive += OnParryWindowActive;
-    } 
+        _resetTimer = _guardTimer;
+    }
 
     private void Update()
     {
+        if (_isGuardTimerActive)
+        {
+            if (_guardTimer > 0)
+            {
+                _guardTimer -= Time.deltaTime;
+            }
+            else
+            {
+                _guardTimer = 0;
+                _isGuardTimerActive = false;
+            }
+        }
+        if(!_isGuardTimerActive && !_isGuarding)
+        {
+            OnGuardExit();
+        }
+
         if (_isGuarding && !_isShieldDisabled)
         {
             if (_shield == null)
@@ -63,41 +84,17 @@ public class Guard : MonoBehaviour
                 Debug.Log("Cannot Create Shield, No Element Attached");
             }
             else
-            { 
+            {
                 Color color = _shield.GetComponent<SpriteRenderer>().color;
                 color.a = (_shieldEnergy * 0.01f);
                 _shield.GetComponent<SpriteRenderer>().color = color;
             }
         }
-        if (_isGuarding && ComboSkillOn)
-        {
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Water)
-            {
-                GameObject ComboSkillClone = Instantiate(ComboSkill, transform.position, Quaternion.identity);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Earth)
-            {
-                GameObject ComboSkillClone = Instantiate(ComboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Fire)
-            {
-                GameObject ComboSkillClone = Instantiate(ComboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            if (GetComponent<HeroStats>().GetElement == Elements.ElementalAttribute.Air)
-            {
-                GameObject ComboSkillClone = Instantiate(ComboSkill, transform);
-                ComboSkillClone.tag = this.GetComponent<HeroStats>().tag;
-            }
-            ComboSkillOn = false;
-        }
 
-        if (_shieldBreak)
+        if(_shieldEnergy <= 0)
         {
-            _shieldBreak = false;
-            ShieldBreakEffect();
+            _shieldBreak = true;
+            _isShieldDisabled = true;
             OnGuardExit();
         }
     }
@@ -106,7 +103,10 @@ public class Guard : MonoBehaviour
     {
         if (!_isShieldDisabled)
         {
+            _heroMovement.Speed = _heroMovement.Speed / 2f;
+            _guardTimer = _resetTimer;
             _isGuarding = true;
+            _isGuardTimerActive = true;
             onParryWindowActive?.Invoke();
             SummonGuard();
             StartCoroutine(ShieldEnergyDecrease());
@@ -115,13 +115,21 @@ public class Guard : MonoBehaviour
 
     private void OnGuardExit()
     {
-        //Destroy(_shield);
-        if (_isGuarding  || _shieldBreak )
+        _isGuarding = false;
+         if(_shieldBreak)
+        {
+            ShieldBreakEffect();
+            _shield.SetActive(false);
+            _shieldCreated = false;
+            _heroMovement.Speed = _heroMovement.OriginalMoveSpeed;
+            OnShieldRecover.Invoke();
+        }        
+        else if (!_isGuardTimerActive)
         {
             _shield.SetActive(false);
-            _isGuarding = false;
             _shieldCreated = false;
             OnShieldRecover.Invoke();
+            _heroMovement.Speed = _heroMovement.OriginalMoveSpeed;
         }
     }
 
@@ -135,7 +143,6 @@ public class Guard : MonoBehaviour
     {
         if (!_shieldCreated && !_isShieldDisabled)
         {
-            OnGuardTimer();
             _shield.SetActive(true);
             Color color = _shield.GetComponent<SpriteRenderer>().color;
             color.a = (_shieldEnergy * 0.01f);
@@ -152,7 +159,7 @@ public class Guard : MonoBehaviour
     private IEnumerator ParryWindow()
     {
         float parryTimer = 0;
-        while(_isGuarding && parryTimer < _parryTimeWindow )
+        while (_isGuarding && parryTimer < _parryTimeWindow)
         {
             _canParry = true;
             parryTimer += 1;
@@ -161,36 +168,20 @@ public class Guard : MonoBehaviour
         _canParry = false;
     }
 
-    private void OnGuardTimer()
-    {
-        StartCoroutine(StartGuardTimer());
-    }
-
-    private IEnumerator StartGuardTimer()
-    {
-        _isGuardTimerActive = true;
-        yield return new WaitForSeconds(_guardTimer);
-        _isGuardTimerActive = false;
-    }
 
     private void HeroStats_OnShieldRecovered()
     {
         _isShieldDisabled = false;
+        _shieldBreak = false;
     }
 
     public void TakeShieldDamage(float damage)
     {
         ShieldEnergy -= damage;
-        if (ShieldEnergy <= 0)
-        {
-            OnGuardExit();
-            ShieldBreakEffect();
-        }
     }
 
     private void ShieldBreakEffect()
     {
-        _isShieldDisabled = true;
         _shieldBreakEffect.Play();
     }
 
@@ -199,12 +190,11 @@ public class Guard : MonoBehaviour
         while (_isGuarding)
         {
             _shieldEnergy -= _shieldExpendAmount;
-        yield return new WaitForSeconds(_shieldEnergyTick);
+            yield return new WaitForSeconds(_shieldEnergyTick);
         }
-        if(ShieldEnergy <= 0)
+        if (ShieldEnergy <= 0)
         {
             _shieldEnergy = 0;
-            _shieldBreak = true;
         }
     }
 }

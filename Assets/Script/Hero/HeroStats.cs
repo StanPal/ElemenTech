@@ -33,7 +33,7 @@ public class HeroStats : MonoBehaviour
     private bool _isCoolDownFinished;
 
     // Getters & Setters 
-    public HeroMovement HeroMovement { get => _heroMovement; }
+    public HeroMovement HeroMovement { get => _heroMovement; set => _heroMovement = value; }
     public HeroActions HeroActions { get => _heroActions; }
     public Guard Guard { get => _guard; }
     public bool CDFinished { get { return _isCoolDownFinished; } set { _isCoolDownFinished = value; } }
@@ -164,8 +164,15 @@ public class HeroStats : MonoBehaviour
     }
 
     private void RestoreShield()
-    {        
-        StartCoroutine(RestoreShieldOverTimeCoroutine(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick));
+    {
+        if (!_guard.IsShieldDisabled)
+        {
+            StartCoroutine(RestoreShieldOverTimeCoroutine(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick));
+        }
+        else
+        {
+            StartCoroutine(RestoreBrokenShield(_guard.ShieldRecoveryTime));
+        }
     }
 
     private IEnumerator RestoreShieldOverTimeCoroutine(float restoreAmount, float restoreTick)
@@ -175,10 +182,13 @@ public class HeroStats : MonoBehaviour
             _guard.ShieldEnergy += restoreAmount;
             yield return new WaitForSeconds(restoreTick);
         }
-        if (_guard.IsShieldDisabled && (_guard.ShieldEnergy >= _guard.ShieldMaxEnergy))
-        {
-            OnShieldRecovered?.Invoke();
-        }
+    }
+
+    private IEnumerator RestoreBrokenShield(float shieldRecoveryTime)
+    {
+        yield return new WaitForSeconds(shieldRecoveryTime);
+        OnShieldRecovered?.Invoke();
+
     }
 
     public void DamageOverTime(float damageAmount, float damageDuration)
