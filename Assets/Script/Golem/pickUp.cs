@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class pickUp : MonoBehaviour
 {
+    private float lifeSpan = 2.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -32,7 +33,7 @@ public class pickUp : MonoBehaviour
 
             //Destroy(this.gameObject);
             this.gameObject.SetActive(false);
-            other.gameObject.GetComponent<Golem>().mCurrentHealth = 100.0f;
+            other.gameObject.GetComponent<Golem>().mCurrentHealth += 25.0f;       
         }
     }
 }

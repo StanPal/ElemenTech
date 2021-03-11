@@ -7,15 +7,15 @@ public class AIIdleState : StateMachineBehaviour
 
     public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
     {
-        var manager = ServiceLocator.Get<AIPlayerManager>();
-        _player = manager.GetPlayer(0);
+        _player = animator.gameObject.GetComponent<AIPlayer>();
+       
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         base.OnStateUpdate(animator, stateInfo, layerIndex);
         _player.setReturnFalse();
-        _player.showHP();
+        //_player.showHP();
     }
 
     public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
