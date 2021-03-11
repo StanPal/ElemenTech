@@ -292,7 +292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 0
   _moveSpeed: 12
   _airStrifeSpeed: 6
   _groundJumpForce: 27
