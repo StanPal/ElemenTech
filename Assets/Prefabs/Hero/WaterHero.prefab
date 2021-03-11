@@ -160,10 +160,11 @@ GameObject:
   - component: {fileID: 1371002032310544466}
   - component: {fileID: 5005666907566380715}
   - component: {fileID: 1371002032310544467}
+  - component: {fileID: -755542323865136186}
   - component: {fileID: 110387772121362058}
   m_Layer: 9
   m_Name: WaterHero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -184,6 +185,7 @@ Transform:
   - {fileID: 1371002033529172033}
   - {fileID: 1371002033688476630}
   - {fileID: 2761669398730902918}
+  - {fileID: 5648107867360762458}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -241,7 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ControllerInput: 1
+  ControllerInput: 3
   _moveSpeed: 12
   _isLeft: 0
   _isJumping: 0
@@ -285,6 +287,7 @@ MonoBehaviour:
   Sword: {fileID: 3490320878621640080}
   PivotPoint: {fileID: 7317380116810873624}
   FirePoint: {fileID: 4467623121776858900}
+  _crosshair: {fileID: 1759491250322491649}
   _isOnCooldown: 0
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
@@ -326,6 +329,19 @@ MonoBehaviour:
   _shieldEnergyTick: 0.2
   _shieldEnergy: 100
   ComboSkill: {fileID: 0}
+--- !u!114 &-755542323865136186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371002032310544464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _crossHairs: {fileID: 1759491250322491649}
 --- !u!70 &110387772121362058
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -757,6 +773,87 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!1 &1759491250322491649
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5648107867360762458}
+  - component: {fileID: 6331527016304423533}
+  m_Layer: 0
+  m_Name: WaterCrosshair
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5648107867360762458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759491250322491649}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_Children: []
+  m_Father: {fileID: 1371002032310544473}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &6331527016304423533
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1759491250322491649}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 56e59a37fcb48e0409d7f0c77a5bfcaf, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 2
+  m_Sprite: {fileID: 21300000, guid: a6c52a8f8e9253b43982a3ae1b5ba95c, type: 3}
+  m_Color: {r: 0.91564035, g: 1, b: 0, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 8, y: 8}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &3490320878621640080
 GameObject:
   m_ObjectHideFlags: 0
