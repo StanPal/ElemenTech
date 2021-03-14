@@ -45,6 +45,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private int _numOfWallJumps = 0;
     [SerializeField] private int _maxWallJump = 1;
     [SerializeField] private float _jumpTimer = 5;
+    [SerializeField] private float _clampValue = 10f;
     private bool _isJumpHeld = false;
     private float _jumpTimeCounter = 5;
     private float _extraJumpForce = 0;
@@ -138,11 +139,13 @@ public class HeroMovement : MonoBehaviour
                 _jumpTimeCounter = _jumpTimer;
                 _extraJumpForce = 0;
             }
+            //_rb.velocity = new Vector2(_moveSpeed, Mathf.Clamp(_rb.velocity.y, _rb.gravityScale, _clampValue));
         }
         else
         {
             _isJumping = true;
             _groundJumpForce = _airJumpForce;
+           //_rb.velocity = new Vector2(_moveSpeed, Mathf.Clamp(_rb.velocity.y, -_rb.gravityScale, -_clampValue));
         }
 
         if (_isJumping)
@@ -237,6 +240,7 @@ public class HeroMovement : MonoBehaviour
         }
 
         transform.localScale = characterScale;
+        
     }
 
     private void Update()
@@ -316,7 +320,21 @@ public class HeroMovement : MonoBehaviour
         }
         if (ControllerInput == Controller.PS4)
         {
-            _playerInput.PS4.Dash.performed += _ => OnDash();
+            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+            {
+                if (_playerInput.PS4.TapDash.triggered)
+                {
+                    OnDashTap();
+                }
+                else if (_playerInput.PS4.Dash.triggered)
+                {
+                    OnDash();
+                }
+            }
+            else
+            {
+                _playerInput.PS4.Dash.performed += _ => OnDash();
+            }
         }
         if (ControllerInput == Controller.XBOX)
         {
@@ -591,7 +609,8 @@ public class HeroMovement : MonoBehaviour
     }
 
     private IEnumerator DashStrike()
-    {        
+    {
+        CreateDashPartile();
         if (GetIsLeft)
         {
             _rb.velocity = Vector2.left * _dashSpeed;

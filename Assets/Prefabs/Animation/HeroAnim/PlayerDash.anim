@@ -72,14 +72,16 @@ AnimationClip:
   - time: 0
     functionName: InvincibleOn
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 5b8ccd796fa5184419109b1fb47b90b3,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
   - time: 0.26666668
     functionName: InvincibleOff
     data: 
-    objectReferenceParameter: {fileID: 0}
+    objectReferenceParameter: {fileID: 11500000, guid: 5b8ccd796fa5184419109b1fb47b90b3,
+      type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

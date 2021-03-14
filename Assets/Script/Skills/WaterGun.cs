@@ -88,7 +88,7 @@ public class WaterGun : MonoBehaviour
     }
     private void OnCollisionExit2D(Collision2D collision)
     {
-        Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
+       // Physics2D.IgnoreCollision(collision.collider, GetComponent<Collider2D>(), false);
         _CanDamagePlayer = true;
     }
 

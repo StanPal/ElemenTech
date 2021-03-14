@@ -60,7 +60,7 @@ public class FireBall : MonoBehaviour
                     {
                         collision.GetComponent<HeroStats>().DeBuff = StatusEffects.NegativeEffects.OnFire;
                         collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_fireSkills.Damage);
-                        collision.GetComponent<HeroStats>().DamageOverTime(_fireSkills.Damage, _fireSkills.DotDuration);
+                        collision.GetComponent<HeroStats>().DamageOverTime(_fireSkills.DotDamage, _fireSkills.DotDuration);
                     }
                     Destroy(gameObject);
                 }

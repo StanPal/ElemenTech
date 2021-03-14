@@ -8,12 +8,14 @@ public class FireSkills : MonoBehaviour
 
     [SerializeField] private float _speed = 10.0f;
     [SerializeField] private float _damage = 10.0f;
+    [SerializeField] private float _dotDamage = 20.0f;
     [SerializeField] private float _dotDuration = 5.0f;
 
     public float Speed { get => _speed;  set => _speed = value; } 
     public float Damage { get => _damage; } 
     public PlayerSkills PlayerSkills { get => _heroSkills; } 
     public float DotDuration { get => _dotDuration; } 
+    public float DotDamage { get => _dotDamage; }
 
     private void Start()
     {

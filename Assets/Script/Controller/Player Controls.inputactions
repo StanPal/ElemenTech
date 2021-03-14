@@ -562,6 +562,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TapDash",
+                    "type": "Button",
+                    "id": "9da975b9-c92a-4411-8040-6efa8057ea71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -668,7 +676,7 @@
                     "name": "",
                     "id": "0a4c5404-b582-4f86-8bb4-fcda52d8e939",
                     "path": "<XInputController>/leftShoulder",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
@@ -740,6 +748,17 @@
                     "action": "FastFall",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a39585ea-f7e3-4914-99a9-657e5163d2e4",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -802,6 +821,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "TapDash",
+                    "type": "Button",
+                    "id": "6672daae-149f-496a-9136-ff539593a3ae",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Tap(duration=0.1)"
                 },
                 {
                     "name": "Aim",
@@ -921,7 +948,7 @@
                     "name": "",
                     "id": "a01ac0f8-50da-4898-9354-54fd858f922b",
                     "path": "<DualShockGamepad>/leftShoulder",
-                    "interactions": "",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
@@ -1002,6 +1029,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "41ad0776-d188-4dac-9c6f-62c603a5c02c",
+                    "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapDash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
