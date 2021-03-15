@@ -909,12 +909,12 @@ PrefabInstance:
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: field of view
-      value: 48
+      value: 41
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -951,7 +951,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
 --- !u!1 &363935783
 GameObject:
@@ -2286,7 +2287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216423913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75, y: 16, z: 0}
+  m_LocalPosition: {x: 4.75, y: 36, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2304,7 +2305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ba970a9e73587d4ab11f53a7d4f6d4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _halfXBounds: 0
+  _halfXBounds: -10
   _halfYBounds: 20
   _halfZBounds: 15
 --- !u!1 &1233675942

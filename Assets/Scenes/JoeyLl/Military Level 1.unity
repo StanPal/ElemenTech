@@ -456,17 +456,17 @@ PrefabInstance:
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: orthographic
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: field of view
-      value: 75
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: near clip plane
-      value: 0.01
+      value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
@@ -498,7 +498,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7249980656986483023, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
 --- !u!1 &405517718
 GameObject:
@@ -2445,7 +2446,7 @@ PrefabInstance:
     - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 7.5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
         type: 3}

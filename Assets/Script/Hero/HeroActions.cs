@@ -21,6 +21,7 @@ public class HeroActions : MonoBehaviour
     private HeroStats _heroStats;
     private PlayerInput _playerInput;
     private Rigidbody2D _rb;
+    private Crosshair _crossHair;
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
     private bool _isEarthStomping = false;
@@ -62,6 +63,7 @@ public class HeroActions : MonoBehaviour
         _camera = FindObjectOfType<Camera>();
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         _originalSpriteColor = _spriteRenderer.color;
+        _crossHair = GetComponentInChildren<Crosshair>();
     }
 
     private void OnEnable()
@@ -138,8 +140,9 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                _lookDirection = Camera.main.ScreenToWorldPoint((Vector3)_playerInput.KeyboardMouse.Aim.ReadValue<Vector2>()) - transform.position;
-                _lookAngle = Mathf.Atan2(_lookDirection.y, _lookDirection.x) * Mathf.Rad2Deg;
+                //Ray mouseRay = Camera.main.ScreenPointToRay((Vector3)PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
+                //_lookDirection = new Vector3(mouseRay.origin.x + mouseRay.direction.x, mouseRay.origin.y + mouseRay.direction.y,0);
+                _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
                 _axisPos = _playerInput.PS4.Aim.ReadValue<Vector2>();

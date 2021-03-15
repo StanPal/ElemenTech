@@ -13,6 +13,7 @@ public class HeroMovement : MonoBehaviour
     private Collider2D _col2D;
     private AnimationEvents _animationEvents;
     private Rigidbody2D _rb;
+    [SerializeField] private GameObject _Crosshair;
     [SerializeField] private ParticleSystem _dust;
     [SerializeField] private ParticleSystem _dashParticleEffect;
 
@@ -338,7 +339,21 @@ public class HeroMovement : MonoBehaviour
         }
         if (ControllerInput == Controller.XBOX)
         {
-            _playerInput.XBOX.Dash.performed += _ => OnDash();
+            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+            {
+                if (_playerInput.XBOX.TapDash.triggered)
+                {
+                    OnDashTap();
+                }
+                else if (_playerInput.XBOX.Dash.triggered)
+                {
+                    OnDash();
+                }
+            }
+            else
+            {
+                _playerInput.PS4.Dash.performed += _ => OnDash();
+            }            
         }
         if (ControllerInput == Controller.Gamepad)
         {
@@ -585,7 +600,7 @@ public class HeroMovement : MonoBehaviour
     }
 
     private IEnumerator Dash(bool _isLeft, float valueModifier)
-    {        
+    {
         if (_isLeft)
         {
             _rb.velocity = Vector2.left * _dashSpeed * valueModifier;
@@ -610,6 +625,7 @@ public class HeroMovement : MonoBehaviour
 
     private IEnumerator DashStrike()
     {
+        StopCoroutine(Dash(_isLeft, _tapDashMultiplier));
         CreateDashPartile();
         if (GetIsLeft)
         {

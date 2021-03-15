@@ -766,7 +766,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a39585ea-f7e3-4914-99a9-657e5163d2e4"",
                     ""path"": ""<XInputController>/leftShoulder"",
-                    ""interactions"": ""Tap"",
+                    ""interactions"": ""Tap(duration=0.1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TapDash"",
