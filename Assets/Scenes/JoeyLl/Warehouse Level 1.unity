@@ -274,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 15
+      value: 17.5
       objectReference: {fileID: 0}
     - target: {fileID: 626247835298582180, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
         type: 3}
@@ -339,7 +339,7 @@ PrefabInstance:
     - target: {fileID: 626247835298582183, guid: 5df3d1f3ae8f8e54b8db64950990e6c4,
         type: 3}
       propertyPath: _halfXBounds
-      value: 0
+      value: -5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5df3d1f3ae8f8e54b8db64950990e6c4, type: 3}
@@ -699,7 +699,7 @@ PrefabInstance:
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}
       propertyPath: field of view
-      value: 40
+      value: 37
       objectReference: {fileID: 0}
     - target: {fileID: 7255437403339329848, guid: 069c9e0702597c24c9527064f7bfa94e,
         type: 3}

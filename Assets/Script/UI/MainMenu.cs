@@ -15,6 +15,11 @@ public class MainMenu : MonoBehaviour
         scoreManager = FindObjectOfType<ScoreManager>();
     }
 
+    public void StartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
     public void PlayWorkingLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -38,6 +43,11 @@ public class MainMenu : MonoBehaviour
             scoreManager.PracticeMode = false;
     }
     
+    public void Credits()
+    {
+        SceneManager.LoadScene("Credits");
+    }
+
     public void QuitGame()
     {
         Debug.Log("QUIT");
