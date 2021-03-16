@@ -14,6 +14,15 @@ public class MainMenu : MonoBehaviour
     {
         scoreManager = FindObjectOfType<ScoreManager>();
     }
+    
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("GameEnd"))
+        {
+            Cursor.visible = true;
+        }
+    }
 
     public void StartGame()
     {

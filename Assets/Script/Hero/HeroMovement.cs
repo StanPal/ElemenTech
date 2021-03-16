@@ -486,8 +486,7 @@ public class HeroMovement : MonoBehaviour
         else
         {
             rayColor = Color.red;
-        }        
-        Debug.Log(raycastHit2D.collider);
+        }           
         return raycastHit2D.collider != null;
     }
 
@@ -504,9 +503,7 @@ public class HeroMovement : MonoBehaviour
         else
         {
             rayColor = Color.red;
-        }
-        //Debug.DrawRay(_col2D.bounds.center, Vector2.left * -(_col2D.bounds.extents.x + extraLengthText), rayColor);
-        //Debug.DrawRay(_col2D.bounds.center, Vector2.left * (_col2D.bounds.extents.x + extraLengthText), rayColor);
+        }     
         if (raycastHit2DLeft.collider != null)
         {
             return true;

@@ -8,11 +8,12 @@ public class Crosshair : MonoBehaviour
 
     private HeroActions _heroAction = null;
     private HeroMovement _heroMovement = null;
-
+    private SmashCamera _smashCamera = null;
     private void Awake()
     {
         _heroAction = GetComponentInParent<HeroActions>();
         _heroMovement = GetComponentInParent<HeroMovement>();
+        _smashCamera = FindObjectOfType<SmashCamera>();
         Cursor.visible = false;
     }
 
@@ -44,7 +45,7 @@ public class Crosshair : MonoBehaviour
         Ray mouseRay = Camera.main.ScreenPointToRay((Vector3)_heroAction.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
         Debug.DrawRay(mouseRay.origin, mouseRay.direction * 50, Color.yellow);
         //float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
-        _target = new Vector3(mouseRay.origin.x + mouseRay.direction.x * 55, mouseRay.origin.y + mouseRay.direction.y * 55, 0);
+        _target = new Vector3(mouseRay.origin.x + mouseRay.direction.x * 50f, mouseRay.origin.y + mouseRay.direction.y * 50f, 0);
         transform.position = _target;
         //transform.position.Normalize();
        // _target = Camera.main.ScreenToWorldPoint((Vector3)_heroAction.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());

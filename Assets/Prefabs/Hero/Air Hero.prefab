@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -463,7 +463,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 0}
   _dust: {fileID: 2378443808384279137}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 0
   _moveSpeed: 14
   _airStrifeSpeed: 5
   _groundJumpForce: 20
@@ -984,6 +984,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0542fa5cf8099649bf14050ae28e549, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7031224146284675901
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5745905597698010381}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8210359937382917956
 GameObject:
   m_ObjectHideFlags: 0
@@ -1014,18 +1026,6 @@ Transform:
   m_Father: {fileID: 1573514005131078975}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7031224146284675901
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5745905597698010381}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &62108489092859300
 PrefabInstance:
   m_ObjectHideFlags: 0

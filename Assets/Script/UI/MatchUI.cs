@@ -29,7 +29,7 @@ public class MatchUI : MonoBehaviour
         Debug.Log("Current Scene" + SceneManager.GetActiveScene().buildIndex);
         Debug.Log("Total Scene Count" + SceneManager.sceneCountInBuildSettings);
 
-        if (SceneManager.GetActiveScene().buildIndex + 1 == SceneManager.sceneCountInBuildSettings - 1)
+        if ((SceneManager.GetActiveScene().buildIndex + 1) == SceneManager.sceneCountInBuildSettings - 2)
         {
             StartCoroutine(TransitionToGameEndScene());
         }

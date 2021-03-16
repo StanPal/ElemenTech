@@ -41,18 +41,21 @@ public class PauseUI : MonoBehaviour
 
     public void PauseGame()
     {
+        Cursor.visible = true;
         mCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
+        Cursor.visible = false;
         mCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void BackToMainMenu()
     {
+        Cursor.visible = true;
         ResetPlayers();
         _ScoreManager.ResetScore();
         SceneManager.LoadScene(0);
