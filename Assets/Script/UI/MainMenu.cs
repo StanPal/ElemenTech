@@ -48,4 +48,8 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+    public void Menue()
+    {
+        SceneManager.LoadScene("GameBegin");
+    }
 }
