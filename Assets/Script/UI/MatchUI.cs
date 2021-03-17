@@ -26,8 +26,6 @@ public class MatchUI : MonoBehaviour
         TeamOneScore.text = "Team 1: " + _scoreManager.TeamOneScore;
         TeamTwoScore.text = "Team 2: " + _scoreManager.TeamTwoScore;
         Time.timeScale = 0;
-        Debug.Log("Current Scene" + SceneManager.GetActiveScene().buildIndex);
-        Debug.Log("Total Scene Count" + SceneManager.sceneCountInBuildSettings);
 
         if ((SceneManager.GetActiveScene().buildIndex + 1) == SceneManager.sceneCountInBuildSettings - 2)
         {

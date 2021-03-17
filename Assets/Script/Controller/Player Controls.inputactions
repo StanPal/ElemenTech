@@ -70,6 +70,14 @@
                     "interactions": "Hold"
                 },
                 {
+                    "name": "DashTap",
+                    "type": "Button",
+                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Dash",
                     "type": "Button",
                     "id": "fe94e74e-2574-4df0-89c4-0305ea0478d7",
@@ -97,14 +105,6 @@
                     "name": "TapJump",
                     "type": "Button",
                     "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "DashTap",
-                    "type": "Button",
-                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -192,7 +192,7 @@
                     "name": "",
                     "id": "a9ed5be7-296f-46a9-b9da-8788cadb6975",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Dash",
@@ -269,7 +269,7 @@
                     "name": "",
                     "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
                     "path": "<Keyboard>/leftShift",
-                    "interactions": "Tap(duration=0.1)",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
                     "action": "DashTap",

@@ -206,11 +206,14 @@ public class HeroMovement : MonoBehaviour
         if (_isDashing)
         {
             StartCoroutine(Dash(_isLeft,1f));
+            StartCoroutine(DisableCrossHair());
         }
 
         if (_isTapDashing)
         {
             StartCoroutine(Dash(_isLeft, _tapDashMultiplier));
+            StartCoroutine(DisableCrossHair());
+
         }
 
         if (_heroActions.DashStriking)
@@ -251,6 +254,21 @@ public class HeroMovement : MonoBehaviour
             case Controller.None:
                 break;
             case Controller.Keyboard:
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+                {
+                    if (_playerInput.KeyboardMouse.DashTap.triggered)
+                    {
+                        OnDashTap();
+                    }
+                    else if (_playerInput.KeyboardMouse.Dash.triggered)
+                    {
+                        OnDash();
+                    }
+                }
+                else
+                {
+                    _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+                }
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {    
                     if(_playerInput.KeyboardMouse.TapJump.triggered)
@@ -303,21 +321,7 @@ public class HeroMovement : MonoBehaviour
 
         if (ControllerInput == Controller.Keyboard)
         {
-            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
-            {
-                if (_playerInput.KeyboardMouse.DashTap.triggered)
-                {
-                    OnDashTap();
-                }
-                else if (_playerInput.KeyboardMouse.Dash.triggered)
-                {
-                    OnDash();
-                }
-            }
-            else
-            {
-                _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
-            }
+  
         }
         if (ControllerInput == Controller.PS4)
         {
@@ -531,7 +535,7 @@ public class HeroMovement : MonoBehaviour
     {
         if (_canDash)
         {
-            _tapDashMultiplier = 0.3f;
+            Debug.Log("TapDash Triggered");
             _playerAnimator.SetBool("IsDashing", true);
             _isTapDashing = true;
         }
@@ -598,13 +602,27 @@ public class HeroMovement : MonoBehaviour
 
     private IEnumerator Dash(bool _isLeft, float valueModifier)
     {
-        if (_isLeft)
+        if (_isDashing)
         {
-            _rb.velocity = Vector2.left * _dashSpeed * valueModifier;
+            if (_isLeft)
+            {
+                _rb.velocity = Vector2.left * _dashSpeed;
+            }
+            else
+            {
+                _rb.velocity = Vector2.right * _dashSpeed;
+            }
         }
-        else
+        else if (_isTapDashing)
         {
-            _rb.velocity = Vector2.right * _dashSpeed * valueModifier;
+            if (_isLeft)
+            {
+                _rb.velocity = Vector2.left *  _tapDashMultiplier;
+            }
+            else
+            {
+                _rb.velocity = Vector2.right * _tapDashMultiplier;
+            }
         }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(_dashStartUpTime);
@@ -620,17 +638,38 @@ public class HeroMovement : MonoBehaviour
         _canDash = true;
     }
 
+    private IEnumerator DisableCrossHair()
+    {
+        _Crosshair.SetActive(false);
+        yield return new WaitForSeconds(1f);
+        _Crosshair.SetActive(true);
+    }
+
     private IEnumerator DashStrike()
     {
-        StopCoroutine(Dash(_isLeft, _tapDashMultiplier));
+        //StopCoroutine(Dash(_isLeft, _tapDashMultiplier));        
         CreateDashPartile();
-        if (GetIsLeft)
+        if (_isDashing)
         {
-            _rb.velocity = Vector2.left * _dashSpeed;
+            if (_isLeft)
+            {
+                _rb.velocity = Vector2.left * _dashSpeed;
+            }
+            else
+            {
+                _rb.velocity = Vector2.right * _dashSpeed;
+            }
         }
-        else
+        else if (_isTapDashing)
         {
-            _rb.velocity = Vector2.right * _dashSpeed;
+            if (_isLeft)
+            {
+                _rb.velocity = Vector2.left * _dashSpeed * _tapDashMultiplier;
+            }
+            else
+            {
+                _rb.velocity = Vector2.right * _dashSpeed * _tapDashMultiplier;
+            }
         }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);

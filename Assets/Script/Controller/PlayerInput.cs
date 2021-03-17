@@ -83,6 +83,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": ""Hold""
                 },
                 {
+                    ""name"": ""DashTap"",
+                    ""type"": ""Button"",
+                    ""id"": ""2b2dfe6a-c91a-46a6-92dc-3c0be9da9725"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""Dash"",
                     ""type"": ""Button"",
                     ""id"": ""fe94e74e-2574-4df0-89c4-0305ea0478d7"",
@@ -110,14 +118,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""TapJump"",
                     ""type"": ""Button"",
                     ""id"": ""4ea8c05b-af27-4de1-9b55-a332b47c572d"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """"
-                },
-                {
-                    ""name"": ""DashTap"",
-                    ""type"": ""Button"",
-                    ""id"": ""2b2dfe6a-c91a-46a6-92dc-3c0be9da9725"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -205,7 +205,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""a9ed5be7-296f-46a9-b9da-8788cadb6975"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Dash"",
@@ -282,7 +282,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""24b48706-cf8f-47dd-8f5b-0a52f94b3d3f"",
                     ""path"": ""<Keyboard>/leftShift"",
-                    ""interactions"": ""Tap(duration=0.1)"",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DashTap"",
@@ -1316,11 +1316,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Guard = m_KeyboardMouse.FindAction("Guard", throwIfNotFound: true);
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
+        m_KeyboardMouse_DashTap = m_KeyboardMouse.FindAction("DashTap", throwIfNotFound: true);
         m_KeyboardMouse_Dash = m_KeyboardMouse.FindAction("Dash", throwIfNotFound: true);
         m_KeyboardMouse_Aim = m_KeyboardMouse.FindAction("Aim", throwIfNotFound: true);
         m_KeyboardMouse_FastFall = m_KeyboardMouse.FindAction("FastFall", throwIfNotFound: true);
         m_KeyboardMouse_TapJump = m_KeyboardMouse.FindAction("TapJump", throwIfNotFound: true);
-        m_KeyboardMouse_DashTap = m_KeyboardMouse.FindAction("DashTap", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -1426,11 +1426,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Guard;
     private readonly InputAction m_KeyboardMouse_GuardRelease;
     private readonly InputAction m_KeyboardMouse_Pause;
+    private readonly InputAction m_KeyboardMouse_DashTap;
     private readonly InputAction m_KeyboardMouse_Dash;
     private readonly InputAction m_KeyboardMouse_Aim;
     private readonly InputAction m_KeyboardMouse_FastFall;
     private readonly InputAction m_KeyboardMouse_TapJump;
-    private readonly InputAction m_KeyboardMouse_DashTap;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -1443,11 +1443,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Guard => m_Wrapper.m_KeyboardMouse_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
+        public InputAction @DashTap => m_Wrapper.m_KeyboardMouse_DashTap;
         public InputAction @Dash => m_Wrapper.m_KeyboardMouse_Dash;
         public InputAction @Aim => m_Wrapper.m_KeyboardMouse_Aim;
         public InputAction @FastFall => m_Wrapper.m_KeyboardMouse_FastFall;
         public InputAction @TapJump => m_Wrapper.m_KeyboardMouse_TapJump;
-        public InputAction @DashTap => m_Wrapper.m_KeyboardMouse_DashTap;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1481,6 +1481,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnPause;
+                @DashTap.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
+                @DashTap.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
+                @DashTap.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
                 @Dash.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
                 @Dash.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDash;
@@ -1493,9 +1496,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @TapJump.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
                 @TapJump.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
                 @TapJump.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
-                @DashTap.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
-                @DashTap.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
-                @DashTap.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnDashTap;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -1524,6 +1524,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @DashTap.started += instance.OnDashTap;
+                @DashTap.performed += instance.OnDashTap;
+                @DashTap.canceled += instance.OnDashTap;
                 @Dash.started += instance.OnDash;
                 @Dash.performed += instance.OnDash;
                 @Dash.canceled += instance.OnDash;
@@ -1536,9 +1539,6 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @TapJump.started += instance.OnTapJump;
                 @TapJump.performed += instance.OnTapJump;
                 @TapJump.canceled += instance.OnTapJump;
-                @DashTap.started += instance.OnDashTap;
-                @DashTap.performed += instance.OnDashTap;
-                @DashTap.canceled += instance.OnDashTap;
             }
         }
     }
@@ -1973,11 +1973,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnDashTap(InputAction.CallbackContext context);
         void OnDash(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnFastFall(InputAction.CallbackContext context);
         void OnTapJump(InputAction.CallbackContext context);
-        void OnDashTap(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {

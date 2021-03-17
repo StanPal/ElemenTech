@@ -1,12 +1,14 @@
 ﻿using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
-{    
+{
+   
     [SerializeField] private int _teamOneScore = 0;
     [SerializeField] private int _teamTwoScore = 0;
     [SerializeField] bool _isPracticeMode = false;
     [SerializeField] bool _isMatchOver = false;
 
+    public bool TriggerReset = false;
     public int TeamOneScore { get => _teamOneScore; }
     public int TeamTwoScore { get => _teamTwoScore; }
     public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }

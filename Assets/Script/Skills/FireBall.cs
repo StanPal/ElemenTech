@@ -87,21 +87,5 @@ public class FireBall : MonoBehaviour
                 }
             }
         }
-
-        if (_fireSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
-        {
-            if (!collision.Equals(_fireSkills.PlayerSkills.HeroMovement.gameObject))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamageFromProjectile(_fireSkills.Damage);
-                    Destroy(gameObject);
-                }
-            }
-            else
-            {
-
-            }
-        }
     }
 }
