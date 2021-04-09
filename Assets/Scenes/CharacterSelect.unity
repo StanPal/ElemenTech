@@ -1618,6 +1618,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 6b856c2fa3ecd184e80b0166b68a116e,
         type: 3}
+    - target: {fileID: 5874293931745151887, guid: d1e3e086e704ce145b6c48714009af9e,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 89ae96b1de0445e4da26c14357037e06,
+        type: 3}
     - target: {fileID: 6314731783248641628, guid: d1e3e086e704ce145b6c48714009af9e,
         type: 3}
       propertyPath: m_AnchoredPosition.y

@@ -609,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 3327959309964347463}
+  _burningEffect: {fileID: 0}
   Team: 0
   _meleeAttack: 10
   _maxHealth: 100
@@ -652,11 +653,11 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 1
   _moveSpeed: 17
   _airStrifeSpeed: 8
   _groundJumpForce: 30
-  _airJumpForce: 20
+  _airJumpForce: 23
   _numOfJumps: 0
   _maxJumps: 1
   _numOfWallJumps: 1

@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour
 {
    
@@ -17,6 +17,15 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         ServiceLocator.Register<ScoreManager>(this);
+    }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ResetScore();
+        }
+
     }
 
     public void AddPoints(int team, int points)

@@ -356,7 +356,7 @@ public class HeroMovement : MonoBehaviour
             }
             else
             {
-                _playerInput.PS4.Dash.performed += _ => OnDash();
+                _playerInput.XBOX.Dash.performed += _ => OnDash();
             }            
         }
         if (ControllerInput == Controller.Gamepad)
@@ -649,8 +649,6 @@ public class HeroMovement : MonoBehaviour
     {
         //StopCoroutine(Dash(_isLeft, _tapDashMultiplier));        
         CreateDashPartile();
-        if (_isDashing)
-        {
             if (_isLeft)
             {
                 _rb.velocity = Vector2.left * _dashSpeed;
@@ -659,18 +657,6 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = Vector2.right * _dashSpeed;
             }
-        }
-        else if (_isTapDashing)
-        {
-            if (_isLeft)
-            {
-                _rb.velocity = Vector2.left * _dashSpeed * _tapDashMultiplier;
-            }
-            else
-            {
-                _rb.velocity = Vector2.right * _dashSpeed * _tapDashMultiplier;
-            }
-        }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);
         _playerAnimator.SetBool("IsDashStriking", false);

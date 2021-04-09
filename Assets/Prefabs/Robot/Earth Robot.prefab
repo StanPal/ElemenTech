@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 6066433788430600090}
   m_Layer: 9
   m_Name: Earth Robot
-  m_TagString: FFA
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -485,6 +485,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 1061393159270828253}
+  _burningEffect: {fileID: 0}
   Team: 2
   _meleeAttack: 20
   _maxHealth: 100
@@ -528,7 +529,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 0}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 0
+  ControllerInput: 3
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -1128,6 +1129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26b287895405eaa468d0b30b4d07e23f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stompDamage: 30
 --- !u!61 &2482097772392215309
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ public class EarthStomp : MonoBehaviour
     private HeroStats _heroStats;
     private HeroActions _heroActions;
     private HeroMovement _heroMovement;
-    private float _stompDamage = 20f;
+    [SerializeField] private float _stompDamage = 30f;
     private bool _isHit = false;
 
     private void Awake()
