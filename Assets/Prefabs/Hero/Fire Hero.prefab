@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 122998365925269869}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -653,7 +653,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 3
   _moveSpeed: 17
   _airStrifeSpeed: 8
   _groundJumpForce: 30
