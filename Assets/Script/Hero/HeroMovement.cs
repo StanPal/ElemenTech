@@ -496,7 +496,7 @@ public class HeroMovement : MonoBehaviour
 
     public bool IsWall()
     {
-        float extraLengthText = .15f;
+        float extraLengthText = .25f;
         RaycastHit2D raycastHit2DLeft = Physics2D.Raycast(_col2D.bounds.center , Vector2.left, -(_col2D.bounds.extents.x + extraLengthText), _whatIsWall);
         RaycastHit2D raycastHit2DRight = Physics2D.Raycast(_col2D.bounds.center, Vector2.left, (_col2D.bounds.extents.x + extraLengthText), _whatIsWall);
         Color rayColor;
@@ -510,16 +510,16 @@ public class HeroMovement : MonoBehaviour
         }     
         if (raycastHit2DLeft.collider != null)
         {
+            Debug.Log(raycastHit2DLeft.collider);            
             return true;
         }
-        else if (raycastHit2DRight.collider != null)
+        if (raycastHit2DRight.collider != null)
         {
+            Debug.Log(raycastHit2DRight.collider);
             return true;
         }
-        else
-        {
             return false;
-        }
+ 
     }
 
     private void OnDash()

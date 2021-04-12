@@ -29,7 +29,7 @@ public class PlayerAttack : MonoBehaviour
     }
   
     private void AttackPerformed()
-    {
+    {   
         swingActive = true;
         if (_heroMovement.GetIsLeft)
         {

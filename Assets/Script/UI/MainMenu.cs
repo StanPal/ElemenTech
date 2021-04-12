@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {    
     private ScoreManager scoreManager;
+    private SoundManager _soundManager; 
 
     private void Awake()
     {
@@ -12,7 +13,8 @@ public class MainMenu : MonoBehaviour
 
     private void Initialize()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager = ServiceLocator.Get<ScoreManager>();
+        _soundManager = ServiceLocator.Get<SoundManager>();
     }
     
 
@@ -26,6 +28,7 @@ public class MainMenu : MonoBehaviour
 
     public void StartGame()
     {
+        _soundManager.PlayMusic(0).Play();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 

@@ -485,7 +485,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 1061393159270828253}
-  _burningEffect: {fileID: 0}
+  _burningEffect: {fileID: 3979320080342667845, guid: 80ce73f8a0ea0014788499489b71de74,
+    type: 3}
   Team: 2
   _meleeAttack: 20
   _maxHealth: 100
@@ -526,10 +527,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Crosshair: {fileID: 0}
+  _Crosshair: {fileID: 8599390148659613289}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30

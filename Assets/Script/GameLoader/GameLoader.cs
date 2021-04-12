@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class GameLoader : AsyncLoader
 {
     [SerializeField] private GameObject _playerManager = null;
-    [SerializeField] private GameObject _scoreManager = null; 
+    [SerializeField] private GameObject _scoreManager = null;
+    [SerializeField] private GameObject _soundManager = null;
     [SerializeField] private int _sceneIndexToLoad = 1;
     private static int _sceneIndex = 0;
     private static GameLoader _instance; // The only singleton you should have.
@@ -50,8 +51,8 @@ public class GameLoader : AsyncLoader
         DontDestroyOnLoad(systemsGO);
 
         // Queue up loading routines
-        Enqueue(IntializeCoreSystems(), 2);
-        Enqueue(InitializeModularSystems(), 2);
+        Enqueue(IntializeCoreSystems(), 3);
+        Enqueue(InitializeModularSystems(), 3);
 
         // Set completion callback
         CallOnComplete(OnComplete);
@@ -64,6 +65,7 @@ public class GameLoader : AsyncLoader
 
         Instantiate(_playerManager, SystemsParent);
         Instantiate(_scoreManager, SystemsParent);
+        Instantiate(_soundManager, SystemsParent);
 
         yield return null;
     }

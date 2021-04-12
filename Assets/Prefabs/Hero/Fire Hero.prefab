@@ -660,7 +660,7 @@ MonoBehaviour:
   _airJumpForce: 23
   _numOfJumps: 0
   _maxJumps: 1
-  _numOfWallJumps: 1
+  _numOfWallJumps: 0
   _maxWallJump: 1
   _jumpTimer: 5
   _clampValue: 10

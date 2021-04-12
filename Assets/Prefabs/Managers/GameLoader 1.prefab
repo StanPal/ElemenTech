@@ -47,5 +47,7 @@ MonoBehaviour:
     type: 3}
   _scoreManager: {fileID: 5340142389288448264, guid: 61c2469ac2f40644795e9c565621861d,
     type: 3}
+  _soundManager: {fileID: 6262434300899713609, guid: f738dbd6d3e6cc649a88120850da0a5b,
+    type: 3}
   _sceneIndexToLoad: 1
   _moduleComponents: []

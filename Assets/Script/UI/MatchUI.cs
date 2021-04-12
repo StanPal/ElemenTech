@@ -27,7 +27,8 @@ public class MatchUI : MonoBehaviour
         TeamTwoScore.text = "Team 2: " + _scoreManager.TeamTwoScore;
         Time.timeScale = 0;
 
-        if ((SceneManager.GetActiveScene().buildIndex + 1) == SceneManager.sceneCountInBuildSettings - 2)
+        if ((SceneManager.GetActiveScene().buildIndex + 1) == SceneManager.sceneCountInBuildSettings - 2 ||
+           (_scoreManager.TeamOneScore == _scoreManager.BestOfValue || _scoreManager.TeamTwoScore == _scoreManager.BestOfValue ))
         {
             StartCoroutine(TransitionToGameEndScene());
         }
@@ -42,7 +43,7 @@ public class MatchUI : MonoBehaviour
         Time.timeScale = 1;
         yield return new WaitForSeconds(1);
         _scoreManager.IsMatchOver = false;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene("GameEnd");
     }
 
     private IEnumerator TransitionToNextScene()

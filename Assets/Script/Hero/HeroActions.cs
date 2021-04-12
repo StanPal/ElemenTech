@@ -11,6 +11,7 @@ public class HeroActions : MonoBehaviour
     public event System.Action onParryPerformed;
 
     [SerializeField] private GameObject Stomp;
+    private SoundManager _soundManager; 
     public GameObject Sword;
     public Transform PivotPoint;
     public Transform FirePoint;
@@ -55,6 +56,7 @@ public class HeroActions : MonoBehaviour
     private void Initialize()
     {
         _rb = GetComponent<Rigidbody2D>();
+        _soundManager = ServiceLocator.Get<SoundManager>();
         _playerAnimator = GetComponentInChildren<Animator>();
         _heroMovement = GetComponent<HeroMovement>();
         _heroStats = GetComponent<HeroStats>();
@@ -205,7 +207,7 @@ public class HeroActions : MonoBehaviour
     }
 
     private void SwordSwing()
-    {
+    {        
         if (HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
         {
             if(_heroMovement.Dashing || _heroMovement.TapDashing)
@@ -225,6 +227,7 @@ public class HeroActions : MonoBehaviour
                 //_playerAnimator.SetTrigger("AttackTrigger");
                 //Sword.gameObject.SetActive(true);
                 onAttackPerformed.Invoke();
+                AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
             }
         }
         else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
@@ -235,6 +238,7 @@ public class HeroActions : MonoBehaviour
             //_playerAnimator.SetTrigger("AttackTrigger");
             //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
+            AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
         }
     }
 
