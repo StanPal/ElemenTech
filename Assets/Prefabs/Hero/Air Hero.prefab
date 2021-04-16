@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -441,6 +441,7 @@ MonoBehaviour:
   Sword: {fileID: 5620810093717837379}
   PivotPoint: {fileID: 1573514005131078975}
   FirePoint: {fileID: 7832531724153277597}
+  _crosshair: {fileID: 0}
   _isOnCooldown: 0
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
