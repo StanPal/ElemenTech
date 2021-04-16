@@ -530,7 +530,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 8599390148659613289}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 4
+  ControllerInput: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
