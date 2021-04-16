@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicFiles:
-  - {fileID: 8300000, guid: 67dd73a8fb8b99e4d8c8d793c86c4324, type: 3}
+  - {fileID: 8300000, guid: 1fbf26b4eb9ad544ab5ca8476e106eab, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -53,7 +53,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
   - {fileID: 0}
   - {fileID: 0}
-  _volume: 1
+  _volume: 5
 --- !u!82 &6933320748071800976
 AudioSource:
   m_ObjectHideFlags: 0
