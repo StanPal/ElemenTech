@@ -62,7 +62,8 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _dashSpeed = 5f;
     [SerializeField] private float _dashCoolDown = 1f;
     [SerializeField] private float _dashTime = 1f;
-    [SerializeField] private float _dashStartUpTime = 1f;
+    [SerializeField] private float _dashEndTime = 0.3f;
+    [SerializeField] private float _dashAttackDistance = 3f;
 
     //Recovery Time until the player can move again 
     [SerializeField] private float _recoveryTime = 1f;
@@ -319,10 +320,6 @@ public class HeroMovement : MonoBehaviour
                 break;
         }
 
-        if (ControllerInput == Controller.Keyboard)
-        {
-  
-        }
         if (ControllerInput == Controller.PS4)
         {
             if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
@@ -395,6 +392,38 @@ public class HeroMovement : MonoBehaviour
                 Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
             }
         }
+        if(_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
+        {
+            if(_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team2"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+                }
+            }            
+        }
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team2"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
+            }
+        }
+
+    }    
+
+    private IEnumerator ResetCollision(Collider2D enemyCollider)
+    {
+        Debug.Log("Collision Timer Started");
+        yield return new WaitForSeconds(_dashEndTime);
+        Physics2D.IgnoreCollision(_capsuleCollider, enemyCollider, false);
+
     }
 
     public void flipCharacter()
@@ -612,8 +641,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = Vector2.right * _dashSpeed;
             }
+            _dashEndTime = 0.3f;
+
         }
-        else if (_isTapDashing)
+        if (_isTapDashing)
         {
             if (_isLeft)
             {
@@ -623,9 +654,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = Vector2.right * _tapDashMultiplier;
             }
+            _dashEndTime = 0.1f;
         }
         _rb.gravityScale = 0f;
-        yield return new WaitForSeconds(_dashStartUpTime);
+        yield return new WaitForSeconds(_dashEndTime);
         _playerAnimator.SetBool("IsDashing", false);
         _isTapDashing = false;
         _rb.velocity = Vector2.zero;
@@ -646,16 +678,15 @@ public class HeroMovement : MonoBehaviour
     }
 
     private IEnumerator DashStrike()
-    {
-        //StopCoroutine(Dash(_isLeft, _tapDashMultiplier));        
+    {        
         CreateDashPartile();
             if (_isLeft)
             {
-                _rb.velocity = Vector2.left * _dashSpeed;
+                _rb.velocity = Vector2.left * _dashAttackDistance;
             }
             else
             {
-                _rb.velocity = Vector2.right * _dashSpeed;
+                _rb.velocity = Vector2.right * _dashAttackDistance;
             }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);

@@ -222,10 +222,7 @@ public class HeroActions : MonoBehaviour
             else if (!_isGuardInvoked && !_isSwinging && !_isDashStriking)
             {
                 _isSwinging = true;
-                //_playerAnimator.SetBool("IsJumping",false);
                 _playerAnimator.SetBool("IsAttacking", true);
-                //_playerAnimator.SetTrigger("AttackTrigger");
-                //Sword.gameObject.SetActive(true);
                 onAttackPerformed.Invoke();
                 AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
             }
@@ -233,10 +230,7 @@ public class HeroActions : MonoBehaviour
         else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
             _isSwinging = true;
-            //_playerAnimator.SetBool("IsJumping",false);
             _playerAnimator.SetBool("IsAttacking", true);
-            //_playerAnimator.SetTrigger("AttackTrigger");
-            //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
             AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
         }
