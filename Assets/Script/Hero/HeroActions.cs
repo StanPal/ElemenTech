@@ -85,8 +85,17 @@ public class HeroActions : MonoBehaviour
             {
                 _playerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
-                _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    if (_playerInput.KeyboardMouse.HoldSpecial.triggered)
+                    {
 
+                    }
+                }
+                else
+                {
+                    _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                }
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();

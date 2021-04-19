@@ -43,7 +43,15 @@
                     "id": "ca9c08ef-2248-4f5f-9c5d-1348b304c40a",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": ""
+                },
+                {
+                    "name": "HoldSpecial",
+                    "type": "Button",
+                    "id": "27205a18-6af4-4e44-a818-3864a032215b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 },
                 {
                     "name": "Guard",
@@ -311,6 +319,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "WeightShiftRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3c306a7d-ea94-4452-9f78-dcefb19c7ea4",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldSpecial",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -586,6 +605,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TapDash",
+                    "type": "Button",
+                    "id": "9da975b9-c92a-4411-8040-6efa8057ea71",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Aim",
                     "type": "Button",
                     "id": "8ac82f9b-5d6a-410c-b1c2-49aefbc1e1b8",
@@ -602,9 +629,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "TapDash",
+                    "name": "WeightShiftHold",
                     "type": "Button",
-                    "id": "9da975b9-c92a-4411-8040-6efa8057ea71",
+                    "id": "f15999bf-86d2-4d4d-893d-172b1be4bd27",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeightShiftRelease",
+                    "type": "Button",
+                    "id": "f0831244-943d-49af-81df-6d24e217ebcd",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -789,6 +824,28 @@
                 },
                 {
                     "name": "",
+                    "id": "8d1c16b9-db8d-43ce-b0a9-5ee509756cf8",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "Hold(pressPoint=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "012647db-6288-4f20-95b8-68e3b06e41b6",
+                    "path": "<XInputController>/leftShoulder",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "a39585ea-f7e3-4914-99a9-657e5163d2e4",
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "Tap(duration=0.1)",
@@ -888,6 +945,22 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "f32505d6-6803-4016-8221-c99501da527d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeightShiftHold",
+                    "type": "Button",
+                    "id": "5771b0c5-7b2d-409e-ae69-98df65d145c8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeightShiftRelease",
+                    "type": "Button",
+                    "id": "5751a9ad-2db5-402b-a9cf-ba20b48eb8fb",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -1078,6 +1151,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "TapDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "86b0b06b-870b-4019-82ca-906577628254",
+                    "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "Hold(pressPoint=0.2)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e12faa74-8577-4170-91c3-9fca30f0955c",
+                    "path": "<DualShockGamepad>/leftShoulder",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

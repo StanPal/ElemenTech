@@ -238,7 +238,7 @@ public class HeroMovement : MonoBehaviour
         {
             characterScale.x = -1;
             _isLeft = true;
-            onPlayerFlip?.Invoke();      
+            onPlayerFlip?.Invoke();
         }
 
         if (_moveInput > 0)
@@ -317,17 +317,79 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.PS4:
+
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+                {
+                    if (_playerInput.PS4.TapDash.triggered)
+                    {
+                        OnDashTap();
+                    }
+                    else if (_playerInput.PS4.Dash.triggered)
+                    {
+                        OnDash();
+                    }
+                }
+                else
+                {
+                    if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                    {
+                        if (_playerInput.PS4.WeightShiftHold.triggered)
+                        {
+                            OnWeightShift();
+                        }
+                        if (_playerInput.PS4.WeightShiftRelease.triggered)
+                        {
+                            OnWeightShiftRelease();
+                        }
+                    }
+                    else
+                    {
+                        _playerInput.PS4.Dash.performed += _ => OnDash();
+                    }
+                }            
                 if (_playerInput.PS4.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
+
             case Controller.XBOX:
+
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+                {
+                    if (_playerInput.XBOX.TapDash.triggered)
+                    {
+                        OnDashTap();
+                    }
+                    else if (_playerInput.XBOX.Dash.triggered)
+                    {
+                        OnDash();
+                    }
+                }
+                else
+                {
+                    if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                    {
+                        if (_playerInput.XBOX.WeightShiftHold.triggered)
+                        {
+                            OnWeightShift();
+                        }
+                        if (_playerInput.XBOX.WeightShiftRelease.triggered)
+                        {
+                            OnWeightShiftRelease();
+                        }
+                    }
+                    else
+                    {
+                        _playerInput.XBOX.Dash.performed += _ => OnDash();
+                    }
+                }
                 if (_playerInput.XBOX.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
+
             case Controller.Gamepad:
                 if (_playerInput.Gamepad.Jump.triggered)
                 {
@@ -338,50 +400,8 @@ public class HeroMovement : MonoBehaviour
                 break;
         }
 
-        if (ControllerInput == Controller.PS4)
-        {
-            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
-            {
-                if (_playerInput.PS4.TapDash.triggered)
-                {
-                    OnDashTap();
-                }
-                else if (_playerInput.PS4.Dash.triggered)
-                {
-                    OnDash();
-                }
-            }
-            else
-            {
-                _playerInput.PS4.Dash.performed += _ => OnDash();
-            }
-        }
-        if (ControllerInput == Controller.XBOX)
-        {
-            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
-            {
-                if (_playerInput.XBOX.TapDash.triggered)
-                {
-                    OnDashTap();
-                }
-                else if (_playerInput.XBOX.Dash.triggered)
-                {
-                    OnDash();
-                }
-            }
-            else
-            {
-                _playerInput.XBOX.Dash.performed += _ => OnDash();
-            }            
-        }
-        if (ControllerInput == Controller.Gamepad)
-        {
-            _playerInput.Gamepad.Dash.performed += _ => OnDash();
-        }
-
             _horizontalMove = _moveInput * _moveSpeed;
             _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
-
     }
 
     private void OnEnable()
