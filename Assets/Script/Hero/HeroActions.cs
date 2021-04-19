@@ -85,8 +85,17 @@ public class HeroActions : MonoBehaviour
             {
                 _playerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
-                _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    if (_playerInput.KeyboardMouse.HoldSpecial.triggered)
+                    {
 
+                    }
+                }
+                else
+                {
+                    _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                }
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();
@@ -142,8 +151,6 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                //Ray mouseRay = Camera.main.ScreenPointToRay((Vector3)PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                //_lookDirection = new Vector3(mouseRay.origin.x + mouseRay.direction.x, mouseRay.origin.y + mouseRay.direction.y,0);
                 _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
@@ -197,11 +204,19 @@ public class HeroActions : MonoBehaviour
     {
         if (Time.time > _nextFireTime)
         {
-            if (!_isGuardInvoked && !_isOnCooldown && !_heroMovement.Dashing)
+            if (!_isGuardInvoked && !_isOnCooldown)
             {
-                _playerAnimator.SetTrigger("SkillTrigger");
-                _nextFireTime = Time.time + HeroStats.CoolDown;
-                onSkillPerformed.Invoke(HeroStats.GetElement);
+                if(!_heroMovement.Dashing)
+                {
+                    _playerAnimator.SetTrigger("SkillTrigger");
+                    _nextFireTime = Time.time + HeroStats.CoolDown;
+                    onSkillPerformed.Invoke(HeroStats.GetElement);
+                }
+                if((_heroMovement.Dashing && _heroMovement.IsGrounded()))
+                {
+                    _nextFireTime = Time.time + HeroStats.CoolDown;
+                    onSkillPerformed.Invoke(HeroStats.GetElement);
+                }
             }
         }
     }
@@ -222,10 +237,7 @@ public class HeroActions : MonoBehaviour
             else if (!_isGuardInvoked && !_isSwinging && !_isDashStriking)
             {
                 _isSwinging = true;
-                //_playerAnimator.SetBool("IsJumping",false);
                 _playerAnimator.SetBool("IsAttacking", true);
-                //_playerAnimator.SetTrigger("AttackTrigger");
-                //Sword.gameObject.SetActive(true);
                 onAttackPerformed.Invoke();
                 AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
             }
@@ -233,10 +245,7 @@ public class HeroActions : MonoBehaviour
         else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
             _isSwinging = true;
-            //_playerAnimator.SetBool("IsJumping",false);
             _playerAnimator.SetBool("IsAttacking", true);
-            //_playerAnimator.SetTrigger("AttackTrigger");
-            //Sword.gameObject.SetActive(true);
             onAttackPerformed.Invoke();
             AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
         }

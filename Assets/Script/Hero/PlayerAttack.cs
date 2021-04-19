@@ -110,8 +110,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount,_knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.DashStriking)
+                    {
+                        Debug.Log("AttackHitTriggered");
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    }
                     if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
                     {
                         _particleSystemManager.FireAura(_heroMovement.gameObject);
@@ -130,8 +138,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.DashStriking)
+                    {
+                        Debug.Log("AttackHitTriggered");
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    }
                     if (_heroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)
                     {
                         _particleSystemManager.FireAura(_heroMovement.gameObject);

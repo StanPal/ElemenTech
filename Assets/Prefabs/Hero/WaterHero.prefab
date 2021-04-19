@@ -306,7 +306,6 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 3
   _jumpTimer: 5
-  _clampValue: 10
   _extraJumpForceRate: 1
   _whatIsGround:
     serializedVersion: 2
@@ -318,7 +317,8 @@ MonoBehaviour:
   _dashSpeed: 40
   _dashCoolDown: 1
   _dashTime: 0.1
-  _dashStartUpTime: 0.3
+  _dashEndTime: 0.3
+  _dashAttackDistance: 30
   _recoveryTime: 0
   _knockBackXRecieved: 0
   _knockBackYRecieved: 0
@@ -360,6 +360,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fallMultiplier: 2.5
+  _weightDropRate: 0.5
+  _weightModifier: 0.1
+  _weightMin: 0.3
 --- !u!114 &1371002032310544467
 MonoBehaviour:
   m_ObjectHideFlags: 0

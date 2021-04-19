@@ -13,6 +13,7 @@ public class HeroMovement : MonoBehaviour
     private Collider2D _col2D;
     private AnimationEvents _animationEvents;
     private Rigidbody2D _rb;
+    private FastFallJump _fastFallJump;
     [SerializeField] private GameObject _Crosshair;
     [SerializeField] private ParticleSystem _dust;
     [SerializeField] private ParticleSystem _dashParticleEffect;
@@ -37,6 +38,7 @@ public class HeroMovement : MonoBehaviour
 
      private bool _isLeft = false;
      private bool _isJumping = false;
+
     [SerializeField] private float _moveSpeed = 12f;
     [SerializeField] private float _airStrifeSpeed = 6f;
     [SerializeField] private float _groundJumpForce = 15f;
@@ -46,7 +48,7 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private int _numOfWallJumps = 0;
     [SerializeField] private int _maxWallJump = 1;
     [SerializeField] private float _jumpTimer = 5;
-    [SerializeField] private float _clampValue = 10f;
+    //[SerializeField] private float _clampValue = 10f;
     private bool _isJumpHeld = false;
     private float _jumpTimeCounter = 5;
     private float _extraJumpForce = 0;
@@ -54,7 +56,8 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private LayerMask _whatIsWall;
 
-    //Dash Modifiers
+    //Dash & Weight Modifiers
+    private bool _isWeightShifting = false;
     private bool _canDash = true;
     private bool _isDashing;
     private bool _isTapDashing;
@@ -62,16 +65,19 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _dashSpeed = 5f;
     [SerializeField] private float _dashCoolDown = 1f;
     [SerializeField] private float _dashTime = 1f;
-    [SerializeField] private float _dashStartUpTime = 1f;
-
+    [SerializeField] private float _dashEndTime = 0.3f;
+    [SerializeField] private float _dashAttackDistance = 3f;
+    
     //Recovery Time until the player can move again 
     [SerializeField] private float _recoveryTime = 1f;
     private bool _isRecovering = false;
     
+    //KnockBack
     [SerializeField] private float _knockBackXRecieved;
     [SerializeField] private float _knockBackYRecieved;
     [SerializeField] private float _knockBackCount;
 
+    //Slope & Friction 
     [SerializeField] private PhysicsMaterial2D _noFriction;
     [SerializeField] private PhysicsMaterial2D _fullFriction;
     [SerializeField] private float _slopeCheckDistance;
@@ -94,6 +100,7 @@ public class HeroMovement : MonoBehaviour
     public float OriginalMoveSpeed { get => _originalMoveSpeed; }
     public float RecoveryTime { get => _recoveryTime;  set => _recoveryTime = value; } 
     public float OriginalGravity { get => _originalGravity; }
+    public bool WeightShifting { get => _isWeightShifting; }
     public float DashSpeed { get => _dashSpeed; }    
     public bool Dashing { get => _isDashing; set => _isDashing = value; } 
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
@@ -111,6 +118,7 @@ public class HeroMovement : MonoBehaviour
         _animationEvents = GetComponentInChildren<AnimationEvents>();
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _heroStats = GetComponent<HeroStats>();
+        _fastFallJump = GetComponent<FastFallJump>();
         _col2DSize = _capsuleCollider.size;
         _canDash = true;
         _jumpTimeCounter = _jumpTimer;
@@ -213,14 +221,13 @@ public class HeroMovement : MonoBehaviour
         {
             StartCoroutine(Dash(_isLeft, _tapDashMultiplier));
             StartCoroutine(DisableCrossHair());
-
         }
 
         if (_heroActions.DashStriking)
         {
             StartCoroutine(DashStrike());
         }
-
+ 
         if (_isRecovering)
         {
             StartCoroutine(Recover());
@@ -232,8 +239,6 @@ public class HeroMovement : MonoBehaviour
             characterScale.x = -1;
             _isLeft = true;
             onPlayerFlip?.Invoke();
-       
-
         }
 
         if (_moveInput > 0)
@@ -267,8 +272,22 @@ public class HeroMovement : MonoBehaviour
                 }
                 else
                 {
-                    _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
-                }
+                    if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                    {
+                        if (_playerInput.KeyboardMouse.WeightShiftHold.triggered)
+                        {
+                            OnWeightShift();
+                        }
+                        if (_playerInput.KeyboardMouse.WeightShiftRelease.triggered)
+                        {
+                            OnWeightShiftRelease();
+                        }
+                    }
+                    else
+                    {
+                        _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
+                    }
+                }            
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {    
                     if(_playerInput.KeyboardMouse.TapJump.triggered)
@@ -298,17 +317,79 @@ public class HeroMovement : MonoBehaviour
                 }
                 break;
             case Controller.PS4:
+
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+                {
+                    if (_playerInput.PS4.TapDash.triggered)
+                    {
+                        OnDashTap();
+                    }
+                    else if (_playerInput.PS4.Dash.triggered)
+                    {
+                        OnDash();
+                    }
+                }
+                else
+                {
+                    if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                    {
+                        if (_playerInput.PS4.WeightShiftHold.triggered)
+                        {
+                            OnWeightShift();
+                        }
+                        if (_playerInput.PS4.WeightShiftRelease.triggered)
+                        {
+                            OnWeightShiftRelease();
+                        }
+                    }
+                    else
+                    {
+                        _playerInput.PS4.Dash.performed += _ => OnDash();
+                    }
+                }            
                 if (_playerInput.PS4.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
+
             case Controller.XBOX:
+
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
+                {
+                    if (_playerInput.XBOX.TapDash.triggered)
+                    {
+                        OnDashTap();
+                    }
+                    else if (_playerInput.XBOX.Dash.triggered)
+                    {
+                        OnDash();
+                    }
+                }
+                else
+                {
+                    if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                    {
+                        if (_playerInput.XBOX.WeightShiftHold.triggered)
+                        {
+                            OnWeightShift();
+                        }
+                        if (_playerInput.XBOX.WeightShiftRelease.triggered)
+                        {
+                            OnWeightShiftRelease();
+                        }
+                    }
+                    else
+                    {
+                        _playerInput.XBOX.Dash.performed += _ => OnDash();
+                    }
+                }
                 if (_playerInput.XBOX.Jump.triggered)
                 {
                     Jump();
                 }
                 break;
+
             case Controller.Gamepad:
                 if (_playerInput.Gamepad.Jump.triggered)
                 {
@@ -319,54 +400,8 @@ public class HeroMovement : MonoBehaviour
                 break;
         }
 
-        if (ControllerInput == Controller.Keyboard)
-        {
-  
-        }
-        if (ControllerInput == Controller.PS4)
-        {
-            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
-            {
-                if (_playerInput.PS4.TapDash.triggered)
-                {
-                    OnDashTap();
-                }
-                else if (_playerInput.PS4.Dash.triggered)
-                {
-                    OnDash();
-                }
-            }
-            else
-            {
-                _playerInput.PS4.Dash.performed += _ => OnDash();
-            }
-        }
-        if (ControllerInput == Controller.XBOX)
-        {
-            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
-            {
-                if (_playerInput.XBOX.TapDash.triggered)
-                {
-                    OnDashTap();
-                }
-                else if (_playerInput.XBOX.Dash.triggered)
-                {
-                    OnDash();
-                }
-            }
-            else
-            {
-                _playerInput.XBOX.Dash.performed += _ => OnDash();
-            }            
-        }
-        if (ControllerInput == Controller.Gamepad)
-        {
-            _playerInput.Gamepad.Dash.performed += _ => OnDash();
-        }
-
             _horizontalMove = _moveInput * _moveSpeed;
             _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
-
     }
 
     private void OnEnable()
@@ -393,6 +428,29 @@ public class HeroMovement : MonoBehaviour
             if (collision.collider.tag.Equals("Team2"))
             {
                 Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+            }
+        }
+        if(_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
+        {
+            if(_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team2"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+                }
+            }            
+        }
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team2"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
             }
         }
     }
@@ -510,7 +568,7 @@ public class HeroMovement : MonoBehaviour
         }     
         if (raycastHit2DLeft.collider != null)
         {
-            Debug.Log(raycastHit2DLeft.collider);            
+            Debug.Log(raycastHit2DLeft.collider);
             return true;
         }
         if (raycastHit2DRight.collider != null)
@@ -539,6 +597,18 @@ public class HeroMovement : MonoBehaviour
             _playerAnimator.SetBool("IsDashing", true);
             _isTapDashing = true;
         }
+    }
+
+    private void OnWeightShift()
+    {
+        _isWeightShifting = true;
+        StartCoroutine(DropWeight());
+    }
+
+    private void OnWeightShiftRelease()
+    {
+        _isWeightShifting = false;
+        _fastFallJump.Weight = _fastFallJump.OriginalWeight;
     }
 
     private void TapJump()
@@ -600,6 +670,25 @@ public class HeroMovement : MonoBehaviour
         return (_numOfJumps > 0 || ((IsWall() && _numOfWallJumps > 0)));
     }
 
+
+    //Coroutines Start
+
+    private IEnumerator DropWeight()
+    {
+        while (_isWeightShifting && _fastFallJump.Weight > _fastFallJump.WeightMin)
+        {
+            _fastFallJump.Weight -= _fastFallJump.WeightModifier;
+            yield return new WaitForSeconds(_fastFallJump.WeightDropRate);
+        }
+    }
+
+    private IEnumerator ResetCollision(Collider2D enemyCollider)
+    {
+        Debug.Log("Collision Timer Started");
+        yield return new WaitForSeconds(_dashEndTime);
+        Physics2D.IgnoreCollision(_capsuleCollider, enemyCollider, false);
+    }
+
     private IEnumerator Dash(bool _isLeft, float valueModifier)
     {
         if (_isDashing)
@@ -612,8 +701,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = Vector2.right * _dashSpeed;
             }
+            _dashEndTime = 0.3f;
+
         }
-        else if (_isTapDashing)
+        if (_isTapDashing)
         {
             if (_isLeft)
             {
@@ -623,9 +714,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = Vector2.right * _tapDashMultiplier;
             }
+            _dashEndTime = 0.1f;
         }
         _rb.gravityScale = 0f;
-        yield return new WaitForSeconds(_dashStartUpTime);
+        yield return new WaitForSeconds(_dashEndTime);
         _playerAnimator.SetBool("IsDashing", false);
         _isTapDashing = false;
         _rb.velocity = Vector2.zero;
@@ -646,16 +738,15 @@ public class HeroMovement : MonoBehaviour
     }
 
     private IEnumerator DashStrike()
-    {
-        //StopCoroutine(Dash(_isLeft, _tapDashMultiplier));        
+    {        
         CreateDashPartile();
             if (_isLeft)
             {
-                _rb.velocity = Vector2.left * _dashSpeed;
+                _rb.velocity = Vector2.left * _dashAttackDistance;
             }
             else
             {
-                _rb.velocity = Vector2.right * _dashSpeed;
+                _rb.velocity = Vector2.right * _dashAttackDistance;
             }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);
@@ -675,6 +766,11 @@ public class HeroMovement : MonoBehaviour
         _isRecovering = false;
     }
 
+    //Coroutines End
+
+
+    //SoundEffects Start
+
     private void CreateDust()
     {
         _dust.Play();
@@ -685,4 +781,5 @@ public class HeroMovement : MonoBehaviour
         _dashParticleEffect.Play();
     }
 
+    //SoundEffects End
 }
