@@ -121,6 +121,22 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""WeightShiftHold"",
+                    ""type"": ""Button"",
+                    ""id"": ""f7de78cc-0c7b-4fbb-b0cf-72378d1a0225"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""WeightShiftRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""7c7dd7fb-ecb9-4c8c-8a23-43f94316f3cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -286,6 +302,28 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""DashTap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""330d4de7-30b0-4c42-9085-f4a878c6e084"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Hold(pressPoint=0.3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeightShiftHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2e33bd85-b5ea-446d-ae7a-80d76096a3ad"",
+                    ""path"": ""<Keyboard>/leftShift"",
+                    ""interactions"": ""Press(behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeightShiftRelease"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1321,6 +1359,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_Aim = m_KeyboardMouse.FindAction("Aim", throwIfNotFound: true);
         m_KeyboardMouse_FastFall = m_KeyboardMouse.FindAction("FastFall", throwIfNotFound: true);
         m_KeyboardMouse_TapJump = m_KeyboardMouse.FindAction("TapJump", throwIfNotFound: true);
+        m_KeyboardMouse_WeightShiftHold = m_KeyboardMouse.FindAction("WeightShiftHold", throwIfNotFound: true);
+        m_KeyboardMouse_WeightShiftRelease = m_KeyboardMouse.FindAction("WeightShiftRelease", throwIfNotFound: true);
         // KeyboardLayout2
         m_KeyboardLayout2 = asset.FindActionMap("KeyboardLayout2", throwIfNotFound: true);
         m_KeyboardLayout2_Move = m_KeyboardLayout2.FindAction("Move", throwIfNotFound: true);
@@ -1431,6 +1471,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_Aim;
     private readonly InputAction m_KeyboardMouse_FastFall;
     private readonly InputAction m_KeyboardMouse_TapJump;
+    private readonly InputAction m_KeyboardMouse_WeightShiftHold;
+    private readonly InputAction m_KeyboardMouse_WeightShiftRelease;
     public struct KeyboardMouseActions
     {
         private @PlayerInput m_Wrapper;
@@ -1448,6 +1490,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @Aim => m_Wrapper.m_KeyboardMouse_Aim;
         public InputAction @FastFall => m_Wrapper.m_KeyboardMouse_FastFall;
         public InputAction @TapJump => m_Wrapper.m_KeyboardMouse_TapJump;
+        public InputAction @WeightShiftHold => m_Wrapper.m_KeyboardMouse_WeightShiftHold;
+        public InputAction @WeightShiftRelease => m_Wrapper.m_KeyboardMouse_WeightShiftRelease;
         public InputActionMap Get() { return m_Wrapper.m_KeyboardMouse; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1496,6 +1540,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @TapJump.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
                 @TapJump.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
                 @TapJump.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnTapJump;
+                @WeightShiftHold.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftHold;
+                @WeightShiftHold.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftHold;
+                @WeightShiftHold.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftHold;
+                @WeightShiftRelease.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftRelease;
+                @WeightShiftRelease.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftRelease;
+                @WeightShiftRelease.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnWeightShiftRelease;
             }
             m_Wrapper.m_KeyboardMouseActionsCallbackInterface = instance;
             if (instance != null)
@@ -1539,6 +1589,12 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @TapJump.started += instance.OnTapJump;
                 @TapJump.performed += instance.OnTapJump;
                 @TapJump.canceled += instance.OnTapJump;
+                @WeightShiftHold.started += instance.OnWeightShiftHold;
+                @WeightShiftHold.performed += instance.OnWeightShiftHold;
+                @WeightShiftHold.canceled += instance.OnWeightShiftHold;
+                @WeightShiftRelease.started += instance.OnWeightShiftRelease;
+                @WeightShiftRelease.performed += instance.OnWeightShiftRelease;
+                @WeightShiftRelease.canceled += instance.OnWeightShiftRelease;
             }
         }
     }
@@ -1978,6 +2034,8 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnAim(InputAction.CallbackContext context);
         void OnFastFall(InputAction.CallbackContext context);
         void OnTapJump(InputAction.CallbackContext context);
+        void OnWeightShiftHold(InputAction.CallbackContext context);
+        void OnWeightShiftRelease(InputAction.CallbackContext context);
     }
     public interface IKeyboardLayout2Actions
     {

@@ -108,6 +108,22 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "WeightShiftHold",
+                    "type": "Button",
+                    "id": "f7de78cc-0c7b-4fbb-b0cf-72378d1a0225",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "WeightShiftRelease",
+                    "type": "Button",
+                    "id": "7c7dd7fb-ecb9-4c8c-8a23-43f94316f3cd",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -273,6 +289,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "DashTap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "330d4de7-30b0-4c42-9085-f4a878c6e084",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Hold(pressPoint=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftHold",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2e33bd85-b5ea-446d-ae7a-80d76096a3ad",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "WeightShiftRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

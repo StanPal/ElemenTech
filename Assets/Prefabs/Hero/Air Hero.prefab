@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -465,7 +465,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5745905597698010381}
   _dust: {fileID: 2378443808384279137}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 0
+  ControllerInput: 1
   _moveSpeed: 14
   _airStrifeSpeed: 5
   _groundJumpForce: 20
@@ -475,7 +475,6 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 0
   _jumpTimer: 5
-  _clampValue: 10
   _extraJumpForceRate: 1
   _whatIsGround:
     serializedVersion: 2
@@ -487,7 +486,8 @@ MonoBehaviour:
   _dashSpeed: 20
   _dashCoolDown: 1
   _dashTime: 1
-  _dashStartUpTime: 0.2
+  _dashEndTime: 0.3
+  _dashAttackDistance: 3
   _recoveryTime: 0.2
   _knockBackXRecieved: 0
   _knockBackYRecieved: 0
@@ -508,7 +508,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35164e52593016a4b8857e8940a74aea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fallMultiplier: 0.3
+  _fallMultiplier: 3
+  _weightDropRate: 0.1
+  _weightModifier: 0.25
+  _weightMin: 0.25
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0

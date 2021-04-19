@@ -142,8 +142,6 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.None:
                 break;
             case HeroMovement.Controller.Keyboard:
-                //Ray mouseRay = Camera.main.ScreenPointToRay((Vector3)PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
-                //_lookDirection = new Vector3(mouseRay.origin.x + mouseRay.direction.x, mouseRay.origin.y + mouseRay.direction.y,0);
                 _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.PS4:
@@ -197,11 +195,19 @@ public class HeroActions : MonoBehaviour
     {
         if (Time.time > _nextFireTime)
         {
-            if (!_isGuardInvoked && !_isOnCooldown && !_heroMovement.Dashing)
+            if (!_isGuardInvoked && !_isOnCooldown)
             {
-                _playerAnimator.SetTrigger("SkillTrigger");
-                _nextFireTime = Time.time + HeroStats.CoolDown;
-                onSkillPerformed.Invoke(HeroStats.GetElement);
+                if(!_heroMovement.Dashing)
+                {
+                    _playerAnimator.SetTrigger("SkillTrigger");
+                    _nextFireTime = Time.time + HeroStats.CoolDown;
+                    onSkillPerformed.Invoke(HeroStats.GetElement);
+                }
+                if((_heroMovement.Dashing && _heroMovement.IsGrounded()))
+                {
+                    _nextFireTime = Time.time + HeroStats.CoolDown;
+                    onSkillPerformed.Invoke(HeroStats.GetElement);
+                }
             }
         }
     }
