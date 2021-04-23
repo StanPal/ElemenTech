@@ -487,6 +487,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 7802222284378043406}
   _burningEffect: {fileID: 6858178677131795670}
+  _deathEffect: {fileID: 1217042715064955836, guid: 6dfd8fff355f80944b1038f3d86dcc75,
+    type: 3}
   Team: 2
   _meleeAttack: 20
   _maxHealth: 100
@@ -540,7 +542,6 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 2
   _jumpTimer: 5
-  _clampValue: 10
   _extraJumpForceRate: 10
   _whatIsGround:
     serializedVersion: 2
@@ -552,7 +553,8 @@ MonoBehaviour:
   _dashSpeed: 25
   _dashCoolDown: 1
   _dashTime: 0.3
-  _dashStartUpTime: 0.3
+  _dashEndTime: 0.3
+  _dashAttackDistance: 3
   _recoveryTime: 0.5
   _knockBackXRecieved: 0
   _knockBackYRecieved: 0
@@ -574,6 +576,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fallMultiplier: 2.5
+  _weightDropRate: 1
+  _weightModifier: 0.1
+  _weightMin: 0.3
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
