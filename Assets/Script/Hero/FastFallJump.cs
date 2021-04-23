@@ -5,7 +5,7 @@ public class FastFallJump : MonoBehaviour
     [SerializeField] private float _fallMultiplier = 2.5f;
     [SerializeField] private float _weightDropRate = 1f;
     [SerializeField] private float _weightModifier = 0.1f;
-    [SerializeField] private float _weightMin = 0.3f;
+    [SerializeField] private float _weightMin = 2f;
      private float _fallOffsetSpeed = 2f;
     private float _originalFallMultiplier = 0f;
     public float WeightMin { get => _weightMin; }
@@ -35,13 +35,14 @@ public class FastFallJump : MonoBehaviour
         if(_rb.velocity.y < 0)
         {
             if (_heroMovement.WeightShifting)
-            {
+            {    
                 _rb.velocity += Vector2.up  * (_fallMultiplier - _fallOffsetSpeed) * Time.deltaTime;
-
+                _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, _fallMultiplier);
             }
             else
             {
                 _rb.velocity += Vector2.up * Physics2D.gravity.y * (_fallMultiplier - 1) * Time.deltaTime;
+    
             }
         }
     }

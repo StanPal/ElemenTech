@@ -651,7 +651,14 @@ public class HeroMovement : MonoBehaviour
         {
             if (_numOfJumps > 0)
             {
-                _rb.velocity = Vector2.up * _groundJumpForce;
+                if (!IsGrounded() && _isWeightShifting)
+                {
+                    _rb.velocity = Vector2.up * (_groundJumpForce - _fastFallJump.Weight);
+                }
+                else
+                {
+                    _rb.velocity = Vector2.up * _groundJumpForce;
+                }
                 _numOfJumps--;
             }
         } 

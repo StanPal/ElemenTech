@@ -296,7 +296,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 4875966304191913811}
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 4528160433185577089}
-  ControllerInput: 1
+  ControllerInput: 3
   _moveSpeed: 12
   _airStrifeSpeed: 6
   _groundJumpForce: 27
@@ -344,6 +344,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 7317380116810873624}
   FirePoint: {fileID: 4467623121776858900}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}

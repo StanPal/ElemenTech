@@ -4,6 +4,7 @@ public class AirJet : MonoBehaviour
 {
     private float _ProjectileSpeed = 1f;
     private float _ExitTime = 1f;
+    private bool isChargeMax = false; 
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
@@ -15,6 +16,20 @@ public class AirJet : MonoBehaviour
         _ProjectileSpeed = _AirSkills.Speed;
         _ScaleSize = _AirSkills.Scale;
         _ExitTime = _AirSkills.ExitTime;
+        if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
+        {
+            isChargeMax = true;
+            _AirSkills.PlayerSkills.HeroAction.ChargeMax = false;
+            _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
+            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
+                (5f, 5f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+        }
+        else
+        {
+            isChargeMax = false;
+            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+
+        }
     }
 
     private void FixedUpdate()
@@ -25,7 +40,15 @@ public class AirJet : MonoBehaviour
         }
         _ExitTime -= Time.deltaTime;
         _RigidBody.velocity = transform.right * _ProjectileSpeed;
-        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * Time.deltaTime);
+        if (isChargeMax)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
+        }
+        else
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize / 2, _AirSkills.ScaleSpeed * Time.deltaTime);
+
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
