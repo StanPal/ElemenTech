@@ -273,6 +273,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 672245139239114865}
   _burningEffect: {fileID: 3419650895528447326}
+  _deathEffect: {fileID: 1217042715064955836, guid: 6dfd8fff355f80944b1038f3d86dcc75,
+    type: 3}
   Team: 2
   _meleeAttack: 15
   _maxHealth: 100

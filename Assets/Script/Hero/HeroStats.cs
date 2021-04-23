@@ -14,6 +14,8 @@ public class HeroStats : MonoBehaviour
     private HeroMovement _heroMovement;
     [SerializeField] private ParticleSystem _bloodSplatterEffect;
     [SerializeField] private ParticleSystem _burningEffect;
+    [SerializeField] private GameObject _deathEffect;
+
     public enum TeamSetting
     {
         Team1,
@@ -240,6 +242,7 @@ public class HeroStats : MonoBehaviour
     private void HeroDie()
     {
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
+        Instantiate(_deathEffect, transform.position, Quaternion.identity);
         if (playermanager.TeamOne.Contains(gameObject))
         {
             playermanager.TeamOne.Remove(gameObject);
