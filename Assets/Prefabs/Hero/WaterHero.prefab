@@ -346,6 +346,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 7317380116810873624}
   FirePoint: {fileID: 4467623121776858900}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}
