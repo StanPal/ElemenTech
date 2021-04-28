@@ -3,22 +3,30 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    [SerializeField] private float _knockBackXAmount = 10f;
-    [SerializeField] private float _knockBackYAmount = 5f;
-    [SerializeField] private float _knockBackLength = 0.2f;
-    [SerializeField] private float _hitStun = 1f;
+    public event System.Action onPlayerChargeAttack;
+
+    private float _knockBackXAmount = 10f;
+    private float _knockBackYAmount = 5f;
+    private float _knockBackLength = 0.2f;
+    private float _hitStun = 1f;
     private HeroActions _heroAction;
     private HeroMovement _heroMovement;
+    private HeroStats _heroStats;
+    private FastFallJump _fastFallJump;
     private ParticleSystemManager _particleSystemManager;
     private Animator _animator;
     private bool _isOriginalDirectionleft;
-    private Vector3 _originalLocalScale;
+    private bool _isChargeMax = false;
+    private float _meleeDamage; 
+    private Vector3 _originalLocalScale;    
 
     private void Awake()
     {
         _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
         _heroAction = GetComponentInParent<HeroActions>();
         _heroMovement = GetComponentInParent<HeroMovement>();
+        _heroStats = GetComponentInParent<HeroStats>();
+        _fastFallJump = GetComponentInParent<FastFallJump>();
         _animator = GetComponent<Animator>();
     }
 
@@ -28,6 +36,7 @@ public class SwordAttack : MonoBehaviour
         _heroMovement.onPlayerFlip += OnPlayerFlipPerformed;
         _heroAction.onAttackPerformed += OnAttackPerformed;
         _heroAction.onParryPerformed += OnParryPerformed;
+
     }   
 
     private void OnParryPerformed()
@@ -50,6 +59,27 @@ public class SwordAttack : MonoBehaviour
 
     private void OnAttackPerformed()
     {
+        if (_heroAction.ChargeMax)
+        {
+            _isChargeMax = true;
+            _heroAction.ChargeMax = false;
+            _heroAction.ChargeAmount = 0;
+            _meleeDamage = _heroStats.AttackDamage * 2f;
+            _knockBackXAmount = _heroStats.KnockBackXAmount * 2f;
+            _knockBackYAmount = _heroStats.KnockBackYAmount * 2f;
+            _knockBackLength = _heroStats.KnockBackLength * 2f;
+            _hitStun = _heroStats.HitStun * 2f;
+            onPlayerChargeAttack?.Invoke();
+        }
+        else
+        {
+            _meleeDamage = _heroStats.AttackDamage;
+            _knockBackXAmount = _heroStats.KnockBackXAmount;
+            _knockBackYAmount = _heroStats.KnockBackYAmount;
+            _knockBackLength = _heroStats.KnockBackLength;
+            _hitStun = _heroStats.HitStun;
+            _isChargeMax = false;
+        }
         StartCoroutine(SwordStart());
     }
 
@@ -85,7 +115,7 @@ public class SwordAttack : MonoBehaviour
                         }
                         else
                         {
-                            _heroAction.HeroMovement.OnKnockBackHit(10f, 10f, 0.2f, !_heroMovement.GetIsLeft);
+                            _heroAction.HeroMovement.OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, !_heroMovement.GetIsLeft);
                             //heroStats.Guard.TakeShieldDamage(_heroAction.HeroStats.AttackDamage);
                         }
                     }
@@ -94,11 +124,11 @@ public class SwordAttack : MonoBehaviour
                         if (_heroAction.DashStriking)
                         {
                             Debug.Log("AttackHitTriggered");
-                            heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                            heroStats.TakeDamage(_meleeDamage);
                         }
                         else
                         {
-                            heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                            heroStats.TakeDamage(_meleeDamage);
                             collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
                         }                    
                         if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
@@ -142,11 +172,11 @@ public class SwordAttack : MonoBehaviour
                         if (_heroAction.DashStriking)
                         {
                             Debug.Log("AttackHitTriggered");
-                            heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                            heroStats.TakeDamage(_meleeDamage);
                         }
                         else
                         {
-                            heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                            heroStats.TakeDamage(_meleeDamage);
                             collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
                         }                     
                         if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
@@ -160,7 +190,7 @@ public class SwordAttack : MonoBehaviour
 
         if (collision.GetComponent<Golem>())
         {
-            collision.GetComponent<Golem>().TakeDamage(_heroAction.HeroStats.AttackDamage);
+            collision.GetComponent<Golem>().TakeDamage(_meleeDamage);
         }
     }
 }

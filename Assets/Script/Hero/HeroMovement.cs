@@ -9,6 +9,7 @@ public class HeroMovement : MonoBehaviour
     private HeroStats _heroStats;
     private PlayerInput _playerInput;
     private Animator _playerAnimator;
+    private SwordAttack _swordAttack;
     private CapsuleCollider2D _capsuleCollider;
     private Collider2D _col2D;
     private AnimationEvents _animationEvents;
@@ -100,12 +101,13 @@ public class HeroMovement : MonoBehaviour
     public float OriginalMoveSpeed { get => _originalMoveSpeed; }
     public float RecoveryTime { get => _recoveryTime;  set => _recoveryTime = value; } 
     public float OriginalGravity { get => _originalGravity; }
+    public float NumberOfJumps { get => _numOfJumps; set => value = _numOfJumps; }
     public bool WeightShifting { get => _isWeightShifting; }
     public float DashSpeed { get => _dashSpeed; }    
     public bool Dashing { get => _isDashing; set => _isDashing = value; } 
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
     public bool GetIsLeft { get  => _isLeft; } 
-    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }
+    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }    
 
     private void Awake()
     {
@@ -119,6 +121,7 @@ public class HeroMovement : MonoBehaviour
         _capsuleCollider = GetComponent<CapsuleCollider2D>();
         _heroStats = GetComponent<HeroStats>();
         _fastFallJump = GetComponent<FastFallJump>();
+        _swordAttack = GetComponentInChildren<SwordAttack>();
         _col2DSize = _capsuleCollider.size;
         _canDash = true;
         _jumpTimeCounter = _jumpTimer;
@@ -131,7 +134,9 @@ public class HeroMovement : MonoBehaviour
     {
         _playerAnimator.SetBool("IsJumping", false);
         _originalGravity = _rb.gravityScale;
+        _swordAttack.onPlayerChargeAttack += onPlayerChargeAttack;
     }
+
 
     private void FixedUpdate()
     {
@@ -455,6 +460,12 @@ public class HeroMovement : MonoBehaviour
         }
     }
 
+    private void onPlayerChargeAttack()
+    {
+        _numOfJumps = 0;
+        _isWeightShifting = false;
+    }
+
     public void flipCharacter()
     {
         Vector3 characterScale = transform.localScale;
@@ -614,7 +625,9 @@ public class HeroMovement : MonoBehaviour
     private void TapJump()
     {
         CreateDust();
-        _playerAnimator.SetBool("IsJumping", true);
+        // _playerAnimator.SetBool("IsJumping", true);
+        _playerAnimator.SetTrigger("JumpTrigger");
+
         _isJumping = true;
         if (IsWall())
         {
@@ -637,7 +650,8 @@ public class HeroMovement : MonoBehaviour
     private void Jump()
     {
         CreateDust();
-        _playerAnimator.SetBool("IsJumping", true);
+        //_playerAnimator.SetBool("IsJumping", true);
+        _playerAnimator.SetTrigger("JumpTrigger");
         _isJumping = true;
         if (IsWall())
         {
@@ -651,9 +665,10 @@ public class HeroMovement : MonoBehaviour
         {
             if (_numOfJumps > 0)
             {
-                if (!IsGrounded() && _isWeightShifting)
+                if (WeightShifting)
                 {
-                    _rb.velocity = Vector2.up * (_groundJumpForce - _fastFallJump.Weight);
+                    _rb.velocity = Vector2.up * ((_groundJumpForce / (_fastFallJump.OriginalWeight - _fastFallJump.Weight)) / 2f);
+                    _numOfJumps--;
                 }
                 else
                 {
@@ -666,9 +681,18 @@ public class HeroMovement : MonoBehaviour
 
     public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength ,bool direction)
     {
-        _knockBackCount = knockBackLength;
-        _knockBackXRecieved = knockBackX;
-        _knockBackYRecieved = knockBackY;
+        if (_isWeightShifting)
+        {
+            _knockBackCount = knockBackLength *2f;
+            _knockBackXRecieved = knockBackX *2f;
+            _knockBackYRecieved = knockBackY *2f;
+        }
+        else
+        {
+            _knockBackCount = knockBackLength;
+            _knockBackXRecieved = knockBackX;
+            _knockBackYRecieved = knockBackY;
+        }
         _onHitLeft = direction;
     }
 
