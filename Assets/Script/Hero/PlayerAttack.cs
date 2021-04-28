@@ -19,6 +19,8 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _rotation = 0;
     [SerializeField] private float _knockBackLength = 0.2f;
     private bool _originalDirLeft;
+    private bool _isChargeMax = false; 
+    
 
     private void Awake()
     {
@@ -27,7 +29,11 @@ public class PlayerAttack : MonoBehaviour
         _heroMovement = GetComponentInParent<HeroMovement>();
         _heroAction.onAttackPerformed += AttackPerformed;
     }
-  
+
+    private void Start()
+    {
+        
+    }
     private void AttackPerformed()
     {   
         swingActive = true;

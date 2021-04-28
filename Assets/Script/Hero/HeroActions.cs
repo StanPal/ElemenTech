@@ -96,6 +96,11 @@ public class HeroActions : MonoBehaviour
                 _playerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    _playerInput.KeyboardMouse.HoldAttack.performed += _ => OnCharging();
+                    Debug.Log("Hold attack Triggered");
+                }
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();
@@ -146,19 +151,11 @@ public class HeroActions : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+        if(ChargingShot)
         {
-            if (_playerInput.KeyboardMouse.HoldSpecial.triggered)
-            {
-                Debug.Log("Hold Mouse Triggered");
-                ChargingShot = true;
-                StartCoroutine(Charging());
-            }
-            else
-            {
-                // _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
-            }
+            StartCoroutine(Charging());
         }
+
     }
 
     private void Update()
@@ -217,6 +214,11 @@ public class HeroActions : MonoBehaviour
         onGuardExit.Invoke();
     }
     
+    private void OnCharging()
+    {
+        _isChargingShot = true;
+    }
+
     private void ElementSpecial1()
     {
         if (Time.time > _nextFireTime)

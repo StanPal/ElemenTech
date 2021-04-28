@@ -48,7 +48,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""id"": ""ff8c6cab-a322-43e8-b9ee-3dc02250c395"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
-                    ""interactions"": ""Hold""
+                    ""interactions"": """"
                 },
                 {
                     ""name"": ""Element Special 1"",
@@ -59,7 +59,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
-                    ""name"": ""HoldSpecial"",
+                    ""name"": ""HoldAttack"",
                     ""type"": ""Button"",
                     ""id"": ""27205a18-6af4-4e44-a818-3864a032215b"",
                     ""expectedControlType"": ""Button"",
@@ -185,7 +185,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""431820a0-37c8-4b77-9080-c565a080538d"",
                     ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwordSwing"",
@@ -196,7 +196,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""e3fdd414-0724-42a9-a6c3-324ada27c141"",
                     ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Press(behavior=1)"",
+                    ""interactions"": ""Press"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Element Special 1"",
@@ -338,11 +338,11 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""3c306a7d-ea94-4452-9f78-dcefb19c7ea4"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": ""Hold"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": ""Hold(duration=0.3)"",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""HoldSpecial"",
+                    ""action"": ""HoldAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1446,7 +1446,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_KeyboardMouse_JumpRelease = m_KeyboardMouse.FindAction("JumpRelease", throwIfNotFound: true);
         m_KeyboardMouse_SwordSwing = m_KeyboardMouse.FindAction("SwordSwing", throwIfNotFound: true);
         m_KeyboardMouse_ElementSpecial1 = m_KeyboardMouse.FindAction("Element Special 1", throwIfNotFound: true);
-        m_KeyboardMouse_HoldSpecial = m_KeyboardMouse.FindAction("HoldSpecial", throwIfNotFound: true);
+        m_KeyboardMouse_HoldAttack = m_KeyboardMouse.FindAction("HoldAttack", throwIfNotFound: true);
         m_KeyboardMouse_Guard = m_KeyboardMouse.FindAction("Guard", throwIfNotFound: true);
         m_KeyboardMouse_GuardRelease = m_KeyboardMouse.FindAction("Guard Release", throwIfNotFound: true);
         m_KeyboardMouse_Pause = m_KeyboardMouse.FindAction("Pause", throwIfNotFound: true);
@@ -1563,7 +1563,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private readonly InputAction m_KeyboardMouse_JumpRelease;
     private readonly InputAction m_KeyboardMouse_SwordSwing;
     private readonly InputAction m_KeyboardMouse_ElementSpecial1;
-    private readonly InputAction m_KeyboardMouse_HoldSpecial;
+    private readonly InputAction m_KeyboardMouse_HoldAttack;
     private readonly InputAction m_KeyboardMouse_Guard;
     private readonly InputAction m_KeyboardMouse_GuardRelease;
     private readonly InputAction m_KeyboardMouse_Pause;
@@ -1583,7 +1583,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public InputAction @JumpRelease => m_Wrapper.m_KeyboardMouse_JumpRelease;
         public InputAction @SwordSwing => m_Wrapper.m_KeyboardMouse_SwordSwing;
         public InputAction @ElementSpecial1 => m_Wrapper.m_KeyboardMouse_ElementSpecial1;
-        public InputAction @HoldSpecial => m_Wrapper.m_KeyboardMouse_HoldSpecial;
+        public InputAction @HoldAttack => m_Wrapper.m_KeyboardMouse_HoldAttack;
         public InputAction @Guard => m_Wrapper.m_KeyboardMouse_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_KeyboardMouse_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_KeyboardMouse_Pause;
@@ -1618,9 +1618,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ElementSpecial1.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
                 @ElementSpecial1.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
                 @ElementSpecial1.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnElementSpecial1;
-                @HoldSpecial.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldSpecial;
-                @HoldSpecial.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldSpecial;
-                @HoldSpecial.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldSpecial;
+                @HoldAttack.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldAttack;
+                @HoldAttack.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldAttack;
+                @HoldAttack.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnHoldAttack;
                 @Guard.started -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
                 @Guard.performed -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
                 @Guard.canceled -= m_Wrapper.m_KeyboardMouseActionsCallbackInterface.OnGuard;
@@ -1670,9 +1670,9 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @ElementSpecial1.started += instance.OnElementSpecial1;
                 @ElementSpecial1.performed += instance.OnElementSpecial1;
                 @ElementSpecial1.canceled += instance.OnElementSpecial1;
-                @HoldSpecial.started += instance.OnHoldSpecial;
-                @HoldSpecial.performed += instance.OnHoldSpecial;
-                @HoldSpecial.canceled += instance.OnHoldSpecial;
+                @HoldAttack.started += instance.OnHoldAttack;
+                @HoldAttack.performed += instance.OnHoldAttack;
+                @HoldAttack.canceled += instance.OnHoldAttack;
                 @Guard.started += instance.OnGuard;
                 @Guard.performed += instance.OnGuard;
                 @Guard.canceled += instance.OnGuard;
@@ -2166,7 +2166,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         void OnJumpRelease(InputAction.CallbackContext context);
         void OnSwordSwing(InputAction.CallbackContext context);
         void OnElementSpecial1(InputAction.CallbackContext context);
-        void OnHoldSpecial(InputAction.CallbackContext context);
+        void OnHoldAttack(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);

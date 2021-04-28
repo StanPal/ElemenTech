@@ -63,7 +63,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -356,11 +356,11 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1791110765294023620
 Transform:
   m_ObjectHideFlags: 0
@@ -429,6 +429,10 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 0.5
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 3
   _positiveEffect: 3
   _negativeEffect: 3
@@ -882,10 +886,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 20
-  _knockBackYAmount: 10
-  _knockBackLength: 0.2
-  _hitStun: 1
 --- !u!114 &4295802460415164768
 MonoBehaviour:
   m_ObjectHideFlags: 0

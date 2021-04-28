@@ -35,7 +35,7 @@
                     "id": "ff8c6cab-a322-43e8-b9ee-3dc02250c395",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": "Hold"
+                    "interactions": ""
                 },
                 {
                     "name": "Element Special 1",
@@ -46,7 +46,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "HoldSpecial",
+                    "name": "HoldAttack",
                     "type": "Button",
                     "id": "27205a18-6af4-4e44-a818-3864a032215b",
                     "expectedControlType": "Button",
@@ -172,7 +172,7 @@
                     "name": "",
                     "id": "431820a0-37c8-4b77-9080-c565a080538d",
                     "path": "<Mouse>/leftButton",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "SwordSwing",
@@ -183,7 +183,7 @@
                     "name": "",
                     "id": "e3fdd414-0724-42a9-a6c3-324ada27c141",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "Press(behavior=1)",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
                     "action": "Element Special 1",
@@ -325,11 +325,11 @@
                 {
                     "name": "",
                     "id": "3c306a7d-ea94-4452-9f78-dcefb19c7ea4",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "Hold",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Hold(duration=0.3)",
                     "processors": "",
                     "groups": "",
-                    "action": "HoldSpecial",
+                    "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

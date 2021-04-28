@@ -147,10 +147,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 12
-  _knockBackYAmount: 8
-  _knockBackLength: 0.2
-  _hitStun: 1
 --- !u!61 &5781581391148098263
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -280,6 +276,10 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 0.45
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 2
   _positiveEffect: 3
   _negativeEffect: 3

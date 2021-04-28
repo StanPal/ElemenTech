@@ -30,6 +30,10 @@ public class HeroStats : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private float _currentHealth = 100f;
     [SerializeField] private float _coolDown = 3f;
+    [SerializeField] private float _knockBackXAmount = 10f;
+    [SerializeField] private float _knockBackYAmount = 5f;
+    [SerializeField] private float _knockBackLength = 0.2f;
+    [SerializeField] private float _hitStun = 1f;
     private bool _isHealing = false;
     private float _tempCoolDownTime;
     private bool _isCoolDownFinished;
@@ -44,6 +48,11 @@ public class HeroStats : MonoBehaviour
     public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public float MaxHealth { get { return _maxHealth; } }
     public float AttackDamage { get { return _meleeAttack; } }
+    public float KnockBackXAmount { get { return _knockBackXAmount; } }
+    public float KnockBackYAmount { get { return _knockBackYAmount; } }
+    public float KnockBackLength { get { return _knockBackLength; } }
+    public float HitStun { get { return _hitStun; } }
+
 
     //Elemental Type
     [SerializeField] private Elements.ElementalAttribute _elementalType;

@@ -23,12 +23,12 @@ public class AirJet : MonoBehaviour
             _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
             _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
                 (5f, 5f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+            _AirSkills.Damage = _AirSkills.Damage * 2f;
         }
         else
         {
             isChargeMax = false;
-            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-
+            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
         }
     }
 
@@ -40,15 +40,16 @@ public class AirJet : MonoBehaviour
         }
         _ExitTime -= Time.deltaTime;
         _RigidBody.velocity = transform.right * _ProjectileSpeed;
-        if (isChargeMax)
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
-        }
-        else
-        {
-            transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize / 2, _AirSkills.ScaleSpeed * Time.deltaTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
 
-        }
+        //if (isChargeMax)
+        //{
+        //    transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize / 2, _AirSkills.ScaleSpeed * Time.deltaTime);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
