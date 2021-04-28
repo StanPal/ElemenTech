@@ -26,11 +26,18 @@ public class HeroActions : MonoBehaviour
     private bool _isGuardInvoked = false;
     private bool _isSwordSwinging = false;
     private bool _isEarthStomping = false;
+    private bool _isChargingAttack = false;
+    private bool _isChargingShot = false;
+    private bool _isChargeAttackMax = false; 
+    private bool _isChargeMax = false; 
     private float _nextFireTime;
     private Camera _camera;
     private Color _originalSpriteColor;
 
     [SerializeField] private bool _isOnCooldown = false;
+    [SerializeField] private float _chargeAmount = 0f;
+    [SerializeField] private float _chargeAmountMax = 10f;
+    [SerializeField] private float _chargeTime = 2f;
     [SerializeField] private Vector2 _lookDirection;
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector3 _axisPos;
@@ -39,13 +46,16 @@ public class HeroActions : MonoBehaviour
     //Getters & Setters
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
     public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
+    public bool ChargingShot { get => _isChargingShot; set => _isChargingShot = value; } 
+    public bool ChargeMax { get => _isChargeMax; set => _isChargeMax = value; }
+    public float ChargeAmount { get => _chargeAmount; set => _chargeAmount = value; }
     public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
     public bool IsEarthStomping { get => _isEarthStomping; set => _isEarthStomping = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
     public HeroStats HeroStats { get => _heroStats; } 
     public PlayerInput PlayerInput { get => _playerInput; } 
     public Vector2 GetLookDir { get => _lookDirection; }
-    public float GetLookAngle { get => _lookAngle; }     
+    public float GetLookAngle { get => _lookAngle; }
     public Animator PlayerAnimator { get => _playerAnimator; }
 
     private void Awake()
@@ -85,17 +95,7 @@ public class HeroActions : MonoBehaviour
             {
                 _playerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
                 _playerInput.KeyboardMouse.SwordSwing.performed += _ => SwordSwing();
-                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
-                {
-                    if (_playerInput.KeyboardMouse.HoldSpecial.triggered)
-                    {
-
-                    }
-                }
-                else
-                {
-                    _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
-                }
+                _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.KeyboardMouse.Guard.performed += _ => Guard();
@@ -140,6 +140,23 @@ public class HeroActions : MonoBehaviour
                     _playerInput.Gamepad.Guard.performed += _ => Guard();
                 }
                 _playerInput.Gamepad.GuardRelease.performed += _ => GuardRelease();
+            }
+        }
+    }
+
+    private void FixedUpdate()
+    {
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+        {
+            if (_playerInput.KeyboardMouse.HoldSpecial.triggered)
+            {
+                Debug.Log("Hold Mouse Triggered");
+                ChargingShot = true;
+                StartCoroutine(Charging());
+            }
+            else
+            {
+                // _playerInput.KeyboardMouse.ElementSpecial1.performed += _ => ElementSpecial1();
             }
         }
     }
@@ -292,6 +309,21 @@ public class HeroActions : MonoBehaviour
         _rb.gravityScale = _heroMovement.OriginalGravity * 2f;
         yield return new WaitForSeconds(0.5f);
         _rb.gravityScale = _heroMovement.OriginalGravity;
+    }
+
+    private IEnumerator Charging()
+    {
+        while(_isChargingShot && _chargeAmount < _chargeAmountMax)
+        {
+            _chargeAmount += 2f;
+            yield return new WaitForSeconds(0.5f);
+        }
+        if(_chargeAmount == _chargeAmountMax)
+        {
+            StartCoroutine(Flash());
+            _isChargeMax = true;
+            _isChargingShot = false;
+        }
     }
 
     private void Pause()
