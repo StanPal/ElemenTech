@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 122998365925269869}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -617,6 +617,10 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 0.8
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 0
   _positiveEffect: 3
   _negativeEffect: 3
@@ -637,6 +641,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 4742860617384786225}
   FirePoint: {fileID: 4264183723163891622}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}
@@ -655,7 +662,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 0
   _moveSpeed: 17
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -1054,10 +1061,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 15
-  _knockBackYAmount: 7
-  _knockBackLength: 0.2
-  _hitStun: 1
 --- !u!114 &8349940066716883378
 MonoBehaviour:
   m_ObjectHideFlags: 0

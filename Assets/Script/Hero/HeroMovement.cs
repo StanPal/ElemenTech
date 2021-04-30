@@ -107,7 +107,8 @@ public class HeroMovement : MonoBehaviour
     public bool Dashing { get => _isDashing; set => _isDashing = value; } 
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
     public bool GetIsLeft { get  => _isLeft; } 
-    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }    
+    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }
+    public FastFallJump FastFallJump { get => _fastFallJump; }
 
     private void Awake()
     {
@@ -667,7 +668,7 @@ public class HeroMovement : MonoBehaviour
             {
                 if (WeightShifting)
                 {
-                    _rb.velocity = Vector2.up * ((_groundJumpForce / (_fastFallJump.OriginalWeight - _fastFallJump.Weight)) / 2f);
+                    _rb.velocity = Vector2.up * ((_groundJumpForce - _fastFallJump.Weight - _fastFallJump.OriginalWeight) / 2f);
                     _numOfJumps--;
                 }
                 else

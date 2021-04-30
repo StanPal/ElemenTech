@@ -58,6 +58,7 @@ public class HeroActions : MonoBehaviour
     public float GetLookAngle { get => _lookAngle; }
     public Animator PlayerAnimator { get => _playerAnimator; }
 
+
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -216,7 +217,10 @@ public class HeroActions : MonoBehaviour
     
     private void OnCharging()
     {
-        _isChargingShot = true;
+        if (!_heroMovement.IsGrounded())
+        {
+            _isChargingShot = true;
+        }
     }
 
     private void ElementSpecial1()

@@ -16,20 +16,8 @@ public class AirJet : MonoBehaviour
         _ProjectileSpeed = _AirSkills.Speed;
         _ScaleSize = _AirSkills.Scale;
         _ExitTime = _AirSkills.ExitTime;
-        if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
-        {
-            isChargeMax = true;
-            _AirSkills.PlayerSkills.HeroAction.ChargeMax = false;
-            _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
             _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
-                (5f, 5f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-            _AirSkills.Damage = _AirSkills.Damage * 2f;
-        }
-        else
-        {
-            isChargeMax = false;
-            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-        }
+                (2f,2f , 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
     }
 
     private void FixedUpdate()
