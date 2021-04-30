@@ -283,14 +283,17 @@ public class HeroActions : MonoBehaviour
     }
 
     private IEnumerator Flash()
-    {
-        for (int i = 0; i < 2; i++)
+    {        
+        while (_isChargeMax)
         {
-            SetSpriteColor(Color.white);
-            yield return new WaitForSeconds(0.1f);
-            SetSpriteColor(_originalSpriteColor);
-            yield return new WaitForSeconds(0.1f);
-        }
+            for (int i = 0; i < 2; i++)
+            {
+                SetSpriteColor(Color.white);
+                yield return new WaitForSeconds(0.1f);
+                SetSpriteColor(_originalSpriteColor);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }        
     }
 
     private void SetSpriteColor(Color spriteColor)

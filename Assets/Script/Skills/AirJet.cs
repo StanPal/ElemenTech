@@ -17,7 +17,7 @@ public class AirJet : MonoBehaviour
         _ScaleSize = _AirSkills.Scale;
         _ExitTime = _AirSkills.ExitTime;
             _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
-                (2f,2f , 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+                (_AirSkills.KnockbackX, _AirSkills.knockbackY , _AirSkills.knockbackLength, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
     }
 
     private void FixedUpdate()

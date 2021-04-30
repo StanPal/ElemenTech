@@ -21,6 +21,9 @@ public class AirSkills : MonoBehaviour
     [SerializeField]
     float mScaleSpeed; 
     public float ScaleSpeed { get { return mScaleSpeed; } }
+    public float KnockbackX = 10f;
+    public float knockbackY = 10f;
+    public float knockbackLength = 0.5f;
 
     PlayerSkills mHeroSkills;
     public PlayerSkills PlayerSkills { get { return mHeroSkills; } }
