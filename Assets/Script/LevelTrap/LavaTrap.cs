@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class LavaTrap : MonoBehaviour
 {
-    [SerializeField] private float damageTime = 1.0f;
-    [SerializeField] private float damage = 5.0f;
-    private const float delayTime = 1.0f;
+    [SerializeField] private float _damageTime = 1.0f;
+    [SerializeField] private float _damage = 5.0f;
+    private const float _delayTime = 1.0f;
     [SerializeField]
-    private GameObject[] waypoints;
-    private int current = 0;
-    private float WPreadius = 1;
+    private GameObject[] _waypoints;
+    private int _current = 0;
+    private float _wPreadius = 1;
     [SerializeField]
-    private float speed;
+    private float _speed;
 
     public struct TrappedHeroData
     {
@@ -29,27 +29,27 @@ public class LavaTrap : MonoBehaviour
 
     void Update()
     {
-        if (Vector3.Distance(waypoints[current].transform.position, transform.position) < WPreadius)
+        if (Vector3.Distance(_waypoints[_current].transform.position, transform.position) < _wPreadius)
         {
-            current++;
-            if (current >= waypoints.Length)
+            _current++;
+            if (_current >= _waypoints.Length)
             {
-                current = 0;
+                _current = 0;
             }
         }
-        transform.position = Vector3.MoveTowards(transform.position, waypoints[current].transform.position, Time.deltaTime * speed);
+        transform.position = Vector3.MoveTowards(transform.position, _waypoints[_current].transform.position, Time.deltaTime * _speed);
     }
 
     private IEnumerator LavaDamageRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(delayTime);
+            yield return new WaitForSeconds(_delayTime);
             if(_trappedHeros.Count > 0)
             {
                 foreach(var trappedHero in _trappedHeros)
                 {
-                    trappedHero.HeroStats.TakeDamage(damage);
+                    trappedHero.HeroStats.TakeDamage(_damage);
                 }
             }
         }
