@@ -7,7 +7,7 @@ public class IceSpikeTrap : MonoBehaviour
     private IceTrapManager iceTrapManager;
     Vector3 startTransform = new Vector3();
     Rigidbody2D rb;
-    
+    [SerializeField] GameObject IceSpike;
 
     private void Awake()
     {
@@ -19,17 +19,20 @@ public class IceSpikeTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        var heroStats = collision.GetComponent<HeroStats>();
-        if (heroStats != null)
+        if (IceSpike.GetComponent<IceSpikeMovement>().IsActive)
         {
-            Debug.Log("hit player");
-            heroStats.TakeDamage(iceTrapManager.Damage);
-            DestroySpike();
-        }
-        if (collision.gameObject.CompareTag("Wall"))
-        {
-            Debug.Log("hit wall");
-            DestroySpike();
+            var heroStats = collision.GetComponent<HeroStats>();
+            if (heroStats != null)
+            {
+                Debug.Log("hit player");
+                heroStats.TakeDamage(iceTrapManager.Damage);
+                DestroySpike();
+            }
+            if (collision.GetComponentInParent<Walls>())
+            {
+                Debug.Log("hit wall");
+                DestroySpike();
+            }
         }
     }
 
@@ -39,10 +42,9 @@ public class IceSpikeTrap : MonoBehaviour
         //transform.position = startTransform;
         //iceTrapManager.RandomNum.Add(transform);
         // If it hits anything, destroy it.
-        iceTrapManager.SpawnSpike();
         iceTrapManager.IceSpikeCounter--;
-        iceTrapManager.addNewLocation(GetComponentInParent<IceSpikeMovement>().transform);
-        Destroy(GetComponentInParent<IceSpikeMovement>().gameObject); 
+        iceTrapManager.addNewLocation(IceSpike.transform);
+        Destroy(IceSpike.gameObject); 
     }
 
     public void activeSpike()
