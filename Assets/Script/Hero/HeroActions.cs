@@ -57,6 +57,7 @@ public class HeroActions : MonoBehaviour
     public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; }
     public Animator PlayerAnimator { get => _playerAnimator; }
+    public Crosshair CrossHair { get => _crossHair; }
 
     private void Awake()
     {
