@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -471,12 +471,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0c29544e1906227488567f0a467fbc25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  particleTime: 1
   _Crosshair: {fileID: 5745905597698010381}
   _dust: {fileID: 2378443808384279137}
-  _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  _trail1: {fileID: 0}
+  _trail2: {fileID: 0}
+  _trail3: {fileID: 0}
+  _trail4: {fileID: 0}
+  ControllerInput: 3
+  _airTime: 2
   _moveSpeed: 14
-  _airStrifeSpeed: 5
+  _airStrifeSpeed: 7
   _groundJumpForce: 20
   _airJumpForce: 20
   _numOfJumps: 0

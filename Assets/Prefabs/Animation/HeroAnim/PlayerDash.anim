@@ -70,7 +70,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: get_DashProjectileInvincibility
+    functionName: InvincibleOn
     data: 
     objectReferenceParameter: {fileID: 11500000, guid: 5b8ccd796fa5184419109b1fb47b90b3,
       type: 3}

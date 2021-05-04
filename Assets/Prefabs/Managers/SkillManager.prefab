@@ -102,6 +102,9 @@ MonoBehaviour:
   mExitTime: 1.5
   mScale: {x: 0.5, y: 3, z: 0.5}
   mScaleSpeed: 2
+  KnockbackX: 0
+  knockbackY: 0
+  knockbackLength: 0
 --- !u!114 &639230567
 MonoBehaviour:
   m_ObjectHideFlags: 0

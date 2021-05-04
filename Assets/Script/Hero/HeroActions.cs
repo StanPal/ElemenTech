@@ -59,6 +59,7 @@ public class HeroActions : MonoBehaviour
     public Animator PlayerAnimator { get => _playerAnimator; }
     public Crosshair CrossHair { get => _crossHair; }
 
+
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -217,7 +218,10 @@ public class HeroActions : MonoBehaviour
     
     private void OnCharging()
     {
-        _isChargingShot = true;
+        if (!_heroMovement.IsGrounded())
+        {
+            _isChargingShot = true;
+        }
     }
 
     private void ElementSpecial1()
@@ -280,14 +284,17 @@ public class HeroActions : MonoBehaviour
     }
 
     private IEnumerator Flash()
-    {
-        for (int i = 0; i < 2; i++)
+    {        
+        while (_isChargeMax)
         {
-            SetSpriteColor(Color.white);
-            yield return new WaitForSeconds(0.1f);
-            SetSpriteColor(_originalSpriteColor);
-            yield return new WaitForSeconds(0.1f);
-        }
+            for (int i = 0; i < 2; i++)
+            {
+                SetSpriteColor(Color.white);
+                yield return new WaitForSeconds(0.1f);
+                SetSpriteColor(_originalSpriteColor);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }        
     }
 
     private void SetSpriteColor(Color spriteColor)

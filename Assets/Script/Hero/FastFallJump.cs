@@ -45,7 +45,9 @@ public class FastFallJump : MonoBehaviour
             if (_heroMovement.WeightShifting)
             {    
                 _rb.velocity += Vector2.up  * (_fallMultiplier - _fallOffsetSpeed) * Time.deltaTime;
-                _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, _fallMultiplier);
+                _rb.velocity = new Vector2(Mathf.Clamp(_rb.velocity.x, -_heroMovement.AirStrifeSpeed, _heroMovement.AirStrifeSpeed)
+                    , Mathf.Clamp(_rb.velocity.y, 0, _fallMultiplier));
+
             }
             else
             {

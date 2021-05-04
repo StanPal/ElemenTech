@@ -43,5 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb0431918f7bfcd45b4476c477e5a823, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mTeamOneScore: 0
-  mTeamTwoScore: 0
+  _teamOneScore: 0
+  _teamTwoScore: 0
+  _isPracticeMode: 0
+  _isMatchOver: 0
+  _bestOfValue: 3
+  TriggerReset: 0

@@ -15,9 +15,14 @@ public class HeroMovement : MonoBehaviour
     private AnimationEvents _animationEvents;
     private Rigidbody2D _rb;
     private FastFallJump _fastFallJump;
+    [SerializeField] private float particleTime = 1f;
     [SerializeField] private GameObject _Crosshair;
     [SerializeField] private ParticleSystem _dust;
-    [SerializeField] private ParticleSystem _dashParticleEffect;
+    [SerializeField] private ParticleSystem _trail1;
+    [SerializeField] private ParticleSystem _trail2;
+    [SerializeField] private ParticleSystem _trail3;
+    [SerializeField] private ParticleSystem _trail4;
+
 
     public enum Controller
     {
@@ -41,6 +46,7 @@ public class HeroMovement : MonoBehaviour
     private bool _isJumping = false;
     private float _selfKnockBack;
 
+    [SerializeField] private float _airTime = 2f;
     [SerializeField] private float _moveSpeed = 12f;
     [SerializeField] private float _airStrifeSpeed = 6f;
     [SerializeField] private float _groundJumpForce = 15f;
@@ -103,12 +109,22 @@ public class HeroMovement : MonoBehaviour
     public float RecoveryTime { get => _recoveryTime; set => _recoveryTime = value; }
     public float OriginalGravity { get => _originalGravity; }
     public float NumberOfJumps { get => _numOfJumps; set => value = _numOfJumps; }
+    public float AirStrifeSpeed { get => _airStrifeSpeed; }
     public bool WeightShifting { get => _isWeightShifting; }
     public float DashSpeed { get => _dashSpeed; }
     public bool Dashing { get => _isDashing; set => _isDashing = value; }
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
+<<<<<<< HEAD
     public bool GetIsLeft { get => _isLeft; }
     public bool Recovering { get => _isRecovering; set => _isRecovering = value; }
+||||||| 4873367
+    public bool GetIsLeft { get  => _isLeft; } 
+    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }    
+=======
+    public bool GetIsLeft { get  => _isLeft; } 
+    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }
+    public FastFallJump FastFallJump { get => _fastFallJump; }
+>>>>>>> StanPalisoc/Countdown
 
     private void Awake()
     {
@@ -466,7 +482,7 @@ public class HeroMovement : MonoBehaviour
             {
                 if (collision.collider.tag.Equals("Team1"))
                 {
-                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                   Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
                     StartCoroutine(ResetCollision(collision.collider));
 
                 }
@@ -681,7 +697,7 @@ public class HeroMovement : MonoBehaviour
             {
                 if (WeightShifting)
                 {
-                    _rb.velocity = Vector2.up * ((_groundJumpForce / (_fastFallJump.OriginalWeight - _fastFallJump.Weight)) / 2f);
+                    _rb.velocity = Vector2.up * ((_groundJumpForce - _fastFallJump.Weight - _fastFallJump.OriginalWeight) / 2f);
                     _numOfJumps--;
                 }
                 else
@@ -724,6 +740,11 @@ public class HeroMovement : MonoBehaviour
 
 
     //Coroutines Start
+
+    private IEnumerator AirTime()
+    {
+        yield return new WaitForSeconds(2f);
+    }
 
     private IEnumerator DropWeight()
     {
@@ -772,6 +793,7 @@ public class HeroMovement : MonoBehaviour
 
         yield return new WaitForSeconds(_dashEndTime);
         _playerAnimator.SetBool("IsDashing", false);
+        StartCoroutine(FadeAway());
         _isTapDashing = false;
         _rb.velocity = Vector2.zero;
         _rb.gravityScale = _originalGravity;
@@ -819,6 +841,15 @@ public class HeroMovement : MonoBehaviour
         _isRecovering = false;
     }
 
+    private IEnumerator FadeAway()
+    {
+        yield return new WaitForSeconds(particleTime);
+        _trail1.Stop();
+        _trail2.Stop();
+        _trail3.Stop();
+        _trail4.Stop();
+    }
+
     //Coroutines End
 
 
@@ -831,7 +862,10 @@ public class HeroMovement : MonoBehaviour
 
     private void CreateDashPartile()
     {
-        _dashParticleEffect.Play();
+        _trail1.Play();
+        _trail2.Play();
+        _trail3.Play();
+        _trail4.Play();
     }
 
     //SoundEffects End
