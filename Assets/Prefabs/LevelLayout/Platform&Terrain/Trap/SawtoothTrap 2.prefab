@@ -80,8 +80,8 @@ MonoBehaviour:
   Saw: {fileID: 5656973085440563710}
   waypoints:
   - {fileID: 4691732855524430682}
-  - {fileID: 6499409780576125535}
   - {fileID: 5478670141789470851}
+  - {fileID: 6499409780576125535}
   moveSpeed: 5
   workWay: 1
 --- !u!1 &5478670141789470851
@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 894566875}
   m_Layer: 0
   m_Name: position2
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -305,6 +305,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mDamageTime: 1
   mDamage: 20
+  _speed: 2
+  _knockBackAmount: 20
+  _knockBackLength: 0.2
 --- !u!58 &3218189767090022918
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -351,7 +354,7 @@ GameObject:
   - component: {fileID: 236767109}
   m_Layer: 0
   m_Name: position1
-  m_TagString: Untagged
+  m_TagString: button
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
