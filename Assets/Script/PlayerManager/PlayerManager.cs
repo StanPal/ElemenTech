@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerManager : MonoBehaviour
 {
+    public PlayerInputManager _playerInputManager; 
     // Prefabs for Heros
     public GameObject FireHero;
     public GameObject WaterHero;
@@ -18,7 +20,7 @@ public class PlayerManager : MonoBehaviour
     public List<GameObject> TeamTwo = new List<GameObject>();
 
     private void Awake()
-    {
+    {        
         ServiceLocator.Register<PlayerManager>(this);
         FireHero.GetComponent<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
         WaterHero.GetComponentInChildren<HeroMovement>().ControllerInput = HeroMovement.Controller.None;
@@ -33,5 +35,4 @@ public class PlayerManager : MonoBehaviour
         TeamOne.Capacity = 0;
         TeamTwo.Capacity = 0;
     }
-
 }

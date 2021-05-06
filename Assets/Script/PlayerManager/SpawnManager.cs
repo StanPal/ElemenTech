@@ -20,8 +20,9 @@ public class SpawnManager : MonoBehaviour
         _playerManager.TeamTwo.Clear();
 
         if (_playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
-        {
+        {    
             GameObject fireHero = Instantiate(_playerManager.FireHero);
+            //fireHero.GetComponent<HeroMovement>().PlayerInput = fireHero.GetComponent<PlayerInput>().KeyboardMouseScheme;
             fireHero.SetActive(true);
             _playerManager.mPlayersList[0] = fireHero;
             if (_playerManager.mPlayersList[0].tag == "Team1")

@@ -18,10 +18,12 @@ public class SwordAttack : MonoBehaviour
     private bool _isOriginalDirectionleft;
     private bool _isChargeMax = false;
     private float _meleeDamage; 
-    private Vector3 _originalLocalScale;    
+    private Vector3 _originalLocalScale;
+    private BoxCollider2D _boxCollider;
 
     private void Awake()
     {
+        _boxCollider = GetComponent<BoxCollider2D>();
         _particleSystemManager = FindObjectOfType<ParticleSystemManager>();
         _heroAction = GetComponentInParent<HeroActions>();
         _heroMovement = GetComponentInParent<HeroMovement>();
@@ -121,9 +123,10 @@ public class SwordAttack : MonoBehaviour
                     }
                     else
                     {
-                        if (_heroAction.DashStriking)
+                        if (_heroStats.GetElement == Elements.ElementalAttribute.Water && _heroAction.DashStriking)
                         {
                             Debug.Log("AttackHitTriggered");
+                            _boxCollider.isTrigger = false;
                             heroStats.TakeDamage(_meleeDamage);
                         }
                         else

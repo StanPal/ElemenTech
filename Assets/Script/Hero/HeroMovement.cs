@@ -109,7 +109,7 @@ public class HeroMovement : MonoBehaviour
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
     public bool GetIsLeft { get => _isLeft; }
     public bool Recovering { get => _isRecovering; set => _isRecovering = value; }
-
+    public float SelfKnockBack { get => _selfKnockBack; }
     private void Awake()
     {
         _playerAnimator = GetComponentInChildren<Animator>();
@@ -218,17 +218,13 @@ public class HeroMovement : MonoBehaviour
             _knockBackCount -= Time.deltaTime;
         }
 
-        if (_selfKnockBack <= 0)
-        {
-            _rb.velocity = _newVelocity;
-        }
-        else
+        if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
         {
             _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
-            _selfKnockBack -= Time.deltaTime;
+            _selfKnockBack -= Time.deltaTime; 
         }
 
-
+  
 
         if (_isDashing)
         {

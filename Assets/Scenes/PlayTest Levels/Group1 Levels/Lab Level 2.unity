@@ -1039,27 +1039,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &441677194
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7255437403118390973}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a9d69929276ea9478592ab6e3c4f19c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _focusLevel: {fileID: 1216423915}
-  Players: []
-  _depthUpdateSpeed: 40
-  _angleUpdateSpeed: 7
-  _positionUpdateSpeed: 5
-  _depthMax: 15
-  _depthMin: -50
-  _angleMax: 0
-  _angleMin: 3
 --- !u!1 &498047236
 GameObject:
   m_ObjectHideFlags: 0
@@ -2468,7 +2447,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1216423913}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: 18, z: 0}
+  m_LocalPosition: {x: 5.71, y: 14.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5068,9 +5047,9 @@ GameObject:
   - component: {fileID: 7255437403118390960}
   - component: {fileID: 7255437403118390975}
   - component: {fileID: 7255437403118390974}
-  - component: {fileID: 441677194}
   - component: {fileID: 7033959623116719693}
   - component: {fileID: 97399162006537905}
+  - component: {fileID: 7255437403118390976}
   m_Layer: 0
   m_Name: Main Camera (1)
   m_TagString: MainCamera
@@ -5111,7 +5090,7 @@ Camera:
     height: 1
   near clip plane: 0.4
   far clip plane: 1000
-  field of view: 41
+  field of view: 49
   orthographic: 0
   orthographic size: 16.5
   m_Depth: 0
@@ -5129,6 +5108,21 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &7255437403118390976
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7255437403118390973}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40381a6c265667b4cab1aea7826d9a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Players: []
+  camSpeed: 20
+  _focusLevel: {fileID: 1216423915}
 --- !u!4 &7714809240054386859
 Transform:
   m_ObjectHideFlags: 0

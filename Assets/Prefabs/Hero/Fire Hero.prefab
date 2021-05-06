@@ -541,6 +541,7 @@ GameObject:
   - component: {fileID: 1462250077875475378}
   - component: {fileID: 1791110765294023676}
   - component: {fileID: 122998365925269869}
+  - component: {fileID: 162259034700658477}
   m_Layer: 9
   m_Name: Fire Hero
   m_TagString: Team1
@@ -617,6 +618,10 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 0.8
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 0
   _positiveEffect: 3
   _negativeEffect: 3
@@ -637,6 +642,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 4742860617384786225}
   FirePoint: {fileID: 4264183723163891622}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}
@@ -744,6 +752,37 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0}
   m_Size: {x: 1, y: 2}
   m_Direction: 0
+--- !u!114 &162259034700658477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765294023672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: b2f8a0d6ae8e6a640a53164e162b4408,
+    type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 1
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Keyboard&Mouse
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &1791110765672992121
 GameObject:
   m_ObjectHideFlags: 0
@@ -1054,10 +1093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 15
-  _knockBackYAmount: 7
-  _knockBackLength: 0.2
-  _hitStun: 1
 --- !u!114 &8349940066716883378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6276,15 +6311,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0e99817203e8d974d87d4c1dc33bde9d, type: 3}
---- !u!4 &4502669515579716998 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1854956812321698994, guid: 0e99817203e8d974d87d4c1dc33bde9d,
-    type: 3}
-  m_PrefabInstance: {fileID: 2865014447594520884}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4502669515579717017 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1854956812321698989, guid: 0e99817203e8d974d87d4c1dc33bde9d,
+    type: 3}
+  m_PrefabInstance: {fileID: 2865014447594520884}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &4502669515579716998 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1854956812321698994, guid: 0e99817203e8d974d87d4c1dc33bde9d,
     type: 3}
   m_PrefabInstance: {fileID: 2865014447594520884}
   m_PrefabAsset: {fileID: 0}
@@ -6438,15 +6473,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 33d7f6d330c1a4142b8cd8f8bf1bbc43, type: 3}
---- !u!198 &7510961461162962043 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 2394372112823240, guid: 33d7f6d330c1a4142b8cd8f8bf1bbc43,
-    type: 3}
-  m_PrefabInstance: {fileID: 7508848632787558323}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &376321077650569937 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7857721467790714210, guid: 33d7f6d330c1a4142b8cd8f8bf1bbc43,
+    type: 3}
+  m_PrefabInstance: {fileID: 7508848632787558323}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7510961461162962043 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 2394372112823240, guid: 33d7f6d330c1a4142b8cd8f8bf1bbc43,
     type: 3}
   m_PrefabInstance: {fileID: 7508848632787558323}
   m_PrefabAsset: {fileID: 0}
