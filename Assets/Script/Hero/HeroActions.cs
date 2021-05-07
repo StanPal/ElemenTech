@@ -5,13 +5,15 @@ public class HeroActions : MonoBehaviour
 {
     public event System.Action<Elements.ElementalAttribute> onSkillPerformed;
     public event System.Action onAttackPerformed;
+    public event System.Action onChargeAttackPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
     public event System.Action onParryPerformed;
 
     [SerializeField] private GameObject Stomp;
-    private SoundManager _soundManager; 
+    private SoundManager _soundManager;
+    private SwordAttack _swordAttack;
     public GameObject Sword;
     public Transform PivotPoint;
     public Transform FirePoint;
@@ -28,8 +30,8 @@ public class HeroActions : MonoBehaviour
     private bool _isEarthStomping = false;
     private bool _isChargingAttack = false;
     private bool _isChargingShot = false;
-    private bool _isChargeAttackMax = false; 
-    private bool _isChargeMax = false; 
+    private bool _isChargeAttackMax = false;
+    private bool _isChargeMax = false;
     private float _nextFireTime;
     private Camera _camera;
     private Color _originalSpriteColor;
@@ -42,21 +44,23 @@ public class HeroActions : MonoBehaviour
     [SerializeField] private float _lookAngle;
     [SerializeField] private Vector3 _axisPos;
     private bool _isDashStriking = false;
-    
+
     //Getters & Setters
     public bool _isSwinging { get => _isSwordSwinging; set => _isSwordSwinging = value; }
     public bool DashStriking { get => _isDashStriking; set => _isDashStriking = value; }
-    public bool ChargingShot { get => _isChargingShot; set => _isChargingShot = value; } 
+    public bool ChargingShot { get => _isChargingShot; set => _isChargingShot = value; }
     public bool ChargeMax { get => _isChargeMax; set => _isChargeMax = value; }
     public float ChargeAmount { get => _chargeAmount; set => _chargeAmount = value; }
-    public bool IsCooldown { get => _isOnCooldown;  set => _isOnCooldown = value; }
+    public bool IsCooldown { get => _isOnCooldown; set => _isOnCooldown = value; }
     public bool IsEarthStomping { get => _isEarthStomping; set => _isEarthStomping = value; }
     public HeroMovement HeroMovement { get => _heroMovement; }
-    public HeroStats HeroStats { get => _heroStats; } 
-    public PlayerInput PlayerInput { get => _playerInput; } 
+    public HeroStats HeroStats { get => _heroStats; }
+    public PlayerInput PlayerInput { get => _playerInput; }
     public Vector2 GetLookDir { get => _lookDirection; }
     public float GetLookAngle { get => _lookAngle; }
     public Animator PlayerAnimator { get => _playerAnimator; }
+    public Crosshair CrossHair { get => _crossHair; }
+
 
     private void Awake()
     {
@@ -88,9 +92,9 @@ public class HeroActions : MonoBehaviour
     }
 
     private void Start()
-    { 
+    {
         if (!_heroMovement.Recovering)
-        {    
+        {
             if (_heroMovement.ControllerInput == HeroMovement.Controller.Keyboard)
             {
                 _playerInput.KeyboardMouse.FastFall.performed += _ => FastFall();
@@ -99,7 +103,6 @@ public class HeroActions : MonoBehaviour
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
                 {
                     _playerInput.KeyboardMouse.HoldAttack.performed += _ => OnCharging();
-                    Debug.Log("Hold attack Triggered");
                 }
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
@@ -114,6 +117,10 @@ public class HeroActions : MonoBehaviour
                 _playerInput.PS4.FastFall.performed += _ => FastFall();
                 _playerInput.PS4.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    _playerInput.PS4.HoldAttack.performed += _ => OnCharging();
+                }
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.PS4.Guard.performed += _ => Guard();
@@ -122,7 +129,7 @@ public class HeroActions : MonoBehaviour
                 _playerInput.PS4.Pause.performed += _ => Pause();
             }
 
-           if (HeroMovement.ControllerInput == HeroMovement.Controller.XBOX)
+            if (HeroMovement.ControllerInput == HeroMovement.Controller.XBOX)
             {
                 _playerInput.XBOX.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.XBOX.FastFall.performed += _ => FastFall();
@@ -130,6 +137,10 @@ public class HeroActions : MonoBehaviour
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.XBOX.Guard.performed += _ => Guard();
+                }
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    _playerInput.XBOX.HoldAttack.performed += _ => OnCharging();           
                 }
                 _playerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
                 _playerInput.XBOX.Pause.performed += _ => Pause();
@@ -151,7 +162,7 @@ public class HeroActions : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(ChargingShot)
+        if (ChargingShot)
         {
             StartCoroutine(Charging());
         }
@@ -170,7 +181,7 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.PS4:
                 _axisPos = _playerInput.PS4.Aim.ReadValue<Vector2>();
                 _lookDirection = _playerInput.PS4.Aim.ReadValue<Vector2>();
-                _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - _crossHair.transform.position.x) * Mathf.Rad2Deg;
+                _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.XBOX:
                 _axisPos = _playerInput.XBOX.Aim.ReadValue<Vector2>();
@@ -205,7 +216,7 @@ public class HeroActions : MonoBehaviour
     private void Guard()
     {
         _isGuardInvoked = true;
-         onGuardPerformed.Invoke();
+        onGuardPerformed.Invoke();
     }
 
     private void GuardRelease()
@@ -213,7 +224,7 @@ public class HeroActions : MonoBehaviour
         _isGuardInvoked = false;
         onGuardExit.Invoke();
     }
-    
+
     private void OnCharging()
     {
         _isChargingShot = true;
@@ -225,13 +236,13 @@ public class HeroActions : MonoBehaviour
         {
             if (!_isGuardInvoked && !_isOnCooldown)
             {
-                if(!_heroMovement.Dashing)
+                if (!_heroMovement.Dashing)
                 {
                     _playerAnimator.SetTrigger("SkillTrigger");
                     _nextFireTime = Time.time + HeroStats.CoolDown;
                     onSkillPerformed.Invoke(HeroStats.GetElement);
                 }
-                if((_heroMovement.Dashing && _heroMovement.IsGrounded()))
+                if ((_heroMovement.Dashing && _heroMovement.IsGrounded()))
                 {
                     _nextFireTime = Time.time + HeroStats.CoolDown;
                     onSkillPerformed.Invoke(HeroStats.GetElement);
@@ -241,14 +252,15 @@ public class HeroActions : MonoBehaviour
     }
 
     private void SwordSwing()
-    {        
+    {
         if (HeroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
         {
-            if(_heroMovement.Dashing || _heroMovement.TapDashing)
+            if (_heroMovement.Dashing || _heroMovement.TapDashing)
             {
                 _playerAnimator.SetBool("IsDashStriking", true);
                 _playerAnimator.SetBool("IsDashing", false);
                 DashStriking = true;
+
                 _heroMovement.Dashing = false;
                 _heroMovement.TapDashing = false;
 
@@ -263,11 +275,19 @@ public class HeroActions : MonoBehaviour
         }
         else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
-            _isSwinging = true;
-            _playerAnimator.SetBool("IsAttacking", true);
-            onAttackPerformed.Invoke();
+            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air) && _isChargeMax)
+            {                
+                onChargeAttackPerformed?.Invoke();
+            }
+            else
+            {
+                _playerAnimator.SetBool("IsAttacking", true);
+                onAttackPerformed.Invoke();
+            }
+                _isSwinging = true;
             AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
-        }
+        } 
+   
     }
 
     public void InvokeParry()
@@ -278,8 +298,23 @@ public class HeroActions : MonoBehaviour
         //onParryPerformed?.Invoke();
     }
 
+    private IEnumerator ContinuousFlash()
+    {
+        while (_isChargeMax)
+        {
+            for (int i = 0; i < 2; i++)
+            {
+                SetSpriteColor(Color.white);
+                yield return new WaitForSeconds(0.1f);
+                SetSpriteColor(_originalSpriteColor);
+                yield return new WaitForSeconds(0.1f);
+            }
+        }
+    }
+
     private IEnumerator Flash()
     {
+
         for (int i = 0; i < 2; i++)
         {
             SetSpriteColor(Color.white);
@@ -287,6 +322,7 @@ public class HeroActions : MonoBehaviour
             SetSpriteColor(_originalSpriteColor);
             yield return new WaitForSeconds(0.1f);
         }
+
     }
 
     private void SetSpriteColor(Color spriteColor)
@@ -315,14 +351,14 @@ public class HeroActions : MonoBehaviour
 
     private IEnumerator Charging()
     {
-        while(_isChargingShot && _chargeAmount < _chargeAmountMax)
+        while (_isChargingShot && _chargeAmount < _chargeAmountMax)
         {
             _chargeAmount += 2f;
             yield return new WaitForSeconds(0.5f);
         }
-        if(_chargeAmount == _chargeAmountMax)
+        if (_chargeAmount == _chargeAmountMax)
         {
-            StartCoroutine(Flash());
+            StartCoroutine(ContinuousFlash());
             _isChargeMax = true;
             _isChargingShot = false;
         }

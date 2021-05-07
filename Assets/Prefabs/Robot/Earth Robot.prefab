@@ -420,7 +420,7 @@ GameObject:
   - component: {fileID: 6066433788430600090}
   m_Layer: 9
   m_Name: Earth Robot
-  m_TagString: Team2
+  m_TagString: Team4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -487,11 +487,16 @@ MonoBehaviour:
   _bloodSplatterEffect: {fileID: 1061393159270828253}
   _burningEffect: {fileID: 3979320080342667845, guid: 80ce73f8a0ea0014788499489b71de74,
     type: 3}
+  _deathEffect: {fileID: 0}
   Team: 2
   _meleeAttack: 20
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 1.25
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 1
   _positiveEffect: 3
   _negativeEffect: 3
@@ -512,6 +517,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 2311665446414587354}
   FirePoint: {fileID: 2823546030041259660}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}
@@ -531,6 +539,7 @@ MonoBehaviour:
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
   ControllerInput: 3
+  OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -540,7 +549,6 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 1
   _jumpTimer: 5
-  _clampValue: 10
   _extraJumpForceRate: 10
   _whatIsGround:
     serializedVersion: 2
@@ -552,7 +560,8 @@ MonoBehaviour:
   _dashSpeed: 25
   _dashCoolDown: 1
   _dashTime: 0.3
-  _dashStartUpTime: 0.3
+  _dashEndTime: 0.3
+  _dashAttackDistance: 3
   _recoveryTime: 0.5
   _knockBackXRecieved: 0
   _knockBackYRecieved: 0
@@ -574,6 +583,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _fallMultiplier: 2.5
+  _weightDropRate: 1
+  _weightModifier: 0.1
+  _weightMin: 2
 --- !u!114 &1791110765294023676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1030,10 +1042,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 40
-  _knockBackYAmount: 20
-  _knockBackLength: 0.2
-  _hitStun: 1
+  chargeAttack: {fileID: 0}
 --- !u!114 &8695610312681426275
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ public class TeamSelect : MonoBehaviour
     private static int ControllerSelect2 = 0;
     private static int ControllerSelect3 = 0;
     private static int ControllerSelect4 = 0;
+    [SerializeField] private float totaltags = 4;
 
     private void Awake()
     {
@@ -42,8 +43,12 @@ public class TeamSelect : MonoBehaviour
                 _playerManager.FireHero.tag = "Team2";
                 break;
             case 3:
-                TeamButtonList[0].GetComponentInChildren<Text>().text = "FFA";
-                _playerManager.FireHero.tag = "FFA";
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "Team3";
+                _playerManager.FireHero.tag = "Team3";
+                break;
+            case 4:
+                TeamButtonList[0].GetComponentInChildren<Text>().text = "Team4";
+                _playerManager.FireHero.tag = "Team4";
                 break;
             default:
                 break;
@@ -63,8 +68,12 @@ public class TeamSelect : MonoBehaviour
                 _playerManager.EarthHero.tag = "Team2";
                 break;
             case 3:
-                TeamButtonList[1].GetComponentInChildren<Text>().text = "FFA";
-                _playerManager.EarthHero.tag = "FFA";
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "Team3";
+                _playerManager.EarthHero.tag = "Team3";
+                break;
+            case 4:
+                TeamButtonList[1].GetComponentInChildren<Text>().text = "Team4";
+                _playerManager.EarthHero.tag = "Team4";
                 break;
             default:
                 break;
@@ -84,8 +93,12 @@ public class TeamSelect : MonoBehaviour
                 _playerManager.WaterHero.tag = "Team2";
                 break;
             case 3:
-                TeamButtonList[2].GetComponentInChildren<Text>().text = "FFA";
-                _playerManager.WaterHero.tag = "FFA";
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "Team3";
+                _playerManager.WaterHero.tag = "Team4";
+                break;
+            case 4:
+                TeamButtonList[2].GetComponentInChildren<Text>().text = "Team4";
+                _playerManager.WaterHero.tag = "Team4";
                 break;
             default:
                 break;
@@ -105,8 +118,12 @@ public class TeamSelect : MonoBehaviour
                 _playerManager.AirHero.tag = "Team2";
                 break;
             case 3:
-                TeamButtonList[3].GetComponentInChildren<Text>().text = "FFA";
-                _playerManager.AirHero.tag = "FFA";
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "Team3";
+                _playerManager.AirHero.tag = "Team3";
+                break;
+            case 4:
+                TeamButtonList[3].GetComponentInChildren<Text>().text = "Team4";
+                _playerManager.AirHero.tag = "Team4";
                 break;
             default:
                 break;
@@ -116,28 +133,28 @@ public class TeamSelect : MonoBehaviour
     public void SelectController1()
     {
         ControllerSelect1++;
-        if (ControllerSelect1 > 3)
+        if (ControllerSelect1 > totaltags)
             ControllerSelect1 = 0;
     }
 
     public void SelectController2()
     {
         ControllerSelect2++;
-        if (ControllerSelect2 > 3)
+        if (ControllerSelect2 > totaltags)
             ControllerSelect2 = 0;
     }
 
     public void SelectController3()
     {
         ControllerSelect3++;
-        if (ControllerSelect3 > 3)
+        if (ControllerSelect3 > totaltags)
             ControllerSelect3 = 0;
     }
 
     public void SelectController4()
     {
         ControllerSelect4++;
-        if (ControllerSelect4 > 3)
+        if (ControllerSelect4 > totaltags)
             ControllerSelect4 = 0;
     }
 }

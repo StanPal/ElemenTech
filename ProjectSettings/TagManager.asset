@@ -13,7 +13,8 @@ TagManager:
   - BluePortal
   - OrangePortal
   - FFA
-  - button
+  - Team3
+  - Team4
   layers:
   - Default
   - TransparentFX

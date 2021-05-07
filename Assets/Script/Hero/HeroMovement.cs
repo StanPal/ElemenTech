@@ -29,6 +29,16 @@ public class HeroMovement : MonoBehaviour
     }
     public Controller ControllerInput = Controller.None;
 
+    public enum Team
+    {
+        Team1,
+        Team2,
+        Team3,
+        Team4
+    }
+
+    public Team OnTeam = Team.Team1;
+
     private float _horizontalMove;
     private float _moveInput;
     private bool _onHitLeft = false;
@@ -37,8 +47,9 @@ public class HeroMovement : MonoBehaviour
     private float _originalMoveSpeed;
     private float _originalJumpForce;
 
-     private bool _isLeft = false;
-     private bool _isJumping = false;
+    private bool _isLeft = false;
+    private bool _isJumping = false;
+    private float _selfKnockBack;
 
     [SerializeField] private float _moveSpeed = 12f;
     [SerializeField] private float _airStrifeSpeed = 6f;
@@ -68,11 +79,11 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private float _dashTime = 1f;
     [SerializeField] private float _dashEndTime = 0.3f;
     [SerializeField] private float _dashAttackDistance = 3f;
-    
+
     //Recovery Time until the player can move again 
     [SerializeField] private float _recoveryTime = 1f;
     private bool _isRecovering = false;
-    
+
     //KnockBack
     [SerializeField] private float _knockBackXRecieved;
     [SerializeField] private float _knockBackYRecieved;
@@ -94,21 +105,21 @@ public class HeroMovement : MonoBehaviour
     private Vector2 _slopeNormalPerp;
 
     //Getters and Setters
-    public CapsuleCollider2D GetBoxCollider2D { get => _capsuleCollider;  }
-    public PlayerInput PlayerInput { get => _playerInput; } 
+    public CapsuleCollider2D GetBoxCollider2D { get => _capsuleCollider; }
+    public PlayerInput PlayerInput { get => _playerInput; }
     public Rigidbody2D Rigidbody2D { get => _rb; }
-    public float Speed { get => _moveSpeed;  set => _moveSpeed = value; } 
+    public float Speed { get => _moveSpeed; set => _moveSpeed = value; }
     public float OriginalMoveSpeed { get => _originalMoveSpeed; }
-    public float RecoveryTime { get => _recoveryTime;  set => _recoveryTime = value; } 
+    public float RecoveryTime { get => _recoveryTime; set => _recoveryTime = value; }
     public float OriginalGravity { get => _originalGravity; }
     public float NumberOfJumps { get => _numOfJumps; set => value = _numOfJumps; }
     public bool WeightShifting { get => _isWeightShifting; }
-    public float DashSpeed { get => _dashSpeed; }    
-    public bool Dashing { get => _isDashing; set => _isDashing = value; } 
+    public float DashSpeed { get => _dashSpeed; }
+    public bool Dashing { get => _isDashing; set => _isDashing = value; }
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
-    public bool GetIsLeft { get  => _isLeft; } 
-    public bool Recovering { get => _isRecovering;  set => _isRecovering = value; }    
-
+    public bool GetIsLeft { get => _isLeft; }
+    public bool Recovering { get => _isRecovering; set => _isRecovering = value; }
+    public float SelfKnockBack { get => _selfKnockBack; }
     private void Awake()
     {
         _playerAnimator = GetComponentInChildren<Animator>();
@@ -127,12 +138,12 @@ public class HeroMovement : MonoBehaviour
         _jumpTimeCounter = _jumpTimer;
         _originalMoveSpeed = _moveSpeed;
         _originalJumpForce = _groundJumpForce;
-     
+
     }
 
     private void Start()
     {
-        _playerAnimator.SetBool("IsJumping", false);
+        //_playerAnimator.SetBool("IsJumping", false);
         _originalGravity = _rb.gravityScale;
         _swordAttack.onPlayerChargeAttack += onPlayerChargeAttack;
     }
@@ -147,7 +158,10 @@ public class HeroMovement : MonoBehaviour
             _numOfJumps = _maxJumps;
             _numOfWallJumps = _maxWallJump;
             _groundJumpForce = _originalJumpForce;
+            _fastFallJump.Weight = _fastFallJump.OriginalWeight;
             _isJumping = false;
+            _heroActions.ChargeMax = false;
+            _heroActions.ChargeAmount = 0;
             if (!_isJumpHeld)
             {
                 _jumpTimeCounter = _jumpTimer;
@@ -159,7 +173,7 @@ public class HeroMovement : MonoBehaviour
         {
             _isJumping = true;
             _groundJumpForce = _airJumpForce;
-           //_rb.velocity = new Vector2(_moveSpeed, Mathf.Clamp(_rb.velocity.y, -_rb.gravityScale, -_clampValue));
+            //_rb.velocity = new Vector2(_moveSpeed, Mathf.Clamp(_rb.velocity.y, -_rb.gravityScale, -_clampValue));
         }
 
         if (_isJumping)
@@ -169,7 +183,6 @@ public class HeroMovement : MonoBehaviour
             _extraJumpForce = 0;
         }
 
-        SlopeCheck();
         if (!_isRecovering)
         {
             if (ControllerInput == Controller.Keyboard && !_isDashing)
@@ -188,37 +201,11 @@ public class HeroMovement : MonoBehaviour
             {
                 _moveInput = _playerInput.Gamepad.Move.ReadValue<float>();
             }
-        }
-
-        if(_knockBackCount <= 0)
-        {
-            if (_heroActions.IsEarthStomping)
-            {
-                _newVelocity.Set(0, _rb.velocity.y);
-
-            }
-            else
-            {
-                _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
-            }
-            _rb.velocity = _newVelocity;
-        }
-        else
-        {
-            if (_onHitLeft)
-            {
-                _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
-            }
-            else
-            {
-                _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
-            }
-            _knockBackCount -= Time.deltaTime;
-        }
+        }     
 
         if (_isDashing)
         {
-            StartCoroutine(Dash(_isLeft,1f));
+            StartCoroutine(Dash(_isLeft, 1f));
             StartCoroutine(DisableCrossHair());
         }
 
@@ -232,7 +219,7 @@ public class HeroMovement : MonoBehaviour
         {
             StartCoroutine(DashStrike());
         }
- 
+
         if (_isRecovering)
         {
             StartCoroutine(Recover());
@@ -254,19 +241,60 @@ public class HeroMovement : MonoBehaviour
         }
 
         transform.localScale = characterScale;
-        
+
     }
 
     private void Update()
     {
+        #region Movement
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+        }
+
+        if (_knockBackCount >= 0)
+        {
+            if (_onHitLeft)
+            {
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
+                }
+            }
+            else
+            {
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+                }
+            }
+            _knockBackCount -= Time.deltaTime;
+        }
+        else
+        {
+            //*****HARD FIX Look into why this occurs****** 
+            if (_rb.velocity.y != float.NaN)
+            {
+                _rb.velocity = new Vector2(_moveInput * _moveSpeed, _rb.velocity.y);
+            }
+        }
+
+        if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+        {
+            _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+            _selfKnockBack -= Time.deltaTime;
+        }
+        #endregion
+
         switch (ControllerInput)
         {
             case Controller.None:
                 break;
             case Controller.Keyboard:
+                #region Keyboard
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
-                    if (_playerInput.KeyboardMouse.DashTap.triggered)
+                    if (_playerInput.KeyboardMouse.TapDash.triggered)
                     {
                         OnDashTap();
                     }
@@ -292,17 +320,17 @@ public class HeroMovement : MonoBehaviour
                     {
                         _playerInput.KeyboardMouse.Dash.performed += _ => OnDash();
                     }
-                }            
+                }
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
-                {    
-                    if(_playerInput.KeyboardMouse.TapJump.triggered)
+                {
+                    if (_playerInput.KeyboardMouse.TapJump.triggered)
                     {
                         if (CheckCanJump())
                         {
                             TapJump();
                         }
                     }
-                    else if(_playerInput.KeyboardMouse.Jump.triggered)
+                    else if (_playerInput.KeyboardMouse.Jump.triggered)
                     {
                         if (CheckCanJump())
                         {
@@ -315,14 +343,15 @@ public class HeroMovement : MonoBehaviour
                     if (_playerInput.KeyboardMouse.Jump.triggered)
                     {
                         if (CheckCanJump())
-                        {  
+                        {
                             Jump();
                         }
                     }
                 }
                 break;
+            #endregion 
             case Controller.PS4:
-
+                #region PS4
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
                     if (_playerInput.PS4.TapDash.triggered)
@@ -351,15 +380,38 @@ public class HeroMovement : MonoBehaviour
                     {
                         _playerInput.PS4.Dash.performed += _ => OnDash();
                     }
-                }            
-                if (_playerInput.PS4.Jump.triggered)
+                }
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {
-                    Jump();
+                    if (_playerInput.PS4.TapJump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            TapJump();
+                        }
+                    }
+                    else if (_playerInput.PS4.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_playerInput.PS4.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
                 }
                 break;
-
+            #endregion
             case Controller.XBOX:
-
+                #region XBOX
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
                     if (_playerInput.XBOX.TapDash.triggered)
@@ -389,12 +441,35 @@ public class HeroMovement : MonoBehaviour
                         _playerInput.XBOX.Dash.performed += _ => OnDash();
                     }
                 }
-                if (_playerInput.XBOX.Jump.triggered)
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {
-                    Jump();
+                    if (_playerInput.XBOX.TapJump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            TapJump();
+                        }
+                    }
+                    else if (_playerInput.XBOX.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_playerInput.XBOX.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
                 }
                 break;
-
+            #endregion
             case Controller.Gamepad:
                 if (_playerInput.Gamepad.Jump.triggered)
                 {
@@ -405,8 +480,9 @@ public class HeroMovement : MonoBehaviour
                 break;
         }
 
-            _horizontalMove = _moveInput * _moveSpeed;
-            _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
+
+        _horizontalMove = _moveInput * _moveSpeed;
+        _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
     }
 
     private void OnEnable()
@@ -421,36 +497,30 @@ public class HeroMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (this.tag.Equals("Team1"))
-        {
-            if (collision.collider.tag.Equals("Team1"))
-            {
-                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider,true);
-            }
+        if (collision.collider.tag.Equals(tag))
+        {            
+           Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
         }
-        if (this.tag.Equals("Team2"))
+
+        #region SpecificWaterDash
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
         {
-            if (collision.collider.tag.Equals("Team2"))
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
             {
-                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
-            }
-        }
-        if(_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
-        {
-            if(_isDashing || _isTapDashing || _heroActions.DashStriking)
-            {
-                if (collision.collider.tag.Equals("Team2"))
+                if (collision.collider.tag.Equals("Team2") || collision.collider.tag.Equals("Team3")
+                    || collision.collider.tag.Equals("Team4"))
                 {
                     Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
                     StartCoroutine(ResetCollision(collision.collider));
                 }
-            }            
+            }
         }
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team2"))
         {
             if (_isDashing || _isTapDashing || _heroActions.DashStriking)
             {
-                if (collision.collider.tag.Equals("Team1"))
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team3")
+                || collision.collider.tag.Equals("Team4"))
                 {
                     Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
                     StartCoroutine(ResetCollision(collision.collider));
@@ -458,6 +528,35 @@ public class HeroMovement : MonoBehaviour
                 }
             }
         }
+
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team3"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team2")
+                || collision.collider.tag.Equals("Team4"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
+            }
+        }
+
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team4"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team2")
+                || collision.collider.tag.Equals("Team3"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
+            }
+        }
+        #endregion
     }
 
     private void onPlayerChargeAttack()
@@ -469,7 +568,7 @@ public class HeroMovement : MonoBehaviour
     public void flipCharacter()
     {
         Vector3 characterScale = transform.localScale;
-        if(characterScale.x == -1)
+        if (characterScale.x == -1)
         {
             characterScale.x = 1;
             _isLeft = false;
@@ -485,21 +584,21 @@ public class HeroMovement : MonoBehaviour
 
     private void SlopeCheck()
     {
-        Vector2 checkPos = transform.position -  (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
+        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
     }
 
     private void SlopeCheckHorizontal(Vector2 checkPos)
     {
-        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance,_whatIsGround);
+        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance, _whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _slopeCheckDistance, _whatIsGround);
-        if(slopeHitFront)
+        if (slopeHitFront)
         {
             _isOnSlope = true;
             _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
         }
-        else if(slopeHitBack)
+        else if (slopeHitBack)
         {
             _isOnSlope = true;
             _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
@@ -525,9 +624,9 @@ public class HeroMovement : MonoBehaviour
             }
             _slopeDownAngleOld = _slopeDownAngle;
             Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
-            Debug.DrawRay(hit.point, hit.normal,Color.green);
+            Debug.DrawRay(hit.point, hit.normal, Color.green);
         }
-        if(_isOnSlope && _moveInput == 0.0f)
+        if (_isOnSlope && _moveInput == 0.0f)
         {
             _rb.sharedMaterial = _fullFriction;
         }
@@ -550,23 +649,23 @@ public class HeroMovement : MonoBehaviour
     public bool IsGrounded()
     {
         float extraHeightText = 0.5f;
-        RaycastHit2D raycastHit2D = Physics2D.CapsuleCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, CapsuleDirection2D.Vertical, 0f,Vector2.down,extraHeightText, _whatIsGround);
+        RaycastHit2D raycastHit2D = Physics2D.CapsuleCast(_capsuleCollider.bounds.center, _capsuleCollider.bounds.size, CapsuleDirection2D.Vertical, 0f, Vector2.down, extraHeightText, _whatIsGround);
         Color rayColor;
-        if(raycastHit2D.collider != null)
+        if (raycastHit2D.collider != null)
         {
             rayColor = Color.green;
         }
         else
         {
             rayColor = Color.red;
-        }           
+        }
         return raycastHit2D.collider != null;
     }
 
     public bool IsWall()
     {
         float extraLengthText = .25f;
-        RaycastHit2D raycastHit2DLeft = Physics2D.Raycast(_col2D.bounds.center , Vector2.left, -(_col2D.bounds.extents.x + extraLengthText), _whatIsWall);
+        RaycastHit2D raycastHit2DLeft = Physics2D.Raycast(_col2D.bounds.center, Vector2.left, -(_col2D.bounds.extents.x + extraLengthText), _whatIsWall);
         RaycastHit2D raycastHit2DRight = Physics2D.Raycast(_col2D.bounds.center, Vector2.left, (_col2D.bounds.extents.x + extraLengthText), _whatIsWall);
         Color rayColor;
         if (raycastHit2DLeft.collider != null || raycastHit2DRight.collider != null)
@@ -576,7 +675,7 @@ public class HeroMovement : MonoBehaviour
         else
         {
             rayColor = Color.red;
-        }     
+        }
         if (raycastHit2DLeft.collider != null)
         {
             Debug.Log(raycastHit2DLeft.collider);
@@ -587,8 +686,8 @@ public class HeroMovement : MonoBehaviour
             Debug.Log(raycastHit2DRight.collider);
             return true;
         }
-            return false;
- 
+        return false;
+
     }
 
     private void OnDash()
@@ -625,7 +724,7 @@ public class HeroMovement : MonoBehaviour
     private void TapJump()
     {
         CreateDust();
-        // _playerAnimator.SetBool("IsJumping", true);
+        _playerAnimator.SetBool("IsJumping", true);
         _playerAnimator.SetTrigger("JumpTrigger");
 
         _isJumping = true;
@@ -650,15 +749,15 @@ public class HeroMovement : MonoBehaviour
     private void Jump()
     {
         CreateDust();
-        //_playerAnimator.SetBool("IsJumping", true);
+        _playerAnimator.SetBool("IsJumping", true);
         _playerAnimator.SetTrigger("JumpTrigger");
         _isJumping = true;
         if (IsWall())
         {
             if (_numOfWallJumps > 0)
             {
-            _rb.velocity = Vector2.up * _groundJumpForce;
-            _numOfWallJumps--;
+                _rb.velocity = Vector2.up * _groundJumpForce;
+                _numOfWallJumps--;
             }
         }
         else
@@ -676,24 +775,31 @@ public class HeroMovement : MonoBehaviour
                 }
                 _numOfJumps--;
             }
-        } 
+        }
     }
 
-    public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength ,bool direction)
+    public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength, bool direction)
     {
+        Debug.Log(knockBackY);
+        _knockBackCount = knockBackLength;
+        _knockBackXRecieved = knockBackX;
+        _knockBackYRecieved = knockBackY;
+        _onHitLeft = direction;
+    }
+
+    public void OnSelfKnockBack(Vector2 KnockBack, float knockBackLength)
+    {
+        _selfKnockBack = knockBackLength;
         if (_isWeightShifting)
-        {
-            _knockBackCount = knockBackLength *2f;
-            _knockBackXRecieved = knockBackX *2f;
-            _knockBackYRecieved = knockBackY *2f;
+        {            
+            _knockBackXRecieved = KnockBack.x * 2f;
+            _knockBackYRecieved = KnockBack.y * 2f;
         }
         else
-        {
-            _knockBackCount = knockBackLength;
-            _knockBackXRecieved = knockBackX;
-            _knockBackYRecieved = knockBackY;
+        { 
+            _knockBackXRecieved = KnockBack.x;
+            _knockBackYRecieved = KnockBack.y;
         }
-        _onHitLeft = direction;
     }
 
     private bool CheckCanJump()
@@ -739,7 +845,7 @@ public class HeroMovement : MonoBehaviour
         {
             if (_isLeft)
             {
-                _rb.velocity = Vector2.left *  _tapDashMultiplier;
+                _rb.velocity = Vector2.left * _tapDashMultiplier;
             }
             else
             {
@@ -748,6 +854,7 @@ public class HeroMovement : MonoBehaviour
             _dashEndTime = 0.1f;
         }
         _rb.gravityScale = 0f;
+
         yield return new WaitForSeconds(_dashEndTime);
         _playerAnimator.SetBool("IsDashing", false);
         _isTapDashing = false;
@@ -769,16 +876,16 @@ public class HeroMovement : MonoBehaviour
     }
 
     private IEnumerator DashStrike()
-    {        
+    {
         CreateDashPartile();
-            if (_isLeft)
-            {
-                _rb.velocity = Vector2.left * _dashAttackDistance;
-            }
-            else
-            {
-                _rb.velocity = Vector2.right * _dashAttackDistance;
-            }
+        if (_isLeft)
+        {
+            _rb.velocity = Vector2.left * _dashAttackDistance;
+        }
+        else
+        {
+            _rb.velocity = Vector2.right * _dashAttackDistance;
+        }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);
         _playerAnimator.SetBool("IsDashStriking", false);

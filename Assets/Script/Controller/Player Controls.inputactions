@@ -30,6 +30,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwordSwing",
                     "type": "Button",
                     "id": "ff8c6cab-a322-43e8-b9ee-3dc02250c395",
@@ -78,17 +86,17 @@
                     "interactions": "Hold"
                 },
                 {
-                    "name": "DashTap",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
+                    "id": "fe94e74e-2574-4df0-89c4-0305ea0478d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Dash",
+                    "name": "TapDash",
                     "type": "Button",
-                    "id": "fe94e74e-2574-4df0-89c4-0305ea0478d7",
+                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -105,14 +113,6 @@
                     "name": "FastFall",
                     "type": "Button",
                     "id": "c954365a-ce45-4872-9d19-1cde1d6edb41",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "TapJump",
-                    "type": "Button",
-                    "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -280,28 +280,6 @@
                 },
                 {
                     "name": "",
-                    "id": "55a95c71-6524-4969-ba10-e3577e14adf5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TapJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DashTap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "330d4de7-30b0-4c42-9085-f4a878c6e084",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "Hold(pressPoint=0.3)",
@@ -332,205 +310,26 @@
                     "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
-                }
-            ]
-        },
-        {
-            "name": "KeyboardLayout2",
-            "id": "c47409d5-87b7-49e5-b6a9-bddc9ed31137",
-            "actions": [
-                {
-                    "name": "Move",
-                    "type": "Button",
-                    "id": "bbb5afb2-d7dd-412e-a723-d860d76fa9e3",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "0e5debf7-3a40-438c-a4af-68f6371df4b7",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Jump Release",
-                    "type": "Button",
-                    "id": "23b3f825-604e-4841-86e0-02b063febdb2",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "SwordSwing",
-                    "type": "Button",
-                    "id": "166b08e2-964e-4bfa-bc04-168add1e580c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Element Special 1",
-                    "type": "Button",
-                    "id": "43822585-38fa-4995-827b-9fb69f6ac519",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Guard",
-                    "type": "Button",
-                    "id": "3f7420fd-0019-405a-b109-bda66893df34",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Guard Release",
-                    "type": "Button",
-                    "id": "4bc0ac60-2172-472b-9192-17d137fec8ae",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Pause",
-                    "type": "Button",
-                    "id": "22ce2ba3-581f-41f7-bc1b-20b01799016c",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "Dash",
-                    "type": "Button",
-                    "id": "cbd95263-c10a-49ea-8d22-f8f0df0c6097",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "1D Axis",
-                    "id": "26ad3a1d-854e-4840-bf2a-fd8fbf684374",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "6541a7ba-7655-49b1-9f9b-a06c6ab664f2",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "a9cb5d1d-996b-477d-83b8-3b0a091f5064",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Move",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
-                    "id": "40286f35-ac63-4e81-a4af-4542b8519730",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
+                    "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "TapDash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "8b3213a6-bbd4-4f16-91f0-92d07e1670ea",
-                    "path": "<Keyboard>/upArrow",
-                    "interactions": "",
+                    "id": "55a95c71-6524-4969-ba10-e3577e14adf5",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump Release",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "9d717eb6-3eb0-4775-b1c3-307135c37ac9",
-                    "path": "<Keyboard>/j",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "SwordSwing",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4a1f9ec8-352d-4b46-8752-2e44c192f90d",
-                    "path": "<Keyboard>/k",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Element Special 1",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "a77afeaf-6dfb-4c6f-94da-5f6e86536a9d",
-                    "path": "<Keyboard>/l",
-                    "interactions": "Press",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Guard",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "b98259af-c79b-4642-afbc-78d9fe926981",
-                    "path": "<Keyboard>/l",
-                    "interactions": "Press(behavior=1)",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Guard Release",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "fb515af9-403a-4df4-8058-ce70a1a398ff",
-                    "path": "<Keyboard>/p",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Pause",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "d1fc0090-abe3-4061-acd0-7ef29b885580",
-                    "path": "<Keyboard>/rightShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Dash",
+                    "action": "TapJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -557,9 +356,33 @@
                     "interactions": ""
                 },
                 {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "c3fec15f-fc1f-4d07-964f-c78757da11fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "a2da6e2b-496e-4798-b7c6-a181c6c15661",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwordSwing",
                     "type": "Button",
                     "id": "4f3b4f0b-0438-4ece-bfdf-f8f756f5ac21",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HoldAttack",
+                    "type": "Button",
+                    "id": "83246231-5aca-45a0-86a5-0066438bb238",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -694,7 +517,7 @@
                     "name": "",
                     "id": "effed0dc-d7f5-4250-8a87-9cc688489c37",
                     "path": "<XInputController>/rightTrigger",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "SwordSwing",
@@ -854,6 +677,39 @@
                     "action": "TapDash",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f848f506-2d1d-499a-b688-06f78d8ab1b9",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Press(pressPoint=0.3,behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a626ed2e-e0fe-4c4b-b2d9-bea5e9728068",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9567c200-9852-4769-8ce2-809abadc9271",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Hold(duration=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         },
@@ -878,9 +734,33 @@
                     "interactions": ""
                 },
                 {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "165c2bac-7398-41af-8707-09de000c8787",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "d5af1ef7-89b8-4674-82d6-ac538276c185",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Sword Swing",
                     "type": "Button",
                     "id": "7bd3abc5-2220-4f78-9aea-76c640ad1220",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HoldAttack",
+                    "type": "Button",
+                    "id": "7d9b23c6-0c8b-45c7-a51d-52370c7d26d5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -1026,7 +906,7 @@
                     "name": "",
                     "id": "3ed531df-46e8-45b4-abd7-17ce6f4581f5",
                     "path": "<DualShockGamepad>/buttonWest",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Sword Swing",
@@ -1173,6 +1053,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "WeightShiftRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1e5d4aa-28b2-4131-b72e-f8732514516f",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0815a684-46f6-4732-b5d0-452067420faf",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "046967fa-d290-46f6-86fe-3511656c14a7",
+                    "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "Hold(duration=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -1422,7 +1335,106 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Movement",
+            "id": "2ffccef9-dee8-46d2-9834-7c49bac1b887",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "b67e958b-c331-4861-9214-98b88d842e3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "Keyboard",
+                    "id": "f69aa67c-3c01-4bdc-9fd3-640bd7fb81fd",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "9dc418f6-7f0a-4e76-b4b7-4032587b78eb",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "4ea68a32-e47e-4b13-aef5-e23346cd0603",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "XBOX",
+                    "id": "e85ed76f-9ea4-4c10-90a0-cf1df0f3fa69",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "5d9ecb23-a148-40ce-9a02-a2adf3276150",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6f7b13f0-c57c-490f-94fa-b5ea883fc140",
+                    "path": "<XInputController>/leftStick/right",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                }
+            ]
         }
     ],
-    "controlSchemes": []
+    "controlSchemes": [
+        {
+            "name": "Keyboard & Mouse",
+            "bindingGroup": "Keyboard & Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
 }
