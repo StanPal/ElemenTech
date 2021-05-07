@@ -43,8 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d054316aebe4f4d82f02bd0b2aff85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 1324117386745922378, guid: 61182018a349fda4785e8b9ba83dbf96,
-    type: 3}
-  sceneIndexToLoad: 1
+  _playerManager: {fileID: 0}
+  _scoreManager: {fileID: 0}
+  _sceneIndexToLoad: 0
   _moduleComponents:
   - {fileID: 0}

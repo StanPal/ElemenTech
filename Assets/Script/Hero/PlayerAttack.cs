@@ -17,7 +17,10 @@ public class PlayerAttack : MonoBehaviour
     [SerializeField] private float _originalRotation = 60f;
     [SerializeField] private float _knockBackAmount = 20f; 
     [SerializeField] private float _rotation = 0;
+    [SerializeField] private float _knockBackLength = 0.2f;
     private bool _originalDirLeft;
+    private bool _isChargeMax = false; 
+    
 
     private void Awake()
     {
@@ -26,9 +29,13 @@ public class PlayerAttack : MonoBehaviour
         _heroMovement = GetComponentInParent<HeroMovement>();
         _heroAction.onAttackPerformed += AttackPerformed;
     }
-  
-    private void AttackPerformed()
+
+    private void Start()
     {
+        
+    }
+    private void AttackPerformed()
+    {   
         swingActive = true;
         if (_heroMovement.GetIsLeft)
         {
@@ -109,8 +116,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.DashStriking)
+                    {
+                        Debug.Log("AttackHitTriggered");
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    }
                     if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
                     {
                         _particleSystemManager.FireAura(_heroMovement.gameObject);
@@ -129,8 +144,16 @@ public class PlayerAttack : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
-                    collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    if (_heroAction.DashStriking)
+                    {
+                        Debug.Log("AttackHitTriggered");
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                    }
+                    else
+                    {
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+                    }
                     if (_heroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)
                     {
                         _particleSystemManager.FireAura(_heroMovement.gameObject);

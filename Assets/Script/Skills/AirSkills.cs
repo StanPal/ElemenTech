@@ -8,7 +8,7 @@ public class AirSkills : MonoBehaviour
 
     [SerializeField]
     float mDamage = 2.0f;
-    public float Damage { get { return mDamage; } }
+    public float Damage { get { return mDamage; } set => mDamage = value; }
     [SerializeField]
     float mSpeed = 10.0f;
     public float Speed { get { return mSpeed; } }

@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 146319885}
   - component: {fileID: -2189412413965870646}
   - component: {fileID: 97399161761683766}
-  - component: {fileID: 7249980656986483023}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -46,7 +45,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0, g: 0.08071279, b: 0.20754719, a: 0}
+  m_BackGroundColor: {r: 0.15841937, g: 0.24516883, b: 0.3773585, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -62,8 +61,8 @@ Camera:
   near clip plane: 0.4
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
-  orthographic size: 14
+  orthographic: 0
+  orthographic size: 16.5
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
@@ -104,8 +103,8 @@ MonoBehaviour:
   _depthUpdateSpeed: 5
   _angleUpdateSpeed: 7
   _positionUpdateSpeed: 5
-  _depthMax: -10
-  _depthMin: -22
+  _depthMax: 15
+  _depthMin: -30
   _angleMax: 0
   _angleMin: 3
 --- !u!114 &-2189412413965870646
@@ -156,19 +155,3 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: dbc39ea02a03d8148943d24608d36deb, type: 2}
---- !u!114 &7249980656986483023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7255437403339329850}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac17e8ae31e50b645bb409ad31c40400, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _p1CrossHairs: {fileID: 0}
-  _p2CrossHairs: {fileID: 0}
-  _p3CrossHairs: {fileID: 0}
-  _p4CrossHairs: {fileID: 0}

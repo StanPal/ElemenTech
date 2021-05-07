@@ -9,8 +9,12 @@ public class HeroStats : MonoBehaviour
 
     private AnimationEvents _animationEvent;
     private Animator _animator;
+    private HeroActions _heroActions;
     private Guard _guard;
     private HeroMovement _heroMovement;
+    [SerializeField] private ParticleSystem _bloodSplatterEffect;
+    [SerializeField] private ParticleSystem _burningEffect;
+    [SerializeField] private GameObject _deathEffect;
 
     public enum TeamSetting
     {
@@ -26,18 +30,29 @@ public class HeroStats : MonoBehaviour
     [SerializeField] private float _maxHealth = 100f;
     [SerializeField] private float _currentHealth = 100f;
     [SerializeField] private float _coolDown = 3f;
+    [SerializeField] private float _knockBackXAmount = 10f;
+    [SerializeField] private float _knockBackYAmount = 5f;
+    [SerializeField] private float _knockBackLength = 0.2f;
+    [SerializeField] private float _hitStun = 1f;
     private bool _isHealing = false;
     private float _tempCoolDownTime;
     private bool _isCoolDownFinished;
 
     // Getters & Setters 
-    public HeroMovement HeroMovement { get => _heroMovement; }
+    public HeroMovement HeroMovement { get => _heroMovement; set => _heroMovement = value; }
+    public HeroActions HeroActions { get => _heroActions; }
+    public Guard Guard { get => _guard; }
     public bool CDFinished { get { return _isCoolDownFinished; } set { _isCoolDownFinished = value; } }
     public float CDTime { get { return _tempCoolDownTime; } set { _tempCoolDownTime = value; } }
     public float CoolDown { get { return _coolDown; } }
     public float CurrentHealth { get { return _currentHealth; } set { _currentHealth = value; } }
     public float MaxHealth { get { return _maxHealth; } }
     public float AttackDamage { get { return _meleeAttack; } }
+    public float KnockBackXAmount { get { return _knockBackXAmount; } }
+    public float KnockBackYAmount { get { return _knockBackYAmount; } }
+    public float KnockBackLength { get { return _knockBackLength; } }
+    public float HitStun { get { return _hitStun; } }
+
 
     //Elemental Type
     [SerializeField] private Elements.ElementalAttribute _elementalType;
@@ -57,6 +72,7 @@ public class HeroStats : MonoBehaviour
         _tempCoolDownTime = 0;
         _guard = GetComponent<Guard>();
         _heroMovement = GetComponent<HeroMovement>();
+        _heroActions = GetComponent<HeroActions>();
     }
 
     private void Start()
@@ -91,7 +107,6 @@ public class HeroStats : MonoBehaviour
             switch (_negativeEffect)
             {
                 case StatusEffects.NegativeEffects.OnFire:
-                    onDebuffActivated?.Invoke(gameObject);
                     break;
                 case StatusEffects.NegativeEffects.Slowed:
                     onDebuffActivated?.Invoke(gameObject);
@@ -113,15 +128,12 @@ public class HeroStats : MonoBehaviour
         {
             HeroDie();
         }
-        if (_guard.Guarding)
-        {
-            _currentHealth -= (damage * 0.75f);
-        }
         else
         {
             _currentHealth -= damage;
         }
-     
+
+        BloodEffect();
         _animator.SetTrigger("HurtTrigger");
     }
 
@@ -162,8 +174,15 @@ public class HeroStats : MonoBehaviour
     }
 
     private void RestoreShield()
-    {        
-        StartCoroutine(RestoreShieldOverTimeCoroutine(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick));
+    {
+        if (!_guard.IsShieldDisabled)
+        {
+            StartCoroutine(RestoreShieldOverTimeCoroutine(_guard.ShieldRecoveryAmount, _guard.ShieldRecoveryTick));
+        }
+        else
+        {
+            StartCoroutine(RestoreBrokenShield(_guard.ShieldRecoveryTime));
+        }
     }
 
     private IEnumerator RestoreShieldOverTimeCoroutine(float restoreAmount, float restoreTick)
@@ -173,14 +192,18 @@ public class HeroStats : MonoBehaviour
             _guard.ShieldEnergy += restoreAmount;
             yield return new WaitForSeconds(restoreTick);
         }
-        if (_guard.IsShieldDisabled && (_guard.ShieldEnergy >= _guard.ShieldMaxEnergy))
-        {
-            OnShieldRecovered?.Invoke();
-        }
+    }
+
+    private IEnumerator RestoreBrokenShield(float shieldRecoveryTime)
+    {
+        yield return new WaitForSeconds(shieldRecoveryTime);
+        OnShieldRecovered?.Invoke();
+
     }
 
     public void DamageOverTime(float damageAmount, float damageDuration)
     {
+       
         StartCoroutine(DamageOverTimeCoroutine(damageAmount, damageDuration));
     }
 
@@ -190,6 +213,7 @@ public class HeroStats : MonoBehaviour
         float damagePerloop = damageAmount / duration;
         while (amountDamaged < damageAmount)
         {
+            _burningEffect.Play();
             _currentHealth -= damagePerloop;
             if (_currentHealth <= 0)
             {
@@ -200,7 +224,7 @@ public class HeroStats : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         _negativeEffect = StatusEffects.NegativeEffects.None;
-        onDebuffDeActivated?.Invoke(gameObject);
+        _burningEffect.Stop();
     }
 
     public void SlowMovement(float mSlowAmount, float mSlowDuration)
@@ -227,6 +251,7 @@ public class HeroStats : MonoBehaviour
     private void HeroDie()
     {
         PlayerManager playermanager = ServiceLocator.Get<PlayerManager>();
+        Instantiate(_deathEffect, transform.position, Quaternion.identity);
         if (playermanager.TeamOne.Contains(gameObject))
         {
             playermanager.TeamOne.Remove(gameObject);
@@ -236,5 +261,10 @@ public class HeroStats : MonoBehaviour
             playermanager.TeamTwo.Remove(gameObject);
         }
         this.gameObject.SetActive(false);
+    }
+
+    private void BloodEffect()
+    {
+        _bloodSplatterEffect.Play();
     }
 }

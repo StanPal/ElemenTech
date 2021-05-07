@@ -1,12 +1,16 @@
 ﻿using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class ScoreManager : MonoBehaviour
-{    
+{
+   
     [SerializeField] private int _teamOneScore = 0;
     [SerializeField] private int _teamTwoScore = 0;
     [SerializeField] bool _isPracticeMode = false;
     [SerializeField] bool _isMatchOver = false;
+    [SerializeField] private  int _bestOfValue = 2;
 
+    public bool TriggerReset = false;
+    public int BestOfValue { get => _bestOfValue; set => _bestOfValue = value; }
     public int TeamOneScore { get => _teamOneScore; }
     public int TeamTwoScore { get => _teamTwoScore; }
     public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }
@@ -15,6 +19,15 @@ public class ScoreManager : MonoBehaviour
     private void Awake()
     {
         ServiceLocator.Register<ScoreManager>(this);
+    }
+
+    private void Update()
+    {
+        if(SceneManager.GetActiveScene().buildIndex == 1)
+        {
+            ResetScore();
+        }
+
     }
 
     public void AddPoints(int team, int points)

@@ -8,6 +8,7 @@ public class golemManager : MonoBehaviour
 
     [SerializeField]
     private Transform[] spawnNodes;
+
     private int currentSpawnNodeIndex = 0;
 
     [SerializeField]
@@ -61,9 +62,8 @@ public class golemManager : MonoBehaviour
     private void geneGolem()
     {       
             if (UpdatePatrolNodeIndex())
-            {
-                
-                _golem = Instantiate(golemPrefab) as GameObject;
+            {             
+                _golem = Instantiate(golemPrefab) as GameObject;               
                 _golem.transform.position = spawnNodes[currentSpawnNodeIndex].position;
                 _golem.GetComponent<Golem>().currentSpawnNodeIndex = currentSpawnNodeIndex;
                 randGolemType();

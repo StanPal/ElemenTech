@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2114183102223101702}
   - component: {fileID: 1824732039833908318}
   - component: {fileID: 8165779488233349149}
+  - component: {fileID: 392686964864806897}
   m_Layer: 0
   m_Name: WaterElement
   m_TagString: pickup
@@ -27,8 +28,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9196028788834740802}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.533466, y: -0.019066347, z: -1.2765875}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0.4497, y: -0.2978, z: -1.2765875}
+  m_LocalScale: {x: 0.8356277, y: 0.6681732, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -72,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 065532b9910d02c478edafe972b435d4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 230202122c753f544b3749ba3da73f85, type: 3}
   m_Color: {r: 0.18098079, g: 0.57214683, b: 0.7830189, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -100,7 +101,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 1.02, y: 1.68}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -121,3 +122,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7db67578b14262b40b6ea4f099fb0333, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!50 &392686964864806897
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9196028788834740802}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

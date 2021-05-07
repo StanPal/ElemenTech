@@ -43,11 +43,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35d054316aebe4f4d82f02bd0b2aff85, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _PlayerManager: {fileID: 1324117386745922378, guid: 61182018a349fda4785e8b9ba83dbf96,
+  _playerManager: {fileID: 1324117386745922378, guid: 61182018a349fda4785e8b9ba83dbf96,
     type: 3}
-  _ScoreManager: {fileID: 5340142389288448264, guid: 61c2469ac2f40644795e9c565621861d,
+  _scoreManager: {fileID: 5340142389288448264, guid: 61c2469ac2f40644795e9c565621861d,
     type: 3}
-  _ParticleManager: {fileID: 5774566764101366871, guid: 752a42bee5a93b1498187ffd4f466506,
+  _soundManager: {fileID: 6262434300899713609, guid: f738dbd6d3e6cc649a88120850da0a5b,
     type: 3}
-  sceneIndexToLoad: 1
+  _sceneIndexToLoad: 1
   _moduleComponents: []

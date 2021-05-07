@@ -1,8 +1,10 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseUI : MonoBehaviour
 {
+    public event System.Action OnResetTeams;
     private PlayerManager _PlayerManager;
     private ScoreManager _ScoreManager;
     public Canvas mCanvas;
@@ -16,7 +18,7 @@ public class PauseUI : MonoBehaviour
     {
         _PlayerManager = ServiceLocator.Get<PlayerManager>();
         _ScoreManager = ServiceLocator.Get<ScoreManager>();
-    }
+    }    
 
     private void Start()
     {
@@ -36,34 +38,49 @@ public class PauseUI : MonoBehaviour
         {
             _PlayerManager.mPlayersList[3].GetComponent<HeroActions>().onPausePeformed += PauseGame;
         }
+
+
     }
-    
+
 
     public void PauseGame()
     {
+        Cursor.visible = true;
         mCanvas.gameObject.SetActive(true);
         Time.timeScale = 0;
     }
 
     public void ResumeGame()
     {
+        Cursor.visible = false;
         mCanvas.gameObject.SetActive(false);
         Time.timeScale = 1;
     }
 
     public void BackToMainMenu()
     {
-        ResetPlayers();
-        _ScoreManager.ResetScore();
-        SceneManager.LoadScene(0);
-        Time.timeScale = 1f;
+
+        StartCoroutine(backtoMain());
     }
 
     public void RestartScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        _ScoreManager.IsMatchOver = false;
         Time.timeScale = 1f;
     }
+
+    private IEnumerator backtoMain()
+    {
+        ResetPlayers();
+        _ScoreManager.ResetScore();
+        _PlayerManager.TeamOne.Clear();
+        _PlayerManager.TeamTwo.Clear();
+        yield return new WaitForSeconds(0.1f);
+        SceneManager.LoadScene(1);
+        Time.timeScale = 1f;
+    }
+
 
     public void ExitGame()
     {
@@ -72,15 +89,8 @@ public class PauseUI : MonoBehaviour
 
     private void ResetPlayers()
     {
-        _PlayerManager.mPlayersList[0] = _PlayerManager.FireHero;
-        _PlayerManager.mPlayersList[1] = _PlayerManager.WaterHero;
-        _PlayerManager.mPlayersList[2] = _PlayerManager.AirHero;
-        _PlayerManager.mPlayersList[3] = _PlayerManager.EarthHero;
-
-        _PlayerManager.TeamOne.Clear();
-        _PlayerManager.TeamTwo.Clear();
-
-        _ScoreManager.PracticeMode = false;
+        _ScoreManager.TriggerReset = true;
+        OnResetTeams?.Invoke();
         Cursor.visible = true;
     }
 }

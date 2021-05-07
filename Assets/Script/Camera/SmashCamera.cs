@@ -21,9 +21,21 @@ public class SmashCamera : MonoBehaviour
     private Vector3 _desiredPos;
     private Vector3 _targetLocalPos;
 
+    public float DepthMin { get => _depthMin; }
+
     private void Awake()
     {
-        _playerManager = FindObjectOfType<PlayerManager>();
+        GameLoader.CallOnComplete(Initialize);
+    }
+
+    private void Initialize()
+    {
+        _playerManager = ServiceLocator.Get<PlayerManager>();
+        _camera = GetComponent<Camera>();
+    }
+
+    private void Start()
+    {
         for (int i = 0; i < _playerManager.mPlayersList.Count; i++)
         {
             if (_playerManager.mPlayersList[i].activeSelf)
@@ -31,11 +43,6 @@ public class SmashCamera : MonoBehaviour
                 Players.Add(_playerManager.mPlayersList[i]);
             }
         }
-        _camera = GetComponent<Camera>();
-    }
-
-    private void Start()
-    {
         if (_focusLevel != null)
         {
             Players.Add(_focusLevel.gameObject);

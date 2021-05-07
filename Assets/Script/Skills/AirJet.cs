@@ -3,7 +3,8 @@
 public class AirJet : MonoBehaviour
 {
     private float _ProjectileSpeed = 1f;
-    private float _ExitTime = 1f; 
+    private float _ExitTime = 1f;
+    private bool isChargeMax = false; 
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
@@ -15,6 +16,20 @@ public class AirJet : MonoBehaviour
         _ProjectileSpeed = _AirSkills.Speed;
         _ScaleSize = _AirSkills.Scale;
         _ExitTime = _AirSkills.ExitTime;
+        if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
+        {
+            isChargeMax = true;
+            _AirSkills.PlayerSkills.HeroAction.ChargeMax = false;
+            _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
+            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
+                (5f, 5f, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+            _AirSkills.Damage = _AirSkills.Damage * 2f;
+        }
+        else
+        {
+            isChargeMax = false;
+            _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
+        }
     }
 
     private void FixedUpdate()
@@ -25,7 +40,16 @@ public class AirJet : MonoBehaviour
         }
         _ExitTime -= Time.deltaTime;
         _RigidBody.velocity = transform.right * _ProjectileSpeed;
-        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * Time.deltaTime);
+        transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
+
+        //if (isChargeMax)
+        //{
+        //    transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize, _AirSkills.ScaleSpeed * 2f * Time.deltaTime);
+        //}
+        //else
+        //{
+        //    transform.localScale = Vector3.Lerp(transform.localScale, _ScaleSize / 2, _AirSkills.ScaleSpeed * Time.deltaTime);
+        //}
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -39,29 +63,21 @@ public class AirJet : MonoBehaviour
                 golem.TakeDamage(_AirSkills.Damage);
             }
         }
-        
-        if (collision.GetComponent<Guard>())
-        {
-            if (collision.GetComponent<Guard>().tag.Equals(_AirSkills.PlayerSkills.HeroAction.tag))
-            {
-                Guard guard = collision.GetComponent<Guard>();
-                if (guard.Guarding)
-                {
-                    Destroy(gameObject);
-                    Debug.Log("Shield Hit");
-                    collision.GetComponent<Guard>().ComboSkillOn = true;
 
-                }
-            }
-        }
- 
         if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
         {
             if (collision.tag.Equals("Team2"))
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_AirSkills.Damage);
+                    }
+                    else
+                    {
+                        collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                    }
                     Destroy(gameObject);
                 }
             }
@@ -72,7 +88,14 @@ public class AirJet : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
+                    if (heroStats.Guard.Guarding)
+                    {
+                        heroStats.Guard.TakeShieldDamage(_AirSkills.Damage);
+                    }
+                    else
+                    {
+                        collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                    }
                     Destroy(gameObject);
                 }
             }

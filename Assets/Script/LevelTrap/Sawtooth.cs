@@ -7,6 +7,7 @@ public class Sawtooth : MonoBehaviour
 {
     [SerializeField] private float mDamageTime = 1.0f;
     [SerializeField] private float mDamage = 5.0f;
+    [SerializeField] private float _speed = 2.0f;
     private const float mDelayTime = 1.0f;
 
     public struct TrappedHeroData
@@ -21,11 +22,15 @@ public class Sawtooth : MonoBehaviour
         StartCoroutine(SawtoothDamageRoutine());
     }
 
+    private void Update()
+    {
+        this.transform.Rotate(new Vector3(0, 0, 1f), _speed, Space.Self);
+    }
+
     private IEnumerator SawtoothDamageRoutine()
     {
         while (true)
         {
-            yield return new WaitForSeconds(mDelayTime);
             if (_trappedHeros.Count > 0)
             {
                 foreach (var trappedHero in _trappedHeros)
@@ -33,6 +38,7 @@ public class Sawtooth : MonoBehaviour
                     trappedHero.HeroStats.TakeDamage(mDamage);
                 }
             }
+            yield return new WaitForSeconds(mDelayTime);
         }
     }
 

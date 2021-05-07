@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {    
     private ScoreManager scoreManager;
+    private SoundManager _soundManager; 
 
     private void Awake()
     {
@@ -12,7 +13,23 @@ public class MainMenu : MonoBehaviour
 
     private void Initialize()
     {
-        scoreManager = FindObjectOfType<ScoreManager>();
+        scoreManager = ServiceLocator.Get<ScoreManager>();
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
+    
+
+    private void Update()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("GameEnd"))
+        {
+            Cursor.visible = true;
+        }
+    }
+
+    public void StartGame()
+    {
+       // _soundManager.PlayMusic(0).Play();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
     public void PlayWorkingLevel()
@@ -38,15 +55,16 @@ public class MainMenu : MonoBehaviour
             scoreManager.PracticeMode = false;
     }
     
-    public void QuitGame()
-    {
-        Debug.Log("QUIT");
-        Application.Quit();
-    }
-
     public void Credits()
     {
         SceneManager.LoadScene("Credits");
+    }
+
+    public void QuitGame()
+    {
+        Debug.Log("QUIT");
+
+        Application.Quit();
     }
     public void Menue()
     {

@@ -7,7 +7,7 @@ public class Switch : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-      if(collision.GetComponent<PlayerAttack>())
+      if(collision.GetComponent<SwordAttack>())
         {
             onSwitchActivated?.Invoke(_switchID);
         }
