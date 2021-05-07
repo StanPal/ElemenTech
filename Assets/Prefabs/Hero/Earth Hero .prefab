@@ -494,6 +494,10 @@ MonoBehaviour:
   _maxHealth: 100
   _currentHealth: 100
   _coolDown: 1.25
+  _knockBackXAmount: 10
+  _knockBackYAmount: 5
+  _knockBackLength: 0.2
+  _hitStun: 1
   _elementalType: 1
   _positiveEffect: 3
   _negativeEffect: 3
@@ -514,6 +518,9 @@ MonoBehaviour:
   PivotPoint: {fileID: 2311665446414587354}
   FirePoint: {fileID: 2823546030041259660}
   _isOnCooldown: 0
+  _chargeAmount: 0
+  _chargeAmountMax: 10
+  _chargeTime: 2
   _lookDirection: {x: 0, y: 0}
   _lookAngle: 0
   _axisPos: {x: 0, y: 0, z: 0}
@@ -532,7 +539,8 @@ MonoBehaviour:
   _Crosshair: {fileID: 5488120927184991676}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 0
+  ControllerInput: 1
+  OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -1035,10 +1043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _knockBackXAmount: 40
-  _knockBackYAmount: 20
-  _knockBackLength: 0.2
-  _hitStun: 1
+  chargeAttack: {fileID: 0}
 --- !u!114 &8695610312681426275
 MonoBehaviour:
   m_ObjectHideFlags: 0

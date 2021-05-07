@@ -67,11 +67,9 @@ public class AirJet : MonoBehaviour
             }
         }
 
-        if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team1"))
+        if (!collision.tag.Equals(_AirSkills.PlayerSkills.HeroMovement.tag))
         {
-            if (collision.tag.Equals("Team2"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
+               if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     if (heroStats.Guard.Guarding)
                     {
@@ -84,36 +82,5 @@ public class AirJet : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
-        }
-        if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("Team2"))
-        {
-            if (collision.tag.Equals("Team1"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    if (heroStats.Guard.Guarding)
-                    {
-                        heroStats.Guard.TakeShieldDamage(_AirSkills.Damage);
-                    }
-                    else
-                    {
-                        collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
-                    }
-                    Destroy(gameObject);
-                }
-            }
-        }
-
-        if (_AirSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
-        {
-            if (!collision.Equals(this) && collision.tag.Equals("FFA"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    heroStats.TakeDamageFromProjectile(_AirSkills.Damage);
-                    Destroy(gameObject);
-                }
-            }
-        }
+        }    
     }
-}

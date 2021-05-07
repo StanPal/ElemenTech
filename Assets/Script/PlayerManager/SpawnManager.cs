@@ -22,6 +22,8 @@ public class SpawnManager : MonoBehaviour
         _playerManager = ServiceLocator.Get<PlayerManager>();
         _playerManager.TeamOne.Clear();
         _playerManager.TeamTwo.Clear();
+        _playerManager.TeamThree.Clear();
+        _playerManager.TeamFour.Clear();
 
         if (_playerManager.FireHero.GetComponent<HeroMovement>().ControllerInput != HeroMovement.Controller.None)
         {
@@ -35,6 +37,14 @@ public class SpawnManager : MonoBehaviour
                 _playerManager.TeamOne.Add(_playerManager.mPlayersList[0]);
             }
             if (_playerManager.mPlayersList[0].tag == "Team2")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[0]);
+            }
+            if (_playerManager.mPlayersList[0].tag == "Team3")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[0]);
+            }
+            if (_playerManager.mPlayersList[0].tag == "Team4")
             {
                 _playerManager.TeamTwo.Add(_playerManager.mPlayersList[0]);
             }
@@ -54,6 +64,14 @@ public class SpawnManager : MonoBehaviour
             {
                 _playerManager.TeamTwo.Add(_playerManager.mPlayersList[1]);
             }
+            if (_playerManager.mPlayersList[1].tag == "Team3")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[1]);
+            }
+            if (_playerManager.mPlayersList[1].tag == "Team4")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[1]);
+            }
             RandomizeSpawn(waterHero);
 
         }
@@ -70,6 +88,14 @@ public class SpawnManager : MonoBehaviour
             {
                 _playerManager.TeamTwo.Add(_playerManager.mPlayersList[3]);
             }
+            if (_playerManager.mPlayersList[3].tag == "Team3")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[3]);
+            }
+            if (_playerManager.mPlayersList[3].tag == "Team4")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[3]);
+            }
             RandomizeSpawn(earthHero);
 
         }
@@ -83,6 +109,14 @@ public class SpawnManager : MonoBehaviour
                 _playerManager.TeamOne.Add(_playerManager.mPlayersList[2]);
             }
             if (_playerManager.mPlayersList[2].tag == "Team2")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[2]);
+            }
+            if (_playerManager.mPlayersList[2].tag == "Team3")
+            {
+                _playerManager.TeamTwo.Add(_playerManager.mPlayersList[2]);
+            }
+            if (_playerManager.mPlayersList[2].tag == "Team4")
             {
                 _playerManager.TeamTwo.Add(_playerManager.mPlayersList[2]);
             }
@@ -103,6 +137,4 @@ public class SpawnManager : MonoBehaviour
         player.transform.position = _respawnPoints[randIndex].position;
     }
 
-
-    
 }

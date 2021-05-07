@@ -69,7 +69,7 @@ public class CanonBall : MonoBehaviour
         {
             Debug.Log("wall hit");
             Explode();
-           // OnDrawGizmosSelected();
+            // OnDrawGizmosSelected();
             Destroy(gameObject);
         }
         if (SplashRange > 0)
@@ -78,39 +78,22 @@ public class CanonBall : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
                 var enemy = hitCollider.GetComponent<HeroStats>();
-                if (tag.Equals("Team1"))
+                if (!enemy.tag.Equals(tag))
                 {
-                    if (enemy && enemy.tag.Equals("Team2"))
-                    {
-                        var closestPont = hitCollider.ClosestPoint(transform.position);
-                        var distance = Vector3.Distance(closestPont, transform.position);
+                    var closestPont = hitCollider.ClosestPoint(transform.position);
+                    var distance = Vector3.Distance(closestPont, transform.position);
 
-                        var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
-                        enemy.TakeDamage(damagePercent * mDamage);
-                    }
-                }
-                else if (tag.Equals("Team2"))
-                {
-                    if (enemy && enemy.tag.Equals("Team1"))
-                    {
-                        var closestPont = hitCollider.ClosestPoint(transform.position);
-                        var distance = Vector3.Distance(closestPont, transform.position);
-
-                        var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
-                        enemy.TakeDamage(damagePercent * mDamage);
-                    }
+                    var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
+                    enemy.TakeDamage(damagePercent * mDamage);
                 }
             }
         }
         else
         {
             var enemy = collider.GetComponent<HeroStats>();
-            if (tag.Equals("Team1"))
+            if (!enemy.tag.Equals(tag))
             {
-                if (enemy.tag.Equals("Team2"))
-                {
-                    enemy.TakeDamage(mDamage);
-                }
+                enemy.TakeDamage(mDamage);
                 Destroy(gameObject);
             }
         }
@@ -128,12 +111,12 @@ public class CanonBall : MonoBehaviour
         ParticleSystem ps = explosionEffect.GetComponent<ParticleSystem>();
         var sh = ps.shape;
         sh.radius = SplashRange;
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);        
+        Instantiate(explosionEffect, transform.position, Quaternion.identity);
         explosionEffect.GetComponent<ParticleSystem>().Play();
     }
 
 
-static Quaternion LookAt2D(Vector2 forward)
+    static Quaternion LookAt2D(Vector2 forward)
     {
         return Quaternion.Euler(0, 0, Mathf.Atan2(forward.y, forward.x) * Mathf.Rad2Deg);
     }

@@ -663,7 +663,8 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 2
+  OnTeam: 0
   _moveSpeed: 17
   _airStrifeSpeed: 8
   _groundJumpForce: 30
@@ -1093,6 +1094,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargeAttack: {fileID: 0}
 --- !u!114 &8349940066716883378
 MonoBehaviour:
   m_ObjectHideFlags: 0

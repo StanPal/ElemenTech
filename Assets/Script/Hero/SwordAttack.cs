@@ -98,10 +98,8 @@ public class SwordAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team1"))
+        if (!collision.tag.Equals(GetComponentInParent<HeroStats>().gameObject.tag))
         {
-            if (collision.tag.Equals("Team2"))
-            {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     if (heroStats.Guard.Guarding)
@@ -122,7 +120,6 @@ public class SwordAttack : MonoBehaviour
                         else
                         {
                             _heroAction.HeroMovement.OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, !_heroMovement.GetIsLeft);
-                            //heroStats.Guard.TakeShieldDamage(_heroAction.HeroStats.AttackDamage);
                         }
                     }
                     else
@@ -144,60 +141,6 @@ public class SwordAttack : MonoBehaviour
                         }
                     }
                 }
-            }
-        }
-
-        if (GetComponentInParent<HeroStats>().gameObject.tag.Equals("Team2"))
-        {
-            if (collision.tag.Equals("Team1"))
-            {
-                if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    if (heroStats.Guard.Guarding)
-                    {
-                        if (heroStats.Guard.CanParry)
-                        {
-                            if (heroStats.HeroMovement.GetIsLeft && _heroMovement.GetIsLeft)
-                            {
-                                heroStats.HeroMovement.flipCharacter();
-                            }
-                            else if (!heroStats.HeroMovement.GetIsLeft && !_heroMovement.GetIsLeft)
-                            {
-                                heroStats.HeroMovement.flipCharacter();
-
-                            }
-                            heroStats.HeroActions.InvokeParry();
-                        }
-                        else
-                        {
-                            _heroAction.HeroMovement.OnKnockBackHit(10f, 10f, 0.2f, !_heroMovement.GetIsLeft);
-                            //heroStats.Guard.TakeShieldDamage(_heroAction.HeroStats.AttackDamage);
-                        }
-                    }
-                    else
-                    {
-                        if (_heroAction.DashStriking)
-                        {
-                            Debug.Log("AttackHitTriggered");
-                            heroStats.TakeDamage(_meleeDamage);
-                        }
-                        else
-                        {
-                            heroStats.TakeDamage(_meleeDamage);
-                            collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
-                        }
-                        if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
-                        {
-                            _particleSystemManager.FireAura(_heroMovement.gameObject);
-                        }
-                    }
-                }
-            }
-        }
-
-        if (collision.GetComponent<Golem>())
-        {
-            collision.GetComponent<Golem>().TakeDamage(_meleeDamage);
         }
     }
 

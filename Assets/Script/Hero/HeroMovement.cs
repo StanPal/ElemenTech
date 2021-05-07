@@ -29,6 +29,16 @@ public class HeroMovement : MonoBehaviour
     }
     public Controller ControllerInput = Controller.None;
 
+    public enum Team
+    {
+        Team1,
+        Team2,
+        Team3,
+        Team4
+    }
+
+    public Team OnTeam = Team.Team1;
+
     private float _horizontalMove;
     private float _moveInput;
     private bool _onHitLeft = false;
@@ -198,12 +208,12 @@ public class HeroMovement : MonoBehaviour
         {
             if (_heroActions.IsEarthStomping)
             {
-                _newVelocity.Set(0, _rb.velocity.y);
+                _newVelocity = new Vector2(0, _rb.velocity.y);
 
             }
             else
             {
-                _newVelocity.Set(_moveSpeed * _moveInput, _rb.velocity.y);
+                _newVelocity = new Vector2(_moveSpeed * _moveInput, _rb.velocity.y);
             }
             _rb.velocity = _newVelocity;
         }
@@ -447,6 +457,17 @@ public class HeroMovement : MonoBehaviour
                 Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
             }
         }
+
+        if(this.tag.Equals("Team3") && collision.collider.tag.Equals("Team3"))
+        {
+            Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+        }
+
+        if (this.tag.Equals("Team4") && collision.collider.tag.Equals("Team4"))
+        {
+            Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+        }
+
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
         {
             if (_isDashing || _isTapDashing || _heroActions.DashStriking)

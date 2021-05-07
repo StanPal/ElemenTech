@@ -11,30 +11,13 @@ public class FireAura : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (tag.Equals("Team1"))
+        if (!collision.tag.Equals(tag))
         {
-            if (collision.tag.Equals("Team2"))
-            {
-                if(!_tookDamage)
+            if (!_tookDamage)
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    StartCoroutine(DamageOverTimeCoroutine(heroStats,_damage));
+                    StartCoroutine(DamageOverTimeCoroutine(heroStats, _damage));
                 }
-            }
-        }
-
-        if (tag.Equals("Team2"))
-        {
-            if (collision.tag.Equals("Team1"))
-            {
-                if (!_tookDamage)
-                {
-                    if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                    {
-                        StartCoroutine(DamageOverTimeCoroutine(heroStats, _damage));
-                    }
-                }
-            }
         }
     }
 
@@ -44,7 +27,7 @@ public class FireAura : MonoBehaviour
         Debug.Log("Damaged Current Health: " + hero.CurrentHealth);
         _tookDamage = true;
         yield return new WaitForSeconds(_tick);
-        _tookDamage = false;    
+        _tookDamage = false;
     }
 
 }
