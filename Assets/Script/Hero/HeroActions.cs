@@ -103,7 +103,6 @@ public class HeroActions : MonoBehaviour
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
                 {
                     _playerInput.KeyboardMouse.HoldAttack.performed += _ => OnCharging();
-                    Debug.Log("Hold attack Triggered");
                 }
                 if (!gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
@@ -118,6 +117,10 @@ public class HeroActions : MonoBehaviour
                 _playerInput.PS4.FastFall.performed += _ => FastFall();
                 _playerInput.PS4.SwordSwing.performed += _ => SwordSwing();
                 _playerInput.PS4.ElementSpecial1.performed += _ => ElementSpecial1();
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    _playerInput.PS4.HoldAttack.performed += _ => OnCharging();
+                }
                 if (!this.gameObject.GetComponent<Guard>().IsShieldDisabled)
                 {
                     _playerInput.PS4.Guard.performed += _ => Guard();
@@ -137,8 +140,7 @@ public class HeroActions : MonoBehaviour
                 }
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
                 {
-                    _playerInput.XBOX.HoldAttack.performed += _ => OnCharging();
-                    Debug.Log("Hold attack Triggered");
+                    _playerInput.XBOX.HoldAttack.performed += _ => OnCharging();           
                 }
                 _playerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
                 _playerInput.XBOX.Pause.performed += _ => Pause();

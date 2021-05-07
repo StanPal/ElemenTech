@@ -356,7 +356,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team1
+  m_TagString: Team3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -475,7 +475,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5745905597698010381}
   _dust: {fileID: 2378443808384279137}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 2
   OnTeam: 0
   _moveSpeed: 14
   _airStrifeSpeed: 5

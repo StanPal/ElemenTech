@@ -5,9 +5,10 @@ using UnityEngine;
 public class ScreenShakeController : MonoBehaviour
 {        
      private float _shakeTimeRemaning;
-     private float _shakePower;
      private float _shakeFadeTime;
      private float _shakeRotation;
+    [SerializeField] private float _shakePower = 1f;
+    [SerializeField] private float _shakeLength = 1f;
     [SerializeField] private float rotationMultiplier = 1f;
     private PlayerManager _playerManager;
     private bool canShake;

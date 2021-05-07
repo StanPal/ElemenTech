@@ -53,8 +53,6 @@ public class FastFallJump : MonoBehaviour
             else
             {
                 _rb.velocity += Vector2.up * Physics2D.gravity.y * Time.deltaTime;
-
-
             }
         }
     }

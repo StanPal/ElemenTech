@@ -201,45 +201,7 @@ public class HeroMovement : MonoBehaviour
             {
                 _moveInput = _playerInput.Gamepad.Move.ReadValue<float>();
             }
-        }
-
-        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
-        {
-            _rb.velocity = new Vector2(0, _rb.velocity.y);
-        }
-
-        if (_knockBackCount >= 0)
-        {
-            if (_onHitLeft)
-            {
-                if (_knockBackYRecieved != float.NaN)
-                {
-                    _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
-                }
-            }
-            else
-            {
-                if (_knockBackYRecieved != float.NaN)
-                {
-                    _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
-                }
-            }
-            _knockBackCount -= Time.deltaTime;
-        }
-        else
-        {
-            if(_rb.velocity.y != float.NaN)
-            _rb.velocity = new Vector2(_moveInput * Speed, _rb.velocity.y);
-        }
-
-
-        if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
-        {
-            _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
-            _selfKnockBack -= Time.deltaTime; 
-        }
-
-     
+        }     
 
         if (_isDashing)
         {
@@ -284,15 +246,55 @@ public class HeroMovement : MonoBehaviour
 
     private void Update()
     {
+        #region Movement
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
+        {
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
+        }
+
+        if (_knockBackCount >= 0)
+        {
+            if (_onHitLeft)
+            {
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
+                }
+            }
+            else
+            {
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+                }
+            }
+            _knockBackCount -= Time.deltaTime;
+        }
+        else
+        {
+            //*****HARD FIX Look into why this occurs****** 
+            if (_rb.velocity.y != float.NaN)
+            {
+                _rb.velocity = new Vector2(_moveInput * _moveSpeed, _rb.velocity.y);
+            }
+        }
+
+        if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+        {
+            _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+            _selfKnockBack -= Time.deltaTime;
+        }
+        #endregion
 
         switch (ControllerInput)
         {
             case Controller.None:
                 break;
             case Controller.Keyboard:
+                #region Keyboard
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
-                    if (_playerInput.KeyboardMouse.DashTap.triggered)
+                    if (_playerInput.KeyboardMouse.TapDash.triggered)
                     {
                         OnDashTap();
                     }
@@ -347,8 +349,9 @@ public class HeroMovement : MonoBehaviour
                     }
                 }
                 break;
+            #endregion 
             case Controller.PS4:
-
+                #region PS4
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
                     if (_playerInput.PS4.TapDash.triggered)
@@ -378,14 +381,37 @@ public class HeroMovement : MonoBehaviour
                         _playerInput.PS4.Dash.performed += _ => OnDash();
                     }
                 }
-                if (_playerInput.PS4.Jump.triggered)
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {
-                    Jump();
+                    if (_playerInput.PS4.TapJump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            TapJump();
+                        }
+                    }
+                    else if (_playerInput.PS4.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_playerInput.PS4.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
                 }
                 break;
-
+            #endregion
             case Controller.XBOX:
-
+                #region XBOX
                 if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water))
                 {
                     if (_playerInput.XBOX.TapDash.triggered)
@@ -415,12 +441,35 @@ public class HeroMovement : MonoBehaviour
                         _playerInput.XBOX.Dash.performed += _ => OnDash();
                     }
                 }
-                if (_playerInput.XBOX.Jump.triggered)
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth))
                 {
-                    Jump();
+                    if (_playerInput.XBOX.TapJump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            TapJump();
+                        }
+                    }
+                    else if (_playerInput.XBOX.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
+                }
+                else
+                {
+                    if (_playerInput.XBOX.Jump.triggered)
+                    {
+                        if (CheckCanJump())
+                        {
+                            Jump();
+                        }
+                    }
                 }
                 break;
-
+            #endregion
             case Controller.Gamepad:
                 if (_playerInput.Gamepad.Jump.triggered)
                 {
@@ -430,6 +479,7 @@ public class HeroMovement : MonoBehaviour
             default:
                 break;
         }
+
 
         _horizontalMove = _moveInput * _moveSpeed;
         _playerAnimator.SetFloat("Speed", Mathf.Abs(_horizontalMove));
@@ -447,36 +497,18 @@ public class HeroMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (this.tag.Equals("Team1"))
-        {
-            if (collision.collider.tag.Equals("Team1"))
-            {
-                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
-            }
-        }
-        if (this.tag.Equals("Team2"))
-        {
-            if (collision.collider.tag.Equals("Team2"))
-            {
-                Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
-            }
+        if (collision.collider.tag.Equals(tag))
+        {            
+           Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
         }
 
-        if(this.tag.Equals("Team3") && collision.collider.tag.Equals("Team3"))
-        {
-            Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
-        }
-
-        if (this.tag.Equals("Team4") && collision.collider.tag.Equals("Team4"))
-        {
-            Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
-        }
-
+        #region SpecificWaterDash
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team1"))
         {
             if (_isDashing || _isTapDashing || _heroActions.DashStriking)
             {
-                if (collision.collider.tag.Equals("Team2"))
+                if (collision.collider.tag.Equals("Team2") || collision.collider.tag.Equals("Team3")
+                    || collision.collider.tag.Equals("Team4"))
                 {
                     Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
                     StartCoroutine(ResetCollision(collision.collider));
@@ -487,7 +519,8 @@ public class HeroMovement : MonoBehaviour
         {
             if (_isDashing || _isTapDashing || _heroActions.DashStriking)
             {
-                if (collision.collider.tag.Equals("Team1"))
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team3")
+                || collision.collider.tag.Equals("Team4"))
                 {
                     Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
                     StartCoroutine(ResetCollision(collision.collider));
@@ -495,6 +528,35 @@ public class HeroMovement : MonoBehaviour
                 }
             }
         }
+
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team3"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team2")
+                || collision.collider.tag.Equals("Team4"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
+            }
+        }
+
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Water) && this.tag.Equals("Team4"))
+        {
+            if (_isDashing || _isTapDashing || _heroActions.DashStriking)
+            {
+                if (collision.collider.tag.Equals("Team1") || collision.collider.tag.Equals("Team2")
+                || collision.collider.tag.Equals("Team3"))
+                {
+                    Physics2D.IgnoreCollision(_capsuleCollider, collision.collider, true);
+                    StartCoroutine(ResetCollision(collision.collider));
+
+                }
+            }
+        }
+        #endregion
     }
 
     private void onPlayerChargeAttack()

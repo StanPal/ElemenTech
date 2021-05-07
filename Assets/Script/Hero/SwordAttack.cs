@@ -90,7 +90,7 @@ public class SwordAttack : MonoBehaviour
 
     private IEnumerator ChargeAttack()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(0.5f);
         _circleCollider.enabled = false;
         _heroAction._isSwinging = false;
         _isChargeMax = false;

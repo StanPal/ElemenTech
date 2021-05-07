@@ -30,6 +30,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwordSwing",
                     "type": "Button",
                     "id": "ff8c6cab-a322-43e8-b9ee-3dc02250c395",
@@ -78,17 +86,17 @@
                     "interactions": "Hold"
                 },
                 {
-                    "name": "DashTap",
+                    "name": "Dash",
                     "type": "Button",
-                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
+                    "id": "fe94e74e-2574-4df0-89c4-0305ea0478d7",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "Dash",
+                    "name": "TapDash",
                     "type": "Button",
-                    "id": "fe94e74e-2574-4df0-89c4-0305ea0478d7",
+                    "id": "2b2dfe6a-c91a-46a6-92dc-3c0be9da9725",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -105,14 +113,6 @@
                     "name": "FastFall",
                     "type": "Button",
                     "id": "c954365a-ce45-4872-9d19-1cde1d6edb41",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "TapJump",
-                    "type": "Button",
-                    "id": "4ea8c05b-af27-4de1-9b55-a332b47c572d",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -280,28 +280,6 @@
                 },
                 {
                     "name": "",
-                    "id": "55a95c71-6524-4969-ba10-e3577e14adf5",
-                    "path": "<Keyboard>/space",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "TapJump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "Tap",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DashTap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "330d4de7-30b0-4c42-9085-f4a878c6e084",
                     "path": "<Keyboard>/leftShift",
                     "interactions": "Hold(pressPoint=0.3)",
@@ -330,6 +308,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "HoldAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24b48706-cf8f-47dd-8f5b-0a52f94b3d3f",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55a95c71-6524-4969-ba10-e3577e14adf5",
+                    "path": "<Keyboard>/space",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapJump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -364,6 +364,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "a2da6e2b-496e-4798-b7c6-a181c6c15661",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwordSwing",
                     "type": "Button",
                     "id": "4f3b4f0b-0438-4ece-bfdf-f8f756f5ac21",
@@ -372,17 +380,17 @@
                     "interactions": ""
                 },
                 {
-                    "name": "Element Special 1",
+                    "name": "HoldAttack",
                     "type": "Button",
-                    "id": "0c03d2b8-c007-40dd-a3e5-9db4e7e033b8",
+                    "id": "83246231-5aca-45a0-86a5-0066438bb238",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "HoldAttack",
+                    "name": "Element Special 1",
                     "type": "Button",
-                    "id": "83246231-5aca-45a0-86a5-0066438bb238",
+                    "id": "0c03d2b8-c007-40dd-a3e5-9db4e7e033b8",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -683,6 +691,17 @@
                 },
                 {
                     "name": "",
+                    "id": "a626ed2e-e0fe-4c4b-b2d9-bea5e9728068",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "9567c200-9852-4769-8ce2-809abadc9271",
                     "path": "<XInputController>/rightTrigger",
                     "interactions": "Hold(duration=0.3)",
@@ -715,9 +734,33 @@
                     "interactions": ""
                 },
                 {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "165c2bac-7398-41af-8707-09de000c8787",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "TapJump",
+                    "type": "Button",
+                    "id": "d5af1ef7-89b8-4674-82d6-ac538276c185",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "Sword Swing",
                     "type": "Button",
                     "id": "7bd3abc5-2220-4f78-9aea-76c640ad1220",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HoldAttack",
+                    "type": "Button",
+                    "id": "7d9b23c6-0c8b-45c7-a51d-52370c7d26d5",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -863,7 +906,7 @@
                     "name": "",
                     "id": "3ed531df-46e8-45b4-abd7-17ce6f4581f5",
                     "path": "<DualShockGamepad>/buttonWest",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "Sword Swing",
@@ -1010,6 +1053,39 @@
                     "processors": "",
                     "groups": "",
                     "action": "WeightShiftRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "d1e5d4aa-28b2-4131-b72e-f8732514516f",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0815a684-46f6-4732-b5d0-452067420faf",
+                    "path": "<DualShockGamepad>/buttonSouth",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TapJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "046967fa-d290-46f6-86fe-3511656c14a7",
+                    "path": "<DualShockGamepad>/buttonWest",
+                    "interactions": "Hold(duration=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
