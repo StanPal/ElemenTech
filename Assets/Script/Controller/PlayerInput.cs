@@ -369,6 +369,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""interactions"": """"
                 },
                 {
+                    ""name"": ""JumpRelease"",
+                    ""type"": ""Button"",
+                    ""id"": ""c3fec15f-fc1f-4d07-964f-c78757da11fe"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
                     ""name"": ""SwordSwing"",
                     ""type"": ""Button"",
                     ""id"": ""4f3b4f0b-0438-4ece-bfdf-f8f756f5ac21"",
@@ -380,6 +388,14 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": ""Element Special 1"",
                     ""type"": ""Button"",
                     ""id"": ""0c03d2b8-c007-40dd-a3e5-9db4e7e033b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""HoldAttack"",
+                    ""type"": ""Button"",
+                    ""id"": ""83246231-5aca-45a0-86a5-0066438bb238"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
@@ -506,7 +522,7 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""name"": """",
                     ""id"": ""effed0dc-d7f5-4250-8a87-9cc688489c37"",
                     ""path"": ""<XInputController>/rightTrigger"",
-                    ""interactions"": ""Press"",
+                    ""interactions"": ""Press(behavior=1)"",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SwordSwing"",
@@ -664,6 +680,28 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""TapDash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f848f506-2d1d-499a-b688-06f78d8ab1b9"",
+                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""interactions"": ""Press(pressPoint=0.3,behavior=1)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""JumpRelease"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9567c200-9852-4769-8ce2-809abadc9271"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": ""Hold(duration=0.3)"",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""HoldAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1359,8 +1397,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         m_XBOX = asset.FindActionMap("XBOX", throwIfNotFound: true);
         m_XBOX_Move = m_XBOX.FindAction("Move", throwIfNotFound: true);
         m_XBOX_Jump = m_XBOX.FindAction("Jump", throwIfNotFound: true);
+        m_XBOX_JumpRelease = m_XBOX.FindAction("JumpRelease", throwIfNotFound: true);
         m_XBOX_SwordSwing = m_XBOX.FindAction("SwordSwing", throwIfNotFound: true);
         m_XBOX_ElementSpecial1 = m_XBOX.FindAction("Element Special 1", throwIfNotFound: true);
+        m_XBOX_HoldAttack = m_XBOX.FindAction("HoldAttack", throwIfNotFound: true);
         m_XBOX_Guard = m_XBOX.FindAction("Guard", throwIfNotFound: true);
         m_XBOX_GuardRelease = m_XBOX.FindAction("Guard Release", throwIfNotFound: true);
         m_XBOX_Pause = m_XBOX.FindAction("Pause", throwIfNotFound: true);
@@ -1603,8 +1643,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     private IXBOXActions m_XBOXActionsCallbackInterface;
     private readonly InputAction m_XBOX_Move;
     private readonly InputAction m_XBOX_Jump;
+    private readonly InputAction m_XBOX_JumpRelease;
     private readonly InputAction m_XBOX_SwordSwing;
     private readonly InputAction m_XBOX_ElementSpecial1;
+    private readonly InputAction m_XBOX_HoldAttack;
     private readonly InputAction m_XBOX_Guard;
     private readonly InputAction m_XBOX_GuardRelease;
     private readonly InputAction m_XBOX_Pause;
@@ -1620,8 +1662,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
         public XBOXActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @Move => m_Wrapper.m_XBOX_Move;
         public InputAction @Jump => m_Wrapper.m_XBOX_Jump;
+        public InputAction @JumpRelease => m_Wrapper.m_XBOX_JumpRelease;
         public InputAction @SwordSwing => m_Wrapper.m_XBOX_SwordSwing;
         public InputAction @ElementSpecial1 => m_Wrapper.m_XBOX_ElementSpecial1;
+        public InputAction @HoldAttack => m_Wrapper.m_XBOX_HoldAttack;
         public InputAction @Guard => m_Wrapper.m_XBOX_Guard;
         public InputAction @GuardRelease => m_Wrapper.m_XBOX_GuardRelease;
         public InputAction @Pause => m_Wrapper.m_XBOX_Pause;
@@ -1646,12 +1690,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Jump.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJump;
+                @JumpRelease.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJumpRelease;
+                @JumpRelease.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnJumpRelease;
                 @SwordSwing.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnSwordSwing;
                 @SwordSwing.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnSwordSwing;
                 @SwordSwing.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnSwordSwing;
                 @ElementSpecial1.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnElementSpecial1;
                 @ElementSpecial1.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnElementSpecial1;
                 @ElementSpecial1.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnElementSpecial1;
+                @HoldAttack.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnHoldAttack;
+                @HoldAttack.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnHoldAttack;
+                @HoldAttack.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnHoldAttack;
                 @Guard.started -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuard;
                 @Guard.performed -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuard;
                 @Guard.canceled -= m_Wrapper.m_XBOXActionsCallbackInterface.OnGuard;
@@ -1689,12 +1739,18 @@ public class @PlayerInput : IInputActionCollection, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @JumpRelease.started += instance.OnJumpRelease;
+                @JumpRelease.performed += instance.OnJumpRelease;
+                @JumpRelease.canceled += instance.OnJumpRelease;
                 @SwordSwing.started += instance.OnSwordSwing;
                 @SwordSwing.performed += instance.OnSwordSwing;
                 @SwordSwing.canceled += instance.OnSwordSwing;
                 @ElementSpecial1.started += instance.OnElementSpecial1;
                 @ElementSpecial1.performed += instance.OnElementSpecial1;
                 @ElementSpecial1.canceled += instance.OnElementSpecial1;
+                @HoldAttack.started += instance.OnHoldAttack;
+                @HoldAttack.performed += instance.OnHoldAttack;
+                @HoldAttack.canceled += instance.OnHoldAttack;
                 @Guard.started += instance.OnGuard;
                 @Guard.performed += instance.OnGuard;
                 @Guard.canceled += instance.OnGuard;
@@ -2017,8 +2073,10 @@ public class @PlayerInput : IInputActionCollection, IDisposable
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnJumpRelease(InputAction.CallbackContext context);
         void OnSwordSwing(InputAction.CallbackContext context);
         void OnElementSpecial1(InputAction.CallbackContext context);
+        void OnHoldAttack(InputAction.CallbackContext context);
         void OnGuard(InputAction.CallbackContext context);
         void OnGuardRelease(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);

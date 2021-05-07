@@ -183,7 +183,6 @@ public class HeroMovement : MonoBehaviour
             _extraJumpForce = 0;
         }
 
-        SlopeCheck();
         if (!_isRecovering)
         {
             if (ControllerInput == Controller.Keyboard && !_isDashing)
@@ -204,31 +203,35 @@ public class HeroMovement : MonoBehaviour
             }
         }
 
-        if (_knockBackCount <= 0)
+        if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
         {
-            if (_heroActions.IsEarthStomping)
-            {
-                _newVelocity = new Vector2(0, _rb.velocity.y);
-
-            }
-            else
-            {
-                _newVelocity = new Vector2(_moveSpeed * _moveInput, _rb.velocity.y);
-            }
-            _rb.velocity = _newVelocity;
+            _rb.velocity = new Vector2(0, _rb.velocity.y);
         }
-        else
+
+        if (_knockBackCount >= 0)
         {
             if (_onHitLeft)
             {
-                _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(-_knockBackXRecieved, _knockBackYRecieved);
+                }
             }
             else
             {
-                _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+                if (_knockBackYRecieved != float.NaN)
+                {
+                    _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+                }
             }
             _knockBackCount -= Time.deltaTime;
         }
+        else
+        {
+            if(_rb.velocity.y != float.NaN)
+            _rb.velocity = new Vector2(_moveInput * Speed, _rb.velocity.y);
+        }
+
 
         if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
         {
@@ -281,6 +284,7 @@ public class HeroMovement : MonoBehaviour
 
     private void Update()
     {
+
         switch (ControllerInput)
         {
             case Controller.None:
@@ -714,7 +718,7 @@ public class HeroMovement : MonoBehaviour
 
     public void OnKnockBackHit(float knockBackX, float knockBackY, float knockBackLength, bool direction)
     {
-
+        Debug.Log(knockBackY);
         _knockBackCount = knockBackLength;
         _knockBackXRecieved = knockBackX;
         _knockBackYRecieved = knockBackY;

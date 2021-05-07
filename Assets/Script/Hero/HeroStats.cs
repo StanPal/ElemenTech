@@ -6,6 +6,7 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action<GameObject> onDebuffDeActivated;
     public event System.Action OnShieldRecovered;
+    public event System.Action OnDeath;
 
     private AnimationEvents _animationEvent;
     private Animator _animator;
@@ -260,6 +261,7 @@ public class HeroStats : MonoBehaviour
         {
             playermanager.TeamTwo.Remove(gameObject);
         }
+        OnDeath?.Invoke();
         this.gameObject.SetActive(false);
     }
 

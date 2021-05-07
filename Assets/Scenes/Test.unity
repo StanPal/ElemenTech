@@ -414,6 +414,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1018499645}
   - component: {fileID: 1018499646}
+  - component: {fileID: 1018499647}
   m_Layer: 0
   m_Name: Manager
   m_TagString: Untagged
@@ -468,7 +469,8 @@ MonoBehaviour:
       m_Interactions: 
       m_SingletonActionBindings: []
     m_Reference: {fileID: 0}
-  m_PlayerPrefab: {fileID: 1284729131}
+  m_PlayerPrefab: {fileID: 4642372663975743453, guid: e95c3788f8077d4439ea9821c24bc710,
+    type: 3}
   m_SplitScreen: 0
   m_MaintainAspectRatioInSplitScreen: 0
   m_FixedNumberOfSplitScreens: -1
@@ -478,91 +480,18 @@ MonoBehaviour:
     y: 0
     width: 1
     height: 1
---- !u!1001 &1284729130
-PrefabInstance:
+--- !u!114 &1018499647
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 4642372663793389680, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663793389680, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 2.39
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743444, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4642372663975743453, guid: e95c3788f8077d4439ea9821c24bc710,
-        type: 3}
-      propertyPath: m_Name
-      value: WaterHeroTest
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: e95c3788f8077d4439ea9821c24bc710, type: 3}
---- !u!1 &1284729131 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4642372663975743453, guid: e95c3788f8077d4439ea9821c24bc710,
-    type: 3}
-  m_PrefabInstance: {fileID: 1284729130}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1018499644}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abf80b378899b0c4faa5dafd257b3043, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1656238523
 GameObject:
   m_ObjectHideFlags: 0

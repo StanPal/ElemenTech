@@ -135,6 +135,11 @@ public class HeroActions : MonoBehaviour
                 {
                     _playerInput.XBOX.Guard.performed += _ => Guard();
                 }
+                if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
+                {
+                    _playerInput.XBOX.HoldAttack.performed += _ => OnCharging();
+                    Debug.Log("Hold attack Triggered");
+                }
                 _playerInput.XBOX.GuardRelease.performed += _ => GuardRelease();
                 _playerInput.XBOX.Pause.performed += _ => Pause();
             }
@@ -174,7 +179,7 @@ public class HeroActions : MonoBehaviour
             case HeroMovement.Controller.PS4:
                 _axisPos = _playerInput.PS4.Aim.ReadValue<Vector2>();
                 _lookDirection = _playerInput.PS4.Aim.ReadValue<Vector2>();
-                _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - _crossHair.transform.position.x) * Mathf.Rad2Deg;
+                _lookAngle = Mathf.Atan2(_crossHair.transform.position.y - transform.position.y, _crossHair.transform.position.x - transform.position.x) * Mathf.Rad2Deg;
                 break;
             case HeroMovement.Controller.XBOX:
                 _axisPos = _playerInput.XBOX.Aim.ReadValue<Vector2>();

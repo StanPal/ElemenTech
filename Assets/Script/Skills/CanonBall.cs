@@ -111,7 +111,7 @@ public class CanonBall : MonoBehaviour
         ParticleSystem ps = explosionEffect.GetComponent<ParticleSystem>();
         var sh = ps.shape;
         sh.radius = SplashRange;
-        Instantiate(explosionEffect, transform.position, Quaternion.identity);
+        Instantiate(explosionEffect, transform);
         explosionEffect.GetComponent<ParticleSystem>().Play();
     }
 

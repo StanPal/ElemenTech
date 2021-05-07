@@ -356,6 +356,14 @@
                     "interactions": ""
                 },
                 {
+                    "name": "JumpRelease",
+                    "type": "Button",
+                    "id": "c3fec15f-fc1f-4d07-964f-c78757da11fe",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
                     "name": "SwordSwing",
                     "type": "Button",
                     "id": "4f3b4f0b-0438-4ece-bfdf-f8f756f5ac21",
@@ -367,6 +375,14 @@
                     "name": "Element Special 1",
                     "type": "Button",
                     "id": "0c03d2b8-c007-40dd-a3e5-9db4e7e033b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "HoldAttack",
+                    "type": "Button",
+                    "id": "83246231-5aca-45a0-86a5-0066438bb238",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
@@ -493,7 +509,7 @@
                     "name": "",
                     "id": "effed0dc-d7f5-4250-8a87-9cc688489c37",
                     "path": "<XInputController>/rightTrigger",
-                    "interactions": "Press",
+                    "interactions": "Press(behavior=1)",
                     "processors": "",
                     "groups": "",
                     "action": "SwordSwing",
@@ -651,6 +667,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "TapDash",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f848f506-2d1d-499a-b688-06f78d8ab1b9",
+                    "path": "<XInputController>/buttonSouth",
+                    "interactions": "Press(pressPoint=0.3,behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "JumpRelease",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9567c200-9852-4769-8ce2-809abadc9271",
+                    "path": "<XInputController>/rightTrigger",
+                    "interactions": "Hold(duration=0.3)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

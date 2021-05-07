@@ -15,6 +15,8 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -37,7 +39,6 @@ public class Movement : MonoBehaviour
     public void Move(InputAction.CallbackContext context)
     {
         moveInput = context.ReadValue<float>();
-
     }
 
     public void Jump(InputAction.CallbackContext context)
