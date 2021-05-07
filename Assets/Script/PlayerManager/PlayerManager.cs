@@ -18,6 +18,8 @@ public class PlayerManager : MonoBehaviour
 
     public List<GameObject> TeamOne = new List<GameObject>();
     public List<GameObject> TeamTwo = new List<GameObject>();
+    public List<GameObject> TeamThree = new List<GameObject>();
+    public List<GameObject> TeamFour = new List<GameObject>();
 
     private void Awake()
     {        
@@ -34,5 +36,7 @@ public class PlayerManager : MonoBehaviour
 
         TeamOne.Capacity = 0;
         TeamTwo.Capacity = 0;
+        TeamThree.Capacity = 0;
+        TeamFour.Capacity = 0;
     }
 }

@@ -1237,7 +1237,7 @@
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
+                    "name": "Keyboard",
                     "id": "f69aa67c-3c01-4bdc-9fd3-640bd7fb81fd",
                     "path": "1DAxis",
                     "interactions": "",
@@ -1262,6 +1262,39 @@
                     "name": "positive",
                     "id": "4ea68a32-e47e-4b13-aef5-e23346cd0603",
                     "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "XBOX",
+                    "id": "e85ed76f-9ea4-4c10-90a0-cf1df0f3fa69",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "5d9ecb23-a148-40ce-9a02-a2adf3276150",
+                    "path": "<Gamepad>/leftStick/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "6f7b13f0-c57c-490f-94fa-b5ea883fc140",
+                    "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

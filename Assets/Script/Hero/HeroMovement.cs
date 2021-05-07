@@ -150,6 +150,8 @@ public class HeroMovement : MonoBehaviour
             _groundJumpForce = _originalJumpForce;
             _fastFallJump.Weight = _fastFallJump.OriginalWeight;
             _isJumping = false;
+            _heroActions.ChargeMax = false;
+            _heroActions.ChargeAmount = 0;
             if (!_isJumpHeld)
             {
                 _jumpTimeCounter = _jumpTimer;
@@ -224,7 +226,7 @@ public class HeroMovement : MonoBehaviour
             _selfKnockBack -= Time.deltaTime; 
         }
 
-  
+     
 
         if (_isDashing)
         {

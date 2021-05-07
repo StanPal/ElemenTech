@@ -5,6 +5,7 @@ public class HeroActions : MonoBehaviour
 {
     public event System.Action<Elements.ElementalAttribute> onSkillPerformed;
     public event System.Action onAttackPerformed;
+    public event System.Action onChargeAttackPerformed;
     public event System.Action onPausePeformed;
     public event System.Action onGuardPerformed;
     public event System.Action onGuardExit;
@@ -267,11 +268,19 @@ public class HeroActions : MonoBehaviour
         }
         else if (!_isGuardInvoked && !_heroMovement.Dashing && !_isSwinging)
         {
-            _isSwinging = true;
-            _playerAnimator.SetBool("IsAttacking", true);
-            onAttackPerformed.Invoke();
+            if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Air) && _isChargeMax)
+            {                
+                onChargeAttackPerformed?.Invoke();
+            }
+            else
+            {
+                _playerAnimator.SetBool("IsAttacking", true);
+                onAttackPerformed.Invoke();
+            }
+                _isSwinging = true;
             AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[0], this.transform.position, _soundManager.AudioVolume);
-        }
+        } 
+   
     }
 
     public void InvokeParry()

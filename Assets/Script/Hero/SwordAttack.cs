@@ -17,9 +17,11 @@ public class SwordAttack : MonoBehaviour
     private Animator _animator;
     private bool _isOriginalDirectionleft;
     private bool _isChargeMax = false;
-    private float _meleeDamage; 
+    private float _meleeDamage;
     private Vector3 _originalLocalScale;
     private BoxCollider2D _boxCollider;
+    private CircleCollider2D _circleCollider;
+    [SerializeField] private ParticleSystem chargeAttack;
 
     private void Awake()
     {
@@ -30,36 +32,18 @@ public class SwordAttack : MonoBehaviour
         _heroStats = GetComponentInParent<HeroStats>();
         _fastFallJump = GetComponentInParent<FastFallJump>();
         _animator = GetComponent<Animator>();
+        _circleCollider = GetComponent<CircleCollider2D>();
     }
 
-   private void Start()
+    private void Start()
     {
         _originalLocalScale = _heroMovement.transform.localScale;
-        _heroMovement.onPlayerFlip += OnPlayerFlipPerformed;
         _heroAction.onAttackPerformed += OnAttackPerformed;
         _heroAction.onParryPerformed += OnParryPerformed;
-
-    }   
-
-    private void OnParryPerformed()
-    {
-        _animator.SetBool("isAttacking", true);
-        StartCoroutine(SwordStart());
+        _heroAction.onChargeAttackPerformed += OnChargeAttackPerformed;
     }
 
-    private void OnPlayerFlipPerformed()
-    {
-
-    }
-
-    private IEnumerator TurnBackAnimator()
-    {
-        _animator.enabled = false;
-        yield return new WaitForSeconds(0.1f);
-        _animator.enabled = true;
-    }
-
-    private void OnAttackPerformed()
+    private void OnChargeAttackPerformed()
     {
         if (_heroAction.ChargeMax)
         {
@@ -72,24 +56,44 @@ public class SwordAttack : MonoBehaviour
             _knockBackLength = _heroStats.KnockBackLength * 2f;
             _hitStun = _heroStats.HitStun * 2f;
             onPlayerChargeAttack?.Invoke();
+            chargeAttack.Play();
+            _circleCollider.enabled = true;
+            StartCoroutine(ChargeAttack());
         }
-        else
-        {
-            _meleeDamage = _heroStats.AttackDamage;
-            _knockBackXAmount = _heroStats.KnockBackXAmount;
-            _knockBackYAmount = _heroStats.KnockBackYAmount;
-            _knockBackLength = _heroStats.KnockBackLength;
-            _hitStun = _heroStats.HitStun;
-            _isChargeMax = false;
-        }
+    }
+
+    private void OnParryPerformed()
+    {
+        _animator.SetBool("isAttacking", true);
+        StartCoroutine(SwordStart());
+    }
+
+
+    private void OnAttackPerformed()
+    {
+
+        _meleeDamage = _heroStats.AttackDamage;
+        _knockBackXAmount = _heroStats.KnockBackXAmount;
+        _knockBackYAmount = _heroStats.KnockBackYAmount;
+        _knockBackLength = _heroStats.KnockBackLength;
+        _hitStun = _heroStats.HitStun;
+        _isChargeMax = false;
         StartCoroutine(SwordStart());
     }
 
     private IEnumerator SwordStart()
-    {  
+    {
         yield return new WaitForSeconds(0.217f);
         _animator.SetBool("IsAttacking", false);
         _heroAction._isSwinging = false;
+    }
+
+    private IEnumerator ChargeAttack()
+    {
+        yield return new WaitForSeconds(1f);
+        _circleCollider.enabled = false;
+        _heroAction._isSwinging = false;
+        _isChargeMax = false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -133,7 +137,7 @@ public class SwordAttack : MonoBehaviour
                         {
                             heroStats.TakeDamage(_meleeDamage);
                             collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
-                        }                    
+                        }
                         if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
                         {
                             _particleSystemManager.FireAura(_heroMovement.gameObject);
@@ -153,7 +157,7 @@ public class SwordAttack : MonoBehaviour
                     {
                         if (heroStats.Guard.CanParry)
                         {
-                            if(heroStats.HeroMovement.GetIsLeft && _heroMovement.GetIsLeft)
+                            if (heroStats.HeroMovement.GetIsLeft && _heroMovement.GetIsLeft)
                             {
                                 heroStats.HeroMovement.flipCharacter();
                             }
@@ -181,7 +185,7 @@ public class SwordAttack : MonoBehaviour
                         {
                             heroStats.TakeDamage(_meleeDamage);
                             collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
-                        }                     
+                        }
                         if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
                         {
                             _particleSystemManager.FireAura(_heroMovement.gameObject);
@@ -196,4 +200,5 @@ public class SwordAttack : MonoBehaviour
             collision.GetComponent<Golem>().TakeDamage(_meleeDamage);
         }
     }
+
 }
