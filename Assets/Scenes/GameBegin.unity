@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -644,8 +644,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 541295852}
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0, y: 0, z: 300.63}
-  m_LocalScale: {x: 1.2410094, y: 1.2410094, z: 1.2410094}
+  m_LocalPosition: {x: 0, y: 0, z: 464.42}
+  m_LocalScale: {x: 2.5933373, y: 2.5933373, z: 2.5933373}
   m_Children:
   - {fileID: 1087459645}
   m_Father: {fileID: 318829594}
@@ -653,7 +653,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -135, y: 125}
+  m_AnchoredPosition: {x: -255.07, y: 248.54}
   m_SizeDelta: {x: 330.82318, y: 125.34303}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &541295854
@@ -1286,8 +1286,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1746346973}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5572448, y: 0.5572448, z: 0.5572448}
+  m_LocalPosition: {x: 0, y: 0, z: -163.79}
+  m_LocalScale: {x: 1.1644744, y: 1.1644744, z: 1.1644744}
   m_Children:
   - {fileID: 205874422}
   - {fileID: 758126558}
@@ -1298,7 +1298,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 178, y: -30}
+  m_AnchoredPosition: {x: 399, y: -75.366}
   m_SizeDelta: {x: 404.31036, y: 536.615}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1926574916
@@ -1549,7 +1549,7 @@ PrefabInstance:
     - target: {fileID: 1367065374258634931, guid: ca8caafca03355045b351981831605fd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -329
+      value: -360
       objectReference: {fileID: 0}
     - target: {fileID: 1367065374258634931, guid: ca8caafca03355045b351981831605fd,
         type: 3}
@@ -1574,12 +1574,12 @@ PrefabInstance:
     - target: {fileID: 1367065374258634931, guid: ca8caafca03355045b351981831605fd,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -427
+      value: -875
       objectReference: {fileID: 0}
     - target: {fileID: 1367065374258634931, guid: ca8caafca03355045b351981831605fd,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -61
+      value: -104
       objectReference: {fileID: 0}
     - target: {fileID: 1367065374258634931, guid: ca8caafca03355045b351981831605fd,
         type: 3}
