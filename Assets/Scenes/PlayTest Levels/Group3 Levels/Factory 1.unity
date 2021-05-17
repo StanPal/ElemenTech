@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -581,8 +581,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera (1)
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 146319885, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 069c9e0702597c24c9527064f7bfa94e, type: 3}
+--- !u!1 &317448072 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7255437403339329850, guid: 069c9e0702597c24c9527064f7bfa94e,
+    type: 3}
+  m_PrefabInstance: {fileID: 317448071}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &317448073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317448072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 40381a6c265667b4cab1aea7826d9a75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Players: []
+  camSpeed: 20
+  range: 0.4
+--- !u!114 &317448074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317448072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 31542b973172b204fa16f611f391ee1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _shakePower: 1
+  _shakeLength: 1
+  rotationMultiplier: 1
 --- !u!1 &336528968
 GameObject:
   m_ObjectHideFlags: 0
