@@ -19,7 +19,7 @@ public class AirJet : MonoBehaviour
             (new Vector2(-_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.x,
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized * _AirSkills.KnockBackMulitplier, _AirSkills.KnockBackLength);
         Debug.Log(new Vector2(-_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.x,
-            -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized);
+            -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized * _AirSkills.KnockBackMulitplier);
         //if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
         //{
         //    isChargeMax = true;

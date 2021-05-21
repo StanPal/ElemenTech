@@ -99,8 +99,8 @@ MonoBehaviour:
   mDamage: 8
   mSpeed: 20
   mExitTime: 1.5
-  _knockBackLength: 0.5
-  _knockBackMultiplier: 2
+  _knockBackLength: 1
+  _knockBackMultiplier: 3
 --- !u!114 &639230567
 MonoBehaviour:
   m_ObjectHideFlags: 0

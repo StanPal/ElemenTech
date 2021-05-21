@@ -227,6 +227,15 @@ public class HeroMovement : MonoBehaviour
             StartCoroutine(Recover());
         }
 
+        if (_selfKnockBack >= 0 && _isWeightShifting)
+        {
+            _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
+            _selfKnockBack -= Time.deltaTime;
+        }
+    }
+
+    private void Update()
+    {
         #region Movement
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
         {
@@ -258,23 +267,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = new Vector2(_moveInput * _moveSpeed, _rb.velocity.y);
             }
-            else
-            {
-
-            }
         }
 
-        if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
-        {
-            _rb.velocity = new Vector2(_knockBackXRecieved, _knockBackYRecieved);
-            _selfKnockBack -= Time.deltaTime;
-        }
+
         #endregion
-    }
-
-    private void Update()
-    {
-
 
         switch (ControllerInput)
         {
@@ -756,7 +752,7 @@ public class HeroMovement : MonoBehaviour
             {
                 if (WeightShifting)
                 {
-                    _rb.velocity = Vector2.up * ((_groundJumpForce / (_fastFallJump.OriginalWeight - _fastFallJump.Weight)) / 2f);
+                    _rb.velocity = Vector2.up * ((_groundJumpForce / (_fastFallJump.OriginalWeight - _fastFallJump.Weight)));
                     _numOfJumps--;
                 }
                 else
@@ -785,11 +781,11 @@ public class HeroMovement : MonoBehaviour
             _knockBackXRecieved = KnockBack.x * 2f;
             _knockBackYRecieved = KnockBack.y * 2f;
         }
-        else
-        { 
-            _knockBackXRecieved = KnockBack.x;
-            _knockBackYRecieved = KnockBack.y;
-        }
+        //else
+        //{ 
+        //    _knockBackXRecieved = KnockBack.x;
+        //    _knockBackYRecieved = KnockBack.y;
+        //}
     }
 
     private bool CheckCanJump()

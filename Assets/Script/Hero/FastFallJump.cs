@@ -47,7 +47,7 @@ public class FastFallJump : MonoBehaviour
                 _rb.velocity += Vector2.up  * (_fallMultiplier - _fallOffsetSpeed) * Time.deltaTime;
                 if (_heroMovement.SelfKnockBack <= 0)
                 {
-                    _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, _fallMultiplier);
+                    _rb.velocity = Vector2.ClampMagnitude(_rb.velocity, _fallMultiplier * 2f);
                 }
             }
             else
