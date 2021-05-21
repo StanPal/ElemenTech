@@ -4,13 +4,29 @@ using UnityEngine;
 
 public class StopFlip : MonoBehaviour
 {
-    Quaternion rotation = Quaternion.identity;
-    void Awake()
+    Quaternion rotation;
+    private HeroMovement _heroMovement;
+    private void Awake()
     {
-        rotation = transform.rotation;
+        _heroMovement = GetComponentInParent<HeroMovement>();
     }
-    void LateUpdate()
+
+    private void FixedUpdate()
     {
-        transform.rotation = rotation;
+        Vector3 characterScale = transform.localScale;
+        if (_heroMovement.MoveInput  < 0)
+        {
+            characterScale.x = -0.5f;
+            _heroMovement.GetIsLeft = true;
+        }
+
+        if (_heroMovement.MoveInput > 0)
+        {
+            characterScale.x = 0.5f;
+            _heroMovement.GetIsLeft = false;
+        }
+
+        transform.localScale = characterScale;
+
     }
 }

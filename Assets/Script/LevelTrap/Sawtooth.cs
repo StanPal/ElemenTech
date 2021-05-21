@@ -55,8 +55,9 @@ public class Sawtooth : MonoBehaviour
             //    EnterTime = DateTime.Now
             //};
             //_trappedHeros.Add(data);
-            collision.GetComponent<HeroStats>().TakeDamage(mDamage);
-            collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
+          
+            heroStats.TakeDamage(mDamage);
+            heroStats.HeroMovement.OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, !heroStats.HeroMovement.GetIsLeft);
         }
     }
 

@@ -117,9 +117,11 @@ public class HeroMovement : MonoBehaviour
     public float DashSpeed { get => _dashSpeed; }
     public bool Dashing { get => _isDashing; set => _isDashing = value; }
     public bool TapDashing { get => _isTapDashing; set => _isTapDashing = value; }
-    public bool GetIsLeft { get => _isLeft; }
+    public bool GetIsLeft { get => _isLeft; set => _isLeft = value; }
     public bool Recovering { get => _isRecovering; set => _isRecovering = value; }
     public float SelfKnockBack { get => _selfKnockBack; }
+    public float MoveInput { get => _moveInput; }
+
     private void Awake()
     {
         _playerAnimator = GetComponentInChildren<Animator>();
@@ -225,23 +227,7 @@ public class HeroMovement : MonoBehaviour
             StartCoroutine(Recover());
         }
 
-        Vector3 characterScale = transform.localScale;
-        if (_moveInput < 0)
-        {
-            characterScale.x = -1;
-            _isLeft = true;
-            onPlayerFlip?.Invoke();
-        }
-
-        if (_moveInput > 0)
-        {
-            characterScale.x = 1;
-            _isLeft = false;
-            onPlayerFlip?.Invoke();
-        }
-
-        transform.localScale = characterScale;
-
+ 
     }
 
     private void Update()

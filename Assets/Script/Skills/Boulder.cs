@@ -26,6 +26,7 @@ public class Boulder : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position += transform.right * _earthSkills.LaunchForce * Time.deltaTime;
+        transform.RotateAround(transform.position, Vector3.forward, 70f * Time.deltaTime);
     }
     
 

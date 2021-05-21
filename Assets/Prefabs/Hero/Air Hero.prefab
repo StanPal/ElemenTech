@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -435,6 +435,8 @@ MonoBehaviour:
   _knockBackYAmount: 5
   _knockBackLength: 0.2
   _hitStun: 1
+  _shakePower: 1
+  _shakeLength: 1
   _elementalType: 3
   _positiveEffect: 3
   _negativeEffect: 3
@@ -476,7 +478,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5745905597698010381}
   _dust: {fileID: 2378443808384279137}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 1
   OnTeam: 0
   _moveSpeed: 14
   _airStrifeSpeed: 5
@@ -761,6 +763,7 @@ GameObject:
   - component: {fileID: 5380969887007770328}
   - component: {fileID: 4295802460415164768}
   - component: {fileID: 7132035430337609818}
+  - component: {fileID: 8344125713950916153}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -920,6 +923,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 3
+--- !u!114 &8344125713950916153
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1791110765959601702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79046922ab30451408a5337d83c701e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2442036248830408209
 GameObject:
   m_ObjectHideFlags: 0

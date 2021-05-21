@@ -6,7 +6,8 @@ public class HeroStats : MonoBehaviour
     public event System.Action<GameObject> onDebuffActivated;
     public event System.Action<GameObject> onDebuffDeActivated;
     public event System.Action OnShieldRecovered;
-    public event System.Action OnDeath;
+    public event System.Action<float,float> OnShake;
+    
 
     private AnimationEvents _animationEvent;
     private Animator _animator;
@@ -35,6 +36,9 @@ public class HeroStats : MonoBehaviour
     [SerializeField] private float _knockBackYAmount = 5f;
     [SerializeField] private float _knockBackLength = 0.2f;
     [SerializeField] private float _hitStun = 1f;
+    [SerializeField] private float _shakePower = 1;
+    [SerializeField] private float _shakeLength = 1;
+
     private bool _isHealing = false;
     private float _tempCoolDownTime;
     private bool _isCoolDownFinished;
@@ -105,6 +109,7 @@ public class HeroStats : MonoBehaviour
         {
             _isHealing = false;
             _currentHealth -= damage;
+            OnShake.Invoke(_shakePower * 0.5f,_shakeLength * 0.5f);
             switch (_negativeEffect)
             {
                 case StatusEffects.NegativeEffects.OnFire:
@@ -261,7 +266,7 @@ public class HeroStats : MonoBehaviour
         {
             playermanager.TeamTwo.Remove(gameObject);
         }
-        OnDeath?.Invoke();
+        OnShake?.Invoke(_shakePower * 2f, _shakeLength * 2f);
         this.gameObject.SetActive(false);
     }
 
