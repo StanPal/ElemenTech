@@ -35,7 +35,7 @@ public class IceTrapManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(spawnLocation.Count);
+        //Debug.Log(spawnLocation.Count);
         if (iceSpikeCounter < maxSpawnlocation && currentDelayTime < Time.time)
         {
             currentDelayTime = Time.time + delayTime;

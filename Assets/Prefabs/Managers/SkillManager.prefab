@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df9ae2b8293fe9a46a7794daaf431660, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FireBallPrefab: {fileID: 8685245518257252455, guid: b67f932aa223fa948b76a5aa3ba6d5f2,
+  FireBallPrefab: {fileID: 1506670501764102, guid: 19deeca5634e5724fbc19648733ac670,
     type: 3}
   _speed: 20
   _damage: 20
@@ -77,8 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e7539fc20dbe07449103b21bb014d7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mWaterGun: {fileID: 3280369587369324419, guid: e8e96f597af3c6a40ace5ff63d341ef9,
-    type: 3}
+  mWaterGun: {fileID: 1522609394979808, guid: 985002ce806088c488fcee76bfafd6e4, type: 3}
   mSpeed: 25
   mDamage: 8
   mExitTime: 3
@@ -96,12 +95,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf75f85b09b1ef2459038b6ee28cacd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mAirJet: {fileID: 1353044322038243110, guid: ebbf3b235b0c1f74bae767994a158f0d, type: 3}
+  mAirJet: {fileID: 1283372287858124, guid: 9b6288fd0c4aba44882bd84669a933b3, type: 3}
   mDamage: 8
   mSpeed: 20
   mExitTime: 1.5
-  mScale: {x: 0.5, y: 3, z: 0.5}
-  mScaleSpeed: 2
+  _knockBackLength: 0.5
+  _knockBackMultiplier: 2
 --- !u!114 &639230567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,7 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ed8511c2602631439e5507d2ac11fee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EarthBoulder: {fileID: 456878591809443157, guid: d25b6ae191ca7e941b80eeefada72f58,
+  EarthBoulder: {fileID: 1897621801385850, guid: eb585155ffd9c3442814fb518a3d0bea,
     type: 3}
   Points: {fileID: 0}
   LaunchOffset: {x: 0, y: 0, z: 0}

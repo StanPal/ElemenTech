@@ -9,8 +9,7 @@ public class SawtoothTrigger : MonoBehaviour
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        var heroStats = collision.gameObject.GetComponent<HeroStats>();
-        if (heroStats)
+        if (collision.GetComponent<SwordAttack>())
         {
             mTrap.Move(mTriggerId);
         }

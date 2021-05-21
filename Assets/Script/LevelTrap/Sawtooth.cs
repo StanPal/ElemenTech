@@ -8,6 +8,8 @@ public class Sawtooth : MonoBehaviour
     [SerializeField] private float mDamageTime = 1.0f;
     [SerializeField] private float mDamage = 5.0f;
     [SerializeField] private float _speed = 2.0f;
+    [SerializeField] private float _knockBackAmount = 20f;
+    [SerializeField] private float _knockBackLength = 0.2f;
     private const float mDelayTime = 1.0f;
 
     public struct TrappedHeroData
@@ -19,39 +21,43 @@ public class Sawtooth : MonoBehaviour
 
     private void Awake()
     {
-        StartCoroutine(SawtoothDamageRoutine());
+        //StartCoroutine(SawtoothDamageRoutine());
     }
 
     private void Update()
     {
         this.transform.Rotate(new Vector3(0, 0, 1f), _speed, Space.Self);
+
     }
 
-    private IEnumerator SawtoothDamageRoutine()
-    {
-        while (true)
-        {
-            if (_trappedHeros.Count > 0)
-            {
-                foreach (var trappedHero in _trappedHeros)
-                {
-                    trappedHero.HeroStats.TakeDamage(mDamage);
-                }
-            }
-            yield return new WaitForSeconds(mDelayTime);
-        }
-    }
+   //private IEnumerator SawtoothDamageRoutine()
+   //{
+   //    while (true)
+   //    {
+   //        if (_trappedHeros.Count > 0)
+   //        {
+   //            //foreach (var trappedHero in _trappedHeros)
+   //            //{
+   //            //    trappedHero.HeroStats.TakeDamage(mDamage);
+   //            //}
+   //        }
+   //        yield return new WaitForSeconds(mDelayTime);
+   //    }
+   //}
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<HeroStats>())
+        if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
         {
-            TrappedHeroData data = new TrappedHeroData()
-            {
-                HeroStats = collision.GetComponent<HeroStats>(),
-                EnterTime = DateTime.Now
-            };
-            _trappedHeros.Add(data);
+            //TrappedHeroData data = new TrappedHeroData()
+            //{
+            //    HeroStats = collision.GetComponent<HeroStats>(),
+            //    EnterTime = DateTime.Now
+            //};
+            //_trappedHeros.Add(data);
+          
+            heroStats.TakeDamage(mDamage);
+            heroStats.HeroMovement.OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, !heroStats.HeroMovement.GetIsLeft);
         }
     }
 

@@ -22,43 +22,26 @@ public class EarthStomp : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(!_isHit)
+        if (!_isHit)
+        {
+            if (!collision.collider.tag.Equals(_heroStats.tag))
             {
-            if (_heroStats.tag.Equals("Team1"))
-            {
-                if (collision.collider.tag.Equals("Team2"))
+                if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                    {
-                        _isHit = true;
-                        this.gameObject.SetActive(false);
-                        heroStats.TakeDamage(_stompDamage);
-                        heroStats.HeroMovement.Rigidbody2D.velocity = -Vector2.up * _stompDamage;
-                        heroStats.GetComponent<HeroMovement>().Recovering = true;
-                    }
-                }
-            }
-            if (_heroStats.tag.Equals("Team2"))
-            {
-                if (collision.collider.tag.Equals("Team1"))
-                {
-                    if (collision.collider.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                    {
-                        _isHit = true;
-                        this.gameObject.SetActive(false);
-                        heroStats.TakeDamage(_stompDamage);
-                        heroStats.HeroMovement.Rigidbody2D.velocity = -Vector2.up * _stompDamage;
-                        heroStats.GetComponent<HeroMovement>().Recovering = true;
-                    }
+                    _isHit = true;
+                    this.gameObject.SetActive(false);
+                    heroStats.TakeDamage(_stompDamage);
+                    heroStats.HeroMovement.Rigidbody2D.velocity = -Vector2.up * _stompDamage;
+                    heroStats.GetComponent<HeroMovement>().Recovering = true;
                 }
             }
         }
 
-        if(collision.collider.GetComponentInParent<Walls>())
+        if (collision.collider.GetComponentInParent<Walls>())
         {
             this.gameObject.SetActive(false);
         }
-        
+
         _heroActions.PlayerAnimator.SetBool("IsFastFall", false);
         _heroActions.IsEarthStomping = false;
     }

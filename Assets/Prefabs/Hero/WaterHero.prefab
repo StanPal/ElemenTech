@@ -44,6 +44,7 @@ GameObject:
   - component: {fileID: 3971657425997289567}
   - component: {fileID: 5781581391148098263}
   - component: {fileID: 3046514895961485317}
+  - component: {fileID: 631095458201639116}
   m_Layer: 9
   m_Name: Body
   m_TagString: Untagged
@@ -147,6 +148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d22d70d2ee696041b408a76ec58bef9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chargeAttack: {fileID: 0}
 --- !u!61 &5781581391148098263
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -186,6 +188,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _IsInvincible: 0
+--- !u!114 &631095458201639116
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1371002032290494640}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79046922ab30451408a5337d83c701e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1371002032310544464
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1371002032310544473
 Transform:
   m_ObjectHideFlags: 0
@@ -280,6 +294,8 @@ MonoBehaviour:
   _knockBackYAmount: 5
   _knockBackLength: 0.2
   _hitStun: 1
+  _shakePower: 1
+  _shakeLength: 1
   _elementalType: 2
   _positiveEffect: 3
   _negativeEffect: 3
@@ -298,7 +314,8 @@ MonoBehaviour:
   _Crosshair: {fileID: 4875966304191913811}
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 4528160433185577089}
-  ControllerInput: 1
+  ControllerInput: 0
+  OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 6
   _groundJumpForce: 27
@@ -443,7 +460,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}

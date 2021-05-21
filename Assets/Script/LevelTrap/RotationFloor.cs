@@ -82,6 +82,7 @@ public class RotationFloor : MonoBehaviour
                     _floor.layer = 10;
                     _floorLS.layer = 8;
                     _floorRS.layer = 8;
+                    zRotation = _finalZRotation;
                 }
                 break;
             case RotationState.CounterClockwise:
@@ -95,6 +96,7 @@ public class RotationFloor : MonoBehaviour
                     _floor.layer = 8;
                     _floorLS.layer = 10;
                     _floorRS.layer = 10;
+                    zRotation = _startZRotation;
                 }
                 break;
         }

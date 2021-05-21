@@ -45,7 +45,7 @@ public class Crosshair : MonoBehaviour
         Ray mouseRay = Camera.main.ScreenPointToRay((Vector3)_heroAction.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());
         Debug.DrawRay(mouseRay.origin, mouseRay.direction * 50, Color.yellow);
         //float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
-        _target = new Vector3(mouseRay.origin.x + mouseRay.direction.x * 50f, mouseRay.origin.y + mouseRay.direction.y * 50f, 0);
+        _target = new Vector3(mouseRay.origin.x + mouseRay.direction.x * 40f, mouseRay.origin.y + mouseRay.direction.y * 40f, 0);
         transform.position = _target;
         //transform.position.Normalize();
        // _target = Camera.main.ScreenToWorldPoint((Vector3)_heroAction.PlayerInput.KeyboardMouse.Aim.ReadValue<Vector2>());

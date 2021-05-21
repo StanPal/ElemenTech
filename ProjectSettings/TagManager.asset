@@ -13,6 +13,9 @@ TagManager:
   - BluePortal
   - OrangePortal
   - FFA
+  - Team3
+  - Team4
+  - button
   layers:
   - Default
   - TransparentFX
@@ -50,9 +53,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGround1
+    uniqueID: 836084741
+    locked: 0
+  - name: BackGround2
+    uniqueID: 2194911263
+    locked: 0
   - name: Player
     uniqueID: 846023003
-    locked: 0
-  - name: New Layer
-    uniqueID: 836084741
     locked: 0

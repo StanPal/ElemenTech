@@ -2,16 +2,17 @@
 
 public class AnimationEvents : MonoBehaviour
 {
-    [SerializeField] private bool _IsInvincible = false;
+    [SerializeField]  private bool _IsInvincible = false;
     public bool DashProjectileInvincibility { get => _IsInvincible; set => _IsInvincible = value; }
 
-    private void InvincibleOn()
+    public void InvincibleOn()
     {
         _IsInvincible = true;
     }
 
-    private void InvincibleOff()
+    public void InvincibleOff()
     {
         _IsInvincible = false;
     }
+
 }

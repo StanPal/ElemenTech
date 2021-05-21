@@ -26,6 +26,7 @@ public class Boulder : MonoBehaviour
     private void FixedUpdate()
     {
         transform.position += transform.right * _earthSkills.LaunchForce * Time.deltaTime;
+        transform.RotateAround(transform.position, Vector3.forward, 70f * Time.deltaTime);
     }
     
 
@@ -44,7 +45,7 @@ public class Boulder : MonoBehaviour
             {
                 var enemyStats = hitCollider.GetComponent<HeroStats>();
                 var enemyMovement = hitCollider.GetComponent<HeroMovement>();
-                if (tag.Equals("Team1"))
+                if ( tag.Equals("Team1"))
                 {
                     var closestPont = hitCollider.ClosestPoint(transform.position);
                     var distance = Vector3.Distance(closestPont, transform.position);
@@ -108,10 +109,8 @@ public class Boulder : MonoBehaviour
             }
         }
 
-        if (gameObject.tag.Equals("Team1"))
-        {
-            if (collision.collider.tag.Equals("Team2"))
-            {
+        if (!collision.collider.tag.Equals(gameObject.tag))
+        {            
                 if (collision.gameObject.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
                     if (heroStats.Guard.Guarding)
@@ -123,27 +122,7 @@ public class Boulder : MonoBehaviour
                         heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
                     }
                     Explode();
-                    Destroy(gameObject);
-                }
-            }
-        }
-        if (gameObject.tag.Equals("Team2"))
-        {
-            if (collision.collider.tag.Equals("Team1"))
-            {
-                if (collision.gameObject.TryGetComponent<HeroStats>(out HeroStats heroStats))
-                {
-                    if (heroStats.Guard.Guarding)
-                    {
-                        heroStats.Guard.TakeShieldDamage(_earthSkills.Damage);
-                    }
-                    else
-                    {
-                        heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
-                    }
-                    Explode();
-                    Destroy(gameObject);
-                }
+                    Destroy(gameObject);                
             }
         }
         //if (_earthSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
