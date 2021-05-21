@@ -167,7 +167,7 @@ public class HeroMovement : MonoBehaviour
             if (!_isJumpHeld)
             {
                 _jumpTimeCounter = _jumpTimer;
-                _extraJumpForce = 0;
+                _extraJumpForce = 0f;
             }
             //_rb.velocity = new Vector2(_moveSpeed, Mathf.Clamp(_rb.velocity.y, _rb.gravityScale, _clampValue));
         }
@@ -182,7 +182,7 @@ public class HeroMovement : MonoBehaviour
         {
             _moveSpeed = _airStrifeSpeed;
             _jumpTimeCounter = _jumpTimer;
-            _extraJumpForce = 0;
+            _extraJumpForce = 0f;
         }
 
         if (!_isRecovering)
@@ -227,11 +227,6 @@ public class HeroMovement : MonoBehaviour
             StartCoroutine(Recover());
         }
 
- 
-    }
-
-    private void Update()
-    {
         #region Movement
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
         {
@@ -263,6 +258,10 @@ public class HeroMovement : MonoBehaviour
             {
                 _rb.velocity = new Vector2(_moveInput * _moveSpeed, _rb.velocity.y);
             }
+            else
+            {
+
+            }
         }
 
         if (_selfKnockBack >= 0 && _heroStats.GetElement.Equals(Elements.ElementalAttribute.Air))
@@ -271,6 +270,11 @@ public class HeroMovement : MonoBehaviour
             _selfKnockBack -= Time.deltaTime;
         }
         #endregion
+    }
+
+    private void Update()
+    {
+
 
         switch (ControllerInput)
         {
@@ -568,59 +572,59 @@ public class HeroMovement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    private void SlopeCheck()
-    {
-        Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
-        SlopeCheckHorizontal(checkPos);
-        SlopeCheckVertical(checkPos);
-    }
+    //private void SlopeCheck()
+    //{
+    //    Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
+    //    SlopeCheckHorizontal(checkPos);
+    //    SlopeCheckVertical(checkPos);
+    //}
 
-    private void SlopeCheckHorizontal(Vector2 checkPos)
-    {
-        RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance, _whatIsGround);
-        RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _slopeCheckDistance, _whatIsGround);
-        if (slopeHitFront)
-        {
-            _isOnSlope = true;
-            _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-        }
-        else if (slopeHitBack)
-        {
-            _isOnSlope = true;
-            _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
-        }
-        else
-        {
-            _slopeSideAngle = 0.0f;
-            _isOnSlope = false;
-        }
-    }
+    //private void SlopeCheckHorizontal(Vector2 checkPos)
+    //{
+    //    RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance, _whatIsGround);
+    //    RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _slopeCheckDistance, _whatIsGround);
+    //    if (slopeHitFront)
+    //    {
+    //        _isOnSlope = true;
+    //        _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+    //    }
+    //    else if (slopeHitBack)
+    //    {
+    //        _isOnSlope = true;
+    //        _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+    //    }
+    //    else
+    //    {
+    //        _slopeSideAngle = 0.0f;
+    //        _isOnSlope = false;
+    //    }
+    //}
 
-    private void SlopeCheckVertical(Vector2 checkPos)
-    {
-        RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistance, _whatIsGround);
-        if (hit)
-        {
-            _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
-            //Return angle between y-axis and our normal
-            _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-            if (_slopeDownAngle != _slopeDownAngleOld)
-            {
-                _isOnSlope = true;
-            }
-            _slopeDownAngleOld = _slopeDownAngle;
-            Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
-            Debug.DrawRay(hit.point, hit.normal, Color.green);
-        }
-        if (_isOnSlope && _moveInput == 0.0f)
-        {
-            _rb.sharedMaterial = _fullFriction;
-        }
-        else
-        {
-            _rb.sharedMaterial = _noFriction;
-        }
-    }
+    //private void SlopeCheckVertical(Vector2 checkPos)
+    //{
+    //    RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistance, _whatIsGround);
+    //    if (hit)
+    //    {
+    //        _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
+    //        //Return angle between y-axis and our normal
+    //        _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
+    //        if (_slopeDownAngle != _slopeDownAngleOld)
+    //        {
+    //            _isOnSlope = true;
+    //        }
+    //        _slopeDownAngleOld = _slopeDownAngle;
+    //        Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
+    //        Debug.DrawRay(hit.point, hit.normal, Color.green);
+    //    }
+    //    if (_isOnSlope && _moveInput == 0.0f)
+    //    {
+    //        _rb.sharedMaterial = _fullFriction;
+    //    }
+    //    else
+    //    {
+    //        _rb.sharedMaterial = _noFriction;
+    //    }
+    //}
 
     public void IcySlidding(float SliddingSpeed)
     {
@@ -718,7 +722,7 @@ public class HeroMovement : MonoBehaviour
         {
             if (_numOfWallJumps > 0)
             {
-                _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
+                _rb.velocity = Vector2.up * (_groundJumpForce * 0.5f);
                 _numOfWallJumps--;
             }
         }
@@ -726,7 +730,7 @@ public class HeroMovement : MonoBehaviour
         {
             if (_numOfJumps > 0)
             {
-                _rb.velocity = Vector2.up * (_groundJumpForce / 2f);
+                _rb.velocity = Vector2.up * (_groundJumpForce * 0.5f);
                 _numOfJumps--;
             }
         }

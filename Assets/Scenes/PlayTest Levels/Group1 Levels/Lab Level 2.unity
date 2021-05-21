@@ -20967,7 +20967,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Players: []
-  camSpeed: 20
+  camSpeed: 30
   range: 0.4
 --- !u!114 &7255437403118390977
 MonoBehaviour:
@@ -20981,6 +20981,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31542b973172b204fa16f611f391ee1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _shakePower: 0
-  _shakeLength: 1
+  _shakeDeathPower: 2
+  _shakeDeathLength: 2
+  _shakeHitPower: 0.5
+  _shakeHitLength: 1
   rotationMultiplier: 1
