@@ -314,7 +314,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 4875966304191913811}
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 4528160433185577089}
-  ControllerInput: 0
+  ControllerInput: 1
   OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 6
@@ -934,7 +934,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!114 &6691093597474203349
