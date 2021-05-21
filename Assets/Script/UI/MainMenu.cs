@@ -59,6 +59,10 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadScene("Credits");
     }
+    public void Maps()
+    {
+        SceneManager.LoadScene("Maps");
+    }
 
     public void QuitGame()
     {

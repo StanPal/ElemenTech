@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CharacterSelect.unity
     guid: c28738b1c6973f245b6cd6d90d71fb07
   - enabled: 1
+    path: Assets/Scenes/Maps.unity
+    guid: 26d6a41922a70d549a8e90dfe1f0fd5f
+  - enabled: 1
     path: Assets/Scenes/PlayTest Levels/Group1 Levels/Military Level 3.unity
     guid: c339e92bddfd36f46b2b045abead80bf
   - enabled: 1
