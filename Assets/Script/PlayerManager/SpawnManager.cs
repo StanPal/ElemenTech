@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -6,10 +7,16 @@ public class SpawnManager : MonoBehaviour
 {
     private PlayerManager _playerManager;
     private ScoreManager _scoreManager;
+    [SerializeField] private GameObject fireLogo;
+    [SerializeField] private GameObject WaterLogo;
+    [SerializeField] private GameObject AirLogo;
+    [SerializeField] private GameObject EarthLogo;
     [SerializeField] private List<Transform> _startSpawnPoints = new List<Transform>();
     [SerializeField] private List<Transform> _respawnPoints = new List<Transform>();
-
+    private GameObject logo;
     private PlayerInputManager _playerInputManager;
+    private bool _isSpawning;
+
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -145,6 +152,17 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if(_isSpawning)
+        {
+            ////calculate what the new Y position will be
+            //float newY = Mathf.Sin(Time.time * 5f);
+            ////set the object's Y to the new calculated Y
+            //logo.transform.position = new Vector3(logo.transform.position.x, newY, logo.transform.position.z) * 0.5f;
+        }
+    }
+
     private void RandomizeSpawn(GameObject player)
     {
         int randIndex = Random.Range(0, _startSpawnPoints.Count);
@@ -155,7 +173,55 @@ public class SpawnManager : MonoBehaviour
     public void RespawnPlayer(GameObject player)
     {
         int randIndex = Random.Range(0, _respawnPoints.Count);
-        player.transform.position = _respawnPoints[randIndex].position;
+        StartCoroutine(Spawn(randIndex, player));
     }
+    private IEnumerator Spawn(int index, GameObject player)
+    {
+        player.SetActive(false);
+        player.transform.position = _respawnPoints[index].position;
+        switch (player.GetComponent<HeroStats>().GetElement)
+        {
+            case Elements.ElementalAttribute.Fire:
+                logo = Instantiate(fireLogo, _respawnPoints[index].position, Quaternion.identity);
+                break;
+            case Elements.ElementalAttribute.Earth:
+                logo = Instantiate(EarthLogo);
+                logo.transform.position = _respawnPoints[index].position;
+                break;
+            case Elements.ElementalAttribute.Water:
+                logo = Instantiate(WaterLogo);
+                logo.transform.position = _respawnPoints[index].position;
+                break;
+            case Elements.ElementalAttribute.Air:
+                logo = Instantiate(AirLogo);
+                logo.transform.position = _respawnPoints[index].position;
+                break;
+            default:
+                break;
+        }
+        yield return new WaitForSeconds(2f);
+        //_isSpawning = false;
+        Destroy(logo);
+        player.SetActive(true);
+    }
+
+
+    //private IEnumerator Flash(GameObject logo)
+    //{
+    //    logo.SetActive(true);
+    //    for (int i = 0; i < 2; i++)
+    //    {
+    //        SetSpriteColor(logo, Color.white);
+    //        yield return new WaitForSeconds(0.1f);
+    //        SetSpriteColor(logo,_originalSpriteColor);
+    //        yield return new WaitForSeconds(0.1f);
+    //    }
+    //    logo.SetActive(false);
+    //}
+
+    //private void SetSpriteColor(GameObject logo, Color spriteColor)
+    //{
+    //    logo.GetComponent<SpriteRenderer>().color = spriteColor;
+    //}
 
 }

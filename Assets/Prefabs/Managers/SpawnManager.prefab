@@ -43,6 +43,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c725955dc846d5c4991a1155a69d7cfc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireLogo: {fileID: 1390420309005376836, guid: 23541a78afc97d541863106637d92552,
+    type: 3}
+  WaterLogo: {fileID: 1390420309005376836, guid: f6e4e8cfbb2bd4b489f9f9d395e9748d,
+    type: 3}
+  AirLogo: {fileID: 1390420309005376836, guid: 8358631d1b22341459c49a9514ba7b71, type: 3}
+  EarthLogo: {fileID: 1390420309005376836, guid: 01674412fc031c24886e789c9d981d93,
+    type: 3}
   _startSpawnPoints:
   - {fileID: 0}
   - {fileID: 0}
