@@ -17,8 +17,14 @@ public class ScoreManager : MonoBehaviour
     public int TeamTwoScore { get => _teamTwoScore; }
     public int TeamThreeScore { get => _teamThreeScore; }
     public int TeamFourScore { get => _teamFourScore; }
+    public bool TeamOneActive;
+    public bool TeamTwoActive;
+    public bool TeamThreeActive;
+    public bool TeamFourActive;
+
     public bool IsMatchOver { get => _isMatchOver; set => _isMatchOver = value; }
     public bool PracticeMode { get { return _isPracticeMode;} set { _isPracticeMode = value; } }
+
 
     private void Awake()
     {
@@ -61,6 +67,10 @@ public class ScoreManager : MonoBehaviour
         _teamTwoScore = 0;
         _teamThreeScore = 0;
         _teamFourScore = 0;
+        TeamOneActive = false;
+        TeamTwoActive = false;
+        TeamThreeActive = false;
+        TeamFourActive = false;
         _isMatchOver = false;
     }
 }

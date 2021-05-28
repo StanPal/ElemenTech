@@ -52,7 +52,7 @@ public class SmashCamera1 : MonoBehaviour
 
         for (int i = 0; i < Players.Count; i++)
         {
-            DesiredPos += Players[i].position;
+            DesiredPos += new Vector3(Players[i].position.x, Players[i].position.y + _heightOffset);
         }
         if (distance > -10f) distance = -10f;
         DesiredPos /= Players.Count;

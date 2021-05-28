@@ -21,18 +21,55 @@ public class GameFinish : MonoBehaviour
 
     private void DisplayScore()
     {
-        if (_scoreManager.TeamOneScore > _scoreManager.TeamTwoScore)
+        if (_scoreManager.TeamOneScore > _scoreManager.TeamTwoScore &&
+            _scoreManager.TeamOneScore > _scoreManager.TeamThreeScore &&
+            _scoreManager.TeamOneScore > _scoreManager.TeamFourScore)
         {
-            matchOutcome.text = "Team One Wins! Score: " + _scoreManager.TeamOneScore + "-" + _scoreManager.TeamTwoScore;
+            matchOutcome.text = "Team One Wins! Score: " + _scoreManager.TeamOneScore;
         }
-        else if (_scoreManager.TeamOneScore < _scoreManager.TeamTwoScore)
+        else if (_scoreManager.TeamTwoScore > _scoreManager.TeamOneScore &&
+            _scoreManager.TeamTwoScore > _scoreManager.TeamThreeScore &&
+            _scoreManager.TeamTwoScore > _scoreManager.TeamFourScore)
         {
-            matchOutcome.text = "Team Two Wins! Score: " + _scoreManager.TeamTwoScore + "-" + _scoreManager.TeamOneScore;
+            matchOutcome.text = "Team Two Wins! Score: " + _scoreManager.TeamTwoScore;
         }
-        else
+       else if (_scoreManager.TeamThreeScore > _scoreManager.TeamOneScore &&
+            _scoreManager.TeamThreeScore > _scoreManager.TeamTwoScore &&
+            _scoreManager.TeamThreeScore > _scoreManager.TeamFourScore)
+        {
+            matchOutcome.text = "Team Three Wins! Score: " + _scoreManager.TeamThreeScore;
+        }
+        else if (_scoreManager.TeamFourScore > _scoreManager.TeamOneScore &&
+            _scoreManager.TeamFourScore > _scoreManager.TeamTwoScore &&
+            _scoreManager.TeamFourScore > _scoreManager.TeamThreeScore)
+        {
+            matchOutcome.text = "Team Four Wins! Score: " + _scoreManager.TeamFourScore;
+        }
+       else if (_scoreManager.TeamOneScore == _scoreManager.TeamTwoScore)
         {
             matchOutcome.text = "Tie! Score: " + _scoreManager.TeamOneScore + "-" + _scoreManager.TeamTwoScore;
         }
+        else if (_scoreManager.TeamOneScore == _scoreManager.TeamThreeScore)
+        {
+            matchOutcome.text = "Tie! Score: " + _scoreManager.TeamOneScore + "-" + _scoreManager.TeamThreeScore;
+        }
+        else if (_scoreManager.TeamOneScore == _scoreManager.TeamFourScore)
+        {
+            matchOutcome.text = "Tie! Score: " + _scoreManager.TeamOneScore + "-" + _scoreManager.TeamFourScore;
+        }
+        else if(_scoreManager.TeamTwoScore == _scoreManager.TeamThreeScore)
+        {
+            matchOutcome.text = "Tie! Score: " + _scoreManager.TeamTwoScore + "-" + _scoreManager.TeamThreeScore;
+        }
+        else if (_scoreManager.TeamTwoScore == _scoreManager.TeamFourScore)
+        {
+            matchOutcome.text = "Tie! Score: " + _scoreManager.TeamTwoScore + "-" + _scoreManager.TeamFourScore;
+        }
+        else if (_scoreManager.TeamThreeScore == _scoreManager.TeamFourScore)
+        {
+            matchOutcome.text = "Tie! Score: " + _scoreManager.TeamThreeScore + "-" + _scoreManager.TeamFourScore;
+        }
+        
     }
 
     public void BackToMainMenu()

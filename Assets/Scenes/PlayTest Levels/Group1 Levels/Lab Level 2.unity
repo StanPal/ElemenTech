@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -17219,6 +17219,16 @@ PrefabInstance:
       propertyPath: Transition
       value: 
       objectReference: {fileID: 1802778202}
+    - target: {fileID: 8000220797375520722, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8000220798617015241, guid: 89165e1d69e008047903b1a33333ef1b,
+        type: 3}
+      propertyPath: m_Text
+      value: Match Finished
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 89165e1d69e008047903b1a33333ef1b, type: 3}
 --- !u!114 &1802778201 stripped
@@ -17247,7 +17257,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
 --- !u!114 &1802778203 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8000220798714744228, guid: 89165e1d69e008047903b1a33333ef1b,
+  m_CorrespondingSourceObject: {fileID: 2077624084428833971, guid: 89165e1d69e008047903b1a33333ef1b,
     type: 3}
   m_PrefabInstance: {fileID: 1802778200}
   m_PrefabAsset: {fileID: 0}
@@ -20911,6 +20921,7 @@ MonoBehaviour:
   Players: []
   camSpeed: 30
   range: 0.4
+  _heightOffset: 4
 --- !u!114 &7255437403118390977
 MonoBehaviour:
   m_ObjectHideFlags: 0

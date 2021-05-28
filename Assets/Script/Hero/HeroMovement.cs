@@ -237,6 +237,11 @@ public class HeroMovement : MonoBehaviour
             }
         }
 
+
+    }
+
+    private void Update()
+    {
         #region Movement
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
         {
@@ -280,11 +285,8 @@ public class HeroMovement : MonoBehaviour
             _selfKnockBack -= Time.deltaTime;
         }
         #endregion
-    }
 
-    private void Update()
-    {
-        if(IsWall() && _rb.velocity.y <= 0 && !IsGrounded())
+        if (IsWall() && _rb.velocity.y <= 0 && !IsGrounded())
         {
             _isWallSliding = true;
         }
@@ -669,7 +671,7 @@ public class HeroMovement : MonoBehaviour
     {
         CreateDust();
         _playerAnimator.SetBool("IsJumping", true);
-        _playerAnimator.SetTrigger("JumpTrigger");
+       // _playerAnimator.SetTrigger("JumpTrigger");
 
         _isJumping = true;
         if (IsWall())
@@ -694,7 +696,7 @@ public class HeroMovement : MonoBehaviour
     {
         CreateDust();
         _playerAnimator.SetBool("IsJumping", true);
-        _playerAnimator.SetTrigger("JumpTrigger");
+       // _playerAnimator.SetTrigger("JumpTrigger");
         _isJumping = true;
         if (IsWall())
         {
