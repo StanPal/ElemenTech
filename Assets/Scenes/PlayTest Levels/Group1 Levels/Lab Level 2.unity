@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -2107,7 +2107,6 @@ GameObject:
   m_Component:
   - component: {fileID: 206666396}
   - component: {fileID: 206666397}
-  - component: {fileID: 206666398}
   m_Layer: 10
   m_Name: WallJump(4)
   m_TagString: Untagged
@@ -2138,9 +2137,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 206666395}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -2155,24 +2154,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.98}
   m_EdgeRadius: 0
---- !u!252 &206666398
-SurfaceEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 206666395}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Speed: 1
-  m_SpeedVariation: 0
-  m_ForceScale: 0.1
-  m_UseContactForce: 0
-  m_UseFriction: 1
-  m_UseBounce: 1
 --- !u!1 &208159601
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,20 +3238,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2827583883305087848, guid: 28e3ce56773391549bbc5805ea5e2d16,
-        type: 3}
-      propertyPath: mCanvas
-      value: 
-      objectReference: {fileID: 306839414}
     - target: {fileID: 2827583883305087849, guid: 28e3ce56773391549bbc5805ea5e2d16,
         type: 3}
       propertyPath: m_Name
       value: UIManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2827583883305087849, guid: 28e3ce56773391549bbc5805ea5e2d16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2827583883305087851, guid: 28e3ce56773391549bbc5805ea5e2d16,
         type: 3}
@@ -3327,19 +3298,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3045387163052780626, guid: 28e3ce56773391549bbc5805ea5e2d16,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28e3ce56773391549bbc5805ea5e2d16, type: 3}
---- !u!223 &306839414 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 3045387163052780627, guid: 28e3ce56773391549bbc5805ea5e2d16,
-    type: 3}
-  m_PrefabInstance: {fileID: 306839413}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &315025007
 GameObject:
   m_ObjectHideFlags: 0
@@ -5002,7 +4962,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 511361094}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -5160,7 +5120,6 @@ GameObject:
   m_Component:
   - component: {fileID: 556545683}
   - component: {fileID: 556545684}
-  - component: {fileID: 556545685}
   m_Layer: 10
   m_Name: WallJump
   m_TagString: Untagged
@@ -5191,7 +5150,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 556545682}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
@@ -5208,24 +5167,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.98}
   m_EdgeRadius: 0
---- !u!252 &556545685
-SurfaceEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 556545682}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Speed: 1
-  m_SpeedVariation: 0
-  m_ForceScale: 0.1
-  m_UseContactForce: 0
-  m_UseFriction: 1
-  m_UseBounce: 1
 --- !u!1 &557373191
 GameObject:
   m_ObjectHideFlags: 0
@@ -6841,7 +6782,6 @@ GameObject:
   m_Component:
   - component: {fileID: 753353174}
   - component: {fileID: 753353175}
-  - component: {fileID: 753353176}
   m_Layer: 10
   m_Name: WallJump(3)
   m_TagString: Untagged
@@ -6872,9 +6812,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 753353173}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -6889,24 +6829,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.98}
   m_EdgeRadius: 0
---- !u!252 &753353176
-SurfaceEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 753353173}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Speed: 1
-  m_SpeedVariation: 0
-  m_ForceScale: 0.1
-  m_UseContactForce: 0
-  m_UseFriction: 1
-  m_UseBounce: 1
 --- !u!1 &754292449
 GameObject:
   m_ObjectHideFlags: 0
@@ -7029,7 +6951,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 757097299}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -7627,7 +7549,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 815132620}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: ac05ac55bf897984d9ebaf995c3071f1, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
@@ -9706,7 +9628,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -11.25, y: 21.75, z: 0}
   m_LocalScale: {x: 11.0481615, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1618495430}
   m_Father: {fileID: 1335999077}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -9723,7 +9646,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.0057889223, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -11892,7 +11815,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1273245972}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: ac05ac55bf897984d9ebaf995c3071f1, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
@@ -11921,7 +11844,7 @@ SurfaceEffector2D:
   m_ColliderMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_Speed: 1
+  m_Speed: 3.31
   m_SpeedVariation: 0
   m_ForceScale: 0.1
   m_UseContactForce: 0
@@ -13074,7 +12997,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1413072916}
   - component: {fileID: 1413072917}
-  - component: {fileID: 1413072918}
   m_Layer: 10
   m_Name: WallJump(1)
   m_TagString: Untagged
@@ -13105,9 +13027,9 @@ BoxCollider2D:
   m_GameObject: {fileID: 1413072915}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
@@ -13122,24 +13044,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.98}
   m_EdgeRadius: 0
---- !u!252 &1413072918
-SurfaceEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1413072915}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Speed: 1
-  m_SpeedVariation: 0
-  m_ForceScale: 0.1
-  m_UseContactForce: 0
-  m_UseFriction: 1
-  m_UseBounce: 1
 --- !u!1 &1414879104
 GameObject:
   m_ObjectHideFlags: 0
@@ -14863,7 +14767,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1597486542}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -15481,6 +15385,63 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1618495429
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1618495430}
+  - component: {fileID: 1618495431}
+  m_Layer: 10
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1618495430
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618495429}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1053268967}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &1618495431
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1618495429}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.01, y: 0.8}
+  m_EdgeRadius: 0
 --- !u!1 &1629411474
 GameObject:
   m_ObjectHideFlags: 0
@@ -17635,7 +17596,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1843644762}
   - component: {fileID: 1843644763}
-  - component: {fileID: 1843644764}
   m_Layer: 10
   m_Name: WallJump(2)
   m_TagString: Untagged
@@ -17666,7 +17626,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1843644761}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: e718d903c97a0dc48800b3a5a3455933, type: 2}
+  m_Material: {fileID: 6200000, guid: ebf17c951afced9478df5ef65a39ff8a, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 1
   m_UsedByComposite: 0
@@ -17683,24 +17643,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 0.98}
   m_EdgeRadius: 0
---- !u!252 &1843644764
-SurfaceEffector2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1843644761}
-  m_Enabled: 1
-  m_UseColliderMask: 1
-  m_ColliderMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_Speed: 1
-  m_SpeedVariation: 0
-  m_ForceScale: 0.1
-  m_UseContactForce: 0
-  m_UseFriction: 1
-  m_UseBounce: 1
 --- !u!1 &1853422572
 GameObject:
   m_ObjectHideFlags: 0

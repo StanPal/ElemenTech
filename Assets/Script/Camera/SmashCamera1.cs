@@ -12,7 +12,7 @@ public class SmashCamera1 : MonoBehaviour
     public float camSpeed;
     private Camera cam;
     [SerializeField] private float range = 0.4f;
-
+    [SerializeField] private float _heightOffset = 10f;
     void Awake()
 
     {        

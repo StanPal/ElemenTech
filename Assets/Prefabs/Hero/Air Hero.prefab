@@ -489,6 +489,7 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 1
   _jumpTimer: 5
+  _maxWallSlideVelocity: 1
   _extraJumpForceRate: 1
   _whatIsGround:
     serializedVersion: 2

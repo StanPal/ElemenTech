@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 122998365925269869}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team2
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -740,7 +740,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 3
+  ControllerInput: 1
   OnTeam: 0
   _moveSpeed: 17
   _airStrifeSpeed: 8
@@ -751,6 +751,7 @@ MonoBehaviour:
   _numOfWallJumps: 0
   _maxWallJump: 1
   _jumpTimer: 5
+  _maxWallSlideVelocity: 1
   _extraJumpForceRate: 1
   _whatIsGround:
     serializedVersion: 2
@@ -6094,7 +6095,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5982465580042472988}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 13.33, y: -0.03, z: 0}
+  m_LocalPosition: {x: 4, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4742860617384786225}
@@ -6180,7 +6181,7 @@ SpriteRenderer:
   m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 1
 --- !u!114 &2645739008014899530
