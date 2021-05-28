@@ -266,6 +266,14 @@ public class HeroStats : MonoBehaviour
         {
             playermanager.TeamTwo.Remove(gameObject);
         }
+        if (playermanager.TeamThree.Contains(gameObject))
+        {
+            playermanager.TeamThree.Remove(gameObject);
+        }
+        if (playermanager.TeamFour.Contains(gameObject))
+        {
+            playermanager.TeamFour.Contains(gameObject);
+        }
         OnShake?.Invoke(_shakePower * 2f, _shakeLength * 2f);
         this.gameObject.SetActive(false);
     }

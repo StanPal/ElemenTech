@@ -9,9 +9,7 @@ public class EarthSkills : MonoBehaviour
     public Vector3 LaunchOffset;
     private PlayerManager _playerManager;
 
-    [SerializeField] int _numberOfPoints = 20;
-    [SerializeField] float _spaceBetweenPoints = 0.01f;
-    [SerializeField] private float _lanchForce = 10f;
+    [SerializeField] private float _launchForce = 10f;
     [SerializeField] private float _mass = 1f;
     [SerializeField] private float _damage = 10f;
     [SerializeField] private float _splashRange = 1.5f;
@@ -19,19 +17,19 @@ public class EarthSkills : MonoBehaviour
     [SerializeField] private float _knockBackLength = 0.2f;
     private PlayerSkills _heroSkills;
 
+    public bool FiredLeft;
     public float KnockBack { get => _knockBackAmount; }
     public float KnockBackLength { get => _knockBackLength; }
     public float SplashRange { get => _splashRange; } 
     public float Damage { get => _damage; } 
     public float Mass { get => _mass; } 
-    public float LaunchForce { get => _lanchForce; }     
+    public float LaunchForce { get => _launchForce; }     
     public PlayerSkills PlayerSkills { get => _heroSkills; } 
 
 
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
-        _pointsArr = new GameObject[_numberOfPoints];
     }
 
     private void Initialize()
@@ -46,6 +44,15 @@ public class EarthSkills : MonoBehaviour
         GameObject earthskill = Instantiate(EarthBoulder, 
             _playerManager.mPlayersList[3].GetComponent<HeroActions>().FirePoint.position, Quaternion.Euler(0, 0, _heroSkills.HeroAction.GetLookAngle));
         earthskill.tag = PlayerSkills.HeroMovement.tag;
+        Debug.Log(_heroSkills.HeroAction.GetLookAngle);
+        if(_heroSkills.HeroAction.GetLookAngle > -90 && _heroSkills.HeroAction.GetLookAngle < 90)
+        {
+            FiredLeft = false;
+        }
+        else
+        {
+            FiredLeft = true;
+        }
     }
 
     private Vector2 PointPosition(float t)

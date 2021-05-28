@@ -60,10 +60,12 @@ public class HeroMovement : MonoBehaviour
     [SerializeField] private int _numOfWallJumps = 0;
     [SerializeField] private int _maxWallJump = 1;
     [SerializeField] private float _jumpTimer = 5;
+    [SerializeField] private float _maxWallSlideVelocity = 1;
     //[SerializeField] private float _clampValue = 10f;
     private bool _isJumpHeld = false;
     private float _jumpTimeCounter = 5;
     private float _extraJumpForce = 0;
+    private bool _isWallSliding; 
     [SerializeField] private float _extraJumpForceRate = 1;
     [SerializeField] private LayerMask _whatIsGround;
     [SerializeField] private LayerMask _whatIsWall;
@@ -227,6 +229,19 @@ public class HeroMovement : MonoBehaviour
             StartCoroutine(Recover());
         }
 
+        if(_isWallSliding)
+        {
+            if(_rb.velocity.y < -_maxWallSlideVelocity)
+            {
+                _rb.velocity = new Vector2(_rb.velocity.x, -_maxWallSlideVelocity);
+            }
+        }
+
+
+    }
+
+    private void Update()
+    {
         #region Movement
         if (_heroStats.GetElement.Equals(Elements.ElementalAttribute.Earth) && _heroActions.IsEarthStomping)
         {
@@ -270,11 +285,15 @@ public class HeroMovement : MonoBehaviour
             _selfKnockBack -= Time.deltaTime;
         }
         #endregion
-    }
 
-    private void Update()
-    {
-
+        if (IsWall() && _rb.velocity.y <= 0 && !IsGrounded())
+        {
+            _isWallSliding = true;
+        }
+        else
+        {
+            _isWallSliding = false;
+        }
 
         switch (ControllerInput)
         {
@@ -572,69 +591,6 @@ public class HeroMovement : MonoBehaviour
         transform.localScale = characterScale;
     }
 
-    //private void SlopeCheck()
-    //{
-    //    Vector2 checkPos = transform.position - (Vector3)(new Vector2(0.0f, _col2DSize.y / 2));
-    //    SlopeCheckHorizontal(checkPos);
-    //    SlopeCheckVertical(checkPos);
-    //}
-
-    //private void SlopeCheckHorizontal(Vector2 checkPos)
-    //{
-    //    RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, _slopeCheckDistance, _whatIsGround);
-    //    RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, _slopeCheckDistance, _whatIsGround);
-    //    if (slopeHitFront)
-    //    {
-    //        _isOnSlope = true;
-    //        _slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-    //    }
-    //    else if (slopeHitBack)
-    //    {
-    //        _isOnSlope = true;
-    //        _slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
-    //    }
-    //    else
-    //    {
-    //        _slopeSideAngle = 0.0f;
-    //        _isOnSlope = false;
-    //    }
-    //}
-
-    //private void SlopeCheckVertical(Vector2 checkPos)
-    //{
-    //    RaycastHit2D hit = Physics2D.Raycast(checkPos, Vector2.down, _slopeCheckDistance, _whatIsGround);
-    //    if (hit)
-    //    {
-    //        _slopeNormalPerp = Vector2.Perpendicular(hit.normal).normalized;
-    //        //Return angle between y-axis and our normal
-    //        _slopeDownAngle = Vector2.Angle(hit.normal, Vector2.up);
-    //        if (_slopeDownAngle != _slopeDownAngleOld)
-    //        {
-    //            _isOnSlope = true;
-    //        }
-    //        _slopeDownAngleOld = _slopeDownAngle;
-    //        Debug.DrawRay(hit.point, _slopeNormalPerp, Color.red);
-    //        Debug.DrawRay(hit.point, hit.normal, Color.green);
-    //    }
-    //    if (_isOnSlope && _moveInput == 0.0f)
-    //    {
-    //        _rb.sharedMaterial = _fullFriction;
-    //    }
-    //    else
-    //    {
-    //        _rb.sharedMaterial = _noFriction;
-    //    }
-    //}
-
-    public void IcySlidding(float SliddingSpeed)
-    {
-        _moveSpeed += SliddingSpeed;
-    }
-
-    public void SandDecrease(float SandDecreaseSpeed)
-    {
-        _moveSpeed -= SandDecreaseSpeed;
-    }
 
     public bool IsGrounded()
     {
@@ -715,7 +671,7 @@ public class HeroMovement : MonoBehaviour
     {
         CreateDust();
         _playerAnimator.SetBool("IsJumping", true);
-        _playerAnimator.SetTrigger("JumpTrigger");
+       // _playerAnimator.SetTrigger("JumpTrigger");
 
         _isJumping = true;
         if (IsWall())
@@ -740,7 +696,7 @@ public class HeroMovement : MonoBehaviour
     {
         CreateDust();
         _playerAnimator.SetBool("IsJumping", true);
-        _playerAnimator.SetTrigger("JumpTrigger");
+       // _playerAnimator.SetTrigger("JumpTrigger");
         _isJumping = true;
         if (IsWall())
         {
