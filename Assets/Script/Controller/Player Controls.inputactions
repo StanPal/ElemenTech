@@ -475,7 +475,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -497,7 +497,7 @@
                     "path": "<XInputController>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -508,7 +508,7 @@
                     "path": "<XInputController>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -519,7 +519,7 @@
                     "path": "<XInputController>/rightTrigger",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "SwordSwing",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -530,7 +530,7 @@
                     "path": "<XInputController>/rightShoulder",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Element Special 1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -541,7 +541,7 @@
                     "path": "<XInputController>/buttonNorth",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -552,7 +552,7 @@
                     "path": "<XInputController>/buttonNorth",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Guard Release",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -563,7 +563,7 @@
                     "path": "<XInputController>/start",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Pause",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -574,7 +574,7 @@
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -596,7 +596,7 @@
                     "path": "<XInputController>/rightStick/up",
                     "interactions": "",
                     "processors": "AxisDeadzone",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -607,7 +607,7 @@
                     "path": "<XInputController>/rightStick/down",
                     "interactions": "",
                     "processors": "AxisDeadzone(min=0.1,max=1)",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -618,7 +618,7 @@
                     "path": "<XInputController>/rightStick/left",
                     "interactions": "",
                     "processors": "AxisDeadzone(min=0.1,max=1)",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -629,7 +629,7 @@
                     "path": "<XInputController>/rightStick/right",
                     "interactions": "",
                     "processors": "AxisDeadzone(min=0.1,max=1)",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -640,7 +640,7 @@
                     "path": "<XInputController>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "FastFall",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -651,7 +651,7 @@
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "Hold(pressPoint=0.3)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "WeightShiftHold",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -662,7 +662,7 @@
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "WeightShiftRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -673,7 +673,7 @@
                     "path": "<XInputController>/leftShoulder",
                     "interactions": "Tap(duration=0.1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "TapDash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -684,7 +684,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "Press(pressPoint=0.3,behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "JumpRelease",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -695,7 +695,7 @@
                     "path": "<XInputController>/buttonSouth",
                     "interactions": "Tap",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "TapJump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -706,7 +706,7 @@
                     "path": "<XInputController>/rightTrigger",
                     "interactions": "Hold(duration=0.3)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "Xbox",
                     "action": "HoldAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1186,7 +1186,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1197,7 +1197,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1208,7 +1208,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1219,7 +1219,7 @@
                     "path": "<Gamepad>/rightTrigger",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "SwordSwing",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1230,7 +1230,7 @@
                     "path": "<Gamepad>/rightShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Element Special 1",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1241,7 +1241,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "Press",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Guard",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1252,7 +1252,7 @@
                     "path": "<Gamepad>/buttonWest",
                     "interactions": "Press(behavior=1)",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Guard Release",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1263,7 +1263,7 @@
                     "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1285,7 +1285,7 @@
                     "path": "<Gamepad>/rightStick/up",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1296,7 +1296,7 @@
                     "path": "<Gamepad>/rightStick/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1307,7 +1307,7 @@
                     "path": "<Gamepad>/rightStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1318,7 +1318,7 @@
                     "path": "<Gamepad>/rightStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -1329,7 +1329,7 @@
                     "path": "<Gamepad>/dpad/down",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "FastFall",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -1431,6 +1431,28 @@
                 },
                 {
                     "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "Xbox",
+            "bindingGroup": "Xbox",
+            "devices": [
+                {
+                    "devicePath": "<XInputController>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

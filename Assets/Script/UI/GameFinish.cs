@@ -19,6 +19,11 @@ public class GameFinish : MonoBehaviour
         DisplayScore();
     }
 
+    private void Start()
+    {
+        Cursor.visible = true;
+    }
+
     private void DisplayScore()
     {
         if (_scoreManager.TeamOneScore > _scoreManager.TeamTwoScore &&
