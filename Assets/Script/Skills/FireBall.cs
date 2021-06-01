@@ -6,6 +6,7 @@ public class FireBall : MonoBehaviour
     private FireSkills _fireSkills;
     private Rigidbody2D _rigidBody;
     private float _projectileSpeed;
+    [SerializeField] GameObject _fireExplosion; 
 
     private void Awake()
     {
@@ -27,19 +28,6 @@ public class FireBall : MonoBehaviour
             golem.TakeDamage(_fireSkills.Damage);
             Destroy(gameObject);
         }
-        //if (collision.GetComponent<Guard>())
-        //{
-        //    if (collision.GetComponent<Guard>().tag.Equals(_fireSkills.PlayerSkills.HeroAction.tag))
-        //    {
-        //        Guard guard = collision.GetComponent<Guard>();
-        //        if (guard.Guarding)
-        //        {
-        //            Destroy(gameObject);
-        //            Debug.Log("Shield Hit");
-        //            collision.GetComponent<Guard>().ComboSkillOn = true;
-        //        }
-        //    }
-        //}
 
         if (collision.GetComponentInParent<Walls>())
         {
@@ -60,6 +48,7 @@ public class FireBall : MonoBehaviour
                     collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_fireSkills.Damage);
                     collision.GetComponent<HeroStats>().DamageOverTime(_fireSkills.DotDamage, _fireSkills.DotDuration);
                 }
+                Instantiate(_fireExplosion, collision.GetComponent<Transform>().position, Quaternion.identity);
                 Destroy(gameObject);
             }
         }

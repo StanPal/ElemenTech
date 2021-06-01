@@ -8,7 +8,7 @@ public class AirJet : MonoBehaviour
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
-
+    [SerializeField] private GameObject _airExplosionEffect; 
     void Start()
     {        
         _RigidBody = GetComponent<Rigidbody2D>();
@@ -20,21 +20,6 @@ public class AirJet : MonoBehaviour
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized * _AirSkills.KnockBackMulitplier, _AirSkills.KnockBackLength);
         Debug.Log(new Vector2(-_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.x,
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized);
-        //if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
-        //{
-        //    isChargeMax = true;
-        //    _AirSkills.PlayerSkills.HeroAction.ChargeMax = false;
-        //    _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
-        //    _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
-        //        (-_AirSkills.PlayerSkills.HeroAction.FirePoint.transform.position.x,
-        //        -_AirSkills.PlayerSkills.HeroAction.FirePoint.transform.position.y, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-        //    _AirSkills.Damage = _AirSkills.Damage * 2f;
-        //}
-        //else
-        //{
-        //    isChargeMax = false;
-        //    _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-        //}
     }
 
     private void FixedUpdate()
@@ -82,5 +67,6 @@ public class AirJet : MonoBehaviour
                     Destroy(gameObject);
                 }
             }
+        Instantiate(_airExplosionEffect, collision.GetComponent<Transform>().position, Quaternion.identity);
         }    
     }
