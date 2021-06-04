@@ -9,6 +9,7 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private AudioClip[] _projectileSounds;
     [SerializeField] private float _volume = 0.5f;
     private AudioSource _audioSource;
+    
     public AudioClip[] CombatSounds { get => _combatSounds; }
     public AudioClip[] ProjectileSounds { get => _projectileSounds; }
 

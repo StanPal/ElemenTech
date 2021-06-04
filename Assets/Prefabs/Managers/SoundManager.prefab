@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicFiles:
-  - {fileID: 8300000, guid: 67dd73a8fb8b99e4d8c8d793c86c4324, type: 3}
+  - {fileID: 8300000, guid: 14ed9a0e6bb1ff845a71f0f05c521bfb, type: 3}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

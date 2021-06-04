@@ -16,7 +16,11 @@ public class MainMenu : MonoBehaviour
         scoreManager = ServiceLocator.Get<ScoreManager>();
         _soundManager = ServiceLocator.Get<SoundManager>();
     }
-    
+
+    private void Start()
+    {
+      
+    }
 
     private void Update()
     {
