@@ -8,7 +8,14 @@ public class AirJet : MonoBehaviour
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
-    [SerializeField] private GameObject _airExplosionEffect; 
+    [SerializeField] private GameObject _airExplosionEffect;
+    private SoundManager _soundManager;
+
+    private void Awake()
+    {
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
+
     void Start()
     {        
         _RigidBody = GetComponent<Rigidbody2D>();
@@ -20,9 +27,10 @@ public class AirJet : MonoBehaviour
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized * _AirSkills.KnockBackMulitplier, _AirSkills.KnockBackLength);
         Debug.Log(new Vector2(-_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.x,
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized);
+        AudioSource.PlayClipAtPoint(_soundManager.ProjectileSounds[2], this.transform.position, _soundManager.AudioVolume);
     }
 
-    private void FixedUpdate()
+private void FixedUpdate()
     {
         if (_ExitTime <= 0.0f)
         {

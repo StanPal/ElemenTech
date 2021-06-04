@@ -8,6 +8,7 @@ public class Boulder : MonoBehaviour
     private bool _hasHit;
     private Vector3 _direction;
     private Vector3 _launchOffset;
+    SoundManager _soundManager;
 
     private void Awake()
     {
@@ -15,6 +16,7 @@ public class Boulder : MonoBehaviour
         _rigidBody = GetComponent<Rigidbody2D>();
         _launchOffset = _earthSkills.LaunchOffset;
         _rigidBody.mass = _earthSkills.Mass;
+        _soundManager = ServiceLocator.Get<SoundManager>();
     }
 
     private void Start()
@@ -131,18 +133,7 @@ public class Boulder : MonoBehaviour
                     Explode();
                     Destroy(gameObject);                
             }
-        }
-        //if (_earthSkills.PlayerSkills.HeroMovement.tag.Equals("FFA"))
-        //{
-        //    if (!collision.Equals(this) && collision.tag.Equals("FFA"))
-        //    {
-        //        if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
-        //        {
-        //            heroStats.TakeDamageFromProjectile(_earthSkills.Damage);
-        //            Destroy(gameObject);
-        //        }
-        //    }
-        //}
+        }        
     }
 
     private void Explode()
@@ -152,5 +143,6 @@ public class Boulder : MonoBehaviour
         sh.radius = _earthSkills.SplashRange;
         Instantiate(ExplosionEffect, transform.position, Quaternion.identity);
         ExplosionEffect.GetComponent<ParticleSystem>().Play();
+        AudioSource.PlayClipAtPoint(_soundManager.ProjectileSounds[4], this.transform.position, _soundManager.AudioVolume);
     }
 }

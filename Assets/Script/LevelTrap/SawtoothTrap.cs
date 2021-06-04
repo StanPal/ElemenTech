@@ -52,7 +52,7 @@ public class SawtoothTrap : MonoBehaviour
                 if (Saw.transform.position == waypoints[0].transform.position && count == 1)
                 {
                     isActive = false;
-                    _spark.SetActive(false);
+                    _spark.GetComponentInChildren<ParticleSystem>().Stop();
                     count = 0;
                 }
 
@@ -64,12 +64,19 @@ public class SawtoothTrap : MonoBehaviour
                 if(count == 1)
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[0].transform.position, Time.deltaTime * moveSpeed);
-                    _spark.SetActive(true);
+                    _spark.transform.position = Vector3.MoveTowards(_spark.transform.position, 
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        , Time.deltaTime * moveSpeed);
+                    _spark.GetComponentInChildren<ParticleSystem>().Play();
                 }
                 else
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[mTriggerId].transform.position, Time.deltaTime * moveSpeed);
-                    _spark.SetActive(true);
+                    _spark.transform.position = Vector3.MoveTowards(_spark.transform.position,
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        , Time.deltaTime * moveSpeed);
+                    _spark.GetComponentInChildren<ParticleSystem>().Play();
+
                 }
             }
         }
