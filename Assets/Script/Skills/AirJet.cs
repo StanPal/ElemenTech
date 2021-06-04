@@ -63,10 +63,10 @@ public class AirJet : MonoBehaviour
                     else
                     {
                         collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                        Instantiate(_airExplosionEffect, collision.GetComponent<Transform>());
                     }
                     Destroy(gameObject);
                 }
-            }
-        Instantiate(_airExplosionEffect, collision.GetComponent<Transform>().position, Quaternion.identity);
+            }     
         }    
     }

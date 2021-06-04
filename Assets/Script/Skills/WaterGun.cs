@@ -7,6 +7,7 @@ public class WaterGun : MonoBehaviour
     [SerializeField] private float _ProjectileSpeed;
     [SerializeField] private float _ExitTime = 2.0f;
     private bool _CanDamagePlayer = false;
+    [SerializeField] private GameObject _waterExplosionEffect;
 
     private void Awake()
     {
@@ -54,6 +55,7 @@ public class WaterGun : MonoBehaviour
                 else
                 {
                     heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                Instantiate(_waterExplosionEffect, collision.GetComponent<Transform>());
                 }
                 Destroy(gameObject);
             }

@@ -139,6 +139,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _ProjectileSpeed: 0
   _ExitTime: 2
+  _waterExplosionEffect: {fileID: 1459862227383078, guid: 13f7bd2f6df102b48bef94ee2622d856,
+    type: 3}
 --- !u!58 &5663600037640789301
 CircleCollider2D:
   m_ObjectHideFlags: 0

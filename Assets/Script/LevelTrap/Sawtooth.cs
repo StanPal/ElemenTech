@@ -11,6 +11,7 @@ public class Sawtooth : MonoBehaviour
     [SerializeField] private float _knockBackAmount = 20f;
     [SerializeField] private float _knockBackLength = 0.2f;
     private const float mDelayTime = 1.0f;
+  
 
     public struct TrappedHeroData
     {
@@ -22,6 +23,11 @@ public class Sawtooth : MonoBehaviour
     private void Awake()
     {
         //StartCoroutine(SawtoothDamageRoutine());
+    }
+
+    private void Start()
+    {
+
     }
 
     private void Update()

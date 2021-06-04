@@ -19,6 +19,7 @@ public class SawtoothTrap : MonoBehaviour
     private bool isActive = false;
     int mTriggerId = 0;
     int count = 0;
+    [SerializeField] private GameObject _spark;
 
     public void Move(int TriggerId)
     {
@@ -26,6 +27,7 @@ public class SawtoothTrap : MonoBehaviour
         {
             isActive = true;
             mTriggerId = TriggerId;
+
         }
     }
 
@@ -50,6 +52,7 @@ public class SawtoothTrap : MonoBehaviour
                 if (Saw.transform.position == waypoints[0].transform.position && count == 1)
                 {
                     isActive = false;
+                    _spark.SetActive(false);
                     count = 0;
                 }
 
@@ -61,10 +64,12 @@ public class SawtoothTrap : MonoBehaviour
                 if(count == 1)
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[0].transform.position, Time.deltaTime * moveSpeed);
+                    _spark.SetActive(true);
                 }
                 else
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[mTriggerId].transform.position, Time.deltaTime * moveSpeed);
+                    _spark.SetActive(true);
                 }
             }
         }
