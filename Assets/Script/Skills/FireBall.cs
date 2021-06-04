@@ -6,13 +6,20 @@ public class FireBall : MonoBehaviour
     private FireSkills _fireSkills;
     private Rigidbody2D _rigidBody;
     private float _projectileSpeed;
-    [SerializeField] GameObject _fireExplosion; 
+    [SerializeField] GameObject _fireExplosion;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
         _fireSkills = FindObjectOfType<FireSkills>();
         _rigidBody = GetComponent<Rigidbody2D>();
         _projectileSpeed = _fireSkills.Speed;
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
+
+    private void Start()
+    {
+        AudioSource.PlayClipAtPoint(_soundManager.ProjectileSounds[0], this.transform.position, _soundManager.AudioVolume);        
     }
 
     private void FixedUpdate()

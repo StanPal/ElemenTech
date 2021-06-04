@@ -51,8 +51,14 @@ MonoBehaviour:
   - {fileID: 0}
   _combatSounds:
   - {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
+  - {fileID: 8300000, guid: 1438c600459557a4cb7877988baa5d22, type: 3}
   - {fileID: 0}
-  - {fileID: 0}
+  _projectileSounds:
+  - {fileID: 8300000, guid: 1f274684ce3c51c4482ab89ba91c9e3c, type: 3}
+  - {fileID: 8300000, guid: 990d08ee2eec8d048a38ab9afcdb02fe, type: 3}
+  - {fileID: 8300000, guid: 6ad85550c7687694fbcaea70dea1a140, type: 3}
+  - {fileID: 8300000, guid: 5e66eb24875f7434f8bc34f764874427, type: 3}
+  - {fileID: 8300000, guid: cf84346c30eb8f542a320250cbe533d9, type: 3}
   _volume: 10.8
 --- !u!82 &6933320748071800976
 AudioSource:

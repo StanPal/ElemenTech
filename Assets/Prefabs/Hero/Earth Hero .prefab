@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 6066433788430600090}
   m_Layer: 9
   m_Name: 'Earth Hero '
-  m_TagString: Team4
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -542,7 +542,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5488120927184991676}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 0
+  ControllerInput: 1
   OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8

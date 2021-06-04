@@ -51,7 +51,7 @@ MonoBehaviour:
   - {fileID: 1369876698311157786, guid: 7f6c45a4065fe3b449c48b32e2013dad, type: 3}
   - {fileID: 0}
   _auraEffects:
-  - {fileID: 7953942593888774019, guid: 9a732adc574449145b75859449ddf254, type: 3}
+  - {fileID: 100002, guid: d24b66fbf633cd14089be470a01f1f2e, type: 3}
   _auraDuration: 6
   _auraTick: 1
   _auraDamage: 6
