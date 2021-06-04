@@ -219,7 +219,13 @@ GameObject:
   - component: {fileID: 110387772121362058}
   m_Layer: 9
   m_Name: WaterHero
+<<<<<<< HEAD
   m_TagString: Team2
+||||||| f29a1e2
+  m_TagString: Team3
+=======
+  m_TagString: Team1
+>>>>>>> Development
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -314,7 +320,13 @@ MonoBehaviour:
   _Crosshair: {fileID: 4875966304191913811}
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 4528160433185577089}
+<<<<<<< HEAD
   ControllerInput: 3
+||||||| f29a1e2
+  ControllerInput: 0
+=======
+  ControllerInput: 1
+>>>>>>> Development
   OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 6
