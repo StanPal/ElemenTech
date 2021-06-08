@@ -74,6 +74,13 @@ public class MainMenu : MonoBehaviour
 
         Application.Quit();
     }
+
+    public void BackToMain()
+    {
+        _soundManager.MainMenuMusic();
+        SceneManager.LoadScene(0);
+    }
+
     public void Menue()
     {
         SceneManager.LoadScene("GameBegin");

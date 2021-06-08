@@ -109,7 +109,7 @@ public class HeroStats : MonoBehaviour
         {
             _isHealing = false;
             _currentHealth -= damage;
-            OnShake.Invoke(_shakePower * 0.5f,_shakeLength * 0.5f);
+            //OnShake.Invoke(_shakePower * 0.5f,_shakeLength * 0.5f);
             switch (_negativeEffect)
             {
                 case StatusEffects.NegativeEffects.OnFire:

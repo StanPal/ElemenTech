@@ -773,6 +773,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 3164744553564996222}
+    - target: {fileID: 1116747828, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: BackToMain
+      objectReference: {fileID: 0}
     - target: {fileID: 1848780718, guid: d1e3e086e704ce145b6c48714009af9e, type: 3}
       propertyPath: m_Name
       value: TagButtonEarth

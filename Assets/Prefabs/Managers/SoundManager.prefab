@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _musicFiles:
+  - {fileID: 8300000, guid: 3978d206da9cc2549ae308970e054481, type: 3}
   - {fileID: 8300000, guid: 14ed9a0e6bb1ff845a71f0f05c521bfb, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 8300000, guid: 9e9e33e85461832418fd4e7d4b22a06d, type: 3}
   - {fileID: 0}
   _combatSounds:
   - {fileID: 8300000, guid: 13182107f288fdc47a11f9216c8f062b, type: 3}
@@ -70,7 +70,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3978d206da9cc2549ae308970e054481, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.231
   m_Pitch: 1

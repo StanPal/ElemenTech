@@ -10,14 +10,24 @@ public class Audio : MonoBehaviour
 
     private void Awake()
     {
-        _soundManager = ServiceLocator.Get<SoundManager>();
-        _audioSource.GetComponent<AudioSource>();
+        GameLoader.CallOnComplete(Initialize);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    private void Initialize()
     {
-        StartCoroutine(FadeAudioSource.StartFade(_audioSource, 1f, 0.5f));
+        _soundManager = ServiceLocator.Get<SoundManager>();
     }
+
+    private void Start()
+    {
+        _soundManager.Audio = _soundManager.PlayMusic(_TrackIndex);
+        _soundManager.Audio.Play();
+    }
+
+    //// Start is called before the first frame update
+    //void Start()
+    //{
+    //    StartCoroutine(FadeAudioSource.StartFade(_audioSource, 1f, 0.5f));
+    //}
 
 }
