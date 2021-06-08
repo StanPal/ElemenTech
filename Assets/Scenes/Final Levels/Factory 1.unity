@@ -529,7 +529,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &228981599
 Transform:
   m_ObjectHideFlags: 0
@@ -887,7 +887,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &272134323
 Transform:
   m_ObjectHideFlags: 0
@@ -3432,7 +3432,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &644091633
 Transform:
   m_ObjectHideFlags: 0
@@ -5254,6 +5254,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 180
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283792753809650172, guid: 2883cfc64dd777b479a65bc499cbde2e,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283792753809650172, guid: 2883cfc64dd777b479a65bc499cbde2e,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2283792753809650172, guid: 2883cfc64dd777b479a65bc499cbde2e,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3745657996488022590, guid: 2883cfc64dd777b479a65bc499cbde2e,
         type: 3}
@@ -8029,6 +8044,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IceTrapManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 8762166116706157132, guid: f79c097613fc9954392d6a851d047433,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8762166116706157134, guid: f79c097613fc9954392d6a851d047433,
         type: 3}

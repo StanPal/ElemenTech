@@ -58,7 +58,7 @@ public class SawtoothTrap : MonoBehaviour
                 if (Saw.transform.position == waypoints[0].transform.position && count == 1)
                 {
                     isActive = false;
-                    _spark.GetComponentInChildren<ParticleSystem>().Stop();                                        
+                    _spark.GetComponentInChildren<ParticleSystem>().Stop();                    
                     count = 0;
                 }
 
@@ -71,18 +71,18 @@ public class SawtoothTrap : MonoBehaviour
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[0].transform.position, Time.deltaTime * moveSpeed);
                     _spark.transform.position = Vector3.MoveTowards(_spark.transform.position, 
-                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -1f)
                         , Time.deltaTime * moveSpeed);
                     _spark.GetComponentInChildren<ParticleSystem>().Play();
-                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 5.0f);
+                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 10.0f);
                 }
                 else
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[mTriggerId].transform.position, Time.deltaTime * moveSpeed);
                     _spark.transform.position = Vector3.MoveTowards(_spark.transform.position,
-                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -1f)
                         , Time.deltaTime * moveSpeed);                    
-                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 5);
+                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 10.0f);
                     _spark.GetComponentInChildren<ParticleSystem>().Play();
 
                 }
