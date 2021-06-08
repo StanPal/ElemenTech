@@ -686,8 +686,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 7502882153672300466}
   _burningEffect: {fileID: 0}
-  _deathEffect: {fileID: 1217042715064955836, guid: 6dfd8fff355f80944b1038f3d86dcc75,
-    type: 3}
+  _deathEffect: {fileID: 100014, guid: 548efa69b0386424d84ff6eecbbda00b, type: 3}
   Team: 0
   _meleeAttack: 10
   _maxHealth: 100
@@ -740,7 +739,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 0
+  ControllerInput: 2
   OnTeam: 0
   _moveSpeed: 17
   _airStrifeSpeed: 8

@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team3
+  m_TagString: Team1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -424,8 +424,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _bloodSplatterEffect: {fileID: 961234730999560845}
   _burningEffect: {fileID: 7534351800949294440}
-  _deathEffect: {fileID: 1217042715064955836, guid: 6dfd8fff355f80944b1038f3d86dcc75,
-    type: 3}
+  _deathEffect: {fileID: 100014, guid: 548efa69b0386424d84ff6eecbbda00b, type: 3}
   Team: 2
   _meleeAttack: 20
   _maxHealth: 100
