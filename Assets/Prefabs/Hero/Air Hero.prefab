@@ -57,7 +57,7 @@ RectTransform:
   m_GameObject: {fileID: 1791110764095077235}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.94438875, y: 1.1040038, z: 1.0641}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1791110765672992122}
   m_RootOrder: 0
@@ -131,7 +131,7 @@ RectTransform:
   m_GameObject: {fileID: 1791110764363666107}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.3815625, y: 1.2875, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1791110765710771179}
   m_RootOrder: 0
@@ -357,7 +357,7 @@ GameObject:
   - component: {fileID: 5509201499362996635}
   m_Layer: 9
   m_Name: Air Hero
-  m_TagString: Team4
+  m_TagString: Team3
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -478,7 +478,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5745905597698010381}
   _dust: {fileID: 2378443808384279137}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 2
+  ControllerInput: 1
   OnTeam: 0
   _moveSpeed: 14
   _airStrifeSpeed: 5
@@ -607,7 +607,7 @@ RectTransform:
   m_GameObject: {fileID: 1791110765672992121}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.40411842, y: 1.1697266, z: 0.4041816}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1791110764095077244}
   m_Father: {fileID: 1791110765710771179}
@@ -645,7 +645,7 @@ RectTransform:
   m_GameObject: {fileID: 1791110765710771178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.058066, y: 0.16630465, z: 0.058066}
+  m_LocalScale: {x: 0.02331791, y: 0.239767, z: 1}
   m_Children:
   - {fileID: 1791110764363666052}
   - {fileID: 1791110765672992122}
@@ -963,7 +963,7 @@ RectTransform:
   m_GameObject: {fileID: 2442036248830408209}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.021792011, y: 0.011869837, z: 0.021792011}
+  m_LocalScale: {x: 0.027370939, y: 0.014908609, z: 0.027370939}
   m_Children:
   - {fileID: 42243371297441874}
   m_Father: {fileID: 1791110764907904908}
@@ -971,7 +971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.86, y: -0.01}
+  m_AnchoredPosition: {x: -3.1, y: -0.08}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2193405249165881042
@@ -1150,7 +1150,7 @@ RectTransform:
   m_GameObject: {fileID: 6141004509629532064}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4955124, y: 0.81140155, z: 0.4955124}
+  m_LocalScale: {x: 0.46082655, y: 0.75460345, z: 0.46082655}
   m_Children: []
   m_Father: {fileID: 4879602531270153913}
   m_RootOrder: 0
