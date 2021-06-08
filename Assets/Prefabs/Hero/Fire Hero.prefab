@@ -215,7 +215,7 @@ RectTransform:
   m_GameObject: {fileID: 1614050035821404096}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.02330862, y: 0.013395759, z: 0.013395759}
+  m_LocalScale: {x: 0.025268875, y: 0.014522343, z: 0.014522343}
   m_Children:
   - {fileID: 7504923272715246903}
   m_Father: {fileID: 1791110764907904908}
@@ -223,7 +223,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.37, y: 0.67}
+  m_AnchoredPosition: {x: -2.43, y: 0.67}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4525387754852583785
@@ -619,7 +619,7 @@ GameObject:
   - component: {fileID: 122998365925269869}
   m_Layer: 9
   m_Name: Fire Hero
-  m_TagString: Team1
+  m_TagString: Team4
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -740,7 +740,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 2938717500594692796}
   _dust: {fileID: 7510961461162962043}
   _dashParticleEffect: {fileID: 0}
-  ControllerInput: 1
+  ControllerInput: 2
   OnTeam: 0
   _moveSpeed: 17
   _airStrifeSpeed: 8
@@ -1195,14 +1195,14 @@ RectTransform:
   m_GameObject: {fileID: 2789795975388072670}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.33663857, y: 0.5730018, z: 0.5730018}
+  m_LocalScale: {x: 0.4887739, y: 0.8319555, z: 0.8319555}
   m_Children: []
   m_Father: {fileID: 8742629763664896890}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 2.6, y: 6.4}
+  m_AnchoredPosition: {x: 2.7, y: -0.0000013709068}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3796379039064066606
@@ -1232,7 +1232,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: c8da3e57050031b42a17a1b677725af8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 95a9b47262bc2f642a2b4d3cb6f2b35b, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
