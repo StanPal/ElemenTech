@@ -421,7 +421,7 @@ GameObject:
   - component: {fileID: 6066433788430600090}
   m_Layer: 9
   m_Name: 'Earth Hero '
-  m_TagString: Team1
+  m_TagString: Team2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -543,11 +543,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 5488120927184991676}
   _dust: {fileID: 7952915916370585040}
   _dashParticleEffect: {fileID: 0}
-<<<<<<< HEAD
-  ControllerInput: 0
-=======
-  ControllerInput: 1
->>>>>>> d4c626517a866b8825b21b42fbf3c75830defe5c
+  ControllerInput: 2
   OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 8
@@ -1145,7 +1141,7 @@ RectTransform:
   m_GameObject: {fileID: 2534439799667360087}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.020530025, y: -0.011776914, z: -0.012731798}
+  m_LocalScale: {x: -0.016293844, y: -0.009346857, z: -0.01010471}
   m_Children:
   - {fileID: 5307456901946216320}
   m_Father: {fileID: 1791110764907904908}
@@ -1153,7 +1149,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.7, y: 0.062}
+  m_AnchoredPosition: {x: -1.589, y: 0.062}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6287302557313309787
@@ -1177,7 +1173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.3584906, b: 0.14446637, a: 1}
+  m_Color: {r: 0, g: 0.2735849, b: 0.11045356, a: 1}
   m_RaycastTarget: 1
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1220,14 +1216,14 @@ RectTransform:
   m_GameObject: {fileID: 3967910195810430723}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.46054476, y: -0.7085304, z: 0.7085304}
+  m_LocalScale: {x: 0.49569526, y: -0.7626082, z: 0.7626082}
   m_Children: []
   m_Father: {fileID: 8034082559869744577}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 1.4, y: 1.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1466054529536793388
