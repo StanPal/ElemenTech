@@ -78,11 +78,13 @@ public class MainMenu : MonoBehaviour
     public void BackToMain()
     {
         _soundManager.MainMenuMusic();
+        
         SceneManager.LoadScene(0);
     }
 
     public void Menue()
     {
+        _soundManager.MainMenuMusic();
         SceneManager.LoadScene("GameBegin");
     }
 }

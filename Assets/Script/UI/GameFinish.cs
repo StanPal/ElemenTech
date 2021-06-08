@@ -7,6 +7,7 @@ public class GameFinish : MonoBehaviour
     private ScoreManager _scoreManager;
     private PlayerManager _playerManager;
     public TMP_Text matchOutcome;
+    private SoundManager _soundManager;
     private void Awake()
     {
         GameLoader.CallOnComplete(Initialize);
@@ -16,6 +17,7 @@ public class GameFinish : MonoBehaviour
     {
         _scoreManager = ServiceLocator.Get<ScoreManager>();
         _playerManager = ServiceLocator.Get<PlayerManager>();
+        _soundManager = ServiceLocator.Get<SoundManager>();
         DisplayScore();
     }
 
@@ -79,6 +81,7 @@ public class GameFinish : MonoBehaviour
 
     public void BackToMainMenu()
     {
+        _soundManager.MainMenuMusic();
         _scoreManager.IsMatchOver = false;
         _scoreManager.ResetScore();
         ResetPlayers();
