@@ -205,6 +205,7 @@ public class HeroActions : MonoBehaviour
         float distance;
         xy.Raycast(ray, out distance);
         return ray.GetPoint(distance);
+
     }
 
     private IEnumerator CoolDownTimer()

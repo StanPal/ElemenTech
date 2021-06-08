@@ -19,6 +19,13 @@ public class SawtoothTrap : MonoBehaviour
     private bool isActive = false;
     int mTriggerId = 0;
     int count = 0;
+    [SerializeField] private GameObject _spark;
+    private SoundManager _soundManager;
+
+    private void Awake()
+    {
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
 
     public void Move(int TriggerId)
     {
@@ -26,6 +33,7 @@ public class SawtoothTrap : MonoBehaviour
         {
             isActive = true;
             mTriggerId = TriggerId;
+
         }
     }
 
@@ -50,6 +58,7 @@ public class SawtoothTrap : MonoBehaviour
                 if (Saw.transform.position == waypoints[0].transform.position && count == 1)
                 {
                     isActive = false;
+                    _spark.GetComponentInChildren<ParticleSystem>().Stop();                                        
                     count = 0;
                 }
 
@@ -61,10 +70,21 @@ public class SawtoothTrap : MonoBehaviour
                 if(count == 1)
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[0].transform.position, Time.deltaTime * moveSpeed);
+                    _spark.transform.position = Vector3.MoveTowards(_spark.transform.position, 
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        , Time.deltaTime * moveSpeed);
+                    _spark.GetComponentInChildren<ParticleSystem>().Play();
+                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 5.0f);
                 }
                 else
                 {
                     Saw.transform.position = Vector3.MoveTowards(Saw.transform.position, waypoints[mTriggerId].transform.position, Time.deltaTime * moveSpeed);
+                    _spark.transform.position = Vector3.MoveTowards(_spark.transform.position,
+                        new Vector3(Saw.transform.position.x, Saw.transform.position.y + 2.0f, -6f)
+                        , Time.deltaTime * moveSpeed);                    
+                    AudioSource.PlayClipAtPoint(_soundManager.CombatSounds[1], this.transform.position, _soundManager.AudioVolume - 5);
+                    _spark.GetComponentInChildren<ParticleSystem>().Play();
+
                 }
             }
         }

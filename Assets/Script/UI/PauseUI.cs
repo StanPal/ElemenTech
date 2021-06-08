@@ -7,6 +7,7 @@ public class PauseUI : MonoBehaviour
     public event System.Action OnResetTeams;
     private PlayerManager _PlayerManager;
     private ScoreManager _ScoreManager;
+    private SoundManager _SoundManager;
     public Canvas mCanvas;
 
     private void Awake()
@@ -18,6 +19,7 @@ public class PauseUI : MonoBehaviour
     {
         _PlayerManager = ServiceLocator.Get<PlayerManager>();
         _ScoreManager = ServiceLocator.Get<ScoreManager>();
+        _SoundManager = ServiceLocator.Get<SoundManager>();
     }    
 
     private void Start()
@@ -77,6 +79,7 @@ public class PauseUI : MonoBehaviour
         _PlayerManager.TeamOne.Clear();
         _PlayerManager.TeamTwo.Clear();
         yield return new WaitForSeconds(0.1f);
+        _SoundManager.MainMenuMusic();
         SceneManager.LoadScene(1);
         Time.timeScale = 1f;
     }

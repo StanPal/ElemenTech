@@ -8,6 +8,13 @@ public class AirJet : MonoBehaviour
     private Rigidbody2D _RigidBody;
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
+    [SerializeField] private GameObject _airExplosionEffect;
+    private SoundManager _soundManager;
+
+    private void Awake()
+    {
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
 
     void Start()
     {        
@@ -20,24 +27,10 @@ public class AirJet : MonoBehaviour
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized * _AirSkills.KnockBackMulitplier, _AirSkills.KnockBackLength);
         Debug.Log(new Vector2(-_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.x,
             -_AirSkills.PlayerSkills.HeroAction.CrossHair.transform.position.y).normalized);
-        //if(_AirSkills.PlayerSkills.HeroAction.ChargeMax)
-        //{
-        //    isChargeMax = true;
-        //    _AirSkills.PlayerSkills.HeroAction.ChargeMax = false;
-        //    _AirSkills.PlayerSkills.HeroAction.ChargeAmount = 0;
-        //    _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit
-        //        (-_AirSkills.PlayerSkills.HeroAction.FirePoint.transform.position.x,
-        //        -_AirSkills.PlayerSkills.HeroAction.FirePoint.transform.position.y, 1f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-        //    _AirSkills.Damage = _AirSkills.Damage * 2f;
-        //}
-        //else
-        //{
-        //    isChargeMax = false;
-        //    _AirSkills.PlayerSkills.HeroMovement.OnKnockBackHit(2f, 2f, 0.5f, !_AirSkills.PlayerSkills.HeroMovement.GetIsLeft);
-        //}
+        AudioSource.PlayClipAtPoint(_soundManager.ProjectileSounds[2], this.transform.position, _soundManager.AudioVolume);
     }
 
-    private void FixedUpdate()
+private void FixedUpdate()
     {
         if (_ExitTime <= 0.0f)
         {
@@ -78,9 +71,10 @@ public class AirJet : MonoBehaviour
                     else
                     {
                         collision.GetComponent<HeroStats>().TakeDamageFromProjectile(_AirSkills.Damage);
+                        Instantiate(_airExplosionEffect, collision.GetComponent<Transform>());
                     }
                     Destroy(gameObject);
                 }
-            }
+            }     
         }    
     }

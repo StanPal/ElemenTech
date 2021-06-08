@@ -7,6 +7,8 @@ public class WaterGun : MonoBehaviour
     [SerializeField] private float _ProjectileSpeed;
     [SerializeField] private float _ExitTime = 2.0f;
     private bool _CanDamagePlayer = false;
+    [SerializeField] private GameObject _waterExplosionEffect;
+    private SoundManager _soundManager;
 
     private void Awake()
     {
@@ -14,6 +16,12 @@ public class WaterGun : MonoBehaviour
         _RigidBody = GetComponent<Rigidbody2D>();
         _WaterSkills = FindObjectOfType<WaterSkills>();
         _ProjectileSpeed = _WaterSkills.Speed;
+        _soundManager = ServiceLocator.Get<SoundManager>();
+    }
+
+    private void Start()
+    {
+        AudioSource.PlayClipAtPoint(_soundManager.ProjectileSounds[1], this.transform.position, _soundManager.AudioVolume);
     }
 
     private void FixedUpdate()
@@ -54,6 +62,7 @@ public class WaterGun : MonoBehaviour
                 else
                 {
                     heroStats.TakeDamageFromProjectile(_WaterSkills.Damage);
+                Instantiate(_waterExplosionEffect, collision.GetComponent<Transform>());
                 }
                 Destroy(gameObject);
             }

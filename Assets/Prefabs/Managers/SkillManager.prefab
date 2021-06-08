@@ -117,11 +117,10 @@ MonoBehaviour:
     type: 3}
   Points: {fileID: 0}
   LaunchOffset: {x: 0, y: 0, z: 0}
-  _numberOfPoints: 20
-  _spaceBetweenPoints: 0.01
-  _lanchForce: 10
+  _launchForce: 10
   _mass: 2
   _damage: 12
-  _splashRange: 1.5
+  _splashRange: 2.5
   _knockBackAmount: 8
   _knockBackLength: 0.2
+  FiredLeft: 0

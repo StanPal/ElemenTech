@@ -15,7 +15,7 @@ public class HeroStats : MonoBehaviour
     private Guard _guard;
     private HeroMovement _heroMovement;
     [SerializeField] private ParticleSystem _bloodSplatterEffect;
-    [SerializeField] private ParticleSystem _burningEffect;
+    [SerializeField] private GameObject _burningEffect;
     [SerializeField] private GameObject _deathEffect;
 
     public enum TeamSetting
@@ -109,7 +109,7 @@ public class HeroStats : MonoBehaviour
         {
             _isHealing = false;
             _currentHealth -= damage;
-            OnShake.Invoke(_shakePower * 0.5f,_shakeLength * 0.5f);
+            //OnShake.Invoke(_shakePower * 0.5f,_shakeLength * 0.5f);
             switch (_negativeEffect)
             {
                 case StatusEffects.NegativeEffects.OnFire:
@@ -217,9 +217,9 @@ public class HeroStats : MonoBehaviour
     {
         float amountDamaged = 0;
         float damagePerloop = damageAmount / duration;
+        _burningEffect.SetActive(true);
         while (amountDamaged < damageAmount)
         {
-            _burningEffect.Play();
             _currentHealth -= damagePerloop;
             if (_currentHealth <= 0)
             {
@@ -230,7 +230,7 @@ public class HeroStats : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
         _negativeEffect = StatusEffects.NegativeEffects.None;
-        _burningEffect.Stop();
+        _burningEffect.SetActive(false);
     }
 
     public void SlowMovement(float mSlowAmount, float mSlowDuration)

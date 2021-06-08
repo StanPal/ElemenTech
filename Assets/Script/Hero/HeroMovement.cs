@@ -188,7 +188,7 @@ public class HeroMovement : MonoBehaviour
         }
 
         if (!_isRecovering)
-        {
+        {            
             if (ControllerInput == Controller.Keyboard && !_isDashing)
             {
                 _moveInput = _playerInput.KeyboardMouse.Move.ReadValue<float>();

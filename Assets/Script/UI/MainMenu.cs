@@ -16,7 +16,11 @@ public class MainMenu : MonoBehaviour
         scoreManager = ServiceLocator.Get<ScoreManager>();
         _soundManager = ServiceLocator.Get<SoundManager>();
     }
-    
+
+    private void Start()
+    {
+      
+    }
 
     private void Update()
     {
@@ -70,8 +74,17 @@ public class MainMenu : MonoBehaviour
 
         Application.Quit();
     }
+
+    public void BackToMain()
+    {
+        _soundManager.MainMenuMusic();
+        
+        SceneManager.LoadScene(0);
+    }
+
     public void Menue()
     {
+        _soundManager.MainMenuMusic();
         SceneManager.LoadScene("GameBegin");
     }
 }
