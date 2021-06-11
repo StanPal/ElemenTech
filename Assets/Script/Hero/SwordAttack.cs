@@ -128,11 +128,11 @@ public class SwordAttack : MonoBehaviour
                         {
                             Debug.Log("AttackHitTriggered");
                             _boxCollider.isTrigger = false;
-                            heroStats.TakeDamage(_meleeDamage);
+                            heroStats.TakeDamage(_meleeDamage, _heroMovement.GetIsLeft);
                         }
                         else
                         {
-                            heroStats.TakeDamage(_meleeDamage);
+                            heroStats.TakeDamage(_meleeDamage, _heroMovement.GetIsLeft);
                             collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackXAmount, _knockBackYAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
                         }
                         if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))

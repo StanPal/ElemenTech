@@ -37,7 +37,7 @@ public class SteamCover : MonoBehaviour
             {
                 if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage,true);
                     totalTime = 0;
                 }
             }
@@ -48,7 +48,7 @@ public class SteamCover : MonoBehaviour
             {
                 if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage,true);
                     totalTime = 0;
                 }
             }

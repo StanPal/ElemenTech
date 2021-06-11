@@ -65,7 +65,7 @@ public class Sandstorm : MonoBehaviour
             {
                 if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage,true);
                     collision.GetComponent<HeroStats>().SlowMovement(mSlowAmount, 1f);
                     totalTime = 0;
                 }
@@ -77,7 +77,7 @@ public class Sandstorm : MonoBehaviour
             {
                 if (totalTime > mDamageTick)
                 {
-                    collision.GetComponent<HeroStats>().TakeDamage(mDamage);
+                    collision.GetComponent<HeroStats>().TakeDamage(mDamage,true);
                     collision.GetComponent<HeroStats>().SlowMovement(mSlowAmount, 1f);
                     totalTime = 0;
                 }

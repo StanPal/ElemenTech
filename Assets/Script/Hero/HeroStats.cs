@@ -14,7 +14,7 @@ public class HeroStats : MonoBehaviour
     private HeroActions _heroActions;
     private Guard _guard;
     private HeroMovement _heroMovement;
-    [SerializeField] private ParticleSystem _bloodSplatterEffect;
+    [SerializeField] private GameObject _bloodSplatterEffect;
     [SerializeField] private GameObject _burningEffect;
     [SerializeField] private GameObject _deathEffect;
 
@@ -127,7 +127,7 @@ public class HeroStats : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(float damage, bool directionhit)
     {
         _isHealing = false;
         if (_currentHealth <= 0)
@@ -137,9 +137,8 @@ public class HeroStats : MonoBehaviour
         else
         {
             _currentHealth -= damage;
-        }
-
-        BloodEffect();
+        }        
+        BloodEffect(directionhit);
         _animator.SetTrigger("HurtTrigger");
     }
 
@@ -278,8 +277,17 @@ public class HeroStats : MonoBehaviour
         this.gameObject.SetActive(false);
     }
 
-    private void BloodEffect()
+    private void BloodEffect(bool isDirectionHitLeft)
     {
-        _bloodSplatterEffect.Play();
+        if (_heroMovement.GetIsLeft)
+        {
+            Instantiate(_bloodSplatterEffect, this.transform.position, Quaternion.Euler(new Vector3(0,-90,0)));
+        }
+        else
+        {
+            Instantiate(_bloodSplatterEffect, new Vector3(transform.position.x -1f, transform.position.y, transform.position.z)
+                , Quaternion.identity);
+
+        }
     }
 }

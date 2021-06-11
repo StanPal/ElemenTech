@@ -118,6 +118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _airExplosionEffect: {fileID: 1714681308540598, guid: e153c95adb950794db3430ce452c5df6,
     type: 3}
+  _hitEffect: {fileID: 1250507045210962, guid: abe2beb2747cd3f40b4b5dc9408298f0, type: 3}
 --- !u!50 &6872189047231710026
 Rigidbody2D:
   serializedVersion: 4

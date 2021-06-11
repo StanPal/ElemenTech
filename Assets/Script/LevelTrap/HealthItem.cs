@@ -23,7 +23,7 @@ public class HealthItem : MonoBehaviour
             }
             else
             {
-                heroStats.TakeDamage(-itemManager.HealthReply);
+                heroStats.TakeDamage(-itemManager.HealthReply, true);
             }
             
 

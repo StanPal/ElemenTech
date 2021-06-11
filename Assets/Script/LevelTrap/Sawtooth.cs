@@ -62,7 +62,7 @@ public class Sawtooth : MonoBehaviour
             //};
             //_trappedHeros.Add(data);
           
-            heroStats.TakeDamage(mDamage);
+            heroStats.TakeDamage(mDamage, heroStats.HeroMovement.GetIsLeft);
             heroStats.HeroMovement.OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, !heroStats.HeroMovement.GetIsLeft);
         }
     }

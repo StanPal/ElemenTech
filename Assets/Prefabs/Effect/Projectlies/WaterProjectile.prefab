@@ -31,7 +31,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1166044208134363437}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -141,6 +142,9 @@ MonoBehaviour:
   _ExitTime: 2
   _waterExplosionEffect: {fileID: 1459862227383078, guid: 13f7bd2f6df102b48bef94ee2622d856,
     type: 3}
+  _waterExplosionOnWall: {fileID: 1459862227383078, guid: d35290d91e2ad04428f3ea1994955aaf,
+    type: 3}
+  _endPoint: {fileID: 1166044208134363437}
 --- !u!58 &5663600037640789301
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -157,3 +161,33 @@ CircleCollider2D:
   m_Offset: {x: 0.94, y: 0.1}
   serializedVersion: 2
   m_Radius: 0.56
+--- !u!1 &4064376383993300464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1166044208134363437}
+  m_Layer: 11
+  m_Name: EndPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1166044208134363437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4064376383993300464}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.4, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4035221139372988}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

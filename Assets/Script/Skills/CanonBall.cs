@@ -84,7 +84,7 @@ public class CanonBall : MonoBehaviour
                     var distance = Vector3.Distance(closestPont, transform.position);
 
                     var damagePercent = Mathf.InverseLerp(SplashRange, 0, distance);
-                    enemy.TakeDamage(damagePercent * mDamage);
+                    enemy.TakeDamage(damagePercent * mDamage,true);
                 }
             }
         }
@@ -93,7 +93,7 @@ public class CanonBall : MonoBehaviour
             var enemy = collider.GetComponent<HeroStats>();
             if (!enemy.tag.Equals(tag))
             {
-                enemy.TakeDamage(mDamage);
+                enemy.TakeDamage(mDamage,true);
                 Destroy(gameObject);
             }
         }

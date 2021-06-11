@@ -30,7 +30,7 @@ public class EarthStomp : MonoBehaviour
                 {
                     _isHit = true;
                     this.gameObject.SetActive(false);
-                    heroStats.TakeDamage(_stompDamage);
+                    heroStats.TakeDamage(_stompDamage, _heroMovement.GetIsLeft);
                     heroStats.HeroMovement.Rigidbody2D.velocity = -Vector2.up * _stompDamage;
                     heroStats.GetComponent<HeroMovement>().Recovering = true;
                 }

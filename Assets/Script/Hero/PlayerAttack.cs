@@ -119,11 +119,11 @@ public class PlayerAttack : MonoBehaviour
                     if (_heroAction.DashStriking)
                     {
                         Debug.Log("AttackHitTriggered");
-                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage, _heroMovement.GetIsLeft);
                     }
                     else
                     {
-                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage,_heroMovement.GetIsLeft);
                         collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
                     }
                     if (_heroAction.HeroStats.GetElement.Equals(Elements.ElementalAttribute.Fire))
@@ -147,11 +147,11 @@ public class PlayerAttack : MonoBehaviour
                     if (_heroAction.DashStriking)
                     {
                         Debug.Log("AttackHitTriggered");
-                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage, _heroMovement.GetIsLeft);
                     }
                     else
                     {
-                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage);
+                        heroStats.TakeDamage(_heroAction.HeroStats.AttackDamage, _heroMovement.GetIsLeft);
                         collision.GetComponent<HeroMovement>().OnKnockBackHit(_knockBackAmount, _knockBackAmount, _knockBackLength, GetComponentInParent<HeroMovement>().GetIsLeft);
                     }
                     if (_heroAction.HeroStats.GetElement == Elements.ElementalAttribute.Fire)

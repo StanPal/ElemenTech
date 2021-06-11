@@ -8,6 +8,8 @@ public class WaterGun : MonoBehaviour
     [SerializeField] private float _ExitTime = 2.0f;
     private bool _CanDamagePlayer = false;
     [SerializeField] private GameObject _waterExplosionEffect;
+    [SerializeField] private GameObject _waterExplosionOnWall;
+    [SerializeField] private Transform _endPoint;
     private SoundManager _soundManager;
 
     private void Awake()
@@ -48,6 +50,7 @@ public class WaterGun : MonoBehaviour
 
         if (collision.GetComponentInParent<Walls>())
         {
+            Instantiate(_waterExplosionOnWall, _endPoint.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

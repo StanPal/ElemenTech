@@ -23,7 +23,7 @@ public class FireAura : MonoBehaviour
 
     private IEnumerator DamageOverTimeCoroutine(HeroStats hero, float damageAmount)
     {
-        hero.TakeDamage(damageAmount);
+        hero.TakeDamage(damageAmount, hero.HeroMovement.GetIsLeft);
         Debug.Log("Damaged Current Health: " + hero.CurrentHealth);
         _tookDamage = true;
         yield return new WaitForSeconds(_tick);

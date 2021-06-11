@@ -7,6 +7,7 @@ public class FireBall : MonoBehaviour
     private Rigidbody2D _rigidBody;
     private float _projectileSpeed;
     [SerializeField] GameObject _fireExplosion;
+    [SerializeField] private Transform endPoint;
     private SoundManager _soundManager;
 
     private void Awake()
@@ -38,6 +39,7 @@ public class FireBall : MonoBehaviour
 
         if (collision.GetComponentInParent<Walls>())
         {
+            Instantiate(_fireExplosion, endPoint.transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

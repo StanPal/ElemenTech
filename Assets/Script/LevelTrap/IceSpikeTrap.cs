@@ -25,7 +25,7 @@ public class IceSpikeTrap : MonoBehaviour
             if (heroStats != null)
             {
                 Debug.Log("hit player");
-                heroStats.TakeDamage(iceTrapManager.Damage);
+                heroStats.TakeDamage(iceTrapManager.Damage,true);
                 DestroySpike();
             }
             if (collision.GetComponentInParent<Walls>())

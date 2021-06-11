@@ -29,17 +29,17 @@ public class GolemBullet : MonoBehaviour
             Destroy(gameObject);
         }
         
-        if (other.gameObject.tag == "Team2")
-        {
-            Destroy(gameObject);
-           other.GetComponent<HeroStats>().TakeDamage(damage);
-        }
+        //if (other.gameObject.tag == "Team2")
+        //{
+        //    Destroy(gameObject);
+        //   other.GetComponent<HeroStats>().TakeDamage(damage);
+        //}
 
-        if (other.gameObject.tag == "Team1")
-        {
-            Destroy(gameObject);
-            other.GetComponent<HeroStats>().TakeDamage(damage);
-        }
+        //if (other.gameObject.tag == "Team1")
+        //{
+        //    Destroy(gameObject);
+        //    other.GetComponent<HeroStats>().TakeDamage(damage);
+        //}
     }
 
     void Update()

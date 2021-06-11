@@ -23,7 +23,7 @@ public class EarthSpike : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(10f);
+                    heroStats.TakeDamage(10f,true);
                 }
                 
             }
@@ -48,7 +48,7 @@ public class EarthSpike : MonoBehaviour
             {
                 if (collision.TryGetComponent<HeroStats>(out HeroStats heroStats))
                 {
-                    heroStats.TakeDamage(10f);
+                    heroStats.TakeDamage(10f,true);
                 }
             }
         }

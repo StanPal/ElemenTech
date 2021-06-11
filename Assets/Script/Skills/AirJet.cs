@@ -9,6 +9,7 @@ public class AirJet : MonoBehaviour
     private Vector3 _ScaleSize = new Vector3(0.5f, 0.5f, 0.5f);
     private AirSkills _AirSkills;
     [SerializeField] private GameObject _airExplosionEffect;
+    [SerializeField] private GameObject _hitEffect;
     private SoundManager _soundManager;
 
     private void Awake()
@@ -46,6 +47,7 @@ private void FixedUpdate()
     {
         if(collision.GetComponentInParent<Walls>())
         {
+            Instantiate(_hitEffect, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
 

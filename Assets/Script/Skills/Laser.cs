@@ -65,7 +65,7 @@ public class Laser : MonoBehaviour
                         {
                             if (mTotalTime > mDamageTick)
                             {
-                                hero.TakeDamage(mDamage);
+                                hero.TakeDamage(mDamage,true);
                                 mTotalTime = 0;
                             }
                         }
@@ -76,7 +76,7 @@ public class Laser : MonoBehaviour
                         {
                             if(mTotalTime > mDamageTick)
                             {
-                              hero.TakeDamage(10f);
+                              hero.TakeDamage(10f,true);
                               mTotalTime = 0;
                             }
                         }

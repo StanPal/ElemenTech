@@ -49,7 +49,7 @@ public class LavaTrap : MonoBehaviour
             {
                 foreach(var trappedHero in _trappedHeros)
                 {
-                    trappedHero.HeroStats.TakeDamage(_damage);
+                    trappedHero.HeroStats.TakeDamage(_damage, true);
                 }
             }
         }
