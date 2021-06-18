@@ -16,15 +16,17 @@ public class ItemManager : MonoBehaviour
     private float health = 50.0f;
     public float HealthReply { get { return health; } }
     private int itemCounter = 0;
+    [SerializeField] private float respawnTime = 2.0f;
+    public bool canSpawn = false;
 
     public int ItemCounter { set { itemCounter = value; } get { return itemCounter; } }
     private void Awake()
     {
-        for (int i = 0; i < ItemLocation.Count; i++)
-        {
-            spawnLocation.Add(ItemLocation[i]);
-        }
-        for (int i = 0; i < maxSpawnlocation; ++i)
+        //for (int i = 0; i < ItemLocation.Count; i++)
+        //{
+        //    spawnLocation.Add(ItemLocation[i]);
+        //}
+        for (int i = 0; i < 2; ++i)
         {
             SpawnIteam();
         }
@@ -32,18 +34,26 @@ public class ItemManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(spawnLocation.Count);
-        if (itemCounter < maxSpawnlocation)
+        Debug.Log(ItemCounter);
+        if (canSpawn)
         {
-            SpawnIteam();
+            StartCoroutine(SpawnRate());
         }
     }
 
-    public void SpawnIteam()
+    private IEnumerator SpawnRate()
     {
-        Transform location = spawnLocation[Random.Range(0, spawnLocation.Count)];
+        canSpawn = false;
+        yield return new WaitForSeconds(respawnTime);
+        SpawnIteam();
+
+    }
+
+    public void SpawnIteam()
+    {     
+        Transform location = ItemLocation[Random.Range(0,ItemLocation.Count)];
         Instantiate(Health, location.position, Quaternion.identity);
-        spawnLocation.Remove(location);
+        //spawnLocation.Remove(location);
         itemCounter++;
     }
 
