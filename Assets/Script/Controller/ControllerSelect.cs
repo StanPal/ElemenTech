@@ -24,6 +24,7 @@ public class ControllerSelect : MonoBehaviour
 
     void Start()
     {
+        Cursor.visible = true;
         ButtonList[0].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)_ControllerSelect1).ToString();
         ButtonList[1].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)_ControllerSelect2).ToString();
         ButtonList[2].GetComponentInChildren<Text>().text = ((HeroMovement.Controller)_ControllerSelect3).ToString();

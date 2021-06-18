@@ -78,7 +78,7 @@ public class PauseUI : MonoBehaviour
         _ScoreManager.ResetScore();
         _PlayerManager.TeamOne.Clear();
         _PlayerManager.TeamTwo.Clear();
-        Cursor.visible = true;
+        
         yield return new WaitForSeconds(0.1f);
         _SoundManager.MainMenuMusic();
         SceneManager.LoadScene(1);

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &-1397653821364823221
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 2240108284252265876}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5969599348001087597}
+  m_Layer: 0
+  m_Name: BloodSplatterEffect (Missing Prefab)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5969599348001087597
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 2240108284252265876}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: -1397653821364823221}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1150031417332756015}
+  m_Father: {fileID: 1371002032310544473}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1371002032263941963
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,7 +273,7 @@ Transform:
   - {fileID: 8961387658384627387}
   - {fileID: 3870868949774532737}
   - {fileID: 1324866224582060999}
-  - {fileID: 1150031417332756015}
+  - {fileID: 5969599348001087597}
   - {fileID: 1558810978507017224}
   - {fileID: 7955029335108024215}
   m_Father: {fileID: 0}
@@ -314,7 +345,7 @@ MonoBehaviour:
   _Crosshair: {fileID: 4875966304191913811}
   _dust: {fileID: 8525798274027765961}
   _dashParticleEffect: {fileID: 4528160433185577089}
-  ControllerInput: 1
+  ControllerInput: 0
   OnTeam: 0
   _moveSpeed: 12
   _airStrifeSpeed: 6
@@ -1055,6 +1086,37 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &6546923916990955624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 2240108284252265876}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1150031417332756015}
+  m_Layer: 0
+  m_Name: Missing Prefab (Dummy)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1150031417332756015
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 1217042715064955835, guid: 31ba479ff71802a48bfd9c8540fe61af,
+    type: 3}
+  m_PrefabInstance: {fileID: 2240108284252265876}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6546923916990955624}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5969599348001087597}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7556564796693834535
 GameObject:
   m_ObjectHideFlags: 0
@@ -1234,15 +1296,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f6c45a4065fe3b449c48b32e2013dad, type: 3}
---- !u!4 &1324866224582060999 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1369876698311157785, guid: 7f6c45a4065fe3b449c48b32e2013dad,
-    type: 3}
-  m_PrefabInstance: {fileID: 99107052043600862}
-  m_PrefabAsset: {fileID: 0}
 --- !u!198 &1324866224582060998 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 1369876698311157784, guid: 7f6c45a4065fe3b449c48b32e2013dad,
+    type: 3}
+  m_PrefabInstance: {fileID: 99107052043600862}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1324866224582060999 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1369876698311157785, guid: 7f6c45a4065fe3b449c48b32e2013dad,
     type: 3}
   m_PrefabInstance: {fileID: 99107052043600862}
   m_PrefabAsset: {fileID: 0}
@@ -1396,12 +1458,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ba479ff71802a48bfd9c8540fe61af, type: 3}
---- !u!4 &1150031417332756015 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1217042715064955835, guid: 31ba479ff71802a48bfd9c8540fe61af,
-    type: 3}
-  m_PrefabInstance: {fileID: 2240108284252265876}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3172284188720542771
 PrefabInstance:
   m_ObjectHideFlags: 0
