@@ -25,12 +25,13 @@ public class HealthItem : MonoBehaviour
             {
                 heroStats.TakeDamage(-itemManager.HealthReply, true);
             }
-            
+
 
             // If it hits anything, destroy it.
-            itemManager.SpawnIteam();
+            //itemManager.SpawnIteam();
             itemManager.ItemCounter--;
-            itemManager.addNewLocation(transform);
+            itemManager.canSpawn = true;
+            //itemManager.addNewLocation(transform);
             Destroy(gameObject);
         }
     }
