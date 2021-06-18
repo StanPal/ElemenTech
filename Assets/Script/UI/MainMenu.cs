@@ -82,6 +82,11 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadScene(0);
     }
 
+    public void Options()
+    {
+        SceneManager.LoadScene("Options");
+    }
+
     public void Menue()
     {
         _soundManager.MainMenuMusic();
