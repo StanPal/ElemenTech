@@ -17,7 +17,7 @@ public class HeroMovement : MonoBehaviour
     private FastFallJump _fastFallJump;
     [SerializeField] private GameObject _Crosshair;
     [SerializeField] private ParticleSystem _dust;
-    [SerializeField] private ParticleSystem _dashParticleEffect;
+    [SerializeField] private GameObject _dashParticleEffect;
 
     public enum Controller
     {
@@ -236,8 +236,6 @@ public class HeroMovement : MonoBehaviour
                 _rb.velocity = new Vector2(_rb.velocity.x, -_maxWallSlideVelocity);
             }
         }
-
-
     }
 
     private void Update()
@@ -823,6 +821,7 @@ public class HeroMovement : MonoBehaviour
 
     private IEnumerator DashStrike()
     {
+        _dashParticleEffect.SetActive(true);
         CreateDashPartile();
         if (_isLeft)
         {
@@ -834,6 +833,7 @@ public class HeroMovement : MonoBehaviour
         }
         _rb.gravityScale = 0f;
         yield return new WaitForSeconds(0.3f);
+        _dashParticleEffect.SetActive(false);
         _playerAnimator.SetBool("IsDashStriking", false);
         _heroActions.DashStriking = false;
         _rb.gravityScale = OriginalGravity;
@@ -862,7 +862,7 @@ public class HeroMovement : MonoBehaviour
 
     private void CreateDashPartile()
     {
-        _dashParticleEffect.Play();
+        //_dashParticleEffect.Play();
     }
 
     //SoundEffects End
